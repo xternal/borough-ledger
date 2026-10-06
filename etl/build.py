@@ -197,6 +197,12 @@ def build() -> Dict[str, Any]:
             lv.update(m_per_unit=round(now["ctr"] / 1e6 / 100, 4), quality="approx", source_id="ctr_2026-27",
                       method_note="1% of the 2026/27 council tax requirement. Assumes the tax base stays at its 2026/27 level.")
             lv.pop("todo", None)
+        elif lv["id"] == "fees" and "fees_income_m" in mny:
+            fees = float(mny["fees_income_m"]["value"])
+            lv.update(m_per_unit=round(fees / 100, 4), quality="approx", source_id=mny["fees_income_m"]["source_id"],
+                      method_note=f"1% of the £{fees}m of fees and charges income in the 2026/27 budget (Appendix I). "
+                                  "Static: it assumes people use services as much at higher prices, and some fees are set by law (PRE_SHIP_REVIEW H5).")
+            lv.pop("todo", None)
         elif lv["id"] == "settlement":
             lv.update(m_per_unit=round(rsg_br / 1000 / 100, 4), quality="approx", source_id=ra_src,
                       method_note="1% of 2026/27 Revenue Support Grant plus retained business rates.")

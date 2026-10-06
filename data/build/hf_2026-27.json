@@ -1231,11 +1231,11 @@
     "min": 0,
     "max": 10,
     "step": 1,
-    "m_per_unit": 0.4,
+    "m_per_unit": 0.805,
     "controlled_by": "council",
-    "quality": "test",
-    "source_id": "prototype_test",
-    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
+    "quality": "approx",
+    "source_id": "cabinet_pack_2026-02-09",
+    "method_note": "1% of the £80.5m of fees and charges income in the 2026/27 budget (Appendix I). Static: it assumes people use services as much at higher prices, and some fees are set by law (PRE_SHIP_REVIEW H5)."
    },
    {
     "id": "settlement",

@@ -117,7 +117,7 @@
   },
   {
    "file": "data/manual/next_year_2027-28.csv",
-   "sha256": "41bd748973159f3651e892649036063f79441c9dfc005eda6b7bb38dc0e75769"
+   "sha256": "e289e89201716c348fa68632c7801d6bc924c884cb76144ecd25fa8b7e9b03d1"
   },
   {
    "file": "data/manual/ra_service_map.csv",
@@ -139,13 +139,13 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "19e25636ecf23c3c86b44c68f1dbb58edcc6829de002b50d11a376a7edd0040c"
+   "sha256": "b39ee37891506f0a61282a355c522e1287ff987b0e28b39eb9d5c606bffafe7b"
   }
  ],
  "quality_counts": {
-  "approx": 3,
+  "approx": 4,
   "modelled": 3,
   "sourced": 66,
-  "test": 4
+  "test": 3
  }
 }

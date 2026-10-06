@@ -17,16 +17,16 @@ The council's budget papers are behind a firewall that blocks scripts, so they a
 
 | File | What | Automatic check | Status |
 |---|---|---|---|
-| `gap_2026-27.csv` | This year's waterfall from Table 2 of the Full Council report (PDF pages 16 and 17); one `report_total` row with the report's bottom line | Lines add up to the report's bottom line, which must be zero | Extracted 6 Oct 2026. [ ] Human check against page 17 |
-| `next_year_2027-28.csv` | 2027/28 gap £31.4m, the 4.99% council tax rise and £98.2m council tax it assumes, £8.0m planned savings (Appendix B Table 2, Cabinet pack page 57); safe minimum £19m (Full Council report, paragraph 83, page 35). Each row names its source | Source ids exist; values carry a page | Extracted 6 Oct 2026. [ ] Human check |
-| `savings_2026-27.csv` | Every named saving in Appendix C (Cabinet pack pages 61 to 66), £000, this year and next, with each directorate's total row | Lines add up to each directorate total in both years; service savings £9,524k match Table 2's £9.5m | Extracted 6 Oct 2026. [ ] Human check |
+| `gap_2026-27.csv` | This year's waterfall from Table 2 of the Full Council report (PDF pages 16 and 17); one `report_total` row with the report's bottom line | Lines add up to the report's bottom line, which must be zero | Extracted 6 Oct 2026. [x] Human check: checked against the PDF by the project owner, 6 Oct 2026 |
+| `next_year_2027-28.csv` | 2027/28 gap £31.4m, the 4.99% council tax rise and £98.2m council tax it assumes, £8.0m planned savings (Appendix B Table 2, Cabinet pack page 57); safe minimum £19m (Full Council report, paragraph 83, page 35); fees and charges income £80.5m (Appendix I, pack page 128, added after the human check). Each row names its source | Source ids exist; values carry a page | Extracted 6 Oct 2026. [x] Human check: checked against the PDF by the project owner, 6 Oct 2026 |
+| `savings_2026-27.csv` | Every named saving in Appendix C (Cabinet pack pages 61 to 66), £000, this year and next, with each directorate's total row | Lines add up to each directorate total in both years; service savings £9,524k match Table 2's £9.5m | Extracted 6 Oct 2026. [x] Human check: checked against the PDF by the project owner, 6 Oct 2026 |
 | `toggles_2027-28.csv` | Toggle costs modelled from the report, e.g. 20 extra law enforcement officers from £4.6m for 72 (PDF page 23) | Toggle ids exist | [ ] Human check |
 
 Columns:
 
 ```
 gap_2026-27.csv         order,label,m,kind,page,note       kind ∈ pressure, funding, close, close_saving, close_oneoff, report_total, report_gap (optional)
-next_year_2027-28.csv   key,value,source_id,page,note      key ∈ gap_m, ct_assumed_pct, council_tax_m, planned_savings_m, minimum_safe_m
+next_year_2027-28.csv   key,value,source_id,page,note      key ∈ gap_m, ct_assumed_pct, council_tax_m, planned_savings_m, minimum_safe_m, fees_income_m
 savings_2026-27.csv     id,directorate,service,label,k_2026_27,k_2027_28,kind,service_group,page   kind ∈ service, collection_fund, total
 ```
 
