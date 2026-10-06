@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Typecheck, test, preview build
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Preview build (test data allowed, visibly marked)
+        run: pnpm build:preview
+      - name: No middle dots in source or built pages
+        run: pnpm check:dots
+      - name: List remaining test values
+        run: pnpm --filter @borough-ledger/schema report:test-values
+
+  production-gate:
+    # Fails while any rendered value has quality "test" (CLAUDE.md invariant 1).
+    # Expected to fail until M1 replaces the seed data. Not required for merging until then;
+    # Vercel production deploys run the same build:prod and are blocked by it.
+    name: Production build (blocks test data)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:prod

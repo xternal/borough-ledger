@@ -124,6 +124,7 @@ export type Toggle = z.infer<typeof Toggle>;
 export const CouncilYear = z.object({
   meta: z.object({
     council: z.string(),
+    council_short: z.string(),
     council_code: z.string(),
     council_code_note: z.string().optional(),
     year: finYear,

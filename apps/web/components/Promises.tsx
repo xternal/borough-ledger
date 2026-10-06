@@ -1,0 +1,236 @@
+"use client";
+
+import { useState } from "react";
+import type { Status } from "@borough-ledger/schema";
+import { formatDay, formatMonthYear } from "@/lib/format";
+import type { PageModel, PromiseModel } from "@/lib/model";
+import { Num, TestMark } from "./Num";
+import { useLedger } from "./LedgerState";
+
+type Props = Pick<PageModel, "promises" | "today" | "netBudget" | "balance">;
+
+const LADDER = ["promised", "in_plan", "budgeted", "delivering", "delivered"] as const;
+const LABEL: Record<Status, string> = {
+  promised: "Promised",
+  in_plan: "In plan",
+  budgeted: "Budgeted",
+  delivering: "Delivering",
+  delivered: "Delivered",
+  failed: "Failed",
+  quietly_dropped: "Quietly dropped",
+  unscoreable: "Unscoreable",
+  not_in_power: "Opposition pledge",
+};
+const SINGLE: Partial<Record<Status, string>> = {
+  unscoreable: "Unscoreable. No who, how much, when or from where, so it is a slogan.",
+  not_in_power: "Opposition pledge. Costed so voters can compare, but it cannot be delivered from opposition.",
+  quietly_dropped: "Quietly dropped. The deadline passed with no delivery and no statement.",
+  failed: "Failed.",
+};
+const FILTERS = [
+  ["all", "All"],
+  ["administration", "Administration"],
+  ["opposition", "Opposition"],
+  ["overdue", "Overdue"],
+] as const;
+type Filter = (typeof FILTERS)[number][0];
+
+/** Timeline event types map onto the ladder; "funded" is the older name for "budgeted". */
+const EVENT_CLASS: Record<string, string> = { funded: "budgeted" };
+
+function overdue(p: PromiseModel, today: string): boolean {
+  return !!p.deadline && p.deadline < today && p.status !== "delivered" && p.status !== "failed";
+}
+
+function who(p: PromiseModel): string {
+  return p.party ? `${p.actor}, ${p.party}` : p.actor;
+}
+
+export function Promises({ promises, today, netBudget, balance }: Props) {
+  const [filter, setFilter] = useState<Filter>("all");
+  const [sel, setSel] = useState(promises[0]?.id);
+  const { scenario, setToggle } = useLedger();
+
+  // One rule for every side: the filter reads `side` from data, never a party name.
+  const list = promises.filter((p) => filter === "all" || (filter === "overdue" ? overdue(p, today) : p.side === filter));
+  const current = list.find((p) => p.id === sel) ?? list[0];
+
+  return (
+    <section id="promises" aria-labelledby="promises-h">
+      <div className="sec-head">
+        <h2 id="promises-h">Promises</h2>
+        <p>Every pledge from the administration and the opposition, with its cost to the council and a timeline that ends in delivery or in silence.</p>
+      </div>
+      <div className="promises">
+        <div>
+          <div className="filters" role="group" aria-label="Filter promises">
+            {FILTERS.map(([k, l]) => (
+              <button key={k} type="button" className="chip" aria-pressed={k === filter} onClick={() => setFilter(k)}>
+                {l}
+              </button>
+            ))}
+          </div>
+          <div className="plist">
+            {list.length ? (
+              list.map((p) => (
+                <button key={p.id} type="button" className="pcard" aria-pressed={p.id === current?.id} onClick={() => setSel(p.id)}>
+                  <div className="who">
+                    <span>{who(p)}</span>
+                    <span>{formatDay(p.made_on)}</span>
+                  </div>
+                  <div className="txt">&ldquo;{p.text}&rdquo;</div>
+                  <div className="meta">
+                    <span className={`pill st-${p.status}`}>{LABEL[p.status]}</span>
+                    <span>
+                      {p.cost ? (
+                        <>
+                          <Num f={p.cost.low} fmt="m1" />
+                          {" to "}
+                          <Num f={p.cost.high} fmt="m1" /> a year
+                        </>
+                      ) : (
+                        "Cost not stated"
+                      )}
+                    </span>
+                    {p.deadline ? <span>Due {formatMonthYear(p.deadline)}</span> : null}
+                    {p.test ? <TestMark what={`promise card ${p.id}`}>Test card</TestMark> : null}
+                  </div>
+                </button>
+              ))
+            ) : (
+              <p className="muted" style={{ padding: "16px 0" }}>
+                No promises match this filter.
+              </p>
+            )}
+          </div>
+        </div>
+        {current ? (
+          <Detail
+            p={current}
+            today={today}
+            netBudget={netBudget}
+            toggle={balance.toggles.find((t) => t.id === current.lever_or_toggle_id)}
+            toggleOn={current.lever_or_toggle_id ? scenario.toggles[current.lever_or_toggle_id] : undefined}
+            onTry={(id, on) => {
+              setToggle(id, on);
+              location.hash = "#balance";
+            }}
+          />
+        ) : (
+          <div className="detail" />
+        )}
+      </div>
+    </section>
+  );
+}
+
+function Detail({
+  p,
+  today,
+  netBudget,
+  toggle,
+  toggleOn,
+  onTry,
+}: {
+  p: PromiseModel;
+  today: string;
+  netBudget: PageModel["netBudget"];
+  toggle: PageModel["balance"]["toggles"][number] | undefined;
+  toggleOn: boolean | undefined;
+  onTry: (id: string, on: boolean) => void;
+}) {
+  const single = SINGLE[p.status];
+  const idx = LADDER.indexOf(p.status as (typeof LADDER)[number]);
+  const timeline = [...p.timeline.map((e) => ({ ...e, today: false })), { date: today, type: "today", event: "", today: true }].sort((a, z) =>
+    a.date.localeCompare(z.date),
+  );
+  return (
+    <div className="detail">
+      <div style={{ display: "grid", gap: 6 }}>
+        <span className="muted small">
+          {who(p)}, {p.area}
+        </span>
+        <h3 style={{ fontSize: 20, letterSpacing: "-.02em", lineHeight: 1.3 }}>&ldquo;{p.text}&rdquo;</h3>
+        {p.test ? <TestMark what={`promise card ${p.id}`}>Test card with an invented actor</TestMark> : null}
+      </div>
+      {single ? (
+        <div className="ladder single">
+          <span>{single}</span>
+        </div>
+      ) : (
+        <div className="ladder" aria-label={`Status: ${LABEL[p.status]}`}>
+          {LADDER.map((s, i) => (
+            <span key={s} className={i === idx ? "on" : i < idx ? "past" : undefined}>
+              {LABEL[s]}
+            </span>
+          ))}
+        </div>
+      )}
+      {p.cost ? (
+        <div className="trio">
+          <div>
+            <span className="l">A year</span>
+            <span className="n">
+              <Num f={p.cost.central} fmt="m1" />
+            </span>
+            <span className="r">
+              range <Num f={p.cost.low} fmt="m1" /> to <Num f={p.cost.high} fmt="m1" />
+            </span>
+          </div>
+          <div>
+            <span className="l">Per Band D home</span>
+            <span className="n">
+              <Num f={p.cost.perBandD} fmt="gbp0" />
+            </span>
+            <span className="r">a year</span>
+          </div>
+          <div>
+            <span className="l">Share of budget</span>
+            <span className="n">
+              <Num f={p.cost.share} fmt="share1" />
+            </span>
+            <span className="r">
+              of <Num f={netBudget} fmt="m0" />
+            </span>
+          </div>
+        </div>
+      ) : null}
+      <div style={{ display: "grid", gap: 2 }}>
+        <span className="muted small">Paid for by</span>
+        <span>{p.funded_by ?? "Not stated"}</span>
+      </div>
+      <ol className="timeline">
+        {timeline.map((e, i) => (
+          <li key={i} className={`t-${e.today ? "today" : (EVENT_CLASS[e.type] ?? e.type)}`}>
+            <span className="d">{e.today ? "Today" : formatMonthYear(e.date)}</span>
+            <span className="dot" />
+            <span>{e.event}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="actions">
+        {toggle && toggleOn !== undefined ? (
+          <button type="button" className="btn" onClick={() => onTry(toggle.id, !toggleOn)}>
+            {toggleOn ? "See next year without it" : "See next year with it"}
+          </button>
+        ) : null}
+        <button type="button" className="btn secondary" aria-disabled="true" title="Follow by RSS or email arrives in a later release">
+          Follow
+        </button>
+        <button type="button" className="linkbtn" aria-disabled="true" title="Sending evidence arrives in a later release">
+          Add evidence
+        </button>
+      </div>
+      {p.sources.length ? (
+        <div style={{ display: "grid", gap: 4 }} className="small">
+          <span className="muted">Sources</span>
+          {p.sources.map((s) => (
+            <a key={s.url} href={s.url} target="_blank" rel="noopener">
+              {s.title}
+            </a>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}

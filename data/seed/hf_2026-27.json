@@ -1,6 +1,7 @@
 {
  "meta": {
   "council": "London Borough of Hammersmith & Fulham",
+  "council_short": "Hammersmith & Fulham",
   "year": "2026-27",
   "note": "Prototype data. Items marked 'sourced' come from the cited document. Everything marked 'test' is invented to make the layout realistic and MUST be replaced by the ETL before anything is published.",
   "sources": [

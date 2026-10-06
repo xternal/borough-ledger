@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-lc", "export PATH=$HOME/.nvm/versions/node/v22.22.0/bin:$PATH NEXT_TELEMETRY_DISABLED=1 && cd apps/web && pnpm dev --port 3100"],
+      "port": 3100
+    },
+    {
+      "name": "prototype",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3200", "--directory", "prototype"],
+      "port": 3200
+    }
+  ]
+}
