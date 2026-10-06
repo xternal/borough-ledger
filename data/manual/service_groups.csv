@@ -1,0 +1,13 @@
+id,label,official_term,desc,order
+schools,Schools and education,Education services,"Schools' budgets, paid by ring-fenced government grants, plus education the council pays for itself such as special needs transport",1
+adult_care,Care for older and disabled adults,Adult social care,"Home care, care homes and support for disabled adults",2
+children,Children's services,Children's social care,"Children in care, family support, safeguarding and youth justice",3
+housing,Housing and homelessness,Housing services (general fund),"Temporary accommodation and homelessness, housing advice and licensing. Council homes are a separate ring-fenced account",4
+public_health,Public health,Public health,"Sexual health, drug and alcohol services, health visiting and school nursing, paid by a ring-fenced grant",5
+running,Running the council,Central services and other services,"Finance, IT, legal, collecting council tax, pension costs and services the return does not itemise",6
+safety_regulation,Community safety and regulation,Environmental and regulatory services (part),"Law enforcement team, CCTV, environmental health, licensing, trading standards and cemeteries",7
+streets,"Streets, waste and transport",Highways and transport; waste services,"Bins, recycling, street cleaning, roads, street lights and concessionary travel, after parking income",8
+planning,Planning and the local economy,Planning and development services,"Planning applications, building control and economic development",9
+debt_levies,Debt costs and levies,Capital financing and levies,"Interest and repayment of borrowing, London-wide levies, less investment income",10
+parks_culture,"Parks, libraries and leisure",Cultural and related services,"Parks and open spaces, libraries, sport and culture",11
+housing_benefit,Housing benefit (paid by government),Housing benefit,"Mandatory housing benefit, fully paid by government subsidy. Nets to zero and is left out of the chart",99

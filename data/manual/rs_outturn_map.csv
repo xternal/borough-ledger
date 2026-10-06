@@ -1,0 +1,64 @@
+label,role,group
+Service Expenditure - Education services,line,schools
+Service Expenditure - Highways and transport services,line,streets
+Service Expenditure - Children Social Care,line,children
+Service Expenditure - Adult Social Care [note 2],line,adult_care
+Service Expenditure - Public Health,line,public_health
+Service Expenditure - Housing services (GFRA only),line,housing
+Service Expenditure - Cultural and related services,line,parks_culture
+Service Expenditure - Environmental and regulatory services,line,environmental_split
+Service Expenditure - Planning and development services,line,planning
+Service Expenditure - Police services,line,running
+Service Expenditure - Fire and rescue services,line,running
+Service Expenditure - Central services,line,running
+Service Expenditure - Other services,line,running
+Service Expenditure - TOTAL SERVICE EXPENDITURE (total of lines 190 to 698),total,
+Housing Benefits - Housing benefits: rent allowances - mandatory payments,line,housing_benefit
+Housing Benefits - Housing benefits: non-HRA rent rebates - mandatory payments,line,housing_benefit
+Housing Benefits - Housing benefits: rent rebates to HRA tenants - mandatory payments,line,housing_benefit
+Housing Benefits - Housing benefits: subsidy limitation transfers from HRA,line,housing_benefit
+Housing Benefits - Contribution to the HRA re items shared by the whole community,line,housing_benefit
+Precepts and Levies - Parish Precepts,line,debt_levies
+Precepts and Levies - Integrated Transport Authority levy,line,debt_levies
+Precepts and Levies - Waste Disposal Authority levy,line,debt_levies
+Precepts and Levies - London Pensions Fund Authority levy,line,debt_levies
+Precepts and Levies - Other levies,line,debt_levies
+Trading Accounts and Adjustments - External Trading Accounts net surplus(-)/ deficit(+),line,running
+Trading Accounts and Adjustments - Internal Trading Accounts net surplus(-)/ deficit(+),line,running
+Trading Accounts and Adjustments - Capital items accounted for in External Trading Accounts,line,running
+Trading Accounts and Adjustments - Capital items accounted for in Internal Trading Accounts,line,running
+Trading Accounts and Adjustments - Appropriations to(+) / from(-) Accumulated Absences Account,line,running
+Trading Accounts and Adjustments - Adjustments to net current expenditure,line,running
+Net Current Expenditure - NET CURRENT EXPENDITURE (TOTAL OF LINE 699 + LINES 711 TO 748),total,
+Non-current Expenditure and Receipts - Levy: Environment Agency flood defence,line,debt_levies
+Non-current Expenditure and Receipts - Capital expenditure charged to the GF Revenue Account (CERA) (exclude Public Health),line,debt_levies
+Non-current Expenditure and Receipts - Capital expenditure charged to the GF Revenue Account (CERA) (Public Health),line,debt_levies
+Non-current Expenditure and Receipts - Capital receipts used to finance revenue expenditure under receipts flexiblity,line,debt_levies
+Non-current Expenditure and Receipts - Netting off expenditure capitalised by a direction under Section 16(2)b) (-),line,debt_levies
+Non-current Expenditure and Receipts - Provision for bad debts (+/-),line,running
+Non-current Expenditure and Receipts - Provision for repayment of principal,line,debt_levies
+Non-current Expenditure and Receipts - Leasing payments,line,debt_levies
+Non-current Expenditure and Receipts - Interest: external payments,line,debt_levies
+Non-current Expenditure and Receipts - Interest: HRA item 8 payments and receipts,line,debt_levies
+Non-current Expenditure and Receipts - SUB-TOTAL,total,
+Non-current Expenditure and Receipts - Interest and investment income (-): external receipts and dividends,line,debt_levies
+Non-current Expenditure and Receipts - Income from Treasury Management Activities,memo,
+"Non-current Expenditure and Receipts - Income from non-treasury management activities, of which",memo,
+Non-current Expenditure and Receipts - Investment properties,memo,
+Non-current Expenditure and Receipts - Dividends from subsidaries,memo,
+Non-current Expenditure and Receipts - Dividends from equity other than subsidiaries,memo,
+Non-current Expenditure and Receipts - Income from joint ventures,memo,
+Non-current Expenditure and Receipts - Interest from capital loans,memo,
+Non-current Expenditure and Receipts - Interest from revenue loans,memo,
+Non-current Expenditure and Receipts - Income from bonds,memo,
+Non-current Expenditure and Receipts - Other,memo,
+Non-current Expenditure and Receipts - Private Finance Initiative (PFI) schemes - difference from service charge,line,debt_levies
+Non-current Expenditure and Receipts - Appropriations to(+)/ from(-) financial instruments adjustment account,line,debt_levies
+Non-current Expenditure and Receipts - Appropriations to(+)/ from(-) unequal pay back pay account,line,running
+Non-current Expenditure and Receipts - Specific and special grants outside AEF [RG line 799 as income],line,housing_benefit
+Non-current Expenditure and Receipts - Business Rates Supplement (GLA only),line,debt_levies
+Non-current Expenditure and Receipts - Community Infrastructure levy,line,debt_levies
+Non-current Expenditure and Receipts - Carbon Reduction Commitment (CRC) transactions (expenditure) (+),line,running
+Non-current Expenditure and Receipts - Carbon Reduction Commitment (CRC) transactions (income) (-),line,running
+Non-current Expenditure and Receipts - Appropriations to(+)/from(-) dedicated schools grant adjustment account [note 7],line,debt_levies
+Revenue Expenditure - REVENUE EXPENDITURE (TOTAL OF LINES 785 TO 797),total,

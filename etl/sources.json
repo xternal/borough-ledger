@@ -1,0 +1,321 @@
+{
+ "note": "Every file the ETL reads. fetch.py downloads each to data/raw/ and refuses a file whose SHA-256 differs: a changed source must be reviewed, not silently absorbed. Entries marked manual sit behind a firewall that blocks scripts: download them by hand into data/raw/. Their hashes record exactly which file was read.",
+ "sources": [
+  {
+   "id": "ctr_2026-27",
+   "title": "Council Tax levels set by local authorities in England 2026 to 2027, Table 10: council tax requirement data for billing authorities",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2026-to-2027",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a02eeeccd2e0e8b5b20b449/Table_10_2026-27.ods",
+   "file": "Table_10_2026-27.ods",
+   "sha256": "b5b8345743fb722e48699243d1654a3e35b96c89a14c6eb26888035c3e38feb0",
+   "published_on": "2026-03-25",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ctr_data",
+    "sheet": "Data_Billing",
+    "years": [
+     "2025-26",
+     "2026-27"
+    ]
+   }
+  },
+  {
+   "id": "ct_bands_2026-27",
+   "title": "Council Tax levels set by local authorities in England 2026 to 2027, Table 9: area council tax by band",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2026-to-2027",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/69de1fa63e81003ae0422508/Tables_1-9_2026-27.ods",
+   "file": "Tables_1-9_2026-27.ods",
+   "sha256": "66b7c20f70c804038c0a392ff2b7249fd09e83f4e88ac87d0278ce7e19da5537",
+   "published_on": "2026-03-25",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "area_bands",
+    "sheet": "Table_9",
+    "year": "2026-27"
+   }
+  },
+  {
+   "id": "ra_2026-27",
+   "title": "Local authority revenue expenditure and financing England: 2026 to 2027 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2026-to-2027-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a2962166d178a6fb7e32089/RA_2026-27_data_Part_1.ods",
+   "file": "RA_2026-27_data_Part_1.ods",
+   "sha256": "3ea4d4c2218bc9f49bbf59a6fc82481acb6a3494d5b0f4e114cdb945730653db",
+   "published_on": "2026-06-11",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2026-27",
+    "year": "2026-27"
+   }
+  },
+  {
+   "id": "ra_2026-27_part2",
+   "title": "Local authority revenue expenditure and financing England: 2026 to 2027 budget, RA part 2 (reserves and memorandum items)",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2026-to-2027-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a281185e371d9d2c0052b0a/RA_2026-27_data_Part_2.ods",
+   "file": "RA_2026-27_data_Part_2.ods",
+   "sha256": "55c34505c69513fcba446f3484061d2bd115c4ce06bb5bafba7b36e330be4d65",
+   "published_on": "2026-06-11",
+   "licence": "OGL-UK-3.0"
+  },
+  {
+   "id": "sg_2026-27",
+   "title": "Local authority revenue expenditure and financing England: 2026 to 2027 budget, specific and special grants (SG) by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2026-to-2027-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a28119b6d178a6fb7e31f7f/SG_2026-27.ods",
+   "file": "SG_2026-27.ods",
+   "sha256": "6150792dcea97ca58b912a5fbf9fdc99562ba782fb7d6f5c8885e6ca1a17e3b5",
+   "published_on": "2026-06-11",
+   "licence": "OGL-UK-3.0"
+  },
+  {
+   "id": "ct_bands_2025-26",
+   "title": "Council Tax levels set by local authorities in England, Table 9: area council tax by band 2025 to 2026",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2025-to-2026",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/69e88e1c9ca985145673b7f4/Tables_1-9_2025-26.ods",
+   "file": "Tables_1-9_2025-26.ods",
+   "sha256": "7d9f98b6c152d276d7fb672db0a7cec866df24e175bb28ebb55cbe845a8afbc3",
+   "extract": {
+    "kind": "area_bands",
+    "sheet": "Table_9",
+    "year": "2025-26"
+   }
+  },
+  {
+   "id": "ctr_2025-26",
+   "title": "Council Tax levels set by local authorities in England, Table 10: council tax requirement data for billing authorities, 2024 to 2025 and 2025 to 2026",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2025-to-2026",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a02f143e71c4cdf4026ba48/Table_10_2025-26.ods",
+   "file": "Table_10_2025-26.ods",
+   "sha256": "79766eb7b591a4f49e1e9f95cb6b0a232c7a9165945de9acb076769c002e6e5c",
+   "extract": {
+    "kind": "ctr_data",
+    "sheet": "Data_Billing",
+    "years": [
+     "2024-25",
+     "2025-26"
+    ]
+   }
+  },
+  {
+   "id": "ctr_2024-25",
+   "title": "Council Tax levels set by local authorities in England, Table 9 (revised): council tax requirement data for billing authorities, 2023 to 2024 and 2024 to 2025",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2024-to-2025",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/663a45b51834d96a0aa6d1d4/Table_9_24-25__revised_.ods",
+   "file": "Table_9_24-25__revised_.ods",
+   "sha256": "ade111fc09ad25d5219cc2c16efa7170255099b2f1d2d884b2f652d0c1e244e6",
+   "extract": {
+    "kind": "ctr_data",
+    "sheet": "Data_Billing",
+    "years": [
+     "2023-24",
+     "2024-25"
+    ]
+   }
+  },
+  {
+   "id": "ct_bands_2024-25",
+   "title": "Council Tax levels set by local authorities in England, Table 8: area council tax by band 2024 to 2025",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2024-to-2025",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/65fad6739316f5001164c3ca/Table_8_24-25.ods",
+   "file": "Table_8_24-25.ods",
+   "sha256": "249127ae1bff3f37bb335896f801524562de0dd9668c6c9cd64eacd8a8880245",
+   "extract": {
+    "kind": "area_bands",
+    "sheet": "Table_8",
+    "year": "2024-25"
+   }
+  },
+  {
+   "id": "ctr_2023-24",
+   "title": "Council Tax levels set by local authorities in England, Table 9 (revised): council tax requirement data for billing authorities, 2022 to 2023 and 2023 to 2024",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2023-to-2024",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6604009fe8c442001a220323/TABLE_9__REVISED_.ods",
+   "file": "TABLE_9__REVISED_.ods",
+   "sha256": "e17192480e5d99b1d67db9ec5ac649f42ede1f0626fb143e0c6c03c6a925a803",
+   "extract": {
+    "kind": "ctr_data",
+    "sheet": "Data_Billing",
+    "years": [
+     "2022-23",
+     "2023-24"
+    ]
+   }
+  },
+  {
+   "id": "ct_bands_2023-24",
+   "title": "Council Tax levels set by local authorities in England, Table 8 (revised): area council tax by band 2023 to 2024",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2023-to-2024",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/65e598777bc329020bb8c198/Table_8__REVISED_.ods",
+   "file": "Table_8__REVISED_.ods",
+   "sha256": "c8ef95ed86fffd3d621cc45be2ac9c0121c200df77b93a8c4be91853b604cd8c",
+   "extract": {
+    "kind": "area_bands",
+    "sheet": "Table_8",
+    "year": "2023-24"
+   }
+  },
+  {
+   "id": "ct_bands_2022-23",
+   "title": "Council Tax levels set by local authorities in England, Table 8: area council tax by band 2022 to 2023",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "licence": "OGL-UK-3.0",
+   "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2022-to-2023",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/62432821d3bf7f32aea5a3b5/CTR_Table_8_2022-23.ods",
+   "file": "CTR_Table_8_2022-23.ods",
+   "sha256": "d042b3096e3c6d3a2b94d2f62afac34b5b706aaacb5d96bc45dc52be89498f6a",
+   "extract": {
+    "kind": "area_bands",
+    "sheet": "London",
+    "year": "2022-23",
+    "first_band_col": 4
+   }
+  },
+  {
+   "id": "ra_2025-26",
+   "title": "Local authority revenue expenditure and financing England: 2025 to 2026 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2025-to-2026-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/68527310cf42a58f50cac9df/RA_2025-26_data_Part_1.ods",
+   "file": "RA_2025-26_data_Part_1.ods",
+   "sha256": "b6176cf91e0235b29b5cceffd0d9ccfaac8f75e4a986cd236d9dee80dc77c1f9",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2025-26",
+    "year": "2025-26"
+   }
+  },
+  {
+   "id": "ra_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6762a0a83229e84d9bbde757/RA_2024-25_data_Part_1.ods",
+   "file": "RA_2024-25_data_Part_1.ods",
+   "sha256": "19231e891ec06f6aa5c8fed7794b247d5e5a3f59aca6ba59d7ec4efc7f41e8f1",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2024-25",
+    "year": "2024-25"
+   }
+  },
+  {
+   "id": "ra_2023-24",
+   "title": "Local authority revenue expenditure and financing England: 2023 to 2024 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2023-to-2024-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/649304495f7bb7000c7faefb/RA_2023-24_data_Part_1.ods",
+   "file": "RA_2023-24_data_Part_1.ods",
+   "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2023-24",
+    "year": "2023-24"
+   }
+  },
+  {
+   "id": "budget_report_cabinet",
+   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Cabinet, 9 February 2026)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+   "file": "revenue_budget_2026-27.pdf",
+   "sha256": "8a32834f760724140a65ed9b5a516f2dadb56ddccde60e51565cd83c3f994837",
+   "manual": true
+  },
+  {
+   "id": "budget_pac_2026-27",
+   "title": "2026/27 Revenue Budget and Medium-Term Financial Strategy (report to Policy and Accountability Committee)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+   "file": "budget_mtfs_2026-27.pdf",
+   "sha256": "9f048df0a48ce337512a3be93d5b332b33d909ea67ea88384f640a989423a82b",
+   "manual": true
+  },
+  {
+   "id": "tax_base_report_2026-27",
+   "title": "Council Tax Base and Collection Rate 2026/27 and Delegation of the Business Rate Estimate",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+   "file": "tax_base_2026-27.pdf",
+   "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff",
+   "manual": true
+  },
+  {
+   "id": "budget_report",
+   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Full Council, 25 February 2026)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf",
+   "published_on": "2026-02-25",
+   "file": "revenue_budget_2026-27_v41.pdf",
+   "sha256": "f7fdd0066a08544f45ab502bdf8736359107f4e39584a9ca9129926578e67897",
+   "manual": true
+  },
+  {
+   "id": "cabinet_pack_2026-02-09",
+   "title": "Cabinet 9 February 2026, public reports pack (includes budget Appendix B, medium term financial strategy, pages 51 to 60, and Appendix C, investment and savings proposals, pages 61 to 66)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "published_on": "2026-02-09",
+   "file": "cabinet_pack_2026-02-09.pdf",
+   "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce",
+   "manual": true,
+   "note": "Appendix C pages match the separately downloaded appendix (sha256 c9256238f2c7a640). Appendix B matches the Full Council copy (sha256 62631bbd537f9110) except one sentence on the settlement date."
+  },
+  {
+   "id": "rs_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, revenue summary (RS) by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+   "licence": "OGL-UK-3.0",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a2aca48a3674dfd3eb50749/RS_LA_Data_2024-25_data_by_LA.ods",
+   "file": "RS_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c",
+   "extract": {
+    "kind": "outturn",
+    "sheet": "RS_LA_Data_202425",
+    "year": "2024-25",
+    "detail": "ro5_2024-25"
+   }
+  },
+  {
+   "id": "ro5_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, cultural, environmental and planning services (RO5) by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+   "licence": "OGL-UK-3.0",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a291b72db0592d809052b7b/RO5_LA_Data_2024-25_data_by_LA.ods",
+   "file": "RO5_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba",
+   "extract": {
+    "kind": "outturn_detail",
+    "sheet": "RO5_LA_Data_202425"
+   }
+  }
+ ]
+}

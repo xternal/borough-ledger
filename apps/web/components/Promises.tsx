@@ -7,7 +7,7 @@ import type { PageModel, PromiseModel } from "@/lib/model";
 import { Num, TestMark } from "./Num";
 import { useLedger } from "./LedgerState";
 
-type Props = Pick<PageModel, "promises" | "today" | "netBudget" | "balance">;
+type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
 
 const LADDER = ["promised", "in_plan", "budgeted", "delivering", "delivered"] as const;
 const LABEL: Record<Status, string> = {
@@ -46,7 +46,7 @@ function who(p: PromiseModel): string {
   return p.party ? `${p.actor}, ${p.party}` : p.actor;
 }
 
-export function Promises({ promises, today, netBudget, balance }: Props) {
+export function Promises({ promises, today, generalBudget, balance }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
   const [sel, setSel] = useState(promises[0]?.id);
   const { scenario, setToggle } = useLedger();
@@ -108,7 +108,7 @@ export function Promises({ promises, today, netBudget, balance }: Props) {
           <Detail
             p={current}
             today={today}
-            netBudget={netBudget}
+            generalBudget={generalBudget}
             toggle={balance.toggles.find((t) => t.id === current.lever_or_toggle_id)}
             toggleOn={current.lever_or_toggle_id ? scenario.toggles[current.lever_or_toggle_id] : undefined}
             onTry={(id, on) => {
@@ -127,14 +127,14 @@ export function Promises({ promises, today, netBudget, balance }: Props) {
 function Detail({
   p,
   today,
-  netBudget,
+  generalBudget,
   toggle,
   toggleOn,
   onTry,
 }: {
   p: PromiseModel;
   today: string;
-  netBudget: PageModel["netBudget"];
+  generalBudget: PageModel["generalBudget"];
   toggle: PageModel["balance"]["toggles"][number] | undefined;
   toggleOn: boolean | undefined;
   onTry: (id: string, on: boolean) => void;
@@ -190,7 +190,7 @@ function Detail({
               <Num f={p.cost.share} fmt="share1" />
             </span>
             <span className="r">
-              of <Num f={netBudget} fmt="m0" />
+              of the <Num f={generalBudget} fmt="m0" /> it funds itself
             </span>
           </div>
         </div>

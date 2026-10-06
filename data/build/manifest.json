@@ -1,0 +1,165 @@
+{
+ "generated_by": "etl/build.py",
+ "inputs": [
+  {
+   "id": "ctr_2026-27",
+   "file": "Table_10_2026-27.ods",
+   "sha256": "b5b8345743fb722e48699243d1654a3e35b96c89a14c6eb26888035c3e38feb0"
+  },
+  {
+   "id": "ct_bands_2026-27",
+   "file": "Tables_1-9_2026-27.ods",
+   "sha256": "66b7c20f70c804038c0a392ff2b7249fd09e83f4e88ac87d0278ce7e19da5537"
+  },
+  {
+   "id": "ra_2026-27",
+   "file": "RA_2026-27_data_Part_1.ods",
+   "sha256": "3ea4d4c2218bc9f49bbf59a6fc82481acb6a3494d5b0f4e114cdb945730653db"
+  },
+  {
+   "id": "ra_2026-27_part2",
+   "file": "RA_2026-27_data_Part_2.ods",
+   "sha256": "55c34505c69513fcba446f3484061d2bd115c4ce06bb5bafba7b36e330be4d65"
+  },
+  {
+   "id": "sg_2026-27",
+   "file": "SG_2026-27.ods",
+   "sha256": "6150792dcea97ca58b912a5fbf9fdc99562ba782fb7d6f5c8885e6ca1a17e3b5"
+  },
+  {
+   "id": "ct_bands_2025-26",
+   "file": "Tables_1-9_2025-26.ods",
+   "sha256": "7d9f98b6c152d276d7fb672db0a7cec866df24e175bb28ebb55cbe845a8afbc3"
+  },
+  {
+   "id": "ctr_2025-26",
+   "file": "Table_10_2025-26.ods",
+   "sha256": "79766eb7b591a4f49e1e9f95cb6b0a232c7a9165945de9acb076769c002e6e5c"
+  },
+  {
+   "id": "ctr_2024-25",
+   "file": "Table_9_24-25__revised_.ods",
+   "sha256": "ade111fc09ad25d5219cc2c16efa7170255099b2f1d2d884b2f652d0c1e244e6"
+  },
+  {
+   "id": "ct_bands_2024-25",
+   "file": "Table_8_24-25.ods",
+   "sha256": "249127ae1bff3f37bb335896f801524562de0dd9668c6c9cd64eacd8a8880245"
+  },
+  {
+   "id": "ctr_2023-24",
+   "file": "TABLE_9__REVISED_.ods",
+   "sha256": "e17192480e5d99b1d67db9ec5ac649f42ede1f0626fb143e0c6c03c6a925a803"
+  },
+  {
+   "id": "ct_bands_2023-24",
+   "file": "Table_8__REVISED_.ods",
+   "sha256": "c8ef95ed86fffd3d621cc45be2ac9c0121c200df77b93a8c4be91853b604cd8c"
+  },
+  {
+   "id": "ct_bands_2022-23",
+   "file": "CTR_Table_8_2022-23.ods",
+   "sha256": "d042b3096e3c6d3a2b94d2f62afac34b5b706aaacb5d96bc45dc52be89498f6a"
+  },
+  {
+   "id": "ra_2025-26",
+   "file": "RA_2025-26_data_Part_1.ods",
+   "sha256": "b6176cf91e0235b29b5cceffd0d9ccfaac8f75e4a986cd236d9dee80dc77c1f9"
+  },
+  {
+   "id": "ra_2024-25",
+   "file": "RA_2024-25_data_Part_1.ods",
+   "sha256": "19231e891ec06f6aa5c8fed7794b247d5e5a3f59aca6ba59d7ec4efc7f41e8f1"
+  },
+  {
+   "id": "ra_2023-24",
+   "file": "RA_2023-24_data_Part_1.ods",
+   "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0"
+  },
+  {
+   "id": "budget_report_cabinet",
+   "file": "revenue_budget_2026-27.pdf",
+   "sha256": "8a32834f760724140a65ed9b5a516f2dadb56ddccde60e51565cd83c3f994837"
+  },
+  {
+   "id": "budget_pac_2026-27",
+   "file": "budget_mtfs_2026-27.pdf",
+   "sha256": "9f048df0a48ce337512a3be93d5b332b33d909ea67ea88384f640a989423a82b"
+  },
+  {
+   "id": "tax_base_report_2026-27",
+   "file": "tax_base_2026-27.pdf",
+   "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff"
+  },
+  {
+   "id": "budget_report",
+   "file": "revenue_budget_2026-27_v41.pdf",
+   "sha256": "f7fdd0066a08544f45ab502bdf8736359107f4e39584a9ca9129926578e67897"
+  },
+  {
+   "id": "cabinet_pack_2026-02-09",
+   "file": "cabinet_pack_2026-02-09.pdf",
+   "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
+  },
+  {
+   "id": "rs_2024-25",
+   "file": "RS_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c"
+  },
+  {
+   "id": "ro5_2024-25",
+   "file": "RO5_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
+  }
+ ],
+ "manual": [
+  {
+   "file": "data/manual/funding_groups.csv",
+   "sha256": "9acb1485776e95609ba99c22bfe904fbd75fbdc753f47f1030be7d5bafd269bf"
+  },
+  {
+   "file": "data/manual/funding_map.csv",
+   "sha256": "b38128040dc7381e5f2edcbecfb53a66ce8fae9382ada7e9b390af76371d790b"
+  },
+  {
+   "file": "data/manual/gap_2026-27.csv",
+   "sha256": "a47d5301ea1828f459740aee8e1958937889836c3f43fe3c5a1b7cdfe690c288"
+  },
+  {
+   "file": "data/manual/next_year_2027-28.csv",
+   "sha256": "e289e89201716c348fa68632c7801d6bc924c884cb76144ecd25fa8b7e9b03d1"
+  },
+  {
+   "file": "data/manual/ra_service_map.csv",
+   "sha256": "0c93d9fa4a2c3b863d402b4aa3d30a22d160f8fdcc543822a1e6a03e95791004"
+  },
+  {
+   "file": "data/manual/rs_outturn_map.csv",
+   "sha256": "01c26a732ceb4ff6978aff442d29bdf6e6de04798096d5340e8510c526635d30"
+  },
+  {
+   "file": "data/manual/savings_2026-27.csv",
+   "sha256": "e8c15d3230986a93a59bdcc8adff6827b9072467329bd3e5cf66f90db04a712b"
+  },
+  {
+   "file": "data/manual/service_groups.csv",
+   "sha256": "ec0373bdea903f5c5b5b79edeade352b60a23472ee91580fa8ece754d798613f"
+  },
+  {
+   "file": "data/manual/toggles_2027-28.csv",
+   "sha256": "57ebbc574e5a8e8ef175b161c2b5c66d4a6528990e01012f04e1de795e430c5b"
+  }
+ ],
+ "outputs": [
+  {
+   "file": "data/build/hf_2026-27.json",
+   "sha256": "9ad90e9650542c63aef54415053e3374cb04212590a2d7e950e46400d81e80a4"
+  }
+ ],
+ "quality_counts": {
+  "approx": 4,
+  "modelled": 3,
+  "sourced": 66,
+  "test": 3
+ }
+}

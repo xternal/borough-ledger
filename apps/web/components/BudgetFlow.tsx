@@ -20,7 +20,10 @@ interface FlowLink {
 }
 
 const W = 1000;
-const H = 600;
+const H = 640;
+/** Room for labels either side of the flow. */
+const LEFT = 300;
+const RIGHT = 330;
 
 /** Laid out on the server with d3-sankey and drawn as plain SVG, so it renders without JavaScript. */
 function FlowChart({ funding, services, total }: { funding: FlowLine[]; services: FlowLine[]; total: Figure }) {
@@ -37,8 +40,8 @@ function FlowChart({ funding, services, total }: { funding: FlowLine[]; services
     .nodePadding(18)
     .nodeSort(null)
     .extent([
-      [240, 24],
-      [W - 270, H - 10],
+      [LEFT, 24],
+      [W - RIGHT, H - 10],
     ])({ nodes: nodes.map((d) => ({ ...d })), links: links.map((d) => ({ ...d })) });
   const path = sankeyLinkHorizontal();
   const pot = g.nodes.find((n) => n.id === "pot")!;
@@ -136,7 +139,8 @@ export function BudgetFlow({ m }: { m: PageModel }) {
       <div className="sec-head">
         <h2 id="budget-h">The council&rsquo;s budget</h2>
         <p>
-          What the council spends on day-to-day services after fees and ring-fenced grants, and where the money comes from. It must balance by law.
+          What the council spends on day-to-day services after fees and charges, and where the money comes from, including grants that can only be
+          spent on schools or public health. It must balance by law.
         </p>
       </div>
       <div className="flow-head">

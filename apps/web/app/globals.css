@@ -1230,6 +1230,45 @@
     margin-top: 12px;
   }
 
+  /* savings list under the waterfall */
+  .savings {
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    font-size: 14px;
+  }
+  .savings summary {
+    cursor: pointer;
+    font-weight: 550;
+  }
+  .savings > p {
+    padding-top: 10px;
+  }
+  .savings-group {
+    padding-top: 18px;
+  }
+  .savings-group h3 {
+    margin-bottom: 8px;
+  }
+  .savings-group .small {
+    margin-bottom: 8px;
+    max-width: 70ch;
+  }
+  .tablewrap td.wrap-cell {
+    white-space: normal;
+    min-width: 160px;
+  }
+  .oneoff {
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: 550;
+    padding: 1px 7px;
+    border-radius: 999px;
+    color: var(--gap);
+    background: var(--gap-soft);
+    white-space: nowrap;
+  }
+
   /* method */
   .method {
     display: grid;

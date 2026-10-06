@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { BANDS, DATA, type Lever, type Rules } from "@borough-ledger/schema";
+import { REFERENCE_INPUT } from "./fixtures";
 import {
   bandRatio,
   billFor,
@@ -19,14 +20,17 @@ const { council: C, rules: R } = DATA;
 const TOL = R.balanced_budget.tolerance_m;
 const bandD = { council: C.bill.band_d_council, gla: C.bill.band_d_gla };
 
-const input: BalanceInput = {
+/** Live data, for checks on the data itself. */
+const live: BalanceInput = {
   gapM: C.next_year.gap_m,
   levers: C.next_year.levers,
   toggles: C.next_year.toggles,
-  reserves: C.next_year.reserves,
-  referendumLimitPct: R.referendum_limit_pct[C.next_year.year]!.value,
+  reserves: { general_m: C.next_year.reserves.general.m, minimum_safe_m: C.next_year.reserves.minimum_safe.m },
+  referendumThresholdPct: R.referendum_limit_pct[C.next_year.year]!.threshold_pct,
   toleranceM: TOL,
 };
+/** Frozen fixture, for the engine's arithmetic. */
+const input = REFERENCE_INPUT;
 const scenario = (levers: Scenario["levers"], toggles: Scenario["toggles"] = {}): Scenario => {
   const d = defaultScenario(input);
   return { levers: { ...d.levers, ...levers }, toggles: { ...d.toggles, ...toggles } };
@@ -57,22 +61,21 @@ describe("council rules (config, sourced)", () => {
 });
 
 describe("your bill", () => {
-  it("Band D reproduces the published split: council + Mayor of London = total", () => {
+  it("Band D reproduces the published split: council £1,009.00 + Mayor of London £510.51 = £1,519.51", () => {
     const d = billFor(R, bandD, "D", false);
     expect(d.council).toBe(1009);
     expect(d.gla).toBe(510.51);
     expect(d.total).toBeCloseTo(C.bill.band_d_total, 10);
   });
 
-  it("other bands scale the Band D bill by their statutory ratio", () => {
-    expect(billFor(R, bandD, "A", false).total).toBeCloseTo((C.bill.band_d_total * 6) / 9, 10);
-    expect(billFor(R, bandD, "H", false).total).toBeCloseTo(C.bill.band_d_total * 2, 10);
+  it("every band matches the government's published 2026/27 amount to the penny", () => {
+    for (const b of BANDS) expect(Math.round(billFor(R, bandD, b, false).total * 100) / 100).toBe(C.bill.published_bands[b]);
   });
 
-  it("council tax yield in the seed agrees with tax base × Band D × collection rate", () => {
+  it("council tax yield agrees with tax base × Band D × collection rate", () => {
     const y = councilTaxYieldM(C.tax_base.band_d_equivalents, C.bill.band_d_council, C.tax_base.collection_rate);
     const ct = C.funding.find((f) => f.id === "council_tax")!.m;
-    expect(Math.abs(y - ct)).toBeLessThan(0.05); // seed is rounded to £0.1m
+    expect(Math.abs(y - ct)).toBeLessThan(TOL);
   });
 });
 
@@ -80,7 +83,12 @@ describe("the budget balances", () => {
   it("2026/27 funding, including reserves drawn, equals net spending", () => {
     const b = checkBudget(C.funding, C.services, TOL);
     expect(b.balances).toBe(true);
-    expect(b.fundingM).toBeCloseTo(b.spendingM, 9);
+  });
+
+  it("money the council funds itself equals spending after ring-fenced grants", () => {
+    const general = C.funding.filter((f) => !f.ring_fenced_to).reduce((a, f) => a + f.m, 0);
+    const spend = C.services.reduce((a, s) => a + s.general_fund_m, 0);
+    expect(Math.abs(general - spend)).toBeLessThan(TOL);
   });
 
   it("an unbalanced year is detected, not hidden", () => {
@@ -94,11 +102,11 @@ describe("this year's gap", () => {
     const w = buildWaterfall(C.gap_2026_27, TOL);
     expect(w.closes).toBe(true);
     expect(w.residualM).toBeCloseTo(0, 9);
-    expect(w.gapM).toBeCloseTo(20.7, 9);
+    expect(w.gapM).toBeCloseTo(17.2, 9); // budget report Table 2: lines opening the gap
   });
 
   it("a waterfall that does not close is reported", () => {
-    const lines = C.gap_2026_27.filter((l) => l.kind !== "close_oneoff");
+    const lines = C.gap_2026_27.filter((l) => l.kind !== "close_saving");
     expect(buildWaterfall(lines, TOL).closes).toBe(false);
   });
 });
@@ -138,9 +146,10 @@ describe("balance it: five reference scenarios", () => {
 });
 
 describe("balance it: flags", () => {
-  it("a council tax rise above 4.99% raises the referendum flag", () => {
-    expect(input.referendumLimitPct).toBe(4.99);
+  it("a council tax rise above 4.99% raises the referendum flag (the law: 5% or more)", () => {
+    expect(R.referendum_limit_pct[C.meta.year]).toMatchObject({ threshold_pct: 5, core: 3, adult_social_care: 2, quality: "sourced" });
     expect(computeBalance(input, scenario({ ct_rise: 4.99 })).flags.referendum).toBe(false);
+    expect(computeBalance(input, scenario({ ct_rise: 4.999 })).flags.referendum).toBe(false);
     expect(computeBalance(input, scenario({ ct_rise: 4.75 })).flags.referendum).toBe(false);
     expect(computeBalance(input, scenario({ ct_rise: 5 })).flags.referendum).toBe(true);
     expect(computeBalance(input, scenario({ ct_rise: 8 })).flags.referendum).toBe(true);
@@ -149,7 +158,7 @@ describe("balance it: flags", () => {
   it("reserves are one-off and leave less in the bank", () => {
     const r = computeBalance(input, scenario({ reserves: 3 }));
     expect(r.flags.oneOffM).toBe(3);
-    expect(r.reservesLeftM).toBe(C.next_year.reserves.general_m - 3);
+    expect(r.reservesLeftM).toBe(input.reserves.general_m - 3);
     expect(computeBalance(input, scenario({})).flags.oneOffM).toBe(0);
   });
 
@@ -159,7 +168,27 @@ describe("balance it: flags", () => {
     expect(computeBalance(small, scenario({ reserves: 10 })).flags.belowSafeMinimum).toBe(true);
   });
 
-  it("does not read the referendum limit from the lever", () => {
+  it("raises no referendum flag when government sets no limit (H&F, 2027/28)", () => {
+    expect(live.referendumThresholdPct).toBeNull();
+    expect(computeBalance(live, { levers: { ct_rise: 9.99 }, toggles: {} }).flags.referendum).toBe(false);
+    expect(computeBalance({ ...input, referendumThresholdPct: null }, scenario({ ct_rise: 8 })).flags.referendum).toBe(false);
+  });
+
+  it("a lever with an assumed value closes only the difference from it", () => {
+    const levers = input.levers.map((l) => (l.id === "ct_rise" ? { ...l, assumed: 4.99 } : l));
+    const at = (v: number) => computeBalance({ ...input, levers }, scenario({ ct_rise: v })).parts.find((p) => p.id === "council_tax")!.m;
+    expect(at(4.99)).toBeCloseTo(0, 12);
+    expect(at(5.99)).toBeCloseTo(0.807, 9);
+    expect(at(3.99)).toBeCloseTo(-0.807, 9);
+  });
+
+  it("opens on the council's own forecast gap for next year", () => {
+    expect(C.next_year.gap_m).toBe(31.4);
+    expect(C.next_year.quality).toBe("sourced");
+    expect(computeBalance(live, defaultScenario(live)).remainingM).toBeCloseTo(31.4, 9);
+  });
+
+  it("does not read the referendum threshold from the lever", () => {
     const levers: Lever[] = input.levers.map((l) => ({ ...l, limit: 99 }));
     expect(computeBalance({ ...input, levers }, scenario({ ct_rise: 5 })).flags.referendum).toBe(true);
   });
@@ -168,6 +197,7 @@ describe("balance it: flags", () => {
 describe("helpers", () => {
   it("costs a pledge per Band D home", () => {
     expect(perBandDHome(2.5, 82000)).toBeCloseTo(30.4878, 3);
+    expect(perBandDHome(2.5, C.tax_base.band_d_equivalents)).toBeCloseTo(26.71, 2);
   });
   it("steps financial years", () => {
     expect(nextFinancialYear("2027-28")).toBe("2028-29");

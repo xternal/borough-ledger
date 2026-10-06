@@ -1,4 +1,5 @@
-import hfRaw from "../../../data/seed/hf_2026-27.json";
+/* The council year comes from the ETL build (etl/build.py); promises and payments are still seed data until M3 and M4. */
+import hfRaw from "../../../data/build/hf_2026-27.json";
 import promisesRaw from "../../../data/seed/promises.json";
 import paymentsRaw from "../../../data/seed/payments.json";
 import rulesRaw from "../../../data/config/rules.json";
@@ -24,11 +25,20 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
   add("tax_base", c.tax_base);
   c.funding.forEach((f) => add(`funding.${f.id}`, f));
   c.services.forEach((s) => add(`services.${s.id}`, s));
+  c.savings.forEach((s) => add(`savings.${s.id}`, s));
   c.gap_2026_27.forEach((g, i) => {
     if ("quality" in g) add(`gap_2026_27[${i}] ${g.label}`, g);
   });
   add("next_year", c.next_year);
-  add("next_year.reserves", c.next_year.reserves);
+  add("next_year.reserves.general", c.next_year.reserves.general);
+  add("next_year.reserves.minimum_safe", c.next_year.reserves.minimum_safe);
+  c.history.budget.forEach((h) => out.push({ path: `history.budget.${h.year}`, quality: c.history.quality, source_id: h.source_id }));
+  c.history.outturn.forEach((h) =>
+    h.source_ids.forEach((id) => out.push({ path: `history.outturn.${h.year}`, quality: c.history.quality, source_id: id })),
+  );
+  c.history.council_tax.forEach((h) =>
+    h.source_ids.forEach((id) => out.push({ path: `history.council_tax.${h.year}`, quality: c.history.quality, source_id: id })),
+  );
   c.next_year.levers.forEach((l) => add(`next_year.levers.${l.id}`, l));
   c.next_year.toggles.forEach((t) => add(`next_year.toggles.${t.id}`, t));
   add("politics", c.politics);
@@ -76,6 +86,11 @@ export function parseDataset(raw: { council: unknown; promises: unknown; payment
       problems.push(`promise ${p.id}: unknown lever or toggle ${p.lever_or_toggle_id}`);
   for (const y of [council.meta.year, council.next_year.year])
     if (!rules.referendum_limit_pct[y]) problems.push(`rules: no referendum limit for ${y}`);
+  const serviceIds = new Set(council.services.map((s) => s.id));
+  for (const s of council.savings)
+    if (s.service_group && !serviceIds.has(s.service_group)) problems.push(`saving ${s.id}: unknown service group ${s.service_group}`);
+  for (const f of council.funding)
+    if (f.ring_fenced_to && !serviceIds.has(f.ring_fenced_to)) problems.push(`funding ${f.id}: ring-fenced to unknown service ${f.ring_fenced_to}`);
   if (!rules.instalments.options.includes(rules.instalments.default)) problems.push("rules: default instalments not among options");
   if (problems.length) throw new Error(`Seed data failed cross-checks:\n  ${problems.join("\n  ")}`);
 

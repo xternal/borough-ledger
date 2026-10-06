@@ -1,0 +1,187 @@
+ra_line,asset_id,section,label,role,group
+110,eduerl,Education Services,Early years,line,schools
+120,eduprm,Education Services,Primary schools,line,schools
+130,eduscn,Education Services,Secondary schools,line,schools
+140,eduspc,Education Services,Special schools and alternative provision,line,schools
+145,edupst,Education Services,Post-16 provision,line,schools
+165,eduoth,Education Services,Other education and community budget,line,schools
+190,edutot,Education Services,TOTAL EDUCATION SERVICES,total,
+210,transpln,Highways and Transport,"Transport planning, policy and strategy",line,streets
+230,transrdsmnt,Highways and Transport,Structural maintenance,line,streets
+247,transrdsenv,Highways and Transport,"Environmental, safety and routine maintenance",line,streets
+248,transrdswnt,Highways and Transport,Winter service,line,streets
+249,transrdslgh,Highways and Transport,Street lighting (including energy costs),line,streets
+251,transrdstrfcng,Highways and Transport,Traffic management and road safety: congestion charging,line,streets
+252,transrdstrfbs,Highways and Transport,Traffic management and road safety: traffic management – bus lane enforcement,line,streets
+254,transrdstrfsft,Highways and Transport,Traffic management and road safety: road safety education and safe routes (including school crossing patrols),line,streets
+258,transrdstrfoth,Highways and Transport,Traffic management and road safety: other,line,streets
+260,transprk,Highways and Transport,Parking services,line,streets
+271,transpblstt,Highways and Transport,Public transport: statutory concessionary fares,line,streets
+272,transpbldsc,Highways and Transport,Public transport: discretionary concessionary fares,line,streets
+275,transpblopr,Highways and Transport,Public transport: support to operators,line,streets
+276,transpblcrd,Highways and Transport,Public transport: co-ordination,line,streets
+280,transaht,Highways and Transport,"Airports, harbours and toll facilities",line,streets
+290,transtot,Highways and Transport,TOTAL HIGHWAYS AND TRANSPORT SERVICES,total,
+310,cscsr,Children's Social Care,Children's social care: Sure start children's centres early years,line,children
+313,csclkd,Children's Social Care,Children's social care: Children looked after,line,children
+315,cscoth,Children's Social Care,Children's social care: Other children and family services,line,children
+322,cscfml,Children's Social Care,Children's social care: Family support services,line,children
+323,cscyth,Children's Social Care,Children's social care: Youth justice,line,children
+325,cscsfg,Children's Social Care,Children's social care: Safeguarding children and young people’s services,line,children
+326,cscasy,Children's Social Care,Children's social care: Asylum seekers,line,children
+327,cscsrv,Children's Social Care,Children's social care: Services for young people,line,children
+330,csctot,Children's Social Care,TOTAL CHILDREN'S SOCIAL CARE,total,
+332,ascphyadl,Adult Social Care,Physical support - adults (18–64),line,adult_care
+333,ascphyold,Adult Social Care,Physical support - older people (65+),line,adult_care
+334,ascsnsadl,Adult Social Care,Sensory support - adults (18–64),line,adult_care
+335,ascsnsold,Adult Social Care,Sensory support - older people (65+),line,adult_care
+336,ascmmradl,Adult Social Care,Support with memory and cognition - adults (18–64),line,adult_care
+337,ascmmrold,Adult Social Care,Support with memory and cognition - older people (65+),line,adult_care
+340,asclrnadl,Adult Social Care,Learning disability support - adults (18–64),line,adult_care
+341,asclrnold,Adult Social Care,Learning disability support - older people (65+),line,adult_care
+344,ascmntadl,Adult Social Care,Mental health support - adults (18–64),line,adult_care
+345,ascmntold,Adult Social Care,Mental health support - older people (65+),line,adult_care
+348,ascsclsbs,Adult Social Care,Social support: Substance misuse support,line,adult_care
+349,ascsclasy,Adult Social Care,Social support: Asylum seeker support,line,adult_care
+350,ascsclcrr,Adult Social Care,Social support: Support for carer,line,adult_care
+351,ascsclisl,Adult Social Care,Social support: Social Isolation,line,adult_care
+353,ascass,Adult Social Care,Assistive equipment and technology,line,adult_care
+354,ascact,Adult Social Care,Care assessment and safeguarding,line,adult_care
+355,ascinf,Adult Social Care,Information and early intervention (non-attributable costs),line,adult_care
+356,ascdlv,Adult Social Care,"Commissioning, strategy and admin support",line,adult_care
+357,asccovdis,Adult Social Care,COVID-19 discharge costs (to 2023-24),line,adult_care
+358,ascchomes,Adult Social Care,Disbursement payments to care providers (to 2024-25),line,adult_care
+360,asctot,Adult Social Care,TOTAL ADULT SOCIAL CARE,total,
+361,phsxlsti,Public Health,Sexual health services - STI testing and treatment (prescribed functions),line,public_health
+362,phsxlcnt,Public Health,Sexual health services - Contraception (prescribed functions),line,public_health
+363,phsxlprm,Public Health,"Sexual health services - Advice, prevention and promotion (non-prescribed functions)",line,public_health
+365,phhcp,Public Health,NHS health check programme (prescribed functions),line,public_health
+366,phprt,Public Health,Health protection - Local authority role in health protection (prescribed functions),line,public_health
+368,phcmp,Public Health,National child measurement programme (prescribed functions),line,public_health
+370,phadv,Public Health,Public health advice (prescribed functions),line,public_health
+371,phobsadl,Public Health,Obesity - adults,line,public_health
+372,phobschl,Public Health,Obesity - children,line,public_health
+373,phphyadl,Public Health,Physical activity - adults,line,public_health
+374,phphychl,Public Health,Physical activity - children,line,public_health
+376,phsmdrgalctrt,Public Health,Substance misuse - Adult drug and alcohol treatment and recovery services and commissioning,line,public_health
+377,phsbstrtalc,Public Health,Substance misuse - Treatment for alcohol misuse in adults (to 2025-26),line,public_health
+378,phsmprdrgalc,Public Health,Substance misuse - Adult drug and alcohol prevention,line,public_health
+379,phsbsprvalc,Public Health,Substance misuse - Preventing and reducing harm from alcohol misuse in adults (to 2025-26),line,public_health
+380,phsbsspc,Public Health,Substance misuse - Children and young people specialist substance use services and prevention,line,public_health
+381,phsmkstp,Public Health,Smoking and tobacco - Stop smoking services and interventions,line,public_health
+382,phsmkcnt,Public Health,Smoking and tobacco - Wider tobacco control,line,public_health
+383,phchl,Public Health,Children 5–19 public health programmes,line,public_health
+384,phbbymnd,Public Health,Miscellaneous public health services - Mandated 0-5 children’s services (prescribed functions),line,public_health
+385,phbbyoth,Public Health,Miscellaneous public health services - All Other 0-5 children’s services (non-prescribed functions),line,public_health
+386,phwrk,Public Health,Health at work,line,public_health
+387,phmnt,Public Health,Public mental health,line,public_health
+389,phmsc,Public Health,Miscellaneous public health services - other,line,public_health
+390,phtot,Public Health,TOTAL PUBLIC HEALTH,total,
+391,phttt,Public Health,"Test, track & trace and outbreak planning (to 2024-25)",line,public_health
+392,phcov,Public Health,Other public health spend relating to COVID-19 (to 2024-25),line,public_health
+409,housgfcfstr,Housing Services (General Fund Revenue Account [GFRA] only),"Housing strategy, advice, advances, enabling, renewals and licensing",line,housing
+440,housgfcfhml,Housing Services (General Fund Revenue Account [GFRA] only),Homelessness,line,housing
+456,housgfcfbnf,Housing Services (General Fund Revenue Account [GFRA] only),Housing benefits: rent allowances and rent rebates - discretionary payments,line,housing
+457,housgfcfbnfadm,Housing Services (General Fund Revenue Account [GFRA] only),Housing benefits administration,line,housing
+460,housgfcfcnc,Housing Services (General Fund Revenue Account [GFRA] only),Other council property - travellers' sites and non-HRA council property,line,housing
+475,housgfcfwlfspp,Housing Services (General Fund Revenue Account [GFRA] only),Housing welfare: Supporting People,line,housing
+478,housgfcfwlfoth,Housing Services (General Fund Revenue Account [GFRA] only),Other welfare services,line,housing
+490,housgfcftot,Housing Services (General Fund Revenue Account [GFRA] only),TOTAL HOUSING SERVICES (GFRA only),total,
+500,culhrtarc,Cultural and Related Services,Archives,line,parks_culture
+501,culhrtxarc,Cultural and Related Services,Culture and heritage (excluding Archives),line,parks_culture
+504,cultrs,Cultural and Related Services,Tourism,line,parks_culture
+505,cullib,Cultural and Related Services,Library service,line,parks_culture
+506,culsprlscom,Cultural and Related Services,Recreation and sport,line,parks_culture
+507,culpksopn,Cultural and Related Services,Open spaces,line,parks_culture
+509,cultot,Cultural and Related Services,TOTAL CULTURAL AND RELATED SERVICES,total,
+510,envcmt,Environmental and Regulatory Services,"Cemetery, cremation and mortuary services",line,safety_regulation
+519,envrgltrd,Environmental and Regulatory Services,Regulatory services: Trading standards,line,safety_regulation
+520,envrglenvwtr,Environmental and Regulatory Services,Regulatory services: Water safety,line,safety_regulation
+521,envrglenvfd,Environmental and Regulatory Services,Regulatory services: Food safety,line,safety_regulation
+522,envrglenvenv,Environmental and Regulatory Services,Regulatory services: Environmental protection; noise and nuisance,line,safety_regulation
+523,envrglenvhsn,Environmental and Regulatory Services,Regulatory services: Housing standards,line,safety_regulation
+524,envrglenvhs,Environmental and Regulatory Services,Regulatory services: Health and safety,line,safety_regulation
+525,envrglenvprtxlvs,Environmental and Regulatory Services,Regulatory services: Port health (excluding levies),line,safety_regulation
+526,envrglenvprtlvs,Environmental and Regulatory Services,Regulatory services: Port health levies,line,safety_regulation
+527,envrglenvpst,Environmental and Regulatory Services,Regulatory services: Pest control,line,safety_regulation
+528,envrglenvtlt,Environmental and Regulatory Services,Regulatory services: Public conveniences,line,safety_regulation
+529,envrglenvanm,Environmental and Regulatory Services,Regulatory services: Animal and public health; infectious disease,line,safety_regulation
+530,envrglenvlcn,Environmental and Regulatory Services,Regulatory services: Licensing - Alcohol and entertainment licensing; taxi licensing,line,safety_regulation
+531,envcmmcrm,Environmental and Regulatory Services,Community safety (Crime reduction),line,safety_regulation
+532,envcmmsft,Environmental and Regulatory Services,Community safety (Safety services),line,safety_regulation
+533,envcmmcct,Environmental and Regulatory Services,Community safety (CCTV),line,safety_regulation
+541,envfldfld,Environmental and Regulatory Services,Defences against flooding,line,streets
+543,envflddrn,Environmental and Regulatory Services,Land drainage and related work (excluding levy / Special levies),line,streets
+544,envflddrnlev,Environmental and Regulatory Services,Land drainage and related work - Levy / Special levies,line,streets
+547,envcst,Environmental and Regulatory Services,Coast protection,line,streets
+550,envagr,Environmental and Regulatory Services,Agriculture and fisheries services,line,safety_regulation
+570,envstr,Environmental and Regulatory Services,Street cleansing (not chargeable to Highways),line,streets
+581,envcll,Environmental and Regulatory Services,Waste collection,line,streets
+582,envdsp,Environmental and Regulatory Services,Waste disposal,line,streets
+583,envtrd,Environmental and Regulatory Services,Trade waste,line,streets
+584,envrcy,Environmental and Regulatory Services,Recycling,line,streets
+585,envmin,Environmental and Regulatory Services,Waste minimisation,line,streets
+586,envclm,Environmental and Regulatory Services,Climate change costs,line,streets
+590,envtot,Environmental and Regulatory Services,TOTAL ENVIRONMENTAL AND REGULATORY SERVICES,total,
+591,planbld,Planning and Development Services,Building control,line,planning
+592,plandvl,Planning and Development Services,Development control,line,planning
+593,planplc,Planning and Development Services,Planning policy,line,planning
+594,planenv,Planning and Development Services,Environmental initiatives,line,planning
+595,planecndev,Planning and Development Services,Economic development,line,planning
+596,plancmm,Planning and Development Services,Community development,line,planning
+597,planecnrsr,Planning and Development Services,Economic research,line,planning
+598,planbsn,Planning and Development Services,Business Support (b),line,planning
+599,plantot,Planning and Development Services,TOTAL PLANNING AND DEVELOPMENT SERVICES,total,
+601,poltot,Police,TOTAL POLICE SERVICES,line,running
+602,frstot,Fire,TOTAL FIRE AND RESCUE SERVICES,line,running
+604,cencrn,Central Services,Coroners' court services,line,running
+605,cencrtoth,Central Services,Other court services,line,running
+610,cencrp,Central Services,Corporate and democratic core,line,running
+623,centaxdsc,Central Services,Local tax collection: council tax discounts - locally funded,line,running
+625,centaxadm,Central Services,Local tax collection: council tax support administration,line,running
+628,centaxoth,Central Services,Local tax collection: other,line,running
+650,cenemr,Central Services,Emergency planning,line,running
+675,cencnt,Central Services,Central services to the public: other,line,running
+681,cenndcrtr,Central Services,Non-distributed costs - retirement benefits,line,running
+682,cenndcit,Central Services,Non-distributed costs - costs of unused shares of IT facilities and other assets,line,running
+684,cenndcsrp,Central Services,Non-distributed costs - revenue expenditure on surplus assets,line,running
+690,centot,Central Services,TOTAL CENTRAL SERVICES,total,
+698,othtot,Other,TOTAL OTHER SERVICES,line,running
+799,servicetot,Total Service Expenditure,TOTAL SERVICE EXPENDITURE,total,
+811,hbrent,Housing benefits,Housing benefits: rent allowances - mandatory payments,line,housing_benefit
+812,hbnreb,Housing benefits,Housing benefits: non-HRA rent rebates - mandatory payments,line,housing_benefit
+813,hbhreb,Housing benefits,Housing benefits: rent rebates to HRA tenants - mandatory payments,line,housing_benefit
+814,hbsubl,Housing benefits,Housing benefits: subsidy limitation transfers from HRA,line,housing_benefit
+818,hbhrashare,Housing benefits,Contribution to the HRA re items shared by the whole community,line,housing_benefit
+821,parishaggprecept,Precepts and Levies,Parish Precepts,line,debt_levies
+822,levyita,Precepts and Levies,Integrated Transport Authority levy *,line,debt_levies
+824,levywaste,Precepts and Levies,Waste Disposal Authority levy *,line,debt_levies
+827,levylonpen,Precepts and Levies,London Pensions Fund Authority levy,line,debt_levies
+828,levyother,Precepts and Levies,Other levies,line,debt_levies
+831,tradaccext,Trading Accounts and Adjustments,External Trading Accounts net surplus(-)/ deficit(+),line,running
+832,tradaccint,Trading Accounts and Adjustments,Internal Trading Accounts net surplus(-)/ deficit(+),line,running
+841,tradcapext,Trading Accounts and Adjustments,Capital items accounted for in External Trading Accounts,line,running
+842,tradcapint,Trading Accounts and Adjustments,Capital items accounted for in Internal Trading Accounts,line,running
+847,accumul,Trading Accounts and Adjustments,Appropriations to(+) / from(-) Accumulated Absences Account,line,running
+848,adjnce,Trading Accounts and Adjustments,Adjustments to net current expenditure,line,running
+849,netcurrtot,Net Current Expenditure,NET CURRENT EXPENDITURE,total,
+859,levyflood,Non-current Expenditure and Receipts,Levy: Environment Agency flood defence,line,debt_levies
+865,cera,Non-current Expenditure and Receipts,Capital expenditure charged to the GF Revenue Account (CERA) (exclude Public Health),line,debt_levies
+866,ceraph,Non-current Expenditure and Receipts,Capital expenditure charged to the GF Revenue Account (CERA) (Public Health),line,debt_levies
+867,caprecflex,Non-current Expenditure and Receipts,Capital receipts used to finance revenue expenditure under receipts flexibility,line,debt_levies
+868,netoffexpcap,Non-current Expenditure and Receipts,Netting off expenditure capitalised by a direction under Section 16(2)b),line,debt_levies
+871,provbad,Non-current Expenditure and Receipts,Provision for bad debts (+/-),line,running
+873,provprin,Non-current Expenditure and Receipts,Provision for repayment of principal,line,debt_levies
+876,leasing,Non-current Expenditure and Receipts,Leasing payments,line,debt_levies
+881,intextpay,Non-current Expenditure and Receipts,Interest: external payments,line,debt_levies
+883,inthrapay,Non-current Expenditure and Receipts,Interest: HRA item 8 payments and receipts,line,debt_levies
+886,intinvinc,Non-current Expenditure and Receipts,Interest and investment income (-): external receipts and dividends,line,debt_levies
+888,pfidiff,Non-current Expenditure and Receipts,Private Finance Initiative (PFI) schemes - difference from service charge,line,debt_levies
+889,appfinadj,Non-current Expenditure and Receipts,Appropriations to(+)/ from(-) financial instruments adjustment account,line,debt_levies
+890,appunequal,Non-current Expenditure and Receipts,Appropriations to(+)/ from(-) unequal pay back pay account,line,running
+891,grantoutaef,Non-current Expenditure and Receipts,Specific and special grants outside AEF [SG line 799 as income],line,housing_benefit
+893,brsupp,Non-current Expenditure and Receipts,Business Rates Supplement (GLA only),line,debt_levies
+894,levycil,Non-current Expenditure and Receipts,Community Infrastructure levy,line,debt_levies
+895,crcexp,Non-current Expenditure and Receipts,Carbon Reduction Commitment (CRC) transactions (expenditure) (+),line,running
+896,crcinc,Non-current Expenditure and Receipts,Carbon Reduction Commitment (CRC) transactions (income) (-),line,running
+897,appdsgadj,Non-current Expenditure and Receipts,Appropriations to(+)/from(-) dedicated schools grant adjustment account,line,schools

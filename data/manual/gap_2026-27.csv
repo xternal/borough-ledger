@@ -1,0 +1,14 @@
+order,label,m,kind,page,note
+1,Rising prices of contracts and supplies,6.9,pressure,16,Table 2: Provision for Price Inflation (3.2%)
+2,Pay rise for staff,4.0,pressure,16,Table 2: Provision for Pay Inflation (2.5%)
+3,Essential service pressures,3.2,pressure,16,Table 2: Essential pressures
+4,"Other changes, including interest on cash balances",-5.6,pressure,16,Table 2: Other Changes (concessionary fares/interest on balances/other)
+5,Lower employer pension contributions,-2.1,pressure,16,Table 2: Reduction in LGPS employers pension contribution
+6,Less business rates kept locally,30.7,funding,17,Table 2: Decrease in Business rates
+7,More government grants,-13.2,funding,17,Table 2: Increase Central Govt Grants
+8,Transitional relief under the funding reform,-6.0,funding,17,Table 2: Fair Funding - Transitional Relief
+9,Smaller council tax surplus from last year,3.3,funding,17,Table 2: Collection Fund - year on year reduction in surplus
+10,Other collection fund changes,-4.0,funding,17,Table 2: Collection fund
+11,More council tax,-7.7,close,17,Table 2: Increase in Council Tax resources
+12,Savings and efficiencies,-9.5,close_saving,16,Table 2: Savings and Efficiencies
+13,Budget gap after all changes,0,report_total,17,Table 2: Budget Gap 26/27 (shown as -)

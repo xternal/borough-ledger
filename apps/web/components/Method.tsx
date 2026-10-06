@@ -15,7 +15,7 @@ export function Method({ m }: { m: PageModel }) {
             <li>It must set a balanced budget every year.</li>
             <li>It can borrow only for buildings and other capital, not for running costs.</li>
             <li>
-              A council tax rise above <Num f={m.referendumLimitNow} fmt="pct2" /> needs a local referendum.
+              A council tax rise of <Num f={m.referendumLimitNow} fmt="pct0" /> or more needs a local referendum.
             </li>
           </ul>
         </div>
@@ -27,6 +27,9 @@ export function Method({ m }: { m: PageModel }) {
             </li>
             <li>
               <span className="q approx">approx</span> from a secondary source or an assumption still to be checked.
+            </li>
+            <li>
+              <span className="q modelled">modelled</span> worked out from sourced figures by a stated method.
             </li>
             <li>
               <span className="q test">test</span> invented to show the layout, underlined in red. Replaced by real data before launch.
