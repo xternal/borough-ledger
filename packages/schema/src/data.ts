@@ -33,6 +33,9 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
   add("next_year.reserves.general", c.next_year.reserves.general);
   add("next_year.reserves.minimum_safe", c.next_year.reserves.minimum_safe);
   c.history.budget.forEach((h) => out.push({ path: `history.budget.${h.year}`, quality: c.history.quality, source_id: h.source_id }));
+  c.history.outturn.forEach((h) =>
+    h.source_ids.forEach((id) => out.push({ path: `history.outturn.${h.year}`, quality: c.history.quality, source_id: id })),
+  );
   c.history.council_tax.forEach((h) =>
     h.source_ids.forEach((id) => out.push({ path: `history.council_tax.${h.year}`, quality: c.history.quality, source_id: id })),
   );

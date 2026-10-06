@@ -9,6 +9,7 @@ Everything here is read by `etl/build.py`. Each table is checked automatically a
 | `ra_service_map.csv` | Every line of the RA 2026-27 revenue account return mapped to a resident service group | Each RA section adds up to its TOTAL line; all mapped lines add up to REVENUE EXPENDITURE (line 900) | [ ] Read the groups; are bins, parks, community safety and running the council where a resident would look? |
 | `service_groups.csv` | Resident labels and descriptions for the service groups, with the official term | Every mapped group exists | [ ] Plain words, no council jargon |
 | `funding_map.csv` | RA financing lines and SG grant lines mapped to funding groups | SG lines add up to SG line 699 and RA line 904; all funding adds up to line 900 | [ ] Which grants count as ring-fenced (schools, public health) |
+| `rs_outturn_map.csv` | Every line of the 2024/25 revenue summary outturn return (RS) mapped to a service group; environmental services split with RO5 detail | Service lines add up to TOTAL SERVICE EXPENDITURE; all lines to REVENUE EXPENDITURE; RO5 environmental total matches RS | [ ] Same groups as the budget mapping? |
 | `funding_groups.csv` | Funding labels, ring-fencing and one-off flags | Ring-fenced groups point at real service groups | [ ] Labels |
 
 ## Budget report tables (to extract)

@@ -286,6 +286,36 @@
    "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce",
    "manual": true,
    "note": "Appendix C pages match the separately downloaded appendix (sha256 c9256238f2c7a640). Appendix B matches the Full Council copy (sha256 62631bbd537f9110) except one sentence on the settlement date."
+  },
+  {
+   "id": "rs_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, revenue summary (RS) by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+   "licence": "OGL-UK-3.0",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a2aca48a3674dfd3eb50749/RS_LA_Data_2024-25_data_by_LA.ods",
+   "file": "RS_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c",
+   "extract": {
+    "kind": "outturn",
+    "sheet": "RS_LA_Data_202425",
+    "year": "2024-25",
+    "detail": "ro5_2024-25"
+   }
+  },
+  {
+   "id": "ro5_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, cultural, environmental and planning services (RO5) by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+   "licence": "OGL-UK-3.0",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a291b72db0592d809052b7b/RO5_LA_Data_2024-25_data_by_LA.ods",
+   "file": "RO5_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba",
+   "extract": {
+    "kind": "outturn_detail",
+    "sheet": "RO5_LA_Data_202425"
+   }
   }
  ]
 }

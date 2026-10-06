@@ -215,6 +215,18 @@ export const CouncilYear = z.object({
         source_id: z.string(),
       }),
     ),
+    /** What was actually spent, from the RS and RO outturn returns, £m. Includes grants received during the year. */
+    outturn: z.array(
+      z.object({
+        year: finYear,
+        revenue_expenditure_m: z.number(),
+        council_tax_requirement_m: z.number(),
+        services_m: z.record(z.string(), z.number()),
+        housing_benefit_net_m: z.number(),
+        reserves_m: z.object({ unallocated_start: z.number(), unallocated_end: z.number(), earmarked_start: z.number(), earmarked_end: z.number() }),
+        source_ids: z.array(z.string()).min(1),
+      }),
+    ),
     quality: Quality,
   }),
   funding: z.array(FundingLine).min(1),

@@ -157,3 +157,53 @@ def funding(ra: LaRow, sg: LaRow) -> Tuple[Dict[str, float], Dict[str, List[Tupl
     total = sum(groups.values())
     check(close(total, ra.by_line("900"), 0.5), f"Funding sums to {total}, REVENUE EXPENDITURE is {ra.by_line('900')}")
     return groups, detail
+
+
+# ------------------------------------------------------------------ revenue outturn (RS summary, RO5 detail)
+
+STREETS_ENV = ("Street cleansing", "Waste collection", "Waste disposal", "Trade waste", "Recycling", "Waste minimisation",
+               "Climate change", "Defences against flooding", "Land drainage", "Coast protection")
+NCE = re.compile(r" - Net Current Expenditure")
+
+
+def outturn(rs: LaRow, ro5: LaRow) -> Dict[str, float]:
+    """What the council actually spent, by resident service group, £000.
+
+    Section totals come from the RS summary; environmental services are split between streets and
+    community safety with RO5's detail lines, as in the budget mapping. Checked against RS's own
+    TOTAL SERVICE EXPENDITURE and REVENUE EXPENDITURE, and RO5's environmental total.
+    """
+    mapping = read_csv("rs_outturn_map.csv")
+    by_label = {c.label: c for c in rs.columns}
+    missing = [m["label"] for m in mapping if m["label"] not in by_label]
+    check(not missing, f"RS lines missing from the return: {missing[:3]}")
+    val = lambda lbl: as_number(rs.values.get(by_label[lbl].index))  # noqa: E731
+    groups: Dict[str, float] = {}
+    service = 0.0
+    for m in mapping:
+        if m["role"] != "line":
+            continue
+        v = val(m["label"])
+        groups[m["group"]] = groups.get(m["group"], 0.0) + v
+        if m["label"].startswith("Service Expenditure - "):
+            service += v
+    total_service = val(next(m["label"] for m in mapping if "TOTAL SERVICE EXPENDITURE" in m["label"]))
+    revenue = val(next(m["label"] for m in mapping if m["label"].startswith("Revenue Expenditure - REVENUE EXPENDITURE")))
+    check(close(service, total_service, 0.5), f"RS service lines add to {service}, TOTAL SERVICE EXPENDITURE is {total_service}")
+    check(close(sum(groups.values()), revenue, 0.5), f"RS lines add to {sum(groups.values())}, REVENUE EXPENDITURE is {revenue}")
+
+    env = groups.pop("environmental_split", 0.0)
+    nce = [c for c in ro5.columns if NCE.search(c.label)]
+    env_total = [c for c in nce if c.label.upper().startswith("TOTAL ENVIRONMENTAL")]
+    check(len(env_total) == 1, "RO5: no environmental total")
+    check(close(as_number(ro5.values.get(env_total[0].index)), env, 0.5), "RO5 environmental total does not match RS")
+    streets_env = sum(as_number(ro5.values.get(c.index)) for c in nce if c.label.startswith(STREETS_ENV))
+    groups["streets"] = groups.get("streets", 0.0) + streets_env
+    groups["safety_regulation"] = groups.get("safety_regulation", 0.0) + env - streets_env
+    return groups
+
+
+def rs_value(rs: LaRow, starts: str) -> float:
+    hits = [c for c in rs.columns if c.label.startswith(starts)]
+    check(len(hits) == 1, f"RS: {len(hits)} columns start with {starts!r}")
+    return as_number(rs.values.get(hits[0].index))

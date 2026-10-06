@@ -19,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from extract import (  # noqa: E402
     CheckFailed,
+    outturn,
+    rs_value,
     area_bands,
     check,
     close,
@@ -104,6 +106,34 @@ def build() -> Dict[str, Any]:
         budget_history.append({
             "year": ex["year"], "revenue_expenditure_m": m(row.by_line("900")), "council_tax_requirement_m": m(row.by_line("990")),
             "services_m": {k: m(v) for k, v in sorted(groups_y.items())}, "source_id": s["id"],
+        })
+
+    # ---------------------------------------------------------- what was actually spent (RS and RO5 outturn)
+    outturn_history = []
+    for s in sorted((x for x in reg.values() if x.get("extract", {}).get("kind") == "outturn"), key=lambda x: x["extract"]["year"]):
+        ex = s["extract"]
+        det = reg[ex["detail"]]
+        rs = read_la_row(str(ROOT / "data/raw" / s["file"]), ex["sheet"], ons)
+        ro5 = read_la_row(str(ROOT / "data/raw" / det["file"]), det["extract"]["sheet"], ons)
+        try:
+            groups_o = outturn(rs, ro5)
+        except CheckFailed as e:
+            raise CheckFailed(f"{s['id']}: {e}")
+        hb_net = groups_o.pop("housing_benefit", 0.0)
+        outturn_history.append({
+            "year": ex["year"],
+            "revenue_expenditure_m": m(rs_value(rs, "Revenue Expenditure - REVENUE EXPENDITURE")),
+            "council_tax_requirement_m": m(rs_value(rs, "Revenue Expenditure Financing - COUNCIL TAX REQUIREMENT")),
+            "services_m": {k: m(v) for k, v in sorted(groups_o.items())},
+            # Grants outside the main formula beyond what housing benefit costs: not tied to one service in the summary.
+            "housing_benefit_net_m": m(hb_net),
+            "reserves_m": {
+                "unallocated_start": m(rs_value(rs, "Reserves (continued) - Estimated unallocated financial reserves level at 1 April")),
+                "unallocated_end": m(rs_value(rs, "Reserves (continued) - Estimated unallocated financial reserves level at 31 March")),
+                "earmarked_start": m(rs_value(rs, "Reserves at 1 April 2024 - Estimated other earmarked financial reserves level at 1 April")),
+                "earmarked_end": m(rs_value(rs, "Reserves at 31 March 2025 - Estimated other earmarked financial reserves level at 31 March")),
+            },
+            "source_ids": [s["id"], det["id"]],
         })
 
     # ---------------------------------------------------------- budget 2026/27 (RA and SG)
@@ -259,6 +289,7 @@ def build() -> Dict[str, Any]:
                 for y in years
             ],
             "budget": budget_history,
+            "outturn": outturn_history,
             "quality": "sourced",
         },
         "funding": funding_lines,

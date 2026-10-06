@@ -54,6 +54,13 @@ describe("seed parses and cross-checks", () => {
     expect(ct?.limit).toBeCloseTo((DATA.rules.referendum_limit_pct[DATA.council.meta.year]?.threshold_pct ?? 0) - 0.01, 9);
   });
 
+  it("carries what was actually spent in 2024/25, by the same service groups", () => {
+    const o = DATA.council.history.outturn.find((h) => h.year === "2024-25");
+    expect(o?.revenue_expenditure_m).toBe(372.129);
+    expect(Object.keys(o?.services_m ?? {}).sort()).toEqual(DATA.council.services.map((s) => s.id).sort());
+    expect(o?.reserves_m.unallocated_end).toBe(22.066);
+  });
+
   it("checks every saving against its directorate total and flags one-off savings", () => {
     const service = DATA.council.savings.filter((s) => s.kind === "service").reduce((a, s) => a + s.m, 0);
     expect(service).toBeCloseTo(9.524, 9); // Appendix C; Table 2 rounds it to £9.5m

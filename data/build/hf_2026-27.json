@@ -190,6 +190,24 @@
     "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
    },
    {
+    "id": "rs_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, revenue summary (RS) by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a2aca48a3674dfd3eb50749/RS_LA_Data_2024-25_data_by_LA.ods",
+    "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c"
+   },
+   {
+    "id": "ro5_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, cultural, environmental and planning services (RO5) by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a291b72db0592d809052b7b/RO5_LA_Data_2024-25_data_by_LA.ods",
+    "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Ledger method notes (docs/MODEL.md)",
     "publisher": "Borough Ledger",
@@ -383,6 +401,37 @@
      "streets": 8.421
     },
     "source_id": "ra_2026-27"
+   }
+  ],
+  "outturn": [
+   {
+    "year": "2024-25",
+    "revenue_expenditure_m": 372.129,
+    "council_tax_requirement_m": 78.825,
+    "services_m": {
+     "adult_care": 97.043,
+     "children": 59.147,
+     "debt_levies": -1.188,
+     "housing": 30.769,
+     "parks_culture": 5.967,
+     "planning": -22.752,
+     "public_health": 26.413,
+     "running": 30.798,
+     "safety_regulation": 12.867,
+     "schools": 133.533,
+     "streets": 8.246
+    },
+    "housing_benefit_net_m": -8.714,
+    "reserves_m": {
+     "unallocated_start": 21.646,
+     "unallocated_end": 22.066,
+     "earmarked_start": 159.385,
+     "earmarked_end": 175.433
+    },
+    "source_ids": [
+     "rs_2024-25",
+     "ro5_2024-25"
+    ]
    }
   ],
   "quality": "sourced"

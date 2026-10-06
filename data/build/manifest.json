@@ -100,6 +100,16 @@
    "id": "cabinet_pack_2026-02-09",
    "file": "cabinet_pack_2026-02-09.pdf",
    "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
+  },
+  {
+   "id": "rs_2024-25",
+   "file": "RS_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c"
+  },
+  {
+   "id": "ro5_2024-25",
+   "file": "RO5_LA_Data_2024-25_data_by_LA.ods",
+   "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
   }
  ],
  "manual": [
@@ -124,6 +134,10 @@
    "sha256": "0c93d9fa4a2c3b863d402b4aa3d30a22d160f8fdcc543822a1e6a03e95791004"
   },
   {
+   "file": "data/manual/rs_outturn_map.csv",
+   "sha256": "01c26a732ceb4ff6978aff442d29bdf6e6de04798096d5340e8510c526635d30"
+  },
+  {
    "file": "data/manual/savings_2026-27.csv",
    "sha256": "e8c15d3230986a93a59bdcc8adff6827b9072467329bd3e5cf66f90db04a712b"
   },
@@ -139,7 +153,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "b39ee37891506f0a61282a355c522e1287ff987b0e28b39eb9d5c606bffafe7b"
+   "sha256": "9ad90e9650542c63aef54415053e3374cb04212590a2d7e950e46400d81e80a4"
   }
  ],
  "quality_counts": {
