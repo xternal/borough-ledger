@@ -1,0 +1,103 @@
+{
+ "generated_by": "etl/build.py",
+ "inputs": [
+  {
+   "id": "ctr_2026-27",
+   "file": "Table_10_2026-27.ods",
+   "sha256": "b5b8345743fb722e48699243d1654a3e35b96c89a14c6eb26888035c3e38feb0"
+  },
+  {
+   "id": "ct_bands_2026-27",
+   "file": "Tables_1-9_2026-27.ods",
+   "sha256": "66b7c20f70c804038c0a392ff2b7249fd09e83f4e88ac87d0278ce7e19da5537"
+  },
+  {
+   "id": "ra_2026-27",
+   "file": "RA_2026-27_data_Part_1.ods",
+   "sha256": "3ea4d4c2218bc9f49bbf59a6fc82481acb6a3494d5b0f4e114cdb945730653db"
+  },
+  {
+   "id": "ra_2026-27_part2",
+   "file": "RA_2026-27_data_Part_2.ods",
+   "sha256": "55c34505c69513fcba446f3484061d2bd115c4ce06bb5bafba7b36e330be4d65"
+  },
+  {
+   "id": "sg_2026-27",
+   "file": "SG_2026-27.ods",
+   "sha256": "6150792dcea97ca58b912a5fbf9fdc99562ba782fb7d6f5c8885e6ca1a17e3b5"
+  },
+  {
+   "id": "ct_bands_2025-26",
+   "file": "Tables_1-9_2025-26.ods",
+   "sha256": "7d9f98b6c152d276d7fb672db0a7cec866df24e175bb28ebb55cbe845a8afbc3"
+  },
+  {
+   "id": "ctr_2025-26",
+   "file": "Table_10_2025-26.ods",
+   "sha256": "79766eb7b591a4f49e1e9f95cb6b0a232c7a9165945de9acb076769c002e6e5c"
+  },
+  {
+   "id": "ctr_2024-25",
+   "file": "Table_9_24-25__revised_.ods",
+   "sha256": "ade111fc09ad25d5219cc2c16efa7170255099b2f1d2d884b2f652d0c1e244e6"
+  },
+  {
+   "id": "ct_bands_2024-25",
+   "file": "Table_8_24-25.ods",
+   "sha256": "249127ae1bff3f37bb335896f801524562de0dd9668c6c9cd64eacd8a8880245"
+  },
+  {
+   "id": "ctr_2023-24",
+   "file": "TABLE_9__REVISED_.ods",
+   "sha256": "e17192480e5d99b1d67db9ec5ac649f42ede1f0626fb143e0c6c03c6a925a803"
+  },
+  {
+   "id": "ct_bands_2023-24",
+   "file": "Table_8__REVISED_.ods",
+   "sha256": "c8ef95ed86fffd3d621cc45be2ac9c0121c200df77b93a8c4be91853b604cd8c"
+  },
+  {
+   "id": "ct_bands_2022-23",
+   "file": "CTR_Table_8_2022-23.ods",
+   "sha256": "d042b3096e3c6d3a2b94d2f62afac34b5b706aaacb5d96bc45dc52be89498f6a"
+  }
+ ],
+ "manual": [
+  {
+   "file": "data/manual/funding_groups.csv",
+   "sha256": "9acb1485776e95609ba99c22bfe904fbd75fbdc753f47f1030be7d5bafd269bf"
+  },
+  {
+   "file": "data/manual/funding_map.csv",
+   "sha256": "b38128040dc7381e5f2edcbecfb53a66ce8fae9382ada7e9b390af76371d790b"
+  },
+  {
+   "file": "data/manual/gap_2026-27.csv",
+   "sha256": "d9bdcc4e9a2efcd9c6758b09e467d2bbf2d1fc527e27cf69b5d54146291bb02e"
+  },
+  {
+   "file": "data/manual/next_year_2027-28.csv",
+   "sha256": "4e177255dc2b0916a0eacd215e6b6554690e4c930a68e5c69fb0609e40c38478"
+  },
+  {
+   "file": "data/manual/ra_service_map.csv",
+   "sha256": "f96e04aba9c34b2afc52f3d2c93187779655d89f882c1a320f2569d9cbdb9cf2"
+  },
+  {
+   "file": "data/manual/service_groups.csv",
+   "sha256": "ec0373bdea903f5c5b5b79edeade352b60a23472ee91580fa8ece754d798613f"
+  }
+ ],
+ "outputs": [
+  {
+   "file": "data/build/hf_2026-27.json",
+   "sha256": "0f87e70adb5aac4a17b90731fcb267588aa30d0864d5bc506cc708eea23f74f1"
+  }
+ ],
+ "quality_counts": {
+  "approx": 3,
+  "modelled": 2,
+  "sourced": 24,
+  "test": 16
+ }
+}

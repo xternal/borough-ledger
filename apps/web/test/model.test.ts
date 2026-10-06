@@ -5,7 +5,8 @@ describe("page model", () => {
   const m = buildModel();
 
   it("takes every headline number from data", () => {
-    expect(m.netBudget.value).toBeCloseTo(224, 9);
+    expect(m.netBudget.value).toBeCloseTo(398.009, 6);
+    expect(m.generalBudget.value).toBeCloseTo(255.333, 6);
     expect(m.savingsThisYear.value).toBeCloseTo(10, 9);
     expect(m.waterfall.gap.value).toBeCloseTo(20.7, 9);
     expect(m.balance.gap.value).toBe(15);
@@ -15,18 +16,26 @@ describe("page model", () => {
   });
 
   it("derived values inherit the worst quality of their inputs", () => {
-    expect(m.bill.total.quality).toBe("approx");
-    expect(m.ctShare.quality).toBe("test");
-    expect(m.netBudget.quality).toBe("test");
-    expect(m.referendumLimitNow.quality).toBe("approx");
+    expect(m.bill.total.quality).toBe("sourced");
+    expect(m.netBudget.quality).toBe("sourced");
+    expect(m.ctShare.quality).toBe("sourced");
+    expect(m.savingsThisYear.quality).toBe("test");
+    expect(m.referendumLimitNow.quality).toBe("sourced");
+    expect(m.referendumLimitNow.value).toBe(5);
+  });
+
+  it("splits the budget by kind of funding, adding up to the whole", () => {
+    expect(m.ctShare.value).toBeCloseTo(92.552 / 398.009, 6);
+    expect(m.ctShareGeneral.value).toBeCloseTo(92.552 / 255.333, 6);
+    expect(m.ctShare.value + m.grantsShare.value + m.ratesShare.value).toBeLessThan(1);
   });
 
   it("costs promises the same way for both sides", () => {
     const opp = m.promises.find((p) => p.side === "opposition" && p.cost);
     const adm = m.promises.find((p) => p.side === "administration" && p.cost);
     for (const p of [opp, adm]) {
-      expect(p?.cost?.perBandD.value).toBeCloseTo((p!.cost!.central.value * 1e6) / 82000, 6);
-      expect(p?.cost?.share.value).toBeCloseTo(p!.cost!.central.value / 224, 9);
+      expect(p?.cost?.perBandD.value).toBeCloseTo((p!.cost!.central.value * 1e6) / 93597.96, 6);
+      expect(p?.cost?.share.value).toBeCloseTo(p!.cost!.central.value / 255.333, 6);
     }
   });
 

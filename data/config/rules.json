@@ -38,19 +38,53 @@
     "title": "The Council Tax (Administration and Enforcement) Regulations 1992, Schedule 1: payments",
     "publisher": "legislation.gov.uk",
     "url": "https://www.legislation.gov.uk/uksi/1992/613/schedule/1"
+   },
+   {
+    "id": "ct_referendum_2026-27",
+    "title": "Referendums Relating to Council Tax Increases (Principles) (England) Report 2026 to 2027",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://assets.publishing.service.gov.uk/media/6989c723d3f57710b50a9bb4/Council_Tax_Referendum_Principles_Report_2026-27.pdf",
+    "published_on": "2026-02-09",
+    "page": "Annex A paragraph 3 (page 7); Annex B lists Hammersmith & Fulham (page 11)",
+    "licence": "OGL-UK-3.0",
+    "sha256": "128ea9300b33124e88474412be96e050ed210dddcc17cf4b7620bade53df3ac3"
    }
   ]
  },
  "band_ratios": {
   "value": {
-   "A": [6, 9],
-   "B": [7, 9],
-   "C": [8, 9],
-   "D": [9, 9],
-   "E": [11, 9],
-   "F": [13, 9],
-   "G": [15, 9],
-   "H": [18, 9]
+   "A": [
+    6,
+    9
+   ],
+   "B": [
+    7,
+    9
+   ],
+   "C": [
+    8,
+    9
+   ],
+   "D": [
+    9,
+    9
+   ],
+   "E": [
+    11,
+    9
+   ],
+   "F": [
+    13,
+    9
+   ],
+   "G": [
+    15,
+    9
+   ],
+   "H": [
+    18,
+    9
+   ]
   },
   "quality": "sourced",
   "source_id": "lgfa1992_s5"
@@ -61,34 +95,39 @@
   "source_id": "lgfa1992_s11"
  },
  "balanced_budget": {
-  "tolerance_m": 0.0005,
-  "tolerance_note": "Floating-point tolerance only (£500). Anything larger is shown as still to find or spare, never rounded to balanced.",
+  "tolerance_m": 0.005,
+  "tolerance_note": "£5,000. Government returns are published to the nearest £1,000, so sums of rounded lines can differ by a few thousand pounds. Anything larger is shown as still to find or spare, never rounded to balanced.",
   "quality": "sourced",
   "source_id": "lgfa1992_s31a",
   "s114_source_id": "lgfa1988_s114"
  },
  "referendum_limit_pct": {
   "2026-27": {
-   "value": 4.99,
-   "core": 2.99,
+   "threshold_pct": 5,
+   "excessive_if": "at_or_above",
+   "core": 3,
    "adult_social_care": 2,
-   "applies_to": "London borough councils",
-   "quality": "approx",
-   "source_id": "lgfa1992_s52zb",
-   "todo": "TODO(source): cite the Referendums Relating to Council Tax Increases (Principles) (England) Report for 2026/27"
+   "applies_to": "Relevant local authorities, including London borough councils (Annex B)",
+   "quality": "sourced",
+   "source_id": "ct_referendum_2026-27",
+   "note": "A rise of 5% or more is excessive and needs a referendum, so councils in this category stop at 4.99%."
   },
   "2027-28": {
-   "value": 4.99,
-   "core": 2.99,
+   "threshold_pct": 5,
+   "excessive_if": "at_or_above",
+   "core": 3,
    "adult_social_care": 2,
-   "applies_to": "London borough councils",
-   "quality": "test",
-   "source_id": "lgfa1992_s52zb",
-   "todo": "TODO(source): assumed equal to 2026/27 until the 2027/28 settlement sets it"
+   "applies_to": "Relevant local authorities, including London borough councils",
+   "quality": "approx",
+   "source_id": "ct_referendum_2026-27",
+   "todo": "TODO(source): the 2027/28 principles report. The settlement policy statement signalled the same limits for 2027/28; confirm when the report is laid."
   }
  },
  "instalments": {
-  "options": [10, 12],
+  "options": [
+   10,
+   12
+  ],
   "default": 10,
   "quality": "approx",
   "source_id": "ctae_regs_1992_sch1",

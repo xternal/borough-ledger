@@ -39,11 +39,11 @@ export default function Home() {
       <main className="wrap" id="top">
         <Hero m={m} />
         <LedgerStateProvider input={m.balance.input}>
-          <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShare={m.ctShare} netBudget={m.netBudget} place={m.place} mainOtherFunding={m.mainOtherFunding} />
+          <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShareGeneral={m.ctShareGeneral} generalBudget={m.generalBudget} place={m.place} />
           <BudgetFlow m={m} />
           <Waterfall m={m} />
           <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} />
-          <Promises promises={m.promises} today={m.today} netBudget={m.netBudget} balance={m.balance} />
+          <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} />
         </LedgerStateProvider>
         <Payments payments={m.payments} />
         <Method m={m} />

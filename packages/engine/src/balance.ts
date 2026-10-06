@@ -6,8 +6,8 @@ export interface BalanceInput {
   levers: readonly Lever[];
   toggles: readonly Toggle[];
   reserves: { general_m: number; minimum_safe_m: number };
-  /** The referendum limit for next year, in %. */
-  referendumLimitPct: number;
+  /** Next year's referendum threshold, in %: a rise at or above it needs a referendum. */
+  referendumThresholdPct: number;
   toleranceM: number;
 }
 
@@ -30,7 +30,7 @@ export interface BalanceResult {
   status: BalanceStatus;
   reservesLeftM: number;
   flags: {
-    /** Council tax rise above the referendum limit. Flagged, not blocked. */
+    /** Council tax rise at or above the referendum threshold. Flagged, not blocked. */
     referendum: boolean;
     /** One-off money used this year, which returns in next year's gap. */
     oneOffM: number;
@@ -104,7 +104,7 @@ export function computeBalance(input: BalanceInput, scenario: Scenario): Balance
     status,
     reservesLeftM,
     flags: {
-      referendum: ctRisePct > input.referendumLimitPct + 1e-9,
+      referendum: ctRisePct >= input.referendumThresholdPct - 1e-9,
       oneOffM,
       belowSafeMinimum: reservesLeftM < input.reserves.minimum_safe_m,
       section114: status === "short",

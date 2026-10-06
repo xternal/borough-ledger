@@ -11,3 +11,5 @@ coverage/
 next-env.d.ts
 apps/web/.test-data-report.json
 reports/
+data/raw/
+etl/**/__pycache__/

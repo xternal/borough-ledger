@@ -11,6 +11,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  etl:
+    name: ETL (sources, checks, build up to date)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download sources and verify their SHA-256
+        run: python etl/fetch.py
+      - name: ETL unit tests
+        run: python -m unittest discover -s etl/tests -t .
+      - name: Every check passes and data/build matches a fresh build
+        run: python etl/build.py --check
+
   check:
     name: Typecheck, test, preview build
     runs-on: ubuntu-latest

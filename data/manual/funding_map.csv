@@ -1,0 +1,16 @@
+return,line,asset_id,group,sign
+ra,990,ctrtot,council_tax,1
+ra,951,grantrsg,rsg,-1
+ra,956,grantpol,other_grants,-1
+ra,970,retainnndr,business_rates,-1
+ra,906,trnsreorg,other_income,-1
+ra,980,colfunct,other_income,-1
+ra,985,othinc,other_income,-1
+ra,911,appressch,schools_reserves,-1
+ra,913,appresdsg,schools_reserves,-1
+ra,914,appresph,public_health_reserves,-1
+ra,915,appresoth,council_reserves,-1
+ra,916,appresunall,council_reserves,-1
+sg,102-199,,schools_grants,1
+sg,313,grantinph,public_health_grant,1
+sg,200-698,,other_grants,1

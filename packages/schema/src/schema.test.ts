@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import hfRaw from "../../../data/seed/hf_2026-27.json";
+import hfRaw from "../../../data/build/hf_2026-27.json";
+import seedRaw from "../../../data/seed/hf_2026-27.json";
 import promisesRaw from "../../../data/seed/promises.json";
 import paymentsRaw from "../../../data/seed/payments.json";
 import rulesRaw from "../../../data/config/rules.json";
@@ -29,7 +30,7 @@ describe("seed parses and cross-checks", () => {
 
   it("rejects a sourced value that cites a source without a URL", () => {
     const r = raw();
-    r.council.services[0]!.quality = "sourced";
+    r.council.services[0]!.source_id = "prototype_test";
     expect(() => parseDataset(r)).toThrow(/has no URL/);
   });
 
@@ -46,10 +47,17 @@ describe("seed parses and cross-checks", () => {
   });
 
   it("keeps the prototype's copies of the rules in step with the rules config", () => {
-    for (const [band, [num, den]] of Object.entries(DATA.rules.band_ratios.value))
-      expect(DATA.council.bill.band_ratios[band as keyof typeof DATA.council.bill.band_ratios]).toBeCloseTo(num / den, 12);
-    const ct = DATA.council.next_year.levers.find((l) => l.id === "ct_rise");
-    expect(ct?.limit).toBe(DATA.rules.referendum_limit_pct[DATA.council.next_year.year]?.value);
+    const ratios = seedRaw.bill.band_ratios as Record<string, number>;
+    for (const [band, [num, den]] of Object.entries(DATA.rules.band_ratios.value)) expect(ratios[band]).toBeCloseTo(num / den, 12);
+    // The prototype shows the highest rise allowed without a referendum: just under the threshold.
+    const ct = seedRaw.next_year.levers.find((l) => l.id === "ct_rise");
+    expect(ct?.limit).toBeCloseTo((DATA.rules.referendum_limit_pct[DATA.council.next_year.year]?.threshold_pct ?? 0) - 0.01, 9);
+  });
+
+  it("rejects a ring-fenced grant pointing at a service that does not exist", () => {
+    const r = raw();
+    (r.council.funding.find((f) => "ring_fenced_to" in f) as { ring_fenced_to?: string }).ring_fenced_to = "nope";
+    expect(() => parseDataset(r)).toThrow(/ring-fenced to unknown service/);
   });
 
   it("decides administration or opposition from data, never from a party name", () => {
@@ -67,8 +75,9 @@ describe("quality", () => {
 
   it("lists every test value in the seed", () => {
     const list = listTestValues(DATA);
-    expect(list).toContain("funding.business_rates");
+    expect(list).toContain("next_year.reserves.minimum_safe");
     expect(list).toContain("promises.test-b-slogan (test card)");
-    expect(list).not.toContain("funding.transition");
+    expect(list).not.toContain("funding.council_tax");
+    expect(list).not.toContain("bill");
   });
 });

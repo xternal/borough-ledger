@@ -7,9 +7,9 @@ import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 import { useLedger } from "./LedgerState";
 
-type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShare" | "netBudget" | "place" | "mainOtherFunding">;
+type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShareGeneral" | "generalBudget" | "place">;
 
-export function BillSection({ bill, rules, services, ctShare, netBudget, place, mainOtherFunding }: Props) {
+export function BillSection({ bill, rules, services, ctShareGeneral, generalBudget, place }: Props) {
   const { band, singlePerson, setBand, setSinglePerson } = useLedger();
   const b = billFor(rules, { council: bill.council.value, gla: bill.gla.value }, band, singlePerson);
   const inputs: Figure[] = [bill.ratios, ...(singlePerson ? [bill.spd] : [])];
@@ -18,8 +18,9 @@ export function BillSection({ bill, rules, services, ctShare, netBudget, place, 
   const total = derive(b.total, bill.total, ...inputs);
   const pc = (b.council / b.total) * 100;
 
-  const ranked = [...services].sort((a, z) => z.f.value - a.f.value);
-  const shares = ranked.map((s) => ({ ...s, share: derive((s.f.value / netBudget.value) * b.council, s.f, netBudget, council) }));
+  // Council tax pays for what ring-fenced grants do not, so split it by spending after those grants.
+  const ranked = services.filter((s) => s.general && s.general.value > 0).sort((a, z) => z.general!.value - a.general!.value);
+  const shares = ranked.map((s) => ({ ...s, share: derive((s.general!.value / generalBudget.value) * b.council, s.general!, generalBudget, council) }));
   const max = shares[0]?.share.value ?? 1;
   const [lo, hi] = [Math.min(...bill.instalments.options), Math.max(...bill.instalments.options)];
   const perInstalment = (n: number) => derive(b.total / n, total, bill.instalments.f);
@@ -100,12 +101,12 @@ export function BillSection({ bill, rules, services, ctShare, netBudget, place, 
             ))}
           </div>
           <p className="small muted" style={{ marginTop: 14 }}>
-            Split in proportion to the council&rsquo;s net budget. Your council tax pays about <Num f={ctShare} fmt="pence" /> of every £1 the
-            council spends; the rest comes from{" "}
-            {mainOtherFunding ? `${mainOtherFunding[0].toLowerCase()}, ${mainOtherFunding[1].toLowerCase()} and other funding` : "other funding"}.
+            Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself, after schools and public health, which
+            have their own ring-fenced grants. Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants
+            and business rates pay the rest.
           </p>
           <div className="qrow">
-            <QualityGroup q={worst(...services.map((s) => s.f.quality))} text="Split by service" />
+            <QualityGroup q={worst(...services.map((s) => s.f.quality))} text={`Split by service, ${place.yearLabel} budget return`} />
           </div>
         </div>
       </div>

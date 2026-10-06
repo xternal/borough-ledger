@@ -1,6 +1,6 @@
 "use client";
 
-import { derive, type Figure, type Lever } from "@borough-ledger/schema";
+import { derive, fig, worst, type Figure, type Lever, type LeverId } from "@borough-ledger/schema";
 import { billFor, computeBalance, leverValue, nextYearCouncil, type PartId } from "@borough-ledger/engine";
 import { formatLever } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
@@ -22,12 +22,20 @@ const PART: Record<PartId, { label: string; colour: string }> = {
 export function BalanceIt({ balance, bill, rules, place }: Props) {
   const { band, singlePerson, scenario, setLever, setToggle } = useLedger();
   const r = computeBalance(balance.input, scenario);
+  // Outcomes depend on the gap and every choice; each lever's own effect carries only that lever's provenance.
   const q = balance.computed;
   const at = (value: number): Figure => ({ ...q, value });
+  const byLever = (id: LeverId, value: number): Figure => derive(value, balance.coef[id]);
+  const toggleQ = fig(0, worst(...balance.toggles.map((t) => t.quality)), ...balance.toggles.map((t) => t.source_id));
+  const PART_LEVER: Partial<Record<PartId, LeverId>> = { council_tax: "ct_rise", fees: "fees", settlement: "settlement", savings: "savings", reserves: "reserves" };
+  const partFig = (id: PartId, value: number): Figure => {
+    const lever = PART_LEVER[id];
+    return lever ? byLever(lever, value) : derive(value, toggleQ);
+  };
 
   const current = billFor(rules, { council: bill.council.value, gla: bill.gla.value }, band, singlePerson);
   const ctRise = leverValue(scenario, balance.levers.find((l) => l.id === "ct_rise")!);
-  const nextCouncil = derive(nextYearCouncil(current.council, ctRise), bill.council, bill.ratios, q);
+  const nextCouncil = derive(nextYearCouncil(current.council, ctRise), bill.council, bill.ratios);
   const nowCouncil = derive(current.council, bill.council, bill.ratios);
 
   const status =
@@ -40,7 +48,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
   const general = balance.input.reserves.general_m;
 
   function hint(l: Lever, v: number) {
-    const raised = at(v * l.m_per_unit);
+    const raised = byLever(l.id, v * l.m_per_unit);
     switch (l.id) {
       case "ct_rise":
         return (
@@ -54,7 +62,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
       case "fees":
         return <>Raises <Num f={raised} fmt="m1" /></>;
       case "reserves":
-        return <>Leaves <Num f={at(general - v * l.m_per_unit)} fmt="m1" /> in reserves</>;
+        return <>Leaves <Num f={derive(general - v * l.m_per_unit, balance.reservesGeneral, balance.coef.reserves)} fmt="m1" /> in reserves</>;
       case "savings":
         return "Cuts or efficiencies, to be named";
     }
@@ -105,7 +113,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
                   {t.label}
                 </label>
                 <span>
-                  <Num f={at(t.cost_m)} fmt="m1" /> a year
+                  <Num f={fig(t.cost_m, t.quality, t.source_id)} fmt="m1" /> a year
                 </span>
               </div>
             ))}
@@ -141,7 +149,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
                 <span className={PART[p.id].colour === "hatch" ? "sw hatch" : "sw"} style={PART[p.id].colour === "hatch" ? undefined : { background: PART[p.id].colour }} />
                 <span>{PART[p.id].label}</span>
                 <span>
-                  <Num f={at(p.m)} fmt="sm1" />
+                  <Num f={partFig(p.id, p.m)} fmt="sm1" />
                 </span>
               </div>
             ))}
@@ -159,7 +167,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
             <div className="kv">
               <span>Reserves left</span>
               <span>
-                <Num f={at(r.reservesLeftM)} fmt="m1" />
+                <Num f={derive(r.reservesLeftM, balance.reservesGeneral, balance.coef.reserves)} fmt="m1" />
               </span>
             </div>
             <div className="m" aria-hidden="true">
@@ -168,7 +176,7 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
             </div>
             <div className="muted small">Red line: safe minimum</div>
           </div>
-          <Flags r={r} ctRise={ctRise} balance={balance} place={place} at={at} />
+          <Flags r={r} ctRise={ctRise} balance={balance} place={place} at={(v) => byLever("reserves", v)} />
           <div className="qrow" style={{ paddingTop: 0 }}>
             <QualityGroup q={q.quality} text="Gap, costs and yields" />
           </div>
@@ -197,8 +205,8 @@ function Flags({
       c: "bad",
       body: (
         <>
-          A {formatLever("%", ctRise, false)} rise is above the <Num f={balance.referendumLimit} fmt="pct2" /> limit. The council would have to hold a
-          referendum.
+          A {formatLever("%", ctRise, false)} rise reaches the <Num f={balance.referendumLimit} fmt="pct0" /> referendum threshold. The council would
+          have to hold a local referendum.
         </>
       ),
     });

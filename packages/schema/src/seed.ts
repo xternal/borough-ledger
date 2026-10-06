@@ -13,6 +13,9 @@ export const Source = z.object({
   page: z.string().optional(),
   licence: z.string().optional(),
   note: z.string().optional(),
+  /** The exact file the ETL read, and its SHA-256. */
+  asset_url: z.url().optional(),
+  sha256: z.string().regex(/^[0-9a-f]{64}$/).optional(),
 });
 export type Source = z.infer<typeof Source>;
 
@@ -22,7 +25,12 @@ const provenance = {
   source_id: z.string(),
   todo: z.string().optional(),
   note: z.string().optional(),
+  method_note: z.string().optional(),
 };
+
+/** A single value with its own provenance. */
+export const Valued = z.object({ m: z.number(), ...provenance });
+export type Valued = z.infer<typeof Valued>;
 
 export const BANDS = ["A", "B", "C", "D", "E", "F", "G", "H"] as const;
 export const Band = z.enum(BANDS);
@@ -46,7 +54,9 @@ export const Rules = z.object({
   referendum_limit_pct: z.record(
     finYear,
     z.object({
-      value: z.number().positive(),
+      /** A rise at or above this percentage is excessive and needs a local referendum. */
+      threshold_pct: z.number().positive(),
+      excessive_if: z.literal("at_or_above"),
       core: z.number(),
       adult_social_care: z.number(),
       applies_to: z.string(),
@@ -63,11 +73,20 @@ export type Rules = z.infer<typeof Rules>;
 
 /* ------------------------------------------------------------------ council year */
 
+export const FUNDING_KINDS = ["council_tax", "grant", "business_rates", "other", "reserves"] as const;
+
 export const FundingLine = z.object({
   id: z.string(),
   label: z.string(),
+  official_term: z.string(),
+  desc: z.string(),
+  kind: z.enum(FUNDING_KINDS),
   m: z.number(),
+  /** One-off money, such as reserves. Drawn hatched. */
   gap: z.boolean().optional(),
+  /** A ring-fenced grant can only be spent on this service group. */
+  ring_fenced_to: z.string().optional(),
+  detail: z.array(z.object({ label: z.string(), m: z.number() })).optional(),
   ...provenance,
 });
 export type FundingLine = z.infer<typeof FundingLine>;
@@ -75,8 +94,12 @@ export type FundingLine = z.infer<typeof FundingLine>;
 export const ServiceLine = z.object({
   id: z.string(),
   label: z.string(),
-  m: z.number(),
+  official_term: z.string(),
   desc: z.string(),
+  /** Net spending, £m. */
+  m: z.number(),
+  /** Net spending less ring-fenced grants: what council tax, business rates and general grants pay for. */
+  general_fund_m: z.number(),
   ...provenance,
 });
 export type ServiceLine = z.infer<typeof ServiceLine>;
@@ -121,12 +144,22 @@ export const Toggle = z.object({
 });
 export type Toggle = z.infer<typeof Toggle>;
 
+export const CouncilTaxYear = z.object({
+  year: finYear,
+  band_d_council: z.number().positive(),
+  band_d_area: z.number().positive(),
+  band_d_gla: z.number().positive(),
+  council_tax_requirement_m: z.number().positive(),
+  tax_base: z.number().positive(),
+  collection_rate: z.number().min(0).max(1),
+  source_ids: z.array(z.string()).min(1),
+});
+
 export const CouncilYear = z.object({
   meta: z.object({
     council: z.string(),
     council_short: z.string(),
     council_code: z.string(),
-    council_code_note: z.string().optional(),
     year: finYear,
     note: z.string(),
     vintage: isoDate,
@@ -137,25 +170,29 @@ export const CouncilYear = z.object({
     band_d_council: z.number().positive(),
     band_d_gla: z.number().positive(),
     band_d_total_prev: z.number().positive(),
+    band_d_council_prev: z.number().positive(),
     council_rise_pct: z.number(),
-    council_rise_split: z.string(),
-    /** Kept for the static prototype only; the app reads ratios from rules. */
-    band_ratios: z.record(Band, z.number()),
+    /** Every band as published by government, to the penny. The engine must reproduce these. */
+    published_bands: z.record(Band, z.number().positive()),
     gla_note: z.string(),
     ...provenance,
   }),
   tax_base: z.object({
+    /** Band D equivalent homes after council tax support, before collection losses. */
     band_d_equivalents: z.number().positive(),
     collection_rate: z.number().min(0).max(1),
+    /** Tax base for setting the tax: band_d_equivalents × collection_rate. */
+    setting_base: z.number().positive(),
     ...provenance,
   }),
+  history: z.object({ council_tax: z.array(CouncilTaxYear).min(1), quality: Quality }),
   funding: z.array(FundingLine).min(1),
   services: z.array(ServiceLine).min(1),
   gap_2026_27: z.array(GapLine).min(1),
   next_year: z.object({
     year: finYear,
     gap_m: z.number(),
-    reserves: z.object({ general_m: z.number(), minimum_safe_m: z.number(), ...provenance }),
+    reserves: z.object({ general: Valued, minimum_safe: Valued }),
     levers: z.array(Lever),
     toggles: z.array(Toggle),
     ...provenance,

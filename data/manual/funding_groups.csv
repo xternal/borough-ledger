@@ -1,0 +1,11 @@
+id,label,official_term,ring_fenced_to,one_off,desc,order,kind
+council_tax,Council tax,Council tax requirement,,false,What residents pay through the council's part of the bill,1,council_tax
+rsg,Revenue Support Grant,Revenue Support Grant,,false,The council's main general grant from government. From 2026/27 it includes funding that used to come through business rates and separate grants,2,grant
+business_rates,Business rates kept locally,Retained income from Rate Retention Scheme,,false,The share of local business rates the council keeps,3,business_rates
+schools_grants,Schools grants (ring-fenced),Dedicated Schools Grant and other education grants,schools,false,Passed to schools; cannot be spent on anything else,4,grant
+public_health_grant,Public health grant (ring-fenced),Public Health Grant,public_health,false,Can only be spent on public health,5,grant
+other_grants,Other government grants,Other specific and special grants within AEF,,false,"Grants for adult care, children and families, homelessness and others, including the income protection floor",6,grant
+other_income,Council tax surplus and other,Collection fund surplus and other items,,false,"Last year's council tax collected above estimate, and other items",7,other
+schools_reserves,Drawn from schools reserves,Appropriations from schools and DSG reserves,schools,true,One-off: schools' own reserves,8,reserves
+public_health_reserves,Drawn from public health reserves,Appropriations from public health reserves,public_health,true,One-off,9,reserves
+council_reserves,Drawn from council reserves,Appropriations from earmarked and unallocated reserves,,true,"One-off: once spent, the gap returns the year after",10,reserves
