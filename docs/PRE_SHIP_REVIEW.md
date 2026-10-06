@@ -38,3 +38,15 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 * Name. "Borough Ledger" is a working title; make sure nothing suggests it is the council's.
 * Whether to tell the council before launch. Recommended: yes, with an offer of right of reply on the data, without asking permission.
 * Who funds it, and publishing that on the site.
+
+## Status after M1 (6 Oct 2026)
+
+| # | Status |
+|---|---|
+| B1 | Partly closed. Council tax, the 2026/27 budget (funding and services), reserves, the tax base and the referendum rule are now sourced from government returns (`etl/`, `data/build/`). Still test: this year's pressures and savings, next year's gap, the safe minimum for reserves, the fees lever, pledge costs, all promises except free home care, all payments. `pnpm --filter @borough-ledger/schema report:test-values` lists them |
+| B2 | Closed. Band D from the government council tax tables (Table 9 and Table 10, 2026/27); all eight bands match to the penny. The third-party figure for 2025/26 was 2p out |
+| H1 | Open. Needs the budget report, which is behind a firewall that blocks scripts; download by hand into `data/raw/` |
+| H2 | Closed. Council tax covers 23% of day-to-day spending including schools, and 36% of the £255.3m the council funds itself |
+| H3 | Closed. One classification: the government revenue account (RA) lines, grouped in `data/manual/ra_service_map.csv` |
+| Medium: instalments | Open |
+| Medium: Geist | Closed in M0 (self-hosted) |

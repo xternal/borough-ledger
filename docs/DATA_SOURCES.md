@@ -66,3 +66,9 @@
 * Budget PDFs: extract tables to `data/manual/*.csv` with page references; validate against report totals; human check once per year.
 * Payments files: monthly CSV/XLSX with inconsistent columns across years. Normalise headers, keep raw files with hashes, map cost centres to services with a reviewed mapping table.
 * Government returns: ODS/XLSX with stable line codes. Best source for comparing councils.
+
+## In use (M1)
+
+`etl/sources.json` lists every file the ETL reads, with its download URL and SHA-256. Council tax tables for 2022/23 to 2026/27, the RA budget return (parts 1 and 2) and the SG grants return for 2026/27 come from gov.uk under the Open Government Licence. The referendum principles report for 2026/27 is cited in `data/config/rules.json`.
+
+The council's democracy site (democracy.lbhf.gov.uk) sits behind an Azure firewall with a JavaScript challenge. Scripts get a 403, and the ETL does not try to get around it. Budget papers are downloaded by hand into `data/raw/` and extracted into `data/manual/` (see its README).
