@@ -1,0 +1,559 @@
+<title>H&amp;F Borough Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap">
+<style>
+/* Layout: a resident's statement. Bill first, then the council's budget, the gap and how it closed,
+   a balance-it tool for next year, promises, and the payments ledger. White, hairlines, numbers first. */
+:root{
+  --bg:#FFFFFF; --sunk:#F5F5F6; --line:#E7E7EA; --line-strong:#D4D4D8;
+  --ink:#0B0B0D; --muted:#61616B; --faint:#9A9AA3;
+  --accent:#2457F5;
+  --fund:#2457F5; --fund-soft:rgba(36,87,245,.16);
+  --spend:#52525B; --spend-soft:rgba(82,82,91,.13);
+  --gap:#F2600C; --gap-soft:rgba(242,96,12,.16);
+  --gla:#A1A1AA;
+  --good:#15803D; --warn:#B45309; --bad:#DC2626; --idle:#8B8B94;
+  --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#09090B; --sunk:#141417; --line:#232328; --line-strong:#33333A;
+  --ink:#F4F4F5; --muted:#A1A1AA; --faint:#6B6B74; --accent:#6F93FF;
+  --fund:#6F93FF; --fund-soft:rgba(111,147,255,.22);
+  --spend:#A1A1AA; --spend-soft:rgba(161,161,170,.16);
+  --gap:#FF7A2E; --gap-soft:rgba(255,122,46,.20); --gla:#52525B;
+  --good:#4ADE80; --warn:#FBBF24; --bad:#F87171; --idle:#71717A;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#09090B; --sunk:#141417; --line:#232328; --line-strong:#33333A;
+  --ink:#F4F4F5; --muted:#A1A1AA; --faint:#6B6B74; --accent:#6F93FF;
+  --fund:#6F93FF; --fund-soft:rgba(111,147,255,.22);
+  --spend:#A1A1AA; --spend-soft:rgba(161,161,170,.16);
+  --gap:#FF7A2E; --gap-soft:rgba(255,122,46,.20); --gla:#52525B;
+  --good:#4ADE80; --warn:#FBBF24; --bad:#F87171; --idle:#71717A;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.kpi .v,.big,.row .v,.legend2 .amt,.wf-v,.kv,.keys,.trio .n,.lever .val,td.n,.pay-sum b,#sankey text.v,#sankey text.mid,.timeline .d{font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:24px;padding-block:0 80px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+a{color:var(--accent);text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.015em;font-weight:600}
+h1{font-size:clamp(30px,4.4vw,48px);line-height:1.06;letter-spacing:-.03em;max-width:20ch}
+h2{font-size:24px;letter-spacing:-.02em}
+h3{font-size:15px}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.hatch{background:repeating-linear-gradient(45deg,var(--gap) 0 3px,var(--gap-soft) 3px 6px)}
+
+/* bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1120px;margin:0 auto;padding-inline:24px;height:56px;display:flex;align-items:center;gap:24px}
+@media (max-width:520px){.bar-in{padding-inline:16px;gap:12px}}
+.mark{font-weight:650;font-size:15px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.mark i{width:14px;height:14px;border-radius:3px;background:linear-gradient(90deg,var(--fund) 0 64%,var(--gla) 64% 100%)}
+nav.sections{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.sections::-webkit-scrollbar{display:none}
+nav.sections a{font-size:14px;font-weight:500;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav.sections a:hover{color:var(--ink);background:var(--sunk)}
+.ctx{font-size:13px;color:var(--muted);white-space:nowrap}
+@media (max-width:860px){.ctx{display:none}}
+
+/* hero */
+.hero{padding-block:52px 32px;display:grid;gap:16px}
+.kicker{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.tagline{font-size:12px;color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent);padding:2px 8px;border-radius:999px}
+.lede{color:var(--muted);max-width:62ch;font-size:17px;line-height:1.5}
+.lede b{color:var(--ink);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px;padding-block:24px;border-block:1px solid var(--line)}
+.kpi{display:grid;gap:4px;align-content:start;min-width:0}
+.kpi .l{font-size:13px;color:var(--muted)}
+.kpi .v{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1.1;white-space:nowrap}
+.kpi .s{font-size:12.5px;color:var(--muted)}
+@media (max-width:980px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}.kpi .v{font-size:24px}}
+
+section{padding-top:72px;scroll-margin-top:64px}
+.sec-head{display:grid;gap:6px;margin-bottom:24px;max-width:70ch}
+.sec-head p{color:var(--muted)}
+
+/* quality marks */
+.q{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap}
+.q::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--idle);flex:none}
+.q.sourced::before{background:var(--good)}
+.q.test::before{background:var(--bad)}
+.qrow{display:flex;gap:6px 16px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted);padding-top:16px}
+
+/* controls */
+.seg{display:inline-flex;background:var(--sunk);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;color:var(--muted);font:500 14px var(--font);padding:6px 12px;border-radius:6px;cursor:pointer;min-width:36px}
+.seg button[aria-pressed="true"]{background:var(--bg);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 1px 2px rgba(0,0,0,.06)}
+.check{display:flex;gap:10px;align-items:center;font-size:14px}
+.check input{width:18px;height:18px;accent-color:var(--ink);margin:0}
+input[type=range]{width:100%;accent-color:var(--ink);margin:0;height:18px}
+.btn{border:0;background:var(--ink);color:var(--bg);font:550 14px var(--font);padding:9px 16px;border-radius:8px;cursor:pointer}
+.btn.secondary{background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.linkbtn{background:none;border:0;padding:0;font:500 14px var(--font);color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.chip{border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);font:500 13px var(--font);padding:5px 11px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* bill */
+.bill{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:start}
+@media (max-width:900px){.bill{grid-template-columns:minmax(0,1fr);gap:40px}}
+.bill-main{display:grid;gap:20px}
+.big{font-size:56px;font-weight:600;letter-spacing:-.04em;line-height:1}
+@media (max-width:520px){.big{font-size:44px}}
+.split{display:grid;gap:10px}
+.split .barline{display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px}
+.split .barline i{display:block;height:100%}
+.legend2{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 10px;font-size:14px;align-items:baseline}
+.legend2 .sw{width:10px;height:10px;border-radius:2px;align-self:center}
+.legend2 .amt{font-weight:600;text-align:right}
+.legend2 .sub{grid-column:2 / -1;font-size:12.5px;color:var(--muted);margin-top:-4px}
+.rows{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;font-size:14px}
+.row .v{font-weight:550;text-align:right}
+.row .track{grid-column:1 / -1;height:6px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.row .track i{display:block;height:100%;background:var(--spend);border-radius:3px}
+.row.fund .track i{background:var(--fund)}
+.row.gap .track i{background:repeating-linear-gradient(45deg,var(--gap) 0 3px,var(--gap-soft) 3px 6px)}
+.row .d{grid-column:1 / -1;font-size:12.5px;color:var(--muted);margin-top:-2px}
+
+/* budget flow */
+.flow-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+#sankey{display:block;width:100%;height:auto}
+#sankey text{font-family:var(--font);font-size:13.5px;fill:var(--ink);font-weight:500}
+#sankey text.v{font-size:12.5px;fill:var(--muted);font-weight:400}
+#sankey text.mid{font-size:16px;font-weight:600}
+.flow-mobile{display:none}
+@media (max-width:760px){.flow-desktop{display:none}.flow-mobile{display:grid;gap:28px}}
+.flow-mobile h3{font-size:13px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.totalrow{display:flex;justify-content:space-between;font-weight:600;padding-block:10px;border-block:1px solid var(--line)}
+
+/* waterfall */
+.wf{display:grid;gap:0;border-top:1px solid var(--line)}
+.wf-row{display:grid;grid-template-columns:minmax(150px,280px) minmax(0,1fr) 84px;gap:16px;align-items:center;padding-block:9px;border-bottom:1px solid var(--line);font-size:14px}
+@media (max-width:620px){.wf-row{grid-template-columns:minmax(0,1fr) 72px;gap:6px 12px}.wf-row .wf-track{grid-column:1 / -1;grid-row:2}}
+.wf-row .wf-l{min-width:0}
+.wf-row .wf-v{text-align:right;font-weight:550;white-space:nowrap}
+.wf-track{position:relative;height:16px}
+.wf-track i{position:absolute;top:0;bottom:0;border-radius:3px}
+.wf-row.pressure i{background:var(--gap)}
+.wf-row.funding i,.wf-row.close i{background:var(--fund)}
+.wf-row.close_saving i{background:var(--spend)}
+.wf-row.close_oneoff i{background:repeating-linear-gradient(45deg,var(--gap) 0 3px,var(--gap-soft) 3px 6px)}
+.wf-row.subtotal,.wf-row.total{font-weight:600}
+.wf-row.subtotal i,.wf-row.total i{background:var(--ink)}
+.wf-row.total i{width:2px!important}
+.wf-group{font-size:12.5px;color:var(--muted);padding-top:18px;padding-bottom:6px}
+
+/* balance it */
+.balance{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:start}
+@media (max-width:960px){.balance{grid-template-columns:minmax(0,1fr)}}
+.levers{display:grid;gap:22px}
+.lever{display:grid;gap:6px}
+.lever .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px}
+.lever .top label{font-weight:500}
+.lever .top .val{font-weight:600}
+.lever .top .val.over{color:var(--bad)}
+.lever .hint{font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lever .hint b{font-weight:500;color:var(--muted)}
+.toggles{display:grid;gap:12px;padding-top:6px;border-top:1px solid var(--line)}
+.toggles .check{justify-content:space-between}
+.toggles .check span:last-child{color:var(--muted);font-size:13px;white-space:nowrap}
+.toggles .check label{display:flex;gap:10px;align-items:center}
+.result{position:sticky;top:76px;background:var(--sunk);border-radius:14px;padding:24px;display:grid;gap:18px}
+@media (max-width:960px){.result{position:static}}
+.status{font-size:13px;font-weight:600}
+.status.ok{color:var(--good)} .status.short{color:var(--bad)} .status.spare{color:var(--accent)}
+.result .big{font-size:44px}
+.stackbar{display:flex;height:12px;border-radius:4px;overflow:hidden;background:var(--bg);gap:2px}
+.stackbar i{display:block;height:100%}
+.keys{display:grid;gap:6px;font-size:13px}
+.keys div{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:8px;align-items:center}
+.keys .sw{width:10px;height:10px;border-radius:2px}
+.flags{display:grid;gap:8px;font-size:13px}
+.flag{padding:10px 12px;border-radius:8px;background:var(--bg)}
+.flag.bad{color:var(--bad)} .flag.warn{color:var(--warn)}
+.meter{display:grid;gap:6px;font-size:13px}
+.meter .m{position:relative;height:8px;background:var(--bg);border-radius:4px}
+.meter .m i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--spend)}
+.meter .m b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--bad)}
+.kv{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.kv span:last-child{font-weight:600}
+
+/* promises */
+.promises{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:start}
+@media (max-width:900px){.promises{grid-template-columns:minmax(0,1fr)}}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.plist{display:grid;border-top:1px solid var(--line)}
+.pcard{display:grid;gap:8px;padding:16px 12px;text-align:left;font:inherit;color:inherit;width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;cursor:pointer}
+.pcard:hover{background:var(--sunk)}
+.pcard[aria-pressed="true"]{background:var(--sunk);box-shadow:inset 2px 0 0 var(--ink)}
+.pcard .who{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.pcard .txt{font-size:16px;font-weight:550;line-height:1.35;letter-spacing:-.01em}
+.pcard .meta{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--muted)}
+.pill{font-size:12px;font-weight:550;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.st-delivering,.st-funded{background:color-mix(in srgb,var(--warn) 13%,transparent);color:var(--warn)}
+.st-in_plan,.st-budgeted{background:color-mix(in srgb,var(--fund) 12%,transparent);color:var(--fund)}
+.st-delivered{background:color-mix(in srgb,var(--good) 13%,transparent);color:var(--good)}
+.st-failed,.st-quietly_dropped{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+.st-promised,.st-unscoreable,.st-not_in_power{background:var(--sunk);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.testmark{font-size:12px;color:var(--bad)}
+.detail{border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:18px;position:sticky;top:76px}
+@media (max-width:900px){.detail{position:static}}
+.ladder{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+.ladder span{font-size:11.5px;font-weight:500;padding-top:14px;color:var(--faint);position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ladder span::before{content:"";position:absolute;left:0;right:0;top:3px;height:4px;border-radius:2px;background:var(--line)}
+.ladder span.past{color:var(--muted)} .ladder span.past::before{background:var(--ink);opacity:.35}
+.ladder span.on{color:var(--ink);font-weight:600} .ladder span.on::before{background:var(--ink)}
+.ladder.single{grid-template-columns:1fr}
+.ladder.single span{white-space:normal;padding:10px 12px;background:var(--sunk);border-radius:8px;color:var(--ink)}
+.ladder.single span::before{display:none}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-block:16px;border-block:1px solid var(--line)}
+.trio > div{display:grid;gap:2px;min-width:0}
+.trio .n{font-size:24px;font-weight:600;letter-spacing:-.03em}
+.trio .l,.trio .r{font-size:12.5px;color:var(--muted)}
+@media (max-width:520px){.trio{grid-template-columns:minmax(0,1fr)}}
+.timeline{list-style:none;margin:0;padding:0;display:grid}
+.timeline li{display:grid;grid-template-columns:72px 16px minmax(0,1fr);gap:10px;font-size:14px;padding-bottom:14px;position:relative}
+.timeline li .d{font-size:12.5px;color:var(--muted);padding-top:1px}
+.timeline li .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;background:var(--ink);justify-self:center;position:relative;z-index:1}
+.timeline li::before{content:"";position:absolute;left:89.5px;top:12px;bottom:-4px;width:1px;background:var(--line-strong)}
+.timeline li:last-child::before{display:none}
+.t-promised .dot{background:var(--fund)!important}
+.t-in_plan .dot,.t-funded .dot,.t-delivering .dot{background:var(--warn)!important}
+.t-delivered .dot{background:var(--good)!important}
+.t-deadline .dot{background:var(--bg)!important;box-shadow:inset 0 0 0 2px var(--ink)}
+.t-deadline_missed .dot{background:var(--bad)!important}
+.t-today .dot{background:var(--gap)!important;border-radius:2px!important}
+.t-today{color:var(--gap);font-weight:600}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* payments */
+.pay-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.pay-tools input,.pay-tools select{font:400 14px var(--font);padding:9px 12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--ink)}
+.pay-tools input{flex:1;min-width:200px}
+.pay-sum{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-bottom:12px}
+.pay-sum b{color:var(--ink);font-weight:600}
+.tablewrap{overflow-x:auto;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:500;color:var(--muted);font-size:12.5px}
+td.n,th.n{text-align:right}
+.more{margin-top:12px}
+
+.method{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;font-size:14px;color:var(--muted)}
+.method h3{color:var(--ink);margin-bottom:8px}
+.method ul{margin:0;padding-left:18px;display:grid;gap:6px}
+@media (max-width:860px){.method{grid-template-columns:minmax(0,1fr);gap:28px}}
+footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint);display:grid;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="topbar">
+  <div class="bar-in">
+    <a class="mark" href="#top"><i aria-hidden="true"></i>Borough Ledger</a>
+    <nav class="sections" aria-label="Sections">
+      <a href="#bill">Your bill</a><a href="#budget">Budget</a><a href="#gap">The gap</a><a href="#balance">Balance it</a><a href="#promises">Promises</a><a href="#payments">Payments</a><a href="#method">Method</a>
+    </nav>
+    <span class="ctx">Hammersmith &amp; Fulham, 2026/27</span>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <div class="hero">
+    <div class="kicker"><span>Independent project, not run by or affiliated with Hammersmith &amp; Fulham Council</span><span class="tagline">Prototype with test data</span></div>
+    <h1>Where your council tax goes in Hammersmith &amp; Fulham</h1>
+    <p class="lede" id="lede"></p>
+  </div>
+  <div class="kpis" id="kpis"></div>
+
+  <section id="bill">
+    <div class="sec-head"><h2>Your bill</h2><p>Pick your band. The council keeps about two thirds; the rest goes to the Mayor of London.</p></div>
+    <div class="bill">
+      <div class="bill-main">
+        <div class="seg" role="group" aria-label="Council tax band" id="bands"></div>
+        <div>
+          <div class="muted small" id="bill-label">Band D, 2026/27</div>
+          <div class="big" id="bill-total"></div>
+          <div class="muted" id="bill-sub"></div>
+        </div>
+        <label class="check"><input type="checkbox" id="spd"> I live alone (25% single person discount)</label>
+        <div class="split">
+          <div class="barline" id="split-bar"></div>
+          <div class="legend2" id="split-legend"></div>
+        </div>
+        <div class="qrow"><span class="q sourced">sourced</span><span>Band D split from published 2026/27 rates</span></div>
+      </div>
+      <div>
+        <h3 id="share-h" style="margin-bottom:14px"></h3>
+        <div class="rows" id="share-rows"></div>
+        <p class="small muted" style="margin-top:14px" id="share-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="budget">
+    <div class="sec-head"><h2>The council's budget</h2><p>What the council spends on day-to-day services after fees and ring-fenced grants, and where the money comes from. It must balance by law.</p></div>
+    <div class="flow-head">
+      <div class="legend"><span><i style="background:var(--fund)"></i>Funding</span><span><i style="background:var(--gap)"></i>Reserves (one-off)</span><span><i style="background:var(--spend)"></i>Services</span></div>
+    </div>
+    <div class="flow-desktop"><svg id="sankey" viewBox="0 0 1000 600" role="img" aria-label="Flow of council funding into services"></svg></div>
+    <div class="flow-mobile" id="flow-mobile"></div>
+    <div class="qrow"><span class="q sourced">sourced</span><span>Streets, waste, parks and transport; transitional relief</span><span class="q test">test</span><span>All other lines</span></div>
+  </section>
+
+  <section id="gap">
+    <div class="sec-head"><h2>How this year's gap opened and closed</h2><p>Costs rose faster than funding. The council closed the gap with a council tax rise, savings and a one-off draw on reserves.</p></div>
+    <div class="wf" id="wf"></div>
+    <div class="qrow"><span class="q sourced">sourced</span><span>Council tax rise</span><span class="q test">test</span><span>All other lines</span></div>
+  </section>
+
+  <section id="balance">
+    <div class="sec-head"><h2>Balance next year's budget</h2><p>2027/28 starts with a £15.0m gap. Every choice closes part of it. Reserves close it once; the gap returns the year after.</p></div>
+    <div class="balance">
+      <div class="levers" id="levers"></div>
+      <aside class="result" aria-live="polite" id="result"></aside>
+    </div>
+  </section>
+
+  <section id="promises">
+    <div class="sec-head"><h2>Promises</h2><p>Every pledge from the administration and the opposition, with its cost to the council and a timeline that ends in delivery or in silence.</p></div>
+    <div class="promises">
+      <div>
+        <div class="filters" id="pfilters"></div>
+        <div class="plist" id="plist"></div>
+      </div>
+      <div class="detail" id="pdetail"></div>
+    </div>
+  </section>
+
+  <section id="payments">
+    <div class="sec-head"><h2>Payments over £500</h2><p>Every payment the council makes over £500 is published monthly. Search by supplier or service.</p></div>
+    <div class="pay-tools">
+      <input type="search" id="q" placeholder="Search suppliers" aria-label="Search suppliers">
+      <select id="svc" aria-label="Filter by service"></select>
+    </div>
+    <div class="pay-sum" id="pay-sum"></div>
+    <div class="tablewrap"><table id="pay"></table></div>
+    <button type="button" class="linkbtn more" id="more">Show more</button>
+    <div class="qrow"><span class="q test">test</span><span>Invented payments with generic supplier names. The real feed is the council's monthly transparency file.</span></div>
+  </section>
+
+  <section id="method">
+    <div class="sec-head"><h2>How this works</h2></div>
+    <div class="method">
+      <div><h3>The rules a council lives by</h3><ul><li>It must set a balanced budget every year.</li><li>It can borrow only for buildings and other capital, not for running costs.</li><li>A council tax rise above 4.99% needs a local referendum.</li></ul></div>
+      <div><h3>Every number is labelled</h3><ul><li><span class="q sourced">sourced</span> from a published document, linked below.</li><li><span class="q test">test</span> invented to show the layout. Replaced by real data before launch.</li></ul></div>
+      <div><h3>Sources</h3><ul id="sources"></ul></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Borough Ledger is an independent project. It is not run by, endorsed by or affiliated with Hammersmith &amp; Fulham Council.</span>
+    <span>Prototype for design review. Do not quote any figure marked test.</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
+<script>
+const D = {"meta": {"council": "London Borough of Hammersmith & Fulham", "year": "2026-27", "note": "Prototype data. Items marked 'sourced' come from the cited document. Everything marked 'test' is invented to make the layout realistic and MUST be replaced by the ETL before anything is published.", "sources": [{"id": "band_d", "title": "Council tax bands 2026/27 for H&F (councildata.co.uk)", "url": "https://councildata.co.uk/council-tax/london-borough-of-hammersmith-and-fulham/"}, {"id": "budget_paper", "title": "H&F Budget 2026/27 committee paper", "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf"}, {"id": "budget_report", "title": "H&F Revenue Budget and Council Tax Levels 2026/27", "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf"}, {"id": "election", "title": "2026 Hammersmith and Fulham London Borough Council election", "url": "https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election"}]}, "bill": {"band_d_total": 1519.51, "band_d_council": 1009.0, "band_d_gla": 510.51, "band_d_total_prev": 1451.44, "council_rise_pct": 4.99, "council_rise_split": "2.99% core + 2% adult social care precept", "quality": "sourced", "source_id": "band_d", "band_ratios": {"A": 0.6666666666666666, "B": 0.7777777777777778, "C": 0.8888888888888888, "D": 1, "E": 1.2222222222222223, "F": 1.4444444444444444, "G": 1.6666666666666667, "H": 2.0}, "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services"}, "tax_base": {"band_d_equivalents": 82000, "collection_rate": 0.975, "quality": "test"}, "funding": [{"id": "council_tax", "label": "Council tax", "m": 80.7, "quality": "test", "note": "tax base × Band D × collection; the +£7.7m year-on-year rise is from the budget paper"}, {"id": "business_rates", "label": "Business rates kept locally", "m": 58.0, "quality": "test"}, {"id": "core_grants", "label": "Core government grants", "m": 61.3, "quality": "test"}, {"id": "social_care_grants", "label": "Social care grants", "m": 15.0, "quality": "test"}, {"id": "transition", "label": "Transitional relief", "m": 6.0, "quality": "sourced", "source_id": "budget_paper"}, {"id": "reserves", "label": "Drawn from reserves", "m": 3.0, "quality": "test", "gap": true}], "services": [{"id": "adult_care", "label": "Adult social care", "m": 72.0, "quality": "test", "desc": "Home care, care homes, support for disabled adults"}, {"id": "children", "label": "Children's services", "m": 50.0, "quality": "test", "desc": "Children in care, SEND transport, early help"}, {"id": "place", "label": "Streets, waste, parks and transport", "m": 41.3, "quality": "sourced", "source_id": "budget_paper", "desc": "Net budget of the Economy, Arts, Sports and Public Realm committee"}, {"id": "corporate", "label": "Running the council", "m": 22.0, "quality": "test", "desc": "Finance, IT, legal, customer services"}, {"id": "housing", "label": "Housing and homelessness", "m": 17.0, "quality": "test", "desc": "Temporary accommodation, housing advice (council homes are a separate ring-fenced account)"}, {"id": "levies", "label": "Levies and debt costs", "m": 12.7, "quality": "test", "desc": "Waste disposal authority, London-wide levies, capital financing"}, {"id": "safety", "label": "Community safety", "m": 9.0, "quality": "test", "desc": "Law enforcement team, CCTV"}], "gap_2026_27": [{"label": "Pay and prices", "m": 7.5, "kind": "pressure"}, {"label": "More older and disabled residents needing care", "m": 4.0, "kind": "pressure"}, {"label": "Children's placements", "m": 2.5, "kind": "pressure"}, {"label": "Temporary accommodation", "m": 3.5, "kind": "pressure"}, {"label": "New investments", "m": 5.0, "kind": "pressure"}, {"label": "Other pressures", "m": 1.5, "kind": "pressure"}, {"label": "Change in government funding", "m": -3.3, "kind": "funding"}, {"label": "Gap to close", "kind": "subtotal"}, {"label": "Council tax rise", "m": -7.7, "kind": "close", "quality": "sourced", "source_id": "budget_paper"}, {"label": "Savings", "m": -10.0, "kind": "close_saving"}, {"label": "Reserves, one-off", "m": -3.0, "kind": "close_oneoff"}, {"label": "Balanced", "kind": "total"}], "gap_quality": "test except the council tax line", "next_year": {"year": "2027-28", "gap_m": 15.0, "quality": "test", "reserves": {"general_m": 45.0, "minimum_safe_m": 15.0}, "levers": [{"id": "ct_rise", "label": "Council tax rise", "unit": "%", "base": 4.99, "min": 0, "max": 8, "step": 0.25, "m_per_unit": 0.807, "limit": 4.99, "limit_note": "Above 4.99% needs a local referendum", "controlled_by": "council"}, {"id": "savings", "label": "Savings programme", "unit": "£m", "base": 0, "min": 0, "max": 15, "step": 0.5, "m_per_unit": 1, "controlled_by": "council"}, {"id": "reserves", "label": "Use reserves", "unit": "£m", "base": 0, "min": 0, "max": 15, "step": 0.5, "m_per_unit": 1, "controlled_by": "council", "one_off": true}, {"id": "fees", "label": "Parking and fees", "unit": "%", "base": 0, "min": 0, "max": 10, "step": 1, "m_per_unit": 0.4, "controlled_by": "council"}, {"id": "settlement", "label": "Government settlement", "unit": "%", "base": 0, "min": -5, "max": 5, "step": 0.5, "m_per_unit": 0.763, "controlled_by": "government"}], "toggles": [{"id": "free_home_care", "label": "Keep free home care for older residents", "on": true, "cost_m": 2.5, "quality": "test"}, {"id": "weekly_bins", "label": "Keep weekly rubbish collections", "on": true, "cost_m": 1.5, "quality": "test"}, {"id": "library_hours", "label": "Keep library opening hours", "on": true, "cost_m": 0.6, "quality": "test"}, {"id": "extra_officers", "label": "Add 20 law enforcement officers", "on": false, "cost_m": 1.0, "quality": "test"}]}, "politics": {"control": "Labour", "seats": {"Labour": 38, "Conservative": 12}, "total_seats": 50, "leader": "Stephen Cowan", "election": "2026-05-07", "next_election": "2030-05", "quality": "sourced", "source_id": "election"}};
+const PROM = {"meta": {"note": "Only 'hf-free-home-care' is grounded in a real document. All other cards are invented test data with placeholder actors (Party A / Party B) and must never be published."}, "promises": [{"id": "hf-free-home-care", "actor": "H&F administration", "party": "Labour", "made_on": "2014-05-22", "text": "Free home care for older and disabled residents.", "area": "Adult social care", "cost_m": [2.0, 2.5, 3.0], "cost_quality": "test", "status": "delivering", "deadline": null, "funded_by": "General fund; maintained in the 2026/27 budget", "sources": [{"title": "H&F Budget 2026/27 committee paper", "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf"}], "timeline": [{"date": "2014-05-22", "type": "promised", "event": "Pledged at the 2014 local election (date to verify)"}, {"date": "2015-04-01", "type": "delivered", "event": "Charges for home care scrapped (date to verify)"}, {"date": "2026-02-25", "type": "funded", "event": "Kept in the 2026/27 budget"}], "editor_check_required": true}, {"id": "test-a-trees", "actor": "Party A", "party": null, "made_on": "2026-04-10", "text": "Plant 2,000 street trees by 2030.", "area": "Streets and parks", "cost_m": [0.3, 0.4, 0.5], "cost_quality": "test", "status": "in_plan", "deadline": "2030-05-01", "funded_by": "Capital programme and grants", "sources": [], "timeline": [{"date": "2026-04-10", "type": "promised", "event": "Manifesto"}, {"date": "2026-07-14", "type": "in_plan", "event": "Tree strategy approved by cabinet"}, {"date": "2030-05-01", "type": "deadline", "event": "Deadline"}], "test": true}, {"id": "test-a-homes", "actor": "Party A", "party": null, "made_on": "2026-04-10", "text": "Start 1,000 genuinely affordable homes this term.", "area": "Housing", "cost_m": null, "cost_quality": null, "status": "delivering", "deadline": "2030-05-01", "funded_by": "Housing revenue account and partners", "sources": [], "timeline": [{"date": "2026-04-10", "type": "promised", "event": "Manifesto"}, {"date": "2026-09-01", "type": "delivering", "event": "First 120 starts reported"}, {"date": "2030-05-01", "type": "deadline", "event": "Deadline"}], "test": true}, {"id": "test-b-ct-freeze", "actor": "Party B", "party": null, "made_on": "2026-04-12", "text": "Freeze the council's share of council tax for four years.", "area": "Council tax", "cost_m": [3.6, 3.8, 4.0], "cost_quality": "test", "status": "not_in_power", "deadline": null, "funded_by": "Not stated", "sources": [], "timeline": [{"date": "2026-04-12", "type": "promised", "event": "Opposition manifesto. Cost shown is year one: the income a 4.99% rise on the council's share raises."}], "test": true}, {"id": "test-a-potholes", "actor": "Party A", "party": null, "made_on": "2026-04-10", "text": "Fix every reported pothole within 48 hours.", "area": "Streets and parks", "cost_m": [0.6, 0.8, 1.0], "cost_quality": "test", "status": "quietly_dropped", "deadline": "2026-09-30", "funded_by": "Not stated", "sources": [], "timeline": [{"date": "2026-04-10", "type": "promised", "event": "Leaflet"}, {"date": "2026-09-30", "type": "deadline", "event": "Self-imposed deadline"}, {"date": "2026-10-01", "type": "deadline_missed", "event": "Deadline passed with no published performance data"}], "test": true}, {"id": "test-b-slogan", "actor": "Party B", "party": null, "made_on": "2026-04-20", "text": "We'll put residents first.", "area": "General", "cost_m": null, "cost_quality": null, "status": "unscoreable", "deadline": null, "funded_by": null, "sources": [], "timeline": [{"date": "2026-04-20", "type": "promised", "event": "Hustings. No who, how much, when or from where."}], "test": true}]};
+const PAY = {"meta": {"note": "Invented payments for layout only. Supplier names are generic categories, not real companies. The real feed is the council's monthly 'spend over £500' file."}, "payments": [{"date": "2026-09-28", "supplier": "SEND school transport", "service": "Children's services", "amount": 38264.62}, {"date": "2026-09-26", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 7023.6}, {"date": "2026-09-22", "supplier": "Legal services", "service": "Running the council", "amount": 28581.38}, {"date": "2026-09-21", "supplier": "Temporary accommodation provider E", "service": "Housing and homelessness", "amount": 90428.12}, {"date": "2026-09-19", "supplier": "CCTV maintenance", "service": "Community safety", "amount": 3530.17}, {"date": "2026-09-19", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 43283.55}, {"date": "2026-09-16", "supplier": "Temporary accommodation provider C", "service": "Housing and homelessness", "amount": 57974.86}, {"date": "2026-09-14", "supplier": "Home care agency C", "service": "Adult social care", "amount": 32806.38}, {"date": "2026-09-13", "supplier": "IT software licences", "service": "Running the council", "amount": 88809.1}, {"date": "2026-09-10", "supplier": "Residential care home E", "service": "Adult social care", "amount": 81207.79}, {"date": "2026-09-07", "supplier": "SEND school transport", "service": "Children's services", "amount": 24563.16}, {"date": "2026-09-04", "supplier": "Waste and street cleaning contract", "service": "Streets, waste, parks and transport", "amount": 197384.71}, {"date": "2026-09-04", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 56542.3}, {"date": "2026-09-03", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 29134.71}, {"date": "2026-08-28", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 17866.43}, {"date": "2026-08-27", "supplier": "CCTV maintenance", "service": "Community safety", "amount": 4266.71}, {"date": "2026-08-23", "supplier": "CCTV maintenance", "service": "Community safety", "amount": 12506.95}, {"date": "2026-08-23", "supplier": "IT software licences", "service": "Running the council", "amount": 78030.63}, {"date": "2026-08-21", "supplier": "SEND school transport", "service": "Children's services", "amount": 38071.02}, {"date": "2026-08-20", "supplier": "Residential care home E", "service": "Adult social care", "amount": 65625.15}, {"date": "2026-08-19", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 23609.99}, {"date": "2026-08-13", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 16684.29}, {"date": "2026-08-13", "supplier": "Legal services", "service": "Running the council", "amount": 12682.8}, {"date": "2026-08-12", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 89906.47}, {"date": "2026-08-12", "supplier": "IT software licences", "service": "Running the council", "amount": 15072.44}, {"date": "2026-08-11", "supplier": "Legal services", "service": "Running the council", "amount": 17831.24}, {"date": "2026-08-06", "supplier": "Temporary accommodation provider A", "service": "Housing and homelessness", "amount": 93666.08}, {"date": "2026-08-05", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 13548.39}, {"date": "2026-08-03", "supplier": "Waste and street cleaning contract", "service": "Streets, waste, parks and transport", "amount": 200627.34}, {"date": "2026-08-02", "supplier": "Home care agency E", "service": "Adult social care", "amount": 10898.5}, {"date": "2026-08-02", "supplier": "Waste and street cleaning contract", "service": "Streets, waste, parks and transport", "amount": 318504.71}, {"date": "2026-08-02", "supplier": "Residential care home A", "service": "Adult social care", "amount": 131458.59}, {"date": "2026-08-02", "supplier": "Temporary accommodation provider B", "service": "Housing and homelessness", "amount": 49892.49}, {"date": "2026-08-01", "supplier": "IT software licences", "service": "Running the council", "amount": 80059.55}, {"date": "2026-08-01", "supplier": "Energy supply", "service": "Running the council", "amount": 22764.0}, {"date": "2026-07-27", "supplier": "Legal services", "service": "Running the council", "amount": 9418.42}, {"date": "2026-07-25", "supplier": "Temporary accommodation provider C", "service": "Housing and homelessness", "amount": 52538.16}, {"date": "2026-07-23", "supplier": "Children's residential placement B", "service": "Children's services", "amount": 41084.79}, {"date": "2026-07-20", "supplier": "Parks grounds maintenance", "service": "Streets, waste, parks and transport", "amount": 7516.18}, {"date": "2026-07-20", "supplier": "Energy supply", "service": "Running the council", "amount": 11785.06}, {"date": "2026-07-18", "supplier": "CCTV maintenance", "service": "Community safety", "amount": 3630.19}, {"date": "2026-07-12", "supplier": "Energy supply", "service": "Running the council", "amount": 20588.55}, {"date": "2026-07-10", "supplier": "Home care agency D", "service": "Adult social care", "amount": 8515.46}, {"date": "2026-07-09", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 14970.63}, {"date": "2026-07-05", "supplier": "Home care agency B", "service": "Adult social care", "amount": 14149.73}, {"date": "2026-07-04", "supplier": "Energy supply", "service": "Running the council", "amount": 35491.44}, {"date": "2026-07-02", "supplier": "Highways maintenance", "service": "Streets, waste, parks and transport", "amount": 106071.1}, {"date": "2026-07-01", "supplier": "SEND school transport", "service": "Children's services", "amount": 25226.91}]};
+
+const B=D.bill, NY=D.next_year;
+const FUND=D.funding.reduce((a,x)=>a+x.m,0);
+const CT=D.funding.find(x=>x.id==="council_tax").m;
+const gbp=(x,d=2)=>"£"+x.toLocaleString("en-GB",{minimumFractionDigits:d,maximumFractionDigits:d});
+const gbp0=x=>"£"+Math.round(x).toLocaleString("en-GB");
+const m=(x,d=1)=>"£"+x.toFixed(d)+"m";
+const sm=x=>(x>0.004?"+":x<-0.004?"−":"")+"£"+Math.abs(x).toFixed(1)+"m";
+const st={band:"D",spd:false,v:{},t:{}};
+NY.levers.forEach(l=>st.v[l.id]=l.base);
+NY.toggles.forEach(t=>st.t[t.id]=t.on);
+
+/* ---------- hero + kpis ---------- */
+const riseTot=(B.band_d_total/B.band_d_total_prev-1)*100;
+document.getElementById("lede").innerHTML=`A Band D home pays <b>${gbp(B.band_d_total)}</b> this year, up ${riseTot.toFixed(2)}%. Council tax covers about <b>${Math.round(CT/FUND*100)}%</b> of what the council spends on services. Government grants and business rates pay for most of the rest.`;
+const kp=[["Band D bill",gbp0(B.band_d_total),`up ${riseTot.toFixed(1)}% on last year`],["Council budget",m(FUND,0),"net, day-to-day"],["Paid by council tax",Math.round(CT/FUND*100)+"%",m(CT)+" a year"],["Savings this year","£10.0m","to balance 2026/27"],["Reserves",m(NY.reserves.general_m,0),`safe minimum ${m(NY.reserves.minimum_safe_m,0)}`],["Council control",D.politics.control,`${D.politics.seats[D.politics.control]} of ${D.politics.total_seats} seats`]];
+document.getElementById("kpis").innerHTML=kp.map(([l,v,s])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+
+/* ---------- bill ---------- */
+const BANDS=Object.keys(B.band_ratios);
+document.getElementById("bands").innerHTML=BANDS.map(b=>`<button type="button" data-b="${b}" aria-pressed="${b===st.band}">${b}</button>`).join("");
+document.querySelectorAll("[data-b]").forEach(btn=>btn.addEventListener("click",()=>{st.band=btn.dataset.b;document.querySelectorAll("[data-b]").forEach(x=>x.setAttribute("aria-pressed",x===btn));renderBill();renderBalance();}));
+document.getElementById("spd").addEventListener("change",e=>{st.spd=e.target.checked;renderBill();renderBalance();});
+function billFor(band){const r=B.band_ratios[band]*(st.spd?0.75:1);return {council:B.band_d_council*r,gla:B.band_d_gla*r,total:B.band_d_total*r};}
+function renderBill(){
+  const b=billFor(st.band);
+  document.getElementById("bill-label").textContent=`Band ${st.band}, 2026/27${st.spd?", with single person discount":""}`;
+  document.getElementById("bill-total").textContent=gbp(b.total);
+  document.getElementById("bill-sub").textContent=`${gbp(b.total/10)} a month over 10 instalments, or ${gbp(b.total/12)} over 12`;
+  const pc=b.council/b.total*100;
+  document.getElementById("split-bar").innerHTML=`<i style="width:${pc}%;background:var(--fund)"></i><i style="width:${100-pc}%;background:var(--gla)"></i>`;
+  document.getElementById("split-legend").innerHTML=`<span class="sw" style="background:var(--fund)"></span><span>Hammersmith &amp; Fulham Council</span><span class="amt">${gbp(b.council)}</span>
+   <span class="sw" style="background:var(--gla)"></span><span>Mayor of London (GLA)</span><span class="amt">${gbp(b.gla)}</span><span class="sub">${B.gla_note}</span>`;
+  document.getElementById("share-h").textContent=`Your ${gbp(b.council)} to the council pays for`;
+  const svc=[...D.services].sort((a,b2)=>b2.m-a.m), tot=svc.reduce((a,x)=>a+x.m,0), mx=svc[0].m/tot*b.council;
+  document.getElementById("share-rows").innerHTML=svc.map(s=>{const v=s.m/tot*b.council;return `<div class="row"><span>${s.label}</span><span class="v">${gbp(v,0)}</span><div class="track"><i style="width:${(v/mx*100).toFixed(1)}%"></i></div></div>`}).join("");
+  document.getElementById("share-note").textContent=`Split in proportion to the council's net budget. Your council tax is about ${Math.round(CT/FUND*100)}p of every £1 the council spends; the rest comes from grants and business rates.`;
+}
+
+/* ---------- budget flow ---------- */
+function renderFlow(){
+  const svg=d3.select("#sankey"); svg.selectAll("*").remove();
+  const W=1000,H=600;
+  const defs=svg.append("defs"); const pat=defs.append("pattern").attr("id","hatch").attr("width",7).attr("height",7).attr("patternUnits","userSpaceOnUse").attr("patternTransform","rotate(45)");
+  pat.append("rect").attr("width",7).attr("height",7).attr("style","fill:var(--gap-soft)"); pat.append("line").attr("x1",0).attr("y1",0).attr("x2",0).attr("y2",7).attr("style","stroke:var(--gap);stroke-width:2.2");
+  const left=D.funding.map(x=>({id:x.id,label:x.label,v:x.m,side:"L",gap:!!x.gap}));
+  const right=[...D.services].sort((a,b)=>b.m-a.m).map(x=>({id:x.id,label:x.label,v:x.m,side:"R"}));
+  const nodes=[...left,{id:"pot",label:"Net budget",side:"M"},...right];
+  const links=[...left.map(n=>({source:n.id,target:"pot",value:n.v,gap:n.gap})),...right.map(n=>({source:"pot",target:n.id,value:n.v}))];
+  const g=d3.sankey().nodeId(d=>d.id).nodeWidth(8).nodePadding(18).nodeSort(null).extent([[240,24],[W-270,H-10]])({nodes:nodes.map(d=>({...d})),links:links.map(d=>({...d}))});
+  svg.append("g").selectAll("path").data(g.links).join("path").attr("d",d3.sankeyLinkHorizontal()).attr("fill","none").attr("stroke-width",d=>Math.max(1,d.width))
+    .attr("style",d=>d.gap?"stroke:url(#hatch)":d.target.id==="pot"?"stroke:var(--fund-soft)":"stroke:var(--spend-soft)")
+    .append("title").text(d=>`${d.source.label} → ${d.target.label}: ${m(d.value)}`);
+  const ng=svg.append("g").selectAll("g").data(g.nodes).join("g");
+  ng.append("rect").attr("x",d=>d.x0).attr("y",d=>d.y0).attr("width",d=>d.x1-d.x0).attr("height",d=>Math.max(1,d.y1-d.y0)).attr("style",d=>d.side==="M"?"fill:var(--ink)":d.gap?"fill:var(--gap)":d.side==="L"?"fill:var(--fund)":"fill:var(--spend)");
+  ng.filter(d=>d.side!=="M").each(function(d){const L=d.side==="L",x=L?d.x0-10:d.x1+10,y=(d.y0+d.y1)/2,a=L?"end":"start";const el=d3.select(this);
+    const small=(d.y1-d.y0)<30;
+    const t=el.append("text").attr("x",x).attr("y",small?y+4:y-2).attr("text-anchor",a).text(d.label);
+    if(small) t.append("tspan").attr("class","v").attr("style","fill:var(--muted);font-weight:400;font-size:12.5px").text(`  ${m(d.v)}`);
+    else el.append("text").attr("class","v").attr("x",x).attr("y",y+14).attr("text-anchor",a).text(`${m(d.v)}, ${(d.v/FUND*100).toFixed(0)}%`);});
+  const p=g.nodes.find(n=>n.id==="pot");
+  svg.append("text").attr("class","mid").attr("x",(p.x0+p.x1)/2).attr("y",p.y0-8).attr("text-anchor","middle").text(m(FUND,0));
+  const mx=Math.max(...left.map(n=>n.v),...right.map(n=>n.v));
+  const row=(n,cls)=>`<div class="row ${cls}"><span>${n.label}</span><span class="v">${m(n.v)}</span><div class="track"><i style="width:${(n.v/mx*100).toFixed(1)}%"></i></div></div>`;
+  document.getElementById("flow-mobile").innerHTML=`<div><h3>Where the money comes from</h3><div class="rows">${left.map(n=>row(n,n.gap?"gap":"fund")).join("")}</div></div><div class="totalrow"><span>Net budget</span><span>${m(FUND)}</span></div><div><h3>What it pays for</h3><div class="rows">${right.map(n=>row(n,"")).join("")}</div></div>`;
+}
+
+/* ---------- waterfall ---------- */
+function renderWF(){
+  const rows=D.gap_2026_27; let run=0, max=0; const out=[];
+  rows.forEach(r=>{ if(r.kind==="subtotal"||r.kind==="total"){out.push({...r,a:0,b:run,v:run});} else { const a=run; run+=r.m; out.push({...r,a:Math.min(a,run),b:Math.max(a,run),v:r.m}); } max=Math.max(max,run); });
+  const pct=x=>(x/max*100).toFixed(2)+"%";
+  const groups={pressure:"What pushed costs up",funding:"",subtotal:"",close:"How it was closed",close_saving:"",close_oneoff:"",total:""};
+  let html="", seen={};
+  out.forEach(r=>{ const gname=groups[r.kind]; if(gname&&!seen[gname]){seen[gname]=1;html+=`<div class="wf-group">${gname}</div>`;}
+    const val= r.kind==="subtotal"?m(r.v): r.kind==="total"?"£0.0m": sm(r.v);
+    const w= r.kind==="total"? "2px" : pct(r.b-r.a);
+    html+=`<div class="wf-row ${r.kind}"><span class="wf-l">${r.label}${r.quality==="sourced"?' <span class="q sourced" title="sourced"></span>':""}</span><div class="wf-track"><i style="left:${pct(r.a)};width:${w}"></i></div><span class="wf-v">${val}</span></div>`; });
+  document.getElementById("wf").innerHTML=html;
+}
+
+/* ---------- balance it ---------- */
+const lv=Object.fromEntries(NY.levers.map(l=>[l.id,l]));
+function fmtLever(l,v){ if(l.unit==="%") return (l.id==="settlement"&&v>0?"+":"")+v.toFixed(2).replace(/\.00$/,"").replace(/(\.\d)0$/,"$1")+"%"; return "£"+v.toFixed(1)+"m"; }
+function buildLevers(){
+  const el=document.getElementById("levers");
+  el.innerHTML=NY.levers.map(l=>`<div class="lever"><div class="top"><label for="lv-${l.id}">${l.label}</label><span class="val" id="val-${l.id}"></span></div>
+    <input type="range" id="lv-${l.id}" min="${l.min}" max="${l.max}" step="${l.step}" value="${st.v[l.id]}">
+    <div class="hint"><span id="hint-${l.id}"></span><b>${l.controlled_by==="government"?"Decided by government":"Council decides"}</b></div></div>`).join("")+
+    `<div class="toggles"><h3 style="margin-bottom:2px">Services and pledges</h3>${NY.toggles.map(t=>`<div class="check"><label><input type="checkbox" id="tg-${t.id}" ${st.t[t.id]?"checked":""}>${t.label}</label><span>${m(t.cost_m)} a year</span></div>`).join("")}</div>`;
+  NY.levers.forEach(l=>document.getElementById("lv-"+l.id).addEventListener("input",e=>{st.v[l.id]=+e.target.value;renderBalance();}));
+  NY.toggles.forEach(t=>document.getElementById("tg-"+t.id).addEventListener("change",e=>{st.t[t.id]=e.target.checked;renderBalance();renderPromises();}));
+}
+function computeBalance(){
+  const parts=[
+    {k:"Council tax",v:st.v.ct_rise*lv.ct_rise.m_per_unit,c:"var(--fund)"},
+    {k:"Fees and parking",v:st.v.fees*lv.fees.m_per_unit,c:"color-mix(in srgb,var(--fund) 60%,var(--bg))"},
+    {k:"Government settlement",v:st.v.settlement*lv.settlement.m_per_unit,c:"color-mix(in srgb,var(--fund) 35%,var(--bg))"},
+    {k:"Savings",v:st.v.savings,c:"var(--spend)"},
+    {k:"Service choices",v:NY.toggles.reduce((a,t)=>a+(t.on&&!st.t[t.id]?t.cost_m:0)-(!t.on&&st.t[t.id]?t.cost_m:0),0),c:"color-mix(in srgb,var(--spend) 55%,var(--bg))"},
+    {k:"Reserves, one-off",v:st.v.reserves,c:"hatch"}];
+  const closed=parts.reduce((a,p)=>a+p.v,0), remaining=NY.gap_m-closed;
+  return {parts,closed,remaining};
+}
+function renderBalance(){
+  NY.levers.forEach(l=>{const v=st.v[l.id];const el=document.getElementById("val-"+l.id);el.textContent=fmtLever(l,v);el.classList.toggle("over",!!l.limit&&v>l.limit);
+    const h=document.getElementById("hint-"+l.id);
+    if(l.id==="ct_rise"){const nb=billFor(st.band).council*(1+v/100);h.textContent=`Band ${st.band}: ${gbp(nb)} next year, ${v>0?"+":""}${gbp(nb-billFor(st.band).council)}. Raises ${m(v*l.m_per_unit)}.`;}
+    else if(l.id==="settlement") h.textContent=v===0?"Assumes a flat cash settlement":`${sm(v*l.m_per_unit)} to the council`;
+    else if(l.id==="fees") h.textContent=`Raises ${m(v*l.m_per_unit)}`;
+    else if(l.id==="reserves") h.textContent=`Leaves ${m(NY.reserves.general_m-v)} in reserves`;
+    else h.textContent="Cuts or efficiencies, to be named";});
+  const r=computeBalance(), rem=r.remaining;
+  const status= Math.abs(rem)<0.05?{c:"ok",t:"Balanced",n:"£0.0m"}: rem>0?{c:"short",t:"Still to find",n:m(rem)}:{c:"spare",t:"Spare",n:m(-rem)};
+  const total=Math.max(NY.gap_m,r.closed);
+  const bar=r.parts.filter(p=>p.v>0.001).map(p=>`<i style="width:${(p.v/total*100).toFixed(2)}%;${p.c==="hatch"?"":"background:"+p.c}" class="${p.c==="hatch"?"hatch":""}"></i>`).join("")+(rem>0.05?`<i style="width:${(rem/total*100).toFixed(2)}%;background:transparent;box-shadow:inset 0 0 0 1.5px var(--bad);border-radius:3px"></i>`:"");
+  const keys=r.parts.map(p=>`<div><span class="sw ${p.c==="hatch"?"hatch":""}" style="${p.c==="hatch"?"":"background:"+p.c}"></span><span>${p.k}</span><span>${sm(p.v)}</span></div>`).join("");
+  const flags=[];
+  if(st.v.ct_rise>lv.ct_rise.limit) flags.push(`<div class="flag bad">A ${st.v.ct_rise}% rise is above the 4.99% limit. The council would have to hold a referendum.</div>`);
+  if(st.v.reserves>0) flags.push(`<div class="flag warn">${m(st.v.reserves)} from reserves is one-off. The same amount reappears in the 2028/29 gap.</div>`);
+  const resLeft=NY.reserves.general_m-st.v.reserves;
+  if(resLeft<NY.reserves.minimum_safe_m) flags.push(`<div class="flag bad">Reserves fall below the ${m(NY.reserves.minimum_safe_m,0)} safe minimum.</div>`);
+  if(rem>0.05) flags.push(`<div class="flag bad">A council cannot set an unbalanced budget. Without a plan, the finance director must issue a section 114 notice.</div>`);
+  const nb=billFor(st.band).council*(1+st.v.ct_rise/100);
+  document.getElementById("result").innerHTML=`
+    <div><div class="status ${status.c}">${status.t}</div><div class="big">${status.n}</div><div class="muted small">of a ${m(NY.gap_m)} gap in 2027/28</div></div>
+    <div class="stackbar">${bar}</div>
+    <div class="keys">${keys}</div>
+    <div class="kv"><span>Your council part, Band ${st.band}${st.spd?", single person":""}</span><span>${gbp(nb)}</span></div>
+    <div class="meter"><div class="kv"><span>Reserves left</span><span>${m(resLeft)}</span></div><div class="m"><i style="width:${(resLeft/NY.reserves.general_m*100).toFixed(1)}%"></i><b style="left:${(NY.reserves.minimum_safe_m/NY.reserves.general_m*100).toFixed(1)}%"></b></div><div class="muted small">Red line: safe minimum</div></div>
+    ${flags.length?`<div class="flags">${flags.join("")}</div>`:""}
+    <div class="qrow" style="padding-top:0"><span class="q test">test</span><span>Gap, costs and yields are invented</span></div>`;
+}
+
+/* ---------- promises ---------- */
+const LADDER=["promised","in_plan","budgeted","delivering","delivered"];
+const LBL={promised:"Promised",in_plan:"In plan",budgeted:"Budgeted",funded:"Budgeted",delivering:"Delivering",delivered:"Delivered",failed:"Failed",quietly_dropped:"Quietly dropped",unscoreable:"Unscoreable",not_in_power:"Opposition pledge"};
+const BANDD_EQ=D.tax_base.band_d_equivalents;
+let sel=PROM.promises[0].id, pf="all";
+const FILT=[["all","All"],["admin","Administration"],["opp","Opposition"],["overdue","Overdue"]];
+document.getElementById("pfilters").innerHTML=FILT.map(([k,l])=>`<button type="button" class="chip" data-f="${k}" aria-pressed="${k===pf}">${l}</button>`).join("");
+document.querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{pf=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));renderPromises();}));
+const TODAY=new Date().toISOString().slice(0,10);
+const isAdmin=p=>p.actor!=="Party B";
+const overdue=p=>p.deadline&&p.deadline<TODAY&&!["delivered","failed"].includes(p.status);
+const dt=s=>new Date(s).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+function renderPromises(){
+  const list=PROM.promises.filter(p=>pf==="all"||(pf==="admin"&&isAdmin(p)&&p.status!=="not_in_power")||(pf==="opp"&&(p.actor==="Party B"))||(pf==="overdue"&&overdue(p)));
+  if(!list.find(p=>p.id===sel)&&list.length) sel=list[0].id;
+  document.getElementById("plist").innerHTML=list.length?list.map(p=>`<button type="button" class="pcard" data-id="${p.id}" aria-pressed="${p.id===sel}">
+    <div class="who"><span>${p.actor}${p.party?", "+p.party:""}</span><span>${dt(p.made_on)}</span></div>
+    <div class="txt">“${p.text}”</div>
+    <div class="meta"><span class="pill st-${p.status}">${LBL[p.status]}</span><span>${p.cost_m?`£${p.cost_m[0]}–${p.cost_m[2]}m a year`:"Cost not stated"}</span>${p.deadline?`<span>Due ${new Date(p.deadline).toLocaleDateString("en-GB",{month:"short",year:"numeric"})}</span>`:""}${p.test?`<span class="testmark">Test card</span>`:""}</div></button>`).join(""):`<p class="muted" style="padding:16px 0">No promises match this filter.</p>`;
+  document.querySelectorAll(".pcard").forEach(b=>b.addEventListener("click",()=>{sel=b.dataset.id;renderPromises();}));
+  const p=PROM.promises.find(x=>x.id===sel); if(!p) {document.getElementById("pdetail").innerHTML="";return;}
+  const idx=LADDER.indexOf(p.status==="funded"?"budgeted":p.status);
+  const ladder= ["unscoreable","not_in_power","failed","quietly_dropped"].includes(p.status)
+    ? `<div class="ladder single"><span>${p.status==="unscoreable"?"Unscoreable. No who, how much, when or from where, so it is a slogan.":p.status==="not_in_power"?"Opposition pledge. Costed so voters can compare, but it cannot be delivered from opposition.":p.status==="quietly_dropped"?"Quietly dropped. The deadline passed with no delivery and no statement.":"Failed."}</span></div>`
+    : `<div class="ladder">${LADDER.map((s,i)=>`<span class="${i===idx?"on":i<idx?"past":""}">${LBL[s]}</span>`).join("")}</div>`;
+  const c=p.cost_m;
+  const trio=c?`<div class="trio"><div><span class="l">A year</span><span class="n">£${c[1]}m</span><span class="r">range £${c[0]}–${c[2]}m</span></div><div><span class="l">Per Band D home</span><span class="n">${gbp(c[1]*1e6/BANDD_EQ,0)}</span><span class="r">a year</span></div><div><span class="l">Share of budget</span><span class="n">${(c[1]/FUND*100).toFixed(1)}%</span><span class="r">of ${m(FUND,0)}</span></div></div>`:"";
+  const tl=[...p.timeline,{date:TODAY,type:"today",event:"Today"}].sort((a,b)=>a.date.localeCompare(b.date));
+  document.getElementById("pdetail").innerHTML=`
+    <div style="display:grid;gap:6px"><span class="muted small">${p.actor}${p.party?", "+p.party:""}, ${p.area}</span><h3 style="font-size:20px;letter-spacing:-.02em;line-height:1.3">“${p.text}”</h3>${p.test?`<span class="testmark">Test card with an invented actor</span>`:""}</div>
+    ${ladder}${trio}
+    ${p.funded_by!==undefined?`<div style="display:grid;gap:2px"><span class="muted small">Paid for by</span><span>${p.funded_by||"Not stated"}</span></div>`:""}
+    <ol class="timeline">${tl.map(e=>`<li class="t-${e.type}"><span class="d">${e.type==="today"?"Today":new Date(e.date).toLocaleDateString("en-GB",{month:"short",year:"numeric"})}</span><span class="dot"></span><span>${e.type==="today"?"":e.event}</span></li>`).join("")}</ol>
+    <div class="actions">${p.id==="hf-free-home-care"?`<button type="button" class="btn" id="tryit">${st.t.free_home_care?"See next year without it":"Put it back"}</button>`:""}<button type="button" class="btn secondary">Follow</button><button type="button" class="linkbtn">Add evidence</button></div>
+    ${p.sources.length?`<div style="display:grid;gap:4px" class="small"><span class="muted">Sources</span>${p.sources.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>`).join("")}</div>`:""}`;
+  const t=document.getElementById("tryit"); if(t) t.addEventListener("click",()=>{st.t.free_home_care=!st.t.free_home_care;document.getElementById("tg-free_home_care").checked=st.t.free_home_care;renderBalance();renderPromises();location.hash="#balance";});
+}
+
+/* ---------- payments ---------- */
+let shown=12;
+const svcs=[...new Set(PAY.payments.map(p=>p.service))].sort();
+document.getElementById("svc").innerHTML=`<option value="">All services</option>`+svcs.map(s=>`<option>${s}</option>`).join("");
+function renderPay(){
+  const q=document.getElementById("q").value.trim().toLowerCase(), s=document.getElementById("svc").value;
+  const rows=PAY.payments.filter(p=>(!q||p.supplier.toLowerCase().includes(q))&&(!s||p.service===s));
+  const tot=rows.reduce((a,p)=>a+p.amount,0);
+  document.getElementById("pay-sum").innerHTML=`<span><b>${rows.length}</b> payments</span><span><b>${gbp0(tot)}</b> total</span><span>July to September 2026</span>`;
+  document.getElementById("pay").innerHTML=`<thead><tr><th>Date</th><th>Supplier</th><th>Service</th><th class="n">Amount</th></tr></thead><tbody>${rows.slice(0,shown).map(p=>`<tr><td>${dt(p.date)}</td><td>${p.supplier}</td><td>${p.service}</td><td class="n">${gbp(p.amount)}</td></tr>`).join("")}</tbody>`;
+  document.getElementById("more").hidden=rows.length<=shown;
+}
+document.getElementById("q").addEventListener("input",()=>{shown=12;renderPay();});
+document.getElementById("svc").addEventListener("change",()=>{shown=12;renderPay();});
+document.getElementById("more").addEventListener("click",()=>{shown+=12;renderPay();});
+
+document.getElementById("sources").innerHTML=D.meta.sources.map(s=>`<li><a href="${s.url}" target="_blank" rel="noopener">${s.title}</a></li>`).join("");
+buildLevers(); renderBill(); renderFlow(); renderWF(); renderBalance(); renderPromises(); renderPay();
+</script>

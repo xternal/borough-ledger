@@ -1,0 +1,295 @@
+{
+ "meta": {
+  "note": "Invented payments for layout only. Supplier names are generic categories, not real companies. The real feed is the council's monthly 'spend over \u00a3500' file."
+ },
+ "payments": [
+  {
+   "date": "2026-09-28",
+   "supplier": "SEND school transport",
+   "service": "Children's services",
+   "amount": 38264.62
+  },
+  {
+   "date": "2026-09-26",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 7023.6
+  },
+  {
+   "date": "2026-09-22",
+   "supplier": "Legal services",
+   "service": "Running the council",
+   "amount": 28581.38
+  },
+  {
+   "date": "2026-09-21",
+   "supplier": "Temporary accommodation provider E",
+   "service": "Housing and homelessness",
+   "amount": 90428.12
+  },
+  {
+   "date": "2026-09-19",
+   "supplier": "CCTV maintenance",
+   "service": "Community safety",
+   "amount": 3530.17
+  },
+  {
+   "date": "2026-09-19",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 43283.55
+  },
+  {
+   "date": "2026-09-16",
+   "supplier": "Temporary accommodation provider C",
+   "service": "Housing and homelessness",
+   "amount": 57974.86
+  },
+  {
+   "date": "2026-09-14",
+   "supplier": "Home care agency C",
+   "service": "Adult social care",
+   "amount": 32806.38
+  },
+  {
+   "date": "2026-09-13",
+   "supplier": "IT software licences",
+   "service": "Running the council",
+   "amount": 88809.1
+  },
+  {
+   "date": "2026-09-10",
+   "supplier": "Residential care home E",
+   "service": "Adult social care",
+   "amount": 81207.79
+  },
+  {
+   "date": "2026-09-07",
+   "supplier": "SEND school transport",
+   "service": "Children's services",
+   "amount": 24563.16
+  },
+  {
+   "date": "2026-09-04",
+   "supplier": "Waste and street cleaning contract",
+   "service": "Streets, waste, parks and transport",
+   "amount": 197384.71
+  },
+  {
+   "date": "2026-09-04",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 56542.3
+  },
+  {
+   "date": "2026-09-03",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 29134.71
+  },
+  {
+   "date": "2026-08-28",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 17866.43
+  },
+  {
+   "date": "2026-08-27",
+   "supplier": "CCTV maintenance",
+   "service": "Community safety",
+   "amount": 4266.71
+  },
+  {
+   "date": "2026-08-23",
+   "supplier": "CCTV maintenance",
+   "service": "Community safety",
+   "amount": 12506.95
+  },
+  {
+   "date": "2026-08-23",
+   "supplier": "IT software licences",
+   "service": "Running the council",
+   "amount": 78030.63
+  },
+  {
+   "date": "2026-08-21",
+   "supplier": "SEND school transport",
+   "service": "Children's services",
+   "amount": 38071.02
+  },
+  {
+   "date": "2026-08-20",
+   "supplier": "Residential care home E",
+   "service": "Adult social care",
+   "amount": 65625.15
+  },
+  {
+   "date": "2026-08-19",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 23609.99
+  },
+  {
+   "date": "2026-08-13",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 16684.29
+  },
+  {
+   "date": "2026-08-13",
+   "supplier": "Legal services",
+   "service": "Running the council",
+   "amount": 12682.8
+  },
+  {
+   "date": "2026-08-12",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 89906.47
+  },
+  {
+   "date": "2026-08-12",
+   "supplier": "IT software licences",
+   "service": "Running the council",
+   "amount": 15072.44
+  },
+  {
+   "date": "2026-08-11",
+   "supplier": "Legal services",
+   "service": "Running the council",
+   "amount": 17831.24
+  },
+  {
+   "date": "2026-08-06",
+   "supplier": "Temporary accommodation provider A",
+   "service": "Housing and homelessness",
+   "amount": 93666.08
+  },
+  {
+   "date": "2026-08-05",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 13548.39
+  },
+  {
+   "date": "2026-08-03",
+   "supplier": "Waste and street cleaning contract",
+   "service": "Streets, waste, parks and transport",
+   "amount": 200627.34
+  },
+  {
+   "date": "2026-08-02",
+   "supplier": "Home care agency E",
+   "service": "Adult social care",
+   "amount": 10898.5
+  },
+  {
+   "date": "2026-08-02",
+   "supplier": "Waste and street cleaning contract",
+   "service": "Streets, waste, parks and transport",
+   "amount": 318504.71
+  },
+  {
+   "date": "2026-08-02",
+   "supplier": "Residential care home A",
+   "service": "Adult social care",
+   "amount": 131458.59
+  },
+  {
+   "date": "2026-08-02",
+   "supplier": "Temporary accommodation provider B",
+   "service": "Housing and homelessness",
+   "amount": 49892.49
+  },
+  {
+   "date": "2026-08-01",
+   "supplier": "IT software licences",
+   "service": "Running the council",
+   "amount": 80059.55
+  },
+  {
+   "date": "2026-08-01",
+   "supplier": "Energy supply",
+   "service": "Running the council",
+   "amount": 22764.0
+  },
+  {
+   "date": "2026-07-27",
+   "supplier": "Legal services",
+   "service": "Running the council",
+   "amount": 9418.42
+  },
+  {
+   "date": "2026-07-25",
+   "supplier": "Temporary accommodation provider C",
+   "service": "Housing and homelessness",
+   "amount": 52538.16
+  },
+  {
+   "date": "2026-07-23",
+   "supplier": "Children's residential placement B",
+   "service": "Children's services",
+   "amount": 41084.79
+  },
+  {
+   "date": "2026-07-20",
+   "supplier": "Parks grounds maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 7516.18
+  },
+  {
+   "date": "2026-07-20",
+   "supplier": "Energy supply",
+   "service": "Running the council",
+   "amount": 11785.06
+  },
+  {
+   "date": "2026-07-18",
+   "supplier": "CCTV maintenance",
+   "service": "Community safety",
+   "amount": 3630.19
+  },
+  {
+   "date": "2026-07-12",
+   "supplier": "Energy supply",
+   "service": "Running the council",
+   "amount": 20588.55
+  },
+  {
+   "date": "2026-07-10",
+   "supplier": "Home care agency D",
+   "service": "Adult social care",
+   "amount": 8515.46
+  },
+  {
+   "date": "2026-07-09",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 14970.63
+  },
+  {
+   "date": "2026-07-05",
+   "supplier": "Home care agency B",
+   "service": "Adult social care",
+   "amount": 14149.73
+  },
+  {
+   "date": "2026-07-04",
+   "supplier": "Energy supply",
+   "service": "Running the council",
+   "amount": 35491.44
+  },
+  {
+   "date": "2026-07-02",
+   "supplier": "Highways maintenance",
+   "service": "Streets, waste, parks and transport",
+   "amount": 106071.1
+  },
+  {
+   "date": "2026-07-01",
+   "supplier": "SEND school transport",
+   "service": "Children's services",
+   "amount": 25226.91
+  }
+ ]
+}

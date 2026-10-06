@@ -1,0 +1,200 @@
+{
+ "meta": {
+  "note": "Only 'hf-free-home-care' is grounded in a real document. All other cards are invented test data with placeholder actors (Party A / Party B) and must never be published."
+ },
+ "promises": [
+  {
+   "id": "hf-free-home-care",
+   "actor": "H&F administration",
+   "party": "Labour",
+   "made_on": "2014-05-22",
+   "text": "Free home care for older and disabled residents.",
+   "area": "Adult social care",
+   "cost_m": [
+    2.0,
+    2.5,
+    3.0
+   ],
+   "cost_quality": "test",
+   "status": "delivering",
+   "deadline": null,
+   "funded_by": "General fund; maintained in the 2026/27 budget",
+   "sources": [
+    {
+     "title": "H&F Budget 2026/27 committee paper",
+     "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf"
+    }
+   ],
+   "timeline": [
+    {
+     "date": "2014-05-22",
+     "type": "promised",
+     "event": "Pledged at the 2014 local election (date to verify)"
+    },
+    {
+     "date": "2015-04-01",
+     "type": "delivered",
+     "event": "Charges for home care scrapped (date to verify)"
+    },
+    {
+     "date": "2026-02-25",
+     "type": "funded",
+     "event": "Kept in the 2026/27 budget"
+    }
+   ],
+   "editor_check_required": true
+  },
+  {
+   "id": "test-a-trees",
+   "actor": "Party A",
+   "party": null,
+   "made_on": "2026-04-10",
+   "text": "Plant 2,000 street trees by 2030.",
+   "area": "Streets and parks",
+   "cost_m": [
+    0.3,
+    0.4,
+    0.5
+   ],
+   "cost_quality": "test",
+   "status": "in_plan",
+   "deadline": "2030-05-01",
+   "funded_by": "Capital programme and grants",
+   "sources": [],
+   "timeline": [
+    {
+     "date": "2026-04-10",
+     "type": "promised",
+     "event": "Manifesto"
+    },
+    {
+     "date": "2026-07-14",
+     "type": "in_plan",
+     "event": "Tree strategy approved by cabinet"
+    },
+    {
+     "date": "2030-05-01",
+     "type": "deadline",
+     "event": "Deadline"
+    }
+   ],
+   "test": true
+  },
+  {
+   "id": "test-a-homes",
+   "actor": "Party A",
+   "party": null,
+   "made_on": "2026-04-10",
+   "text": "Start 1,000 genuinely affordable homes this term.",
+   "area": "Housing",
+   "cost_m": null,
+   "cost_quality": null,
+   "status": "delivering",
+   "deadline": "2030-05-01",
+   "funded_by": "Housing revenue account and partners",
+   "sources": [],
+   "timeline": [
+    {
+     "date": "2026-04-10",
+     "type": "promised",
+     "event": "Manifesto"
+    },
+    {
+     "date": "2026-09-01",
+     "type": "delivering",
+     "event": "First 120 starts reported"
+    },
+    {
+     "date": "2030-05-01",
+     "type": "deadline",
+     "event": "Deadline"
+    }
+   ],
+   "test": true
+  },
+  {
+   "id": "test-b-ct-freeze",
+   "actor": "Party B",
+   "party": null,
+   "made_on": "2026-04-12",
+   "text": "Freeze the council's share of council tax for four years.",
+   "area": "Council tax",
+   "cost_m": [
+    3.6,
+    3.8,
+    4.0
+   ],
+   "cost_quality": "test",
+   "status": "not_in_power",
+   "deadline": null,
+   "funded_by": "Not stated",
+   "sources": [],
+   "timeline": [
+    {
+     "date": "2026-04-12",
+     "type": "promised",
+     "event": "Opposition manifesto. Cost shown is year one: the income a 4.99% rise on the council's share raises."
+    }
+   ],
+   "test": true
+  },
+  {
+   "id": "test-a-potholes",
+   "actor": "Party A",
+   "party": null,
+   "made_on": "2026-04-10",
+   "text": "Fix every reported pothole within 48 hours.",
+   "area": "Streets and parks",
+   "cost_m": [
+    0.6,
+    0.8,
+    1.0
+   ],
+   "cost_quality": "test",
+   "status": "quietly_dropped",
+   "deadline": "2026-09-30",
+   "funded_by": "Not stated",
+   "sources": [],
+   "timeline": [
+    {
+     "date": "2026-04-10",
+     "type": "promised",
+     "event": "Leaflet"
+    },
+    {
+     "date": "2026-09-30",
+     "type": "deadline",
+     "event": "Self-imposed deadline"
+    },
+    {
+     "date": "2026-10-01",
+     "type": "deadline_missed",
+     "event": "Deadline passed with no published performance data"
+    }
+   ],
+   "test": true
+  },
+  {
+   "id": "test-b-slogan",
+   "actor": "Party B",
+   "party": null,
+   "made_on": "2026-04-20",
+   "text": "We'll put residents first.",
+   "area": "General",
+   "cost_m": null,
+   "cost_quality": null,
+   "status": "unscoreable",
+   "deadline": null,
+   "funded_by": null,
+   "sources": [],
+   "timeline": [
+    {
+     "date": "2026-04-20",
+     "type": "promised",
+     "event": "Hustings. No who, how much, when or from where."
+    }
+   ],
+   "test": true
+  }
+ ]
+}

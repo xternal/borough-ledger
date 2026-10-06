@@ -1,0 +1,323 @@
+{
+ "meta": {
+  "council": "London Borough of Hammersmith & Fulham",
+  "year": "2026-27",
+  "note": "Prototype data. Items marked 'sourced' come from the cited document. Everything marked 'test' is invented to make the layout realistic and MUST be replaced by the ETL before anything is published.",
+  "sources": [
+   {
+    "id": "band_d",
+    "title": "Council tax bands 2026/27 for H&F (councildata.co.uk)",
+    "url": "https://councildata.co.uk/council-tax/london-borough-of-hammersmith-and-fulham/"
+   },
+   {
+    "id": "budget_paper",
+    "title": "H&F Budget 2026/27 committee paper",
+    "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf"
+   },
+   {
+    "id": "budget_report",
+    "title": "H&F Revenue Budget and Council Tax Levels 2026/27",
+    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf"
+   },
+   {
+    "id": "election",
+    "title": "2026 Hammersmith and Fulham London Borough Council election",
+    "url": "https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election"
+   }
+  ]
+ },
+ "bill": {
+  "band_d_total": 1519.51,
+  "band_d_council": 1009.0,
+  "band_d_gla": 510.51,
+  "band_d_total_prev": 1451.44,
+  "council_rise_pct": 4.99,
+  "council_rise_split": "2.99% core + 2% adult social care precept",
+  "quality": "sourced",
+  "source_id": "band_d",
+  "band_ratios": {
+   "A": 0.6666666666666666,
+   "B": 0.7777777777777778,
+   "C": 0.8888888888888888,
+   "D": 1,
+   "E": 1.2222222222222223,
+   "F": 1.4444444444444444,
+   "G": 1.6666666666666667,
+   "H": 2.0
+  },
+  "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services"
+ },
+ "tax_base": {
+  "band_d_equivalents": 82000,
+  "collection_rate": 0.975,
+  "quality": "test"
+ },
+ "funding": [
+  {
+   "id": "council_tax",
+   "label": "Council tax",
+   "m": 80.7,
+   "quality": "test",
+   "note": "tax base × Band D × collection; the +£7.7m year-on-year rise is from the budget paper"
+  },
+  {
+   "id": "business_rates",
+   "label": "Business rates kept locally",
+   "m": 58.0,
+   "quality": "test"
+  },
+  {
+   "id": "core_grants",
+   "label": "Core government grants",
+   "m": 61.3,
+   "quality": "test"
+  },
+  {
+   "id": "social_care_grants",
+   "label": "Social care grants",
+   "m": 15.0,
+   "quality": "test"
+  },
+  {
+   "id": "transition",
+   "label": "Transitional relief",
+   "m": 6.0,
+   "quality": "sourced",
+   "source_id": "budget_paper"
+  },
+  {
+   "id": "reserves",
+   "label": "Drawn from reserves",
+   "m": 3.0,
+   "quality": "test",
+   "gap": true
+  }
+ ],
+ "services": [
+  {
+   "id": "adult_care",
+   "label": "Adult social care",
+   "m": 72.0,
+   "quality": "test",
+   "desc": "Home care, care homes, support for disabled adults"
+  },
+  {
+   "id": "children",
+   "label": "Children's services",
+   "m": 50.0,
+   "quality": "test",
+   "desc": "Children in care, SEND transport, early help"
+  },
+  {
+   "id": "place",
+   "label": "Streets, waste, parks and transport",
+   "m": 41.3,
+   "quality": "sourced",
+   "source_id": "budget_paper",
+   "desc": "Net budget of the Economy, Arts, Sports and Public Realm committee"
+  },
+  {
+   "id": "corporate",
+   "label": "Running the council",
+   "m": 22.0,
+   "quality": "test",
+   "desc": "Finance, IT, legal, customer services"
+  },
+  {
+   "id": "housing",
+   "label": "Housing and homelessness",
+   "m": 17.0,
+   "quality": "test",
+   "desc": "Temporary accommodation, housing advice (council homes are a separate ring-fenced account)"
+  },
+  {
+   "id": "levies",
+   "label": "Levies and debt costs",
+   "m": 12.7,
+   "quality": "test",
+   "desc": "Waste disposal authority, London-wide levies, capital financing"
+  },
+  {
+   "id": "safety",
+   "label": "Community safety",
+   "m": 9.0,
+   "quality": "test",
+   "desc": "Law enforcement team, CCTV"
+  }
+ ],
+ "gap_2026_27": [
+  {
+   "label": "Pay and prices",
+   "m": 7.5,
+   "kind": "pressure"
+  },
+  {
+   "label": "More older and disabled residents needing care",
+   "m": 4.0,
+   "kind": "pressure"
+  },
+  {
+   "label": "Children's placements",
+   "m": 2.5,
+   "kind": "pressure"
+  },
+  {
+   "label": "Temporary accommodation",
+   "m": 3.5,
+   "kind": "pressure"
+  },
+  {
+   "label": "New investments",
+   "m": 5.0,
+   "kind": "pressure"
+  },
+  {
+   "label": "Other pressures",
+   "m": 1.5,
+   "kind": "pressure"
+  },
+  {
+   "label": "Change in government funding",
+   "m": -3.3,
+   "kind": "funding"
+  },
+  {
+   "label": "Gap to close",
+   "kind": "subtotal"
+  },
+  {
+   "label": "Council tax rise",
+   "m": -7.7,
+   "kind": "close",
+   "quality": "sourced",
+   "source_id": "budget_paper"
+  },
+  {
+   "label": "Savings",
+   "m": -10.0,
+   "kind": "close_saving"
+  },
+  {
+   "label": "Reserves, one-off",
+   "m": -3.0,
+   "kind": "close_oneoff"
+  },
+  {
+   "label": "Balanced",
+   "kind": "total"
+  }
+ ],
+ "gap_quality": "test except the council tax line",
+ "next_year": {
+  "year": "2027-28",
+  "gap_m": 15.0,
+  "quality": "test",
+  "reserves": {
+   "general_m": 45.0,
+   "minimum_safe_m": 15.0
+  },
+  "levers": [
+   {
+    "id": "ct_rise",
+    "label": "Council tax rise",
+    "unit": "%",
+    "base": 4.99,
+    "min": 0,
+    "max": 8,
+    "step": 0.25,
+    "m_per_unit": 0.807,
+    "limit": 4.99,
+    "limit_note": "Above 4.99% needs a local referendum",
+    "controlled_by": "council"
+   },
+   {
+    "id": "savings",
+    "label": "Savings programme",
+    "unit": "£m",
+    "base": 0,
+    "min": 0,
+    "max": 15,
+    "step": 0.5,
+    "m_per_unit": 1,
+    "controlled_by": "council"
+   },
+   {
+    "id": "reserves",
+    "label": "Use reserves",
+    "unit": "£m",
+    "base": 0,
+    "min": 0,
+    "max": 15,
+    "step": 0.5,
+    "m_per_unit": 1,
+    "controlled_by": "council",
+    "one_off": true
+   },
+   {
+    "id": "fees",
+    "label": "Parking and fees",
+    "unit": "%",
+    "base": 0,
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "m_per_unit": 0.4,
+    "controlled_by": "council"
+   },
+   {
+    "id": "settlement",
+    "label": "Government settlement",
+    "unit": "%",
+    "base": 0,
+    "min": -5,
+    "max": 5,
+    "step": 0.5,
+    "m_per_unit": 0.763,
+    "controlled_by": "government"
+   }
+  ],
+  "toggles": [
+   {
+    "id": "free_home_care",
+    "label": "Keep free home care for older residents",
+    "on": true,
+    "cost_m": 2.5,
+    "quality": "test"
+   },
+   {
+    "id": "weekly_bins",
+    "label": "Keep weekly rubbish collections",
+    "on": true,
+    "cost_m": 1.5,
+    "quality": "test"
+   },
+   {
+    "id": "library_hours",
+    "label": "Keep library opening hours",
+    "on": true,
+    "cost_m": 0.6,
+    "quality": "test"
+   },
+   {
+    "id": "extra_officers",
+    "label": "Add 20 law enforcement officers",
+    "on": false,
+    "cost_m": 1.0,
+    "quality": "test"
+   }
+  ]
+ },
+ "politics": {
+  "control": "Labour",
+  "seats": {
+   "Labour": 38,
+   "Conservative": 12
+  },
+  "total_seats": 50,
+  "leader": "Stephen Cowan",
+  "election": "2026-05-07",
+  "next_election": "2030-05",
+  "quality": "sourced",
+  "source_id": "election"
+ }
+}
