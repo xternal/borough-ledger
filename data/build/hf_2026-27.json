@@ -121,6 +121,33 @@
     "sha256": "d042b3096e3c6d3a2b94d2f62afac34b5b706aaacb5d96bc45dc52be89498f6a"
    },
    {
+    "id": "ra_2025-26",
+    "title": "Local authority revenue expenditure and financing England: 2025 to 2026 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2025-to-2026-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/68527310cf42a58f50cac9df/RA_2025-26_data_Part_1.ods",
+    "sha256": "b6176cf91e0235b29b5cceffd0d9ccfaac8f75e4a986cd236d9dee80dc77c1f9"
+   },
+   {
+    "id": "ra_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6762a0a83229e84d9bbde757/RA_2024-25_data_Part_1.ods",
+    "sha256": "19231e891ec06f6aa5c8fed7794b247d5e5a3f59aca6ba59d7ec4efc7f41e8f1"
+   },
+   {
+    "id": "ra_2023-24",
+    "title": "Local authority revenue expenditure and financing England: 2023 to 2024 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2023-to-2024-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/649304495f7bb7000c7faefb/RA_2023-24_data_Part_1.ods",
+    "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Ledger method notes (docs/MODEL.md)",
     "publisher": "Borough Ledger",
@@ -248,6 +275,84 @@
      "ct_bands_2026-27",
      "ctr_2026-27"
     ]
+   }
+  ],
+  "budget": [
+   {
+    "year": "2023-24",
+    "revenue_expenditure_m": 317.053,
+    "council_tax_requirement_m": 73.316,
+    "services_m": {
+     "adult_care": 70.952,
+     "children": 50.013,
+     "debt_levies": 3.804,
+     "housing": 12.317,
+     "parks_culture": 5.045,
+     "planning": 4.581,
+     "public_health": 24.017,
+     "running": 36.188,
+     "safety_regulation": 7.308,
+     "schools": 107.988,
+     "streets": 0.034
+    },
+    "source_id": "ra_2023-24"
+   },
+   {
+    "year": "2024-25",
+    "revenue_expenditure_m": 331.147,
+    "council_tax_requirement_m": 78.825,
+    "services_m": {
+     "adult_care": 79.689,
+     "children": 55.532,
+     "debt_levies": 5.005,
+     "housing": 11.863,
+     "parks_culture": 5.413,
+     "planning": 4.411,
+     "public_health": 24.461,
+     "running": 24.716,
+     "safety_regulation": 9.132,
+     "schools": 111.259,
+     "streets": 4.877
+    },
+    "source_id": "ra_2024-25"
+   },
+   {
+    "year": "2025-26",
+    "revenue_expenditure_m": 378.33,
+    "council_tax_requirement_m": 84.864,
+    "services_m": {
+     "adult_care": 84.682,
+     "children": 54.64,
+     "debt_levies": 6.943,
+     "housing": 44.388,
+     "parks_culture": 4.752,
+     "planning": 2.712,
+     "public_health": 26.026,
+     "running": 25.591,
+     "safety_regulation": 12.038,
+     "schools": 119.098,
+     "streets": 6.364
+    },
+    "source_id": "ra_2025-26"
+   },
+   {
+    "year": "2026-27",
+    "revenue_expenditure_m": 398.009,
+    "council_tax_requirement_m": 92.552,
+    "services_m": {
+     "adult_care": 84.674,
+     "children": 54.697,
+     "debt_levies": 9.42,
+     "housing": 43.498,
+     "parks_culture": 4.755,
+     "planning": 7.021,
+     "public_health": 28.139,
+     "running": 23.224,
+     "safety_regulation": 12.363,
+     "schools": 121.797,
+     "streets": 8.421
+    },
+    "source_id": "ra_2026-27"
    }
   ],
   "quality": "sourced"

@@ -41,7 +41,7 @@ class LaRow:
 def as_number(v: object) -> float:
     if isinstance(v, float):
         return v
-    if v is None or v in ("[x]", "[z]", "[c]", "-"):
+    if v is None or v in ("[x]", "[z]", "[c]", "-", "Category discontinued"):
         return 0.0
     raise ValueError(f"not a number: {v!r}")
 

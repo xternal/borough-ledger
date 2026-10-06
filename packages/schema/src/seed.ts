@@ -185,7 +185,20 @@ export const CouncilYear = z.object({
     setting_base: z.number().positive(),
     ...provenance,
   }),
-  history: z.object({ council_tax: z.array(CouncilTaxYear).min(1), quality: Quality }),
+  history: z.object({
+    council_tax: z.array(CouncilTaxYear).min(1),
+    /** Budgeted spending by service group from each year's RA return, £m. */
+    budget: z.array(
+      z.object({
+        year: finYear,
+        revenue_expenditure_m: z.number(),
+        council_tax_requirement_m: z.number(),
+        services_m: z.record(z.string(), z.number()),
+        source_id: z.string(),
+      }),
+    ),
+    quality: Quality,
+  }),
   funding: z.array(FundingLine).min(1),
   services: z.array(ServiceLine).min(1),
   gap_2026_27: z.array(GapLine).min(1),

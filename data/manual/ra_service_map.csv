@@ -49,6 +49,8 @@ ra_line,asset_id,section,label,role,group
 354,ascact,Adult Social Care,Care assessment and safeguarding,line,adult_care
 355,ascinf,Adult Social Care,Information and early intervention (non-attributable costs),line,adult_care
 356,ascdlv,Adult Social Care,"Commissioning, strategy and admin support",line,adult_care
+357,asccovdis,Adult Social Care,COVID-19 discharge costs (to 2023-24),line,adult_care
+358,ascchomes,Adult Social Care,Disbursement payments to care providers (to 2024-25),line,adult_care
 360,asctot,Adult Social Care,TOTAL ADULT SOCIAL CARE,total,
 361,phsxlsti,Public Health,Sexual health services - STI testing and treatment (prescribed functions),line,public_health
 362,phsxlcnt,Public Health,Sexual health services - Contraception (prescribed functions),line,public_health
@@ -62,7 +64,9 @@ ra_line,asset_id,section,label,role,group
 373,phphyadl,Public Health,Physical activity - adults,line,public_health
 374,phphychl,Public Health,Physical activity - children,line,public_health
 376,phsmdrgalctrt,Public Health,Substance misuse - Adult drug and alcohol treatment and recovery services and commissioning,line,public_health
+377,phsbstrtalc,Public Health,Substance misuse - Treatment for alcohol misuse in adults (to 2025-26),line,public_health
 378,phsmprdrgalc,Public Health,Substance misuse - Adult drug and alcohol prevention,line,public_health
+379,phsbsprvalc,Public Health,Substance misuse - Preventing and reducing harm from alcohol misuse in adults (to 2025-26),line,public_health
 380,phsbsspc,Public Health,Substance misuse - Children and young people specialist substance use services and prevention,line,public_health
 381,phsmkstp,Public Health,Smoking and tobacco - Stop smoking services and interventions,line,public_health
 382,phsmkcnt,Public Health,Smoking and tobacco - Wider tobacco control,line,public_health
@@ -73,6 +77,8 @@ ra_line,asset_id,section,label,role,group
 387,phmnt,Public Health,Public mental health,line,public_health
 389,phmsc,Public Health,Miscellaneous public health services - other,line,public_health
 390,phtot,Public Health,TOTAL PUBLIC HEALTH,total,
+391,phttt,Public Health,"Test, track & trace and outbreak planning (to 2024-25)",line,public_health
+392,phcov,Public Health,Other public health spend relating to COVID-19 (to 2024-25),line,public_health
 409,housgfcfstr,Housing Services (General Fund Revenue Account [GFRA] only),"Housing strategy, advice, advances, enabling, renewals and licensing",line,housing
 440,housgfcfhml,Housing Services (General Fund Revenue Account [GFRA] only),Homelessness,line,housing
 456,housgfcfbnf,Housing Services (General Fund Revenue Account [GFRA] only),Housing benefits: rent allowances and rent rebates - discretionary payments,line,housing

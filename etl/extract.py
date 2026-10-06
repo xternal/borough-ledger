@@ -86,10 +86,12 @@ def read_csv(name: str) -> List[Dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def ra_services(ra: LaRow) -> Tuple[Dict[str, float], Dict[str, List[Tuple[str, str, float]]]]:
+def ra_services(ra: LaRow, strict_lines: bool = False) -> Tuple[Dict[str, float], Dict[str, List[Tuple[str, str, float]]]]:
     """Net current expenditure grouped into resident service groups, £000.
 
     Returns (group totals, group → [(line, label, value)]) and checks every RA section against its own TOTAL line.
+    With strict_lines=False (earlier years, whose forms had slightly different lines) a mapped line that is
+    absent counts as zero; the section and grand-total checks still catch any line the mapping misses.
     """
     mapping = read_csv("ra_service_map.csv")
     by_line = {c.line: c for c in ra.columns}
@@ -100,6 +102,8 @@ def ra_services(ra: LaRow) -> Tuple[Dict[str, float], Dict[str, List[Tuple[str, 
         if m["role"] != "line":
             continue
         c = by_line.get(m["ra_line"])
+        if c is None and not strict_lines:
+            continue
         check(c is not None, f"RA line {m['ra_line']} ({m['label']}) missing from the return")
         v = as_number(ra.values.get(c.index))  # type: ignore[union-attr]
         groups[m["group"]] = groups.get(m["group"], 0.0) + v
@@ -110,7 +114,7 @@ def ra_services(ra: LaRow) -> Tuple[Dict[str, float], Dict[str, List[Tuple[str, 
         if m["role"] == "total" and m["section"] in section_sum and m["ra_line"] not in ("799", "849"):
             total = ra.by_line(m["ra_line"])
             check(close(section_sum[m["section"]], total, 0.5), f"RA {m['label']}: lines sum to {section_sum[m['section']]}, return says {total}")
-    service_lines = sum(v for m in mapping if m["role"] == "line" and float(m["ra_line"]) < 799
+    service_lines = sum(v for m in mapping if m["role"] == "line" and float(m["ra_line"]) < 799 and m["ra_line"] in by_line
                         for v in [as_number(ra.values.get(by_line[m["ra_line"]].index))])
     check(close(service_lines, ra.by_line("799"), 0.5), f"RA service lines sum to {service_lines}, TOTAL SERVICE EXPENDITURE is {ra.by_line('799')}")
     revenue = sum(groups.values())

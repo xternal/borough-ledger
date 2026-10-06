@@ -45,7 +45,12 @@
    "file": "RA_2026-27_data_Part_1.ods",
    "sha256": "3ea4d4c2218bc9f49bbf59a6fc82481acb6a3494d5b0f4e114cdb945730653db",
    "published_on": "2026-06-11",
-   "licence": "OGL-UK-3.0"
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2026-27",
+    "year": "2026-27"
+   }
   },
   {
    "id": "ra_2026-27_part2",
@@ -182,6 +187,51 @@
     "sheet": "London",
     "year": "2022-23",
     "first_band_col": 4
+   }
+  },
+  {
+   "id": "ra_2025-26",
+   "title": "Local authority revenue expenditure and financing England: 2025 to 2026 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2025-to-2026-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/68527310cf42a58f50cac9df/RA_2025-26_data_Part_1.ods",
+   "file": "RA_2025-26_data_Part_1.ods",
+   "sha256": "b6176cf91e0235b29b5cceffd0d9ccfaac8f75e4a986cd236d9dee80dc77c1f9",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2025-26",
+    "year": "2025-26"
+   }
+  },
+  {
+   "id": "ra_2024-25",
+   "title": "Local authority revenue expenditure and financing England: 2024 to 2025 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6762a0a83229e84d9bbde757/RA_2024-25_data_Part_1.ods",
+   "file": "RA_2024-25_data_Part_1.ods",
+   "sha256": "19231e891ec06f6aa5c8fed7794b247d5e5a3f59aca6ba59d7ec4efc7f41e8f1",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2024-25",
+    "year": "2024-25"
+   }
+  },
+  {
+   "id": "ra_2023-24",
+   "title": "Local authority revenue expenditure and financing England: 2023 to 2024 budget, revenue account (RA) data by local authority",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2023-to-2024-budget-individual-local-authority-data",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/649304495f7bb7000c7faefb/RA_2023-24_data_Part_1.ods",
+   "file": "RA_2023-24_data_Part_1.ods",
+   "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "ra_history",
+    "sheet": "RA_LA_Data_2023-24",
+    "year": "2023-24"
    }
   }
  ]

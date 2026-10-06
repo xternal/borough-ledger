@@ -87,6 +87,21 @@ def build() -> Dict[str, Any]:
     band_d_total = bands[YEAR]["D"]
     band_d_gla = round(band_d_total - now["band_d_council"], 2)
 
+    # ---------------------------------------------------------- spending history (RA budgets), checked year by year
+    budget_history = []
+    for s in sorted((x for x in reg.values() if x.get("extract", {}).get("kind") == "ra_history"), key=lambda x: x["extract"]["year"]):
+        ex = s["extract"]
+        row = read_la_row(str(ROOT / "data/raw" / s["file"]), ex["sheet"], ons)
+        try:
+            groups_y, _ = ra_services(row, strict_lines=False)
+        except CheckFailed as e:
+            raise CheckFailed(f"{s['id']}: {e}")
+        groups_y.pop("housing_benefit", None)
+        budget_history.append({
+            "year": ex["year"], "revenue_expenditure_m": m(row.by_line("900")), "council_tax_requirement_m": m(row.by_line("990")),
+            "services_m": {k: m(v) for k, v in sorted(groups_y.items())}, "source_id": s["id"],
+        })
+
     # ---------------------------------------------------------- budget 2026/27 (RA and SG)
     ra = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27"]["file"]), "RA_LA_Data_2026-27", ons)
     ra2 = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27_part2"]["file"]), "RA_LA_Data_2026-27", ons)
@@ -221,6 +236,7 @@ def build() -> Dict[str, Any]:
                 }
                 for y in years
             ],
+            "budget": budget_history,
             "quality": "sourced",
         },
         "funding": funding_lines,
