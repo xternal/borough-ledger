@@ -25,6 +25,7 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
   add("tax_base", c.tax_base);
   c.funding.forEach((f) => add(`funding.${f.id}`, f));
   c.services.forEach((s) => add(`services.${s.id}`, s));
+  c.savings.forEach((s) => add(`savings.${s.id}`, s));
   c.gap_2026_27.forEach((g, i) => {
     if ("quality" in g) add(`gap_2026_27[${i}] ${g.label}`, g);
   });
@@ -83,6 +84,8 @@ export function parseDataset(raw: { council: unknown; promises: unknown; payment
   for (const y of [council.meta.year, council.next_year.year])
     if (!rules.referendum_limit_pct[y]) problems.push(`rules: no referendum limit for ${y}`);
   const serviceIds = new Set(council.services.map((s) => s.id));
+  for (const s of council.savings)
+    if (s.service_group && !serviceIds.has(s.service_group)) problems.push(`saving ${s.id}: unknown service group ${s.service_group}`);
   for (const f of council.funding)
     if (f.ring_fenced_to && !serviceIds.has(f.ring_fenced_to)) problems.push(`funding ${f.id}: ring-fenced to unknown service ${f.ring_fenced_to}`);
   if (!rules.instalments.options.includes(rules.instalments.default)) problems.push("rules: default instalments not among options");

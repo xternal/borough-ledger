@@ -51,7 +51,13 @@ describe("seed parses and cross-checks", () => {
     for (const [band, [num, den]] of Object.entries(DATA.rules.band_ratios.value)) expect(ratios[band]).toBeCloseTo(num / den, 12);
     // The prototype shows the highest rise allowed without a referendum: just under the threshold.
     const ct = seedRaw.next_year.levers.find((l) => l.id === "ct_rise");
-    expect(ct?.limit).toBeCloseTo((DATA.rules.referendum_limit_pct[DATA.council.next_year.year]?.threshold_pct ?? 0) - 0.01, 9);
+    expect(ct?.limit).toBeCloseTo((DATA.rules.referendum_limit_pct[DATA.council.meta.year]?.threshold_pct ?? 0) - 0.01, 9);
+  });
+
+  it("checks every saving against its directorate total and flags one-off savings", () => {
+    const service = DATA.council.savings.filter((s) => s.kind === "service").reduce((a, s) => a + s.m, 0);
+    expect(service).toBeCloseTo(9.524, 9); // Appendix C; Table 2 rounds it to £9.5m
+    expect(DATA.council.savings.filter((s) => s.one_off).map((s) => s.id).sort()).toEqual(["asc-stretch", "ct-arrears-release", "nndr-bad-debt-release"]);
   });
 
   it("rejects a ring-fenced grant pointing at a service that does not exist", () => {

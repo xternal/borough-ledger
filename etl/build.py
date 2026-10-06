@@ -165,11 +165,35 @@ def build() -> Dict[str, Any]:
 
     # ---------------------------------------------------------- carry over from the seed what still needs the budget report
     ny = seed["next_year"]
+    unalloc_end = ra2.by_asset("resunall_end")
+    mny = manual_next_year()
+    def cite(key: str) -> Dict[str, str]:
+        r = mny[key]
+        check(r.get("source_id") in reg, f"next_year_2027-28.csv {key}: unknown source {r.get('source_id')}")
+        return {"source_id": r["source_id"], "method_note": f"{reg[r['source_id']]['title'].split(' (')[0]}, PDF page {r['page']}. {r['note']}".strip()}
+
+    gap_src: Dict[str, Any] = (
+        {"gap_m": float(mny["gap_m"]["value"]), "quality": "sourced", **cite("gap_m")}
+        if "gap_m" in mny else {"gap_m": ny["gap_m"], "quality": ny["quality"], "source_id": ny["source_id"], "todo": ny["todo"]}
+    )
+    minimum = (
+        {"m": float(mny["minimum_safe_m"]["value"]), "quality": "sourced", **cite("minimum_safe_m")}
+        if "minimum_safe_m" in mny else
+        {"m": ny["reserves"]["minimum_safe_m"], "quality": "test", "source_id": "prototype_test",
+         "todo": "TODO(source): the safe minimum set by the finance director in the budget report"}
+    )
     rsg_br = fund.get("rsg", 0.0) + fund.get("business_rates", 0.0)
     levers = []
     for lv in ny["levers"]:
         lv = {k: v for k, v in lv.items() if k not in ("limit", "limit_note")}  # the threshold lives in data/config/rules.json
-        if lv["id"] == "ct_rise":
+        if lv["id"] == "ct_rise" and "ct_assumed_pct" in mny and "council_tax_m" in mny:
+            assumed = float(mny["ct_assumed_pct"]["value"])
+            base = float(mny["council_tax_m"]["value"]) / (1 + assumed / 100)
+            lv.update(m_per_unit=round(base / 100, 4), assumed=assumed, quality="approx", source_id=mny["council_tax_m"]["source_id"],
+                      method_note=f"1% of 2027/28 council tax before the rise: £{mny['council_tax_m']['value']}m ÷ (1 + {assumed}%). "
+                                  f"The council's forecast already assumes a {assumed}% rise, so only the difference from it closes or widens the gap.")
+            lv.pop("todo", None)
+        elif lv["id"] == "ct_rise":
             lv.update(m_per_unit=round(now["ctr"] / 1e6 / 100, 4), quality="approx", source_id="ctr_2026-27",
                       method_note="1% of the 2026/27 council tax requirement. Assumes the tax base stays at its 2026/27 level.")
             lv.pop("todo", None)
@@ -180,20 +204,10 @@ def build() -> Dict[str, Any]:
         elif lv["id"] in ("savings", "reserves"):
             lv.update(quality="modelled", source_id=METHOD["id"], method_note="£1m chosen closes £1m of the gap, by definition.")
             lv.pop("todo", None)
+            if lv["id"] == "savings" and "planned_savings_m" in mny:
+                lv["label"] = "Further savings"
+                lv["method_note"] += f" On top of the £{mny['planned_savings_m']['value']}m of savings the forecast already includes."
         levers.append(lv)
-    unalloc_end = ra2.by_asset("resunall_end")
-    mny = manual_next_year()
-    gap_src: Dict[str, Any] = (
-        {"gap_m": float(mny["gap_m"]["value"]), "quality": "sourced", "source_id": "budget_report", "method_note": f"Budget report, PDF page {mny['gap_m']['page']}. {mny['gap_m']['note']}".strip()}
-        if "gap_m" in mny else {"gap_m": ny["gap_m"], "quality": ny["quality"], "source_id": ny["source_id"], "todo": ny["todo"]}
-    )
-    minimum = (
-        {"m": float(mny["minimum_safe_m"]["value"]), "quality": "sourced", "source_id": "budget_report",
-         "method_note": f"Budget report, PDF page {mny['minimum_safe_m']['page']}. {mny['minimum_safe_m']['note']}".strip()}
-        if "minimum_safe_m" in mny else
-        {"m": ny["reserves"]["minimum_safe_m"], "quality": "test", "source_id": "prototype_test",
-         "todo": "TODO(source): the safe minimum set by the finance director in the budget report"}
-    )
     next_year = {
         "year": ny["year"], **gap_src,
         "reserves": {
@@ -244,6 +258,7 @@ def build() -> Dict[str, Any]:
         "funding": funding_lines,
         "services": services,
         "gap_2026_27": manual_gap(seed["gap_2026_27"]),
+        "savings": manual_savings(),
         "next_year": next_year,
         "politics": seed["politics"],
     }
@@ -308,6 +323,38 @@ def manual_gap(seed_lines: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return out
 
 
+def manual_savings() -> List[Dict[str, Any]]:
+    """Named savings from data/manual/savings_2026-27.csv (budget report Appendix C), checked against each directorate's total."""
+    path = ROOT / "data" / "manual" / "savings_2026-27.csv"
+    if not path.exists():
+        return []
+    rows = read_csv(path.name)
+    totals = {r["directorate"]: r for r in rows if r["kind"] == "total"}
+    items = [r for r in rows if r["kind"] in ("service", "collection_fund")]
+    check(len(items) + len(totals) == len(rows), "savings_2026-27.csv: unknown kinds")
+    for d, t in totals.items():
+        for col in ("k_2026_27", "k_2027_28"):
+            got = sum(int(r[col]) for r in items if r["directorate"] == d)
+            check(got == int(t[col]), f"savings {d} {col}: lines add to {got}, Appendix C total is {t[col]}")
+    check(all(r["directorate"] in totals for r in items), "every savings directorate needs its total row")
+    groups = {g["id"] for g in read_csv("service_groups.csv")}
+    out = []
+    for r in items:
+        check(not r["service_group"] or r["service_group"] in groups, f"saving {r['id']}: unknown service group {r['service_group']}")
+        now_m, next_m = int(r["k_2026_27"]) / 1000, int(r["k_2027_28"]) / 1000
+        item: Dict[str, Any] = {
+            "id": r["id"], "label": r["label"], "directorate": r["directorate"], "service": r["service"], "kind": r["kind"],
+            # One-off: saves money this year and nothing next year (it comes back as a gap, invariant 4).
+            "m": round(-now_m, 3), "m_next_year": round(-next_m, 3), "one_off": now_m != 0 and next_m == 0,
+            "quality": "sourced", "source_id": "cabinet_pack_2026-02-09",
+            "method_note": f"Budget Appendix C, Cabinet pack PDF page {r['page']}",
+        }
+        if r["service_group"]:
+            item["service_group"] = r["service_group"]
+        out.append(item)
+    return out
+
+
 def manual_toggles(toggles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Toggle costs from data/manual/toggles_2027-28.csv where extracted or modelled from the budget report."""
     path = ROOT / "data" / "manual" / "toggles_2027-28.csv"
@@ -326,7 +373,7 @@ def manual_toggles(toggles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
 
 
 def manual_next_year() -> Dict[str, Dict[str, str]]:
-    """Next year's gap and the safe minimum for reserves from data/manual/next_year_2027-28.csv, if extracted."""
+    """Next year's figures from data/manual/next_year_2027-28.csv (key, value, source_id, page, note), if extracted."""
     path = ROOT / "data" / "manual" / "next_year_2027-28.csv"
     return {r["key"]: r for r in read_csv(path.name) if r["value"]} if path.exists() else {}
 

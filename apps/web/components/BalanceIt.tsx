@@ -50,13 +50,28 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
   function hint(l: Lever, v: number) {
     const raised = byLever(l.id, v * l.m_per_unit);
     switch (l.id) {
-      case "ct_rise":
+      case "ct_rise": {
+        const assumed = balance.ctAssumed;
+        const diff = byLever(l.id, (v - (assumed?.value ?? 0)) * l.m_per_unit);
         return (
           <>
             Band {band}: <Num f={nextCouncil} fmt="gbp2" /> next year, {v > 0 ? "+" : ""}
-            <Num f={derive(nextCouncil.value - nowCouncil.value, nextCouncil, nowCouncil)} fmt="gbp2" />. Raises <Num f={raised} fmt="m1" />.
+            <Num f={derive(nextCouncil.value - nowCouncil.value, nextCouncil, nowCouncil)} fmt="gbp2" />.{" "}
+            {!assumed ? (
+              <>
+                Raises <Num f={raised} fmt="m1" />.
+              </>
+            ) : Math.abs(diff.value) < 1e-9 ? (
+              "The forecast already assumes this rise."
+            ) : (
+              <>
+                Raises <Num f={{ ...diff, value: Math.abs(diff.value) }} fmt="m1" /> {diff.value > 0 ? "more" : "less"} than the forecast assumes.
+              </>
+            )}
+            {balance.referendumNote ? <span title={balance.referendumNote.text}> No referendum limit for {place.short} in {place.nextYearLabel}.</span> : null}
           </>
         );
+      }
       case "settlement":
         return v === 0 ? "Assumes a flat cash settlement" : <><Num f={raised} fmt="sm1" /> to the council</>;
       case "fees":
@@ -73,8 +88,17 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
       <div className="sec-head">
         <h2 id="balance-h">Balance next year&rsquo;s budget</h2>
         <p>
-          {place.nextYearLabel} starts with a <Num f={balance.gap} fmt="m1" /> gap. Every choice closes part of it. Reserves close it once; the gap
-          returns the year after.
+          {balance.ctAssumed ? (
+            <>
+              In the council&rsquo;s own forecast, {place.nextYearLabel} starts with a <Num f={balance.gap} fmt="m1" /> gap, after the{" "}
+              <Num f={balance.ctAssumed} fmt="pct2" /> council tax rise it already assumes. Every choice below changes that.
+            </>
+          ) : (
+            <>
+              {place.nextYearLabel} starts with a <Num f={balance.gap} fmt="m1" /> gap. Every choice closes part of it.
+            </>
+          )}{" "}
+          Reserves close it once; the gap returns the year after.
         </p>
       </div>
       <div className="balance">
@@ -200,7 +224,7 @@ function Flags({
   at: (v: number) => Figure;
 }) {
   const flags: { c: "bad" | "warn"; body: React.ReactNode }[] = [];
-  if (r.flags.referendum)
+  if (r.flags.referendum && balance.referendumLimit)
     flags.push({
       c: "bad",
       body: (

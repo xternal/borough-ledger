@@ -49,12 +49,11 @@ jobs:
         run: pnpm --filter @borough-ledger/schema report:test-values
 
   production-gate:
-    # Fails while any rendered value has quality "test" (CLAUDE.md invariant 1).
-    # Expected to fail until M1 replaces the seed data. Not required for merging until then;
-    # Vercel production deploys run the same build:prod and are blocked by it.
-    name: Production build (blocks test data)
+    # CLAUDE.md invariant 1: a production build must fail while any rendered value has quality "test".
+    # This job proves that: with test data present, build:prod must fail on the test-data error;
+    # with none left, build:prod must pass. Vercel production deploys run the same build:prod.
+    name: Production build gate
     runs-on: ubuntu-latest
-    continue-on-error: true
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     steps:
@@ -65,4 +64,4 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build:prod
+      - run: scripts/ci-production-gate.sh

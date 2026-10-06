@@ -235,8 +235,8 @@
    }
   },
   {
-   "id": "budget_report",
-   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Council)",
+   "id": "budget_report_cabinet",
+   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Cabinet, 9 February 2026)",
    "publisher": "London Borough of Hammersmith & Fulham",
    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
    "asset_url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
@@ -263,6 +263,29 @@
    "file": "tax_base_2026-27.pdf",
    "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff",
    "manual": true
+  },
+  {
+   "id": "budget_report",
+   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Full Council, 25 February 2026)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf",
+   "published_on": "2026-02-25",
+   "file": "revenue_budget_2026-27_v41.pdf",
+   "sha256": "f7fdd0066a08544f45ab502bdf8736359107f4e39584a9ca9129926578e67897",
+   "manual": true
+  },
+  {
+   "id": "cabinet_pack_2026-02-09",
+   "title": "Cabinet 9 February 2026, public reports pack (includes budget Appendix B, medium term financial strategy, pages 51 to 60, and Appendix C, investment and savings proposals, pages 61 to 66)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "published_on": "2026-02-09",
+   "file": "cabinet_pack_2026-02-09.pdf",
+   "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce",
+   "manual": true,
+   "note": "Appendix C pages match the separately downloaded appendix (sha256 c9256238f2c7a640). Appendix B matches the Full Council copy (sha256 62631bbd537f9110) except one sentence on the settlement date."
   }
  ]
 }

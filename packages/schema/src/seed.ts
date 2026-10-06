@@ -54,14 +54,14 @@ export const Rules = z.object({
   referendum_limit_pct: z.record(
     finYear,
     z.object({
-      /** A rise at or above this percentage is excessive and needs a local referendum. */
-      threshold_pct: z.number().positive(),
-      excessive_if: z.literal("at_or_above"),
-      core: z.number(),
-      adult_social_care: z.number(),
+      /** A rise at or above this percentage is excessive and needs a local referendum. Null: no limit set for this council. */
+      threshold_pct: z.number().positive().nullable(),
+      excessive_if: z.enum(["at_or_above", "none"]),
+      core: z.number().nullable(),
+      adult_social_care: z.number().nullable(),
       applies_to: z.string(),
       ...provenance,
-    }),
+    }).refine((r) => (r.threshold_pct === null) === (r.excessive_if === "none"), "a referendum threshold is null exactly when no limit is set"),
   ),
   instalments: z.object({
     options: z.array(z.number().int().positive()).min(1),
@@ -129,9 +129,27 @@ export const Lever = z
     limit: z.number().optional(),
     limit_note: z.string().optional(),
     one_off: z.boolean().optional(),
+    /** The value the gap already assumes (e.g. the forecast's council tax rise). Only the difference from it closes the gap. */
+    assumed: z.number().optional(),
     ...provenance,
   })
   .refine((l) => l.min <= l.base && l.base <= l.max, "lever base must lie between min and max");
+
+export const Saving = z.object({
+  id: z.string(),
+  label: z.string(),
+  directorate: z.string(),
+  service: z.string(),
+  kind: z.enum(["service", "collection_fund"]),
+  /** Saving this year and next, £m (positive = money saved). */
+  m: z.number(),
+  m_next_year: z.number(),
+  /** Saves money this year only; the same amount comes back as a gap next year. */
+  one_off: z.boolean(),
+  service_group: z.string().optional(),
+  ...provenance,
+});
+export type Saving = z.infer<typeof Saving>;
 export type Lever = z.infer<typeof Lever>;
 
 export const Toggle = z.object({
@@ -202,6 +220,7 @@ export const CouncilYear = z.object({
   funding: z.array(FundingLine).min(1),
   services: z.array(ServiceLine).min(1),
   gap_2026_27: z.array(GapLine).min(1),
+  savings: z.array(Saving),
   next_year: z.object({
     year: finYear,
     gap_m: z.number(),

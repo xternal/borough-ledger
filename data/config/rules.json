@@ -48,6 +48,14 @@
     "page": "Annex A paragraph 3 (page 7); Annex B lists Hammersmith & Fulham (page 11)",
     "licence": "OGL-UK-3.0",
     "sha256": "128ea9300b33124e88474412be96e050ed210dddcc17cf4b7620bade53df3ac3"
+   },
+   {
+    "id": "lgfs_2026-27_response",
+    "title": "Provisional local government finance settlement 2026-2027 to 2028-2029: consultation summary of responses",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/consultations/provisional-local-government-finance-settlement-2026-to-2027/outcome/provisional-local-government-finance-settlement-2026-2027-to-2028-2029-consultation-summary-of-responses",
+    "page": "Section 3, summary of final proposals: council tax",
+    "licence": "OGL-UK-3.0"
    }
   ]
  },
@@ -113,14 +121,15 @@
    "note": "A rise of 5% or more is excessive and needs a referendum, so councils in this category stop at 4.99%."
   },
   "2027-28": {
-   "threshold_pct": 5,
-   "excessive_if": "at_or_above",
-   "core": 3,
-   "adult_social_care": 2,
-   "applies_to": "Relevant local authorities, including London borough councils",
+   "threshold_pct": null,
+   "excessive_if": "none",
+   "core": null,
+   "adult_social_care": null,
+   "applies_to": "Hammersmith and Fulham, one of six low council tax authorities named by government",
    "quality": "approx",
-   "source_id": "ct_referendum_2026-27",
-   "todo": "TODO(source): the 2027/28 principles report. The settlement policy statement signalled the same limits for 2027/28; confirm when the report is laid."
+   "source_id": "lgfs_2026-27_response",
+   "note": "Government confirmed its intention not to set referendum principles for 2027-28 and 2028-29 for City of London, Hammersmith and Fulham, Kensington and Chelsea, Wandsworth, Westminster and Windsor and Maidenhead.",
+   "todo": "TODO(source): approx until the 2027-28 referendum principles report is laid, which makes it law"
   }
  },
  "instalments": {

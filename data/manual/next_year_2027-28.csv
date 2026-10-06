@@ -1,3 +1,6 @@
-key,value,page,note
-minimum_safe_m,19,34,"Paragraph 83: general balances have a medium-term optimal range of £19m to £23m; this is the bottom of the range"
-gap_m,,,TODO(source): the 2027/28 gap is in Appendix B (medium term financial forecast) of the budget report; not yet downloaded
+key,value,source_id,page,note
+gap_m,31.4,cabinet_pack_2026-02-09,57,"Appendix B Table 2: Forecast Budget Gap 2027/28, after the council tax rise and savings the forecast already assumes"
+ct_assumed_pct,4.99,cabinet_pack_2026-02-09,57,Appendix B paragraph 27: the forecast assumes a Council Tax increase of 4.99% in each year
+council_tax_m,98.2,cabinet_pack_2026-02-09,57,Appendix B Table 2: Council Tax resources 2027/28
+planned_savings_m,8.0,cabinet_pack_2026-02-09,57,Appendix B Table 2: MTFS Savings 2027/28 already in the forecast
+minimum_safe_m,19,budget_report,35,"Paragraph 83: general balances have a medium-term optimal range of £19m to £23m; this is the bottom of the range"

@@ -147,7 +147,6 @@ describe("balance it: five reference scenarios", () => {
 
 describe("balance it: flags", () => {
   it("a council tax rise above 4.99% raises the referendum flag (the law: 5% or more)", () => {
-    expect(live.referendumThresholdPct).toBe(5);
     expect(R.referendum_limit_pct[C.meta.year]).toMatchObject({ threshold_pct: 5, core: 3, adult_social_care: 2, quality: "sourced" });
     expect(computeBalance(input, scenario({ ct_rise: 4.99 })).flags.referendum).toBe(false);
     expect(computeBalance(input, scenario({ ct_rise: 4.999 })).flags.referendum).toBe(false);
@@ -167,6 +166,26 @@ describe("balance it: flags", () => {
     const small = { ...input, reserves: { general_m: 20, minimum_safe_m: 15 } };
     expect(computeBalance(small, scenario({ reserves: 5 })).flags.belowSafeMinimum).toBe(false);
     expect(computeBalance(small, scenario({ reserves: 10 })).flags.belowSafeMinimum).toBe(true);
+  });
+
+  it("raises no referendum flag when government sets no limit (H&F, 2027/28)", () => {
+    expect(live.referendumThresholdPct).toBeNull();
+    expect(computeBalance(live, { levers: { ct_rise: 9.99 }, toggles: {} }).flags.referendum).toBe(false);
+    expect(computeBalance({ ...input, referendumThresholdPct: null }, scenario({ ct_rise: 8 })).flags.referendum).toBe(false);
+  });
+
+  it("a lever with an assumed value closes only the difference from it", () => {
+    const levers = input.levers.map((l) => (l.id === "ct_rise" ? { ...l, assumed: 4.99 } : l));
+    const at = (v: number) => computeBalance({ ...input, levers }, scenario({ ct_rise: v })).parts.find((p) => p.id === "council_tax")!.m;
+    expect(at(4.99)).toBeCloseTo(0, 12);
+    expect(at(5.99)).toBeCloseTo(0.807, 9);
+    expect(at(3.99)).toBeCloseTo(-0.807, 9);
+  });
+
+  it("opens on the council's own forecast gap for next year", () => {
+    expect(C.next_year.gap_m).toBe(31.4);
+    expect(C.next_year.quality).toBe("sourced");
+    expect(computeBalance(live, defaultScenario(live)).remainingM).toBeCloseTo(31.4, 9);
   });
 
   it("does not read the referendum threshold from the lever", () => {

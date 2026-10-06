@@ -6,8 +6,8 @@ export interface BalanceInput {
   levers: readonly Lever[];
   toggles: readonly Toggle[];
   reserves: { general_m: number; minimum_safe_m: number };
-  /** Next year's referendum threshold, in %: a rise at or above it needs a referendum. */
-  referendumThresholdPct: number;
+  /** Next year's referendum threshold, in %: a rise at or above it needs a referendum. Null when government sets no limit. */
+  referendumThresholdPct: number | null;
   toleranceM: number;
 }
 
@@ -81,7 +81,8 @@ export function computeBalance(input: BalanceInput, scenario: Scenario): Balance
   let ctRisePct = 0;
   for (const l of input.levers) {
     const v = leverValue(scenario, l);
-    const m = v * l.m_per_unit;
+    // A gap forecast that already assumes, say, a 4.99% rise is closed only by the difference from it.
+    const m = (v - (l.assumed ?? 0)) * l.m_per_unit;
     const part = LEVER_PART[l.id];
     byPart.set(part, (byPart.get(part) ?? 0) + m);
     if (l.one_off) oneOffM += m;
@@ -104,7 +105,7 @@ export function computeBalance(input: BalanceInput, scenario: Scenario): Balance
     status,
     reservesLeftM,
     flags: {
-      referendum: ctRisePct >= input.referendumThresholdPct - 1e-9,
+      referendum: input.referendumThresholdPct !== null && ctRisePct >= input.referendumThresholdPct - 1e-9,
       oneOffM,
       belowSafeMinimum: reservesLeftM < input.reserves.minimum_safe_m,
       section114: status === "short",

@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { derive, type Figure } from "@borough-ledger/schema";
 import type { PageModel, WaterfallRowModel } from "@/lib/model";
 import { Num } from "./Num";
+import { SavingsList } from "./SavingsList";
 import { QualityLegend } from "./QualityLegend";
 
 const CLOSING = new Set<WaterfallRowModel["kind"]>(["close", "close_saving", "close_oneoff"]);
@@ -84,6 +85,7 @@ export function Waterfall({ m }: { m: PageModel }) {
         })}
       </div>
       <QualityLegend items={m.qualityLegend.gap} />
+      <SavingsList savings={m.savings} place={m.place} />
     </section>
   );
 }

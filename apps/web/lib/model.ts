@@ -13,6 +13,7 @@ import {
   type PromiseSeed,
   type Quality,
   type Rules,
+  type Saving,
   type Source,
   type Toggle,
 } from "@borough-ledger/schema";
@@ -38,6 +39,15 @@ export interface WaterfallRowModel {
   f: Figure;
   from: number;
   to: number;
+}
+
+export interface SavingRow {
+  id: string;
+  label: string;
+  service: string;
+  f: Figure;
+  next: Figure;
+  oneOff: boolean;
 }
 
 export interface PromiseModel extends PromiseSeed {
@@ -72,6 +82,7 @@ export interface PageModel {
   /** Council tax as a share of the budget the council funds itself. */
   ctShareGeneral: Figure;
   savingsThisYear: Figure;
+  savings: { service: SavingRow[]; collection: SavingRow[]; serviceTotal: Figure | null; collectionTotal: Figure | null; oneOffTotal: Figure | null };
   waterfall: { rows: WaterfallRowModel[]; gap: Figure; maxM: number };
   balance: {
     input: BalanceInput;
@@ -80,8 +91,12 @@ export interface PageModel {
     gap: Figure;
     reservesGeneral: Figure;
     reservesMin: Figure;
-    /** Next year's limit, used by the tool. */
-    referendumLimit: Figure;
+    /** Next year's referendum threshold; null when government sets no limit for this council. */
+    referendumLimit: Figure | null;
+    /** Why there is no limit, when there is none. */
+    referendumNote: { text: string; f: Figure } | null;
+    /** The council tax rise the gap forecast already assumes, if any. */
+    ctAssumed: Figure | null;
     /** Quality and sources shared by every number the tool computes. */
     computed: Figure;
     coef: Record<LeverId, Figure>;
@@ -101,6 +116,30 @@ export interface QualityItem {
 }
 
 const of = (x: { quality: Quality; source_id: string }, value: number) => fig(value, x.quality, x.source_id);
+
+function nonNull<T>(v: T | null, what: string): T {
+  if (v === null) throw new Error(`${what} is missing`);
+  return v;
+}
+
+function savingsModel(all: Saving[]): PageModel["savings"] {
+  const row = (s: Saving): SavingRow => ({
+    id: s.id,
+    label: s.label,
+    service: s.service || s.directorate,
+    f: of(s, s.m),
+    next: of(s, s.m_next_year),
+    oneOff: s.one_off,
+  });
+  const total = (rows: SavingRow[]) => {
+    const [first, ...rest] = rows.map((r) => r.f);
+    return first ? derive(rows.reduce((a, r) => a + r.f.value, 0), first, ...rest) : null;
+  };
+  const byAmount = (a: SavingRow, z: SavingRow) => z.f.value - a.f.value;
+  const service = all.filter((s) => s.kind === "service").map(row).sort(byAmount);
+  const collection = all.filter((s) => s.kind === "collection_fund").map(row).sort(byAmount);
+  return { service, collection, serviceTotal: total(service), collectionTotal: total(collection), oneOffTotal: total([...service, ...collection].filter((r) => r.oneOff)) };
+}
 
 function londonToday(): string {
   // en-CA formats as YYYY-MM-DD.
@@ -244,6 +283,7 @@ export function buildModel(): PageModel {
     ctShareGeneral,
     savingsThisYear,
     waterfall: { rows, gap: gapRow ? gapRow.f : fig(wf.gapM, "test", "prototype_test"), maxM: wf.maxM },
+    savings: savingsModel(C.savings),
     balance: {
       input: {
         gapM: ny.gap_m,
@@ -258,11 +298,16 @@ export function buildModel(): PageModel {
       gap,
       reservesGeneral,
       reservesMin,
-      referendumLimit: of(limit, limit.threshold_pct),
+      referendumLimit: limit.threshold_pct === null ? null : of(limit, limit.threshold_pct),
+      referendumNote: limit.threshold_pct === null ? { text: limit.note ?? "", f: of(limit, 0) } : null,
+      ctAssumed: (() => {
+        const ct = ny.levers.find((l) => l.id === "ct_rise");
+        return ct?.assumed !== undefined ? of(ct, ct.assumed) : null;
+      })(),
       computed,
       coef,
     },
-    referendumLimitNow: of(limitNow, limitNow.threshold_pct),
+    referendumLimitNow: of(limitNow, nonNull(limitNow.threshold_pct, `referendum threshold for ${C.meta.year}`)),
     politics: {
       control: C.politics.control,
       seats: of(C.politics, C.politics.seats[C.politics.control] ?? 0),

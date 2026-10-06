@@ -81,6 +81,31 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class ManualSavings(unittest.TestCase):
+    """Named savings must add up to each directorate's total in Appendix C."""
+
+    HEAD = "id,directorate,service,label,k_2026_27,k_2027_28,kind,service_group,page\n"
+
+    def _run(self, csv_text: str):
+        import build  # noqa: WPS433
+
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "data" / "manual").mkdir(parents=True)
+            (root / "data" / "manual" / "savings_2026-27.csv").write_text(csv_text)
+            (root / "data" / "manual" / "service_groups.csv").write_text("id,label,official_term,desc,order\nrunning,Running,Central,x,1\n")
+            with mock.patch.object(build, "ROOT", root), mock.patch.object(extract, "MANUAL", root / "data" / "manual"):
+                return build.manual_savings()
+
+    def test_flags_one_off_savings(self) -> None:
+        out = self._run(self.HEAD + "a,Corp,,Thing,-100,-100,service,running,1\nb,Corp,,Once,-50,0,service,,1\nt,Corp,,Total,-150,-100,total,,1\n")
+        self.assertEqual([(s["id"], s["m"], s["one_off"]) for s in out], [("a", 0.1, False), ("b", 0.05, True)])
+
+    def test_rejects_lines_that_miss_the_directorate_total(self) -> None:
+        with self.assertRaises(extract.CheckFailed):
+            self._run(self.HEAD + "a,Corp,,Thing,-100,-100,service,,1\nt,Corp,,Total,-150,-100,total,,1\n")
+
+
 class ManualGap(unittest.TestCase):
     """The hand-extracted waterfall must add up to the report's own gap and close to zero."""
 

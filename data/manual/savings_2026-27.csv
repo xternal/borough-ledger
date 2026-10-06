@@ -1,0 +1,36 @@
+id,directorate,service,label,k_2026_27,k_2027_28,kind,service_group,page
+cyps-integration,People,Children and Young Peoples Services,Service efficiencies through closer integration and joint working,-380,-380,service,children,61
+education-send,People,Education and Special Educational Needs,Service efficiencies in education and special educational needs,-150,-150,service,schools,61
+peoples-commissioning-1,People,People's Commissioning,Service efficiencies across People's Commissioning,-55,-55,service,,61
+chc-review,People,Specialist Support and Independent Living,Review care costs with NHS Continuing Health Care criteria as people with very high needs leave hospital,-234,-234,service,adult_care,61
+direct-payments,People,"Independent Living, Quality, Performance and Safeguarding",Make better use of direct payments to give residents more choice and control,-200,-200,service,adult_care,61
+asc-redesign,People,Adult Social Care,Redesign provision and transform practice to give residents more choice and control,-1000,-1000,service,adult_care,61
+mental-health-reprovision,People,Specialist Support and Independent Living,Reprovide mental health services to match demand and reduce duplication,-193,-193,service,adult_care,61
+peoples-commissioning-2,People,People's Commissioning,Commissioning and transformation efficiencies,-55,-55,service,,61
+estates-colocation-1,People,Specialist Support and Independent Living,Estates efficiencies from co-locating services,0,-103,service,adult_care,61
+estates-colocation-2,People,Specialist Support and Independent Living,Estates efficiencies from co-locating services,0,-81,service,adult_care,61
+public-health-efficiencies,People,Public Health,Public health service efficiencies,-230,-230,service,public_health,61
+asc-stretch,People,Adult Social Care,"Stretch target: wider range of local services, one-off opportunities and preventative services",-1750,0,service,adult_care,61
+total-people,People,,People's Services total,-4247,-2681,total,,61
+psl-leases,Housing Solutions,Housing Solutions,Transfer private sector leases to the council's housing company with higher charges,-1050,-1050,service,housing,62
+licence-income,Housing Solutions,Private Housing Standards,More income from property licences,-150,-150,service,safety_regulation,62
+total-housing,Housing Solutions,,Housing Solutions total,-1200,-1200,total,,62
+place-redesign,Place,All Place Services,Place redesign phase 3,-1300,-1300,service,,63
+place-fees,Place,All Place Services,Review fees and charges,-500,-500,service,,63
+commercial-initiatives,Place,Public Realm,Other commercial initiatives,-750,-750,service,streets,63
+waste-disposal,Place,Public Realm,Targeted reduction in waste disposal costs,-200,-200,service,streets,63
+total-place,Place,,Place total,-2750,-2750,total,,63
+local-support-payments,Finance and Corporate Services,Revenues and Benefits,Reform the Local Support Payment scheme,-450,-450,service,running,64
+ct-summons-costs,Finance and Corporate Services,Revenues and Benefits,Raise council tax summons costs by £20 a summons,-157,-157,service,running,64
+nndr-summons-costs,Finance and Corporate Services,Revenues and Benefits,Raise business rates summons costs by £20 a summons,-20,-20,service,running,64
+total-fcs,Finance and Corporate Services,,Finance and Corporate Services total,-627,-627,total,,64
+hbop,Corporate,,HBOP,-200,-200,service,running,65
+commercial-card-charging,Corporate,,Charge for payments by commercial card,-500,-500,service,running,65
+total-corporate,Corporate,,Corporate total,-700,-700,total,,65
+ct-collection-rate,Collection Fund,Council Tax,"Raise council tax collection by 1%, 1.25% and 1.5% (includes extra staff)",-875,-1094,collection_fund,,66
+ct-arrears-release,Collection Fund,Council Tax,Release £2m from the collection fund as council tax arrears keep falling,-2000,0,collection_fund,,66
+second-homes-premium,Collection Fund,Council Tax,More homes charged the second homes premium and a larger tax base,-1700,-1700,collection_fund,,66
+nndr-bad-debt-release,Collection Fund,Business Rates,Release £2m of bad debt provision on business rates,-2000,0,collection_fund,,66
+nndr-tax-base,Collection Fund,Business Rates,More business rates income from a larger base and full recovery (includes extra staff),-1700,-1700,collection_fund,,66
+nndr-relief-policy,Collection Fund,Business Rates,"End relief for residents' and tenants' associations and voluntary aided schools",-100,-100,collection_fund,,66
+total-collection-fund,Collection Fund,,Collection Fund total,-8375,-4594,total,,66
