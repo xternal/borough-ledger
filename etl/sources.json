@@ -1,5 +1,5 @@
 {
- "note": "Every file the ETL reads. fetch.py downloads each to data/raw/ and refuses a file whose SHA-256 differs: a changed source must be reviewed, not silently absorbed.",
+ "note": "Every file the ETL reads. fetch.py downloads each to data/raw/ and refuses a file whose SHA-256 differs: a changed source must be reviewed, not silently absorbed. Entries marked manual sit behind a firewall that blocks scripts: download them by hand into data/raw/. Their hashes record exactly which file was read.",
  "sources": [
   {
    "id": "ctr_2026-27",
@@ -233,6 +233,36 @@
     "sheet": "RA_LA_Data_2023-24",
     "year": "2023-24"
    }
+  },
+  {
+   "id": "budget_report",
+   "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Council)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+   "file": "revenue_budget_2026-27.pdf",
+   "sha256": "8a32834f760724140a65ed9b5a516f2dadb56ddccde60e51565cd83c3f994837",
+   "manual": true
+  },
+  {
+   "id": "budget_pac_2026-27",
+   "title": "2026/27 Revenue Budget and Medium-Term Financial Strategy (report to Policy and Accountability Committee)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+   "file": "budget_mtfs_2026-27.pdf",
+   "sha256": "9f048df0a48ce337512a3be93d5b332b33d909ea67ea88384f640a989423a82b",
+   "manual": true
+  },
+  {
+   "id": "tax_base_report_2026-27",
+   "title": "Council Tax Base and Collection Rate 2026/27 and Delegation of the Business Rate Estimate",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+   "file": "tax_base_2026-27.pdf",
+   "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff",
+   "manual": true
   }
  ]
 }

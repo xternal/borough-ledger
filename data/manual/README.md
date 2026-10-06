@@ -17,13 +17,14 @@ The council's budget papers are behind a firewall that blocks scripts, so they a
 
 | File | What | Automatic check | Status |
 |---|---|---|---|
-| `gap_2026-27.csv` | This year's waterfall: pressures, change in government funding, council tax rise, savings, reserves; one `report_gap` row with the gap as the report states it | Lines add up to the report's own gap; closing lines close it to zero | Waiting for `Revenue Budget and Council Tax Levels 2026-27.pdf` |
-| `next_year_2027-28.csv` | `gap_m` (2027/28 gap from the medium-term plan) and `minimum_safe_m` (safe minimum level of reserves) | Values present with a page | Waiting for the same report |
+| `gap_2026-27.csv` | This year's waterfall from Table 2 (PDF page 17); one `report_total` row with the report's bottom line | Lines add up to the report's bottom line, which must be zero | Extracted 6 Oct 2026. [ ] Human check against page 17 |
+| `next_year_2027-28.csv` | `minimum_safe_m` (bottom of the £19m to £23m optimal range, paragraph 83, PDF page 34) and `gap_m` (2027/28 gap) | Values present with a page | Safe minimum extracted. Gap waiting for Appendix B (medium term financial forecast), a separate document. [ ] Human check |
+| `toggles_2027-28.csv` | Toggle costs modelled from the report, e.g. 20 extra law enforcement officers from £4.6m for 72 (PDF page 23) | Toggle ids exist | [ ] Human check |
 
 Columns:
 
 ```
-gap_2026-27.csv         order,label,m,kind,page,note       kind ∈ pressure, funding, close, close_saving, close_oneoff, report_gap
+gap_2026-27.csv         order,label,m,kind,page,note       kind ∈ pressure, funding, close, close_saving, close_oneoff, report_total, report_gap (optional)
 next_year_2027-28.csv   key,value,page,note                key ∈ gap_m, minimum_safe_m
 ```
 

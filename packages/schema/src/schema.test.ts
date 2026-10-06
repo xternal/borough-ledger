@@ -75,7 +75,8 @@ describe("quality", () => {
 
   it("lists every test value in the seed", () => {
     const list = listTestValues(DATA);
-    expect(list).toContain("next_year.reserves.minimum_safe");
+    expect(list).toContain("next_year.levers.fees");
+    expect(list).not.toContain("next_year.reserves.minimum_safe");
     expect(list).toContain("promises.test-b-slogan (test card)");
     expect(list).not.toContain("funding.council_tax");
     expect(list).not.toContain("bill");

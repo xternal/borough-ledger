@@ -75,6 +75,21 @@
    "id": "ra_2023-24",
    "file": "RA_2023-24_data_Part_1.ods",
    "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0"
+  },
+  {
+   "id": "budget_report",
+   "file": "revenue_budget_2026-27.pdf",
+   "sha256": "8a32834f760724140a65ed9b5a516f2dadb56ddccde60e51565cd83c3f994837"
+  },
+  {
+   "id": "budget_pac_2026-27",
+   "file": "budget_mtfs_2026-27.pdf",
+   "sha256": "9f048df0a48ce337512a3be93d5b332b33d909ea67ea88384f640a989423a82b"
+  },
+  {
+   "id": "tax_base_report_2026-27",
+   "file": "tax_base_2026-27.pdf",
+   "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff"
   }
  ],
  "manual": [
@@ -88,11 +103,11 @@
   },
   {
    "file": "data/manual/gap_2026-27.csv",
-   "sha256": "d9bdcc4e9a2efcd9c6758b09e467d2bbf2d1fc527e27cf69b5d54146291bb02e"
+   "sha256": "6d3f478e12c997e7ccd9feeb6b8cd0925fc3d2457ed78004aad3b6c0ad69f5a8"
   },
   {
    "file": "data/manual/next_year_2027-28.csv",
-   "sha256": "4e177255dc2b0916a0eacd215e6b6554690e4c930a68e5c69fb0609e40c38478"
+   "sha256": "3aeab945a76e921b8b9b95b2bddaf35d9d66254a3550b8379858d22f4d1c5c37"
   },
   {
    "file": "data/manual/ra_service_map.csv",
@@ -101,18 +116,22 @@
   {
    "file": "data/manual/service_groups.csv",
    "sha256": "ec0373bdea903f5c5b5b79edeade352b60a23472ee91580fa8ece754d798613f"
+  },
+  {
+   "file": "data/manual/toggles_2027-28.csv",
+   "sha256": "57ebbc574e5a8e8ef175b161c2b5c66d4a6528990e01012f04e1de795e430c5b"
   }
  ],
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "e6556e14075abc33a8b7dd727b39fe5b7605ad863bb9cdb210a395b81301aca3"
+   "sha256": "402c7f7a4b2f1b90058ac3a84032eaafef97fec763b391741f16d282c197d7cf"
   }
  ],
  "quality_counts": {
   "approx": 3,
-  "modelled": 2,
-  "sourced": 24,
-  "test": 16
+  "modelled": 3,
+  "sourced": 36,
+  "test": 5
  }
 }

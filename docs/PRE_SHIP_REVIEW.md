@@ -43,9 +43,9 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 
 | # | Status |
 |---|---|
-| B1 | Partly closed. Council tax, the 2026/27 budget (funding and services), reserves, the tax base and the referendum rule are now sourced from government returns (`etl/`, `data/build/`). Still test: this year's pressures and savings, next year's gap, the safe minimum for reserves, the fees lever, pledge costs, all promises except free home care, all payments. `pnpm --filter @borough-ledger/schema report:test-values` lists them |
+| B1 | Partly closed. Council tax, the 2026/27 budget (funding and services), reserves and their safe minimum, the tax base, the referendum rule and this year's gap waterfall are now sourced (`etl/`, `data/build/`, `data/manual/`). Still test: next year's gap (Appendix B of the budget report), the fees lever, pledge costs, all promises except free home care, all payments. `pnpm --filter @borough-ledger/schema report:test-values` lists them |
 | B2 | Closed. Band D from the government council tax tables (Table 9 and Table 10, 2026/27); all eight bands match to the penny. The third-party figure for 2025/26 was 2p out |
-| H1 | Open. Needs the budget report, which is behind a firewall that blocks scripts; download by hand into `data/raw/` |
+| H1 | Closed. The waterfall is rebuilt from Table 2 of the budget report (PDF page 17), which closes to zero: business rates +£30.7m, grants −£13.2m, transitional relief −£6.0m, council tax −£7.7m, savings −£9.5m. No reserves were used in 2026/27 |
 | H2 | Closed. Council tax covers 23% of day-to-day spending including schools, and 36% of the £255.3m the council funds itself |
 | H3 | Closed. One classification: the government revenue account (RA) lines, grouped in `data/manual/ra_service_map.csv` |
 | Medium: instalments | Open |

@@ -148,23 +148,35 @@
     "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0"
    },
    {
+    "id": "budget_report",
+    "title": "Revenue Budget and Council Tax Levels 2026/27 (report to Council)",
+    "publisher": "London Borough of Hammersmith & Fulham",
+    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+    "asset_url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+    "sha256": "8a32834f760724140a65ed9b5a516f2dadb56ddccde60e51565cd83c3f994837"
+   },
+   {
+    "id": "budget_pac_2026-27",
+    "title": "2026/27 Revenue Budget and Medium-Term Financial Strategy (report to Policy and Accountability Committee)",
+    "publisher": "London Borough of Hammersmith & Fulham",
+    "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+    "asset_url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+    "sha256": "9f048df0a48ce337512a3be93d5b332b33d909ea67ea88384f640a989423a82b"
+   },
+   {
+    "id": "tax_base_report_2026-27",
+    "title": "Council Tax Base and Collection Rate 2026/27 and Delegation of the Business Rate Estimate",
+    "publisher": "London Borough of Hammersmith & Fulham",
+    "url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+    "asset_url": "https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf",
+    "sha256": "c15a1f48165e47b10bcc11fe92c8a6479fae8c879aeec7b99a0d1a7d7f0654ff"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Ledger method notes (docs/MODEL.md)",
     "publisher": "Borough Ledger",
     "url": "https://github.com/xternal/borough-ledger/blob/main/docs/MODEL.md",
     "note": "TODO(decide): the repository is private; publish the method page before launch."
-   },
-   {
-    "id": "budget_paper",
-    "title": "H&F Budget 2026/27 committee paper",
-    "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
-    "publisher": "London Borough of Hammersmith & Fulham"
-   },
-   {
-    "id": "budget_report",
-    "title": "H&F Revenue Budget and Council Tax Levels 2026/27",
-    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
-    "publisher": "London Borough of Hammersmith & Fulham"
    },
    {
     "id": "election",
@@ -626,87 +638,104 @@
  ],
  "gap_2026_27": [
   {
-   "label": "Pay and prices",
-   "m": 7.5,
+   "label": "Rising prices of contracts and supplies",
+   "m": 6.9,
    "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Provision for Price Inflation (3.2%)"
   },
   {
-   "label": "More older and disabled residents needing care",
+   "label": "Pay rise for staff",
    "m": 4.0,
    "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Provision for Pay Inflation (2.5%)"
   },
   {
-   "label": "Children's placements",
-   "m": 2.5,
+   "label": "Essential service pressures",
+   "m": 3.2,
    "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Essential pressures"
   },
   {
-   "label": "Temporary accommodation",
-   "m": 3.5,
+   "label": "Other changes, including interest on cash balances",
+   "m": -5.6,
    "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Other Changes (concessionary fares/interest on balances/other)"
   },
   {
-   "label": "New investments",
-   "m": 5.0,
+   "label": "Lower employer pension contributions",
+   "m": -2.1,
    "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Reduction in LGPS employers pension contribution"
   },
   {
-   "label": "Other pressures",
-   "m": 1.5,
-   "kind": "pressure",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
-  },
-  {
-   "label": "Change in government funding",
-   "m": -3.3,
+   "label": "Less business rates kept locally",
+   "m": 30.7,
    "kind": "funding",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Decrease in Business rates"
+  },
+  {
+   "label": "More government grants",
+   "m": -13.2,
+   "kind": "funding",
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Increase Central Govt Grants"
+  },
+  {
+   "label": "Transitional relief under the funding reform",
+   "m": -6.0,
+   "kind": "funding",
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Fair Funding - Transitional Relief"
+  },
+  {
+   "label": "Smaller council tax surplus from last year",
+   "m": 3.3,
+   "kind": "funding",
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Collection Fund - year on year reduction in surplus"
+  },
+  {
+   "label": "Other collection fund changes",
+   "m": -4.0,
+   "kind": "funding",
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Collection fund"
   },
   {
    "label": "Gap to close",
    "kind": "subtotal"
   },
   {
-   "label": "Council tax rise",
+   "label": "More council tax",
    "m": -7.7,
    "kind": "close",
    "quality": "sourced",
-   "source_id": "budget_paper"
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Increase in Council Tax resources"
   },
   {
-   "label": "Savings",
-   "m": -10.0,
+   "label": "Savings and efficiencies",
+   "m": -9.5,
    "kind": "close_saving",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
-  },
-  {
-   "label": "Reserves, one-off",
-   "m": -3.0,
-   "kind": "close_oneoff",
-   "quality": "test",
-   "source_id": "prototype_test",
-   "todo": "TODO(source): replace in M1 from the budget report or government returns"
+   "quality": "sourced",
+   "source_id": "budget_report",
+   "method_note": "Budget report, PDF page 17. Table 2: Savings and Efficiencies"
   },
   {
    "label": "Balanced",
@@ -727,10 +756,10 @@
     "method_note": "Unallocated reserves the council expects to hold at 31 March 2027 (RA 2026-27 line 1016)."
    },
    "minimum_safe": {
-    "m": 15.0,
-    "quality": "test",
-    "source_id": "prototype_test",
-    "todo": "TODO(source): the safe minimum set by the finance director in the budget report"
+    "m": 19.0,
+    "quality": "sourced",
+    "source_id": "budget_report",
+    "method_note": "Budget report, PDF page 34. Paragraph 83: general balances have a medium-term optimal range of £19m to £23m; this is the bottom of the range"
    }
   },
   "levers": [
@@ -839,10 +868,10 @@
     "id": "extra_officers",
     "label": "Add 20 law enforcement officers",
     "on": false,
-    "cost_m": 1.0,
-    "quality": "test",
-    "source_id": "prototype_test",
-    "todo": "TODO(source): cost from the budget report or a costed pledge"
+    "cost_m": 1.28,
+    "quality": "modelled",
+    "source_id": "budget_report",
+    "method_note": "Budget report, PDF page 23: 20 officers at the average cost of the Law Enforcement Team, which costs £4.6m a year for 72 officers"
    }
   ]
  },

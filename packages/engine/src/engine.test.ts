@@ -102,11 +102,11 @@ describe("this year's gap", () => {
     const w = buildWaterfall(C.gap_2026_27, TOL);
     expect(w.closes).toBe(true);
     expect(w.residualM).toBeCloseTo(0, 9);
-    expect(w.gapM).toBeCloseTo(20.7, 9);
+    expect(w.gapM).toBeCloseTo(17.2, 9); // budget report Table 2: lines opening the gap
   });
 
   it("a waterfall that does not close is reported", () => {
-    const lines = C.gap_2026_27.filter((l) => l.kind !== "close_oneoff");
+    const lines = C.gap_2026_27.filter((l) => l.kind !== "close_saving");
     expect(buildWaterfall(lines, TOL).closes).toBe(false);
   });
 });

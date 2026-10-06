@@ -7,8 +7,8 @@ describe("page model", () => {
   it("takes every headline number from data", () => {
     expect(m.netBudget.value).toBeCloseTo(398.009, 6);
     expect(m.generalBudget.value).toBeCloseTo(255.333, 6);
-    expect(m.savingsThisYear.value).toBeCloseTo(10, 9);
-    expect(m.waterfall.gap.value).toBeCloseTo(20.7, 9);
+    expect(m.savingsThisYear.value).toBeCloseTo(9.5, 9);
+    expect(m.waterfall.gap.value).toBeCloseTo(17.2, 9);
     expect(m.balance.gap.value).toBe(15);
     expect(m.place.nextYearLabel).toBe("2027/28");
     expect(m.place.yearAfterLabel).toBe("2028/29");
@@ -19,7 +19,8 @@ describe("page model", () => {
     expect(m.bill.total.quality).toBe("sourced");
     expect(m.netBudget.quality).toBe("sourced");
     expect(m.ctShare.quality).toBe("sourced");
-    expect(m.savingsThisYear.quality).toBe("test");
+    expect(m.savingsThisYear.quality).toBe("sourced");
+    expect(m.balance.gap.quality).toBe("test");
     expect(m.referendumLimitNow.quality).toBe("sourced");
     expect(m.referendumLimitNow.value).toBe(5);
   });

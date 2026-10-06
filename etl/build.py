@@ -41,8 +41,7 @@ METHOD = {
     "url": "https://github.com/xternal/borough-ledger/blob/main/docs/MODEL.md",
     "note": "TODO(decide): the repository is private; publish the method page before launch.",
 }
-# Seed sources still cited by values carried over until the budget report is extracted.
-KEEP_SEED_SOURCES = {"budget_paper", "budget_report", "election", "prototype_test"}
+# Seed sources are kept only while a carried-over value still cites them.
 
 
 def m(v_thousands: float) -> float:
@@ -58,8 +57,13 @@ def source_entry(s: Dict[str, Any]) -> Dict[str, Any]:
 def build() -> Dict[str, Any]:
     reg = {s["id"]: s for s in load_sources()}
     for s in reg.values():
-        check((ROOT / "data" / "raw" / s["file"]).exists(), f"missing data/raw/{s['file']}: run python3 etl/fetch.py")
-        check(sha256(ROOT / "data" / "raw" / s["file"]) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
+        path = ROOT / "data" / "raw" / s["file"]
+        if s.get("manual"):
+            # Read by hand into data/manual/; the build does not need the file, but if present it must be the one recorded.
+            check(not path.exists() or sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
+            continue
+        check(path.exists(), f"missing data/raw/{s['file']}: run python3 etl/fetch.py")
+        check(sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
     seed = json.loads(SEED.read_text())
     ons = seed["meta"]["council_code"]
 
@@ -180,12 +184,12 @@ def build() -> Dict[str, Any]:
     unalloc_end = ra2.by_asset("resunall_end")
     mny = manual_next_year()
     gap_src: Dict[str, Any] = (
-        {"gap_m": float(mny["gap_m"]["value"]), "quality": "sourced", "source_id": "budget_report", "method_note": f"Budget report page {mny['gap_m']['page']}"}
+        {"gap_m": float(mny["gap_m"]["value"]), "quality": "sourced", "source_id": "budget_report", "method_note": f"Budget report, PDF page {mny['gap_m']['page']}. {mny['gap_m']['note']}".strip()}
         if "gap_m" in mny else {"gap_m": ny["gap_m"], "quality": ny["quality"], "source_id": ny["source_id"], "todo": ny["todo"]}
     )
     minimum = (
         {"m": float(mny["minimum_safe_m"]["value"]), "quality": "sourced", "source_id": "budget_report",
-         "method_note": f"Budget report page {mny['minimum_safe_m']['page']}"}
+         "method_note": f"Budget report, PDF page {mny['minimum_safe_m']['page']}. {mny['minimum_safe_m']['note']}".strip()}
         if "minimum_safe_m" in mny else
         {"m": ny["reserves"]["minimum_safe_m"], "quality": "test", "source_id": "prototype_test",
          "todo": "TODO(source): the safe minimum set by the finance director in the budget report"}
@@ -198,11 +202,9 @@ def build() -> Dict[str, Any]:
             "minimum_safe": minimum,
         },
         "levers": levers,
-        "toggles": ny["toggles"],
+        "toggles": manual_toggles(ny["toggles"]),
     }
 
-    sources = [source_entry(reg[k]) for k in reg] + [METHOD]
-    sources += [s for s in seed["meta"]["sources"] if s["id"] in KEEP_SEED_SOURCES]
     vintage = max(s["published_on"] for s in reg.values() if "published_on" in s)
 
     out = {
@@ -211,7 +213,7 @@ def build() -> Dict[str, Any]:
             "year": YEAR,
             "note": "Built by etl/build.py from government returns. Values marked test or approx are carried over from data/seed until the council's budget report is extracted into data/manual/.",
             "vintage": vintage,
-            "sources": sources,
+            "sources": [],
         },
         "bill": {
             "band_d_total": band_d_total, "band_d_council": now["band_d_council"], "band_d_gla": band_d_gla,
@@ -245,7 +247,28 @@ def build() -> Dict[str, Any]:
         "next_year": next_year,
         "politics": seed["politics"],
     }
+    cited = set(cited_sources(out))
+    sources = [source_entry(reg[k]) for k in reg] + [METHOD]
+    sources += [s for s in seed["meta"]["sources"] if s["id"] in cited and s["id"] not in reg]
+    out["meta"]["sources"] = sources
     return out
+
+
+def cited_sources(x: Any) -> List[str]:
+    """Every source id a value in the output cites."""
+    found: List[str] = []
+    if isinstance(x, dict):
+        for k, v in x.items():
+            if k == "source_id" and isinstance(v, str):
+                found.append(v)
+            elif k == "source_ids" and isinstance(v, list):
+                found.extend(v)
+            else:
+                found.extend(cited_sources(v))
+    elif isinstance(x, list):
+        for v in x:
+            found.extend(cited_sources(v))
+    return found
 
 
 GAP_KINDS = ("pressure", "funding", "close", "close_saving", "close_oneoff")
@@ -254,29 +277,51 @@ GAP_KINDS = ("pressure", "funding", "close", "close_saving", "close_oneoff")
 def manual_gap(seed_lines: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """This year's gap waterfall from data/manual/gap_2026-27.csv if it has been extracted, else the seed.
 
-    The CSV holds the report's lines in order, each with its page, plus one row of kind `report_gap`
-    carrying the gap as the report states it. Checks: the lines add up to the report's own gap, and
-    the closing lines close it to zero.
+    The CSV holds the report's lines in order, each with its page, plus one `report_total` row: the report's
+    own bottom line after every change (zero for a balanced budget). An optional `report_gap` row carries the
+    gap if the report states one. Checks: the lines add up to the report's bottom line, which must be zero,
+    and to the stated gap if given.
     """
     path = ROOT / "data" / "manual" / "gap_2026-27.csv"
     rows = [r for r in read_csv(path.name) if r["kind"]] if path.exists() else []
     if not rows:
         return seed_lines
-    stated = [float(r["m"]) for r in rows if r["kind"] == "report_gap"]
-    check(len(stated) == 1, "gap_2026-27.csv needs exactly one report_gap row (the gap as the report states it)")
+    unknown = [r["kind"] for r in rows if r["kind"] not in GAP_KINDS + ("report_total", "report_gap")]
+    check(not unknown, f"gap_2026-27.csv: unknown kinds {unknown}")
+    totals = [float(r["m"]) for r in rows if r["kind"] == "report_total"]
+    check(len(totals) == 1, "gap_2026-27.csv needs exactly one report_total row (the report's own bottom line)")
     lines = [r for r in rows if r["kind"] in GAP_KINDS]
-    check(len(lines) == len(rows) - 1, f"gap_2026-27.csv: unknown kinds {[r['kind'] for r in rows if r['kind'] not in GAP_KINDS + ('report_gap',)]}")
     opened = sum(float(r["m"]) for r in lines if r["kind"] in ("pressure", "funding"))
     closed = sum(float(r["m"]) for r in lines if r["kind"].startswith("close"))
-    check(close(opened, stated[0], 0.05), f"gap lines add to £{opened}m, the report says £{stated[0]}m")
-    check(close(opened + closed, 0.0, 0.05), f"the gap does not close: £{opened + closed}m left")
+    check(close(opened + closed, totals[0], 0.05), f"gap lines add to £{opened + closed:.1f}m, the report's bottom line is £{totals[0]}m")
+    check(close(totals[0], 0.0, 0.05), f"the report's own bottom line is £{totals[0]}m, not a balanced budget")
+    for r in rows:
+        if r["kind"] == "report_gap":
+            check(close(opened, float(r["m"]), 0.05), f"gap lines open £{opened:.1f}m, the report says £{r['m']}m")
     out: List[Dict[str, Any]] = []
     for r in lines:
         if r["kind"].startswith("close") and not any(o["kind"] == "subtotal" for o in out):
             out.append({"label": "Gap to close", "kind": "subtotal"})
         out.append({"label": r["label"], "m": float(r["m"]), "kind": r["kind"], "quality": "sourced", "source_id": "budget_report",
-                    "method_note": f"Budget report page {r['page']}"})
+                    "method_note": f"Budget report, PDF page {r['page']}. {r['note']}".strip()})
     out.append({"label": "Balanced", "kind": "total"})
+    return out
+
+
+def manual_toggles(toggles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Toggle costs from data/manual/toggles_2027-28.csv where extracted or modelled from the budget report."""
+    path = ROOT / "data" / "manual" / "toggles_2027-28.csv"
+    over = {r["id"]: r for r in read_csv(path.name)} if path.exists() else {}
+    ids = {t["id"] for t in toggles}
+    check(set(over) <= ids, f"toggles_2027-28.csv: unknown toggles {set(over) - ids}")
+    out = []
+    for t in toggles:
+        if t["id"] in over:
+            r = over[t["id"]]
+            t = {k: v for k, v in t.items() if k != "todo"}
+            t.update(cost_m=float(r["cost_m"]), quality=r["quality"], source_id="budget_report",
+                     method_note=f"Budget report, PDF page {r['page']}: {r['method_note']}")
+        out.append(t)
     return out
 
 

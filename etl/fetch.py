@@ -35,6 +35,9 @@ def main(check_only: bool) -> int:
         if "file" not in s:
             continue
         path = RAW / s["file"]
+        if s.get("manual") and not path.exists():
+            print(f"manual    {s['file']} (download by hand from {s['url']}; not needed to build)")
+            continue
         if not path.exists():
             if check_only:
                 print(f"missing   {s['file']}")

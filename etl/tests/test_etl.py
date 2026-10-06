@@ -100,15 +100,23 @@ class ManualGap(unittest.TestCase):
         self.assertEqual(self._run(self.HEAD), [{"label": "seed", "kind": "total"}])
 
     def test_builds_a_closing_waterfall(self) -> None:
-        out = self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,Grant change,-2,funding,12,\n3,The gap,8,report_gap,12,\n"
-                        "4,Council tax,-5,close,13,\n5,Savings,-3,close_saving,14,\n")
+        out = self._run(self.HEAD + "1,Pay,10,pressure,12,Table 2: Pay\n2,Grant change,-2,funding,12,\n3,The gap,8,report_gap,12,\n"
+                        "4,Council tax,-5,close,13,\n5,Savings,-3,close_saving,14,\n6,Bottom line,0,report_total,14,\n")
         self.assertEqual([r["kind"] for r in out], ["pressure", "funding", "subtotal", "close", "close_saving", "total"])
-        self.assertEqual(out[0]["method_note"], "Budget report page 12")
+        self.assertEqual(out[0]["method_note"], "Budget report, PDF page 12. Table 2: Pay")
+
+    def test_needs_the_report_bottom_line(self) -> None:
+        with self.assertRaises(extract.CheckFailed):
+            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,Council tax,-10,close,13,\n")
 
     def test_rejects_lines_that_do_not_match_the_report(self) -> None:
         with self.assertRaises(extract.CheckFailed):
-            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,The gap,9,report_gap,12,\n3,Council tax,-10,close,13,\n")
+            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,The gap,9,report_gap,12,\n3,Council tax,-10,close,13,\n4,Bottom,0,report_total,13,\n")
 
     def test_rejects_a_gap_that_does_not_close(self) -> None:
         with self.assertRaises(extract.CheckFailed):
-            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,The gap,10,report_gap,12,\n3,Council tax,-7,close,13,\n")
+            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,Council tax,-7,close,13,\n3,Bottom,0,report_total,13,\n")
+
+    def test_rejects_a_report_that_is_not_balanced(self) -> None:
+        with self.assertRaises(extract.CheckFailed):
+            self._run(self.HEAD + "1,Pay,10,pressure,12,\n2,Council tax,-7,close,13,\n3,Bottom,3,report_total,13,\n")
