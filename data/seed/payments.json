@@ -1,6 +1,9 @@
 {
  "meta": {
-  "note": "Invented payments for layout only. Supplier names are generic categories, not real companies. The real feed is the council's monthly 'spend over \u00a3500' file."
+  "note": "Invented payments for layout only. Supplier names are generic categories, not real companies. The real feed is the council's monthly 'spend over £500' file.",
+  "quality": "test",
+  "source_id": "prototype_test",
+  "vintage": "2026-10-06"
  },
  "payments": [
   {

@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+.env*
+!.env.example
+.DS_Store
+.vercel/
+next-env.d.ts
+apps/web/.test-data-report.json

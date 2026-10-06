@@ -7,24 +7,37 @@
    {
     "id": "band_d",
     "title": "Council tax bands 2026/27 for H&F (councildata.co.uk)",
-    "url": "https://councildata.co.uk/council-tax/london-borough-of-hammersmith-and-fulham/"
+    "url": "https://councildata.co.uk/council-tax/london-borough-of-hammersmith-and-fulham/",
+    "publisher": "councildata.co.uk (third party)"
    },
    {
     "id": "budget_paper",
     "title": "H&F Budget 2026/27 committee paper",
-    "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf"
+    "url": "https://democracy.lbhf.gov.uk/documents/s133637/Budget%202026-27.pdf",
+    "publisher": "London Borough of Hammersmith & Fulham"
    },
    {
     "id": "budget_report",
     "title": "H&F Revenue Budget and Council Tax Levels 2026/27",
-    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf"
+    "url": "https://democracy.lbhf.gov.uk/documents/s133753/Revenue%20Budget%20and%20Council%20Tax%20Levels%202026-27.pdf",
+    "publisher": "London Borough of Hammersmith & Fulham"
    },
    {
     "id": "election",
     "title": "2026 Hammersmith and Fulham London Borough Council election",
-    "url": "https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election"
+    "url": "https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election",
+    "publisher": "Wikipedia (secondary)"
+   },
+   {
+    "id": "prototype_test",
+    "title": "Invented for the prototype layout",
+    "publisher": "Borough Ledger",
+    "note": "Not a source. Values citing this are test data and are blocked from production builds."
    }
-  ]
+  ],
+  "council_code": "E09000013",
+  "council_code_note": "TODO(source): verify the ONS code for H&F",
+  "vintage": "2026-10-06"
  },
  "bill": {
   "band_d_total": 1519.51,
@@ -33,7 +46,7 @@
   "band_d_total_prev": 1451.44,
   "council_rise_pct": 4.99,
   "council_rise_split": "2.99% core + 2% adult social care precept",
-  "quality": "sourced",
+  "quality": "approx",
   "source_id": "band_d",
   "band_ratios": {
    "A": 0.6666666666666666,
@@ -45,12 +58,15 @@
    "G": 1.6666666666666667,
    "H": 2.0
   },
-  "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services"
+  "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services",
+  "todo": "TODO(source): Band D comes from a third-party site. Re-source from the council's own council tax page or the government council tax table (PRE_SHIP_REVIEW B2)."
  },
  "tax_base": {
   "band_d_equivalents": 82000,
   "collection_rate": 0.975,
-  "quality": "test"
+  "quality": "test",
+  "source_id": "prototype_test",
+  "todo": "TODO(source): Council Tax Base and Collection Rate 2026/27 report"
  },
  "funding": [
   {
@@ -58,25 +74,33 @@
    "label": "Council tax",
    "m": 80.7,
    "quality": "test",
-   "note": "tax base × Band D × collection; the +£7.7m year-on-year rise is from the budget paper"
+   "note": "tax base × Band D × collection; the +£7.7m year-on-year rise is from the budget paper",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "business_rates",
    "label": "Business rates kept locally",
    "m": 58.0,
-   "quality": "test"
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "core_grants",
    "label": "Core government grants",
    "m": 61.3,
-   "quality": "test"
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "social_care_grants",
    "label": "Social care grants",
    "m": 15.0,
-   "quality": "test"
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "transition",
@@ -90,7 +114,9 @@
    "label": "Drawn from reserves",
    "m": 3.0,
    "quality": "test",
-   "gap": true
+   "gap": true,
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   }
  ],
  "services": [
@@ -99,14 +125,18 @@
    "label": "Adult social care",
    "m": 72.0,
    "quality": "test",
-   "desc": "Home care, care homes, support for disabled adults"
+   "desc": "Home care, care homes, support for disabled adults",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "children",
    "label": "Children's services",
    "m": 50.0,
    "quality": "test",
-   "desc": "Children in care, SEND transport, early help"
+   "desc": "Children in care, SEND transport, early help",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "place",
@@ -121,65 +151,94 @@
    "label": "Running the council",
    "m": 22.0,
    "quality": "test",
-   "desc": "Finance, IT, legal, customer services"
+   "desc": "Finance, IT, legal, customer services",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "housing",
    "label": "Housing and homelessness",
    "m": 17.0,
    "quality": "test",
-   "desc": "Temporary accommodation, housing advice (council homes are a separate ring-fenced account)"
+   "desc": "Temporary accommodation, housing advice (council homes are a separate ring-fenced account)",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "levies",
    "label": "Levies and debt costs",
    "m": 12.7,
    "quality": "test",
-   "desc": "Waste disposal authority, London-wide levies, capital financing"
+   "desc": "Waste disposal authority, London-wide levies, capital financing",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "id": "safety",
    "label": "Community safety",
    "m": 9.0,
    "quality": "test",
-   "desc": "Law enforcement team, CCTV"
+   "desc": "Law enforcement team, CCTV",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   }
  ],
  "gap_2026_27": [
   {
    "label": "Pay and prices",
    "m": 7.5,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "More older and disabled residents needing care",
    "m": 4.0,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Children's placements",
    "m": 2.5,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Temporary accommodation",
    "m": 3.5,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "New investments",
    "m": 5.0,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Other pressures",
    "m": 1.5,
-   "kind": "pressure"
+   "kind": "pressure",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Change in government funding",
    "m": -3.3,
-   "kind": "funding"
+   "kind": "funding",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Gap to close",
@@ -195,26 +254,34 @@
   {
    "label": "Savings",
    "m": -10.0,
-   "kind": "close_saving"
+   "kind": "close_saving",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Reserves, one-off",
    "m": -3.0,
-   "kind": "close_oneoff"
+   "kind": "close_oneoff",
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): replace in M1 from the budget report or government returns"
   },
   {
    "label": "Balanced",
    "kind": "total"
   }
  ],
- "gap_quality": "test except the council tax line",
  "next_year": {
   "year": "2027-28",
   "gap_m": 15.0,
   "quality": "test",
   "reserves": {
    "general_m": 45.0,
-   "minimum_safe_m": 15.0
+   "minimum_safe_m": 15.0,
+   "quality": "test",
+   "source_id": "prototype_test",
+   "todo": "TODO(source): general reserves and the safe minimum set by the finance director"
   },
   "levers": [
    {
@@ -228,7 +295,10 @@
     "m_per_unit": 0.807,
     "limit": 4.99,
     "limit_note": "Above 4.99% needs a local referendum",
-    "controlled_by": "council"
+    "controlled_by": "council",
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
    },
    {
     "id": "savings",
@@ -239,7 +309,10 @@
     "max": 15,
     "step": 0.5,
     "m_per_unit": 1,
-    "controlled_by": "council"
+    "controlled_by": "council",
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
    },
    {
     "id": "reserves",
@@ -251,7 +324,10 @@
     "step": 0.5,
     "m_per_unit": 1,
     "controlled_by": "council",
-    "one_off": true
+    "one_off": true,
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
    },
    {
     "id": "fees",
@@ -262,7 +338,10 @@
     "max": 10,
     "step": 1,
     "m_per_unit": 0.4,
-    "controlled_by": "council"
+    "controlled_by": "council",
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
    },
    {
     "id": "settlement",
@@ -273,7 +352,10 @@
     "max": 5,
     "step": 0.5,
     "m_per_unit": 0.763,
-    "controlled_by": "government"
+    "controlled_by": "government",
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): coefficient from M1 data (yield of 1% council tax, fees base, core grants)"
    }
   ],
   "toggles": [
@@ -282,30 +364,41 @@
     "label": "Keep free home care for older residents",
     "on": true,
     "cost_m": 2.5,
-    "quality": "test"
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): cost from the budget report or a costed pledge",
+    "promise_id": "hf-free-home-care"
    },
    {
     "id": "weekly_bins",
     "label": "Keep weekly rubbish collections",
     "on": true,
     "cost_m": 1.5,
-    "quality": "test"
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): cost from the budget report or a costed pledge"
    },
    {
     "id": "library_hours",
     "label": "Keep library opening hours",
     "on": true,
     "cost_m": 0.6,
-    "quality": "test"
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): cost from the budget report or a costed pledge"
    },
    {
     "id": "extra_officers",
     "label": "Add 20 law enforcement officers",
     "on": false,
     "cost_m": 1.0,
-    "quality": "test"
+    "quality": "test",
+    "source_id": "prototype_test",
+    "todo": "TODO(source): cost from the budget report or a costed pledge"
    }
-  ]
+  ],
+  "source_id": "prototype_test",
+  "todo": "TODO(source): 2027/28 gap from the medium-term financial strategy in the budget report"
  },
  "politics": {
   "control": "Labour",
@@ -317,7 +410,8 @@
   "leader": "Stephen Cowan",
   "election": "2026-05-07",
   "next_election": "2030-05",
-  "quality": "sourced",
-  "source_id": "election"
+  "quality": "approx",
+  "source_id": "election",
+  "todo": "TODO(source): confirm seats and leader with the council's democracy site (Wikipedia is secondary)"
  }
 }

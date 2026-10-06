@@ -1,6 +1,7 @@
 {
  "meta": {
-  "note": "Only 'hf-free-home-care' is grounded in a real document. All other cards are invented test data with placeholder actors (Party A / Party B) and must never be published."
+  "note": "Only 'hf-free-home-care' is grounded in a real document. All other cards are invented test data with placeholder actors (Party A / Party B) and must never be published.",
+  "side_note": "side is administration or opposition at the time of the pledge. The app reads it from data; no code path checks a party name."
  },
  "promises": [
   {
@@ -42,7 +43,10 @@
      "event": "Kept in the 2026/27 budget"
     }
    ],
-   "editor_check_required": true
+   "editor_check_required": true,
+   "side": "administration",
+   "cost_source_id": "prototype_test",
+   "lever_or_toggle_id": "free_home_care"
   },
   {
    "id": "test-a-trees",
@@ -78,7 +82,9 @@
      "event": "Deadline"
     }
    ],
-   "test": true
+   "test": true,
+   "side": "administration",
+   "cost_source_id": "prototype_test"
   },
   {
    "id": "test-a-homes",
@@ -110,7 +116,8 @@
      "event": "Deadline"
     }
    ],
-   "test": true
+   "test": true,
+   "side": "administration"
   },
   {
    "id": "test-b-ct-freeze",
@@ -136,7 +143,9 @@
      "event": "Opposition manifesto. Cost shown is year one: the income a 4.99% rise on the council's share raises."
     }
    ],
-   "test": true
+   "test": true,
+   "side": "opposition",
+   "cost_source_id": "prototype_test"
   },
   {
    "id": "test-a-potholes",
@@ -172,7 +181,9 @@
      "event": "Deadline passed with no published performance data"
     }
    ],
-   "test": true
+   "test": true,
+   "side": "administration",
+   "cost_source_id": "prototype_test"
   },
   {
    "id": "test-b-slogan",
@@ -194,7 +205,8 @@
      "event": "Hustings. No who, how much, when or from where."
     }
    ],
-   "test": true
+   "test": true,
+   "side": "opposition"
   }
  ]
 }
