@@ -79,7 +79,6 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 
 ## Payments update (7 Oct 2026)
 
-Four of the seven newer quarters are in: Q3 2024/25, Q1 2025/26, Q3 2025/26 and Q1 2026/27, downloaded through a browser from the council's page. The ledger now has 187,220 payments in 36 months, up to June 2026. 31,533 rows are held back as council redactions and 263 by our rules. The forename list behind the "first name and surname" rule now covers names common across London's communities, not only English ones.
+All seven newer quarters the council lists are in (Q3 2024/25 to Q1 2026/27), downloaded through a browser from the council's page. The ledger has 241,195 payments in 45 months, up to June 2026, with 2024/25 and 2025/26 as complete years. 41,549 rows are held back as council redactions and 266 by our rules.
 
-Still to add by hand: Spend data Q4 2024-25, Spend data Q2 2025-26, Spend data Q4 2025-26. Then 2024/25 and 2025/26 are complete years, which closes the B7 full-year test.
-
+B7 closed: the redaction rules ran on two full years. Reviewing the names they let through found one private individual paid a fee ("first name and surname" with a first name the list did not know); the forename list now covers names common across London's communities, and that payment is a total only. Keep the review step (`etl/tests/test_payments.py` and a look at short names without an organisation word) each time new files are added.

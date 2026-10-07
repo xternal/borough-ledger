@@ -104,7 +104,7 @@ class Privacy(unittest.TestCase):
 
     def test_people_are_withheld(self):
         for n in ["Mr J Smith", "Mrs Jane Smith", "John Smith", "J Smith", "J. Smith", "Smith, John", "Smith J", "Sir John Doe",
-                  "Priya Sharma", "Kwame Mensah", "Agnieszka Nowak"]:
+                  "Priya Sharma", "Kwame Mensah", "Agnieszka Nowak", "Patience Moyo"]:
             self.assertEqual(P.payee_class(n), "person", n)
 
     def test_organisations_are_published(self):

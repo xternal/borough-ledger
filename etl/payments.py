@@ -167,7 +167,9 @@ FORENAMES = frozenset(
     ravi reza rohan sadia saira salma sanjay shabana sunil tariq usman vijay yasmin yusuf zainab zara abdi abdullah amir hamid
     mahmoud ifrah sagal hodan chidi chinedu emeka ifeoma kofi kwame olu oluwaseun tunde ade adebayo ngozi fatou aminata
     agnieszka andrzej ewa katarzyna magdalena marek piotr tomasz irina olga natalia ivan dmitri ana carlos jose juan luis sofia
-    giulia francesco marco""".split()
+    giulia francesco marco patience blessing precious mercy faith joy gift comfort favour peace hope chipo tendai tatenda farai
+    rudo nyasha tafadzwa kudzai chiamaka adaeze nkechi femi funmi bisi kemi yemi tolu seun bola dayo tope ama akosua kojo yaw
+    abena efua esi""".split()
 )
 WORD = re.compile(r"[A-Za-z][A-Za-z'’\-]*\.?$")
 # Payments that usually go to individuals: direct payments, foster and guardianship allowances, support for children in need.

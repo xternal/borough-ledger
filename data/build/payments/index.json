@@ -13,12 +13,12 @@
    "Payments the council redacted, and payments to anyone who looks like a private individual, are shown only as totals per month and service."
   ],
   "mapping": {
-   "lines": 615,
-   "unreviewed": 615
+   "lines": 642,
+   "unreviewed": 642
   },
   "withheld_rows_by_reason": {
-   "person": 263,
-   "redacted": 31533
+   "person": 266,
+   "redacted": 41549
   }
  },
  "sources": [
@@ -122,6 +122,17 @@
    "own_total": null
   },
   {
+   "id": "spend_2024-25_q4",
+   "title": "Spend data Q4 2024-25",
+   "period": "2025-01/2025-03",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-08/lbhf-spend-data-q4-2024-25.xlsx",
+   "archive_url": null,
+   "sha256": "b34df888d49ca2658de7a8a8b839d97c9b56c2aaf39bf64c750d4ff331ae42fa",
+   "rows": 17989,
+   "total": 139596627.12,
+   "own_total": null
+  },
+  {
    "id": "spend_2025-26_q1",
    "title": "Spend data Q1 2025-26",
    "period": "2025-04/2025-06",
@@ -130,6 +141,17 @@
    "sha256": "e9195ce29e03bc66c9f0c448d558526ef11893f61558387db677fd5917bad52b",
    "rows": 17655,
    "total": 135763759.84,
+   "own_total": null
+  },
+  {
+   "id": "spend_2025-26_q2",
+   "title": "Spend data Q2 2025-26",
+   "period": "2025-07/2025-09",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-11/lbhf-spend-data-q2-2025-26.xlsx",
+   "archive_url": null,
+   "sha256": "80e9c03efb467b853b3f325a80b724ed0556898f2070ad98939716196cf66161",
+   "rows": 15738,
+   "total": 141044560.29,
    "own_total": null
   },
   {
@@ -144,6 +166,17 @@
    "own_total": null
   },
   {
+   "id": "spend_2025-26_q4",
+   "title": "Spend data Q4 2025-26",
+   "period": "2026-01/2026-03",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2026-09/spend-data-q4-2025-26.xlsx",
+   "archive_url": null,
+   "sha256": "d0228626a17d4258e7f000bf774e58062b79dc1aa38134428a75376b6f2ad6a5",
+   "rows": 20248,
+   "total": 191689066.03,
+   "own_total": null
+  },
+  {
    "id": "spend_2026-27_q1",
    "title": "Spend data Q1 2026-27",
    "period": "2026-04/2026-06",
@@ -155,23 +188,7 @@
    "own_total": null
   }
  ],
- "missing": [
-  {
-   "id": "spend_2024-25_q4",
-   "title": "Spend data Q4 2024-25",
-   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-08/lbhf-spend-data-q4-2024-25.xlsx"
-  },
-  {
-   "id": "spend_2025-26_q2",
-   "title": "Spend data Q2 2025-26",
-   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-11/lbhf-spend-data-q2-2025-26.xlsx"
-  },
-  {
-   "id": "spend_2025-26_q4",
-   "title": "Spend data Q4 2025-26",
-   "url": "https://www.lbhf.gov.uk/sites/default/files/2026-09/spend-data-q4-2025-26.xlsx"
-  }
- ],
+ "missing": [],
  "groups": [
   {
    "id": "schools",
@@ -982,6 +999,89 @@
    }
   },
   {
+   "month": "2025-01",
+   "files": [
+    "spend_2024-25_q4"
+   ],
+   "rows": 5448,
+   "total": 47303708.43,
+   "published_rows": 4467,
+   "published_total": 44501998.46,
+   "withheld_rows": 981,
+   "withheld_total": 2801709.97,
+   "by_group": {
+    "adult_care": 7349317.15,
+    "capital": 17985786.33,
+    "children": 2343712.54,
+    "council_homes": 3744708.57,
+    "debt_levies": 17165.0,
+    "housing": 4035881.33,
+    "parks_culture": 142983.27,
+    "planning": 208917.84,
+    "public_health": 778556.66,
+    "running": 2041882.02,
+    "safety_regulation": 294437.82,
+    "schools": 2455044.93,
+    "streets": 5687092.76,
+    "unclassified": 218222.21
+   }
+  },
+  {
+   "month": "2025-02",
+   "files": [
+    "spend_2024-25_q4"
+   ],
+   "rows": 6219,
+   "total": 41929442.68,
+   "published_rows": 5144,
+   "published_total": 37841328.77,
+   "withheld_rows": 1075,
+   "withheld_total": 4088113.91,
+   "by_group": {
+    "adult_care": 6541438.74,
+    "capital": 13733788.98,
+    "children": 1231750.22,
+    "council_homes": 4439879.62,
+    "debt_levies": 2035289.0,
+    "housing": 4024595.06,
+    "parks_culture": 172425.9,
+    "planning": 274905.29,
+    "public_health": 689540.5,
+    "running": 1752098.72,
+    "safety_regulation": 129244.14,
+    "schools": 3682994.6,
+    "streets": 3116424.85,
+    "unclassified": 105067.06
+   }
+  },
+  {
+   "month": "2025-03",
+   "files": [
+    "spend_2024-25_q4"
+   ],
+   "rows": 6322,
+   "total": 50363476.01,
+   "published_rows": 5217,
+   "published_total": 46151486.51,
+   "withheld_rows": 1105,
+   "withheld_total": 4211989.5,
+   "by_group": {
+    "adult_care": 9249191.39,
+    "capital": 17356307.65,
+    "children": 3316555.9,
+    "council_homes": 4854739.54,
+    "housing": 3823547.74,
+    "parks_culture": 418784.07,
+    "planning": 434892.96,
+    "public_health": 907674.39,
+    "running": 2476414.22,
+    "safety_regulation": 406065.01,
+    "schools": 3619037.02,
+    "streets": 3352504.56,
+    "unclassified": 147761.56
+   }
+  },
+  {
    "month": "2025-04",
    "files": [
     "spend_2025-26_q1"
@@ -1061,6 +1161,89 @@
     "schools": 5370815.63,
     "streets": 4182043.04,
     "unclassified": 33528.2
+   }
+  },
+  {
+   "month": "2025-07",
+   "files": [
+    "spend_2025-26_q2"
+   ],
+   "rows": 5162,
+   "total": 51990035.61,
+   "published_rows": 4553,
+   "published_total": 48040133.35,
+   "withheld_rows": 609,
+   "withheld_total": 3949902.26,
+   "by_group": {
+    "adult_care": 7753342.7,
+    "capital": 17411918.92,
+    "children": 2651610.53,
+    "council_homes": 4818814.52,
+    "debt_levies": 26328.0,
+    "housing": 3823261.74,
+    "parks_culture": 753454.48,
+    "planning": 404485.81,
+    "public_health": 569902.33,
+    "running": 1930667.69,
+    "safety_regulation": 299633.88,
+    "schools": 5974798.13,
+    "streets": 5450564.35,
+    "unclassified": 121252.53
+   }
+  },
+  {
+   "month": "2025-08",
+   "files": [
+    "spend_2025-26_q2"
+   ],
+   "rows": 5104,
+   "total": 48889801.07,
+   "published_rows": 4320,
+   "published_total": 43184491.88,
+   "withheld_rows": 784,
+   "withheld_total": 5705309.19,
+   "by_group": {
+    "adult_care": 8065933.05,
+    "capital": 12632401.55,
+    "children": 2522072.13,
+    "council_homes": 5387838.9,
+    "debt_levies": 2210341.0,
+    "housing": 3063022.75,
+    "parks_culture": 196761.69,
+    "planning": 251760.76,
+    "public_health": 1675432.81,
+    "running": 2046772.91,
+    "safety_regulation": 265795.1,
+    "schools": 5425274.97,
+    "streets": 5132755.45,
+    "unclassified": 13638.0
+   }
+  },
+  {
+   "month": "2025-09",
+   "files": [
+    "spend_2025-26_q2"
+   ],
+   "rows": 5472,
+   "total": 40164723.61,
+   "published_rows": 4759,
+   "published_total": 36661053.25,
+   "withheld_rows": 713,
+   "withheld_total": 3503670.36,
+   "by_group": {
+    "adult_care": 8164172.41,
+    "capital": 10972587.2,
+    "children": 1939426.92,
+    "council_homes": 5563829.69,
+    "housing": 3569664.1,
+    "parks_culture": 774841.01,
+    "planning": 236122.91,
+    "public_health": 1545394.36,
+    "running": 1640832.86,
+    "safety_regulation": 156427.36,
+    "schools": 2321736.84,
+    "streets": 3181825.54,
+    "unclassified": 97862.41
    }
   },
   {
@@ -1144,6 +1327,89 @@
     "schools": 1045105.53,
     "streets": 2790195.42,
     "unclassified": 59463.5
+   }
+  },
+  {
+   "month": "2026-01",
+   "files": [
+    "spend_2025-26_q4"
+   ],
+   "rows": 6401,
+   "total": 57596083.19,
+   "published_rows": 4592,
+   "published_total": 50452000.03,
+   "withheld_rows": 1809,
+   "withheld_total": 7144083.16,
+   "by_group": {
+    "adult_care": 9659851.08,
+    "capital": 12314671.16,
+    "children": 6490620.55,
+    "council_homes": 7467390.8,
+    "debt_levies": 15240.0,
+    "housing": 4963890.75,
+    "parks_culture": 453831.1,
+    "planning": 320723.99,
+    "public_health": 1137446.5,
+    "running": 3446765.85,
+    "safety_regulation": 276178.49,
+    "schools": 4642092.48,
+    "streets": 6138884.71,
+    "unclassified": 268495.73
+   }
+  },
+  {
+   "month": "2026-02",
+   "files": [
+    "spend_2025-26_q4"
+   ],
+   "rows": 7820,
+   "total": 84530755.47,
+   "published_rows": 5635,
+   "published_total": 75703947.88,
+   "withheld_rows": 2185,
+   "withheld_total": 8826807.59,
+   "by_group": {
+    "adult_care": 18417794.05,
+    "capital": 16970627.08,
+    "children": 4480521.77,
+    "council_homes": 11394982.55,
+    "debt_levies": 2205979.0,
+    "housing": 7400331.57,
+    "parks_culture": 898659.67,
+    "planning": 452016.52,
+    "public_health": 1581028.22,
+    "running": 3895094.5,
+    "safety_regulation": 351439.42,
+    "schools": 7828546.06,
+    "streets": 8468929.95,
+    "unclassified": 184805.11
+   }
+  },
+  {
+   "month": "2026-03",
+   "files": [
+    "spend_2025-26_q4"
+   ],
+   "rows": 6027,
+   "total": 49562227.37,
+   "published_rows": 5269,
+   "published_total": 44930798.44,
+   "withheld_rows": 758,
+   "withheld_total": 4631428.93,
+   "by_group": {
+    "adult_care": 10858071.34,
+    "capital": 7673628.72,
+    "children": 3496810.89,
+    "council_homes": 7419201.99,
+    "housing": 4788554.03,
+    "parks_culture": 248858.97,
+    "planning": 373655.17,
+    "public_health": 625280.93,
+    "running": 3821772.5,
+    "safety_regulation": 337333.44,
+    "schools": 3533969.01,
+    "streets": 6361029.31,
+    "unclassified": 24061.07
    }
   },
   {
@@ -1231,7 +1497,7 @@
   }
  ],
  "suppliers": {
-  "count": 5369,
-  "with_page": 3446
+  "count": 5764,
+  "with_page": 3709
  }
 }
