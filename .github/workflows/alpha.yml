@@ -22,5 +22,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      # Vercel does not deploy a commit it has already built for main, so the Alpha gets a new, empty commit on top
+      # of main, credited to whoever made the latest change (a Hobby team only deploys its own members' commits).
       - name: Move alpha to the latest main
-        run: git push --force origin HEAD:refs/heads/alpha
+        run: |
+          git config user.name "$(git log -1 --format=%an)"
+          git config user.email "$(git log -1 --format=%ae)"
+          git checkout -B alpha
+          git commit --allow-empty -m "Alpha: main at ${GITHUB_SHA::7}"
+          git push --force origin alpha
