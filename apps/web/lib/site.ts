@@ -6,6 +6,9 @@ const PREVIEW_URL = process.env.VERCEL_ENV === "preview" && process.env.VERCEL_B
 /** TODO(decide): production domain. Set NEXT_PUBLIC_SITE_URL on Vercel once the name is settled (PRE_SHIP_REVIEW, Decide). */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? PREVIEW_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
+/** Who made the site, credited in every footer. */
+export const MAKER = { name: "Pavel Guzhikov", url: "https://guzh.uk", coffee: "https://ko-fi.com/pavelg" };
+
 export const SITE = {
   name: "Borough Ledger",
   title: "Borough Ledger: where your council tax goes in Hammersmith & Fulham",

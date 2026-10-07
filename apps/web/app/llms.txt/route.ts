@@ -1,6 +1,6 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
-import { SITE, SITE_URL } from "@/lib/site";
+import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -12,7 +12,7 @@ export function GET() {
 
 > ${SITE.description}
 
-${SITE.name} is an independent project. It is not run by, endorsed by or affiliated with ${c.council_short} Council.
+${SITE.name} is an independent project. It is not run by, endorsed by or affiliated with ${c.council_short} Council. Made by ${MAKER.name} (${MAKER.url}).
 
 ## What is on the site
 

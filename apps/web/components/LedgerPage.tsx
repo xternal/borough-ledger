@@ -14,12 +14,20 @@ import { TopBar } from "@/components/TopBar";
 import { Waterfall } from "@/components/Waterfall";
 import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
-import { SITE, SITE_URL } from "@/lib/site";
+import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
 /** The whole statement. `/` renders it as is; `/balance` opens it on a shared scenario. */
 export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initialScenario?: Scenario; focus?: string }) {
   const jsonLd = [
-    { "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, description: SITE.description, inLanguage: "en-GB" },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE.name,
+      url: SITE_URL,
+      description: SITE.description,
+      inLanguage: "en-GB",
+      creator: { "@type": "Person", name: MAKER.name, url: MAKER.url },
+    },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
