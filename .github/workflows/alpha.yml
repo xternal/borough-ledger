@@ -1,0 +1,26 @@
+name: Alpha
+
+# The Alpha is a private copy of the site for trying it out: the `alpha` branch, kept on the latest main.
+# Vercel builds every push to it as a preview: test data visibly marked, kept out of search engines,
+# behind Vercel login unless shared. Never commit to `alpha` directly; this job overwrites it.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alpha
+  cancel-in-progress: true
+
+jobs:
+  alpha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Move alpha to the latest main
+        run: git push --force origin HEAD:refs/heads/alpha

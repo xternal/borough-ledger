@@ -118,3 +118,5 @@ python3 etl/payments.py                                   # build data/build/pay
 | `data/config/rules.json` | Band ratios, single person discount, balanced budget rule, referendum limit, instalments, each with its legal source |
 
 Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. Set `NEXT_PUBLIC_SITE_URL` once the domain is chosen.
+
+**Alpha.** A private copy for trying the site out before launch, at https://borough-ledger-git-alpha-pavel-gs-projects-6b67d27b.vercel.app. The `alpha` branch follows `main` (`.github/workflows/alpha.yml`) and Vercel builds it as a preview: figures still marked test are underlined in red, every page is noindex and robots.txt disallows everything. Vercel login protects it; to let someone in without an account, use the Share button on the deployment in Vercel, or turn off Vercel Authentication for previews in the project's Deployment Protection settings. Never commit to `alpha` directly.
