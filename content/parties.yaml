@@ -18,8 +18,7 @@ parties:
     manifesto:
       title: "Your priorities, our mission: our plan for Hammersmith & Fulham (Conservative manifesto 2026)"
       url: "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
-      archive_url: null
-      archive_todo: "TODO(source): archive a copy (the Wayback Machine was rate-limiting on 7 Oct 2026)"
+      archive_url: "https://web.archive.org/web/20260326124540/https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
       published_on: "2026-03-16"
-      published_note: "PDF creation date; linked from https://www.hfconservatives.org.uk/manifesto2026"
+      published_note: "PDF creation date; linked from https://www.hfconservatives.org.uk/manifesto2026. The Wayback Machine copy of 26 March 2026 and a fresh one of 7 October 2026 are byte-identical to the quoted file (same SHA-256)."
       sha256: "e4d97a0804c16f856e4de9492557208c44fb12ba11ddc83830a6b9866abd13e8"
