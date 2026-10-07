@@ -490,6 +490,126 @@
     color: var(--bg);
     border-color: var(--ink);
   }
+  .chip .count {
+    margin-left: 4px;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.6;
+  }
+
+  /* promises index (/promises) */
+  section.plist-section {
+    padding-top: 28px;
+  }
+  .ptools {
+    display: grid;
+    gap: 12px;
+    padding: 16px 0;
+    border-block: 1px solid var(--line);
+  }
+  .ptool {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+  .ptool-l {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .ptool select {
+    justify-self: start;
+    max-width: 100%;
+    font: 400 14px var(--font);
+    padding: 7px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .pcount {
+    margin: 14px 0 6px;
+  }
+  .prows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .prow {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    grid-template-areas: "who quote" "who meta";
+    gap: 6px 20px;
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .prow:hover {
+    background: var(--sunk);
+  }
+  .prow-who {
+    grid-area: who;
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    font-size: 14px;
+  }
+  .prow-who .muted {
+    font-size: 12.5px;
+  }
+  .prow-quote {
+    grid-area: quote;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .prow-meta {
+    grid-area: meta;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  @media (max-width: 640px) {
+    .ptool {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 6px;
+    }
+    .prow {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "who" "quote" "meta";
+    }
+    .prow-who {
+      display: flex;
+      gap: 8px;
+    }
+  }
+  .statuses {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 16px;
+    max-width: 80ch;
+  }
+  .statuses > div {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+    font-size: 14px;
+  }
+  .statuses dd {
+    margin: 0;
+    color: var(--muted);
+  }
+  @media (max-width: 640px) {
+    .statuses > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+  }
 
   /* bill */
   .bill {

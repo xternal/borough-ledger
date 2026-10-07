@@ -18,7 +18,7 @@ export function sectionHref(id: SectionId): string {
 
 /** The section a page belongs to, or null on the long pages where the section in view is highlighted instead. */
 export function sectionForPath(path: string): SectionId | null {
-  if (/^\/(promises|promise|councillor)(\/|$)/.test(path)) return "promises";
+  if (/^\/(promises|promise|councillors?)(\/|$)/.test(path)) return "promises";
   if (/^\/(payments|supplier)(\/|$)/.test(path)) return "payments";
   if (/^\/sources(\/|$)/.test(path)) return "method";
   return null;

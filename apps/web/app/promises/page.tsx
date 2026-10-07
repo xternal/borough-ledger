@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { LedgerStateProvider } from "@/components/LedgerState";
 import { JsonLd } from "@/components/JsonLd";
+import { Num } from "@/components/Num";
 import { PageShell } from "@/components/PageShell";
-import { Promises } from "@/components/Promises";
+import { PromisesIndex } from "@/components/PromisesIndex";
 import { buildModel } from "@/lib/model";
-import { formatDay } from "@/lib/format";
+import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
 
 export const revalidate = 86400;
 
-const title = `Promises and councillors in Hammersmith & Fulham | ${SITE.name}`;
+const title = `Promises made to Hammersmith & Fulham residents | ${SITE.name}`;
 const description =
-  "Every headline pledge from the 2026 Labour and Conservative manifestos for Hammersmith & Fulham, quoted word for word with its source, cost and progress, and the borough's 50 councillors by ward.";
+  "Every headline pledge from the 2026 Labour and Conservative manifestos for Hammersmith & Fulham, quoted word for word with its source, its status and its cost to the council, tracked to the same rules for every party.";
 
 export const metadata: Metadata = {
   title,
@@ -24,45 +24,77 @@ export const metadata: Metadata = {
 
 export default function PromisesPage() {
   const m = buildModel();
-  const byId = new Map(m.people.councillors.map((c) => [c.id, c]));
+  const groups = sides(m.promises);
+  const used = STATUS_ORDER.filter((s) => m.promises.some((p) => p.status === s));
+  const seatsOf = (party: string) => m.people.councillors.filter((c) => c.party === party).length;
   return (
     <PageShell m={m}>
       <div className="hero">
         <h1>Promises</h1>
         <p className="lede">
-          Each party&rsquo;s headline pledges from its 2026 manifesto, quoted word for word, with the page they come from. Every party is held to the
-          same rules: a pledge from a party that does not run the council is an opposition pledge, and a pledge with no who, how much, when or from
-          where is marked unscoreable.
+          What each party promised {m.place.short} in its 2026 manifesto, quoted word for word, and where each pledge stands now. Every party is held to the
+          same rules.
         </p>
       </div>
-      <LedgerStateProvider input={m.balance.input}>
-        <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} heading={false} />
-      </LedgerStateProvider>
-      <section id="councillors" aria-labelledby="councillors-h">
+
+      <div className="kpis kpis-3">
+        <div className="kpi">
+          <span className="l">Pledges tracked</span>
+          <span className="v">{m.promises.length}</span>
+          <span className="s">headline pledges from {groups.reduce((a, g) => a + g.parties.length, 0)} manifestos, May 2026</span>
+        </div>
+        {groups.map((g) => (
+          <div className="kpi" key={g.id}>
+            <span className="l">{g.label}</span>
+            <span className="v">{g.count}</span>
+            <span className="s">
+              pledges;{" "}
+              {g.id === "administration" ? (
+                <>
+                  <Num f={m.politics.seats} fmt="int" /> of <Num f={m.politics.totalSeats} fmt="int" /> seats
+                </>
+              ) : (
+                g.parties.map((p, i) => (
+                  <span key={p}>
+                    {i ? ", " : ""}
+                    <Num f={{ ...m.politics.seats, value: seatsOf(p) }} fmt="int" /> seats
+                  </span>
+                ))
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <section aria-labelledby="list-h" className="plist-section">
+        <h2 id="list-h" className="sr-only">
+          All pledges
+        </h2>
+        <PromisesIndex promises={m.promises} />
+      </section>
+
+      <section aria-labelledby="how-h" className="pay-section">
         <div className="sec-head">
-          <h2 id="councillors-h">Councillors</h2>
+          <h2 id="how-h">How pledges are tracked</h2>
           <p>
-            {m.people.councillors.length} councillors in {m.people.wards.length} wards, from the council&rsquo;s own records on{" "}
-            {formatDay(m.people.retrievedOn)}.
+            Each party&rsquo;s own headline pledges get a card, quoted exactly with the manifesto page and an archived copy. The party with more than half the
+            seats runs the council; the same rules apply to every party.
           </p>
         </div>
-        <div className="wards">
-          {m.people.wards.map((w) => (
-            <div className="ward" key={w.id}>
-              <h3>{w.name}</h3>
-              <ul>
-                {w.councillor_ids.map((id) => {
-                  const c = byId.get(id)!;
-                  return (
-                    <li key={id}>
-                      <a href={`/councillor/${id}`}>{c.name}</a> <span className="muted">{c.party}</span>
-                    </li>
-                  );
-                })}
-              </ul>
+        <dl className="statuses">
+          {used.map((s) => (
+            <div key={s}>
+              <dt>
+                <span className={`pill st-${s}`}>{STATUS_LABEL[s]}</span>
+              </dt>
+              <dd>{STATUS_MEANS[s]}</dd>
             </div>
           ))}
-        </div>
+        </dl>
+        <p className="muted small">
+          A pledge moves up only on evidence from council papers. Any councillor or party named on a card can reply, and replies are published. Who
+          represents you: <a href="/councillors">councillors by ward</a>.
+        </p>
       </section>
       <JsonLd data={promisesJsonLd(m.promises)} />
     </PageShell>

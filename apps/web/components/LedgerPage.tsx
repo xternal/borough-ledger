@@ -44,7 +44,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
           <BudgetFlow m={m} />
           <Waterfall m={m} />
           <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} />
-          <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} />
+          <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} />
         </LedgerStateProvider>
         <Payments payments={m.payments} />
         <Method m={m} />
