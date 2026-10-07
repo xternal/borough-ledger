@@ -1577,6 +1577,14 @@
     display: grid;
     gap: 6px;
   }
+  footer .credit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer a {
+    color: var(--muted);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
