@@ -95,3 +95,8 @@ Still open before calling it a launch: B5 and B6 (legal), the editor checks, the
 
 Claude checked all 642 lines of `data/manual/payments_service_map.csv` against what was bought and who was paid (40 groups corrected) and listed 26 lines it was unsure of; the project owner read those and signed off every line. Services in payments are now shown as sourced rather than approx. When new spend files add service areas, `--draft-map` adds them as `reviewed=no` and the site goes back to approx until they are checked.
 
+## Manifesto archive and card check (7 Oct 2026)
+
+- **Conservative manifesto archived.** The Wayback Machine copy of 26 March 2026, and a fresh one made today, are byte-identical (same SHA-256) to the file the cards quote; a May capture was cut off at 5 MB and is not used. Both parties' manifestos now have an archived copy. Closes the "Conservative archive" item.
+- **Editor check prepared.** `docs/editor-checks/2026-manifesto-cards.md` sets each of the 18 quotes against its manifesto page (all 18 are on the cited page word for word; Labour's parks pledge runs across two columns on page 5 and is also in the page 2 list), with each status and its reason, and two leads from the spend files. docs/PROMISE_STANDARD.md asks for two editors per card before the "Awaiting editor check" mark comes off.
+
