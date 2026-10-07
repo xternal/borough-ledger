@@ -103,7 +103,8 @@ class Privacy(unittest.TestCase):
         self.assertEqual(P.payee_class("Redactive Publishing Ltd"), "org")  # a real company, not a marker
 
     def test_people_are_withheld(self):
-        for n in ["Mr J Smith", "Mrs Jane Smith", "John Smith", "J Smith", "J. Smith", "Smith, John", "Smith J", "Sir John Doe"]:
+        for n in ["Mr J Smith", "Mrs Jane Smith", "John Smith", "J Smith", "J. Smith", "Smith, John", "Smith J", "Sir John Doe",
+                  "Priya Sharma", "Kwame Mensah", "Agnieszka Nowak", "Patience Moyo"]:
             self.assertEqual(P.payee_class(n), "person", n)
 
     def test_organisations_are_published(self):
@@ -144,6 +145,7 @@ class DraftMapping(unittest.TestCase):
         self.assertEqual(P.draft_group("Voids & Repairs", "")[0], "council_homes")
         self.assertEqual(P.draft_group("Allocations & Lettings (GF)", "")[0], "housing")
         self.assertEqual(P.draft_group("Budget Planning and Monitoring", "LBHF Corporate Finance and Systems")[0], "running")
+        self.assertEqual(P.draft_group("Strategic Head of Neighbourhoods", "")[0], "council_homes")
         self.assertEqual(P.draft_group("Something new", "")[0], "unclassified")
 
 

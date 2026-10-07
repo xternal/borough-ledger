@@ -29,7 +29,8 @@ describe("payments", () => {
   it("never names anyone the council or we withheld", () => {
     const names = [...suppliersById().values()].map((s) => s.name);
     expect(names.some((n) => /redacted/i.test(n) && !/redactive/i.test(n))).toBe(false);
-    expect(names.some((n) => /^(mr|mrs|miss|ms)\.?\s/i.test(n))).toBe(false);
+    // A title is fine only on a registered company ("MS Ashraf Ltd"), never on a person.
+    expect(names.some((n) => /^(mr|mrs|miss|ms)\.?\s/i.test(n) && !/\b(ltd|limited|plc|llp)\b/i.test(n))).toBe(false);
     expect(names.some((n) => /\bt\/a\b/i.test(n))).toBe(false); // sole traders appear by trading name only
   });
 

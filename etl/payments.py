@@ -1,7 +1,7 @@
 """Payments over £500: the council's quarterly spend files, normalised, redacted and mapped to services.
 
     python3 etl/payments.py --fetch      download files the Wayback Machine holds; record hashes, rows and totals of new files
-    python3 etl/payments.py --draft-map  add unmapped service areas to data/manual/payments_service_map.csv (reviewed=no)
+    python3 etl/payments.py --draft-map  draft every line of data/manual/payments_service_map.csv not marked reviewed=yes
     python3 etl/payments.py              build data/build/payments/
     python3 etl/payments.py --check      what CI runs: rebuild and compare when every file is present, otherwise
                                          reconcile the committed build to the rows and totals recorded per file
@@ -146,7 +146,7 @@ ORG_WORDS = re.compile(
     r"primary|playcentre|sixth form|sons|fund)\b",
     re.I,
 )
-# Common forenames in England and Wales (ONS baby names and census), used only to spot "Firstname Surname" payees.
+# Common forenames in London (ONS baby names and census, across communities), used only to spot "Firstname Surname" payees.
 FORENAMES = frozenset(
     """aaron abdul abigail adam adrian ahmed aidan alan albert alex alexander alexandra ali alice alison amanda amelia amy
     andrea andrew angela ann anna anne anthony antonio arthur ashley barbara barry ben benjamin beth bethany bill brian bruce
@@ -161,7 +161,15 @@ FORENAMES = frozenset(
     nicholas nicola nigel noah oliver olivia owen pamela patricia patrick paul paula pauline peter philip rachel raymond rebecca
     richard robert roger ronald rosemary ross ruth ryan sally samantha samuel sandra sara sarah scott sean shane sharon sheila
     shirley simon sophie stacey stephanie stephen steven stuart susan suzanne teresa thomas timothy tina tom tony tracey tracy
-    valerie vanessa victoria vincent wayne william yvonne zoe""".split()
+    valerie vanessa victoria vincent wayne william yvonne zoe
+    aisha amina anil arjun asha ayesha bilal deepak dev divya gita hamza hassan hussein ibrahim imran jayesh kamal karim kavita
+    khalid lakshmi layla leila mariam maryam mehmet mohamed mustafa nadia naveen neha nikhil nisha omar pooja priya rahul rajesh
+    ravi reza rohan sadia saira salma sanjay shabana sunil tariq usman vijay yasmin yusuf zainab zara abdi abdullah amir hamid
+    mahmoud ifrah sagal hodan chidi chinedu emeka ifeoma kofi kwame olu oluwaseun tunde ade adebayo ngozi fatou aminata
+    agnieszka andrzej ewa katarzyna magdalena marek piotr tomasz irina olga natalia ivan dmitri ana carlos jose juan luis sofia
+    giulia francesco marco patience blessing precious mercy faith joy gift comfort favour peace hope chipo tendai tatenda farai
+    rudo nyasha tafadzwa kudzai chiamaka adaeze nkechi femi funmi bisi kemi yemi tolu seun bola dayo tope ama akosua kojo yaw
+    abena efua esi""".split()
 )
 WORD = re.compile(r"[A-Za-z][A-Za-z'’\-]*\.?$")
 # Payments that usually go to individuals: direct payments, foster and guardianship allowances, support for children in need.
@@ -274,8 +282,12 @@ DRAFT_RULES: List[Tuple[str, str]] = [
     (r"budget planning|property services|asset management|asset strategy|human resources|people management|people & talent|"
      r"managed services|pension fund|governance|scrutiny|committee services|change delivery|change management|insight & analytics|"
      r"project management office|information management|chief information officer|chief executive|delivery and value|"
-     r"commercial services|contract governance|health and safety team|\bfraud\b|civic services|advertising hoardings", "running"),
-    (r"rent income|chief housing officer|resident and building safety", "council_homes"),
+     r"commercial services|contract governance|health and safety team|\bfraud\b|civic services|advertising hoardings|"
+     r"it project management|members support|complaints and resolutions|business systems support|senior management budgets|"
+     r"departmental admin|strategic relationship management|director of resources|lead officer hub|to be closed or reallocated",
+     "running"),
+    (r"rent income|chief housing officer|resident and building safety|strategic head of neighbourhoods|home ownership",
+     "council_homes"),
     (r"hospital teams|ccg funding|social care directorate|social care commissioning|health partnerships|meal services|"
      r"asc and nhs", "adult_care"),
     (r"\bmash\b|contact and assessment|emergency duty team|partners in practice", "children"),
@@ -549,7 +561,7 @@ def draft_map(reg: Dict[str, Any]) -> int:
             stats[map_key(s["layout"], r.area, r.directorate)].append(r.amount)
     added = 0
     for key in stats:
-        if key not in smap:
+        if key not in smap or smap[key]["reviewed"] != "yes":  # re-draft anything a person has not checked
             group, rule = draft_group(key[1], key[2])
             smap[key] = {"layout": key[0], "service_area": key[1], "directorate": key[2], "group": group, "reviewed": "no",
                          "note": f"draft: matched '{rule}'" if rule else "draft: no rule matched"}
@@ -563,7 +575,7 @@ def draft_map(reg: Dict[str, Any]) -> int:
         w.writeheader()
         for key in sorted(smap, key=lambda k: (k[0], -float(smap[k]["total"] or 0), k[1], k[2])):
             w.writerow({k: smap[key].get(k, "") for k in fields})
-    print(f"payments_service_map.csv: {added} new lines (reviewed=no), {len(smap)} in all")
+    print(f"payments_service_map.csv: {added} lines drafted (reviewed=no), {len(smap)} in all")
     return 0
 
 
