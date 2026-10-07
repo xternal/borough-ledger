@@ -80,6 +80,8 @@ export interface PromiseModel {
   /** The councillor's party, when the actor is a councillor. */
   party: string | null;
   partyId: string;
+  /** The party's short name ("Labour"), for filters and lists. */
+  partyShort: string;
   side: "administration" | "opposition";
   made_on: string;
   venue: string;
@@ -199,6 +201,7 @@ function promiseModel(K: typeof DATA.content, p: PromiseCard, costOf: (x: Promis
     actor: councillor?.name ?? party?.name ?? p.actor.id,
     party: councillor ? (party?.short ?? null) : null,
     partyId,
+    partyShort: party?.short ?? party?.name ?? partyId,
     side: sideOf(K, partyId),
     made_on: p.made_on,
     venue: p.venue,

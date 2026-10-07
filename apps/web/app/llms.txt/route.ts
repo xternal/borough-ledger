@@ -35,7 +35,8 @@ Every figure is labelled sourced, approx or test, with a link to its source on t
 Data vintage: ${c.vintage}.
 
 - [Home](${SITE_URL}/)
-- [Promises and councillors](${SITE_URL}/promises)
+- [Promises](${SITE_URL}/promises)
+- [Councillors by ward](${SITE_URL}/councillors)
 - [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)
 - [Sources](${SITE_URL}/sources)

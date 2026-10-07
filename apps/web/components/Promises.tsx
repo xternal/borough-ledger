@@ -6,6 +6,7 @@ import type { Status } from "@borough-ledger/schema";
 import { formatDay, formatMonthYear } from "@/lib/format";
 import type { PageModel, PromiseModel } from "@/lib/model";
 import { Num, TestMark } from "./Num";
+import { isOverdue, sides } from "@/lib/promises";
 import { useLedger } from "./LedgerState";
 
 type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
@@ -36,32 +37,38 @@ const SINGLE: Partial<Record<Status, string>> = {
   quietly_dropped: "Quietly dropped. The deadline passed with no delivery and no statement.",
   failed: "Failed.",
 };
-const FILTERS = [
-  ["all", "All"],
-  ["administration", "Administration"],
-  ["opposition", "Opposition"],
-  ["overdue", "Overdue"],
-] as const;
-type Filter = (typeof FILTERS)[number][0];
+type Filter = "all" | "administration" | "opposition" | "overdue";
 
 /** Timeline event types map onto the ladder; "funded" is the older name for "budgeted". */
 const EVENT_CLASS: Record<string, string> = { funded: "budgeted" };
 
-function overdue(p: PromiseModel, today: string): boolean {
-  return !!p.deadline && p.deadline < today && p.status !== "delivered" && p.status !== "failed";
-}
+const overdue = isOverdue;
 
 function who(p: PromiseModel): string {
   return p.party ? `${p.actor}, ${p.party}` : p.actor;
 }
 
-export function Promises({ promises, today, generalBudget, balance, heading = true }: Props & { heading?: boolean }) {
+export function Promises({
+  promises,
+  today,
+  generalBudget,
+  balance,
+  heading = true,
+  limit,
+}: Props & { heading?: boolean; /** Show only this many cards, with a link to all of them. */ limit?: number }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [sel, setSel] = useState(promises[0]?.id);
   const { scenario, setToggle } = useLedger();
 
-  // One rule for every side: the filter reads `side` from data, never a party name.
-  const list = promises.filter((p) => filter === "all" || (filter === "overdue" ? overdue(p, today) : p.side === filter));
+  // One rule for every side: the filter reads `side` from data, never a party name; labels name the parties from the data.
+  const overdueCount = promises.filter((p) => overdue(p, today)).length;
+  const filters: { id: Filter; label: string; count: number }[] = [
+    { id: "all", label: "All", count: promises.length },
+    ...sides(promises).map((g) => ({ id: g.id as Filter, label: g.label, count: g.count })),
+    ...(overdueCount ? [{ id: "overdue" as Filter, label: "Overdue", count: overdueCount }] : []),
+  ];
+  const all = promises.filter((p) => filter === "all" || (filter === "overdue" ? overdue(p, today) : p.side === filter));
+  const list = limit ? all.slice(0, limit) : all;
   const current = list.find((p) => p.id === sel) ?? list[0];
 
   return (
@@ -71,7 +78,7 @@ export function Promises({ promises, today, generalBudget, balance, heading = tr
           <h2 id="promises-h">Promises</h2>
           <p>
             Each party&rsquo;s headline pledges from its 2026 manifesto, quoted word for word, with the cost to the council and a timeline that ends in
-            delivery or in silence. <a href="/promises">All promises and councillors</a>
+            delivery or in silence. <a href="/promises">All promises</a>, and <a href="/councillors">councillors by ward</a>.
           </p>
         </div>
       ) : (
@@ -82,9 +89,9 @@ export function Promises({ promises, today, generalBudget, balance, heading = tr
       <div className="promises">
         <div>
           <div className="filters" role="group" aria-label="Filter promises">
-            {FILTERS.map(([k, l]) => (
-              <button key={k} type="button" className="chip" aria-pressed={k === filter} onClick={() => setFilter(k)}>
-                {l}
+            {filters.map((f) => (
+              <button key={f.id} type="button" className="chip" aria-pressed={f.id === filter} onClick={() => setFilter(f.id)}>
+                {f.label} <span className="count">{f.count}</span>
               </button>
             ))}
           </div>
@@ -125,6 +132,11 @@ export function Promises({ promises, today, generalBudget, balance, heading = tr
                 No promises match this filter.
               </p>
             )}
+            {limit && all.length > list.length ? (
+              <a className="linkbtn more" href={filter === "administration" || filter === "opposition" ? `/promises?side=${filter}` : "/promises"}>
+                See all {all.length} promises
+              </a>
+            ) : null}
           </div>
         </div>
         {current ? (
