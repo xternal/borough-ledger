@@ -1,13 +1,5 @@
 import { STAGE } from "@/lib/site";
-const SECTIONS = [
-  ["bill", "Your bill"],
-  ["budget", "Budget"],
-  ["gap", "The gap"],
-  ["balance", "Balance it"],
-  ["promises", "Promises"],
-  ["payments", "Payments"],
-  ["method", "Method"],
-] as const;
+import { SectionNav } from "./SectionNav";
 
 export function TopBar({ place, year }: { place: string; year: string }) {
   return (
@@ -20,13 +12,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
             {STAGE}
           </span>
         </a>
-        <nav className="sections" aria-label="Sections">
-          {SECTIONS.map(([id, label]) => (
-            <a key={id} href={id === "promises" || id === "payments" ? `/${id}` : `/#${id}`}>
-              {label}
-            </a>
-          ))}
-        </nav>
+        <SectionNav />
         <span className="ctx">
           {place}, {year}
         </span>
