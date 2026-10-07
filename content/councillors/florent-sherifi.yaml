@@ -1,0 +1,12 @@
+id: "florent-sherifi"
+name: "Florent Sherifi"
+party: "labour"
+party_name: "Labour"
+ward_id: "brook-green"
+roles:
+  - title: "Chair of Housing and Homelessness PAC"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9558"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

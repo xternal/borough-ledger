@@ -54,3 +54,15 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 | New: source version | The adopted budget is the Full Council report of 25 Feb 2026; figures match the Cabinet version of 9 Feb. Citations use the Full Council version and its page numbers |
 | New: outturn 2024/25 | What was actually spent comes from the RS and RO5 outturn returns, in the same service groups (`history.outturn`). Housing and homelessness was budgeted at £11.9m and cost £30.8m, so the £44.4m 2025/26 budget reflects real temporary accommodation costs. Outturn includes grants received during the year, so a gap between budget and outturn is not by itself an overspend. Earlier outturn years need their own adapters |
 | New: fees lever | Sourced from £80.5m of fees and charges income (Appendix I); approx and static (H5) |
+
+## Status after M3 (7 Oct 2026)
+
+| # | Status |
+|---|---|
+| B1 | Promises closed. 18 real cards from both parties' 2026 manifestos replace every test card. Still test: three service toggle costs (free home care, weekly bins, library hours) and all payments (M4) |
+| B3 | Open. The free home care card now cites the 2026/27 budget report (PDF page 22) and both 2026 manifestos; the 2014 pledge and the 2015 end of charges are kept out of the timeline until an editor sources them |
+| B4 | Closed. No "Party A / Party B" cards remain; CI fails if a promise card has quality "test" |
+| New: card check | Every card is marked "Awaiting editor check" until two editors read each quote against the manifesto page (docs/PROMISE_STANDARD.md §6) |
+| New: Conservative archive | The Conservative manifesto is saved with its SHA-256, but the Wayback Machine had not archived it by 7 Oct 2026. Submit it at web.archive.org/save and add `archive_url` to `content/parties.yaml` |
+| Medium: seats | Closed. Labour 38 of 50 seats, the leader and every councillor now come from the council's ModernGov service (retrieved 7 Oct 2026), not Wikipedia |
+

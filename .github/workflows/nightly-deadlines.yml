@@ -1,0 +1,40 @@
+name: Nightly promise deadlines
+
+# Appends an automatic deadline_missed event to any promise whose deadline has passed with no delivery recorded
+# (docs/PROMISE_STANDARD.md). Append-only: it never edits an existing entry. An editor confirms "quietly dropped" later.
+on:
+  schedule:
+    - cron: "15 2 * * *" # 02:15 UTC: 03:15 BST in summer, 02:15 GMT in winter
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly-deadlines
+  cancel-in-progress: false
+
+jobs:
+  deadlines:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Flag passed deadlines
+        run: pnpm --filter @borough-ledger/schema content:deadlines
+      - name: Rebuild content.json
+        run: pnpm --filter @borough-ledger/schema content:build
+      - name: Commit the new events, if any
+        run: |
+          if git diff --quiet; then echo "No deadlines passed; nothing to record."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Record missed promise deadlines ($(date -u +%F))"
+          git push

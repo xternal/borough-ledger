@@ -1,0 +1,12 @@
+id: "natalia-perez"
+name: "Natalia Perez"
+party: "labour"
+party_name: "Labour"
+ward_id: "white-city"
+roles:
+  - title: "Chair of Families, Health and Care PAC"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1284"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

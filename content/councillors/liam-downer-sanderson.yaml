@@ -1,0 +1,12 @@
+id: "liam-downer-sanderson"
+name: "Liam Downer-Sanderson"
+party: "conservative"
+party_name: "Conservative"
+ward_id: "fulham-town"
+roles:
+  - title: "Shadow Cabinet Member for Finance and Reform"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9016"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

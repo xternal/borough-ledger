@@ -1,0 +1,21 @@
+id: "con-2026-police"
+actor:
+  kind: "party"
+  id: "conservative"
+made_on: "2026-03-16"
+venue: "manifesto"
+area: "Community safety"
+versions:
+  - text: "Fifty extra Police Officers from the Met to patrol our streets to tackle crime and anti-social behaviour"
+    recorded_on: "2026-10-07"
+    source_url: "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
+    page: 6
+status: "not_in_power"
+deadline: null
+events:
+  - date: "2026-03-16"
+    type: "promised"
+    text: "Key commitment in the 2026 Conservative manifesto"
+replies: []
+editor_check_required: true
+editor_note: "Cost not stated in the manifesto; cost it from Met charges for additional officers if a council source exists."

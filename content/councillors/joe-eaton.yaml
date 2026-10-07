@@ -1,0 +1,11 @@
+id: "joe-eaton"
+name: "Joe Eaton"
+party: "labour"
+party_name: "Labour"
+ward_id: "avonmore"
+roles: []
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9557"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

@@ -35,13 +35,33 @@ describe("page model", () => {
     expect(m.ctShare.value + m.grantsShare.value + m.ratesShare.value).toBeLessThan(1);
   });
 
-  it("costs promises the same way for both sides", () => {
-    const opp = m.promises.find((p) => p.side === "opposition" && p.cost);
-    const adm = m.promises.find((p) => p.side === "administration" && p.cost);
-    for (const p of [opp, adm]) {
-      expect(p?.cost?.perBandD.value).toBeCloseTo((p!.cost!.central.value * 1e6) / 93597.96, 6);
-      expect(p?.cost?.share.value).toBeCloseTo(p!.cost!.central.value / 255.333, 6);
-    }
+  it("holds both parties' manifesto pledges to the same rules", () => {
+    expect(m.promises).toHaveLength(18);
+    const by = (side: string) => m.promises.filter((p) => p.side === side);
+    expect(by("administration").every((p) => p.partyId === "labour")).toBe(true); // 38 of 50 seats
+    expect(by("opposition").every((p) => p.partyId === "conservative" && ["not_in_power", "unscoreable"].includes(p.status))).toBe(true);
+    expect(m.promises.every((p) => p.sources.length > 0 && p.sources.every((s) => s.url.startsWith("https://")))).toBe(true);
+    expect(m.promises.every((p) => !p.test)).toBe(true);
+  });
+
+  it("orders cards neutrally: newest first, then by id", () => {
+    const dates = m.promises.map((p) => p.made_on);
+    expect(dates).toEqual([...dates].sort().reverse());
+  });
+
+  it("costs a capital pledge per Band D home, once", () => {
+    const parks = m.promises.find((p) => p.id === "lab-2026-parks")!;
+    expect(parks.cost).toBeNull();
+    expect(parks.capital?.central.value).toBe(8);
+    expect(parks.capital?.perBandD.value).toBeCloseTo((8 * 1e6) / 93597.96, 6);
+  });
+
+  it("takes party control and councillors from the council's records", () => {
+    expect(m.politics.control).toBe("Labour");
+    expect(m.politics.seats.value).toBe(38);
+    expect(m.politics.totalSeats.value).toBe(50);
+    expect(m.people.wards).toHaveLength(21);
+    expect(m.people.councillors.find((c) => c.roles.includes("Leader of the Council"))?.name).toBe("Stephen Cowan");
   });
 
   it("lists the savings with their totals and the one-off part", () => {

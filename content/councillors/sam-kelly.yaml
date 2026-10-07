@@ -1,0 +1,12 @@
+id: "sam-kelly"
+name: "Sam Kelly"
+party: "labour"
+party_name: "Labour"
+ward_id: "walham-green"
+roles:
+  - title: "Chair of Environment, Arts and Culture PAC"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9570"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

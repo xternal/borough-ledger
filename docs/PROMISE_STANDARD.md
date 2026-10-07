@@ -48,3 +48,14 @@ Use council figures first (budget report, cabinet papers). Otherwise a documente
 * Two editors per merge. Reader submissions go to triage; volume never changes a status.
 * Editors declare party membership and residence ward. Cards about a party an editor belongs to need a second editor from outside it.
 * Quarterly audit of a 10% sample by someone outside the project.
+
+## 6. Which pledges get a card
+
+The same rule for every party, so nobody chooses the easy pledges for one side and the hard ones for the other.
+
+* **Manifestos:** each party's own headline pledges, as the party marks them. For May 2026 that is the eight pledges on page 2 of Labour's manifesto and the nine "Key commitment" boxes in the Conservative manifesto. Other manifesto pledges get cards when an editor has capacity, taking each manifesto in page order.
+* **Who is the administration** comes from seats in the council's own records (more than half the seats), never from a party name. With no overall control, every party's pledges are opposition pledges.
+* **Starting status:** the administration's pledges start at "promised" and move up only on evidence from council papers. Opposition pledges are "opposition pledge" (`not_in_power`).
+* **Quotes** are copied exactly as printed, typos included, with the PDF page. The manifesto is archived (Wayback Machine) and its SHA-256 recorded in `content/parties.yaml`.
+* **Order on the site:** newest first, then by id. No party is listed first by design.
+* **Editor check:** cards drafted by the build carry `editor_check_required: true` and show "Awaiting editor check" until two editors have read each quote against the page and applied the 7-day unscoreable rule (§2).

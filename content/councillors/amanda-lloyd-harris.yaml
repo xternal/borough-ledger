@@ -1,0 +1,12 @@
+id: "amanda-lloyd-harris"
+name: "Amanda Lloyd-Harris"
+party: "conservative"
+party_name: "Conservative"
+ward_id: "palace-and-hurlingham"
+roles:
+  - title: "Shadow Cabinet Member for the Environment, Arts and Culture"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1828"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

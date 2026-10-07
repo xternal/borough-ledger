@@ -1,0 +1,12 @@
+id: "nicole-trehy"
+name: "Nicole Trehy"
+party: "labour"
+party_name: "Labour"
+ward_id: "wormholt"
+roles:
+  - title: "Cabinet Member for Climate Emergency and Travel"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3089"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

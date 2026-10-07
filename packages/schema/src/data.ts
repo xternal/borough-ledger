@@ -1,14 +1,16 @@
-/* The council year comes from the ETL build (etl/build.py); promises and payments are still seed data until M3 and M4. */
+/* The council year comes from the ETL build (etl/build.py), promises and councillors from content/ (compiled to
+   data/build/content.json); payments are still seed data until M4. */
 import hfRaw from "../../../data/build/hf_2026-27.json";
-import promisesRaw from "../../../data/seed/promises.json";
+import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/seed/payments.json";
 import rulesRaw from "../../../data/config/rules.json";
-import { CouncilYear, Payments, Promises, Rules, type Source } from "./seed";
+import { checkContent, ContentFile, type Content } from "./content";
+import { CouncilYear, Payments, Rules, type Source } from "./seed";
 import type { Quality } from "./quality";
 
 export interface Dataset {
   council: CouncilYear;
-  promises: Promises;
+  content: Content;
   payments: Payments;
   rules: Rules;
   /** Every source cited anywhere, by id. */
@@ -42,11 +44,6 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
   );
   c.next_year.levers.forEach((l) => add(`next_year.levers.${l.id}`, l));
   c.next_year.toggles.forEach((t) => add(`next_year.toggles.${t.id}`, t));
-  add("politics", c.politics);
-  d.promises.promises.forEach((p) => {
-    if (p.cost_m && p.cost_quality && p.cost_source_id)
-      out.push({ path: `promises.${p.id}.cost`, quality: p.cost_quality, source_id: p.cost_source_id });
-  });
   add("payments", d.payments.meta);
   const r = d.rules;
   add("rules.band_ratios", r.band_ratios);
@@ -59,9 +56,9 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
 }
 
 /** Parse and cross-check raw seed objects. Throws with every problem listed. */
-export function parseDataset(raw: { council: unknown; promises: unknown; payments: unknown; rules: unknown }): Dataset {
+export function parseDataset(raw: { council: unknown; content: unknown; payments: unknown; rules: unknown }): Dataset {
   const council = CouncilYear.parse(raw.council);
-  const promises = Promises.parse(raw.promises);
+  const content = ContentFile.parse(raw.content);
   const payments = Payments.parse(raw.payments);
   const rules = Rules.parse(raw.rules);
 
@@ -72,17 +69,18 @@ export function parseDataset(raw: { council: unknown; promises: unknown; payment
   }
 
   const problems: string[] = [];
-  for (const ref of provenanceRefs({ council, promises, payments, rules })) {
+  for (const ref of provenanceRefs({ council, content, payments, rules })) {
     const s = sources.get(ref.source_id);
     if (!s) problems.push(`${ref.path}: unknown source_id "${ref.source_id}"`);
     else if (ref.quality !== "test" && !s.url) problems.push(`${ref.path}: ${ref.quality} value cites "${s.id}", which has no URL`);
   }
-  const promiseIds = new Set(promises.promises.map((p) => p.id));
+  problems.push(...checkContent(content));
+  const promiseIds = new Set(content.promises.map((p) => p.id));
   const toggleIds = new Set(council.next_year.toggles.map((t) => t.id));
   const leverIds = new Set<string>(council.next_year.levers.map((l) => l.id));
   for (const t of council.next_year.toggles)
     if (t.promise_id && !promiseIds.has(t.promise_id)) problems.push(`toggle ${t.id}: unknown promise ${t.promise_id}`);
-  for (const p of promises.promises)
+  for (const p of content.promises)
     if (p.lever_or_toggle_id && !toggleIds.has(p.lever_or_toggle_id) && !leverIds.has(p.lever_or_toggle_id))
       problems.push(`promise ${p.id}: unknown lever or toggle ${p.lever_or_toggle_id}`);
   const fc = council.next_year.forecast;
@@ -98,8 +96,8 @@ export function parseDataset(raw: { council: unknown; promises: unknown; payment
   if (!rules.instalments.options.includes(rules.instalments.default)) problems.push("rules: default instalments not among options");
   if (problems.length) throw new Error(`Seed data failed cross-checks:\n  ${problems.join("\n  ")}`);
 
-  return { council, promises, payments, rules, sources };
+  return { council, content, payments, rules, sources };
 }
 
 /** The parsed seed. Parsing happens once, at import; bad data fails the build. */
-export const DATA: Dataset = parseDataset({ council: hfRaw, promises: promisesRaw, payments: paymentsRaw, rules: rulesRaw });
+export const DATA: Dataset = parseDataset({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw });

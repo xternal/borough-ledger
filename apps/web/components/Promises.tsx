@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { encodeScenario, defaultScenario } from "@borough-ledger/engine";
 import type { Status } from "@borough-ledger/schema";
 import { formatDay, formatMonthYear } from "@/lib/format";
 import type { PageModel, PromiseModel } from "@/lib/model";
@@ -20,6 +21,14 @@ const LABEL: Record<Status, string> = {
   quietly_dropped: "Quietly dropped",
   unscoreable: "Unscoreable",
   not_in_power: "Opposition pledge",
+};
+const VENUE: Record<string, string> = {
+  manifesto: "Manifesto",
+  leaflet: "Leaflet",
+  hustings: "Hustings",
+  council_meeting: "Council meeting",
+  press: "Press statement",
+  social: "Social media",
 };
 const SINGLE: Partial<Record<Status, string>> = {
   unscoreable: "Unscoreable. No who, how much, when or from where, so it is a slogan.",
@@ -46,7 +55,7 @@ function who(p: PromiseModel): string {
   return p.party ? `${p.actor}, ${p.party}` : p.actor;
 }
 
-export function Promises({ promises, today, generalBudget, balance }: Props) {
+export function Promises({ promises, today, generalBudget, balance, heading = true }: Props & { heading?: boolean }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [sel, setSel] = useState(promises[0]?.id);
   const { scenario, setToggle } = useLedger();
@@ -57,10 +66,19 @@ export function Promises({ promises, today, generalBudget, balance }: Props) {
 
   return (
     <section id="promises" aria-labelledby="promises-h">
-      <div className="sec-head">
-        <h2 id="promises-h">Promises</h2>
-        <p>Every pledge from the administration and the opposition, with its cost to the council and a timeline that ends in delivery or in silence.</p>
-      </div>
+      {heading ? (
+        <div className="sec-head">
+          <h2 id="promises-h">Promises</h2>
+          <p>
+            Each party&rsquo;s headline pledges from its 2026 manifesto, quoted word for word, with the cost to the council and a timeline that ends in
+            delivery or in silence. <a href="/promises">All promises and councillors</a>
+          </p>
+        </div>
+      ) : (
+        <h2 id="promises-h" className="sr-only">
+          Promises
+        </h2>
+      )}
       <div className="promises">
         <div>
           <div className="filters" role="group" aria-label="Filter promises">
@@ -88,11 +106,16 @@ export function Promises({ promises, today, generalBudget, balance }: Props) {
                           {" to "}
                           <Num f={p.cost.high} fmt="m1" /> a year
                         </>
+                      ) : p.capital ? (
+                        <>
+                          <Num f={p.capital.central} fmt="m1" /> capital
+                        </>
                       ) : (
                         "Cost not stated"
                       )}
                     </span>
                     {p.deadline ? <span>Due {formatMonthYear(p.deadline)}</span> : null}
+                    {p.editorCheck ? <span className="checkmark">Awaiting editor check</span> : null}
                     {p.test ? <TestMark what={`promise card ${p.id}`}>Test card</TestMark> : null}
                   </div>
                 </button>
@@ -112,8 +135,16 @@ export function Promises({ promises, today, generalBudget, balance }: Props) {
             toggle={balance.toggles.find((t) => t.id === current.lever_or_toggle_id)}
             toggleOn={current.lever_or_toggle_id ? scenario.toggles[current.lever_or_toggle_id] : undefined}
             onTry={(id, on) => {
-              setToggle(id, on);
-              location.hash = "#balance";
+              // On the full statement, change the tool in place; elsewhere, open a balance-it link with this choice.
+              if (document.getElementById("balance")) {
+                setToggle(id, on);
+                location.hash = "#balance";
+              } else {
+                const s = defaultScenario(balance.input);
+                s.toggles[id] = on;
+                const code = encodeScenario(balance.input, s);
+                location.href = `/balance${code ? `?s=${code}` : ""}`;
+              }
             }}
           />
         ) : (
@@ -124,7 +155,7 @@ export function Promises({ promises, today, generalBudget, balance }: Props) {
   );
 }
 
-function Detail({
+export function Detail({
   p,
   today,
   generalBudget,
@@ -151,6 +182,11 @@ function Detail({
           {who(p)}, {p.area}
         </span>
         <h3 style={{ fontSize: 20, letterSpacing: "-.02em", lineHeight: 1.3 }}>&ldquo;{p.text}&rdquo;</h3>
+        <span className="muted small">
+          {VENUE[p.venue] ?? p.venue}, {formatDay(p.made_on)}
+          {p.page ? `, page ${p.page}` : ""}
+          {p.editorCheck ? <span className="checkmark"> Awaiting editor check</span> : null}
+        </span>
         {p.test ? <TestMark what={`promise card ${p.id}`}>Test card with an invented actor</TestMark> : null}
       </div>
       {single ? (
@@ -195,6 +231,24 @@ function Detail({
           </div>
         </div>
       ) : null}
+      {!p.cost && p.capital ? (
+        <div className="trio">
+          <div>
+            <span className="l">Capital, over the term</span>
+            <span className="n">
+              <Num f={p.capital.central} fmt="m1" />
+            </span>
+            <span className="r">{p.capital.note ?? "one-off investment"}</span>
+          </div>
+          <div>
+            <span className="l">Per Band D home</span>
+            <span className="n">
+              <Num f={p.capital.perBandD} fmt="gbp0" />
+            </span>
+            <span className="r">once, not a year</span>
+          </div>
+        </div>
+      ) : null}
       <div style={{ display: "grid", gap: 2 }}>
         <span className="muted small">Paid for by</span>
         <span>{p.funded_by ?? "Not stated"}</span>
@@ -209,6 +263,9 @@ function Detail({
         ))}
       </ol>
       <div className="actions">
+        <a className="linkbtn" href={`/promise/${p.id}`}>
+          Open the full card
+        </a>
         {toggle && toggleOn !== undefined ? (
           <button type="button" className="btn" onClick={() => onTry(toggle.id, !toggleOn)}>
             {toggleOn ? "See next year without it" : "See next year with it"}
@@ -232,5 +289,25 @@ function Detail({
         </div>
       ) : null}
     </div>
+  );
+}
+
+/** One card on its own page: the panel from the list, opening balance-it links instead of changing the tool in place. */
+export function PromiseCardView({ p, today, generalBudget, balance }: { p: PromiseModel } & Pick<PageModel, "today" | "generalBudget" | "balance">) {
+  const toggle = balance.toggles.find((t) => t.id === p.lever_or_toggle_id);
+  return (
+    <Detail
+      p={p}
+      today={today}
+      generalBudget={generalBudget}
+      toggle={toggle}
+      toggleOn={toggle?.on}
+      onTry={(id, on) => {
+        const s = defaultScenario(balance.input);
+        s.toggles[id] = on;
+        const code = encodeScenario(balance.input, s);
+        location.href = `/balance${code ? `?s=${code}` : ""}`;
+      }}
+    />
   );
 }

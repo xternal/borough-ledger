@@ -4,15 +4,21 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./content": "./src/content-compile.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "report:test-values": "tsx src/report-test-values.ts"
+    "report:test-values": "tsx src/report-test-values.ts",
+    "content:build": "tsx src/content-build.ts",
+    "content:check": "tsx src/content-build.ts --check",
+    "content:append-only": "tsx src/append-only-cli.ts",
+    "content:deadlines": "tsx src/deadlines-cli.ts"
   },
   "dependencies": {
-    "zod": "4.6.5"
+    "zod": "4.6.5",
+    "yaml": "2.9.1"
   },
   "devDependencies": {
     "tsx": "4.23.15",

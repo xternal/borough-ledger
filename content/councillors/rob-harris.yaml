@@ -1,0 +1,11 @@
+id: "rob-harris"
+name: "Rob Harris"
+party: "conservative"
+party_name: "Conservative"
+ward_id: "sands-end"
+roles: []
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9567"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

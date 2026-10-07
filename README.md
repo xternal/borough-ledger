@@ -101,6 +101,8 @@ pnpm typecheck
 pnpm build:preview       # production build that may render test data, each value underlined in red, noindex
 pnpm build:prod          # fails while any rendered value has quality "test"
 pnpm --filter @borough-ledger/schema report:test-values   # every test value still in the data
+pnpm --filter @borough-ledger/schema content:build        # compile content/ (promises, councillors) into data/build
+python3 etl/councillors.py                                # refresh councillors and wards from the council's ModernGov service
 ```
 
 | Path | What |
@@ -108,6 +110,7 @@ pnpm --filter @borough-ledger/schema report:test-values   # every test value sti
 | `apps/web` | Next.js app. Every number renders through `<Num>`, which carries its quality and blocks test values in `build:prod` |
 | `packages/schema` | Zod schemas for `data/seed` and `data/config/rules.json`, cross-checks, quality helpers |
 | `packages/engine` | Bill, budget identity, waterfall, balance-it and costing. Pure functions with Vitest tests |
+| `content/` | Promise cards, parties, councillors and wards in YAML, edited by pull request; see `content/README.md` |
 | `data/config/rules.json` | Band ratios, single person discount, balanced budget rule, referendum limit, instalments, each with its legal source |
 
 Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. Set `NEXT_PUBLIC_SITE_URL` once the domain is chosen.

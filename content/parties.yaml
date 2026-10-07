@@ -1,0 +1,25 @@
+# Parties with seats on the council after the May 2026 election, and the manifesto each published.
+# Promise cards cite these manifestos; a party's side (administration or opposition) is worked out from
+# which party holds a majority of seats, never from its name (CLAUDE.md invariant 7).
+parties:
+  - id: "labour"
+    name: "Hammersmith & Fulham Labour"
+    short: "Labour"
+    manifesto:
+      title: "Hope you can believe in (Hammersmith & Fulham Labour, 2026 local election manifesto summary)"
+      url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+      archive_url: "https://web.archive.org/web/20260617065909/https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+      published_on: "2026-05-01"
+      published_note: "PDF creation date. The party site did not respond on 7 Oct 2026; the copy read is the Wayback Machine capture of 17 Jun 2026."
+      sha256: "e08440222a5f071c5c1c7a41d2ed2fb60b5c7d62607614d6f5ab91da3f72c974"
+  - id: "conservative"
+    name: "Hammersmith and Fulham Conservatives"
+    short: "Conservative"
+    manifesto:
+      title: "Your priorities, our mission: our plan for Hammersmith & Fulham (Conservative manifesto 2026)"
+      url: "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
+      archive_url: null
+      archive_todo: "TODO(source): archive a copy (the Wayback Machine was rate-limiting on 7 Oct 2026)"
+      published_on: "2026-03-16"
+      published_note: "PDF creation date; linked from https://www.hfconservatives.org.uk/manifesto2026"
+      sha256: "e4d97a0804c16f856e4de9492557208c44fb12ba11ddc83830a6b9866abd13e8"

@@ -1,0 +1,11 @@
+id: "victoria-brocklebank-fowler"
+name: "Victoria Brocklebank-Fowler"
+party: "conservative"
+party_name: "Conservative"
+ward_id: "fulham-town"
+roles: []
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=116"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

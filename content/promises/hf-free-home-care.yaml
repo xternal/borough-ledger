@@ -1,0 +1,26 @@
+id: "hf-free-home-care"
+actor:
+  kind: "party"
+  id: "labour"
+made_on: "2026-05-01"
+venue: "manifesto"
+area: "Care for older and disabled adults"
+versions:
+  - text: "Continue our pioneering policy of free adult home care for every resident in need, because when people need care they should face kindness, not anxiety about cost."
+    recorded_on: "2026-10-07"
+    source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+    page: 3
+status: "delivering"
+deadline: null
+lever_or_toggle_id: "free_home_care"
+events:
+  - date: "2026-02-25"
+    type: "budgeted"
+    text: "Kept in the 2026/27 budget adopted by Full Council: the council says it is the only council in the country to provide free home care, helping 1,623 residents (budget report, PDF page 22)"
+    evidence_url: "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf"
+  - date: "2026-05-01"
+    type: "promised"
+    text: "Re-pledged in the 2026 Labour manifesto"
+replies: []
+editor_check_required: true
+editor_note: "Earlier history (2014 pledge, 2015 charges scrapped) is not yet sourced (PRE_SHIP_REVIEW B3); append those events once found."

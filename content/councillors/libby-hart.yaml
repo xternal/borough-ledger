@@ -1,0 +1,12 @@
+id: "libby-hart"
+name: "Libby Hart"
+party: "conservative"
+party_name: "Conservative"
+ward_id: "sands-end"
+roles:
+  - title: "Shadow Cabinet Member for Social Advancement and the Pathway Bond / Enterprise and Skills"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9568"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

@@ -1,0 +1,1681 @@
+{
+ "parties": [
+  {
+   "id": "labour",
+   "name": "Hammersmith & Fulham Labour",
+   "short": "Labour",
+   "manifesto": {
+    "title": "Hope you can believe in (Hammersmith & Fulham Labour, 2026 local election manifesto summary)",
+    "url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+    "archive_url": "https://web.archive.org/web/20260617065909/https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+    "published_on": "2026-05-01",
+    "published_note": "PDF creation date. The party site did not respond on 7 Oct 2026; the copy read is the Wayback Machine capture of 17 Jun 2026.",
+    "sha256": "e08440222a5f071c5c1c7a41d2ed2fb60b5c7d62607614d6f5ab91da3f72c974"
+   }
+  },
+  {
+   "id": "conservative",
+   "name": "Hammersmith and Fulham Conservatives",
+   "short": "Conservative",
+   "manifesto": {
+    "title": "Your priorities, our mission: our plan for Hammersmith & Fulham (Conservative manifesto 2026)",
+    "url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+    "archive_url": null,
+    "archive_todo": "TODO(source): archive a copy (the Wayback Machine was rate-limiting on 7 Oct 2026)",
+    "published_on": "2026-03-16",
+    "published_note": "PDF creation date; linked from https://www.hfconservatives.org.uk/manifesto2026",
+    "sha256": "e4d97a0804c16f856e4de9492557208c44fb12ba11ddc83830a6b9866abd13e8"
+   }
+  }
+ ],
+ "councillors": [
+  {
+   "id": "adrian-pascu-tulbure",
+   "name": "Adrian Pascu-Tulbure",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "parsons-green-and-sandford",
+   "roles": [
+    {
+     "title": "Deputy Leader of the Opposition and Shadow Cabinet Member for the Economy"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3080",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "adronie-alford",
+   "name": "Adronie Alford",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "munster",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for Housing and Homelessness"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=136",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "alex-sanderson",
+   "name": "Alex Sanderson",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "college-park-and-old-oak",
+   "roles": [
+    {
+     "title": "Deputy Leader (responsible for Health and Social Care and Children and Education)"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1815",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "aliya-afzal-khan",
+   "name": "Aliya Afzal-Khan",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "palace-and-hurlingham",
+   "roles": [
+    {
+     "title": "Opposition Deputy Whip and Shadow Cabinet Member for Health and Social Care and Children and Education"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3078",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "amanda-lloyd-harris",
+   "name": "Amanda Lloyd-Harris",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "palace-and-hurlingham",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for the Environment, Arts and Culture"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1828",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "andrew-jones",
+   "name": "Andrew Jones",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "white-city",
+   "roles": [
+    {
+     "title": "Cabinet Member for the Economy"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=606",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "anna-magryta-urban",
+   "name": "Anna Magryta-Urban",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "fulham-reach",
+   "roles": [],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9560",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "asif-siddique",
+   "name": "Asif Siddique",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "wendell-park",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Older People"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1819",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "bora-kwon",
+   "name": "Bora Kwon",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "college-park-and-old-oak",
+   "roles": [
+    {
+     "title": "Cabinet Member for the Environment, Arts and Culture"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1818",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "callum-nimmo",
+   "name": "Callum Nimmo",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "hammersmith-broadway",
+   "roles": [
+    {
+     "title": "Deputy Whip, Deputy Cabinet Member for Housing and Homelessness, and Borough Representative for the Armed Forces Community"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=5954",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "daryl-brown",
+   "name": "Daryl Brown",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "west-kensington",
+   "roles": [
+    {
+     "title": "Deputy Mayor"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=607",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "david-campbell",
+   "name": "David Campbell",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "fulham-reach",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member to the Leader of the Council"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9559",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "dominic-stanton",
+   "name": "Dominic Stanton",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "munster",
+   "roles": [
+    {
+     "title": "Opposition Whip"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1826",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "florent-sherifi",
+   "name": "Florent Sherifi",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "brook-green",
+   "roles": [
+    {
+     "title": "Chair of Housing and Homelessness PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9558",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "florian-chevoppe-verdier",
+   "name": "Florian Chevoppe-Verdier",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "west-kensington",
+   "roles": [
+    {
+     "title": "Chair of Pension Fund Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3088",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "frances-umeh",
+   "name": "Frances Umeh",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "white-city",
+   "roles": [
+    {
+     "title": "Cabinet Member for Housing and Homelessness"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3032",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "genevieve-nwaogbe",
+   "name": "Genevieve Nwaogbe",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "walham-green",
+   "roles": [
+    {
+     "title": "Deputy Whip"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3086",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "hannah-bulmer",
+   "name": "Hannah Bulmer",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "grove",
+   "roles": [
+    {
+     "title": "Cabinet Member for Social Advancement and the Pathway Bond"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9561",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "harry-brackley",
+   "name": "Harry Brackley",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "ravenscourt",
+   "roles": [
+    {
+     "title": "Chair of Public Sector Reform PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9565",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "jacolyn-daly",
+   "name": "Jacolyn Daly",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "addison",
+   "roles": [
+    {
+     "title": "Chair of Community Safety Board"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3069",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "jeremy-maddocks",
+   "name": "Jeremy Maddocks",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "palace-and-hurlingham",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for Community Safety"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9564",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "joe-eaton",
+   "name": "Joe Eaton",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "avonmore",
+   "roles": [],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9557",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "jose-afonso",
+   "name": "Jose Afonso",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "parsons-green-and-sandford",
+   "roles": [
+    {
+     "title": "Leader of the Opposition"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3079",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "laura-janes",
+   "name": "Laura Janes",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "avonmore",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Holocaust Remembrance and Combating Hate"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3071",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "liam-downer-sanderson",
+   "name": "Liam Downer-Sanderson",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "fulham-town",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for Finance and Reform"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9016",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "libby-hart",
+   "name": "Libby Hart",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "sands-end",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for Social Advancement and the Pathway Bond / Enterprise and Skills"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9568",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "lisa-homan",
+   "name": "Lisa Homan",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "coningham",
+   "roles": [
+    {
+     "title": "Cabinet Member for Community Safety"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=112",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "lydia-paynter",
+   "name": "Lydia Paynter",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "lillie",
+   "roles": [
+    {
+     "title": "Chair of Planning and Development Control Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=5953",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "max-schmid",
+   "name": "Max Schmid",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "wormholt",
+   "roles": [
+    {
+     "title": "Chair of Audit Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1106",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "mercy-umeh",
+   "name": "Mercy Umeh",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "shepherds-bush-green",
+   "roles": [
+    {
+     "title": "Chair of Licensing Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=147",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "molly-mantle",
+   "name": "Molly Mantle",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "hammersmith-broadway",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Education and Upstream London Forum and Expo and Vice Chair of Licensing Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9562",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "natalia-perez",
+   "name": "Natalia Perez",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "white-city",
+   "roles": [
+    {
+     "title": "Chair of Families, Health and Care PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1284",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "natalie-lindsay",
+   "name": "Natalie Lindsay",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "ravenscourt",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Active Travel"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9566",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "nicole-trehy",
+   "name": "Nicole Trehy",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "wormholt",
+   "roles": [
+    {
+     "title": "Cabinet Member for Climate Emergency and Travel"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3089",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "nikos-souslous",
+   "name": "Nikos Souslous",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "fulham-reach",
+   "roles": [
+    {
+     "title": "Chief Whip"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3075",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "rebecca-harvey",
+   "name": "Rebecca Harvey",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "wendell-park",
+   "roles": [
+    {
+     "title": "Chair of Policy and Oversight Board"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1813",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "rob-harris",
+   "name": "Rob Harris",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "sands-end",
+   "roles": [],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9567",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "rory-vaughan",
+   "name": "Rory Vaughan",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "coningham",
+   "roles": [
+    {
+     "title": "Chair of Economy and Social Advancement PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=107",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "roseanne-meacher",
+   "name": "Roseanne Meacher",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "sands-end",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Upstream London"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9569",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "ross-melton",
+   "name": "Ross Melton",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "addison",
+   "roles": [
+    {
+     "title": "Chair of Pensions Board and Climate, Sustainability and Travel PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3070",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "rowan-ree",
+   "name": "Rowan Ree",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "coningham",
+   "roles": [
+    {
+     "title": "Cabinet Member for Finance and Reform"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1824",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "sam-kelly",
+   "name": "Sam Kelly",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "walham-green",
+   "roles": [
+    {
+     "title": "Chair of Environment, Arts and Culture PAC"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9570",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "sharon-holder",
+   "name": "Sharon Holder",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "lillie",
+   "roles": [
+    {
+     "title": "Mayor"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1283",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "stala-antoniades",
+   "name": "Stala Antoniades",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "brook-green",
+   "roles": [
+    {
+     "title": "Deputy Cabinet Member for Land Development"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=3072",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "stephen-cowan",
+   "name": "Stephen Cowan",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "grove",
+   "roles": [
+    {
+     "title": "Leader of the Council"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=133",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "stewart-waine",
+   "name": "Stewart Waine",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "munster",
+   "roles": [
+    {
+     "title": "Shadow Cabinet Member for Climate Emergency and Travel"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9563",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "victoria-brignell",
+   "name": "Victoria Brignell",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "west-kensington",
+   "roles": [
+    {
+     "title": "Vice Chair of Planning and Development Control Committee"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=9571",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "victoria-brocklebank-fowler",
+   "name": "Victoria Brocklebank-Fowler",
+   "party": "conservative",
+   "party_name": "Conservative",
+   "ward_id": "fulham-town",
+   "roles": [],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=116",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "wesley-harcourt",
+   "name": "Wesley Harcourt",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "college-park-and-old-oak",
+   "roles": [
+    {
+     "title": "Chair of Health and Wellbeing Board"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=118",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  },
+  {
+   "id": "zarar-qayyum",
+   "name": "Zarar Qayyum",
+   "party": "labour",
+   "party_name": "Labour",
+   "ward_id": "shepherds-bush-green",
+   "roles": [
+    {
+     "title": "Cabinet Member for Enterprise and Skills"
+    }
+   ],
+   "democracy_url": "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=1827",
+   "source": {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07"
+   }
+  }
+ ],
+ "wards": {
+  "note": "Generated by etl/councillors.py. Do not edit by hand; re-run the import.",
+  "sources": [
+   {
+    "title": "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)",
+    "url": "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "retrieved_on": "2026-10-07",
+    "sha256": "3d6987fce6441fce70f2973c986e2b6ec079f6342de9dd95c07a08279ccbe87a"
+   },
+   {
+    "title": "Democracy Club, Hammersmith and Fulham local election 7 May 2026 (ward codes)",
+    "url": "https://candidates.democracyclub.org.uk/api/next/ballots/?election_id=local.hammersmith-and-fulham.2026-05-07&page_size=50",
+    "retrieved_on": "2026-10-07",
+    "sha256": "16d4d72ea82031e990be399175acb1acdd78de294367ab456a29575e8c288584",
+    "licence": "CC BY-SA 4.0"
+   }
+  ],
+  "wards": [
+   {
+    "id": "addison",
+    "ons_code": "E05013733",
+    "name": "Addison",
+    "councillor_ids": [
+     "jacolyn-daly",
+     "ross-melton"
+    ]
+   },
+   {
+    "id": "avonmore",
+    "ons_code": "E05013734",
+    "name": "Avonmore",
+    "councillor_ids": [
+     "joe-eaton",
+     "laura-janes"
+    ]
+   },
+   {
+    "id": "brook-green",
+    "ons_code": "E05013735",
+    "name": "Brook Green",
+    "councillor_ids": [
+     "stala-antoniades",
+     "florent-sherifi"
+    ]
+   },
+   {
+    "id": "college-park-and-old-oak",
+    "ons_code": "E05013736",
+    "name": "College Park and Old Oak",
+    "councillor_ids": [
+     "wesley-harcourt",
+     "bora-kwon",
+     "alex-sanderson"
+    ]
+   },
+   {
+    "id": "coningham",
+    "ons_code": "E05013737",
+    "name": "Coningham",
+    "councillor_ids": [
+     "lisa-homan",
+     "rowan-ree",
+     "rory-vaughan"
+    ]
+   },
+   {
+    "id": "fulham-reach",
+    "ons_code": "E05013738",
+    "name": "Fulham Reach",
+    "councillor_ids": [
+     "david-campbell",
+     "anna-magryta-urban",
+     "nikos-souslous"
+    ]
+   },
+   {
+    "id": "fulham-town",
+    "ons_code": "E05013739",
+    "name": "Fulham Town",
+    "councillor_ids": [
+     "victoria-brocklebank-fowler",
+     "liam-downer-sanderson"
+    ]
+   },
+   {
+    "id": "grove",
+    "ons_code": "E05013740",
+    "name": "Grove",
+    "councillor_ids": [
+     "hannah-bulmer",
+     "stephen-cowan"
+    ]
+   },
+   {
+    "id": "hammersmith-broadway",
+    "ons_code": "E05013741",
+    "name": "Hammersmith Broadway",
+    "councillor_ids": [
+     "molly-mantle",
+     "callum-nimmo"
+    ]
+   },
+   {
+    "id": "lillie",
+    "ons_code": "E05013742",
+    "name": "Lillie",
+    "councillor_ids": [
+     "sharon-holder",
+     "lydia-paynter"
+    ]
+   },
+   {
+    "id": "munster",
+    "ons_code": "E05013743",
+    "name": "Munster",
+    "councillor_ids": [
+     "adronie-alford",
+     "dominic-stanton",
+     "stewart-waine"
+    ]
+   },
+   {
+    "id": "palace-and-hurlingham",
+    "ons_code": "E05013744",
+    "name": "Palace & Hurlingham",
+    "councillor_ids": [
+     "aliya-afzal-khan",
+     "amanda-lloyd-harris",
+     "jeremy-maddocks"
+    ]
+   },
+   {
+    "id": "parsons-green-and-sandford",
+    "ons_code": "E05013745",
+    "name": "Parsons Green & Sandford",
+    "councillor_ids": [
+     "jose-afonso",
+     "adrian-pascu-tulbure"
+    ]
+   },
+   {
+    "id": "ravenscourt",
+    "ons_code": "E05013746",
+    "name": "Ravenscourt",
+    "councillor_ids": [
+     "harry-brackley",
+     "natalie-lindsay"
+    ]
+   },
+   {
+    "id": "sands-end",
+    "ons_code": "E05013747",
+    "name": "Sands End",
+    "councillor_ids": [
+     "rob-harris",
+     "libby-hart",
+     "roseanne-meacher"
+    ]
+   },
+   {
+    "id": "shepherds-bush-green",
+    "ons_code": "E05013748",
+    "name": "Shepherds Bush Green",
+    "councillor_ids": [
+     "zarar-qayyum",
+     "mercy-umeh"
+    ]
+   },
+   {
+    "id": "walham-green",
+    "ons_code": "E05013749",
+    "name": "Walham Green",
+    "councillor_ids": [
+     "sam-kelly",
+     "genevieve-nwaogbe"
+    ]
+   },
+   {
+    "id": "wendell-park",
+    "ons_code": "E05013750",
+    "name": "Wendell Park",
+    "councillor_ids": [
+     "rebecca-harvey",
+     "asif-siddique"
+    ]
+   },
+   {
+    "id": "west-kensington",
+    "ons_code": "E05013751",
+    "name": "West Kensington",
+    "councillor_ids": [
+     "victoria-brignell",
+     "daryl-brown",
+     "florian-chevoppe-verdier"
+    ]
+   },
+   {
+    "id": "white-city",
+    "ons_code": "E05013752",
+    "name": "White City",
+    "councillor_ids": [
+     "andrew-jones",
+     "natalia-perez",
+     "frances-umeh"
+    ]
+   },
+   {
+    "id": "wormholt",
+    "ons_code": "E05013753",
+    "name": "Wormholt",
+    "councillor_ids": [
+     "max-schmid",
+     "nicole-trehy"
+    ]
+   }
+  ]
+ },
+ "promises": [
+  {
+   "id": "con-2026-developments",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Planning and the local economy",
+   "versions": [
+    {
+     "text": "Ensure Hammersmith and Fulham is home to the highest-quality dvelopments - homes that people are proud to live in, and innovative workspaces that bring business to the area",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 23
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true,
+   "editor_note": "'dvelopments' is the manifesto's own spelling, quoted as printed."
+  },
+  {
+   "id": "con-2026-green-spaces",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Parks, libraries and leisure",
+   "versions": [
+    {
+     "text": "Protect and enhance our precious green spaces as the lungs of the borough, get more trees planted, and encourage the community to get involved",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 12
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-high-streets",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Planning and the local economy",
+   "versions": [
+    {
+     "text": "Bring all parties together to revive our high streets",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 14
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-next-generation",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Young people and jobs",
+   "versions": [
+    {
+     "text": "Convene the Borough’s best minds to inspire the next generation, making Hammersmith & Fulham a place where the next generation can reach for the sky",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 19
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-parking-permit",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Streets, waste and transport",
+   "versions": [
+    {
+     "text": "A borough-wide parking permit for an additional fee, giving you choice and convenience",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 10
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-police",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "Fifty extra Police Officers from the Met to patrol our streets to tackle crime and anti-social behaviour",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 6
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true,
+   "editor_note": "Cost not stated in the manifesto; cost it from Met charges for additional officers if a council source exists."
+  },
+  {
+   "id": "con-2026-services-taxes",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Running the council",
+   "versions": [
+    {
+     "text": "Combine new technology with old-fashioned high standards to ensure residents get the service they deserve while keeping taxes as low as possible",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 27
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-social-care",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Care for older and disabled adults",
+   "versions": [
+    {
+     "text": "Maintain free adult social care for all residents",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 16
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "lever_or_toggle_id": "free_home_care",
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "con-2026-tenants",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Housing and homelessness",
+   "versions": [
+    {
+     "text": "Always put our tenants and our leaseholders first and listen to their needs",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 21
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "Key commitment in the 2026 Conservative manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "hf-free-home-care",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Care for older and disabled adults",
+   "versions": [
+    {
+     "text": "Continue our pioneering policy of free adult home care for every resident in need, because when people need care they should face kindness, not anxiety about cost.",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "delivering",
+   "deadline": null,
+   "lever_or_toggle_id": "free_home_care",
+   "events": [
+    {
+     "date": "2026-02-25",
+     "type": "budgeted",
+     "text": "Kept in the 2026/27 budget adopted by Full Council: the council says it is the only council in the country to provide free home care, helping 1,623 residents (budget report, PDF page 22)",
+     "evidence_url": "https://democracy.lbhf.gov.uk/documents/s134070/Budget%20Report.pdf"
+    },
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Re-pledged in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true,
+   "editor_note": "Earlier history (2014 pledge, 2015 charges scrapped) is not yet sourced (PRE_SHIP_REVIEW B3); append those events once found."
+  },
+  {
+   "id": "lab-2026-affordable-homes",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Housing and homelessness",
+   "versions": [
+    {
+     "text": "Build over 10,000 genuinely affordable homes for local people",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 6
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-ai-cctv",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "Introduce AI-enabled CCTV that identifies weapons and criminals",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 4
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-best-value",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Running the council",
+   "versions": [
+    {
+     "text": "Be the best value council in Britain, including free adult home care and cost-of-living support",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true,
+   "editor_note": "'Best value council in Britain' has no stated measure; free home care has its own card (hf-free-home-care)."
+  },
+  {
+   "id": "lab-2026-green-schemes",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Climate and environment",
+   "versions": [
+    {
+     "text": "Install new green schemes to reduce energy bills and cut emissions",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 4
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-high-streets",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Planning and the local economy",
+   "versions": [
+    {
+     "text": "Invest in our high streets. Extend our unique European partnerships so more local young people gain international work experience",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 6
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-hospital",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Health",
+   "versions": [
+    {
+     "text": "Help build new state-of-the-art hospital facilities",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true,
+   "editor_note": "How much and from where are not stated; decide within 7 days whether council documents supply them or the card is unscoreable."
+  },
+  {
+   "id": "lab-2026-parks",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Parks, libraries and leisure",
+   "versions": [
+    {
+     "text": "Deliver over £8m new investment in playgrounds and parks",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 5
+    }
+   ],
+   "capital_cost_m": {
+    "range": [
+     8,
+     8,
+     8
+    ],
+    "quality": "sourced",
+    "note": "The manifesto says 'over £8m' of new investment: £8m is a lower bound, and it is capital spending over the term."
+   },
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-pathway-bond",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Young people and jobs",
+   "versions": [
+    {
+     "text": "Offer every local young person a Pathway Bond career opportunity",
+     "recorded_on": "2026-10-07",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 2
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "Headline pledge in the 2026 Labour manifesto"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  }
+ ],
+ "control": "labour"
+}
