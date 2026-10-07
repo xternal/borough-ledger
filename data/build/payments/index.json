@@ -5,7 +5,7 @@
   "page": "https://www.lbhf.gov.uk/councillors-and-democracy/data-and-information/transparency/procurement-and-financial-data",
   "licence": "OGL-UK-3.0",
   "quality": "sourced",
-  "group_quality": "approx",
+  "group_quality": "sourced",
   "notes": [
    "Amounts exclude VAT.",
    "Credit notes show as negative amounts.",
@@ -14,7 +14,9 @@
   ],
   "mapping": {
    "lines": 642,
-   "unreviewed": 642
+   "unreviewed": 0,
+   "checked": 0,
+   "unsure": 0
   },
   "withheld_rows_by_reason": {
    "person": 266,
@@ -303,15 +305,15 @@
    "withheld_total": 297234.35,
    "by_group": {
     "adult_care": 2349900.1,
-    "children": 195782.62,
-    "council_homes": 316734.55,
+    "children": 695782.62,
+    "council_homes": 349455.05,
     "housing": 822276.68,
-    "parks_culture": 6621.73,
-    "planning": 77240.95,
-    "running": 5141716.34,
-    "safety_regulation": 7443.2,
+    "parks_culture": 10304.93,
+    "planning": 56918.08,
+    "running": 3569070.51,
+    "safety_regulation": 3760.0,
     "schools": 1064041.5,
-    "streets": 1061739.82
+    "streets": 2121988.02
    }
   },
   {
@@ -326,18 +328,18 @@
    "withheld_rows": 1086,
    "withheld_total": 1432707.34,
    "by_group": {
-    "adult_care": 5739607.13,
-    "children": 1115268.09,
-    "council_homes": 2712970.36,
-    "housing": 1149049.86,
-    "parks_culture": 34035.42,
-    "planning": 133793.22,
+    "adult_care": 5724067.87,
+    "capital": 398700.44,
+    "children": 1084928.12,
+    "council_homes": 3121315.61,
+    "housing": 1203229.7,
+    "parks_culture": 41353.67,
+    "planning": 134268.95,
     "public_health": 501616.24,
-    "running": 12091477.81,
-    "safety_regulation": 89352.25,
-    "schools": 183789.3,
-    "streets": 5132376.05,
-    "unclassified": 1000.0
+    "running": 11193540.02,
+    "safety_regulation": 97573.26,
+    "schools": 234727.94,
+    "streets": 5149013.91
    }
   },
   {
@@ -352,18 +354,18 @@
    "withheld_rows": 760,
    "withheld_total": 1136764.29,
    "by_group": {
-    "adult_care": 5932655.24,
-    "children": 4231873.75,
-    "council_homes": 2518179.54,
-    "housing": 1089226.53,
-    "parks_culture": 32972.67,
-    "planning": 243086.87,
+    "adult_care": 5920655.15,
+    "capital": 2288388.92,
+    "children": 1260809.54,
+    "council_homes": 5004394.3,
+    "housing": 1064150.6,
+    "parks_culture": 194718.14,
+    "planning": 202918.4,
     "public_health": 461464.21,
-    "running": 12817178.7,
-    "safety_regulation": 243552.02,
-    "schools": 24779997.58,
-    "streets": 4632900.67,
-    "unclassified": 2035.7
+    "running": 7889919.76,
+    "safety_regulation": 93806.64,
+    "schools": 27743382.03,
+    "streets": 4860515.79
    }
   },
   {
@@ -378,18 +380,18 @@
    "withheld_rows": 819,
    "withheld_total": 1143374.5,
    "by_group": {
-    "adult_care": 5723798.65,
-    "children": 1876603.03,
-    "council_homes": 2750963.34,
-    "housing": 1354406.65,
-    "parks_culture": 142138.27,
-    "planning": 39958.16,
+    "adult_care": 5703484.9,
+    "capital": 1584081.78,
+    "children": 810466.4,
+    "council_homes": 10385621.99,
+    "housing": 1052111.34,
+    "parks_culture": 975094.12,
+    "planning": 391785.96,
     "public_health": 1297608.42,
-    "running": 16856456.31,
-    "safety_regulation": 1023050.41,
-    "schools": 4977296.96,
-    "streets": 2554976.32,
-    "unclassified": 6102.35
+    "running": 7515706.29,
+    "safety_regulation": 210408.31,
+    "schools": 6043005.27,
+    "streets": 2633984.09
    }
   },
   {
@@ -404,18 +406,18 @@
    "withheld_rows": 774,
    "withheld_total": 1006491.86,
    "by_group": {
-    "adult_care": 6317444.11,
-    "children": 1328536.47,
-    "council_homes": 1458444.96,
-    "housing": 1015673.74,
-    "parks_culture": 19421.9,
-    "planning": 111332.3,
+    "adult_care": 6159329.09,
+    "capital": 343527.2,
+    "children": 1273979.79,
+    "council_homes": 4113241.69,
+    "housing": 1015765.15,
+    "parks_culture": 168550.33,
+    "planning": 98800.11,
     "public_health": 617119.65,
-    "running": 9639496.34,
-    "safety_regulation": 322974.63,
-    "schools": 1684312.68,
-    "streets": 1847090.28,
-    "unclassified": 7353.57
+    "running": 6568424.51,
+    "safety_regulation": 331961.22,
+    "schools": 1762790.4,
+    "streets": 1915711.49
    }
   },
   {
@@ -430,17 +432,18 @@
    "withheld_rows": 901,
    "withheld_total": 1181973.56,
    "by_group": {
-    "adult_care": 5831357.17,
-    "children": 3890888.69,
-    "council_homes": 4540432.39,
-    "housing": 1292149.23,
-    "parks_culture": 43337.56,
-    "planning": 136622.93,
+    "adult_care": 5810374.46,
+    "capital": 1156483.67,
+    "children": 782732.95,
+    "council_homes": 10072018.67,
+    "housing": 1296798.06,
+    "parks_culture": 141189.56,
+    "planning": 205205.69,
     "public_health": 1004707.48,
-    "running": 12493577.31,
-    "safety_regulation": 322966.87,
-    "schools": 18428814.88,
-    "streets": 4363723.47
+    "running": 4795370.32,
+    "safety_regulation": 246097.58,
+    "schools": 21525723.67,
+    "streets": 5311875.87
    }
   },
   {
@@ -455,17 +458,18 @@
    "withheld_rows": 823,
    "withheld_total": 1055668.42,
    "by_group": {
-    "adult_care": 6057434.67,
-    "children": 2123839.49,
-    "council_homes": 2049166.83,
-    "housing": 1449831.38,
-    "parks_culture": 16422.24,
-    "planning": 61188.59,
+    "adult_care": 6030507.36,
+    "capital": 1106805.2,
+    "children": 779279.98,
+    "council_homes": 4928261.47,
+    "housing": 1522654.35,
+    "parks_culture": 184993.47,
+    "planning": 97147.37,
     "public_health": 672689.66,
-    "running": 12220043.23,
-    "safety_regulation": 805272.88,
-    "schools": 6286190.16,
-    "streets": 2303351.77
+    "running": 7628039.99,
+    "safety_regulation": 663628.96,
+    "schools": 7632100.82,
+    "streets": 2799322.27
    }
   },
   {
@@ -480,17 +484,18 @@
    "withheld_rows": 906,
    "withheld_total": 1135829.46,
    "by_group": {
-    "adult_care": 5032357.56,
-    "children": 1526451.95,
-    "council_homes": 2125881.19,
-    "housing": 1206262.54,
-    "parks_culture": 34049.28,
-    "planning": 220912.3,
+    "adult_care": 4974523.43,
+    "capital": 621122.74,
+    "children": 3265448.78,
+    "council_homes": 5221869.05,
+    "housing": 1367567.42,
+    "parks_culture": 181275.81,
+    "planning": 185253.63,
     "public_health": 1637447.29,
-    "running": 11997789.28,
-    "safety_regulation": 455336.6,
-    "schools": 2011019.95,
-    "streets": 3583277.08
+    "running": 5731398.2,
+    "safety_regulation": 365944.2,
+    "schools": 2493258.35,
+    "streets": 3785676.12
    }
   },
   {
@@ -505,17 +510,18 @@
    "withheld_rows": 931,
    "withheld_total": 1168458.12,
    "by_group": {
-    "adult_care": 6591320.51,
-    "children": 2115060.26,
-    "council_homes": 2520114.19,
-    "housing": 1224801.57,
-    "parks_culture": 107828.68,
-    "planning": 100297.85,
+    "adult_care": 6568315.68,
+    "capital": 2080752.38,
+    "children": 1023928.46,
+    "council_homes": 6559508.89,
+    "housing": 1252241.86,
+    "parks_culture": 908894.55,
+    "planning": 145295.71,
     "public_health": 667541.86,
-    "running": 11231338.15,
-    "safety_regulation": 1314616.08,
-    "schools": 5156325.21,
-    "streets": 7493271.73
+    "running": 4717738.89,
+    "safety_regulation": 536555.04,
+    "schools": 6275241.04,
+    "streets": 7786501.73
    }
   },
   {
@@ -530,17 +536,18 @@
    "withheld_rows": 883,
    "withheld_total": 1288895.8,
    "by_group": {
-    "adult_care": 6432635.98,
-    "children": 4978626.64,
-    "council_homes": 1465518.43,
-    "housing": 1392151.24,
-    "parks_culture": 60869.58,
-    "planning": 116563.98,
+    "adult_care": 6419854.75,
+    "capital": 231256.73,
+    "children": 4096564.84,
+    "council_homes": 4763906.34,
+    "housing": 1399105.4,
+    "parks_culture": 138277.15,
+    "planning": 202758.07,
     "public_health": 1203142.78,
-    "running": 18416410.06,
-    "safety_regulation": 327597.45,
-    "schools": 17432665.91,
-    "streets": 2794176.69
+    "running": 11833999.17,
+    "safety_regulation": 262971.11,
+    "schools": 20986400.45,
+    "streets": 3082121.95
    }
   },
   {
@@ -555,18 +562,18 @@
    "withheld_rows": 933,
    "withheld_total": 1182865.55,
    "by_group": {
-    "adult_care": 7830892.57,
-    "children": 1860985.5,
-    "council_homes": 2436033.07,
-    "housing": 1146113.3,
-    "parks_culture": 52994.85,
-    "planning": 189258.74,
+    "adult_care": 7798163.05,
+    "capital": 1452586.72,
+    "children": 1342525.72,
+    "council_homes": 7506343.04,
+    "housing": 1156726.8,
+    "parks_culture": 191724.5,
+    "planning": 206628.23,
     "public_health": 2166412.07,
-    "running": 11483137.2,
-    "safety_regulation": 333372.02,
-    "schools": 3818862.38,
-    "streets": 3173934.33,
-    "unclassified": 965.0
+    "running": 4657940.6,
+    "safety_regulation": 228336.89,
+    "schools": 4403955.92,
+    "streets": 3381617.49
    }
   },
   {
@@ -581,17 +588,18 @@
    "withheld_rows": 946,
    "withheld_total": 1114575.97,
    "by_group": {
-    "adult_care": 4695073.96,
-    "children": 2793847.72,
-    "council_homes": 1990625.83,
-    "housing": 1397046.18,
-    "parks_culture": 220354.87,
-    "planning": 141855.08,
+    "adult_care": 4656255.82,
+    "capital": 574885.2,
+    "children": 2974532.28,
+    "council_homes": 12622629.87,
+    "housing": 1414845.64,
+    "parks_culture": 1039016.44,
+    "planning": 240093.44,
     "public_health": 2930954.84,
-    "running": 25228473.64,
-    "safety_regulation": 1881852.29,
-    "schools": 5186362.86,
-    "streets": 4510216.14
+    "running": 9605578.8,
+    "safety_regulation": 1102008.86,
+    "schools": 6614024.33,
+    "streets": 7201837.89
    }
   },
   {
@@ -606,17 +614,18 @@
    "withheld_rows": 1099,
    "withheld_total": 1276733.72,
    "by_group": {
-    "adult_care": 6551072.16,
-    "children": 5590485.47,
-    "council_homes": 708102.33,
-    "housing": 1781485.18,
-    "parks_culture": 78158.06,
-    "planning": 133861.47,
+    "adult_care": 6504626.91,
+    "capital": 1496154.5,
+    "children": 2876942.01,
+    "council_homes": 1792129.58,
+    "housing": 1739842.12,
+    "parks_culture": 416787.05,
+    "planning": 206763.95,
     "public_health": 908804.34,
-    "running": 17276562.5,
-    "safety_regulation": 1161472.9,
-    "schools": 16270576.1,
-    "streets": 4413987.5
+    "running": 11968177.06,
+    "safety_regulation": 869289.16,
+    "schools": 21344444.29,
+    "streets": 4750607.04
    }
   },
   {
@@ -631,17 +640,18 @@
    "withheld_rows": 1083,
    "withheld_total": 1242322.5,
    "by_group": {
-    "adult_care": 6086345.46,
-    "children": 1050359.77,
-    "council_homes": 2779178.22,
-    "housing": 1663285.85,
-    "parks_culture": 41632.39,
-    "planning": 103424.63,
+    "adult_care": 6052499.05,
+    "capital": 1323421.4,
+    "children": 399240.1,
+    "council_homes": 5826214.7,
+    "housing": 1564149.19,
+    "parks_culture": 501710.21,
+    "planning": 531883.19,
     "public_health": 2117633.41,
-    "running": 11974992.75,
-    "safety_regulation": 709555.64,
-    "schools": 1092677.59,
-    "streets": 5371648.45
+    "running": 7216146.11,
+    "safety_regulation": 283324.23,
+    "schools": 1756721.86,
+    "streets": 5417790.71
    }
   },
   {
@@ -656,17 +666,18 @@
    "withheld_rows": 1634,
    "withheld_total": 1968581.2,
    "by_group": {
-    "adult_care": 6332635.4,
-    "children": 1561006.09,
-    "council_homes": 1341685.85,
-    "housing": 1691272.84,
-    "parks_culture": 69691.47,
-    "planning": 17855.1,
+    "adult_care": 6280845.19,
+    "capital": 991926.31,
+    "children": 1002940.79,
+    "council_homes": 3586384.28,
+    "housing": 1658095.96,
+    "parks_culture": 963064.68,
+    "planning": 86113.31,
     "public_health": 1660653.28,
-    "running": 8803435.53,
-    "safety_regulation": 1135392.77,
-    "schools": 6197768.94,
-    "streets": 2631442.73
+    "running": 5434920.45,
+    "safety_regulation": 293809.77,
+    "schools": 6770520.72,
+    "streets": 2713565.26
    }
   },
   {
@@ -681,19 +692,18 @@
    "withheld_rows": 660,
    "withheld_total": 2780737.55,
    "by_group": {
-    "adult_care": 6187643.47,
-    "capital": 6516827.85,
-    "children": 2316708.46,
+    "adult_care": 6177423.22,
+    "capital": 6519327.85,
+    "children": 1763745.46,
     "council_homes": 3757843.16,
     "housing": 3753680.48,
     "parks_culture": 113763.55,
     "planning": 165195.67,
-    "public_health": 889647.2,
-    "running": 1807161.46,
+    "public_health": 1541335.2,
+    "running": 1817381.71,
     "safety_regulation": 336605.55,
     "schools": 4317382.92,
-    "streets": 3811120.36,
-    "unclassified": 101225.0
+    "streets": 3811120.36
    }
   },
   {
@@ -708,19 +718,18 @@
    "withheld_rows": 586,
    "withheld_total": 2289800.35,
    "by_group": {
-    "adult_care": 6194026.35,
+    "adult_care": 6138593.0,
     "capital": 9289384.31,
-    "children": 2687720.56,
+    "children": 2327150.16,
     "council_homes": 4992341.31,
     "housing": 2843318.21,
     "parks_culture": 813352.54,
     "planning": 319504.36,
-    "public_health": 716228.27,
-    "running": 5629562.85,
+    "public_health": 1109315.97,
+    "running": 5684996.2,
     "safety_regulation": 419641.14,
     "schools": 2625831.68,
-    "streets": 3260068.9,
-    "unclassified": 32517.3
+    "streets": 3260068.9
    }
   },
   {
@@ -735,19 +744,18 @@
    "withheld_rows": 745,
    "withheld_total": 4193436.3,
    "by_group": {
-    "adult_care": 8618564.87,
+    "adult_care": 8599863.01,
     "capital": 8792915.98,
-    "children": 4274759.68,
+    "children": 4258795.51,
     "council_homes": 3447354.5,
     "housing": 3982625.89,
     "parks_culture": 239893.7,
     "planning": 336392.37,
-    "public_health": 872491.71,
-    "running": 3622624.38,
+    "public_health": 891707.71,
+    "running": 3641326.24,
     "safety_regulation": 183517.35,
     "schools": 3452810.35,
-    "streets": 4676699.17,
-    "unclassified": 3251.83
+    "streets": 4676699.17
    }
   },
   {
@@ -762,19 +770,18 @@
    "withheld_rows": 739,
    "withheld_total": 6033185.03,
    "by_group": {
-    "adult_care": 6318861.52,
-    "capital": 9478675.28,
-    "children": 1972312.1,
+    "adult_care": 5525271.93,
+    "capital": 9479506.73,
+    "children": 1594144.1,
     "council_homes": 3422130.46,
     "housing": 3215388.33,
     "parks_culture": 264250.61,
     "planning": 240826.31,
-    "public_health": 193068.99,
-    "running": 5299278.97,
+    "public_health": 625115.19,
+    "running": 6092868.56,
     "safety_regulation": 260691.9,
     "schools": 7090058.72,
-    "streets": 1825191.8,
-    "unclassified": 54709.65
+    "streets": 1825191.8
    }
   },
   {
@@ -789,20 +796,18 @@
    "withheld_rows": 659,
    "withheld_total": 3025584.47,
    "by_group": {
-    "adult_care": 5337984.21,
+    "adult_care": 5316773.73,
     "capital": 13319849.74,
-    "children": 1838153.66,
-    "council_homes": 2843976.97,
-    "debt_levies": 1972378.0,
+    "children": 1838753.66,
+    "council_homes": 2862004.97,
     "housing": 3565716.9,
     "parks_culture": 843859.82,
     "planning": 283589.25,
-    "public_health": 810109.51,
-    "running": 2998574.66,
+    "public_health": 886559.51,
+    "running": 3002257.14,
     "safety_regulation": 165566.83,
-    "schools": 2979636.81,
-    "streets": 3922864.45,
-    "unclassified": 77050.0
+    "schools": 2979136.81,
+    "streets": 5895242.45
    }
   },
   {
@@ -817,20 +822,18 @@
    "withheld_rows": 635,
    "withheld_total": 3149347.74,
    "by_group": {
-    "adult_care": 6408601.06,
-    "capital": 8954291.02,
-    "children": 1766589.39,
+    "adult_care": 6307717.93,
+    "capital": 8957957.65,
+    "children": 1743322.73,
     "council_homes": 5782884.62,
-    "debt_levies": 81271.0,
     "housing": 3394952.07,
     "parks_culture": 258054.02,
     "planning": 395675.02,
-    "public_health": 614655.39,
-    "running": 3423070.85,
+    "public_health": 653722.05,
+    "running": 3524903.98,
     "safety_regulation": 251576.24,
-    "schools": 2488132.55,
-    "streets": 3499687.33,
-    "unclassified": 19466.63
+    "schools": 2487182.55,
+    "streets": 3580958.33
    }
   },
   {
@@ -845,19 +848,18 @@
    "withheld_rows": 797,
    "withheld_total": 3419696.61,
    "by_group": {
-    "adult_care": 7765981.23,
+    "adult_care": 6905850.75,
     "capital": 11713844.02,
-    "children": 3427423.08,
+    "children": 2177362.57,
     "council_homes": 4715204.6,
     "housing": 3766429.2,
     "parks_culture": 280789.35,
     "planning": 284060.86,
-    "public_health": 557784.87,
-    "running": 1340613.9,
+    "public_health": 1879820.39,
+    "running": 2204194.38,
     "safety_regulation": 224593.74,
-    "schools": 3435389.27,
-    "streets": 4963686.12,
-    "unclassified": 74675.01
+    "schools": 3434639.27,
+    "streets": 4963686.12
    }
   },
   {
@@ -872,20 +874,18 @@
    "withheld_rows": 721,
    "withheld_total": 4773119.21,
    "by_group": {
-    "adult_care": 6304307.95,
-    "capital": 12127070.65,
-    "children": 2601146.4,
+    "adult_care": 6384780.47,
+    "capital": 12127745.65,
+    "children": 1524706.58,
     "council_homes": 6960176.37,
-    "debt_levies": 2042447.0,
     "housing": 3958027.75,
     "parks_culture": 157488.68,
     "planning": 302781.11,
-    "public_health": 1242296.32,
-    "running": 2508311.49,
+    "public_health": 2322902.81,
+    "running": 2427838.97,
     "safety_regulation": 219112.04,
     "schools": 5927518.66,
-    "streets": 1724086.0,
-    "unclassified": 4841.67
+    "streets": 3766533.0
    }
   },
   {
@@ -901,18 +901,17 @@
    "withheld_total": 2274400.03,
    "by_group": {
     "adult_care": 6542399.76,
-    "capital": 11888741.38,
-    "children": 1603386.35,
+    "capital": 11889557.24,
+    "children": 1409527.18,
     "council_homes": 5004839.92,
     "housing": 3472066.51,
     "parks_culture": 816832.03,
     "planning": 292092.78,
-    "public_health": 1076051.97,
-    "running": 1618275.27,
+    "public_health": 1274077.81,
+    "running": 1621988.72,
     "safety_regulation": 205631.2,
     "schools": 1835679.93,
-    "streets": 3350801.79,
-    "unclassified": 8695.98
+    "streets": 3350801.79
    }
   },
   {
@@ -927,20 +926,18 @@
    "withheld_rows": 923,
    "withheld_total": 2807989.05,
    "by_group": {
-    "adult_care": 8048430.28,
-    "capital": 16798450.12,
-    "children": 2933822.29,
+    "adult_care": 7207001.28,
+    "capital": 16804615.12,
+    "children": 2919350.95,
     "council_homes": 4042808.92,
-    "debt_levies": 17165.0,
     "housing": 3843790.22,
     "parks_culture": 181489.77,
-    "planning": 345702.51,
-    "public_health": 911948.32,
-    "running": 3395398.77,
+    "planning": 354072.03,
+    "public_health": 965714.99,
+    "running": 4307576.77,
     "safety_regulation": 280723.47,
     "schools": 2163516.98,
-    "streets": 3534076.19,
-    "unclassified": 124578.85
+    "streets": 3551241.19
    }
   },
   {
@@ -955,20 +952,18 @@
    "withheld_rows": 895,
    "withheld_total": 4274893.68,
    "by_group": {
-    "adult_care": 6017016.02,
+    "adult_care": 5972563.79,
     "capital": 13009765.7,
-    "children": 2542889.02,
+    "children": 1422641.29,
     "council_homes": 5749276.38,
-    "debt_levies": 2025282.0,
     "housing": 2968425.08,
     "parks_culture": 799318.39,
-    "planning": 278462.04,
-    "public_health": 654661.27,
-    "running": 1637547.17,
+    "planning": 284216.99,
+    "public_health": 1816401.67,
+    "running": 1748116.89,
     "safety_regulation": 306182.48,
     "schools": 4885717.27,
-    "streets": 3456509.48,
-    "unclassified": 113365.11
+    "streets": 5481791.48
    }
   },
   {
@@ -983,19 +978,18 @@
    "withheld_rows": 967,
    "withheld_total": 4047532.13,
    "by_group": {
-    "adult_care": 8340942.35,
-    "capital": 13805113.63,
-    "children": 1726219.7,
+    "adult_care": 7600106.35,
+    "capital": 13806855.58,
+    "children": 1472896.86,
     "council_homes": 5461158.09,
     "housing": 4186786.13,
     "parks_culture": 168828.24,
-    "planning": 292794.85,
-    "public_health": 698779.85,
-    "running": 2553438.17,
+    "planning": 297309.98,
+    "public_health": 974394.36,
+    "running": 3327832.17,
     "safety_regulation": 210580.26,
     "schools": 7093364.21,
-    "streets": 3969277.1,
-    "unclassified": 62106.75
+    "streets": 3969277.1
    }
   },
   {
@@ -1010,20 +1004,18 @@
    "withheld_rows": 981,
    "withheld_total": 2801709.97,
    "by_group": {
-    "adult_care": 7349317.15,
-    "capital": 17985786.33,
-    "children": 2343712.54,
+    "adult_care": 7246626.38,
+    "capital": 17987018.07,
+    "children": 1247020.09,
     "council_homes": 3744708.57,
-    "debt_levies": 17165.0,
     "housing": 4035881.33,
     "parks_culture": 142983.27,
-    "planning": 208917.84,
-    "public_health": 778556.66,
-    "running": 2041882.02,
+    "planning": 233457.94,
+    "public_health": 2020228.66,
+    "running": 2192043.61,
     "safety_regulation": 294437.82,
     "schools": 2455044.93,
-    "streets": 5687092.76,
-    "unclassified": 218222.21
+    "streets": 5704257.76
    }
   },
   {
@@ -1038,20 +1030,18 @@
    "withheld_rows": 1075,
    "withheld_total": 4088113.91,
    "by_group": {
-    "adult_care": 6541438.74,
-    "capital": 13733788.98,
-    "children": 1231750.22,
+    "adult_care": 6198149.64,
+    "capital": 13736633.2,
+    "children": 1216070.92,
     "council_homes": 4439879.62,
-    "debt_levies": 2035289.0,
     "housing": 4024595.06,
     "parks_culture": 172425.9,
-    "planning": 274905.29,
-    "public_health": 689540.5,
-    "running": 1752098.72,
+    "planning": 277765.43,
+    "public_health": 753492.5,
+    "running": 2146477.82,
     "safety_regulation": 129244.14,
     "schools": 3682994.6,
-    "streets": 3116424.85,
-    "unclassified": 105067.06
+    "streets": 5151713.85
    }
   },
   {
@@ -1066,19 +1056,18 @@
    "withheld_rows": 1105,
    "withheld_total": 4211989.5,
    "by_group": {
-    "adult_care": 9249191.39,
-    "capital": 17356307.65,
-    "children": 3316555.9,
+    "adult_care": 9268326.74,
+    "capital": 17356507.65,
+    "children": 3101287.0,
     "council_homes": 4854739.54,
     "housing": 3823547.74,
     "parks_culture": 418784.07,
-    "planning": 434892.96,
-    "public_health": 907674.39,
-    "running": 2476414.22,
+    "planning": 463144.21,
+    "public_health": 1130336.94,
+    "running": 2569195.53,
     "safety_regulation": 406065.01,
     "schools": 3619037.02,
-    "streets": 3352504.56,
-    "unclassified": 147761.56
+    "streets": 3352504.56
    }
   },
   {
@@ -1093,19 +1082,18 @@
    "withheld_rows": 1148,
    "withheld_total": 6329536.51,
    "by_group": {
-    "adult_care": 6842229.88,
-    "capital": 10910876.96,
+    "adult_care": 6035026.91,
+    "capital": 10918739.14,
     "children": 1611064.38,
     "council_homes": 6626074.65,
     "housing": 3118741.38,
     "parks_culture": 755874.61,
-    "planning": 207393.92,
-    "public_health": 129453.28,
-    "running": 2411606.07,
+    "planning": 209409.92,
+    "public_health": 242744.95,
+    "running": 3244584.04,
     "safety_regulation": 296102.37,
     "schools": 7432121.82,
-    "streets": 2080772.28,
-    "unclassified": 148944.85
+    "streets": 2080772.28
    }
   },
   {
@@ -1120,20 +1108,18 @@
    "withheld_rows": 1136,
    "withheld_total": 4330062.09,
    "by_group": {
-    "adult_care": 7904872.54,
-    "capital": 15068442.68,
+    "adult_care": 7877692.54,
+    "capital": 15080053.58,
     "children": 2402310.92,
     "council_homes": 4345646.45,
-    "debt_levies": 2195157.0,
     "housing": 3225560.05,
     "parks_culture": 478964.31,
-    "planning": 236081.29,
+    "planning": 236621.79,
     "public_health": 199693.24,
-    "running": 6958202.74,
+    "running": 7031492.74,
     "safety_regulation": 151243.82,
     "schools": 2811620.23,
-    "streets": 3990426.7,
-    "unclassified": 58261.4
+    "streets": 6185583.7
    }
   },
   {
@@ -1148,19 +1134,18 @@
    "withheld_rows": 1168,
    "withheld_total": 4153641.77,
    "by_group": {
-    "adult_care": 6365774.92,
-    "capital": 13835709.64,
-    "children": 2396214.46,
-    "council_homes": 4514538.24,
+    "adult_care": 6285356.17,
+    "capital": 13836427.84,
+    "children": 1246445.9,
+    "council_homes": 4535766.24,
     "housing": 3597121.54,
     "parks_culture": 313130.64,
-    "planning": 242798.91,
-    "public_health": 401162.0,
-    "running": 1676929.3,
+    "planning": 243908.91,
+    "public_health": 1565930.56,
+    "running": 1752820.05,
     "safety_regulation": 236253.5,
     "schools": 5370815.63,
-    "streets": 4182043.04,
-    "unclassified": 33528.2
+    "streets": 4182043.04
    }
   },
   {
@@ -1175,20 +1160,18 @@
    "withheld_rows": 609,
    "withheld_total": 3949902.26,
    "by_group": {
-    "adult_care": 7753342.7,
-    "capital": 17411918.92,
-    "children": 2651610.53,
+    "adult_care": 7000069.55,
+    "capital": 17413418.92,
+    "children": 1508176.78,
     "council_homes": 4818814.52,
-    "debt_levies": 26328.0,
     "housing": 3823261.74,
     "parks_culture": 753454.48,
-    "planning": 404485.81,
-    "public_health": 569902.33,
-    "running": 1930667.69,
+    "planning": 413229.84,
+    "public_health": 1793656.58,
+    "running": 2714628.84,
     "safety_regulation": 299633.88,
     "schools": 5974798.13,
-    "streets": 5450564.35,
-    "unclassified": 121252.53
+    "streets": 5476892.35
    }
   },
   {
@@ -1203,20 +1186,18 @@
    "withheld_rows": 784,
    "withheld_total": 5705309.19,
    "by_group": {
-    "adult_care": 8065933.05,
-    "capital": 12632401.55,
-    "children": 2522072.13,
+    "adult_care": 8039727.85,
+    "capital": 12633901.55,
+    "children": 2170589.13,
     "council_homes": 5387838.9,
-    "debt_levies": 2210341.0,
     "housing": 3063022.75,
     "parks_culture": 196761.69,
     "planning": 251760.76,
-    "public_health": 1675432.81,
-    "running": 2046772.91,
+    "public_health": 2029715.81,
+    "running": 2082316.11,
     "safety_regulation": 265795.1,
     "schools": 5425274.97,
-    "streets": 5132755.45,
-    "unclassified": 13638.0
+    "streets": 7343096.45
    }
   },
   {
@@ -1231,19 +1212,18 @@
    "withheld_rows": 713,
    "withheld_total": 3503670.36,
    "by_group": {
-    "adult_care": 8164172.41,
-    "capital": 10972587.2,
-    "children": 1939426.92,
-    "council_homes": 5563829.69,
+    "adult_care": 7385975.71,
+    "capital": 10976337.65,
+    "children": 1749162.42,
+    "council_homes": 5578029.69,
     "housing": 3569664.1,
     "parks_culture": 774841.01,
-    "planning": 236122.91,
-    "public_health": 1545394.36,
-    "running": 1640832.86,
+    "planning": 244629.02,
+    "public_health": 1795748.36,
+    "running": 2430345.91,
     "safety_regulation": 156427.36,
     "schools": 2321736.84,
-    "streets": 3181825.54,
-    "unclassified": 97862.41
+    "streets": 3181825.54
    }
   },
   {
@@ -1258,20 +1238,18 @@
    "withheld_rows": 699,
    "withheld_total": 3201694.47,
    "by_group": {
-    "adult_care": 8316387.49,
-    "capital": 10392608.24,
-    "children": 2706944.87,
+    "adult_care": 8006008.79,
+    "capital": 10393468.24,
+    "children": 1887200.87,
     "council_homes": 3988318.11,
-    "debt_levies": 15240.0,
     "housing": 4204619.71,
     "parks_culture": 152435.42,
-    "planning": 209503.93,
-    "public_health": 1073403.42,
-    "running": 2173288.07,
+    "planning": 214075.55,
+    "public_health": 1917997.42,
+    "running": 2487411.77,
     "safety_regulation": 342377.93,
     "schools": 2880405.85,
-    "streets": 1787602.24,
-    "unclassified": 34026.62
+    "streets": 1802842.24
    }
   },
   {
@@ -1286,20 +1264,18 @@
    "withheld_rows": 794,
    "withheld_total": 5091814.41,
    "by_group": {
-    "adult_care": 6741635.54,
-    "capital": 5390638.95,
-    "children": 1651688.68,
+    "adult_care": 6702029.84,
+    "capital": 5391475.96,
+    "children": 1085826.18,
     "council_homes": 4177214.42,
-    "debt_levies": 2195129.0,
     "housing": 3277320.84,
     "parks_culture": 793313.58,
-    "planning": 220677.62,
-    "public_health": 214289.35,
-    "running": 888381.08,
+    "planning": 223053.56,
+    "public_health": 827741.35,
+    "running": 939546.78,
     "safety_regulation": 92422.95,
     "schools": 5035280.88,
-    "streets": 3230282.66,
-    "unclassified": 62362.45
+    "streets": 5425411.66
    }
   },
   {
@@ -1314,19 +1290,18 @@
    "withheld_rows": 2031,
    "withheld_total": 7553785.57,
    "by_group": {
-    "adult_care": 9682731.58,
+    "adult_care": 8903364.58,
     "capital": 8601428.72,
-    "children": 5425561.48,
+    "children": 5408894.73,
     "council_homes": 5671006.36,
     "housing": 2720763.71,
     "parks_culture": 94520.46,
-    "planning": 43983.53,
-    "public_health": 63110.82,
-    "running": 958514.0,
+    "planning": 44947.03,
+    "public_health": 138277.57,
+    "running": 1737881.0,
     "safety_regulation": 85876.1,
     "schools": 1045105.53,
-    "streets": 2790195.42,
-    "unclassified": 59463.5
+    "streets": 2790195.42
    }
   },
   {
@@ -1341,20 +1316,18 @@
    "withheld_rows": 1809,
    "withheld_total": 7144083.16,
    "by_group": {
-    "adult_care": 9659851.08,
-    "capital": 12314671.16,
-    "children": 6490620.55,
+    "adult_care": 9625301.5,
+    "capital": 12320370.61,
+    "children": 5849944.6,
     "council_homes": 7467390.8,
-    "debt_levies": 15240.0,
     "housing": 4963890.75,
     "parks_culture": 453831.1,
-    "planning": 320723.99,
-    "public_health": 1137446.5,
-    "running": 3446765.85,
+    "planning": 322939.37,
+    "public_health": 1843001.95,
+    "running": 3677016.83,
     "safety_regulation": 276178.49,
     "schools": 4642092.48,
-    "streets": 6138884.71,
-    "unclassified": 268495.73
+    "streets": 6154124.71
    }
   },
   {
@@ -1369,20 +1342,18 @@
    "withheld_rows": 2185,
    "withheld_total": 8826807.59,
    "by_group": {
-    "adult_care": 18417794.05,
-    "capital": 16970627.08,
-    "children": 4480521.77,
+    "adult_care": 17606377.34,
+    "capital": 16974708.15,
+    "children": 3661228.24,
     "council_homes": 11394982.55,
-    "debt_levies": 2205979.0,
     "housing": 7400331.57,
     "parks_culture": 898659.67,
-    "planning": 452016.52,
-    "public_health": 1581028.22,
-    "running": 3895094.5,
+    "planning": 512355.56,
+    "public_health": 2463701.75,
+    "running": 4763516.21,
     "safety_regulation": 351439.42,
     "schools": 7828546.06,
-    "streets": 8468929.95,
-    "unclassified": 184805.11
+    "streets": 10674908.95
    }
   },
   {
@@ -1397,19 +1368,18 @@
    "withheld_rows": 758,
    "withheld_total": 4631428.93,
    "by_group": {
-    "adult_care": 10858071.34,
-    "capital": 7673628.72,
-    "children": 3496810.89,
+    "adult_care": 10837182.55,
+    "capital": 7679553.17,
+    "children": 3116101.39,
     "council_homes": 7419201.99,
     "housing": 4788554.03,
     "parks_culture": 248858.97,
-    "planning": 373655.17,
-    "public_health": 625280.93,
-    "running": 3821772.5,
+    "planning": 376021.54,
+    "public_health": 1007490.43,
+    "running": 3856931.54,
     "safety_regulation": 337333.44,
     "schools": 3533969.01,
-    "streets": 6361029.31,
-    "unclassified": 24061.07
+    "streets": 6361029.31
    }
   },
   {
@@ -1424,19 +1394,18 @@
    "withheld_rows": 842,
    "withheld_total": 8074500.72,
    "by_group": {
-    "adult_care": 7234820.67,
-    "capital": 8890669.66,
+    "adult_care": 6477276.61,
+    "capital": 8896919.66,
     "children": 1117037.25,
     "council_homes": 7690623.75,
     "housing": 2843036.56,
     "parks_culture": 690012.45,
-    "planning": 225480.93,
-    "public_health": 148426.03,
-    "running": 6436318.22,
+    "planning": 225980.93,
+    "public_health": 216551.03,
+    "running": 7200072.28,
     "safety_regulation": 96208.75,
     "schools": 12101609.65,
-    "streets": 3879189.68,
-    "unclassified": 81085.0
+    "streets": 3879189.68
    }
   },
   {
@@ -1451,20 +1420,18 @@
    "withheld_rows": 585,
    "withheld_total": 2525349.27,
    "by_group": {
-    "adult_care": 6586362.6,
-    "capital": 3633850.22,
-    "children": 3298591.45,
+    "adult_care": 6581660.4,
+    "capital": 3636425.22,
+    "children": 3260129.05,
     "council_homes": 3944653.92,
-    "debt_levies": 2400332.0,
     "housing": 3185900.52,
     "parks_culture": 218430.06,
-    "planning": 241732.43,
-    "public_health": 324467.96,
-    "running": 1731293.34,
+    "planning": 272707.16,
+    "public_health": 405725.36,
+    "running": 1766550.54,
     "safety_regulation": 159691.05,
     "schools": 3572893.14,
-    "streets": 4003310.16,
-    "unclassified": 106899.73
+    "streets": 6403642.16
    }
   },
   {
@@ -1479,20 +1446,18 @@
    "withheld_rows": 652,
    "withheld_total": 3365447.62,
    "by_group": {
-    "adult_care": 8058182.26,
-    "capital": 7586618.32,
-    "children": 2835924.55,
-    "council_homes": 5571902.51,
-    "debt_levies": 40493.0,
+    "adult_care": 7987165.31,
+    "capital": 7587718.32,
+    "children": 1690011.08,
+    "council_homes": 5611002.51,
     "housing": 3255265.94,
     "parks_culture": 956563.26,
-    "planning": 301953.4,
-    "public_health": 1487869.91,
-    "running": 3381155.39,
+    "planning": 304905.4,
+    "public_health": 2675283.38,
+    "running": 3416647.34,
     "safety_regulation": 147022.63,
-    "schools": 2710108.2,
-    "streets": 2109140.63,
-    "unclassified": 46102.0
+    "schools": 2707083.2,
+    "streets": 2149633.63
    }
   }
  ],

@@ -149,6 +149,13 @@ class DraftMapping(unittest.TestCase):
         self.assertEqual(P.draft_group("Something new", "")[0], "unclassified")
 
 
+    def test_redrafting_never_overwrites_a_checked_line(self):
+        self.assertTrue(P.needs_draft(None))
+        self.assertTrue(P.needs_draft({"reviewed": "no"}))
+        self.assertFalse(P.needs_draft({"reviewed": "checked"}))
+        self.assertFalse(P.needs_draft({"reviewed": "yes"}))
+
+
 class Reconcile(unittest.TestCase):
     """The committed build adds back up to every file: published rows plus withheld totals."""
 
