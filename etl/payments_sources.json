@@ -116,7 +116,10 @@
    "url": "https://www.lbhf.gov.uk/sites/default/files/2025-06/lbhf-spend-data-q3-2024-25.xlsx",
    "archive_url": null,
    "file": "payments/lbhf-spend-data-q3-2024-25.xlsx",
-   "sha256": null
+   "sha256": "46a794c788f08b81885c47d15b2838df2569a7f1b835e3d6e51aadaa0fd65125",
+   "rows": 17219,
+   "total": 139635708.43,
+   "own_total": null
   },
   {
    "id": "spend_2024-25_q4",
@@ -136,7 +139,10 @@
    "url": "https://www.lbhf.gov.uk/sites/default/files/2025-08/lbhf-spend-data-q1-2025-26.xlsx",
    "archive_url": null,
    "file": "payments/lbhf-spend-data-q1-2025-26.xlsx",
-   "sha256": null
+   "sha256": "e9195ce29e03bc66c9f0c448d558526ef11893f61558387db677fd5917bad52b",
+   "rows": 17655,
+   "total": 135763759.84,
+   "own_total": null
   },
   {
    "id": "spend_2025-26_q2",
@@ -156,7 +162,10 @@
    "url": "https://www.lbhf.gov.uk/sites/default/files/2026-03/spend-data-q3-2025-26.xlsx",
    "archive_url": null,
    "file": "payments/spend-data-q3-2025-26.xlsx",
-   "sha256": null
+   "sha256": "438c20d86fd07be80d6cb30576536f72b4c9369770c4af87339030a924c907d6",
+   "rows": 12438,
+   "total": 109490061.11,
+   "own_total": null
   },
   {
    "id": "spend_2025-26_q4",
@@ -176,7 +185,10 @@
    "url": "https://www.lbhf.gov.uk/sites/default/files/2026-09/spend-data-q1-2026-27.xlsx",
    "archive_url": null,
    "file": "payments/spend-data-q1-2026-27.xlsx",
-   "sha256": null
+   "sha256": "17ff2526c81048c1fc2d3110bc04c2eb6aa9aa2045f9e9a3df92d7e7be5c9fdd",
+   "rows": 15360,
+   "total": 123331229.18,
+   "own_total": null
   }
  ]
 }
