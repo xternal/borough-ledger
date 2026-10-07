@@ -22,7 +22,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Balance it: next year's gap with the real choices a council has, including the referendum limit on council tax rises and the one-off nature of reserves.
 - Promises: each party's headline pledges from its 2026 manifesto, quoted word for word with the manifesto page, an archived copy, a status and a timeline. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
 - Councillors: all 50 councillors by ward, with their posts, from the council's own records.
-- Payments over £500: the council's monthly transparency files, searchable.
+- Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
 ## How to cite figures
 
@@ -35,6 +35,7 @@ Data vintage: ${c.vintage}.
 - [Home](${SITE_URL}/)
 - [Promises and councillors](${SITE_URL}/promises)
 - [Balance next year's budget](${SITE_URL}/balance)
+- [Payments over £500](${SITE_URL}/payments)
 ${buildModel()
   .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d](${SITE_URL}/promise/${p.id})`)
   .join("\n")}

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import hfRaw from "../../../data/build/hf_2026-27.json";
 import seedRaw from "../../../data/seed/hf_2026-27.json";
 import contentRaw from "../../../data/build/content.json";
-import paymentsRaw from "../../../data/seed/payments.json";
+import paymentsRaw from "../../../data/build/payments/index.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -103,6 +103,23 @@ describe("seed parses and cross-checks", () => {
     expect(deadlinesMissed([flagged], "2026-10-07")).toEqual([]); // already flagged
   });
 
+  it("reconciles every payments file: each month adds back up to its file, and older files to the council's own total", () => {
+    expect(DATA.payments.sources.length).toBeGreaterThanOrEqual(8);
+    for (const s of DATA.payments.sources) {
+      const months = DATA.payments.months.filter((m) => m.files.includes(s.id));
+      expect(months.reduce((a, m) => a + m.rows, 0)).toBe(s.rows);
+      expect(months.reduce((a, m) => a + m.total, 0)).toBeCloseTo(s.total, 2);
+    }
+    expect(DATA.payments.sources.filter((s) => s.own_total !== null).length).toBeGreaterThanOrEqual(3);
+    const r = raw();
+    r.payments.months[0]!.total += 1;
+    expect(() => parseDataset(r)).toThrow(/published plus withheld|do not add up/);
+  });
+
+  it("cites every payments file as a source with its hash", () => {
+    for (const s of DATA.payments.sources) expect(DATA.sources.get(s.id)?.sha256).toBe(s.sha256);
+  });
+
   it("keeps promise history append-only", () => {
     const before = DATA.content.promises;
     const grown = structuredClone(before);
@@ -130,6 +147,7 @@ describe("quality", () => {
     expect(list).not.toContain("next_year.levers.fees");
     expect(list).not.toContain("next_year.reserves.minimum_safe");
     expect(list.some((x) => x.startsWith("promises."))).toBe(false); // test cards are gone
+    expect(list.some((x) => x.startsWith("payments"))).toBe(false); // the council's own spend files since M4
     expect(list).not.toContain("funding.council_tax");
     expect(list).not.toContain("bill");
   });

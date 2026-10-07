@@ -12,7 +12,6 @@ describe("page model", () => {
     expect(m.balance.gap.value).toBe(31.4);
     expect(m.place.nextYearLabel).toBe("2027/28");
     expect(m.place.yearAfterLabel).toBe("2028/29");
-    expect(m.payments.period).toBe("July to September 2026");
   });
 
   it("derived values inherit the worst quality of their inputs", () => {

@@ -13,6 +13,16 @@ Councils redact payments to individuals (foster carers, direct-payment recipient
 * Never join payments with other data to infer who someone is.
 * Supplier pages only for companies, charities and public bodies.
 
+How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py`):
+
+* **Council redactions.** Rows the council marked "Personal Data - Name Redacted", "Individual Name redacted", "Redacted - Sensitive Supplier/Service", or with a location or address redacted, are matched as whole phrases and never reach `data/build/`. A real company with "redact" in its name is not caught.
+* **People the council did not redact.** A payee is held back if it has a title (Mr, Mrs, Dr, Sir and so on) and no organisation word, or looks like a first name or initial and a surname and nothing else ("John Smith", "J Smith", "Smith, John").
+* **Payments that usually go to individuals** (direct payments, foster and kinship allowances, help for children in need under section 17, support allowances): the payee is shown only if its name marks it as a company, charity or public body.
+* **Sole traders** written as "Name T/A Business" appear by the trading name only.
+* Held-back rows are added up per month, service group and reason (`redacted` or `person`), and only those totals are published. A month's total still adds back up to the council's file.
+* Supplier pages only for names that mark a company (Ltd, plc, LLP, CIC), a charity or a public body. Other organisations appear in the month tables without a page.
+* When in doubt, hold back: a business named after a person may be shown only as a total. That loses a little detail and never names anyone.
+
 ## Follow
 
 * Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs).

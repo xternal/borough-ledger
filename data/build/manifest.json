@@ -130,6 +130,14 @@
    "sha256": "3bb54aca1806c46c570b1ae7148884a4374df894964eb22079e4ec496a88c32d"
   },
   {
+   "file": "data/manual/payment_groups.csv",
+   "sha256": "253ceb6a4ee10addf4d67e1562730b52eb1096faa48fa4ef12f25fec1719e317"
+  },
+  {
+   "file": "data/manual/payments_service_map.csv",
+   "sha256": "505b70c30e615b3a743349dd7560e430897fc342e885512ac800722dca2f2342"
+  },
+  {
    "file": "data/manual/ra_service_map.csv",
    "sha256": "0c93d9fa4a2c3b863d402b4aa3d30a22d160f8fdcc543822a1e6a03e95791004"
   },

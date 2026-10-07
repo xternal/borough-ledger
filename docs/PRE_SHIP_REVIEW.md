@@ -66,3 +66,14 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 | New: Conservative archive | The Conservative manifesto is saved with its SHA-256, but the Wayback Machine had not archived it by 7 Oct 2026. Submit it at web.archive.org/save and add `archive_url` to `content/parties.yaml` |
 | Medium: seats | Closed. Labour 38 of 50 seats, the leader and every councillor now come from the council's ModernGov service (retrieved 7 Oct 2026), not Wikipedia |
 
+## Status after M4 (7 Oct 2026)
+
+| # | Status |
+|---|---|
+| B1 | Payments closed. The 48 invented payments are gone; the ledger is built from the council's own spend files (124,548 payments in 24 months so far). Only three service toggle costs remain test (free home care, weekly bins, library hours), so the production gate still blocks |
+| B7 | Mostly closed. Redaction rules are in code and tested (docs/PRIVACY.md): council redactions, people the council did not redact, payments that usually go to individuals, and sole traders' own names. 19,700 rows are held back as council redactions and 256 more by our rules, shown only as totals. Run once on a full year: 2024/25 needs the Q3 and Q4 files, which the council's site serves only to a browser |
+| H7 | Closed. Real files, reconciled: every month adds back up to its file to the penny, and the three older files with a total row match it |
+| New: payments mapping | `data/manual/payments_service_map.csv` (500 lines) is a keyword draft. Until a person checks it, services in payments are marked approx. Largest lines first: an hour or two |
+| New: missing quarters | Seven quarters listed by the council (Q3 2024/25 to Q1 2026/27) are not in the build yet. Download them by hand from the council's procurement and financial data page into `data/raw/payments/`, then run `--fetch`, `--draft-map` and a build |
+| New: Companies House | Not matched yet. Supplier pages link to a Companies House search; a confident automatic match needs the free bulk company file (about 470 MB) or an API key, and is left for a later change |
+

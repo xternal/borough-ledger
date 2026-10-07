@@ -103,6 +103,9 @@ pnpm build:prod          # fails while any rendered value has quality "test"
 pnpm --filter @borough-ledger/schema report:test-values   # every test value still in the data
 pnpm --filter @borough-ledger/schema content:build        # compile content/ (promises, councillors) into data/build
 python3 etl/councillors.py                                # refresh councillors and wards from the council's ModernGov service
+python3 etl/payments.py --fetch                           # spend files: download archived ones, record hash, rows and total of new ones
+python3 etl/payments.py --draft-map                       # add new service areas to data/manual/payments_service_map.csv for review
+python3 etl/payments.py                                   # build data/build/payments (redacted, mapped, reconciled to each file)
 ```
 
 | Path | What |
@@ -110,6 +113,7 @@ python3 etl/councillors.py                                # refresh councillors 
 | `apps/web` | Next.js app. Every number renders through `<Num>`, which carries its quality and blocks test values in `build:prod` |
 | `packages/schema` | Zod schemas for `data/seed` and `data/config/rules.json`, cross-checks, quality helpers |
 | `packages/engine` | Bill, budget identity, waterfall, balance-it and costing. Pure functions with Vitest tests |
+| `etl/payments.py` | The council's quarterly spend files: privacy rules (docs/PRIVACY.md), service mapping, a JSON file per month and per-supplier totals in `data/build/payments/`, reconciled to every file |
 | `content/` | Promise cards, parties, councillors and wards in YAML, edited by pull request; see `content/README.md` |
 | `data/config/rules.json` | Band ratios, single person discount, balanced budget rule, referendum limit, instalments, each with its legal source |
 

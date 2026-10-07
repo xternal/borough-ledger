@@ -5,6 +5,7 @@ export type Fmt =
   | "m0" // £224m
   | "m1" // £80.7m
   | "mAuto" // £80.7m, or £0.03m when under £0.1m
+  | "pm1" // £37.7m from an amount in pounds (payments)
   | "sm1" // +£4.0m / −£3.3m
   | "pct0" // 36%   (input in percent units)
   | "pct1" // 4.7%
@@ -52,6 +53,8 @@ export function format(fmt: Fmt, raw: number): string {
       const v = clean(raw, dp);
       return `${sign(v)}£${nf(dp, dp).format(Math.abs(v))}m`;
     }
+    case "pm1":
+      return format("m1", raw / 1e6);
     case "mAuto":
       return Math.abs(raw) > 0 && Math.abs(raw) < 0.1 ? `${sign(raw)}£${nf(2, 2).format(Math.abs(clean(raw, 2)))}m` : format("m1", raw);
     case "sm1": {
@@ -90,6 +93,11 @@ const MONTH_YEAR = new Intl.DateTimeFormat("en-GB", { month: "short", year: "num
 const utc = (iso: string) => new Date(`${iso}T00:00:00Z`);
 export const formatDay = (iso: string) => DAY.format(utc(iso));
 export const formatMonthYear = (iso: string) => MONTH_YEAR.format(utc(iso));
+const MONTH_LONG = new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+/** "2024-04" -> "April 2024". */
+export const formatMonth = (ym: string) => MONTH_LONG.format(utc(`${ym}-01`));
+/** "2024-04" -> "Apr 2024". */
+export const formatMonthShort = (ym: string) => MONTH_YEAR.format(utc(`${ym}-01`));
 
 /** "July to September 2026", or "December 2025 to February 2026". */
 export function formatPeriod(fromIso: string, toIso: string): string {

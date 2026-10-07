@@ -18,7 +18,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
         </a>
         <nav className="sections" aria-label="Sections">
           {SECTIONS.map(([id, label]) => (
-            <a key={id} href={id === "promises" ? "/promises" : `/#${id}`}>
+            <a key={id} href={id === "promises" || id === "payments" ? `/${id}` : `/#${id}`}>
               {label}
             </a>
           ))}

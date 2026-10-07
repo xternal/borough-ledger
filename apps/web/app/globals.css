@@ -1302,6 +1302,116 @@
   .more {
     margin-top: 12px;
   }
+  .pay-section {
+    padding-top: 56px;
+  }
+  .pay-h3 {
+    margin: 32px 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .kpis.kpis-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 8px;
+  }
+  .kpis.kpis-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 20px;
+  }
+  @media (max-width: 720px) {
+    .kpis.kpis-3,
+    .kpis.kpis-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .block {
+    display: block;
+  }
+  .month-nav {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+  .mbars {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+  .mbars-year h3 {
+    margin: 14px 0 4px;
+    font-weight: 500;
+  }
+  .mbar {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr) 96px;
+    gap: 12px;
+    align-items: center;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .mbars-wide .mbar {
+    grid-template-columns: minmax(120px, 240px) minmax(0, 1fr) 110px;
+  }
+  a.mbar:hover,
+  .mbar[aria-current="page"] {
+    background: var(--sunk);
+  }
+  .mbar[aria-current="page"] {
+    font-weight: 600;
+  }
+  .mbar-track {
+    display: flex;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--sunk);
+    overflow: hidden;
+  }
+  .mbar-track i {
+    display: block;
+    height: 100%;
+    background: var(--spend);
+  }
+  .mbar-track i.held {
+    background: var(--line-strong);
+  }
+  .mbar-v {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  @media (max-width: 520px) {
+    .mbar {
+      grid-template-columns: 64px minmax(0, 1fr) 76px;
+      gap: 8px;
+    }
+    .mbars-wide .mbar {
+      grid-template-columns: 110px minmax(0, 1fr) 84px;
+    }
+  }
+  .supplier-hits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px;
+    display: grid;
+  }
+  .supplier-hits li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .supplier-hits li .muted {
+    white-space: nowrap;
+  }
+  .faq.faq-flush {
+    margin-top: 0;
+  }
 
   /* promises, cards and councillors */
   .checkmark {
