@@ -131,6 +131,8 @@ export const Lever = z
     one_off: z.boolean().optional(),
     /** The value the gap already assumes (e.g. the forecast's council tax rise). Only the difference from it closes the gap. */
     assumed: z.number().optional(),
+    /** Values worth marking on the slider, such as a freeze or the forecast's assumption. */
+    marks: z.array(z.number()).optional(),
     ...provenance,
   })
   .refine((l) => l.min <= l.base && l.base <= l.max, "lever base must lie between min and max");
@@ -239,6 +241,8 @@ export const CouncilYear = z.object({
     reserves: z.object({ general: Valued, minimum_safe: Valued }),
     levers: z.array(Lever),
     toggles: z.array(Toggle),
+    /** The council's medium-term forecast: cumulative gap for each year if nothing new is done. First entry is next year. */
+    forecast: z.array(z.object({ year: finYear, gap_m: z.number(), ...provenance })).min(1),
     ...provenance,
   }),
   politics: z.object({

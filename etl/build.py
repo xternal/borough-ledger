@@ -219,6 +219,8 @@ def build() -> Dict[str, Any]:
         if lv["id"] == "ct_rise" and "ct_assumed_pct" in mny and "council_tax_m" in mny:
             assumed = float(mny["ct_assumed_pct"]["value"])
             base = float(mny["council_tax_m"]["value"]) / (1 + assumed / 100)
+            # 0.01 steps so the forecast's own rise (4.99%) is a position on the slider; marks at a freeze and at the forecast.
+            lv.update(step=0.01, max=10, marks=[0, assumed])
             lv.update(m_per_unit=round(base / 100, 4), assumed=assumed, quality="approx", source_id=mny["council_tax_m"]["source_id"],
                       method_note=f"1% of 2027/28 council tax before the rise: £{mny['council_tax_m']['value']}m ÷ (1 + {assumed}%). "
                                   f"The council's forecast already assumes a {assumed}% rise, so only the difference from it closes or widens the gap.")
@@ -244,6 +246,12 @@ def build() -> Dict[str, Any]:
                 lv["label"] = "Further savings"
                 lv["method_note"] += f" On top of the £{mny['planned_savings_m']['value']}m of savings the forecast already includes."
         levers.append(lv)
+    # The council's medium-term forecast: cumulative gaps, each assuming nothing new is done in earlier years.
+    forecast = [{"year": ny["year"], "gap_m": gap_src["gap_m"], "quality": gap_src["quality"], "source_id": gap_src["source_id"],
+                 **({"method_note": gap_src["method_note"]} if "method_note" in gap_src else {})}]
+    for key in sorted(k for k in mny if k.startswith("gap_") and k.endswith("_m") and k != "gap_m"):
+        forecast.append({"year": key[len("gap_"):-len("_m")], "gap_m": float(mny[key]["value"]), "quality": "sourced", **cite(key)})
+    check([f["year"] for f in forecast] == sorted(f["year"] for f in forecast), "forecast years out of order")
     next_year = {
         "year": ny["year"], **gap_src,
         "reserves": {
@@ -253,6 +261,7 @@ def build() -> Dict[str, Any]:
         },
         "levers": levers,
         "toggles": manual_toggles(ny["toggles"]),
+        "forecast": forecast,
     }
 
     vintage = max(s["published_on"] for s in reg.values() if "published_on" in s)

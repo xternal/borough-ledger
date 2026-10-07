@@ -30,6 +30,7 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
     if ("quality" in g) add(`gap_2026_27[${i}] ${g.label}`, g);
   });
   add("next_year", c.next_year);
+  c.next_year.forecast.forEach((f) => add(`next_year.forecast.${f.year}`, f));
   add("next_year.reserves.general", c.next_year.reserves.general);
   add("next_year.reserves.minimum_safe", c.next_year.reserves.minimum_safe);
   c.history.budget.forEach((h) => out.push({ path: `history.budget.${h.year}`, quality: c.history.quality, source_id: h.source_id }));
@@ -84,6 +85,9 @@ export function parseDataset(raw: { council: unknown; promises: unknown; payment
   for (const p of promises.promises)
     if (p.lever_or_toggle_id && !toggleIds.has(p.lever_or_toggle_id) && !leverIds.has(p.lever_or_toggle_id))
       problems.push(`promise ${p.id}: unknown lever or toggle ${p.lever_or_toggle_id}`);
+  const fc = council.next_year.forecast;
+  if (fc[0]?.year !== council.next_year.year || fc[0]?.gap_m !== council.next_year.gap_m)
+    problems.push("next_year.forecast must start with next year's gap");
   for (const y of [council.meta.year, council.next_year.year])
     if (!rules.referendum_limit_pct[y]) problems.push(`rules: no referendum limit for ${y}`);
   const serviceIds = new Set(council.services.map((s) => s.id));

@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { derive, fig, worst, type Figure, type Lever, type LeverId } from "@borough-ledger/schema";
-import { billFor, computeBalance, leverValue, nextYearCouncil, type PartId } from "@borough-ledger/engine";
+import { billFor, computeBalance, encodeScenario, leverValue, mediumTerm, nextYearCouncil, type MediumTermYear, type PartId } from "@borough-ledger/engine";
 import { formatLever } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
 import { Num } from "./Num";
@@ -46,6 +47,24 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
         : { c: "spare", t: "Spare", f: at(-r.remainingM) };
   const scale = Math.max(balance.input.gapM, r.closedM);
   const general = balance.input.reserves.general_m;
+  const forecast = balance.strip.filter((y) => y.gap).map((y) => ({ year: y.year, gapM: y.gap!.value }));
+  const years = mediumTerm(balance.input, forecast, scenario);
+
+  // Keep a shared /balance link in step with the choices, so reloading or copying the address keeps them.
+  const code = encodeScenario(balance.input, scenario);
+  const path = `/balance${code ? `?s=${code}` : ""}`;
+  useEffect(() => {
+    if (window.location.pathname === "/balance") window.history.replaceState(null, "", path);
+  }, [path]);
+  const [copied, setCopied] = useState<"idle" | "copied" | "manual">("idle");
+  useEffect(() => setCopied("idle"), [path]);
+  const copy = () => {
+    const url = `${window.location.origin}${path}`;
+    navigator.clipboard?.writeText(url).then(
+      () => setCopied("copied"),
+      () => setCopied("manual"),
+    ) ?? setCopied("manual");
+  };
 
   function hint(l: Lever, v: number) {
     const raised = byLever(l.id, v * l.m_per_unit);
@@ -119,8 +138,16 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
                   max={l.max}
                   step={l.step}
                   value={v}
+                  list={l.marks ? `marks-${l.id}` : undefined}
                   onChange={(e) => setLever(l.id, Number(e.target.value))}
                 />
+                {l.marks ? (
+                  <datalist id={`marks-${l.id}`}>
+                    {l.marks.map((x) => (
+                      <option key={x} value={x} />
+                    ))}
+                  </datalist>
+                ) : null}
                 <div className="hint">
                   <span>{hint(l, v)}</span>
                   <b>{l.controlled_by === "government" ? "Decided by government" : "Council decides"}</b>
@@ -201,12 +228,64 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
             <div className="muted small">Red line: safe minimum</div>
           </div>
           <Flags r={r} ctRise={ctRise} balance={balance} place={place} at={(v) => byLever("reserves", v)} />
+          <Strip strip={balance.strip} years={years} q={q} />
+          <div className="share">
+            <button type="button" className="btn secondary" onClick={copy}>
+              Copy a link to these choices
+            </button>
+            <span className="small muted" aria-live="polite">
+              {copied === "copied" ? "Link copied" : copied === "manual" ? `Copy this link: ${window.location.origin}${path}` : null}
+            </span>
+          </div>
           <div className="qrow" style={{ paddingTop: 0 }}>
             <QualityGroup q={q.quality} text="Gap, costs and yields" />
           </div>
         </aside>
       </div>
     </section>
+  );
+}
+
+/** The next three years if nothing else changes: recurring choices keep saving, one-off money comes back. */
+function Strip({ strip, years, q }: { strip: PageModel["balance"]["strip"]; years: MediumTermYear[]; q: Figure }) {
+  const max = Math.max(1, ...years.map((y) => Math.abs(y.remainingM)));
+  return (
+    <div className="strip" aria-label="The next three years if nothing else changes">
+      <div className="muted small">If nothing else changes</div>
+      <div className="strip-years">
+        {strip.map((cell) => {
+          const y = years.find((x) => x.year === cell.year);
+          if (!cell.gap || !y)
+            return (
+              <div className="strip-year" key={cell.year}>
+                <span className="y">{cell.label}</span>
+                <span className="s">Not yet forecast by the council</span>
+              </div>
+            );
+          const f = derive(Math.abs(y.remainingM), q, cell.gap);
+          const word = y.status === "short" ? "to find" : y.status === "spare" ? "spare" : "balanced";
+          const width = (Math.abs(y.remainingM) / max) * 100;
+          const back = y.status === "short" ? Math.min(100, (y.comesBackM / Math.abs(y.remainingM)) * 100) : 0;
+          return (
+            <div className="strip-year" key={cell.year}>
+              <span className="y">{cell.label}</span>
+              <span className={`n ${y.status}`}>{y.status === "balanced" ? "£0.0m" : <Num f={f} fmt="mAuto" />}</span>
+              <span className="s">{word}</span>
+              <span className="bar" aria-hidden="true">
+                <i className={y.status} style={{ width: `${width.toFixed(1)}%` }}>
+                  {back > 0 ? <b className="hatch" style={{ width: `${back.toFixed(1)}%` }} /> : null}
+                </i>
+              </span>
+              {y.comesBackM > 0 ? (
+                <span className="s">
+                  including <Num f={derive(y.comesBackM, q)} fmt="m1" /> of reserves coming back
+                </span>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
