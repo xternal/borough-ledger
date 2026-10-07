@@ -241,6 +241,8 @@ export const CouncilYear = z.object({
     reserves: z.object({ general: Valued, minimum_safe: Valued }),
     levers: z.array(Lever),
     toggles: z.array(Toggle),
+    /** Switches held back until their cost is sourced: named on the page, never given a number. */
+    pending_toggles: z.array(z.object({ id: z.string(), label: z.string(), todo: z.string() })).default([]),
     /** The council's medium-term forecast: cumulative gap for each year if nothing new is done. First entry is next year. */
     forecast: z.array(z.object({ year: finYear, gap_m: z.number(), ...provenance })).min(1),
     ...provenance,

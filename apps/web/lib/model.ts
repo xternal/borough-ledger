@@ -135,6 +135,8 @@ export interface PageModel {
     input: BalanceInput;
     levers: Lever[];
     toggles: Toggle[];
+    /** Switches held back until their cost is sourced. */
+    pendingToggles: string[];
     gap: Figure;
     reservesGeneral: Figure;
     reservesMin: Figure;
@@ -394,6 +396,7 @@ export function buildModel(): PageModel {
       },
       levers: ny.levers,
       toggles: ny.toggles,
+      pendingToggles: ny.pending_toggles.map((t) => t.label),
       gap,
       reservesGeneral,
       reservesMin,

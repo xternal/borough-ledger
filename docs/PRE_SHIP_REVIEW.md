@@ -82,3 +82,12 @@ Self-review of the prototype and pack, 6 Oct 2026. Handing the pack to a develop
 All seven newer quarters the council lists are in (Q3 2024/25 to Q1 2026/27), downloaded through a browser from the council's page. The ledger has 241,195 payments in 45 months, up to June 2026, with 2024/25 and 2025/26 as complete years. 41,549 rows are held back as council redactions and 266 by our rules.
 
 B7 closed: the redaction rules ran on two full years. Reviewing the names they let through found one private individual paid a fee ("first name and surname" with a first name the list did not know); the forename list now covers names common across London's communities, and that payment is a total only. Keep the review step (`etl/tests/test_payments.py` and a look at short names without an organisation word) each time new files are added.
+
+## Public alpha (7 Oct 2026)
+
+The project owner decided to publish the site as a public alpha at https://borough-ledger.vercel.app, open to search engines and AI crawlers, **before** the legal advice in B6 (third-party campaigning rules and naming councillors) and before the editor checks of the promise cards and the payments mapping. The site says "Alpha" next to its name, every promise card still says "Awaiting editor check", and payments mark service groups as approx.
+
+To publish with no test values, the three "Balance it" switches without a sourced cost (free home care, weekly bins, library hours) are held back and named on the page as coming later. The two free home care cards no longer link to a switch until it returns. Production builds now pass the gate, which still blocks any test value from reaching them.
+
+Still open before calling it a launch: B5 and B6 (legal), the editor checks, the human checks of the mapping tables, the Conservative manifesto archive link and B3.
+

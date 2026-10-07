@@ -185,6 +185,16 @@
     -webkit-backdrop-filter: saturate(1.4) blur(10px);
     border-bottom: 1px solid var(--line);
   }
+  .mark .stage {
+    margin-left: 6px;
+    padding: 1px 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    vertical-align: 2px;
+  }
   .bar-in {
     max-width: 1120px;
     margin: 0 auto;

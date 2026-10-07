@@ -1,3 +1,4 @@
+import { STAGE } from "@/lib/site";
 const SECTIONS = [
   ["bill", "Your bill"],
   ["budget", "Budget"],
@@ -15,6 +16,9 @@ export function TopBar({ place, year }: { place: string; year: string }) {
         <a className="mark" href="/">
           <i aria-hidden="true" />
           Borough Ledger
+          <span className="stage" title="Early version: figures are sourced, but editors are still checking promise cards and service groups">
+            {STAGE}
+          </span>
         </a>
         <nav className="sections" aria-label="Sections">
           {SECTIONS.map(([id, label]) => (

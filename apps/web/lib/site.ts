@@ -1,10 +1,18 @@
 import { ALLOW_TEST_DATA } from "./quality";
 
-/** A Vercel preview (such as the Alpha) links to its own branch address; set at build time, used by server code only. */
-const PREVIEW_URL = process.env.VERCEL_ENV === "preview" && process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : undefined;
+/** On Vercel, production links to the project's production address and a preview to its branch address. Build time, server code only. */
+const VERCEL_URL =
+  process.env.VERCEL_ENV === "production" && process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_ENV === "preview" && process.env.VERCEL_BRANCH_URL
+      ? `https://${process.env.VERCEL_BRANCH_URL}`
+      : undefined;
 
 /** TODO(decide): production domain. Set NEXT_PUBLIC_SITE_URL on Vercel once the name is settled (PRE_SHIP_REVIEW, Decide). */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? PREVIEW_URL ?? "http://localhost:3000").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? VERCEL_URL ?? "http://localhost:3000").replace(/\/$/, "");
+
+/** The site is in alpha: shown next to the name and said in llms.txt. Remove when the pre-ship review is closed. */
+export const STAGE = "Alpha";
 
 /** Who made the site, credited in every footer. */
 export const MAKER = { name: "Pavel Guzhikov", url: "https://guzh.uk", coffee: "https://ko-fi.com/pavelg" };

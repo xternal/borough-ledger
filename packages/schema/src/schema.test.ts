@@ -33,7 +33,8 @@ describe("seed parses and cross-checks", () => {
 
   it("rejects a sourced value that cites a source without a URL", () => {
     const r = raw();
-    r.council.services[0]!.source_id = "prototype_test";
+    r.council.meta.sources.push({ id: "no_url", title: "A source without a link", publisher: "Nobody" } as (typeof r.council.meta.sources)[number]);
+    r.council.services[0]!.source_id = "no_url";
     expect(() => parseDataset(r)).toThrow(/has no URL/);
   });
 
@@ -45,7 +46,7 @@ describe("seed parses and cross-checks", () => {
 
   it("rejects a promise linked to a toggle that does not exist", () => {
     const r = raw();
-    (r.content.promises.find((p) => p.lever_or_toggle_id) as { lever_or_toggle_id?: string }).lever_or_toggle_id = "nope";
+    (r.content.promises[0] as { lever_or_toggle_id?: string }).lever_or_toggle_id = "nope";
     expect(() => parseDataset(r)).toThrow(/unknown lever or toggle/);
   });
 
@@ -143,7 +144,8 @@ describe("quality", () => {
 
   it("lists every test value in the seed", () => {
     const list = listTestValues(DATA);
-    expect(list).toContain("next_year.toggles.weekly_bins");
+    expect(list).toEqual([]); // switches without a sourced cost are held back, not shown (next_year.pending_toggles)
+    expect(DATA.council.next_year.pending_toggles.map((t) => t.id)).toEqual(["free_home_care", "weekly_bins", "library_hours"]);
     expect(list).not.toContain("next_year.levers.fees");
     expect(list).not.toContain("next_year.reserves.minimum_safe");
     expect(list.some((x) => x.startsWith("promises."))).toBe(false); // test cards are gone
