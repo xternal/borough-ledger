@@ -91,3 +91,7 @@ To publish with no test values, the three "Balance it" switches without a source
 
 Still open before calling it a launch: B5 and B6 (legal), the editor checks, the human checks of the mapping tables, the Conservative manifesto archive link and B3.
 
+## Payments mapping signed off (7 Oct 2026)
+
+Claude checked all 642 lines of `data/manual/payments_service_map.csv` against what was bought and who was paid (40 groups corrected) and listed 26 lines it was unsure of; the project owner read those and signed off every line. Services in payments are now shown as sourced rather than approx. When new spend files add service areas, `--draft-map` adds them as `reviewed=no` and the site goes back to approx until they are checked.
+

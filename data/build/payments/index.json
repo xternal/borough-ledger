@@ -5,7 +5,7 @@
   "page": "https://www.lbhf.gov.uk/councillors-and-democracy/data-and-information/transparency/procurement-and-financial-data",
   "licence": "OGL-UK-3.0",
   "quality": "sourced",
-  "group_quality": "approx",
+  "group_quality": "sourced",
   "notes": [
    "Amounts exclude VAT.",
    "Credit notes show as negative amounts.",
@@ -14,9 +14,9 @@
   ],
   "mapping": {
    "lines": 642,
-   "unreviewed": 642,
-   "checked": 642,
-   "unsure": 26
+   "unreviewed": 0,
+   "checked": 0,
+   "unsure": 0
   },
   "withheld_rows_by_reason": {
    "person": 266,

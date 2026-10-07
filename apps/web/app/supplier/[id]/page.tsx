@@ -140,7 +140,10 @@ export default async function SupplierPage({ params }: Props) {
         </div>
         <div className="qrow">
           <QualityGroup q={PAY.meta.quality} text="Amounts: the council's own figures, excluding VAT" />
-          <QualityGroup q={GROUP_QUALITY} text="Services: matched by us from the council's service areas" />
+          <QualityGroup
+            q={GROUP_QUALITY}
+            text={GROUP_QUALITY === "sourced" ? "Services: matched from the council's service areas and checked by hand" : "Services: matched by us from the council's service areas"}
+          />
         </div>
         <p className="muted small">
           From {files.length === 1 ? "the council's spend file" : `${files.length} of the council's spend files`}:{" "}
