@@ -67,7 +67,7 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
   const sources = new Map<string, Source>();
   const paymentSources: Source[] = payments.sources.map((s) => ({
     id: s.id,
-    title: `${payments.meta.publisher}, ${s.title}`,
+    title: s.title,
     publisher: payments.meta.publisher,
     url: s.url,
     asset_url: s.archive_url ?? s.url,

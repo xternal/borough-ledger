@@ -441,7 +441,7 @@ export function buildModel(): PageModel {
         [
           ...DATA.sources.values(),
           ...K.parties.map((pt) => ({ id: `manifesto:${pt.id}`, title: pt.manifesto.title, publisher: pt.name, url: pt.manifesto.archive_url ?? pt.manifesto.url })),
-          ...K.wards.sources.map((src, i) => ({ id: `content:${i}`, title: src.title, publisher: "", url: src.url })),
+          ...K.wards.sources.map((src, i) => ({ id: `content:${i}`, title: src.title, publisher: src.title.split(",")[0]!, url: src.url })),
         ]
           .filter((s): s is Source & { url: string } => !!s.url)
           .map((s) => [s.url, s]),

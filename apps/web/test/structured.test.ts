@@ -25,3 +25,14 @@ describe("structured data", () => {
     expect(about.sameAs).toEqual([c.democracy_url]);
   });
 });
+
+describe("sources", () => {
+  it("puts every source in exactly one group", async () => {
+    const { groupSources } = await import("@/lib/sources");
+    const m = buildModel();
+    const groups = groupSources(m.sources);
+    expect(groups.reduce((a, g) => a + g.items.length, 0)).toBe(m.sources.length);
+    expect(groups.map((g) => g.id)).not.toContain("other");
+    expect(groups.find((g) => g.id === "spend")?.items.length).toBe(15);
+  });
+});
