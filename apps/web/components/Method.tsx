@@ -1,5 +1,6 @@
 import type { PageModel } from "@/lib/model";
 import { faq } from "@/lib/faq";
+import { groupSources } from "@/lib/sources";
 import { Num } from "./Num";
 
 export function Method({ m }: { m: PageModel }) {
@@ -38,15 +39,17 @@ export function Method({ m }: { m: PageModel }) {
         </div>
         <div>
           <h3>Sources</h3>
-          <ul>
-            {m.sources.map((s) => (
-              <li key={s.id}>
-                <a href={s.url} target="_blank" rel="noopener">
-                  {s.title}
-                </a>
+          <p className="muted">{m.sources.length} published documents. Every figure links to the one it comes from.</p>
+          <ul className="src-groups">
+            {groupSources(m.sources).map((g) => (
+              <li key={g.id}>
+                <a href={`/sources#${g.id}`}>{g.label}</a> <span className="muted">{g.items.length}</span>
               </li>
             ))}
           </ul>
+          <p>
+            <a href="/sources">All sources, with dates and file fingerprints</a>
+          </p>
         </div>
       </div>
       <div className="faq">

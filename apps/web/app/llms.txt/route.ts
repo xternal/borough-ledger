@@ -38,6 +38,7 @@ Data vintage: ${c.vintage}.
 - [Promises and councillors](${SITE_URL}/promises)
 - [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)
+- [Sources](${SITE_URL}/sources)
 ${buildModel()
   .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d](${SITE_URL}/promise/${p.id})`)
   .join("\n")}

@@ -1551,6 +1551,29 @@
     gap: 6px;
     list-style: disc;
   }
+  .method p {
+    margin: 0 0 8px;
+  }
+  .method ul.src-groups {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+  .source-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 80ch;
+    display: grid;
+  }
+  .source-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .source-list code {
+    font-size: 12px;
+  }
   @media (max-width: 860px) {
     .method {
       grid-template-columns: minmax(0, 1fr);
