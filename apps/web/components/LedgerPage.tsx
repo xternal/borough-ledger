@@ -4,6 +4,7 @@ import { BillSection } from "@/components/BillSection";
 import { BudgetFlow } from "@/components/BudgetFlow";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import { JsonLd } from "@/components/JsonLd";
 import { LedgerStateProvider } from "@/components/LedgerState";
 import { Method } from "@/components/Method";
 import { Payments } from "@/components/Payments";
@@ -42,7 +43,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
         <Footer council={m.place.short} hasTestData={m.hasTestData} />
       </main>
       {focus ? <ScrollTo id={focus} /> : null}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <JsonLd data={jsonLd} />
     </>
   );
 }

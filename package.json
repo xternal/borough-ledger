@@ -10,6 +10,7 @@
     "build:prod": "pnpm --filter @borough-ledger/web build:prod",
     "dev": "pnpm --filter @borough-ledger/web dev",
     "check:dots": "node scripts/check-no-middle-dot.mjs",
+    "check:share-images": "node scripts/check-share-images.mjs",
     "prototype": "python3 build_prototype.py"
   }
 }

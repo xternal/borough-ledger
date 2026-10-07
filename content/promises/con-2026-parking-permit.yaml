@@ -1,0 +1,20 @@
+id: "con-2026-parking-permit"
+actor:
+  kind: "party"
+  id: "conservative"
+made_on: "2026-03-16"
+venue: "manifesto"
+area: "Streets, waste and transport"
+versions:
+  - text: "A borough-wide parking permit for an additional fee, giving you choice and convenience"
+    recorded_on: "2026-10-07"
+    source_url: "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
+    page: 10
+status: "not_in_power"
+deadline: null
+events:
+  - date: "2026-03-16"
+    type: "promised"
+    text: "Key commitment in the 2026 Conservative manifesto"
+replies: []
+editor_check_required: true

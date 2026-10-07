@@ -306,7 +306,6 @@ def build() -> Dict[str, Any]:
         "gap_2026_27": manual_gap(seed["gap_2026_27"]),
         "savings": manual_savings(),
         "next_year": next_year,
-        "politics": seed["politics"],
     }
     cited = set(cited_sources(out))
     sources = [source_entry(reg[k]) for k in reg] + [METHOD]

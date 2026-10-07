@@ -215,12 +215,6 @@
     "note": "TODO(decide): the repository is private; publish the method page before launch."
    },
    {
-    "id": "election",
-    "title": "2026 Hammersmith and Fulham London Borough Council election",
-    "url": "https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election",
-    "publisher": "Wikipedia (secondary)"
-   },
-   {
     "id": "prototype_test",
     "title": "Invented for the prototype layout",
     "publisher": "Borough Ledger",
@@ -1360,19 +1354,5 @@
     "method_note": "Cabinet 9 February 2026, public reports pack, PDF page 57. Appendix B Table 2: Forecast Budget Gap 2028/29 (cumulative), assuming a 4.99% council tax rise in each year"
    }
   ]
- },
- "politics": {
-  "control": "Labour",
-  "seats": {
-   "Labour": 38,
-   "Conservative": 12
-  },
-  "total_seats": 50,
-  "leader": "Stephen Cowan",
-  "election": "2026-05-07",
-  "next_election": "2030-05",
-  "quality": "approx",
-  "source_id": "election",
-  "todo": "TODO(source): confirm seats and leader with the council's democracy site (Wikipedia is secondary)"
  }
 }

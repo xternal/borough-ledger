@@ -1,14 +1,17 @@
 import { describe, expect, it } from "vitest";
 import hfRaw from "../../../data/build/hf_2026-27.json";
 import seedRaw from "../../../data/seed/hf_2026-27.json";
-import promisesRaw from "../../../data/seed/promises.json";
+import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/seed/payments.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
+import { appendOnlyProblems } from "./append-only";
+import { deadlinesMissed } from "./deadlines";
+import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, promises: promisesRaw, payments: paymentsRaw, rules: rulesRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {
@@ -34,15 +37,15 @@ describe("seed parses and cross-checks", () => {
     expect(() => parseDataset(r)).toThrow(/has no URL/);
   });
 
-  it("rejects a real promise card without a source", () => {
+  it("rejects a promise card without a sourced version", () => {
     const r = raw();
-    r.promises.promises[0]!.sources = [];
-    expect(() => parseDataset(r)).toThrow(/needs at least one source/);
+    r.content.promises[0]!.versions = [];
+    expect(() => parseDataset(r)).toThrow(/at least one version/);
   });
 
   it("rejects a promise linked to a toggle that does not exist", () => {
     const r = raw();
-    r.promises.promises[0]!.lever_or_toggle_id = "nope";
+    (r.content.promises.find((p) => p.lever_or_toggle_id) as { lever_or_toggle_id?: string }).lever_or_toggle_id = "nope";
     expect(() => parseDataset(r)).toThrow(/unknown lever or toggle/);
   });
 
@@ -73,8 +76,43 @@ describe("seed parses and cross-checks", () => {
     expect(() => parseDataset(r)).toThrow(/ring-fenced to unknown service/);
   });
 
-  it("decides administration or opposition from data, never from a party name", () => {
-    expect(new Set(DATA.promises.promises.map((p) => p.side))).toEqual(new Set(["administration", "opposition"]));
+  it("decides administration or opposition from seats, never from a party name", () => {
+    expect(DATA.content.control).toBe("labour"); // 38 of 50 seats in the council's own records
+    expect(sideOf(DATA.content, "labour")).toBe("administration");
+    expect(sideOf(DATA.content, "conservative")).toBe("opposition");
+    expect(sideOf({ control: null }, "labour")).toBe("opposition"); // no overall control: nobody is the administration
+  });
+
+  it("holds every party to the same status rules", () => {
+    const c = structuredClone(DATA.content);
+    c.promises.find((p) => p.actor.id === "conservative")!.status = "delivering";
+    c.promises.find((p) => p.actor.id === "labour")!.status = "not_in_power";
+    const problems = checkContent(c);
+    expect(problems.some((x) => /opposition pledge must be not_in_power/.test(x))).toBe(true);
+    expect(problems.some((x) => /administration's pledge cannot be not_in_power/.test(x))).toBe(true);
+  });
+
+  it("flags a passed deadline once, and only for the administration's open pledges", () => {
+    const base = structuredClone(DATA.content.promises.find((p) => p.status === "promised")!);
+    const p = { ...base, deadline: "2026-09-30" };
+    expect(deadlinesMissed([p], "2026-10-07").map((x) => x.id)).toEqual([p.id]);
+    expect(deadlinesMissed([p], "2026-09-30")).toEqual([]); // not yet passed
+    expect(deadlinesMissed([{ ...p, status: "delivered" as const }], "2026-10-07")).toEqual([]);
+    expect(deadlinesMissed([{ ...p, status: "not_in_power" as const }], "2026-10-07")).toEqual([]);
+    const flagged = { ...p, events: [...p.events, { date: "2026-10-01", type: "deadline_missed" as const, text: "x", auto: true }] };
+    expect(deadlinesMissed([flagged], "2026-10-07")).toEqual([]); // already flagged
+  });
+
+  it("keeps promise history append-only", () => {
+    const before = DATA.content.promises;
+    const grown = structuredClone(before);
+    grown[0]!.events.push({ date: "2026-11-01", type: "in_plan", text: "Cabinet decision" });
+    expect(appendOnlyProblems(before, grown)).toEqual([]);
+    const edited = structuredClone(before);
+    edited[0]!.versions[0]!.text = "Something else";
+    expect(appendOnlyProblems(before, edited)).toEqual([`${before[0]!.id}: versions[0] was edited; add a new entry instead`]);
+    const deleted = before.slice(1) as PromiseCard[];
+    expect(appendOnlyProblems(before, deleted)[0]).toMatch(/deleted/);
   });
 });
 
@@ -91,7 +129,7 @@ describe("quality", () => {
     expect(list).toContain("next_year.toggles.weekly_bins");
     expect(list).not.toContain("next_year.levers.fees");
     expect(list).not.toContain("next_year.reserves.minimum_safe");
-    expect(list).toContain("promises.test-b-slogan (test card)");
+    expect(list.some((x) => x.startsWith("promises."))).toBe(false); // test cards are gone
     expect(list).not.toContain("funding.council_tax");
     expect(list).not.toContain("bill");
   });

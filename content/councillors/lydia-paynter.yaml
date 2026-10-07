@@ -1,0 +1,12 @@
+id: "lydia-paynter"
+name: "Lydia Paynter"
+party: "labour"
+party_name: "Labour"
+ward_id: "lillie"
+roles:
+  - title: "Chair of Planning and Development Control Committee"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=5953"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

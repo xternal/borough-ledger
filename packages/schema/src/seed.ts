@@ -245,15 +245,6 @@ export const CouncilYear = z.object({
     forecast: z.array(z.object({ year: finYear, gap_m: z.number(), ...provenance })).min(1),
     ...provenance,
   }),
-  politics: z.object({
-    control: z.string(),
-    seats: z.record(z.string(), z.number().int().nonnegative()),
-    total_seats: z.number().int().positive(),
-    leader: z.string(),
-    election: isoDate,
-    next_election: z.string(),
-    ...provenance,
-  }),
 });
 export type CouncilYear = z.infer<typeof CouncilYear>;
 

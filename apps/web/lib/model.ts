@@ -10,7 +10,9 @@ import {
   type Lever,
   type LeverId,
   type PaymentSeed,
-  type PromiseSeed,
+  type PromiseCard,
+  sideOf,
+  partyOf,
   type Quality,
   type Rules,
   type Saving,
@@ -50,8 +52,54 @@ export interface SavingRow {
   oneOff: boolean;
 }
 
-export interface PromiseModel extends PromiseSeed {
-  cost: { low: Figure; central: Figure; high: Figure; perBandD: Figure; share: Figure } | null;
+export interface CostModel {
+  low: Figure;
+  central: Figure;
+  high: Figure;
+  perBandD: Figure;
+  share: Figure;
+  note?: string;
+}
+
+export interface CouncillorModel {
+  id: string;
+  name: string;
+  party: string;
+  partyId: string;
+  side: "administration" | "opposition";
+  wardId: string;
+  ward: string;
+  roles: string[];
+  democracy_url: string;
+}
+
+/** A promise card ready to render, the same shape for every party. */
+export interface PromiseModel {
+  id: string;
+  /** Who made it: the party's name, or the councillor's. */
+  actor: string;
+  /** The councillor's party, when the actor is a councillor. */
+  party: string | null;
+  partyId: string;
+  side: "administration" | "opposition";
+  made_on: string;
+  venue: string;
+  area: string;
+  /** The latest wording, with the page of its source. */
+  text: string;
+  page: number | null;
+  versions: PromiseCard["versions"];
+  status: PromiseCard["status"];
+  deadline: string | null;
+  funded_by: string | null;
+  cost: CostModel | null;
+  capital: CostModel | null;
+  sources: { title: string; url: string }[];
+  timeline: { date: string; type: string; event: string; evidence_url?: string }[];
+  replies: PromiseCard["replies"];
+  lever_or_toggle_id?: string;
+  editorCheck: boolean;
+  test?: boolean;
 }
 
 export interface PageModel {
@@ -107,6 +155,7 @@ export interface PageModel {
   referendumLimitNow: Figure;
   politics: { control: string; seats: Figure; totalSeats: Figure };
   promises: PromiseModel[];
+  people: { councillors: CouncillorModel[]; wards: { id: string; name: string; ons_code: string; councillor_ids: string[] }[]; retrievedOn: string };
   payments: { rows: PaymentSeed[]; f: Figure; period: string; services: string[] };
   sources: Source[];
   qualityLegend: { budget: QualityItem[]; gap: QualityItem[] };
@@ -118,6 +167,55 @@ export interface QualityItem {
 }
 
 const of = (x: { quality: Quality; source_id: string }, value: number) => fig(value, x.quality, x.source_id);
+
+/** Party control from the council's own councillor records. */
+function politicsOf(K: typeof DATA.content): PageModel["politics"] {
+  const seats = (party: string | null) => K.councillors.filter((c) => c.party === party).length;
+  const party = K.parties.find((p) => p.id === K.control);
+  const src = "moderngov_councillors";
+  return {
+    control: party?.short ?? "No overall control",
+    seats: fig(seats(K.control), "sourced", src),
+    totalSeats: fig(K.councillors.length, "sourced", src),
+  };
+}
+
+function promiseModel(K: typeof DATA.content, p: PromiseCard, costOf: (x: PromiseCard["cost_m"], id: string) => CostModel | null): PromiseModel {
+  const partyId = partyOf(K, p);
+  const party = K.parties.find((x) => x.id === partyId);
+  const councillor = p.actor.kind === "councillor" ? K.councillors.find((c) => c.id === p.actor.id) : undefined;
+  const latest = p.versions[p.versions.length - 1]!;
+  const sources = new Map<string, string>();
+  for (const v of p.versions) {
+    const m = party?.manifesto;
+    const title = m && v.source_url === m.url ? `${m.title}${v.page ? `, page ${v.page}` : ""}` : v.source_url;
+    sources.set(v.archive_url ?? (m && v.source_url === m.url && m.archive_url ? m.archive_url : v.source_url), title);
+  }
+  for (const e of p.events) if (e.evidence_url && !sources.has(e.evidence_url)) sources.set(e.evidence_url, e.text.split(":")[0] ?? e.evidence_url);
+  return {
+    id: p.id,
+    actor: councillor?.name ?? party?.name ?? p.actor.id,
+    party: councillor ? (party?.short ?? null) : null,
+    partyId,
+    side: sideOf(K, partyId),
+    made_on: p.made_on,
+    venue: p.venue,
+    area: p.area,
+    text: latest.text,
+    page: latest.page ?? null,
+    versions: p.versions,
+    status: p.status,
+    deadline: p.deadline,
+    funded_by: p.funded_by ?? null,
+    cost: costOf(p.cost_m ?? null, p.id),
+    capital: costOf(p.capital_cost_m ?? null, p.id),
+    sources: [...sources].map(([url, title]) => ({ url, title })),
+    timeline: p.events.map((e) => ({ date: e.date, type: e.type, event: e.text, ...(e.evidence_url ? { evidence_url: e.evidence_url } : {}) })),
+    replies: p.replies,
+    ...(p.lever_or_toggle_id ? { lever_or_toggle_id: p.lever_or_toggle_id } : {}),
+    editorCheck: !!p.editor_check_required,
+  };
+}
 
 function nonNull<T>(v: T | null, what: string): T {
   if (v === null) throw new Error(`${what} is missing`);
@@ -149,7 +247,7 @@ function londonToday(): string {
 }
 
 export function buildModel(): PageModel {
-  const { council: C, rules: R, promises: P, payments: PAY } = DATA;
+  const { council: C, rules: R, content: K, payments: PAY } = DATA;
   const tol = R.balanced_budget.tolerance_m;
 
   const budget = checkBudget(C.funding, C.services, tol);
@@ -233,21 +331,23 @@ export function buildModel(): PageModel {
 
   /* promises: costed the same way for every side */
   const taxBase = of(C.tax_base, C.tax_base.band_d_equivalents);
-  const promises: PromiseModel[] = P.promises.map((p) => {
-    if (!p.cost_m || !p.cost_quality || !p.cost_source_id) return { ...p, cost: null };
-    const c = (v: number) => fig(v, p.cost_quality!, p.cost_source_id!);
-    const central = c(p.cost_m[1]);
+  const costOf = (x: PromiseCard["cost_m"], id: string): CostModel | null => {
+    if (!x) return null;
+    const c = (v: number) => fig(v, x.quality, `promise:${id}`);
+    const central = c(x.range[1]);
     return {
-      ...p,
-      cost: {
-        low: c(p.cost_m[0]),
-        central,
-        high: c(p.cost_m[2]),
-        perBandD: derive((central.value * 1e6) / taxBase.value, central, taxBase),
-        share: derive(central.value / generalBudget.value, central, generalBudget),
-      },
+      low: c(x.range[0]),
+      central,
+      high: c(x.range[2]),
+      perBandD: derive((central.value * 1e6) / taxBase.value, central, taxBase),
+      share: derive(central.value / generalBudget.value, central, generalBudget),
+      ...(x.note ? { note: x.note } : {}),
     };
-  });
+  };
+  // Newest first, then by id: a neutral order that favours no party.
+  const promises: PromiseModel[] = [...K.promises]
+    .sort((a, z) => z.made_on.localeCompare(a.made_on) || a.id.localeCompare(z.id))
+    .map((p) => promiseModel(K, p, costOf));
 
   /* payments */
   const dates = PAY.payments.map((p) => p.date).sort();
@@ -317,10 +417,21 @@ export function buildModel(): PageModel {
       coef,
     },
     referendumLimitNow: of(limitNow, nonNull(limitNow.threshold_pct, `referendum threshold for ${C.meta.year}`)),
-    politics: {
-      control: C.politics.control,
-      seats: of(C.politics, C.politics.seats[C.politics.control] ?? 0),
-      totalSeats: of(C.politics, C.politics.total_seats),
+    politics: politicsOf(K),
+    people: {
+      councillors: K.councillors.map((c) => ({
+        id: c.id,
+        name: c.name,
+        party: K.parties.find((x) => x.id === c.party)?.short ?? c.party_name,
+        partyId: c.party,
+        side: sideOf(K, c.party),
+        wardId: c.ward_id,
+        ward: K.wards.wards.find((w) => w.id === c.ward_id)?.name ?? c.ward_id,
+        roles: c.roles.map((r) => r.title),
+        democracy_url: c.democracy_url,
+      })),
+      wards: K.wards.wards.map((w) => ({ id: w.id, name: w.name, ons_code: w.ons_code, councillor_ids: w.councillor_ids })),
+      retrievedOn: K.wards.sources[0]?.retrieved_on ?? "",
     },
     promises,
     payments: {
@@ -330,7 +441,17 @@ export function buildModel(): PageModel {
       services: [...new Set(PAY.payments.map((p) => p.service))].sort(),
     },
     // One entry per published page: several files can come from the same release.
-    sources: [...new Map([...DATA.sources.values()].filter((s) => s.url).map((s) => [s.url, s])).values()],
+    sources: [
+      ...new Map(
+        [
+          ...DATA.sources.values(),
+          ...K.parties.map((pt) => ({ id: `manifesto:${pt.id}`, title: pt.manifesto.title, publisher: pt.name, url: pt.manifesto.archive_url ?? pt.manifesto.url })),
+          ...K.wards.sources.map((src, i) => ({ id: `content:${i}`, title: src.title, publisher: "", url: src.url })),
+        ]
+          .filter((s): s is Source & { url: string } => !!s.url)
+          .map((s) => [s.url, s]),
+      ).values(),
+    ],
     qualityLegend: {
       budget: [...C.funding, ...C.services].map((x) => ({ label: x.label, quality: x.quality })),
       gap: C.gap_2026_27.filter(isGapValueLine).map((x) => ({ label: x.label, quality: x.quality })),

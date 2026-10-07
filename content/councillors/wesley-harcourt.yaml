@@ -1,0 +1,12 @@
+id: "wesley-harcourt"
+name: "Wesley Harcourt"
+party: "labour"
+party_name: "Labour"
+ward_id: "college-park-and-old-oak"
+roles:
+  - title: "Chair of Health and Wellbeing Board"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=118"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

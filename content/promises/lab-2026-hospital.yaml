@@ -1,0 +1,21 @@
+id: "lab-2026-hospital"
+actor:
+  kind: "party"
+  id: "labour"
+made_on: "2026-05-01"
+venue: "manifesto"
+area: "Health"
+versions:
+  - text: "Help build new state-of-the-art hospital facilities"
+    recorded_on: "2026-10-07"
+    source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+    page: 3
+status: "promised"
+deadline: null
+events:
+  - date: "2026-05-01"
+    type: "promised"
+    text: "Headline pledge in the 2026 Labour manifesto"
+replies: []
+editor_check_required: true
+editor_note: "How much and from where are not stated; decide within 7 days whether council documents supply them or the card is unscoreable."

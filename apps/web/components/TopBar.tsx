@@ -12,13 +12,13 @@ export function TopBar({ place, year }: { place: string; year: string }) {
   return (
     <header className="topbar">
       <div className="bar-in">
-        <a className="mark" href="#top">
+        <a className="mark" href="/">
           <i aria-hidden="true" />
           Borough Ledger
         </a>
         <nav className="sections" aria-label="Sections">
           {SECTIONS.map(([id, label]) => (
-            <a key={id} href={`#${id}`}>
+            <a key={id} href={id === "promises" ? "/promises" : `/#${id}`}>
               {label}
             </a>
           ))}

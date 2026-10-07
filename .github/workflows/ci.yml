@@ -26,6 +26,24 @@ jobs:
       - name: Every check passes and data/build matches a fresh build
         run: python etl/build.py --check
 
+  content:
+    name: Content (promises, councillors, append-only history)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Every file parses, every cross-check passes, content.json is up to date
+        run: pnpm --filter @borough-ledger/schema content:check
+      - name: Promise history only grows (CLAUDE.md invariant 8)
+        run: pnpm --filter @borough-ledger/schema content:append-only origin/main
+
   check:
     name: Typecheck, test, preview build
     runs-on: ubuntu-latest
@@ -45,6 +63,8 @@ jobs:
         run: pnpm build:preview
       - name: No middle dots in source or built pages
         run: pnpm check:dots
+      - name: Every promise card has its own share image
+        run: pnpm check:share-images
       - name: List remaining test values
         run: pnpm --filter @borough-ledger/schema report:test-values
 

@@ -1,0 +1,12 @@
+id: "callum-nimmo"
+name: "Callum Nimmo"
+party: "labour"
+party_name: "Labour"
+ward_id: "hammersmith-broadway"
+roles:
+  - title: "Deputy Whip, Deputy Cabinet Member for Housing and Homelessness, and Borough Representative for the Armed Forces Community"
+democracy_url: "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID=5954"
+source:
+  title: "Hammersmith & Fulham Council, councillors by ward (ModernGov web service)"
+  url: "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
+  retrieved_on: "2026-10-07"

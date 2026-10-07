@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * CLAUDE.md invariant 10: no middle-dot (·) separators anywhere in the UI.
- * Scans source, data and content, plus built pages when they exist. Docs that state the rule are exempt.
+ * Scans source, data and content, plus built pages when they exist (binary files skipped). Docs that state the rule are exempt.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative } from "node:path";
@@ -26,7 +26,11 @@ const targets = [...SOURCES.map((d) => [d, SOURCE_EXT]), [BUILT, BUILT_EXT]];
 for (const [d, exts] of targets)
   for (const f of walk(join(ROOT, d))) {
     if (!exts.has(extname(f))) continue;
-    readFileSync(f, "utf8")
+    const buf = readFileSync(f);
+    // Prerendered share images are PNGs saved as .body; their bytes can spell "·" by chance. Their text is checked at source.
+    if (buf.includes(0)) continue;
+    buf
+      .toString("utf8")
       .split("\n")
       .forEach((line, i) => {
         if (line.includes(DOT)) hits.push(`${relative(ROOT, f)}:${i + 1}`);
