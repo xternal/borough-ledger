@@ -260,7 +260,10 @@ def build() -> Dict[str, Any]:
             "minimum_safe": minimum,
         },
         "levers": levers,
-        "toggles": manual_toggles(ny["toggles"]),
+        # A switch whose cost is still a test value is held back, not shown, until its cost is sourced.
+        "toggles": [t for t in manual_toggles(ny["toggles"]) if t["quality"] != "test"],
+        "pending_toggles": [{"id": t["id"], "label": t["label"], "todo": t.get("todo", "")}
+                            for t in manual_toggles(ny["toggles"]) if t["quality"] == "test"],
         "forecast": forecast,
     }
 

@@ -1,6 +1,6 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
-import { MAKER, SITE, SITE_URL } from "@/lib/site";
+import { MAKER, SITE, SITE_URL, STAGE } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -23,6 +23,8 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Promises: each party's headline pledges from its 2026 manifesto, quoted word for word with the manifesto page, an archived copy, a status and a timeline. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
 - Councillors: all 50 councillors by ward, with their posts, from the council's own records.
 - Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
+
+This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, but editors are still checking the promise cards (each says so) and how payments are grouped into services.
 
 ## How to cite figures
 

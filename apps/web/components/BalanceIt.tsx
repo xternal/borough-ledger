@@ -168,6 +168,11 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
                 </span>
               </div>
             ))}
+            {balance.pendingToggles.length ? (
+              <p className="muted small">
+                Coming once their cost is found in the council&rsquo;s papers: {balance.pendingToggles.join(", ").toLowerCase().replace(/^./, (c) => c.toUpperCase())}.
+              </p>
+            ) : null}
           </div>
         </div>
         <aside className="result" aria-live="polite">

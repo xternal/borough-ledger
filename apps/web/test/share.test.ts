@@ -22,9 +22,9 @@ describe("balance-it strip and share text", () => {
   });
 
   it("lists the choices and shows reserves coming back the year after", () => {
-    const s = shareSummary(m, decodeScenario(m.balance.input, "ct:5.99,sv:10,rs:5,off:weekly_bins"));
-    expect(s.choices).toEqual(["Council tax up 5.99% (forecast 4.99%)", "£10.0m more savings", "£5.0m from reserves, once", "Stop weekly rubbish collections"]);
+    const s = shareSummary(m, decodeScenario(m.balance.input, "ct:5.99,sv:10,rs:5,on:extra_officers"));
+    expect(s.choices).toEqual(["Council tax up 5.99% (forecast 4.99%)", "£10.0m more savings", "£5.0m from reserves, once", "Add 20 law enforcement officers"]);
     expect(s.later).toMatch(/including £5\.0m of reserves coming back$/);
-    expect(s.quality).toBe("test"); // the weekly bins cost is still a test value
+    expect(s.quality).toBe("modelled"); // the officers' cost is modelled from the budget report
   });
 });

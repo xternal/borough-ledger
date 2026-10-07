@@ -161,13 +161,12 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "e58f020ad2b548b9440164eea39f324d354aed24a938ed7bf0c3c24d72bcc547"
+   "sha256": "6756a711bf0924a2efa275a2db95bcf431d84f69d9a6f4aa1fe21f2f1672b66e"
   }
  ],
  "quality_counts": {
   "approx": 3,
   "modelled": 3,
-  "sourced": 68,
-  "test": 3
+  "sourced": 68
  }
 }
