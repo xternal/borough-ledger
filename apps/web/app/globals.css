@@ -26,50 +26,51 @@
   --idle: #8b8b94;
   --font: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
+/* Dark mode: deep navy slate (#101820), as in Public Ledger, never black. Every text colour passes WCAG AA on bg and sunk. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #09090b;
-    --sunk: #141417;
-    --line: #232328;
-    --line-strong: #33333a;
-    --ink: #f4f4f5;
-    --muted: #a1a1aa;
-    --faint: #6b6b74;
-    --accent: #6f93ff;
-    --fund: #6f93ff;
-    --fund-soft: rgba(111, 147, 255, 0.22);
-    --spend: #a1a1aa;
-    --spend-soft: rgba(161, 161, 170, 0.16);
+    --bg: #101820;
+    --sunk: #1a2531;
+    --line: #26323f;
+    --line-strong: #364657;
+    --ink: #e7edf3;
+    --muted: #a3b0bd;
+    --faint: #7d8b99;
+    --accent: #7b9dff;
+    --fund: #7b9dff;
+    --fund-soft: rgba(123, 157, 255, 0.22);
+    --spend: #a3b0bd;
+    --spend-soft: rgba(163, 176, 189, 0.16);
     --gap: #ff7a2e;
     --gap-soft: rgba(255, 122, 46, 0.2);
-    --gla: #52525b;
+    --gla: #4f5f71;
     --good: #4ade80;
     --warn: #fbbf24;
     --bad: #f87171;
-    --idle: #71717a;
+    --idle: #8291a0;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #09090b;
-  --sunk: #141417;
-  --line: #232328;
-  --line-strong: #33333a;
-  --ink: #f4f4f5;
-  --muted: #a1a1aa;
-  --faint: #6b6b74;
-  --accent: #6f93ff;
-  --fund: #6f93ff;
-  --fund-soft: rgba(111, 147, 255, 0.22);
-  --spend: #a1a1aa;
-  --spend-soft: rgba(161, 161, 170, 0.16);
+  --bg: #101820;
+  --sunk: #1a2531;
+  --line: #26323f;
+  --line-strong: #364657;
+  --ink: #e7edf3;
+  --muted: #a3b0bd;
+  --faint: #7d8b99;
+  --accent: #7b9dff;
+  --fund: #7b9dff;
+  --fund-soft: rgba(123, 157, 255, 0.22);
+  --spend: #a3b0bd;
+  --spend-soft: rgba(163, 176, 189, 0.16);
   --gap: #ff7a2e;
   --gap-soft: rgba(255, 122, 46, 0.2);
-  --gla: #52525b;
+  --gla: #4f5f71;
   --good: #4ade80;
   --warn: #fbbf24;
   --bad: #f87171;
-  --idle: #71717a;
+  --idle: #8291a0;
   color-scheme: dark;
 }
 
