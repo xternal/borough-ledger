@@ -11,6 +11,9 @@ const VERCEL_URL =
 /** TODO(decide): production domain. Set NEXT_PUBLIC_SITE_URL on Vercel once the name is settled (PRE_SHIP_REVIEW, Decide). */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? VERCEL_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
+/** Google Search Console's verification code (public by design: it sits in the page head). Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel. */
+export const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
+
 /** The site is in alpha: shown next to the name and said in llms.txt. Remove when the pre-ship review is closed. */
 export const STAGE = "Alpha";
 

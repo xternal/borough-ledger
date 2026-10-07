@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
-import { INDEXABLE, SITE, SITE_URL } from "@/lib/site";
+import { GOOGLE_SITE_VERIFICATION, INDEXABLE, SITE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description: SITE.description,
   },
   twitter: { card: "summary_large_image", title: SITE.title, description: SITE.description },
+  ...(GOOGLE_SITE_VERIFICATION ? { verification: { google: GOOGLE_SITE_VERIFICATION } } : {}),
 };
 
 export const viewport: Viewport = {

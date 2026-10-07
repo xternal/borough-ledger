@@ -100,3 +100,15 @@ Claude checked all 642 lines of `data/manual/payments_service_map.csv` against w
 - **Conservative manifesto archived.** The Wayback Machine copy of 26 March 2026, and a fresh one made today, are byte-identical (same SHA-256) to the file the cards quote; a May capture was cut off at 5 MB and is not used. Both parties' manifestos now have an archived copy. Closes the "Conservative archive" item.
 - **Editor check prepared.** `docs/editor-checks/2026-manifesto-cards.md` sets each of the 18 quotes against its manifesto page (all 18 are on the cited page word for word; Labour's parks pledge runs across two columns on page 5 and is also in the page 2 list), with each status and its reason, and two leads from the spend files. docs/PROMISE_STANDARD.md asks for two editors per card before the "Awaiting editor check" mark comes off.
 
+## Legal check done (7 Oct 2026)
+
+The project owner reports that the legal check is done with no issues: B5 (the name and not looking official) and B6 (third-party campaigning rules and naming councillors). B6 says to take advice again before the May 2030 election period.
+
+Still open before calling it a launch:
+
+- **Editor check of the 18 promise cards** by two editors (docs/editor-checks/2026-manifesto-cards.md).
+- **Human checks of the budget mapping tables** in data/manual/README.md: ra_service_map, service_groups, funding_map, rs_outturn_map, funding_groups, payment_groups and toggles_2027-28. The payments mapping is signed off.
+- **B3**: the free home care history before 2026 (not shown on the card until sourced).
+- **Decide**: the final name, whether to tell the council before launch (recommended: yes, offering a right of reply on the data), and saying on the site who funds it (now: the owner, with a Ko-fi link).
+- **Search Console**: the verification code goes in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel.
+
