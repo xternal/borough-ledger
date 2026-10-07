@@ -250,6 +250,12 @@
     color: var(--ink);
     background: var(--sunk);
   }
+  /* Where you are: the page's section, or on the statement the section in view. */
+  nav.sections a[aria-current] {
+    color: var(--ink);
+    background: var(--sunk);
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
   .ctx {
     font-size: 13px;
     color: var(--muted);

@@ -15,6 +15,7 @@ Your council tax bill, turned into a readable account of your council's money an
 5. **Neutral.** No party colours anywhere. Red and green only for deltas and statuses.
 6. **Provenance one glance away.** A coloured dot and a word: sourced (green), approx (amber), test (red).
 7. **No middle-dot (·) separators.** Use layout, alignment, line breaks or commas.
+8. **People always know where they are.** The top bar highlights the current section (`aria-current`): the page's section on its own pages and sub-pages (a promise card lights up Promises, a supplier lights up Payments), and on the long statement the section in view as you scroll. On a phone the highlighted item stays visible in the scrolling menu.
 
 ## Information architecture
 
