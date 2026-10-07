@@ -1,6 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { ogFonts } from "@/lib/ogFonts";
 import { decodeScenario } from "@borough-ledger/engine";
 import { buildModel } from "@/lib/model";
 import { shareSummary } from "@/lib/shareText";
@@ -10,8 +9,7 @@ export async function GET(req: Request) {
   const m = buildModel();
   const scenario = decodeScenario(m.balance.input, new URL(req.url).searchParams.get("s"));
   const sum = shareSummary(m, scenario);
-  const fonts = join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans");
-  const [regular, semibold] = await Promise.all([readFile(join(fonts, "Geist-Regular.ttf")), readFile(join(fonts, "Geist-SemiBold.ttf"))]);
+  const fonts = await ogFonts();
   const short = sum.status.includes("still to find");
   return new ImageResponse(
     (
@@ -42,10 +40,7 @@ export async function GET(req: Request) {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        { name: "Geist", data: regular, weight: 400, style: "normal" },
-        { name: "Geist", data: semibold, weight: 600, style: "normal" },
-      ],
+      fonts,
     },
   );
 }

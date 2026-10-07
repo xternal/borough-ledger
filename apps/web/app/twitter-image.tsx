@@ -1,6 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { ogFonts } from "@/lib/ogFonts";
 import { DATA } from "@borough-ledger/schema";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
 
@@ -10,8 +9,7 @@ export const contentType = "image/png";
 
 /** Text only: no figures, so the share image can never carry an unmarked test value. */
 export default async function Image() {
-  const fonts = join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans");
-  const [regular, semibold] = await Promise.all([readFile(join(fonts, "Geist-Regular.ttf")), readFile(join(fonts, "Geist-SemiBold.ttf"))]);
+  const fonts = await ogFonts();
   const place = DATA.council.meta.council_short;
   return new ImageResponse(
     (
@@ -40,10 +38,7 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: [
-        { name: "Geist", data: regular, weight: 400, style: "normal" },
-        { name: "Geist", data: semibold, weight: 600, style: "normal" },
-      ],
+      fonts,
     },
   );
 }
