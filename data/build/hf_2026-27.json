@@ -1234,12 +1234,16 @@
     "unit": "%",
     "base": 4.99,
     "min": 0,
-    "max": 8,
-    "step": 0.25,
+    "max": 10,
+    "step": 0.01,
     "m_per_unit": 0.9353,
     "controlled_by": "council",
     "quality": "approx",
     "source_id": "cabinet_pack_2026-02-09",
+    "marks": [
+     0,
+     4.99
+    ],
     "assumed": 4.99,
     "method_note": "1% of 2027/28 council tax before the rise: £98.2m ÷ (1 + 4.99%). The council's forecast already assumes a 4.99% rise, so only the difference from it closes or widens the gap."
    },
@@ -1338,6 +1342,22 @@
     "quality": "modelled",
     "source_id": "budget_report",
     "method_note": "Budget report, PDF page 23: 20 officers at the average cost of the Law Enforcement Team, which costs £4.6m a year for 72 officers"
+   }
+  ],
+  "forecast": [
+   {
+    "year": "2027-28",
+    "gap_m": 31.4,
+    "quality": "sourced",
+    "source_id": "cabinet_pack_2026-02-09",
+    "method_note": "Cabinet 9 February 2026, public reports pack, PDF page 57. Appendix B Table 2: Forecast Budget Gap 2027/28, after the council tax rise and savings the forecast already assumes"
+   },
+   {
+    "year": "2028-29",
+    "gap_m": 57.3,
+    "quality": "sourced",
+    "source_id": "cabinet_pack_2026-02-09",
+    "method_note": "Cabinet 9 February 2026, public reports pack, PDF page 57. Appendix B Table 2: Forecast Budget Gap 2028/29 (cumulative), assuming a 4.99% council tax rise in each year"
    }
   ]
  },

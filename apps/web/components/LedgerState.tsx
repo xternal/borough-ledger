@@ -17,10 +17,10 @@ interface LedgerState {
 
 const Ctx = createContext<LedgerState | null>(null);
 
-export function LedgerStateProvider({ input, children }: { input: BalanceInput; children: React.ReactNode }) {
+export function LedgerStateProvider({ input, initialScenario, children }: { input: BalanceInput; initialScenario?: Scenario; children: React.ReactNode }) {
   const [band, setBand] = useState<Band>("D");
   const [singlePerson, setSinglePerson] = useState(false);
-  const [scenario, setScenario] = useState<Scenario>(() => defaultScenario(input));
+  const [scenario, setScenario] = useState<Scenario>(() => initialScenario ?? defaultScenario(input));
 
   const setLever = useCallback((id: LeverId, v: number) => setScenario((s) => ({ ...s, levers: { ...s.levers, [id]: v } })), []);
   const setToggle = useCallback((id: string, on: boolean) => setScenario((s) => ({ ...s, toggles: { ...s.toggles, [id]: on } })), []);

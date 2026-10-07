@@ -48,6 +48,20 @@ gap_{t+1} = pressures_{t+1} − Δfunding_{t+1} + reserves_used_t + Σ one-off s
 ```
 Recurring choices (council tax rise, permanent savings) carry forward; one-off choices (reserves, one-off savings) come back.
 
+How it is built (M2): the council's own medium-term forecast (budget Appendix B, Table 2) gives the cumulative gap for each year if nothing new is done: £31.4m in 2027/28 and £57.3m in 2028/29, assuming a 4.99% council tax rise each year. With choices made for next year:
+
+```
+year 1:    remaining = forecast_1 − recurring − one_off
+year t>1:  remaining = forecast_t − recurring          (one-off money is not subtracted again, so it comes back)
+recurring = council tax rise above the forecast's own + fees + settlement change + permanent savings + services stopped
+one_off   = reserves used
+reserves_left = general_reserves − reserves used        (spent once, stays spent)
+```
+
+This is the same as the formula above: the year-2 gap rises by the year-1 reserves. Simplifications: a higher council tax rise is carried forward as the same £ amount each year (no compounding), fee changes are static (no behavioural response, PRE_SHIP H5), and 2029/30 is shown as not forecast because the council does not publish it.
+
+Scenario links: `/balance?s=ct:5.5,sv:3,rs:2,fe:2,st:-1,off:weekly_bins,on:extra_officers`. Only choices that differ from the start are written; unknown keys are ignored and values are clamped to each lever's range and snapped to its step.
+
 ## 6. Promise costing
 
 * £ a year (range), per Band D equivalent home (`cost / tax_base`), share of net budget.

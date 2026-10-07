@@ -97,6 +97,8 @@ export interface PageModel {
     referendumNote: { text: string; f: Figure } | null;
     /** The council tax rise the gap forecast already assumes, if any. */
     ctAssumed: Figure | null;
+    /** Three years from next year: the council's forecast gap where it has one, null where it does not forecast. */
+    strip: { year: string; label: string; gap: Figure | null }[];
     /** Quality and sources shared by every number the tool computes. */
     computed: Figure;
     coef: Record<LeverId, Figure>;
@@ -300,6 +302,13 @@ export function buildModel(): PageModel {
       reservesMin,
       referendumLimit: limit.threshold_pct === null ? null : of(limit, limit.threshold_pct),
       referendumNote: limit.threshold_pct === null ? { text: limit.note ?? "", f: of(limit, 0) } : null,
+      strip: (() => {
+        const years = [ny.year, nextFinancialYear(ny.year), nextFinancialYear(nextFinancialYear(ny.year))];
+        return years.map((y) => {
+          const f = ny.forecast.find((x) => x.year === y);
+          return { year: y, label: displayYear(y), gap: f ? of(f, f.gap_m) : null };
+        });
+      })(),
       ctAssumed: (() => {
         const ct = ny.levers.find((l) => l.id === "ct_rise");
         return ct?.assumed !== undefined ? of(ct, ct.assumed) : null;

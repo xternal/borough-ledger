@@ -8,7 +8,10 @@ import {
   checkBudget,
   computeBalance,
   councilTaxYieldM,
+  decodeScenario,
   defaultScenario,
+  encodeScenario,
+  mediumTerm,
   displayYear,
   nextFinancialYear,
   perBandDHome,
@@ -208,5 +211,82 @@ describe("helpers", () => {
   it("type-checks the rules shape", () => {
     const r: Rules = R;
     expect(Object.keys(r.referendum_limit_pct)).toContain(C.meta.year);
+  });
+});
+
+describe("medium-term view (docs/MODEL.md §5): five reference scenarios", () => {
+  const forecast = [
+    { year: "2027-28", gapM: 15 },
+    { year: "2028-29", gapM: 30 },
+  ];
+  const ct = 4.99 * 0.807; // the fixture's default council tax rise closes this much every year
+  const run = (s: Scenario) => mediumTerm(input, forecast, s);
+
+  it("1. defaults: the council tax rise keeps closing the gap each year", () => {
+    const [y1, y2] = run(scenario({}));
+    expect(y1!.remainingM).toBeCloseTo(15 - ct, 9);
+    expect(y2!.remainingM).toBeCloseTo(30 - ct, 9);
+    expect(y2!.comesBackM).toBe(0);
+  });
+
+  it("2. reserves used in 2027/28 reappear in 2028/29", () => {
+    const base = run(scenario({}));
+    const [y1, y2] = run(scenario({ reserves: 10 }));
+    expect(y1!.remainingM).toBeCloseTo(15 - ct - 10, 9);
+    expect(y2!.remainingM).toBeCloseTo(base[1]!.remainingM, 9); // the £10m helps once, then the gap is back
+    expect(y2!.comesBackM).toBe(10);
+    expect(y2!.remainingM - y1!.remainingM).toBeCloseTo(30 - 15 + 10, 9); // MODEL §5: next gap includes reserves used
+    expect(y2!.reservesLeftM).toBe(35); // and the reserves stay spent
+  });
+
+  it("3. permanent savings close the gap in every year", () => {
+    const [y1, y2] = run(scenario({ savings: 5 }));
+    expect(y1!.remainingM).toBeCloseTo(15 - ct - 5, 9);
+    expect(y2!.remainingM).toBeCloseTo(30 - ct - 5, 9);
+  });
+
+  it("4. stopping services is a recurring choice", () => {
+    const [, y2] = run(scenario({}, { free_home_care: false, weekly_bins: false }));
+    expect(y2!.remainingM).toBeCloseTo(30 - ct - 4, 9);
+  });
+
+  it("5. a mix of recurring and one-off choices", () => {
+    const [y1, y2] = run(scenario({ ct_rise: 6, reserves: 5, fees: 5, settlement: -2 }));
+    const recurring = 6 * 0.807 + 5 * 0.4 - 2 * 0.763;
+    expect(y1!.recurringM).toBeCloseTo(recurring, 9);
+    expect(y1!.remainingM).toBeCloseTo(15 - recurring - 5, 9);
+    expect(y2!.remainingM).toBeCloseTo(30 - recurring, 9);
+    expect(y2!.status).toBe("short");
+  });
+
+  it("opens on the council's own forecast for both years", () => {
+    const years = mediumTerm(live, C.next_year.forecast.map((f) => ({ year: f.year, gapM: f.gap_m })), defaultScenario(live));
+    expect(years.map((y) => y.year)).toEqual(["2027-28", "2028-29"]);
+    expect(years[0]!.remainingM).toBeCloseTo(31.4, 9);
+    expect(years[1]!.remainingM).toBeCloseTo(57.3, 9);
+  });
+});
+
+describe("scenario links", () => {
+  it("encodes only choices that differ from the start, and decodes them back", () => {
+    expect(encodeScenario(input, scenario({}))).toBe("");
+    const s = scenario({ ct_rise: 5.5, reserves: 3 }, { weekly_bins: false, extra_officers: true });
+    const code = encodeScenario(input, s);
+    expect(code).toBe("ct:5.5,rs:3,off:weekly_bins,on:extra_officers");
+    expect(decodeScenario(input, code)).toEqual(s);
+  });
+
+  it("ignores unknown keys and clamps or snaps bad values", () => {
+    const d = decodeScenario(input, "ct:99,sv:3.3,zz:1,rs:abc,off:nope.weekly_bins,garbage");
+    expect(d.levers.ct_rise).toBe(8); // fixture max
+    expect(d.levers.savings).toBe(3.5); // snapped to the 0.5 step
+    expect(d.levers.reserves).toBe(0);
+    expect(d.toggles.weekly_bins).toBe(false);
+    expect(decodeScenario(input, null)).toEqual(defaultScenario(input));
+  });
+
+  it("round-trips the live levers, including the forecast's 4.99%", () => {
+    const s = { ...defaultScenario(live), levers: { ...defaultScenario(live).levers, ct_rise: 4.99, fees: 3 } };
+    expect(decodeScenario(live, encodeScenario(live, s))).toEqual(s);
   });
 });
