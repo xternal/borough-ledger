@@ -11,6 +11,8 @@ Everything here is read by `etl/build.py`. Each table is checked automatically a
 | `funding_map.csv` | RA financing lines and SG grant lines mapped to funding groups | SG lines add up to SG line 699 and RA line 904; all funding adds up to line 900 | [ ] Which grants count as ring-fenced (schools, public health) |
 | `rs_outturn_map.csv` | Every line of the 2024/25 revenue summary outturn return (RS) mapped to a service group; environmental services split with RO5 detail | Service lines add up to TOTAL SERVICE EXPENDITURE; all lines to REVENUE EXPENDITURE; RO5 environmental total matches RS | [ ] Same groups as the budget mapping? |
 | `funding_groups.csv` | Funding labels, ring-fencing and one-off flags | Ring-fenced groups point at real service groups | [ ] Labels |
+| `payment_groups.csv` | Extra groups for payments outside the day-to-day budget: council homes (the ring-fenced housing account), building projects (capital) and "not yet classified" | Every group in the payments mapping exists | [ ] Labels |
+| `payments_service_map.csv` | Every service area in the council's spend files mapped to a service group. Drafted by `python3 etl/payments.py --draft-map` from keyword rules (`note` says which words matched); `rows` and `total` show what each line moves | The build fails if any service area in a file has no line; every month adds back up to its file | [ ] Read each line with `reviewed=no`, largest first, fix `group` and set `reviewed=yes`. Until then the site marks services in payments as approx |
 
 ## Budget report tables (to extract)
 

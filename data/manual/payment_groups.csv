@@ -1,0 +1,4 @@
+id,label,official_term,desc,order
+council_homes,Council homes,Housing revenue account,"Repairs, maintenance, estates and services for council tenants and leaseholders. Paid from rents through a ring-fenced account, not council tax",12
+capital,Building projects,Capital programme,"New and improved buildings, homes, schools and roads, paid for once rather than every year, often with borrowing or grants",13
+unclassified,Not yet classified,,"Service areas not yet matched to a group. An editor matches each one by hand",14

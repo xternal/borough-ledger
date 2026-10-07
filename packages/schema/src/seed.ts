@@ -308,22 +308,6 @@ export const Promises = z.object({
 });
 export type Promises = z.infer<typeof Promises>;
 
-/* ------------------------------------------------------------------ payments */
-
-export const PaymentSeed = z.object({
-  date: isoDate,
-  supplier: z.string(),
-  service: z.string(),
-  amount: z.number().positive(),
-});
-export type PaymentSeed = z.infer<typeof PaymentSeed>;
-
-export const Payments = z.object({
-  meta: z.object({ vintage: isoDate, ...provenance, note: z.string() }),
-  payments: z.array(PaymentSeed),
-});
-export type Payments = z.infer<typeof Payments>;
-
 export function isGapValueLine(l: GapLine): l is GapValueLine {
   return l.kind !== "subtotal" && l.kind !== "total";
 }

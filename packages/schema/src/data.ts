@@ -1,17 +1,18 @@
 /* The council year comes from the ETL build (etl/build.py), promises and councillors from content/ (compiled to
-   data/build/content.json); payments are still seed data until M4. */
+   data/build/content.json), payments from the council's spend files (etl/payments.py; the month files are read by the app). */
 import hfRaw from "../../../data/build/hf_2026-27.json";
 import contentRaw from "../../../data/build/content.json";
-import paymentsRaw from "../../../data/seed/payments.json";
+import paymentsRaw from "../../../data/build/payments/index.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { checkContent, ContentFile, type Content } from "./content";
-import { CouncilYear, Payments, Rules, type Source } from "./seed";
+import { checkPayments, PaymentsIndex } from "./payments";
+import { CouncilYear, Rules, type Source } from "./seed";
 import type { Quality } from "./quality";
 
 export interface Dataset {
   council: CouncilYear;
   content: Content;
-  payments: Payments;
+  payments: PaymentsIndex;
   rules: Rules;
   /** Every source cited anywhere, by id. */
   sources: ReadonlyMap<string, Source>;
@@ -44,7 +45,8 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
   );
   c.next_year.levers.forEach((l) => add(`next_year.levers.${l.id}`, l));
   c.next_year.toggles.forEach((t) => add(`next_year.toggles.${t.id}`, t));
-  add("payments", d.payments.meta);
+  const pay = d.payments;
+  pay.months.forEach((m) => m.files.forEach((f) => out.push({ path: `payments.${m.month}`, quality: pay.meta.quality, source_id: f })));
   const r = d.rules;
   add("rules.band_ratios", r.band_ratios);
   add("rules.single_person_discount", r.single_person_discount);
@@ -59,11 +61,20 @@ export function provenanceRefs(d: Omit<Dataset, "sources">): { path: string; qua
 export function parseDataset(raw: { council: unknown; content: unknown; payments: unknown; rules: unknown }): Dataset {
   const council = CouncilYear.parse(raw.council);
   const content = ContentFile.parse(raw.content);
-  const payments = Payments.parse(raw.payments);
+  const payments = PaymentsIndex.parse(raw.payments);
   const rules = Rules.parse(raw.rules);
 
   const sources = new Map<string, Source>();
-  for (const s of [...council.meta.sources, ...rules.meta.sources]) {
+  const paymentSources: Source[] = payments.sources.map((s) => ({
+    id: s.id,
+    title: `${payments.meta.publisher}, ${s.title}`,
+    publisher: payments.meta.publisher,
+    url: s.url,
+    asset_url: s.archive_url ?? s.url,
+    sha256: s.sha256,
+    licence: payments.meta.licence,
+  }));
+  for (const s of [...council.meta.sources, ...rules.meta.sources, ...paymentSources]) {
     if (sources.has(s.id)) throw new Error(`duplicate source id ${s.id}`);
     sources.set(s.id, s);
   }
@@ -75,6 +86,7 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
     else if (ref.quality !== "test" && !s.url) problems.push(`${ref.path}: ${ref.quality} value cites "${s.id}", which has no URL`);
   }
   problems.push(...checkContent(content));
+  problems.push(...checkPayments(payments));
   const promiseIds = new Set(content.promises.map((p) => p.id));
   const toggleIds = new Set(council.next_year.toggles.map((t) => t.id));
   const leverIds = new Set<string>(council.next_year.levers.map((l) => l.id));

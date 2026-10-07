@@ -11,7 +11,7 @@
 | Council Tax Base and Collection Rate 2026/27 | Tax base and collection rate | ✓ https://democracy.lbhf.gov.uk/documents/s133440/Council%20Tax%20Base%20and%20Collection%20Rate%202026-27%20and%20Delegation%20of%20the%20Business%20Rate%20Estimate.pdf |
 | Council Tax Support Scheme 2026/27 | Who gets support | ✓ https://democracy.lbhf.gov.uk/documents/s133556/Council+Tax+Support+Scheme+2026-27.pdf |
 | Democracy site (ModernGov) | Councillors, wards, committees, decisions, agendas, webcasts. ModernGov sites usually expose a web service (`mgWebService.asmx`); check | ✓ https://democracy.lbhf.gov.uk |
-| Transparency: payments over £500, contracts over £5,000, senior salaries | Monthly / quarterly files under the Transparency Code | Council website transparency section (find exact URL) |
+| Transparency: payments over £500, contracts over £5,000, procurement cards | Quarterly files under the Transparency Code | ✓ https://www.lbhf.gov.uk/councillors-and-democracy/data-and-information/transparency/procurement-and-financial-data |
 | Statement of accounts | Outturn, reserves, balance sheet | Council website |
 
 ## Central government (same for every English council)
@@ -72,3 +72,12 @@
 `etl/sources.json` lists every file the ETL reads, with its download URL and SHA-256. Council tax tables for 2022/23 to 2026/27, the RA budget return (parts 1 and 2) and the SG grants return for 2026/27 come from gov.uk under the Open Government Licence. The referendum principles report for 2026/27 is cited in `data/config/rules.json`.
 
 The council's democracy site (democracy.lbhf.gov.uk) sits behind an Azure firewall with a JavaScript challenge. Scripts get a 403, and the ETL does not try to get around it. Budget papers are downloaded by hand into `data/raw/` and extracted into `data/manual/` (see its README).
+
+## In use (M4)
+
+`etl/payments_sources.json` lists every quarterly spend file with the council's URL, the Internet Archive's copy where there is one, its SHA-256, and the rows and total recorded from it. The council's page lists the latest nine quarters (April 2024 onwards). Older files were taken down; the Internet Archive kept Q4 2023/24 and five quarters from 2015 to 2017, which `python3 etl/payments.py --fetch` downloads from there.
+
+The council's website answers scripts with "page not found", even with an honest user agent, and the ETL does not pretend to be a browser. Newer files are downloaded by hand from the page above into `data/raw/payments/`, then `--fetch` records their hash, rows and total. Two layouts so far: 2015 to 2017 (14 columns, every payment including under £500, ending with the council's own total row) and 2023/24 onwards (7 columns, over £500 only). Both are read by header name, and a file with unknown headers stops the build.
+
+DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the output is plain JSON that DuckDB can query directly (`read_json`) if anyone wants SQL.
+

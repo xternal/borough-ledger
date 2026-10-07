@@ -25,6 +25,8 @@ jobs:
         run: python -m unittest discover -s etl/tests -t .
       - name: Every check passes and data/build matches a fresh build
         run: python etl/build.py --check
+      - name: Payments reconcile to every council file (raw files are not in CI, so the committed build is checked)
+        run: python etl/payments.py --check
 
   content:
     name: Content (promises, councillors, append-only history)

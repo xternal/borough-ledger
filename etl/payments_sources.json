@@ -1,0 +1,182 @@
+{
+ "note": "The council's quarterly spend files (payments over £500 under the Local Government Transparency Code 2015). Files the Wayback Machine holds are fetched from there by `python3 etl/payments.py --fetch`; the council's own site answers scripts with 'page not found', so newer files are downloaded by hand from `page` into data/raw/payments/. `rows` and `total` are recorded from each file by `--register` and every build reconciles to them.",
+ "publisher": "London Borough of Hammersmith & Fulham",
+ "page": "https://www.lbhf.gov.uk/councillors-and-democracy/data-and-information/transparency/procurement-and-financial-data",
+ "licence": "OGL-UK-3.0",
+ "files": [
+  {
+   "id": "spend_2015-16_q1",
+   "title": "Spend data Q1 2015-16 (April to June 2015)",
+   "period": "2015-04/2015-06",
+   "layout": "2015",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q1_2015_0401-20150630.xls.xlsx",
+   "archive_url": "https://web.archive.org/web/20250508235615/https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q1_2015_0401-20150630.xls.xlsx",
+   "file": "payments/spend_data_q1_2015_0401-20150630.xls.xlsx",
+   "sha256": "a02c80598ef339e546c49a2c8806690611dc1731a45e6e095880df26244d9632",
+   "rows": 11832,
+   "total": 96912956.7,
+   "own_total": null
+  },
+  {
+   "id": "spend_2015-16_q2",
+   "title": "Spend data Q2 2015-16 (July to September 2015)",
+   "period": "2015-07/2015-09",
+   "layout": "2015",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q2_20150701-20150930.xlsx",
+   "archive_url": "https://web.archive.org/web/20250507114632/https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q2_20150701-20150930.xlsx",
+   "file": "payments/spend_data_q2_20150701-20150930.xlsx",
+   "sha256": "f03da2589c6496c68399fb6226333a9fd165ca2e317906feb080cf096801f855",
+   "rows": 14627,
+   "total": 115321137.48,
+   "own_total": 115321137.47999962
+  },
+  {
+   "id": "spend_2015-16_q3",
+   "title": "Spend data Q3 2015-16 (October to December 2015)",
+   "period": "2015-10/2015-12",
+   "layout": "2015",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q3_20151001-20151231.xlsx",
+   "archive_url": "https://web.archive.org/web/20250507131010/https://www.lbhf.gov.uk/sites/default/files/section_attachments/spend_data_q3_20151001-20151231.xlsx",
+   "file": "payments/spend_data_q3_20151001-20151231.xlsx",
+   "sha256": "1482636e17965b0fbca720e8c0b141e05626cb7cefab99c3950c7b1537940526",
+   "rows": 14887,
+   "total": 102398732.01,
+   "own_total": 102398732.00999874
+  },
+  {
+   "id": "spend_2015-16_q4",
+   "title": "Supplier spend January to March 2016",
+   "period": "2016-01/2016-03",
+   "layout": "2015",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/lbhf-supplier-spend-january-march-2016.xlsx",
+   "archive_url": "https://web.archive.org/web/20250507113328/https://www.lbhf.gov.uk/sites/default/files/section_attachments/lbhf-supplier-spend-january-march-2016.xlsx",
+   "file": "payments/lbhf-supplier-spend-january-march-2016.xlsx",
+   "sha256": "d8ffc6219f51510928b190405c451d5a6ce2600c651e3c41d6490b11245cc6bc",
+   "rows": 14834,
+   "total": 140089983.18,
+   "own_total": 140089983.1799993
+  },
+  {
+   "id": "spend_2017-18_q1",
+   "title": "Supplier spend Q1 2017-18 (April to June 2017)",
+   "period": "2017-04/2017-06",
+   "layout": "2015",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/supplier_spend_q1_apr-jun_2017.xlsx",
+   "archive_url": "https://web.archive.org/web/20230724100552/https://www.lbhf.gov.uk/sites/default/files/section_attachments/supplier_spend_q1_apr-jun_2017.xlsx",
+   "file": "payments/supplier_spend_q1_apr-jun_2017.xlsx",
+   "sha256": "1c8d1fe671fc31b3e38c9c3aab0a2a57f19626421e554cb0c2d2bca51b2cc524",
+   "rows": 22063,
+   "total": 119308142.17,
+   "own_total": null
+  },
+  {
+   "id": "spend_2023-24_q4",
+   "title": "Spend data Q4 2023-24",
+   "period": "2024-01/2024-03",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2024-10/lbhf-spend-data-q4-2023-24.xlsx",
+   "archive_url": "https://web.archive.org/web/20250413102143/https://www.lbhf.gov.uk/sites/default/files/2024-10/lbhf-spend-data-q4-2023-24.xlsx",
+   "file": "payments/lbhf-spend-data-q4-2023-24.xlsx",
+   "sha256": "e1669010adeb99c35df37b64e02ce1e13eb52ffe4a823f20ae5334158068e104",
+   "rows": 15728,
+   "total": 116402204.69,
+   "own_total": null
+  },
+  {
+   "id": "spend_2024-25_q1",
+   "title": "Spend data Q1 2024-25",
+   "period": "2024-04/2024-06",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2024-10/lbhf-spend-data-q1-2024-25.xlsx",
+   "archive_url": "https://web.archive.org/web/20250413101914/https://www.lbhf.gov.uk/sites/default/files/2024-10/lbhf-spend-data-q1-2024-25.xlsx",
+   "file": "payments/lbhf-spend-data-q1-2024-25.xlsx",
+   "sha256": "840f00a54a550f3cd44bd61d86a94722a2ac5d01cdae0b30c9cdbe5d1b6adfa7",
+   "rows": 14466,
+   "total": 117933662.64,
+   "own_total": null
+  },
+  {
+   "id": "spend_2024-25_q2",
+   "title": "Spend data Q2 2024-25",
+   "period": "2024-07/2024-09",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-01/lbhf-spend-data-q2-2024-25.xlsx",
+   "archive_url": "https://web.archive.org/web/20250413132120/https://www.lbhf.gov.uk/sites/default/files/2025-01/lbhf-spend-data-q2-2024-25.xlsx",
+   "file": "payments/lbhf-spend-data-q2-2024-25.xlsx",
+   "sha256": "35ee5a3994d6adfdd27b66e8efd27b96a1846cf1888978cd7f2e6835df4e057f",
+   "rows": 16111,
+   "total": 126345582.21,
+   "own_total": null
+  },
+  {
+   "id": "spend_2024-25_q3",
+   "title": "Spend data Q3 2024-25",
+   "period": "2024-10/2024-12",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-06/lbhf-spend-data-q3-2024-25.xlsx",
+   "archive_url": null,
+   "file": "payments/lbhf-spend-data-q3-2024-25.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2024-25_q4",
+   "title": "Spend data Q4 2024-25",
+   "period": "2025-01/2025-03",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-08/lbhf-spend-data-q4-2024-25.xlsx",
+   "archive_url": null,
+   "file": "payments/lbhf-spend-data-q4-2024-25.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2025-26_q1",
+   "title": "Spend data Q1 2025-26",
+   "period": "2025-04/2025-06",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-08/lbhf-spend-data-q1-2025-26.xlsx",
+   "archive_url": null,
+   "file": "payments/lbhf-spend-data-q1-2025-26.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2025-26_q2",
+   "title": "Spend data Q2 2025-26",
+   "period": "2025-07/2025-09",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2025-11/lbhf-spend-data-q2-2025-26.xlsx",
+   "archive_url": null,
+   "file": "payments/lbhf-spend-data-q2-2025-26.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2025-26_q3",
+   "title": "Spend data Q3 2025-26",
+   "period": "2025-10/2025-12",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2026-03/spend-data-q3-2025-26.xlsx",
+   "archive_url": null,
+   "file": "payments/spend-data-q3-2025-26.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2025-26_q4",
+   "title": "Spend data Q4 2025-26",
+   "period": "2026-01/2026-03",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2026-09/spend-data-q4-2025-26.xlsx",
+   "archive_url": null,
+   "file": "payments/spend-data-q4-2025-26.xlsx",
+   "sha256": null
+  },
+  {
+   "id": "spend_2026-27_q1",
+   "title": "Spend data Q1 2026-27",
+   "period": "2026-04/2026-06",
+   "layout": "2023",
+   "url": "https://www.lbhf.gov.uk/sites/default/files/2026-09/spend-data-q1-2026-27.xlsx",
+   "archive_url": null,
+   "file": "payments/spend-data-q1-2026-27.xlsx",
+   "sha256": null
+  }
+ ]
+}

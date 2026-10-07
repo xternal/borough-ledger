@@ -6,6 +6,7 @@ describe("format", () => {
     expect(format("gbp2", 1519.51)).toBe("£1,519.51");
     expect(format("gbp0", 1013.0066)).toBe("£1,013");
     expect(format("m1", 80.7)).toBe("£80.7m");
+    expect(format("pm1", 37_715_494.94)).toBe("£37.7m");
     expect(format("m0", 224)).toBe("£224m");
     expect(format("sm1", 7.5)).toBe("+£7.5m");
     expect(format("sm1", -3.3)).toBe("−£3.3m");

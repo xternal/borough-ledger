@@ -1,4 +1,5 @@
 /* schema.org JSON-LD for the promise and councillor pages (search engines and AI search read it). */
+import type { PaymentSupplier, PaymentsIndex } from "@borough-ledger/schema";
 import type { CouncillorModel, PromiseModel } from "@/lib/model";
 import { SITE, SITE_URL } from "@/lib/site";
 
@@ -70,5 +71,49 @@ export function councillorJsonLd(c: CouncillorModel) {
       },
     },
     breadcrumbs([["Home", "/"], ["Promises", "/promises"], [c.name, `/councillor/${c.id}`]]),
+  ] as const;
+}
+
+/** The payments ledger as a dataset built from the council's files, with its questions. */
+export function paymentsJsonLd(p: PaymentsIndex, month: string, faq: readonly { q: string; a: string }[]) {
+  const first = p.months[0]!.month;
+  const last = p.months[p.months.length - 1]!.month;
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "Dataset",
+      name: "Hammersmith & Fulham Council payments over £500",
+      description:
+        "Every payment in Hammersmith & Fulham Council's quarterly spend files, by month, organisation and service, reconciled to each file. Payments to people are shown only as totals.",
+      url: `${SITE_URL}/payments`,
+      inLanguage: "en-GB",
+      temporalCoverage: `${first}/${last}`,
+      license: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      isAccessibleForFree: true,
+      creator: { "@type": "Organization", name: SITE.name, url: SITE_URL },
+      isBasedOn: p.sources.map((s) => s.url),
+      distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE_URL}/payments/suppliers.json` }],
+    },
+    {
+      "@context": CONTEXT,
+      "@type": "FAQPage",
+      mainEntity: faq.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+    },
+    breadcrumbs([["Home", "/"], ["Payments", "/payments"], ...(month === last ? [] : ([[month, `/payments/${month}`]] as [string, string][]))]),
+  ] as const;
+}
+
+/** An organisation the council pays, described from the council's own files. */
+export function supplierJsonLd(s: PaymentSupplier) {
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "WebPage",
+      name: s.name,
+      url: `${SITE_URL}/supplier/${s.id}`,
+      inLanguage: "en-GB",
+      about: { "@type": s.kind === "public_body" ? "GovernmentOrganization" : "Organization", name: s.name },
+    },
+    breadcrumbs([["Home", "/"], ["Payments", "/payments"], [s.name, `/supplier/${s.id}`]]),
   ] as const;
 }

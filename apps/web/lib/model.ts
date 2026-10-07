@@ -9,7 +9,6 @@ import {
   type GapLine,
   type Lever,
   type LeverId,
-  type PaymentSeed,
   type PromiseCard,
   sideOf,
   partyOf,
@@ -20,7 +19,7 @@ import {
   type Toggle,
 } from "@borough-ledger/schema";
 import { buildWaterfall, checkBudget, displayYear, nextFinancialYear, type BalanceInput } from "@borough-ledger/engine";
-import { formatPeriod } from "./format";
+import { latestQuarter, PAY } from "./payments";
 
 /** Everything the page renders, as serialisable data. Built once per render on the server. */
 export interface FlowLine {
@@ -156,7 +155,8 @@ export interface PageModel {
   politics: { control: string; seats: Figure; totalSeats: Figure };
   promises: PromiseModel[];
   people: { councillors: CouncillorModel[]; wards: { id: string; name: string; ons_code: string; councillor_ids: string[] }[]; retrievedOn: string };
-  payments: { rows: PaymentSeed[]; f: Figure; period: string; services: string[] };
+  /** The latest three months of the council's spend files; the full ledger is at /payments. */
+  payments: ReturnType<typeof latestQuarter> & { months: number; suppliers: number; firstMonth: string };
   sources: Source[];
   qualityLegend: { budget: QualityItem[]; gap: QualityItem[] };
 }
@@ -247,7 +247,7 @@ function londonToday(): string {
 }
 
 export function buildModel(): PageModel {
-  const { council: C, rules: R, content: K, payments: PAY } = DATA;
+  const { council: C, rules: R, content: K } = DATA;
   const tol = R.balanced_budget.tolerance_m;
 
   const budget = checkBudget(C.funding, C.services, tol);
@@ -349,9 +349,6 @@ export function buildModel(): PageModel {
     .sort((a, z) => z.made_on.localeCompare(a.made_on) || a.id.localeCompare(z.id))
     .map((p) => promiseModel(K, p, costOf));
 
-  /* payments */
-  const dates = PAY.payments.map((p) => p.date).sort();
-  const period = dates.length ? formatPeriod(dates[0]!, dates[dates.length - 1]!) : "";
 
   return {
     place: {
@@ -434,12 +431,7 @@ export function buildModel(): PageModel {
       retrievedOn: K.wards.sources[0]?.retrieved_on ?? "",
     },
     promises,
-    payments: {
-      rows: [...PAY.payments].sort((a, z) => z.date.localeCompare(a.date)),
-      f: of(PAY.meta, 0),
-      period,
-      services: [...new Set(PAY.payments.map((p) => p.service))].sort(),
-    },
+    payments: { ...latestQuarter(), months: PAY.months.length, suppliers: PAY.suppliers.count, firstMonth: PAY.months[0]!.month },
     // One entry per published page: several files can come from the same release.
     sources: [
       ...new Map(
