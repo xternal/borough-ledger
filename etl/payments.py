@@ -1,7 +1,7 @@
 """Payments over £500: the council's quarterly spend files, normalised, redacted and mapped to services.
 
     python3 etl/payments.py --fetch      download files the Wayback Machine holds; record hashes, rows and totals of new files
-    python3 etl/payments.py --draft-map  draft every line of data/manual/payments_service_map.csv not marked reviewed=yes
+    python3 etl/payments.py --draft-map  draft new lines of data/manual/payments_service_map.csv, and re-draft reviewed=no ones
     python3 etl/payments.py              build data/build/payments/
     python3 etl/payments.py --check      what CI runs: rebuild and compare when every file is present, otherwise
                                          reconcile the committed build to the rows and totals recorded per file
@@ -523,6 +523,9 @@ def build(reg: Dict[str, Any]) -> Dict[str, bytes]:
     }
 
     unreviewed = sum(1 for v in smap.values() if v["reviewed"] != "yes")
+    bad = sorted({v["reviewed"] for v in smap.values()} - {"no", "checked", "yes"})
+    if bad:
+        raise CheckFailed(f"payments_service_map.csv: reviewed must be no, checked or yes, not {bad}")
     used_keys = {map_key(layout_of[r.file_id], r.area, r.directorate) for r in rows}
     reasons = Counter()
     for (m, g, reason), a in withheld.items():
@@ -541,7 +544,13 @@ def build(reg: Dict[str, Any]) -> Dict[str, bytes]:
                 "Files from 2023/24 onwards list payments over £500. Older files list every payment, including smaller ones.",
                 "Payments the council redacted, and payments to anyone who looks like a private individual, are shown only as totals per month and service.",
             ],
-            "mapping": {"lines": len(used_keys), "unreviewed": sum(1 for k in used_keys if smap[k]["reviewed"] != "yes")},
+            # reviewed: "no" keyword draft, "checked" read against spend and payees but not yet signed off, "yes" signed off by a person.
+            "mapping": {
+                "lines": len(used_keys),
+                "unreviewed": sum(1 for k in used_keys if smap[k]["reviewed"] != "yes"),
+                "checked": sum(1 for k in used_keys if smap[k]["reviewed"] == "checked"),
+                "unsure": sum(1 for k in used_keys if smap[k]["note"].startswith("unsure:")),
+            },
             "withheld_rows_by_reason": dict(sorted(reasons.items())),
         },
         "sources": [
@@ -564,6 +573,11 @@ def compact(x: Any) -> bytes:
     return (json.dumps(x, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
 
 
+def needs_draft(line: Optional[Dict[str, str]]) -> bool:
+    """New lines and keyword drafts get a (new) draft; a line someone has checked or signed off is never overwritten."""
+    return line is None or line.get("reviewed") == "no"
+
+
 def draft_map(reg: Dict[str, Any]) -> int:
     smap = load_service_map()
     stats: Dict[Tuple[str, str, str], List[float]] = defaultdict(list)
@@ -573,7 +587,7 @@ def draft_map(reg: Dict[str, Any]) -> int:
             stats[map_key(s["layout"], r.area, r.directorate)].append(r.amount)
     added = 0
     for key in stats:
-        if key not in smap or smap[key]["reviewed"] != "yes":  # re-draft anything a person has not checked
+        if needs_draft(smap.get(key)):
             group, rule = draft_group(key[1], key[2])
             smap[key] = {"layout": key[0], "service_area": key[1], "directorate": key[2], "group": group, "reviewed": "no",
                          "note": f"draft: matched '{rule}'" if rule else "draft: no rule matched"}

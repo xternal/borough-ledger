@@ -53,7 +53,7 @@ export const PaymentsIndex = z.object({
     /** Service groups come from a mapping table that is approx until a person has checked every line. */
     group_quality: Quality,
     notes: z.array(z.string()),
-    mapping: z.object({ lines: z.number().int(), unreviewed: z.number().int() }),
+    mapping: z.object({ lines: z.number().int(), unreviewed: z.number().int(), checked: z.number().int(), unsure: z.number().int() }),
     withheld_rows_by_reason: z.record(z.string(), z.number().int()),
   }),
   sources: z.array(PaymentSource).min(1),
