@@ -62,6 +62,11 @@ export const PaymentsIndex = z.object({
   groups: z.array(PaymentGroup),
   months: z.array(PaymentMonth).min(1),
   suppliers: z.object({ count: z.number().int(), with_page: z.number().int() }),
+  /** The latest three months and who was paid most in them, for the home page. */
+  latest_quarter: z.object({
+    months: z.array(month).min(1),
+    top: z.array(z.object({ id: z.string(), name: z.string(), page: z.boolean(), total: z.number() })),
+  }),
 });
 export type PaymentsIndex = z.infer<typeof PaymentsIndex>;
 

@@ -68,18 +68,16 @@ export function filesFor(monthIds: readonly string[]): string[] {
   return [...new Set(PAY.months.filter((m) => monthIds.includes(m.month)).flatMap((m) => m.files))];
 }
 
-/** The latest three months in the build, for the home page summary. */
+/**
+ * The latest three months in the build, for the home page summary. Uses only the index (bundled with the app):
+ * pages rendered on request, such as /balance, cannot read the month or supplier files on Vercel.
+ */
 export function latestQuarter() {
-  const ms = PAY.months.slice(-3);
-  const ids = ms.map((m) => m.month);
+  const ids = PAY.latest_quarter.months;
+  const ms = PAY.months.filter((m) => ids.includes(m.month));
   const files = filesFor(ids);
   const sum = (k: "total" | "rows" | "withheld_total" | "withheld_rows" | "published_total") => ms.reduce((a, m) => a + m[k], 0);
-  const top = [...suppliersById().values()]
-    .map((s) => ({ s, total: ids.reduce((a, m) => a + (s.months[m] ?? 0), 0) }))
-    .filter((x) => x.total > 0)
-    .sort((a, z) => z.total - a.total)
-    .slice(0, 5)
-    .map(({ s, total }) => ({ id: s.id, name: s.name, page: s.page, total: payFig(total, files) }));
+  const top = PAY.latest_quarter.top.map((s) => ({ id: s.id, name: s.name, page: s.page, total: payFig(s.total, files) }));
   return {
     from: ids[0]!,
     to: ids[ids.length - 1]!,
