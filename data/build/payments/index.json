@@ -1499,5 +1499,44 @@
  "suppliers": {
   "count": 5764,
   "with_page": 3709
+ },
+ "latest_quarter": {
+  "months": [
+   "2026-04",
+   "2026-05",
+   "2026-06"
+  ],
+  "top": [
+   {
+    "id": "marsh-ltd",
+    "name": "Marsh Ltd",
+    "page": true,
+    "total": 4480943.31
+   },
+   {
+    "id": "higgins-partnerships-1961-plc",
+    "name": "HIGGINS PARTNERSHIPS 1961 PLC",
+    "page": true,
+    "total": 4285318.0
+   },
+   {
+    "id": "veolia-es-uk-ltd",
+    "name": "VEOLIA ES (UK) LIMITED",
+    "page": true,
+    "total": 3966107.34
+   },
+   {
+    "id": "wates-living-space-ltd",
+    "name": "Wates Living Space Ltd",
+    "page": true,
+    "total": 3425207.74
+   },
+   {
+    "id": "f-m-conway-ltd",
+    "name": "F.M Conway Ltd",
+    "page": true,
+    "total": 2726082.21
+   }
+  ]
  }
 }

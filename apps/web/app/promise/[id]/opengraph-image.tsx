@@ -1,6 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { ogFonts } from "@/lib/ogFonts";
 import { DATA } from "@borough-ledger/schema";
 import { format } from "@/lib/format";
 import { buildModel } from "@/lib/model";
@@ -31,8 +30,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const { id } = await params;
   const m = buildModel();
   const p = m.promises.find((x) => x.id === id)!;
-  const fonts = join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans");
-  const [regular, semibold] = await Promise.all([readFile(join(fonts, "Geist-Regular.ttf")), readFile(join(fonts, "Geist-SemiBold.ttf"))]);
+  const fonts = await ogFonts();
   const cost = p.cost ?? p.capital;
   if (cost) assertRenderable(cost.perBandD.quality, `share image for ${id}`);
   const costLine = p.cost
@@ -67,10 +65,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
     ),
     {
       ...size,
-      fonts: [
-        { name: "Geist", data: regular, weight: 400, style: "normal" },
-        { name: "Geist", data: semibold, weight: 600, style: "normal" },
-      ],
+      fonts,
     },
   );
 }

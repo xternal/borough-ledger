@@ -512,6 +512,16 @@ def build(reg: Dict[str, Any]) -> Dict[str, bytes]:
         })
     files["suppliers.json"] = compact({"columns_top": ["date", "amount", "group", "type"], "suppliers": suppliers})
 
+    last3 = [m["month"] for m in months_index[-3:]]
+    top = sorted(
+        ((sum(s["months"].get(m, 0.0) for m in last3), s) for s in suppliers),
+        key=lambda x: -x[0],
+    )[:5]
+    latest_quarter = {
+        "months": last3,
+        "top": [{"id": s["id"], "name": s["name"], "page": s["page"], "total": round(t, 2)} for t, s in top if t > 0],
+    }
+
     unreviewed = sum(1 for v in smap.values() if v["reviewed"] != "yes")
     used_keys = {map_key(layout_of[r.file_id], r.area, r.directorate) for r in rows}
     reasons = Counter()
@@ -542,6 +552,8 @@ def build(reg: Dict[str, Any]) -> Dict[str, bytes]:
         "groups": groups,
         "months": months_index,
         "suppliers": {"count": len(suppliers), "with_page": sum(1 for s in suppliers if s["page"])},
+        # For the home page: computed here so that pages rendered on request never read the month or supplier files.
+        "latest_quarter": latest_quarter,
     }, indent=1, ensure_ascii=False) + "\n").encode()
     assert source_ids
     return files
