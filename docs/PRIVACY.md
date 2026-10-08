@@ -43,6 +43,12 @@ How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py
 * We never see the postcode and nothing is stored. The ward page the reader lands on is the same for everyone in that ward.
 * Readers who would rather not send a postcode anywhere can pick their ward on the map or the list.
 
+## Council decisions
+
+* Only the formal decision is kept: Cabinet's decision text, or for Full Council the resolution (the words after "RESOLVED"). The debate in the minutes, which can name members of the public who spoke, is never stored or shown.
+* A name after a courtesy title (Mr, Mrs, Ms, Miss, Mx, Dr) is replaced with "[name removed]"; councillors and officers named in their role stay. CI checks this on every build.
+* Decision text is sent to the Claude API only to suggest links; it is the council's published record and contains no personal data beyond that.
+
 ## Replies and corrections by email
 
 * The site shows one address, boroughs@guzh.uk, for corrections and for replies from anyone named on a card.

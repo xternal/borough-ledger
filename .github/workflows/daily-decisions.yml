@@ -1,0 +1,73 @@
+name: Daily council decisions
+
+# Fetches Cabinet and Full Council decisions from the council's ModernGov web service (etl/decisions.py), then asks
+# Claude which open pledges of the party running the council each new decision moves
+# (packages/schema/src/decision-links-cli.ts). Decisions are the council's own records and go straight to main.
+# Suggested links go to a pull request: merging it is the editor's confirmation (docs/PROMISE_STANDARD.md, section 5).
+on:
+  schedule:
+    - cron: "30 5 * * *" # 05:30 UTC: 06:30 BST in summer, 05:30 GMT in winter
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: daily-decisions
+  cancel-in-progress: false
+
+jobs:
+  decisions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch decisions from the council's web service
+        run: python etl/decisions.py
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Ask Claude which pledges new decisions move
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pnpm --filter @borough-ledger/schema decisions:suggest "$RUNNER_TEMP/suggestions.json"
+      - name: Commit new decisions to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/build/decisions.json data/build/decision_assessments.json
+          if git diff --cached --quiet; then echo "No new decisions."; exit 0; fi
+          git commit -m "Council decisions ($(date -u +%F))"
+          git push
+      - name: Open a pull request with the suggested links
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(python -c "import json, os; print(len(json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'suggestions.json')))))")
+          if [ "$n" = "0" ]; then echo "No links suggested."; exit 0; fi
+          branch="decision-links/$(date -u +%F)"
+          git switch -c "$branch"
+          pnpm --filter @borough-ledger/schema decisions:apply "$RUNNER_TEMP/suggestions.json" "$RUNNER_TEMP/summary.md"
+          pnpm --filter @borough-ledger/schema content:build
+          git add content data/build/content.json
+          git commit -m "Suggested links from council decisions to pledges ($(date -u +%F))"
+          git push -u origin "$branch"
+          {
+            echo "Claude read the council's new decisions and suggests these links. Each quote is the decision's own words, checked by code."
+            echo
+            echo "**Merging this pull request confirms them.** Close it to reject them all, or remove a link before merging."
+            echo
+            cat "$RUNNER_TEMP/summary.md"
+          } > "$RUNNER_TEMP/body.md"
+          gh pr create --title "Council decisions to pledges: $n suggested" --body-file "$RUNNER_TEMP/body.md" --base main --head "$branch"
+          # A pull request opened with the workflow's token does not start CI by itself.
+          gh workflow run ci.yml --ref "$branch"

@@ -7,6 +7,7 @@ import { assertRenderable } from "./quality";
 import { type Feed, type FeedItem, shorten, tag } from "./rss";
 import { SITE } from "./site";
 import { WARD_SPEND, wardsOf } from "./wards";
+import { DECISIONS, STEP_LABEL } from "./decisions";
 
 type EventType = (typeof EVENT_TYPES)[number];
 
@@ -77,14 +78,43 @@ export function paymentItems(): FeedItem[] {
 
 const PROMISES_FEED = (ps: PromiseModel[]): FeedItem[] => ps.flatMap(promiseItems);
 
+/** One item per Cabinet or Full Council decision, naming any pledge an editor confirmed it moves. */
+export function decisionItems(): FeedItem[] {
+  const m = buildModel();
+  const promises = new Map(m.promises.map((p) => [p.id, p]));
+  return DECISIONS.decisions.map((d) => {
+    const moves = DATA.content.decision_links
+      .filter((l) => l.decision_id === d.id && promises.has(l.promise_id))
+      .map((l) => `${STEP_LABEL[l.event]}: ${promises.get(l.promise_id)!.partyShort} pledge \u201c${shorten(promises.get(l.promise_id)!.text, 70)}\u201d.`);
+    return {
+      title: `${d.body}: ${d.title}`,
+      path: `/decisions#${d.id}`,
+      guid: tag("decision", d.id),
+      date: d.date,
+      description: [...moves, shorten(d.text.replace(/\n/g, " "), 600)].join(" "),
+    };
+  });
+}
+
+export function decisionsFeed(): Feed {
+  const m = buildModel();
+  return {
+    title: `${SITE.name}: council decisions in ${m.place.short}`,
+    description: "Every Cabinet and Full Council decision, with the pledges an editor confirmed it moves.",
+    path: "/decisions",
+    self: "/decisions/feed.xml",
+    items: decisionItems(),
+  };
+}
+
 export function everythingFeed(): Feed {
   const m = buildModel();
   return {
     title: `${SITE.name}: everything new`,
-    description: `New pledge cards, changes to every pledge, replies and each month of payments, for ${m.place.short}.`,
+    description: `New pledge cards, changes to every pledge, replies, council decisions and each month of payments, for ${m.place.short}.`,
     path: "/",
     self: "/feed.xml",
-    items: [...PROMISES_FEED(m.promises), ...paymentItems()],
+    items: [...PROMISES_FEED(m.promises), ...decisionItems(), ...paymentItems()],
   };
 }
 
@@ -170,6 +200,7 @@ export function allFeeds(): Feed[] {
   return [
     everythingFeed(),
     promisesFeed(),
+    decisionsFeed(),
     paymentsFeed(),
     ...DATA.content.promises.map((p) => promiseFeed(p.id)!),
     ...DATA.content.wards.wards.map((w) => wardFeed(w.id)!),

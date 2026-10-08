@@ -1827,6 +1827,47 @@
     gap: 6px 20px;
   }
 
+  a.btn {
+    display: inline-block;
+    text-decoration: none;
+  }
+  /* council decisions */
+  .decisions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 18px;
+  }
+  .decisions li {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    scroll-margin-top: 72px;
+  }
+  .decisions h3 {
+    font-size: 15px;
+    margin: 0 0 6px;
+  }
+  .d-text {
+    white-space: pre-line;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 75ch;
+  }
+  .d-more summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 14px;
+    padding: 2px 0;
+  }
+  .d-link {
+    margin: 4px 0 8px;
+    font-size: 14px;
+  }
+  .decisions-mtg {
+    max-width: none;
+  }
+
   /* savings list under the waterfall */
   .savings {
     margin-top: 24px;

@@ -108,6 +108,9 @@ python3 etl/councillors.py                                # refresh councillors 
 python3 etl/ward_map.py                                   # ward boundaries from the ONS, drawn as SVG for /wards and each ward page
 python3 etl/capital_wards.py --draft                      # new building schemes into data/manual/capital_scheme_wards.csv, located for review
 python3 etl/capital_wards.py                              # building schemes by ward into data/build/ward_spend.json
+python3 etl/decisions.py                                  # Cabinet and Full Council decisions from the council's ModernGov web service
+pnpm --filter @borough-ledger/schema decisions:suggest out.json   # ask Claude about decisions not yet assessed (needs ANTHROPIC_API_KEY)
+pnpm --filter @borough-ledger/schema decisions:apply out.json     # add suggested links and events to content/ (for a pull request)
 python3 etl/payments.py --fetch                           # spend files: download archived ones, record hash, rows and total of new ones
 python3 etl/payments.py --draft-map                       # add new service areas to data/manual/payments_service_map.csv for review
 python3 etl/payments.py                                   # build data/build/payments (redacted, mapped, reconciled to each file)

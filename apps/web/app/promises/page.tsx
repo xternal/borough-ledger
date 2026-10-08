@@ -37,6 +37,9 @@ export default function PromisesPage() {
           What each party promised {m.place.short} in its 2026 manifesto, quoted word for word, and where each pledge stands now. Every party is held to the
           same rules.
         </p>
+        <p className="small">
+          <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them.
+        </p>
         <FollowLink href="/promises/feed.xml" label="Follow every pledge by RSS" />
       </div>
 

@@ -48,6 +48,9 @@ export default function FollowPage() {
             <a href="/promises/feed.xml">Every pledge</a> <span className="muted small">new cards, status changes, deadlines and replies, for every party alike</span>
           </li>
           <li>
+            <a href="/decisions/feed.xml">Council decisions</a> <span className="muted small">every Cabinet and Full Council decision, with the pledges it moves</span>
+          </li>
+          <li>
             <a href="/payments/feed.xml">Payments over £500</a> <span className="muted small">one item for each month of the council&rsquo;s spend files</span>
           </li>
         </ul>

@@ -8,6 +8,7 @@ import type { PageModel, PromiseModel } from "@/lib/model";
 import { Num, TestMark } from "./Num";
 import { isOverdue, sides } from "@/lib/promises";
 import { useLedger } from "./LedgerState";
+import { CONTACT } from "@/lib/site";
 
 type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
 
@@ -270,7 +271,17 @@ export function Detail({
           <li key={i} className={`t-${e.today ? "today" : (EVENT_CLASS[e.type] ?? e.type)}`}>
             <span className="d">{e.today ? "Today" : formatMonthYear(e.date)}</span>
             <span className="dot" />
-            <span>{e.event}</span>
+            <span>
+              {e.event}
+              {"evidence_url" in e && e.evidence_url ? (
+                <>
+                  {" "}
+                  <a className="small" href={e.evidence_url}>
+                    Source
+                  </a>
+                </>
+              ) : null}
+            </span>
           </li>
         ))}
       </ol>
@@ -283,12 +294,12 @@ export function Detail({
             {toggleOn ? "See next year without it" : "See next year with it"}
           </button>
         ) : null}
-        <button type="button" className="btn secondary" aria-disabled="true" title="Follow by RSS or email arrives in a later release">
-          Follow
-        </button>
-        <button type="button" className="linkbtn" aria-disabled="true" title="Sending evidence arrives in a later release">
-          Add evidence
-        </button>
+        <a className="btn secondary" href={`/promise/${p.id}/feed.xml`} type="application/rss+xml">
+          Follow by RSS
+        </a>
+        <a className="linkbtn" href={`mailto:${CONTACT}?subject=${encodeURIComponent(`Evidence for ${p.id}`)}`}>
+          Send evidence
+        </a>
       </div>
       {p.sources.length ? (
         <div style={{ display: "grid", gap: 4 }} className="small">
