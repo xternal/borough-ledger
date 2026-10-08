@@ -15,16 +15,31 @@ const promiseIds = () =>
 // Ward ids from content/wards.yaml without a YAML parser: every `- id: "..."` line.
 const wardIds = () => [...readFileSync("content/wards.yaml", "utf8").matchAll(/^\s+- id: "([^"]+)"/gm)].map((m) => m[1]);
 
+/** A card's party and topic pages, read from its YAML without a parser (a deleted card has none). */
+function partyAndTopic(file) {
+  let text;
+  try {
+    text = readFileSync(file, "utf8");
+  } catch {
+    return [];
+  }
+  const party = text.match(/^actor:\s*\n\s+kind: "party"\s*\n\s+id: "([^"]+)"/m)?.[1];
+  const area = text.match(/^area: "([^"]+)"/m)?.[1];
+  const slug = area?.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return [...(party ? [`/party/${party}`] : []), ...(slug ? [`/topic/${slug}`] : [])];
+}
+
 /** The public pages a changed file feeds. */
 export function pagesFor(file) {
   let m;
-  if ((m = file.match(/^content\/promises\/([a-z0-9-]+)\.yaml$/))) return [`/promise/${m[1]}`, `/promise/${m[1]}.md`, "/promises", "/"];
+  if ((m = file.match(/^content\/promises\/([a-z0-9-]+)\.yaml$/))) return [`/promise/${m[1]}`, `/promise/${m[1]}.md`, "/promises", "/", ...partyAndTopic(file)];
   if ((m = file.match(/^content\/councillors\/([a-z0-9-]+)\.yaml$/))) return [`/councillor/${m[1]}`, "/wards"];
   if (file === "content/decision_links.yaml" || file === "data/build/decisions.json") return ["/decisions", "/promises"];
   if (file === "content/wards.yaml" || file.startsWith("data/build/ward_")) return ["/wards", ...wardIds().map((w) => `/ward/${w}`)];
   if (file.startsWith("data/build/payments/")) return ["/payments"];
   if (file.startsWith("data/build/hf_") || file.startsWith("data/config/")) return ["/", "/balance"];
-  if (file.startsWith("apps/web/")) return ["/", "/promises", "/decisions", "/wards", "/payments", "/sources", ...promiseIds().map((id) => `/promise/${id}`)];
+  if (file.startsWith("apps/web/"))
+    return ["/", "/promises", "/decisions", "/wards", "/payments", "/sources", ...promiseIds().flatMap((id) => [`/promise/${id}`, ...partyAndTopic(`content/promises/${id}.yaml`)])];
   return [];
 }
 

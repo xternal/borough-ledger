@@ -16,7 +16,9 @@ describe("RSS feeds", () => {
 
   it("gives every pledge, ward and councillor a feed, with unique item ids and no middle dots", () => {
     const feeds = allFeeds();
-    expect(feeds.length).toBe(4 + DATA.content.promises.length + DATA.content.wards.wards.length + DATA.content.councillors.length);
+    const topics = new Set(DATA.content.promises.map((p) => p.area)).size;
+    const parties = new Set(DATA.content.promises.filter((p) => p.actor.kind === "party").map((p) => p.actor.id)).size;
+    expect(feeds.length).toBe(4 + DATA.content.promises.length + DATA.content.wards.wards.length + DATA.content.councillors.length + parties + topics);
     for (const f of feeds) {
       const guids = f.items.map((i) => i.guid);
       expect(new Set(guids).size).toBe(guids.length);
