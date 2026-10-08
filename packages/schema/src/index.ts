@@ -7,3 +7,4 @@ export * from "./payments";
 export * from "./append-only";
 export * from "./deadlines";
 export * from "./wardmap";
+export * from "./wardspend";

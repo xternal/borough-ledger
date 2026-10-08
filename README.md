@@ -106,6 +106,8 @@ pnpm --filter @borough-ledger/schema report:test-values   # every test value sti
 pnpm --filter @borough-ledger/schema content:build        # compile content/ (promises, councillors) into data/build
 python3 etl/councillors.py                                # refresh councillors and wards from the council's ModernGov service
 python3 etl/ward_map.py                                   # ward boundaries from the ONS, drawn as SVG for /wards and each ward page
+python3 etl/capital_wards.py --draft                      # new building schemes into data/manual/capital_scheme_wards.csv, located for review
+python3 etl/capital_wards.py                              # building schemes by ward into data/build/payments/wards.json
 python3 etl/payments.py --fetch                           # spend files: download archived ones, record hash, rows and total of new ones
 python3 etl/payments.py --draft-map                       # add new service areas to data/manual/payments_service_map.csv for review
 python3 etl/payments.py                                   # build data/build/payments (redacted, mapped, reconciled to each file)

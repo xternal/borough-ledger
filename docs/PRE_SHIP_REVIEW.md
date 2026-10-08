@@ -134,3 +134,9 @@ Still open before calling it a launch:
 - **Not yet:** council building schemes by ward. The spend files name places in about 200 capital projects ("Frank Banfield Park", "Edward Woods Fire Safety works"), but matching each to a ward needs a hand-checked table, like the payments mapping. Planned as the next change, shown as approx until checked.
 - No pledge card is about one ward yet. Ward pages say so and ask for ward leaflets at the contact address.
 
+## Building schemes by ward (8 Oct 2026)
+
+Each ward page now shows the building work the council's spend files say it paid for there, from January 2024 to June 2026: £346.8m across 308 schemes. £251.6m is placed in one ward, £18.9m on roads and blocks across wards (shown on each, not split), £44.0m on programmes everywhere (footways, street lights, void repairs) and £32.3m on schemes whose name gives no place. Hammersmith Broadway has the most, £85.6m, mostly the Town Hall.
+
+The ward for each scheme is ours, from its name (`data/manual/capital_scheme_wards.csv`). Claude checked all 308 lines: OpenStreetMap matches against the name and the nearest postcodes, roads by their whole length; several were moved (Olympia is in Avonmore, Normand Park in Lillie). Six lines are left for the project owner (Lillie Road and Farm Lane housing sites, which Queensmill school, Normand Croft school, North Kensington Gate). Until every line is signed off, the ward figures are marked approx.
+
