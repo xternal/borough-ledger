@@ -1,4 +1,4 @@
-# PRD — Borough Ledger (Hammersmith & Fulham pilot)
+# PRD — Borough Book (Hammersmith & Fulham pilot)
 
 ## Problem
 

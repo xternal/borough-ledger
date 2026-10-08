@@ -147,3 +147,10 @@ Update, 8 Oct 2026: the project owner asked Claude to settle the six open lines 
 Every pledge, ward and councillor has an RSS feed, plus feeds for everything, every pledge and payments (92 feeds, all static files built with the site). Pledge items are new cards, each dated event and replies; ward feeds add each month's building work in the ward (marked as our estimate of the ward); the payments feed has one item a month. `/follow` explains RSS in plain words and lists the main feeds; pages link their own feed and declare it in the page head. No accounts, no email, nothing stored. Still to do in M5: email alerts (needs a small database and double opt-in) and the contribute form.
 
 Ward schemes signed off (8 Oct 2026): the project owner signed off `data/manual/capital_scheme_wards.csv`. Ward building figures are now marked sourced. Every hand-made table in `data/manual/` has its human check.
+
+## Name and domain (8 Oct 2026)
+
+The project owner chose the name **Borough Book** and the domain **boroughbook.uk** (DNS at Cloudflare, served by Vercel; www redirects to the bare domain). It is general on purpose: later boroughs get their own section on the same site. The old address, borough-ledger.vercel.app, redirects every page to the same page on boroughbook.uk, so links, search ranking and RSS subscriptions carry over. The legal check covered the old name; the owner may want the same quick check of the new one. Code packages (`@borough-ledger/*`), the repo, the Vercel project and RSS item ids keep the old name, which readers never see.
+
+Still to do: verify boroughbook.uk in Google Search Console as a Domain property (one DNS TXT record).
+

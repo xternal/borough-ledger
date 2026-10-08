@@ -1,10 +1,10 @@
 # Shared core with Public Ledger
 
-Borough Ledger and Public Ledger (the national version) share ideas, a design system and a promise standard. Share code only once both exist and the overlap is proven ("rule of two").
+Borough Book and Public Ledger (the national version) share ideas, a design system and a promise standard. Share code only once both exist and the overlap is proven ("rule of two").
 
 ## Build order
 
-1. Build Borough Ledger as its own repo, mirroring Public Ledger's structure (`apps/web`, `packages/engine`, `packages/schema`).
+1. Build Borough Book as its own repo, mirroring Public Ledger's structure (`apps/web`, `packages/engine`, `packages/schema`).
 2. When both have reached their M3 (promise ledger), extract a `ledger-core` package set:
 
 | Package | Contents | Notes |

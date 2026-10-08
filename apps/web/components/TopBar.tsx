@@ -1,4 +1,4 @@
-import { STAGE } from "@/lib/site";
+import { SITE, STAGE } from "@/lib/site";
 import { SectionNav } from "./SectionNav";
 
 export function TopBar({ place, year }: { place: string; year: string }) {
@@ -7,7 +7,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
       <div className="bar-in">
         <a className="mark" href="/">
           <i aria-hidden="true" />
-          Borough Ledger
+          {SITE.name}
           <span className="stage" title="Early version: every figure is sourced and checked by hand, and more is being added">
             {STAGE}
           </span>

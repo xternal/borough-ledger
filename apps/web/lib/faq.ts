@@ -5,7 +5,7 @@ export function faq(council: string): { q: string; a: string }[] {
   return [
     {
       q: "Is this the council's website?",
-      a: `No. Borough Ledger is an independent project. It is not run by, endorsed by or affiliated with ${council} Council.`,
+      a: `No. Borough Book is an independent project. It is not run by, endorsed by or affiliated with ${council} Council.`,
     },
     {
       q: "Where do the numbers come from?",

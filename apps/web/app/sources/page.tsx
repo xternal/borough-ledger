@@ -8,7 +8,7 @@ import { groupSources } from "@/lib/sources";
 
 const title = `Sources for Hammersmith & Fulham's money and promises | ${SITE.name}`;
 const description =
-  "Every document behind Borough Ledger: the council's budget papers and spend files, government council tax and spending returns, the laws a council budget must follow, and both parties' 2026 manifestos.";
+  "Every document behind Borough Book: the council's budget papers and spend files, government council tax and spending returns, the laws a council budget must follow, and both parties' 2026 manifestos.";
 
 export const metadata: Metadata = {
   title,
@@ -26,7 +26,7 @@ export default function SourcesPage() {
       <div className="hero">
         <h1>Sources</h1>
         <p className="lede">
-          Every figure on Borough Ledger comes from one of these {m.sources.length} published documents, and links to it. Where we read a file, we keep its
+          Every figure on Borough Book comes from one of these {m.sources.length} published documents, and links to it. Where we read a file, we keep its
           SHA-256 fingerprint, so anyone can check it is the same file.
         </p>
       </div>

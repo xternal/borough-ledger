@@ -4,7 +4,7 @@ import { CONTACT, MAKER, REPO } from "@/lib/site";
 export function Footer({ council, hasTestData }: { council: string; hasTestData: boolean }) {
   return (
     <footer>
-      <span>Borough Ledger is an independent project. It is not run by, endorsed by or affiliated with {council} Council.</span>
+      <span>Borough Book is an independent project. It is not run by, endorsed by or affiliated with {council} Council.</span>
       <span>
         Spotted a mistake, or named on a card? Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. The code and data are <a href={REPO}>open on GitHub</a>. <a href="/follow">Follow changes by RSS</a>.
       </span>

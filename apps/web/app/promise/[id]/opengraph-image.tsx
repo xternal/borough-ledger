@@ -5,7 +5,7 @@ import { format } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { assertRenderable } from "@/lib/quality";
 
-export const alt = "A promise tracked by Borough Ledger";
+export const alt = "A promise tracked by Borough Book";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
               <div style={{ width: "64%", background: "#2457F5" }} />
               <div style={{ width: "36%", background: "#A1A1AA" }} />
             </div>
-            Borough Ledger
+            Borough Book
           </div>
           <div style={{ display: "flex", color: "#61616B" }}>{`${p.actor}, ${p.made_on.slice(0, 4)}`}</div>
         </div>

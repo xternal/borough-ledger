@@ -19,7 +19,7 @@ export async function GET(req: Request) {
             <div style={{ width: "64%", background: "#2457F5" }} />
             <div style={{ width: "36%", background: "#A1A1AA" }} />
           </div>
-          {`Borough Ledger: ${sum.title}`}
+          {`Borough Book: ${sum.title}`}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 84, fontWeight: 600, letterSpacing: "-0.03em", color: short ? "#DC2626" : "#15803D" }}>{sum.status}</div>
