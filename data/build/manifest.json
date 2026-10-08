@@ -114,6 +114,10 @@
  ],
  "manual": [
   {
+   "file": "data/manual/capital_scheme_wards.csv",
+   "sha256": "1aad006a51d362c4d6a155890c013c3b23ae42337fb0bd723dc95fd0b174e93d"
+  },
+  {
    "file": "data/manual/funding_groups.csv",
    "sha256": "9acb1485776e95609ba99c22bfe904fbd75fbdc753f47f1030be7d5bafd269bf"
   },

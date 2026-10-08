@@ -2,8 +2,8 @@
 
     python3 etl/capital_wards.py --draft   add new schemes to data/manual/capital_scheme_wards.csv, located with
                                            OpenStreetMap (Nominatim) and the ONS ward boundaries, as reviewed=no
-    python3 etl/capital_wards.py           build data/build/payments/wards.json from the built month files and the table
-    python3 etl/capital_wards.py --check   check data/build/payments/wards.json matches a fresh build (CI)
+    python3 etl/capital_wards.py           build data/build/ward_spend.json from the built month files and the table
+    python3 etl/capital_wards.py --check   check data/build/ward_spend.json matches a fresh build (CI)
 
 The spend files name a scheme in the service area ("Capital - Frank Banfield Park"), never an address. A person checks
 each line of the table once (data/manual/README.md); until every line is checked the site marks ward totals approx.
@@ -29,7 +29,7 @@ from typing import Dict, List, Optional, Tuple
 ROOT = Path(__file__).resolve().parent.parent
 MONTHS = ROOT / "data" / "build" / "payments" / "months"
 TABLE = ROOT / "data" / "manual" / "capital_scheme_wards.csv"
-OUT = ROOT / "data" / "build" / "payments" / "wards.json"
+OUT = ROOT / "data" / "build" / "ward_spend.json"
 WARDS_YAML = ROOT / "content" / "wards.yaml"
 RAW = ROOT / "data" / "raw"
 CACHE = RAW / "geocode_cache.json"
@@ -305,8 +305,8 @@ def main(argv: List[str]) -> None:
     out = dump(build())
     if "--check" in argv:
         if not OUT.exists() or OUT.read_text() != out:
-            raise SystemExit("capital wards: data/build/payments/wards.json is out of date; run python3 etl/capital_wards.py")
-        print("capital wards: data/build/payments/wards.json matches a fresh build.")
+            raise SystemExit("capital wards: data/build/ward_spend.json is out of date; run python3 etl/capital_wards.py")
+        print("capital wards: data/build/ward_spend.json matches a fresh build.")
         return
     OUT.write_text(out)
     d = json.loads(out)

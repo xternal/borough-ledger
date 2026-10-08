@@ -4,7 +4,7 @@ import seedRaw from "../../../data/seed/hf_2026-27.json";
 import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/build/payments/index.json";
 import wardMapRaw from "../../../data/build/ward_map.json";
-import wardSpendRaw from "../../../data/build/payments/wards.json";
+import wardSpendRaw from "../../../data/build/ward_spend.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";

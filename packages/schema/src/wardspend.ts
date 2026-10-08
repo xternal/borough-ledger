@@ -1,4 +1,4 @@
-/* Council building schemes by ward, as built by etl/capital_wards.py into data/build/payments/wards.json. */
+/* Council building schemes by ward, as built by etl/capital_wards.py into data/build/ward_spend.json. */
 import { z } from "zod";
 import type { Content } from "./content";
 import type { PaymentsIndex } from "./payments";
