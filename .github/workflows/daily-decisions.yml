@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "30 5 * * *" # 05:30 UTC: 06:30 BST in summer, 05:30 GMT in winter
   workflow_dispatch:
+    inputs:
+      probe:
+        description: "Only check that the Claude API key and model work"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,6 +34,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Fetch decisions from the council's web service
+        if: ${{ !inputs.probe }}
         run: python etl/decisions.py
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
@@ -36,11 +42,18 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Check the Claude API key and model
+        if: ${{ inputs.probe }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pnpm --filter @borough-ledger/schema decisions:probe
       - name: Ask Claude which pledges new decisions move
+        if: ${{ !inputs.probe }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: pnpm --filter @borough-ledger/schema decisions:suggest "$RUNNER_TEMP/suggestions.json"
       - name: Commit new decisions to main
+        if: ${{ !inputs.probe }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -49,6 +62,7 @@ jobs:
           git commit -m "Council decisions ($(date -u +%F))"
           git push
       - name: Open a pull request with the suggested links
+        if: ${{ !inputs.probe }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

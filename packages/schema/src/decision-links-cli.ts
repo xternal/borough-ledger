@@ -97,10 +97,23 @@ function apply(input: string, summaryPath?: string) {
   console.log(`${lines.length} links applied.`);
 }
 
+/** One tiny request: is the key accepted and does the model exist? Costs a fraction of a penny. */
+async function probe() {
+  if (!process.env.ANTHROPIC_API_KEY) throw new Error("No ANTHROPIC_API_KEY.");
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
+    body: JSON.stringify({ model: MODEL, max_tokens: 5, messages: [{ role: "user", content: "Reply with OK." }] }),
+  });
+  if (!res.ok) throw new Error(`Claude API ${res.status} for ${MODEL}: ${(await res.text()).slice(0, 300)}`);
+  console.log(`Claude API key accepted; ${MODEL} answered.`);
+}
+
 const [cmd, a, b] = process.argv.slice(2);
-if (cmd === "suggest" && a) await suggest(a);
+if (cmd === "probe") await probe();
+else if (cmd === "suggest" && a) await suggest(a);
 else if (cmd === "apply" && a) apply(a, b);
 else {
-  console.error("usage: decision-links-cli.ts suggest <out.json> | apply <in.json> [summary.md]");
+  console.error("usage: decision-links-cli.ts probe | suggest <out.json> | apply <in.json> [summary.md]");
   process.exit(2);
 }
