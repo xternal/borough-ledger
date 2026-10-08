@@ -10,11 +10,18 @@ versions:
     recorded_on: "2026-10-07"
     source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
     page: 4
-status: "promised"
+status: "in_plan"
 deadline: null
 events:
   - date: "2026-05-01"
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
+  - date: 2026-01-19
+    type: in_plan
+    text: "Cabinet decision, 19 Jan 2026 (in a council plan): “To approve a new H&F
+      service, as part of the H&F ‘Healthy Homes’ programme, to help residents
+      design and install measures including insulation, solar PV, heat pumps and
+      energy storage to their homes.”"
+    evidence_url: https://democracy.lbhf.gov.uk/ieDecisionDetails.aspx?AIId=72574
 replies: []
 editor_check_required: false

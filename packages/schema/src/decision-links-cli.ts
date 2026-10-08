@@ -8,7 +8,7 @@
    Needs ANTHROPIC_API_KEY; without it, suggest records nothing and says so. */
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { parseDocument } from "yaml";
+import { isSeq, parseDocument } from "yaml";
 import { compileContent } from "./content-compile";
 import { SYSTEM_PROMPT, eventFor, linkFor, linkTool, openPledges, statusAfter, userPrompt, validSuggestions, type Suggestion } from "./decision-links";
 import type { PromiseCard } from "./content";
@@ -69,6 +69,9 @@ function apply(input: string, summaryPath?: string) {
   const linksDoc = parseDocument(
     existsSync(LINKS) ? readFileSync(LINKS, "utf8") : "# Council decisions linked to pledges. Added by pull request; merging it is the editor's confirmation.\nlinks: []\n",
   );
+  // One field a line, like every other content file, so a link reads (and is reviewed) easily.
+  const seq = linksDoc.get("links", true);
+  if (isSeq(seq)) seq.flow = false;
   const existing = new Set(content.decision_links.map((l) => `${l.decision_id}:${l.promise_id}`));
   const lines: string[] = [];
   for (const s of suggestions) {

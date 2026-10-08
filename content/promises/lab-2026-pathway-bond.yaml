@@ -10,11 +10,18 @@ versions:
     recorded_on: "2026-10-07"
     source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
     page: 2
-status: "promised"
+status: "delivering"
 deadline: null
 events:
   - date: "2026-05-01"
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
+  - date: 2026-01-28
+    type: delivering
+    text: "Full Council resolution, 28 Jan 2026 (being delivered): “Already, 109
+      local businesses and 26 schools have shown exceptional commitment to
+      inclusive economic growth by signing up to the Pathway Bond, agreeing to
+      provide opportunities for young people in cutting-edge industries.”"
+    evidence_url: https://democracy.lbhf.gov.uk/ieListDocuments.aspx?CId=114&MId=7894
 replies: []
 editor_check_required: false
