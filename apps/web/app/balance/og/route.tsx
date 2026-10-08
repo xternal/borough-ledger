@@ -3,6 +3,7 @@ import { ogFonts } from "@/lib/ogFonts";
 import { decodeScenario } from "@borough-ledger/engine";
 import { buildModel } from "@/lib/model";
 import { shareSummary } from "@/lib/shareText";
+import { LOGO_DATA_URI } from "@/lib/logo";
 
 /** 1200×630 share image for a balance-it scenario: the outcome, the choices and the year after. */
 export async function GET(req: Request) {
@@ -15,10 +16,7 @@ export async function GET(req: Request) {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#FFFFFF", color: "#0B0B0D", padding: "64px 80px", fontFamily: "Geist" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 28, fontWeight: 600 }}>
-          <div style={{ width: 28, height: 28, borderRadius: 6, display: "flex", overflow: "hidden" }}>
-            <div style={{ width: "64%", background: "#2457F5" }} />
-            <div style={{ width: "36%", background: "#A1A1AA" }} />
-          </div>
+          <img src={LOGO_DATA_URI} width={34} height={34} alt="" />
           {`Borough Book: ${sum.title}`}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>

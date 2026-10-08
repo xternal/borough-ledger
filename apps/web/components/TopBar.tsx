@@ -1,4 +1,5 @@
 import { SITE, STAGE } from "@/lib/site";
+import { Logo } from "./Logo";
 import { SectionNav } from "./SectionNav";
 
 export function TopBar({ place, year }: { place: string; year: string }) {
@@ -6,7 +7,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
     <header className="topbar">
       <div className="bar-in">
         <a className="mark" href="/">
-          <i aria-hidden="true" />
+          <Logo />
           {SITE.name}
           <span className="stage" title="Early version: every figure is sourced and checked by hand, and more is being added">
             {STAGE}

@@ -12,6 +12,7 @@ Your council tax bill, turned into a readable account of your council's money an
 2. **The gap is the story.** Councils must balance every year. The orange gap (and hatched one-off reserves) is the visual thread from "the gap" to "balance it".
 3. **Cleanest possible information design.** Numbers large, labels small and grey, hairlines instead of boxes, one typeface. Boxes only for the balance-it result and the promise detail.
 4. **Never look official.** No council logo, crest, colours or typefaces. "Independent" on every page.
+   The site's own mark: an open book on its blue (#2457f5 to #1b40c9), with three rising bars for the money and an orange (#f2600c) bookmark for the promises being tracked (`apps/web/app/icon.svg`, `components/Logo.tsx`, `lib/logo.ts`). Drawn to read at 16 px: no text lines, bold bars.
 5. **Neutral.** No party colours anywhere. Red and green only for deltas and statuses.
 6. **Provenance one glance away.** A coloured dot and a word: sourced (green), approx (amber), test (red).
 7. **No middle-dot (·) separators.** Use layout, alignment, line breaks or commas.

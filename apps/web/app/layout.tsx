@@ -11,7 +11,7 @@ const ORGANIZATION = {
   "@type": "Organization",
   name: SITE.name,
   url: SITE_URL,
-  logo: `${SITE_URL}/icon.svg`,
+  logo: `${SITE_URL}/logo.png`,
   description: SITE.description,
   email: CONTACT,
   founder: { "@type": "Person", name: MAKER.name, url: MAKER.url },
