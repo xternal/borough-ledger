@@ -37,18 +37,50 @@ export function promisesJsonLd(promises: readonly PromiseModel[]) {
   ] as const;
 }
 
-/** The pledge as a quotation from whoever made it, citing the archived source. */
-export function promiseJsonLd(p: PromiseModel) {
+/** Who publishes every page: the independent project, never the council. */
+export const PUBLISHER = {
+  "@type": "Organization",
+  name: SITE.name,
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.svg`,
+} as const;
+
+/**
+ * A pledge's page: an article about the quotation, with its status, sources and dates, plus the questions it answers.
+ * The status is stated in words (abstract), not as a rating: a pledge is tracked, not fact-checked.
+ */
+export function promiseJsonLd(p: PromiseModel, summary: string, modified: string, qa: readonly { q: string; a: string }[], council: string) {
+  const url = `${SITE_URL}/promise/${p.id}`;
   return [
     {
       "@context": CONTEXT,
-      "@type": "Quotation",
-      text: p.text,
-      url: `${SITE_URL}/promise/${p.id}`,
-      dateCreated: p.made_on,
+      "@type": "Article",
+      headline: `${p.partyShort} pledge: ${short(p.text, 90)}`,
+      abstract: summary,
+      url,
+      mainEntityOfPage: url,
       inLanguage: "en-GB",
-      creator: p.party ? { "@type": "Person", name: p.actor, affiliation: { "@type": "Organization", name: p.party } } : { "@type": "Organization", name: p.actor },
-      ...(p.sources[0] ? { isBasedOn: p.sources[0].url } : {}),
+      datePublished: p.versions[0]!.recorded_on,
+      dateModified: modified,
+      author: PUBLISHER,
+      publisher: PUBLISHER,
+      isAccessibleForFree: true,
+      spatialCoverage: { "@type": "AdministrativeArea", name: council },
+      keywords: [p.partyShort, p.area, "manifesto pledge", "promise tracker", council].join(", "),
+      about: {
+        "@type": "Quotation",
+        text: p.text,
+        dateCreated: p.made_on,
+        creator: p.party ? { "@type": "Person", name: p.actor, affiliation: { "@type": "Organization", name: p.party } } : { "@type": "Organization", name: p.actor },
+        ...(p.sources[0] ? { isBasedOn: p.sources[0].url } : {}),
+      },
+      citation: [...new Set([...p.sources.map((x) => x.url), ...p.timeline.flatMap((e) => (e.evidence_url ? [e.evidence_url] : []))])],
+    },
+    {
+      "@context": CONTEXT,
+      "@type": "FAQPage",
+      url,
+      mainEntity: qa.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
     },
     breadcrumbs([["Home", "/"], ["Promises", "/promises"], [short(p.text), `/promise/${p.id}`]]),
   ] as const;

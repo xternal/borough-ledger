@@ -1,16 +1,32 @@
 import { describe, expect, it } from "vitest";
 import { buildModel } from "@/lib/model";
+import { dateModified, promiseMarkdown, promiseQA, promiseSummary } from "@/lib/promiseText";
 import { councillorJsonLd, promiseJsonLd, promisesJsonLd } from "@/lib/structured";
 
 describe("structured data", () => {
   const m = buildModel();
 
-  it("quotes each pledge from whoever made it, citing its source", () => {
-    const p = m.promises.find((x) => x.id === "lab-2026-hospital")!;
-    const [quote, crumbs] = promiseJsonLd(p);
-    expect(quote).toMatchObject({ "@type": "Quotation", text: p.text, dateCreated: p.made_on, creator: { "@type": "Organization", name: p.actor } });
-    expect(quote).toHaveProperty("isBasedOn", p.sources[0]!.url);
+  it("describes each pledge as an article about the quotation, with its status in words, dates and sources", () => {
+    const p = m.promises.find((x) => x.id === "lab-2026-green-schemes")!;
+    const summary = promiseSummary(p, m);
+    const [article, faq, crumbs] = promiseJsonLd(p, summary, dateModified(p), promiseQA(p, m), m.place.council);
+    expect(article).toMatchObject({ "@type": "Article", abstract: summary, datePublished: p.versions[0]!.recorded_on, dateModified: dateModified(p) });
+    expect(article.about).toMatchObject({ "@type": "Quotation", text: p.text, dateCreated: p.made_on, creator: { "@type": "Organization", name: p.actor } });
+    expect(article.about).toHaveProperty("isBasedOn", p.sources[0]!.url);
+    // A confirmed council decision is cited as a source.
+    expect(article.citation.some((u) => u.includes("democracy.lbhf.gov.uk"))).toBe(true);
+    expect(faq.mainEntity.length).toBeGreaterThanOrEqual(4);
     expect(crumbs.itemListElement).toHaveLength(3);
+  });
+
+  it("answers the status question the same way for every party", () => {
+    for (const p of m.promises) {
+      const s = promiseSummary(p, m);
+      expect(s).toContain(p.text);
+      expect(s).toContain("Status on Borough Book");
+      expect(s).not.toContain("\u00b7");
+      expect(promiseMarkdown(p, m)).toContain(`/promise/${p.id}`);
+    }
   });
 
   it("lists every card on the promises page", () => {

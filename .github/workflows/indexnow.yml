@@ -1,0 +1,24 @@
+name: Tell search engines what changed
+
+# After Vercel reports a successful production deploy, send the pages it changed to IndexNow (scripts/indexnow.mjs),
+# so Bing and the AI search tools it feeds pick them up without waiting for a crawl.
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Send the changed pages
+        run: node scripts/indexnow.mjs $(git diff --name-only HEAD~1 HEAD)

@@ -175,7 +175,10 @@ export function Detail({
   toggle,
   toggleOn,
   onTry,
+  heading = "h3",
 }: {
+  /** The pledge is the page's main heading on its own card page, a sub-heading elsewhere. */
+  heading?: "h1" | "h3";
   p: PromiseModel;
   today: string;
   generalBudget: PageModel["generalBudget"];
@@ -194,7 +197,10 @@ export function Detail({
         <span className="muted small">
           {who(p)}, {p.area}
         </span>
-        <h3 style={{ fontSize: 20, letterSpacing: "-.02em", lineHeight: 1.3 }}>&ldquo;{p.text}&rdquo;</h3>
+        {(() => {
+          const H = heading;
+          return <H style={{ fontSize: 20, letterSpacing: "-.02em", lineHeight: 1.3, margin: 0 }}>&ldquo;{p.text}&rdquo;</H>;
+        })()}
         <span className="muted small">
           {VENUE[p.venue] ?? p.venue}, {formatDay(p.made_on)}
           {p.page ? `, page ${p.page}` : ""}
@@ -269,7 +275,9 @@ export function Detail({
       <ol className="timeline">
         {timeline.map((e, i) => (
           <li key={i} className={`t-${e.today ? "today" : (EVENT_CLASS[e.type] ?? e.type)}`}>
-            <span className="d">{e.today ? "Today" : formatMonthYear(e.date)}</span>
+            <time className="d" dateTime={e.date}>
+              {e.today ? "Today" : formatMonthYear(e.date)}
+            </time>
             <span className="dot" />
             <span>
               {e.event}
@@ -320,6 +328,7 @@ export function PromiseCardView({ p, today, generalBudget, balance }: { p: Promi
   const toggle = balance.toggles.find((t) => t.id === p.lever_or_toggle_id);
   return (
     <Detail
+      heading="h1"
       p={p}
       today={today}
       generalBudget={generalBudget}

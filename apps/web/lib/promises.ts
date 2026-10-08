@@ -53,3 +53,31 @@ export function isOverdue(p: PromiseModel, today: string): boolean {
 
 /** "£8.0m capital" style cost words, or null when no cost is stated. Numbers are rendered by the caller through <Num>. */
 export const hasCost = (p: PromiseModel) => !!(p.cost || p.capital);
+
+const IN_WORDS: Partial<Record<Status, [string, string]>> = {
+  delivered: ["is delivered", "are delivered"],
+  delivering: ["is being delivered", "are being delivered"],
+  budgeted: ["is in the budget", "are in the budget"],
+  in_plan: ["is in a council plan", "are in a council plan"],
+  promised: ["is promised with nothing in council papers yet", "are promised with nothing in council papers yet"],
+  failed: ["has failed", "have failed"],
+  quietly_dropped: ["was quietly dropped", "were quietly dropped"],
+  unscoreable: ["is too vague to track", "are too vague to track"],
+};
+
+/**
+ * Where each side's pledges stand, in one sentence each: "Labour, which runs the council, made 9 headline pledges:
+ * 2 are being delivered, ...". Counted from the data, the same way for every party.
+ */
+export function standing(promises: readonly PromiseModel[]): string[] {
+  return sides(promises).map((g) => {
+    const ps = promises.filter((p) => p.side === g.id);
+    const who = `${g.parties.join(" and ")}${g.id === "administration" ? ", which runs the council," : ", in opposition,"}`;
+    if (g.id === "opposition") return `${who} made ${ps.length} headline pledges; opposition pledges are costed so voters can compare, but cannot be delivered from opposition.`;
+    const parts = STATUS_ORDER.map((st) => [st, ps.filter((p) => p.status === st).length] as const)
+      .filter(([, n]) => n > 0)
+      .map(([st, n]) => `${n} ${(IN_WORDS[st] ?? [STATUS_LABEL[st], STATUS_LABEL[st]])[n === 1 ? 0 : 1]}`);
+    const list = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}` : parts[0];
+    return `${who} made ${ps.length} headline pledges: ${list}.`;
+  });
+}

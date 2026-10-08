@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DATA } from "@borough-ledger/schema";
 import { FollowLink } from "@/components/FollowLink";
 import { JsonLd } from "@/components/JsonLd";
 import { Num } from "@/components/Num";
@@ -6,15 +7,20 @@ import { PageShell } from "@/components/PageShell";
 import { PromisesIndex } from "@/components/PromisesIndex";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
-import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides } from "@/lib/promises";
+import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides, standing } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
 
 export const revalidate = 86400;
 
-const title = `Promises made to Hammersmith & Fulham residents | ${SITE.name}`;
+/** The parties with pledges on the site, from the data, so the title never favours or forgets one. */
+const PARTIES = DATA.content.parties
+  .filter((pt) => DATA.content.promises.some((p) => p.actor.kind === "party" && p.actor.id === pt.id))
+  .map((pt) => pt.short)
+  .join(" and ");
+const title = `${PARTIES} 2026 manifesto pledges in Hammersmith & Fulham: where each stands | ${SITE.name}`;
 const description =
-  "Every headline pledge from the 2026 Labour and Conservative manifestos for Hammersmith & Fulham, quoted word for word with its source, its status and its cost to the council, tracked to the same rules for every party.";
+  `Every headline pledge from the 2026 ${PARTIES} manifestos for Hammersmith & Fulham, quoted word for word with its source, its status and its cost to the council, tracked to the same rules for every party.`;
 
 export const metadata: Metadata = {
   title,
@@ -37,6 +43,7 @@ export default function PromisesPage() {
           What each party promised {m.place.short} in its 2026 manifesto, quoted word for word, and where each pledge stands now. Every party is held to the
           same rules.
         </p>
+        <p className="lede">{standing(m.promises).join(" ")}</p>
         <p className="small">
           <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them.
         </p>

@@ -1,8 +1,23 @@
 import type { Metadata, Viewport } from "next";
 import { feedAlternate } from "@/lib/rss";
 import { GeistSans } from "geist/font/sans";
-import { GOOGLE_SITE_VERIFICATION, INDEXABLE, SITE, SITE_URL } from "@/lib/site";
+import { JsonLd } from "@/components/JsonLd";
+import { CONTACT, GOOGLE_SITE_VERIFICATION, INDEXABLE, MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
 import "./globals.css";
+
+/** Who runs the site, on every page: an independent project, never the council (CLAUDE.md invariant 5). */
+const ORGANIZATION = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.name,
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.svg`,
+  description: SITE.description,
+  email: CONTACT,
+  founder: { "@type": "Person", name: MAKER.name, url: MAKER.url },
+  sameAs: [REPO],
+  areaServed: { "@type": "AdministrativeArea", name: "London Borough of Hammersmith & Fulham" },
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -10,7 +25,10 @@ export const metadata: Metadata = {
   description: SITE.description,
   applicationName: SITE.name,
   alternates: { canonical: "/", types: feedAlternate("/feed.xml", "Borough Book: everything new") },
-  robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false },
+  // Full previews and snippets: a quoted pledge or figure is the point of the site, always with its source on the page.
+  robots: INDEXABLE
+    ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 } }
+    : { index: false, follow: false },
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -33,7 +51,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={GeistSans.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <JsonLd data={ORGANIZATION} />
+      </body>
     </html>
   );
 }

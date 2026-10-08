@@ -127,6 +127,8 @@ python3 etl/payments.py                                   # build data/build/pay
 
 Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. `NEXT_PUBLIC_SITE_URL` on production is the site's own address (https://boroughbook.uk): it sets canonical links, the sitemap and feeds, and when it names a host other than borough-ledger.vercel.app every request to that old address is redirected to it (`next.config.ts`). `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` is optional: Search Console can verify the whole domain with a DNS record instead.
 
+**Search and AI search.** Every page has its title, description, canonical link, share image and structured data; pledges also have a Markdown version at `/promise/<id>.md`, and `/llms.txt` and `/llms-full.txt` describe the whole site for AI tools. After each production deploy, `scripts/indexnow.mjs` tells search engines which pages changed (`.github/workflows/indexnow.yml`).
+
 **Alpha.** The public site at https://boroughbook.uk is the Alpha: a production build (no test values, open to search engines and AI crawlers, with `llms.txt` and a sitemap), marked "Alpha" next to the name (`STAGE` in `apps/web/lib/site.ts`). Every merge to `main` deploys it. Switches in "Balance it" whose cost is still a test value are held back by `etl/build.py` and named on the page as coming later (`next_year.pending_toggles`); they return once their cost is sourced. Pull request previews stay behind Vercel login.
 
 ## 9. Licence
