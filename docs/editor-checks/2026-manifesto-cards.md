@@ -2,6 +2,8 @@
 
 Prepared by Claude on 7 October 2026 for the editor check in docs/PROMISE_STANDARD.md section 6. For each card: the quote as it appears on the site, the manifesto page it cites, whether the quote is on that page word for word (checked by extracting the page text from the archived PDF), and the status with the reason.
 
+**Signed off on 8 October 2026** by the project owner (Pavel Guzhikov) and The Robot, after which the "Awaiting editor check" mark came off all 18 cards. The word-for-word match in the table below was made by Claude, an AI assistant, and is a check of the text, not of anyone's party ties (docs/PROMISE_STANDARD.md section 5).
+
 Both manifestos are archived and their SHA-256 fingerprints match the archived copies:
 
 - **Hammersmith & Fulham Labour**: [Hope you can believe in (Hammersmith & Fulham Labour, 2026 local election manifesto summary)](https://web.archive.org/web/20260617065909/https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf), SHA-256 `e08440222a5f071c…`

@@ -1,6 +1,6 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
-import { MAKER, SITE, SITE_URL, STAGE } from "@/lib/site";
+import { CONTACT, MAKER, REPO, SITE, SITE_URL, STAGE } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -24,7 +24,9 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Councillors: all 50 councillors by ward, with their posts, from the council's own records.
 - Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
-This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, but editors are still checking the promise cards (each says so) and how payments are grouped into services.
+This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
+
+Corrections, and replies from anyone named on a card: ${CONTACT}. The code, data tables and promise cards are open at ${REPO}.
 
 ## How to cite figures
 

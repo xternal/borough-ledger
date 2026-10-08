@@ -6,7 +6,7 @@ import { PageShell } from "@/components/PageShell";
 import { PromiseCardView } from "@/components/Promises";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
-import { SITE } from "@/lib/site";
+import { CONTACT, SITE } from "@/lib/site";
 import { promiseJsonLd } from "@/lib/structured";
 
 type Props = { params: Promise<{ id: string }> };
@@ -63,8 +63,8 @@ export default async function PromisePage({ params }: Props) {
             ))
           ) : (
             <p className="muted">
-              No reply yet. Any councillor or party named on a card can reply, and replies are published within five working days. Every party is
-              held to the same standard.
+              No reply yet. Any councillor or party named on a card can reply by emailing <a href={`mailto:${CONTACT}`}>{CONTACT}</a>, and replies
+              are published here within five working days. Every party is held to the same standard.
             </p>
           )}
         </section>

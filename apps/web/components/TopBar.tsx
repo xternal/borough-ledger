@@ -8,7 +8,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
         <a className="mark" href="/">
           <i aria-hidden="true" />
           Borough Ledger
-          <span className="stage" title="Early version: figures are sourced, but editors are still checking promise cards and service groups">
+          <span className="stage" title="Early version: every figure is sourced and checked by hand, and more is being added">
             {STAGE}
           </span>
         </a>

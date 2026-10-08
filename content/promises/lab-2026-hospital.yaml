@@ -17,5 +17,5 @@ events:
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
 replies: []
-editor_check_required: true
+editor_check_required: false
 editor_note: "How much and from where are not stated; decide within 7 days whether council documents supply them or the card is unscoreable."

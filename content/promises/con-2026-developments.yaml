@@ -17,5 +17,5 @@ events:
     type: "promised"
     text: "Key commitment in the 2026 Conservative manifesto"
 replies: []
-editor_check_required: true
+editor_check_required: false
 editor_note: "'dvelopments' is the manifesto's own spelling, quoted as printed."

@@ -20,6 +20,12 @@ export const STAGE = "Alpha";
 /** Who made the site, credited in every footer. */
 export const MAKER = { name: "Pavel Guzhikov", url: "https://guzh.uk", coffee: "https://ko-fi.com/pavelg" };
 
+/** Where replies from councillors and parties, and corrections, are sent. Shown in every footer and on every promise card. */
+export const CONTACT = "boroughs@guzh.uk";
+
+/** The open repository: code, data tables and every promise card. */
+export const REPO = "https://github.com/xternal/borough-ledger";
+
 export const SITE = {
   name: "Borough Ledger",
   title: "Borough Ledger: where your council tax goes in Hammersmith & Fulham",

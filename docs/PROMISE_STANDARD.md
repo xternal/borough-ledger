@@ -44,7 +44,7 @@ Use council figures first (budget report, cabinet papers). Otherwise a documente
 ## 5. Rewording, reply, process
 
 * Rewording → new version, visible diff.
-* Right of reply for any councillor or party, published within 5 working days.
+* Right of reply for any councillor or party, published within 5 working days. Replies and corrections go to boroughs@guzh.uk, which every card and footer shows; a reply is added to the card's `replies` as sent, with the sender's public role and the date.
 * Two editors per merge. Reader submissions go to triage; volume never changes a status.
 * Editors declare party membership and residence ward. Cards about a party an editor belongs to need a second editor from outside it.
 * Quarterly audit of a 10% sample by someone outside the project.

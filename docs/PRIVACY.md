@@ -36,6 +36,12 @@ How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py
 * Photos: strip EXIF and location before storage; blur any residents' faces or addresses if visible.
 * No IP addresses stored; rate limiting uses a daily-salted hash.
 
+## Replies and corrections by email
+
+* The site shows one address, boroughs@guzh.uk, for corrections and for replies from anyone named on a card.
+* A published reply shows its text, the sender's public role (councillor, party) and the date; never an email address.
+* Emails from residents are used only to check and make the correction. Nothing from them is published without asking, and the inbox is not used for any mailing.
+
 ## Accounts (later, optional)
 
 Passkey or email link. Sync follows, submission history, optional public handle. No public profiles, no comments.

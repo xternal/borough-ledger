@@ -1,8 +1,10 @@
 # Borough Ledger: Hammersmith & Fulham
 
-Working title. An independent, open view of a London borough's money and promises, built for residents. Separate project from Public Ledger (the national version), sharing its ideas and later its code.
+An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://borough-ledger.vercel.app**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, every councillor by ward, and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
 
-Read `docs/PRE_SHIP_REVIEW.md` before anything goes public. Almost every number in the prototype is test data.
+Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from Public Ledger (the national version), sharing its ideas and later its code; "Borough Ledger" is a working title.
+
+Where things stand and what is still open: `docs/PRE_SHIP_REVIEW.md`. The reference prototype in `prototype/` still runs on test data; the site does not.
 
 ## 1. The idea
 
