@@ -4,6 +4,7 @@ import seedRaw from "../../../data/seed/hf_2026-27.json";
 import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/build/payments/index.json";
 import wardMapRaw from "../../../data/build/ward_map.json";
+import wardSpendRaw from "../../../data/build/ward_spend.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -12,7 +13,7 @@ import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {
@@ -129,7 +130,20 @@ describe("seed parses and cross-checks", () => {
     expect(() => parseDataset(oneWay)).toThrow(/not the other way/);
   });
 
-  it("cites every payments file as a source with its hash", () => {
+  it("adds up council building schemes by ward, and keeps them approx until every line is signed off", () => {
+    const s = DATA.wardSpend;
+    expect(Object.keys(s.wards).length).toBeGreaterThan(10);
+    expect(s.quality).toBe(s.mapping.unreviewed + s.mapping.checked > 0 ? "approx" : "sourced");
+    const off = raw();
+    const first = Object.values(off.wardSpend.wards)[0]!;
+    first.total += 1000;
+    expect(() => parseDataset(off)).toThrow(/do not add up/);
+    const early = raw();
+    early.wardSpend.quality = "sourced";
+    expect(() => parseDataset(early)).toThrow(/signed off/);
+  });
+
+    it("cites every payments file as a source with its hash", () => {
     for (const s of DATA.payments.sources) expect(DATA.sources.get(s.id)?.sha256).toBe(s.sha256);
   });
 

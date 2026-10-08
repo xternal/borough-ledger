@@ -4,6 +4,7 @@ import { DATA } from "@borough-ledger/schema";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { WardMap } from "@/components/WardMap";
+import { WardSchemes } from "@/components/WardSchemes";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { CONTACT, SITE } from "@/lib/site";
@@ -86,6 +87,8 @@ export default async function WardPage({ params }: Props) {
               </p>
             )}
           </section>
+
+          <WardSchemes w={w} names={new Map(wards.map((x) => [x.id, x.name]))} />
 
           <section aria-labelledby="street-h" className="ward-sec">
             <h2 id="street-h">Street problems</h2>

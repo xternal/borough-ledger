@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { DATA } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
 import { lookupWard, normalisePostcode, wardFromResult } from "@/lib/wardFinder";
-import { finderData, fixMyStreetUrl, partyMix, wardsOf } from "@/lib/wards";
+import { BOROUGH_SPEND, WARD_SPEND, finderData, fixMyStreetUrl, partyMix, wardsOf } from "@/lib/wards";
 
 const m = buildModel();
 const { wards, councilCode } = finderData(m);
@@ -66,7 +66,21 @@ describe("ward pages", () => {
     expect(fixMyStreetUrl("College Park & Old Oak")).toBe("https://www.fixmystreet.com/reports/Hammersmith+and+Fulham/College+Park+%26+Old+Oak");
   });
 
-  it("describes each ward's councillors the same way for every party", () => {
+  it("shows each ward's building schemes with the table's quality, adding up to its total", () => {
+    for (const w of all) {
+      expect(w.spend.total.quality).toBe(WARD_SPEND.quality);
+      expect(w.spend.schemes.reduce((a, x) => a + x.total.value, 0)).toBeCloseTo(w.spend.total.value, 1);
+      for (const x of [...w.spend.schemes, ...w.spend.shared]) expect(x.total.sources.length).toBeGreaterThan(0);
+      for (const x of w.spend.shared) expect(x.others.length).toBeGreaterThan(0);
+    }
+    const broadway = all.find((w) => w.id === "hammersmith-broadway")!;
+    expect(broadway.spend.schemes.some((x) => /Town Hall/.test(x.label))).toBe(true);
+    const parts = BOROUGH_SPEND.place.value + BOROUGH_SPEND.several.value + BOROUGH_SPEND.borough.value + BOROUGH_SPEND.unknown.value;
+    expect(parts).toBeLessThanOrEqual(BOROUGH_SPEND.total.value + 1);
+    expect(BOROUGH_SPEND.total.value - parts).toBeLessThan(10_000); // only the council's own sites outside the borough are left
+  });
+
+    it("describes each ward's councillors the same way for every party", () => {
     expect(partyMix(["Labour", "Labour", "Labour"])).toBe("all Labour");
     expect(partyMix(["Conservative", "Conservative"])).toBe("both Conservative");
     expect(partyMix(["Labour", "Labour", "Conservative"])).toBe("two Labour and one Conservative");
