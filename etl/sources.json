@@ -328,6 +328,30 @@
    "sha256": "09848894262457c7f11e03019f52b092fb9d05b0130ddec935713659423a1a33",
    "licence": "OGL-UK-3.0",
    "manual": true
+  },
+  {
+   "id": "capital_programme_2026-30",
+   "title": "Four Year Capital Programme 2026-30 and Capital Strategy 2026/27 (report to Full Council, 25 February 2026)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=134079",
+   "asset_url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=134079",
+   "published_on": "2026-02-25",
+   "file": "capital_programme_2026-30_full_council.pdf",
+   "sha256": "a21a7689beb1dff6549b6c9ca6f528557f3a000f082aa0cdb6115993472c1f7d",
+   "manual": true,
+   "note": "Read in a browser on 8 Oct 2026 (the council's site refuses scripts); the hash is of the 28-page PDF read. Its Appendix 1 matches the Cabinet version of 9 February (Cabinet pack pages 152 to 156) line for line."
+  },
+  {
+   "id": "hra_budget_2026-27",
+   "title": "The Housing Revenue Account (HRA) Budget 2026/27, Rents and Service Charges 2026/27 and HRA 10 Year Business Plan (report to Cabinet, 9 February 2026; Cabinet pack pages 157 to 178)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "asset_url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
+   "published_on": "2026-02-09",
+   "file": "cabinet_pack_2026-02-09.pdf",
+   "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce",
+   "manual": true,
+   "note": "Page numbers are the pack's. Cabinet sets the council homes budget; it does not go to Full Council."
   }
  ]
 }

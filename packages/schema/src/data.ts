@@ -8,6 +8,7 @@ import wardMapRaw from "../../../data/build/ward_map.json";
 import wardSpendRaw from "../../../data/build/ward_spend.json";
 import decisionsRaw from "../../../data/build/decisions.json";
 import electionsRaw from "../../../data/build/elections.json";
+import capitalRaw from "../../../data/build/capital.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { checkContent, ContentFile, type Content } from "./content";
 import { checkPayments, PaymentsIndex } from "./payments";
@@ -16,6 +17,7 @@ import { checkWardMap, WardMap } from "./wardmap";
 import { checkWardSpend, WardSpend } from "./wardspend";
 import { checkDecisionLinks, DecisionsFile } from "./decisions";
 import { checkElections, ElectionsFile } from "./elections";
+import { CapitalFile, checkCapital } from "./capital";
 import type { Quality } from "./quality";
 
 export interface Dataset {
@@ -30,6 +32,8 @@ export interface Dataset {
   decisions: DecisionsFile;
   /** Ward results of the borough election (etl/elections.py). */
   elections: ElectionsFile;
+  /** The four-year building programme and the council homes budget (etl/capital.py). */
+  capital: CapitalFile;
   /** Every source cited anywhere, by id. */
   sources: ReadonlyMap<string, Source>;
 }
@@ -38,7 +42,7 @@ export interface Dataset {
 export const ELECTIONS_SOURCE_ID = "democracy_club_elections";
 
 /** Every (quality, source_id) pair in the dataset, with a path for error messages. */
-export function provenanceRefs(d: Omit<Dataset, "sources" | "wardMap" | "wardSpend" | "decisions" | "elections">): { path: string; quality: Quality; source_id: string }[] {
+export function provenanceRefs(d: Omit<Dataset, "sources" | "wardMap" | "wardSpend" | "decisions" | "elections" | "capital">): { path: string; quality: Quality; source_id: string }[] {
   const out: { path: string; quality: Quality; source_id: string }[] = [];
   const add = (path: string, x: { quality: Quality; source_id: string }) =>
     out.push({ path, quality: x.quality, source_id: x.source_id });
@@ -78,7 +82,7 @@ export function provenanceRefs(d: Omit<Dataset, "sources" | "wardMap" | "wardSpe
 }
 
 /** Parse and cross-check raw seed objects. Throws with every problem listed. */
-export function parseDataset(raw: { council: unknown; content: unknown; payments: unknown; rules: unknown; wardMap: unknown; wardSpend: unknown; decisions: unknown; elections: unknown }): Dataset {
+export function parseDataset(raw: { council: unknown; content: unknown; payments: unknown; rules: unknown; wardMap: unknown; wardSpend: unknown; decisions: unknown; elections: unknown; capital: unknown }): Dataset {
   const council = CouncilYear.parse(raw.council);
   const content = ContentFile.parse(raw.content);
   const payments = PaymentsIndex.parse(raw.payments);
@@ -87,6 +91,7 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
   const wardSpend = WardSpend.parse(raw.wardSpend);
   const decisions = DecisionsFile.parse(raw.decisions);
   const elections = ElectionsFile.parse(raw.elections);
+  const capital = CapitalFile.parse(raw.capital);
 
   const sources = new Map<string, Source>();
   const paymentSources: Source[] = payments.sources.map((s) => ({
@@ -133,6 +138,7 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
   problems.push(...checkWardSpend(wardSpend, content, payments));
   problems.push(...checkDecisionLinks(content, decisions));
   problems.push(...checkElections(elections, content));
+  problems.push(...checkCapital(capital, content, decisions, new Set(sources.keys())));
   const promiseIds = new Set(content.promises.map((p) => p.id));
   const toggleIds = new Set(council.next_year.toggles.map((t) => t.id));
   const leverIds = new Set<string>(council.next_year.levers.map((l) => l.id));
@@ -154,8 +160,8 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
   if (!rules.instalments.options.includes(rules.instalments.default)) problems.push("rules: default instalments not among options");
   if (problems.length) throw new Error(`Seed data failed cross-checks:\n  ${problems.join("\n  ")}`);
 
-  return { council, content, payments, rules, wardMap, wardSpend, decisions, elections, sources };
+  return { council, content, payments, rules, wardMap, wardSpend, decisions, elections, capital, sources };
 }
 
 /** The parsed seed. Parsing happens once, at import; bad data fails the build. */
-export const DATA: Dataset = parseDataset({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw });
+export const DATA: Dataset = parseDataset({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw, capital: capitalRaw });

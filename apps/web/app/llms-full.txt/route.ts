@@ -7,6 +7,7 @@ import { promiseMarkdown } from "@/lib/promiseText";
 import { assertRenderable } from "@/lib/quality";
 import { MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
 import { WARD_SPEND, electionOf, wardsOf } from "@/lib/wards";
+import { HOMES, SPAN, capFig, fact, groupsOf, homesFig, totalOf } from "@/lib/capital";
 
 export const dynamic = "force-static";
 
@@ -73,6 +74,11 @@ ${wardsOf(m)
     return `- ${w.name} (${SITE_URL}/ward/${w.id}): ${w.councillors.map((c) => `${c.name} (${c.party})`).join(", ")}.${vote}${build}`;
   })
   .join("\n")}
+
+## Building work and council homes
+
+- The four-year building programme (${SPAN}): ${fig(capFig(totalOf("gf").total!), "m1")} across the borough. Largest areas: ${groupsOf("gf").slice(0, 4).map((g) => `${g.plain} ${fig(capFig(g.total), "m1")}`).join("; ")}. ${SITE_URL}/building
+- Council homes: about ${format("int", fact("homes").value)} homes; rent and service charges bring in ${fig(homesFig(-HOMES.budget.filter((b) => b.kind === "income").reduce((a, b) => a + b.now, 0)), "m1")} in ${HOMES.years[1]!.replace("-", "/")}; rents rise ${fig(fact("rent_rise_pct"), "pct1")} from April 2026; interest takes ${fig(fact("interest_to_rent_pct"), "pct0")} of rent income. Building work on council homes, ${SPAN}: ${fig(capFig(totalOf("hra").total!), "m1")}. ${SITE_URL}/council-homes
 
 ## Payments over £500
 

@@ -7,6 +7,7 @@ import wardMapRaw from "../../../data/build/ward_map.json";
 import wardSpendRaw from "../../../data/build/ward_spend.json";
 import decisionsRaw from "../../../data/build/decisions.json";
 import electionsRaw from "../../../data/build/elections.json";
+import capitalRaw from "../../../data/build/capital.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -15,7 +16,7 @@ import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw, capital: capitalRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {
@@ -43,6 +44,15 @@ describe("seed parses and cross-checks", () => {
     const r = raw();
     r.elections.wards.addison!.candidates[0]!.votes = 1;
     expect(() => parseDataset(r)).toThrow(/fewer votes was elected/);
+  });
+
+  it("rejects a building scheme linked to a pledge that does not exist, and a council homes budget that does not balance", () => {
+    const r = raw();
+    (r.capital.programme.sections[0]!.groups[0]!.lines[0] as { pledges?: string[] }).pledges = ["nope"];
+    expect(() => parseDataset(r)).toThrow(/unknown pledge nope/);
+    const r2 = raw();
+    r2.capital.council_homes.budget[0]!.now -= 5;
+    expect(() => parseDataset(r2)).toThrow(/does not balance/);
   });
 
   it("rejects an unknown source id", () => {
