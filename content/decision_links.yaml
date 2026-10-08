@@ -1,0 +1,27 @@
+# Council decisions linked to pledges. Added by pull request; merging it is the editor's confirmation.
+links:
+  - decision_id: mg-72574
+    promise_id: lab-2026-green-schemes
+    event: in_plan
+    quote: To approve a new H&F service, as part of the H&F ‘Healthy Homes’
+      programme, to help residents design and install measures including
+      insulation, solar PV, heat pumps and energy storage to their homes.
+    suggested_by: Claude (backfill, read in a session)
+    suggested_on: 2026-10-08
+  - decision_id: mg-72977
+    promise_id: lab-2026-pathway-bond
+    event: delivering
+    quote: Already, 109 local businesses and 26 schools have shown exceptional
+      commitment to inclusive economic growth by signing up to the Pathway Bond,
+      agreeing to provide opportunities for young people in cutting-edge
+      industries.
+    suggested_by: Claude (backfill, read in a session)
+    suggested_on: 2026-10-08
+  - decision_id: mg-73396
+    promise_id: lab-2026-affordable-homes
+    event: in_plan
+    quote: that part of the land hatched pink comprising the 39 new affordable homes
+      (21 social rent and 18 shared ownership) located in Block B for housing
+      purposes
+    suggested_by: Claude (backfill, read in a session)
+    suggested_on: 2026-10-08
