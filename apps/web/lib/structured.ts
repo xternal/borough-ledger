@@ -42,7 +42,7 @@ export const PUBLISHER = {
   "@type": "Organization",
   name: SITE.name,
   url: SITE_URL,
-  logo: `${SITE_URL}/icon.svg`,
+  logo: `${SITE_URL}/logo.png`,
 } as const;
 
 /**

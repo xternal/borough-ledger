@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { ogFonts } from "@/lib/ogFonts";
 import { DATA } from "@borough-ledger/schema";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
+import { LOGO_DATA_URI } from "@/lib/logo";
 
 export const alt = "Borough Book: where your council tax goes. An independent project.";
 export const size = { width: 1200, height: 630 };
@@ -15,10 +16,7 @@ export default async function Image() {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#FFFFFF", color: "#0B0B0D", padding: "72px 80px", fontFamily: "Geist" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, fontWeight: 600 }}>
-          <div style={{ width: 30, height: 30, borderRadius: 6, display: "flex", overflow: "hidden" }}>
-            <div style={{ width: "64%", background: "#2457F5" }} />
-            <div style={{ width: "36%", background: "#A1A1AA" }} />
-          </div>
+          <img src={LOGO_DATA_URI} width={36} height={36} alt="" />
           Borough Book
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>

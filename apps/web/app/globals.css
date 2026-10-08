@@ -221,11 +221,10 @@
     gap: 8px;
     white-space: nowrap;
   }
-  .mark i {
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--fund) 0 64%, var(--gla) 64% 100%);
+  .mark svg {
+    width: 20px;
+    height: 20px;
+    flex: none;
   }
   nav.sections {
     display: flex;

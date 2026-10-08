@@ -4,6 +4,7 @@ import { DATA } from "@borough-ledger/schema";
 import { format } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { assertRenderable } from "@/lib/quality";
+import { LOGO_DATA_URI } from "@/lib/logo";
 
 export const alt = "A promise tracked by Borough Book";
 export const size = { width: 1200, height: 630 };
@@ -44,10 +45,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#FFFFFF", color: "#0B0B0D", padding: "60px 80px", fontFamily: "Geist" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, fontWeight: 600 }}>
-            <div style={{ width: 26, height: 26, borderRadius: 6, display: "flex", overflow: "hidden" }}>
-              <div style={{ width: "64%", background: "#2457F5" }} />
-              <div style={{ width: "36%", background: "#A1A1AA" }} />
-            </div>
+            <img src={LOGO_DATA_URI} width={32} height={32} alt="" />
             Borough Book
           </div>
           <div style={{ display: "flex", color: "#61616B" }}>{`${p.actor}, ${p.made_on.slice(0, 4)}`}</div>
