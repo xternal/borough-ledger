@@ -146,3 +146,4 @@ Update, 8 Oct 2026: the project owner asked Claude to settle the six open lines 
 
 Every pledge, ward and councillor has an RSS feed, plus feeds for everything, every pledge and payments (92 feeds, all static files built with the site). Pledge items are new cards, each dated event and replies; ward feeds add each month's building work in the ward (marked as our estimate of the ward); the payments feed has one item a month. `/follow` explains RSS in plain words and lists the main feeds; pages link their own feed and declare it in the page head. No accounts, no email, nothing stored. Still to do in M5: email alerts (needs a small database and double opt-in) and the contribute form.
 
+Ward schemes signed off (8 Oct 2026): the project owner signed off `data/manual/capital_scheme_wards.csv`. Ward building figures are now marked sourced. Every hand-made table in `data/manual/` has its human check.
