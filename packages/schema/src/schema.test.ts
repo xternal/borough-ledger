@@ -140,6 +140,7 @@ describe("seed parses and cross-checks", () => {
     expect(() => parseDataset(off)).toThrow(/do not add up/);
     const early = raw();
     early.wardSpend.quality = "sourced";
+    early.wardSpend.mapping.checked = 1; // one line checked by Claude, not yet signed off by a person
     expect(() => parseDataset(early)).toThrow(/signed off/);
   });
 
