@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DATA } from "@borough-ledger/schema";
 import { JsonLd } from "@/components/JsonLd";
+import { FollowLink } from "@/components/FollowLink";
 import { PageShell } from "@/components/PageShell";
 import { WardMap } from "@/components/WardMap";
 import { WardSchemes } from "@/components/WardSchemes";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
+import { feedAlternate } from "@/lib/rss";
 import { CONTACT, SITE } from "@/lib/site";
 import { wardJsonLd } from "@/lib/structured";
 import { NUMBER, WARD_MAP, partyMix, wardsOf } from "@/lib/wards";
@@ -27,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const names = DATA.content.councillors.filter((c) => c.ward_id === id).map((c) => c.name);
   const title = `${w.name} ward, Hammersmith & Fulham: councillors and pledges | ${SITE.name}`;
   const description = `${w.name} ward in Hammersmith & Fulham: your councillors (${names.join(", ")}), their party and posts, pledges about the area, and where to report street problems.`;
-  return { title, description, alternates: { canonical: `/ward/${id}` }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  return { title, description, alternates: { canonical: `/ward/${id}`, types: feedAlternate(`/ward/${id}/feed.xml`, `${w.name} ward`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
 }
 
 export default async function WardPage({ params }: Props) {
@@ -128,6 +130,7 @@ export default async function WardPage({ params }: Props) {
               </ul>
             </>
           ) : null}
+          <FollowLink href={`/ward/${w.id}/feed.xml`} label={`Follow ${w.name} by RSS`} />
           <p className="small muted">{WARD_MAP.source.attribution}</p>
         </aside>
       </div>

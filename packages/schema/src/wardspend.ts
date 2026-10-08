@@ -32,7 +32,14 @@ export const WardSpend = z.object({
   last: month,
   wards: z.record(
     z.string(),
-    z.object({ total: z.number(), rows: z.number().int(), schemes: z.array(WardScheme), shared: z.array(WardScheme) }),
+    z.object({
+      total: z.number(),
+      rows: z.number().int(),
+      /** Spending on schemes in this ward alone, by month (YYYY-MM). */
+      months: z.record(month, z.number()),
+      schemes: z.array(WardScheme),
+      shared: z.array(WardScheme),
+    }),
   ),
 });
 export type WardSpend = z.infer<typeof WardSpend>;
@@ -50,6 +57,7 @@ export function checkWardSpend(s: WardSpend, content: Content, payments: Payment
   for (const [id, w] of Object.entries(s.wards)) {
     if (!wardIds.has(id)) problems.push(`ward spend: unknown ward ${id}`);
     if (!near(w.schemes.reduce((a, x) => a + x.total, 0), w.total)) problems.push(`ward spend: ${id} schemes do not add up to its total`);
+    if (!near(Object.values(w.months).reduce((a, v) => a + v, 0), w.total)) problems.push(`ward spend: ${id} months do not add up to its total`);
     placed += w.total;
     for (const x of [...w.schemes, ...w.shared]) {
       for (const f of x.files) if (!files.has(f)) problems.push(`ward spend: ${x.area} cites unknown file ${f}`);

@@ -23,7 +23,7 @@ export function sectionForPath(path: string): SectionId | null {
   if (/^\/(promises|promise)(\/|$)/.test(path)) return "promises";
   if (/^\/(wards?|councillors?)(\/|$)/.test(path)) return "ward";
   if (/^\/(payments|supplier)(\/|$)/.test(path)) return "payments";
-  if (/^\/sources(\/|$)/.test(path)) return "method";
+  if (/^\/(sources|follow)(\/|$)/.test(path)) return "method";
   return null;
 }
 

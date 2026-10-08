@@ -183,7 +183,7 @@ def geocode(q: str, bbox: Tuple[float, float, float, float], cache: dict) -> Opt
 
 
 def scheme_totals() -> Dict[str, dict]:
-    out: Dict[str, dict] = defaultdict(lambda: {"total": 0.0, "rows": 0, "first": "9999-99", "last": "0000-00", "files": set()})
+    out: Dict[str, dict] = defaultdict(lambda: {"total": 0.0, "rows": 0, "first": "9999-99", "last": "0000-00", "files": set(), "months": defaultdict(float)})
     for f in sorted(MONTHS.glob("*.json")):
         d = json.loads(f.read_text())
         for r in d["rows"]:
@@ -196,6 +196,7 @@ def scheme_totals() -> Dict[str, dict]:
             a["first"] = min(a["first"], d["month"])
             a["last"] = max(a["last"], d["month"])
             a["files"].add(d["files"][r[7]])
+            a["months"][d["month"]] += r[2]
     return out
 
 
@@ -265,7 +266,7 @@ def build() -> dict:
             raise SystemExit(f"capital wards: {area}: 'several' needs two or more wards")
         if r["reviewed"] not in {"no", "checked", "yes"}:
             raise SystemExit(f"capital wards: {area}: reviewed must be no, checked or yes")
-    wards: Dict[str, dict] = defaultdict(lambda: {"total": 0.0, "rows": 0, "schemes": [], "shared": []})
+    wards: Dict[str, dict] = defaultdict(lambda: {"total": 0.0, "rows": 0, "months": defaultdict(float), "schemes": [], "shared": []})
     kinds: Dict[str, float] = defaultdict(float)
     for area, t in sorted(totals.items(), key=lambda kv: -kv[1]["total"]):
         r = table[area]
@@ -276,6 +277,8 @@ def build() -> dict:
             w = wards[r["ward_id"]]
             w["total"] += t["total"]
             w["rows"] += t["rows"]
+            for m, v in t["months"].items():
+                w["months"][m] += v
             w["schemes"].append(s)
         elif r["kind"] == "several":
             for wid in r["wards"].split(";"):
@@ -290,7 +293,8 @@ def build() -> dict:
         "total": round(sum(t["total"] for t in totals.values()), 2),
         "first": min(t["first"] for t in totals.values()),
         "last": max(t["last"] for t in totals.values()),
-        "wards": {wid: {**w, "total": round(w["total"], 2)} for wid, w in sorted(wards.items())},
+        # Each ward's spending by month (schemes in that ward alone), for the ward's feed.
+        "wards": {wid: {**w, "total": round(w["total"], 2), "months": {m: round(v, 2) for m, v in sorted(w["months"].items())}} for wid, w in sorted(wards.items())},
     }
 
 

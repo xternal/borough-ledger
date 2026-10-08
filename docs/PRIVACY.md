@@ -25,7 +25,8 @@ How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py
 
 ## Follow
 
-* Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs).
+* Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs; not built yet).
+* RSS is live (8 Oct 2026): every feed is a static file built with the site, so nobody is logged as following anything, and feed links carry no tracking codes.
 * Follows can reveal political opinions, which are special category data under UK GDPR. Explicit consent at sign-up, minimal storage, no tracking in emails, one-click delete, DPIA before launch.
 * Local numbers are small: show aggregate follower counts only above 50, and never per ward below 50.
 

@@ -1797,6 +1797,36 @@
     }
   }
 
+  /* follow by RSS */
+  .follow {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin: 4px 0 0;
+  }
+  .follow a[type="application/rss+xml"]::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: var(--gap);
+    vertical-align: 1px;
+  }
+  .feeds {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .feeds-wards {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px 20px;
+  }
+
   /* savings list under the waterfall */
   .savings {
     margin-top: 24px;

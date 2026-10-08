@@ -142,3 +142,7 @@ The ward for each scheme is ours, from its name (`data/manual/capital_scheme_war
 
 Update, 8 Oct 2026: the project owner asked Claude to settle the six open lines with its best judgement rather than check them. Claude found each site in the council's own project pages (Lillie Road: 42 homes at 70-80 Lillie Road, West Kensington; Farm Lane: 31 homes at 11 Farm Lane, Walham Green), the DfE school register (Queensmill is now only at 1 Askham Road, Wormholt; Normand Croft is W14 9PA, West Kensington) and OPDC planning records (North Kensington Gate, Scrubs Lane, College Park and Old Oak). Every line is now checked by Claude, but no person has checked the table, so the ward figures stay marked approx until someone does.
 
+## M5, first part: follow by RSS (8 Oct 2026)
+
+Every pledge, ward and councillor has an RSS feed, plus feeds for everything, every pledge and payments (92 feeds, all static files built with the site). Pledge items are new cards, each dated event and replies; ward feeds add each month's building work in the ward (marked as our estimate of the ward); the payments feed has one item a month. `/follow` explains RSS in plain words and lists the main feeds; pages link their own feed and declare it in the page head. No accounts, no email, nothing stored. Still to do in M5: email alerts (needs a small database and double opt-in) and the contribute form.
+

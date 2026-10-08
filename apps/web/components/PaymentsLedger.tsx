@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { FollowLink } from "@/components/FollowLink";
 import { PageShell } from "@/components/PageShell";
 import { formatMonth, formatMonthShort } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
@@ -63,6 +64,7 @@ export function PaymentsLedger({ m, month }: { m: PageModel; month: string }) {
           payments in {PAY.months.length} months between {formatMonth(MONTHS[0]!)} and {formatMonth(MONTHS[MONTHS.length - 1]!)}. Payments to people are
           shown only as totals.
         </p>
+        <FollowLink href="/payments/feed.xml" label="Follow each new month by RSS" />
       </div>
 
       <section id="search" aria-labelledby="search-h" className="pay-section">
