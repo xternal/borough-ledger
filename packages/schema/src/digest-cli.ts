@@ -81,7 +81,7 @@ async function write(facts: Fact[], today: string): Promise<{ draft: string; not
   const draft = body.content.map((c) => c.text ?? "").join("").trim();
   const check = draftNumbersOk(draft, facts, ["500", "boroughs", today, SITE]);
   if (!check.ok) return { draft: plain, note: `Claude's draft used numbers not in the facts (${check.stray.join(", ")}), so here is the plain version.` };
-  if (draft.includes("·")) return { draft: draft.replace(/·/g, ","), note: "Middle dots replaced with commas." };
+  if (draft.includes("\u00b7")) return { draft: draft.replace(/\u00b7/g, ","), note: "Middle dots replaced with commas." };
   return { draft, note: `Written by ${MODEL} from the facts below; every number checked against them.` };
 }
 
