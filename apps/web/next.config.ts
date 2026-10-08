@@ -31,6 +31,8 @@ const config: NextConfig = {
     "/opengraph-image": ["./assets/fonts/*.ttf"],
     "/twitter-image": ["./assets/fonts/*.ttf"],
     "/promise/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/party/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/topic/[slug]/opengraph-image": ["./assets/fonts/*.ttf"],
   },
 };
 

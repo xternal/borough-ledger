@@ -1,0 +1,43 @@
+name: Is the site up?
+
+# Every 30 minutes: the main pages answer, the content is ours, and the old address still redirects. A failed run
+# emails the repository owner (GitHub's default for failed scheduled workflows), so an outage never goes unnoticed.
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Main pages answer with their own content
+        run: |
+          set -u
+          fail=0
+          check() {
+            url="https://boroughbook.uk$1"; want="$2"
+            body=$(curl -sS --max-time 30 --retry 2 --retry-delay 10 -w '\n%{http_code}' "$url") || { echo "::error::$url did not answer"; fail=1; return; }
+            code=$(printf '%s' "$body" | tail -n1)
+            if [ "$code" != "200" ]; then echo "::error::$url answered $code"; fail=1; return; fi
+            if ! printf '%s' "$body" | grep -q "$want"; then echo "::error::$url is missing \"$want\""; fail=1; return; fi
+            echo "ok  $url"
+          }
+          check / "Borough Book"
+          check /promises "manifesto pledges"
+          check /promise/hf-free-home-care "Right of reply"
+          check /payments "Payments over"
+          check /decisions "Council decisions"
+          check /wards "Your ward"
+          check /feed.xml "<rss"
+          check /llms.txt "Borough Book"
+          old=$(curl -sS --max-time 30 -o /dev/null -w '%{http_code} %{redirect_url}' https://borough-ledger.vercel.app/promises || true)
+          case "$old" in
+            "308 https://boroughbook.uk/promises") echo "ok  old address redirects" ;;
+            *) echo "::error::old address: $old"; fail=1 ;;
+          esac
+          exit $fail

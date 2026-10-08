@@ -11,7 +11,7 @@
   --line-strong: #d4d4d8;
   --ink: #0b0b0d;
   --muted: #61616b;
-  --faint: #9a9aa3;
+  --faint: #6b6b74;
   --accent: #2457f5;
   --fund: #2457f5;
   --fund-soft: rgba(36, 87, 245, 0.16);
@@ -21,8 +21,11 @@
   --gap-soft: rgba(242, 96, 12, 0.16);
   --gla: #a1a1aa;
   --good: #15803d;
-  --warn: #b45309;
-  --bad: #dc2626;
+  --warn: #92400e;
+  --bad: #b91c1c;
+  /* Text on tinted pills: darker than the chart colours so every pill passes WCAG AA (4.5:1). */
+  --good-ink: #166534;
+  --fund-ink: #1d45cf;
   --idle: #8b8b94;
   --font: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -35,7 +38,7 @@
     --line-strong: #364657;
     --ink: #e7edf3;
     --muted: #a3b0bd;
-    --faint: #7d8b99;
+    --faint: #8291a0;
     --accent: #7b9dff;
     --fund: #7b9dff;
     --fund-soft: rgba(123, 157, 255, 0.22);
@@ -48,6 +51,8 @@
     --warn: #fbbf24;
     --bad: #f87171;
     --idle: #8291a0;
+    --good-ink: #4ade80;
+    --fund-ink: #7b9dff;
     color-scheme: dark;
   }
 }
@@ -58,7 +63,7 @@
   --line-strong: #364657;
   --ink: #e7edf3;
   --muted: #a3b0bd;
-  --faint: #7d8b99;
+  --faint: #8291a0;
   --accent: #7b9dff;
   --fund: #7b9dff;
   --fund-soft: rgba(123, 157, 255, 0.22);
@@ -71,6 +76,8 @@
   --warn: #fbbf24;
   --bad: #f87171;
   --idle: #8291a0;
+  --good-ink: #4ade80;
+  --fund-ink: #7b9dff;
   color-scheme: dark;
 }
 
@@ -1186,11 +1193,11 @@
   .st-in_plan,
   .st-budgeted {
     background: color-mix(in srgb, var(--fund) 12%, transparent);
-    color: var(--fund);
+    color: var(--fund-ink);
   }
   .st-delivered {
     background: color-mix(in srgb, var(--good) 13%, transparent);
-    color: var(--good);
+    color: var(--good-ink);
   }
   .st-failed,
   .st-quietly_dropped {
@@ -1865,6 +1872,17 @@
   }
   .decisions-mtg {
     max-width: none;
+  }
+
+  .decisions p.small a {
+    display: inline-block;
+    padding: 5px 0;
+    margin-right: 14px;
+  }
+  .tablewrap td a.small {
+    display: inline-block;
+    padding: 5px 0;
+    margin-left: 6px;
   }
 
   /* savings list under the waterfall */
