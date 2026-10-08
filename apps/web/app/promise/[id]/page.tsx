@@ -8,6 +8,9 @@ import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { CONTACT, SITE } from "@/lib/site";
+import { STATUS_LABEL } from "@/lib/promises";
+import { dateModified, promiseQA, promiseSummary } from "@/lib/promiseText";
+import { shorten } from "@/lib/rss";
 import { promiseJsonLd } from "@/lib/structured";
 
 type Props = { params: Promise<{ id: string }> };
@@ -22,9 +25,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const p = buildModel().promises.find((x) => x.id === id);
   if (!p) return {};
-  const title = `“${p.text}” | ${SITE.name}`;
-  const description = `${p.actor}, ${p.venue} ${p.made_on.slice(0, 4)}. Status, cost to the council and timeline, independently tracked.`;
-  return { title, description, alternates: { canonical: `/promise/${id}`, types: feedAlternate(`/promise/${id}/feed.xml`, `Changes to this pledge`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  const m = buildModel();
+  // The status is in the title, so a search result or an AI answer can say where the pledge stands at a glance.
+  const title = `${p.partyShort} pledge: \u201c${shorten(p.text, 80)}\u201d (${STATUS_LABEL[p.status]}) | ${SITE.name}`;
+  const description = shorten(promiseSummary(p, m), 300);
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/promise/${id}`,
+      types: { ...feedAlternate(`/promise/${id}/feed.xml`, `Changes to this pledge`), "text/markdown": [{ url: `/promise/${id}.md`, title: "This pledge as Markdown" }] },
+    },
+    openGraph: { type: "article", title, description, modifiedTime: dateModified(p), publishedTime: p.versions[0]!.recorded_on },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export default async function PromisePage({ params }: Props) {
@@ -39,6 +53,16 @@ export default async function PromisePage({ params }: Props) {
           <a href="/promises">All promises</a>
         </p>
         <PromiseCardView p={p} today={m.today} generalBudget={m.generalBudget} balance={m.balance} />
+        <section aria-labelledby="short-h" className="card-extra">
+          <h2 id="short-h">In short</h2>
+          <p>{promiseSummary(p, m)}</p>
+          <p className="small muted">
+            Last changed <time dateTime={dateModified(p)}>{formatDay(dateModified(p))}</time>.{" "}
+            <a href={`/promise/${p.id}.md`} type="text/markdown">
+              This pledge as plain text
+            </a>
+          </p>
+        </section>
         {p.versions.length > 1 ? (
           <section aria-labelledby="versions-h" className="card-extra">
             <h2 id="versions-h">Earlier wording</h2>
@@ -51,6 +75,17 @@ export default async function PromisePage({ params }: Props) {
             </ol>
           </section>
         ) : null}
+        <section aria-labelledby="qa-h" className="card-extra">
+          <h2 id="qa-h">Questions</h2>
+          <div className="faq faq-flush">
+            {promiseQA(p, m).map(({ q, a }) => (
+              <details key={q}>
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
         <section aria-labelledby="reply-h" className="card-extra">
           <h2 id="reply-h">Right of reply</h2>
           {p.replies.length ? (
@@ -70,7 +105,7 @@ export default async function PromisePage({ params }: Props) {
           )}
         </section>
       </div>
-      <JsonLd data={promiseJsonLd(p)} />
+      <JsonLd data={promiseJsonLd(p, promiseSummary(p, m), dateModified(p), promiseQA(p, m), m.place.council)} />
     </PageShell>
   );
 }

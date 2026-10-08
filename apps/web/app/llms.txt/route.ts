@@ -1,5 +1,6 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
+import { STATUS_LABEL } from "@/lib/promises";
 import { CONTACT, MAKER, REPO, SITE, SITE_URL, STAGE } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -29,6 +30,12 @@ This is the ${STAGE.toLowerCase()} version. Every figure comes from the council'
 
 Corrections, and replies from anyone named on a card: ${CONTACT}. The code, data tables and promise cards are open at ${REPO}. Our own text and data are CC BY 4.0 (credit "${SITE.name} (${MAKER.name})"), the code is MIT, and council, government and ONS data keep their own licences.
 
+## For AI tools
+
+- Everything in one file: ${SITE_URL}/llms-full.txt
+- Each pledge as Markdown: add .md to its address, for example ${SITE_URL}/promise/${DATA.content.promises[0]!.id}.md
+- Feeds of every change: ${SITE_URL}/follow
+
 ## How to cite figures
 
 Every figure is labelled sourced, approx or test, with a link to its source on the page. Do not quote figures labelled test or approx as fact.${
@@ -46,7 +53,7 @@ Data vintage: ${c.vintage}.
 - [Sources](${SITE_URL}/sources)
 - [Follow changes by RSS](${SITE_URL}/follow): feeds for everything (${SITE_URL}/feed.xml), every pledge, each ward, each councillor and payments
 ${buildModel()
-  .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d](${SITE_URL}/promise/${p.id})`)
+  .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d (${STATUS_LABEL[p.status]})](${SITE_URL}/promise/${p.id}.md)`)
   .join("\n")}
 ${DATA.content.wards.wards.map((w) => `- [${w.name} ward](${SITE_URL}/ward/${w.id})`).join("\n")}
 `;

@@ -21,6 +21,10 @@ const config: NextConfig = {
       { source: "/councillors", destination: "/wards", permanent: true },
     ];
   },
+  // Each pledge as Markdown at /promise/<id>.md, next to its page (llmstxt.org).
+  async rewrites() {
+    return [{ source: "/promise/:id.md", destination: "/md/promise/:id" }];
+  },
   // Share images rendered on request read their fonts from disk; make sure the files ship with them (lib/ogFonts.ts).
   outputFileTracingIncludes: {
     "/balance/og": ["./assets/fonts/*.ttf"],
