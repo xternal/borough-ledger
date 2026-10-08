@@ -26,7 +26,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 
 This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
 
-Corrections, and replies from anyone named on a card: ${CONTACT}. The code, data tables and promise cards are open at ${REPO}.
+Corrections, and replies from anyone named on a card: ${CONTACT}. The code, data tables and promise cards are open at ${REPO}. Our own text and data are CC BY 4.0 (credit "${SITE.name} (${MAKER.name})"), the code is MIT, and council, government and ONS data keep their own licences.
 
 ## How to cite figures
 

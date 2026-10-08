@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
-import { SITE, SITE_URL } from "@/lib/site";
+import { MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
 import { groupSources } from "@/lib/sources";
 
 const title = `Sources for Hammersmith & Fulham's money and promises | ${SITE.name}`;
@@ -60,6 +60,16 @@ export default function SourcesPage() {
           </ul>
         </section>
       ))}
+      <section id="reuse" aria-labelledby="reuse-h" className="pay-section">
+        <div className="sec-head">
+          <h2 id="reuse-h">Reusing this</h2>
+          <p>
+            Our own text and data tables are free to reuse under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: credit &ldquo;
+            {SITE.name} ({MAKER.name})&rdquo; and link back. The code is open under the MIT licence on <a href={REPO}>GitHub</a>. Data from the council,
+            the government and the ONS keeps its own licence, shown against each source above, and quotes from manifestos are not ours to relicense.
+          </p>
+        </div>
+      </section>
       <JsonLd
         data={{
           "@context": "https://schema.org",

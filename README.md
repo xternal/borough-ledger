@@ -123,3 +123,8 @@ python3 etl/payments.py                                   # build data/build/pay
 Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. Set `NEXT_PUBLIC_SITE_URL` once the domain is chosen, and `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to the code Google Search Console gives for the site.
 
 **Alpha.** The public site at https://borough-ledger.vercel.app is the Alpha: a production build (no test values, open to search engines and AI crawlers, with `llms.txt` and a sitemap), marked "Alpha" next to the name (`STAGE` in `apps/web/lib/site.ts`). Every merge to `main` deploys it. Switches in "Balance it" whose cost is still a test value are held back by `etl/build.py` and named on the page as coming later (`next_year.pending_toggles`); they return once their cost is sourced. Pull request previews stay behind Vercel login.
+
+## 9. Licence
+
+Code: MIT (`LICENSE`). Our own text and data tables: CC BY 4.0, credit "Borough Ledger (Pavel Guzhikov)". Council, government, ONS and Democracy Club data keep their own licences, and manifesto quotes are not relicensed: see `LICENSE-CONTENT.md`.
+
