@@ -1,4 +1,5 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
+import { OTHER_BOROUGHS } from "@/lib/boroughList";
 import { buildModel } from "@/lib/model";
 import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL } from "@/lib/promises";
@@ -27,6 +28,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Your ward: find any of the 21 wards by postcode or on a map, with its councillors (all 50, with their posts, from the council's own records), pledges about the ward, the wards next to it and a link to report street problems on FixMyStreet.
 - What the council is building (${SITE_URL}/building): the four-year capital programme, scheme by scheme, how it is paid for and the debt it leaves.
 - Council homes (${SITE_URL}/council-homes): the ring-fenced account council rents pay into, where the money goes, council rents against private rents, and the building work on council homes.
+- Other boroughs: ${OTHER_BOROUGHS.map((b) => `${b.short} (${SITE_URL}${b.href})`).join(", ")}: the bill by band, the budget by service, council tax over five years, and every ward's councillors and election result, from government returns and the council's own records, with the same checks.
 - Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
 This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.

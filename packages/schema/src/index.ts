@@ -12,4 +12,5 @@ export * from "./decisions";
 export * from "./elections";
 export * from "./companies";
 export * from "./capital";
+export * from "./boroughs";
 export * from "./digest";

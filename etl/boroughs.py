@@ -1,0 +1,108 @@
+"""Boroughs beyond Hammersmith & Fulham: the checked statement the government returns give for each one.
+
+    python3 etl/boroughs.py           build data/build/boroughs/<slug>/statement.json for every borough in data/config/boroughs.json
+    python3 etl/boroughs.py --check   fail if any is out of date (CI, after etl/fetch.py)
+
+The same code and checks as Hammersmith & Fulham's (etl/build.py, statement()): council tax for five years, spending by
+service against the borough's own section totals, funding against spending, outturn, and the Mayor of London's share,
+whose split by body (data/manual/gla_2026-27.csv) must match the borough's own GLA element. What needs the borough's
+own budget report (this year's gap, savings, next year) is not built until that report is extracted by hand.
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from build import PREV, YEAR, cited_sources, manual_gla, serialise, source_entry, statement  # noqa: E402
+from extract import CheckFailed  # noqa: E402
+from fetch import ROOT, load_sources  # noqa: E402
+
+CONFIG = ROOT / "data" / "config" / "boroughs.json"
+OUT = ROOT / "data" / "build" / "boroughs"
+
+
+def boroughs() -> List[Dict[str, str]]:
+    return json.loads(CONFIG.read_text())["boroughs"]
+
+
+def build_one(reg: Dict[str, Any], b: Dict[str, str]) -> Dict[str, Any]:
+    st = statement(reg, b["ons"])
+    now, prev, ctr, bands = st["now"], st["prev"], st["ctr"], st["bands"]
+    band_d_gla, band_d_total = st["band_d_gla"], st["band_d_total"]
+    out: Dict[str, Any] = {
+        "meta": {
+            "council": b["council"], "council_short": b["short"], "council_code": b["ons"], "slug": b["slug"], "year": YEAR,
+            "note": "Built by etl/boroughs.py from government returns, with the same checks as Hammersmith & Fulham's.",
+            "vintage": max(s["published_on"] for s in reg.values() if "published_on" in s),
+            "sources": [],
+        },
+        "bill": {
+            "band_d_total": band_d_total, "band_d_council": now["band_d_council"], "band_d_gla": band_d_gla,
+            "band_d_total_prev": bands[PREV]["D"], "band_d_council_prev": prev["band_d_council"],
+            "council_rise_pct": round((now["band_d_council"] / prev["band_d_council"] - 1) * 100, 2),
+            "published_bands": bands[YEAR],
+            "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services",
+            "gla_split": manual_gla(reg, band_d_gla, round(bands[PREV]["D"] - prev["band_d_council"], 2)),
+            "quality": "sourced", "source_id": "ctr_2026-27",
+            "method_note": "Council element from Table 10; area Band D and all bands from Table 9; GLA element is the difference.",
+        },
+        "tax_base": {
+            "band_d_equivalents": now["tax_base"], "collection_rate": now["collection_rate"], "setting_base": now["setting_base"],
+            "quality": "sourced", "source_id": "ctr_2026-27",
+        },
+        "history": {
+            "council_tax": [
+                {
+                    "year": y, "band_d_council": round(ctr[y]["band_d_council"], 2), "band_d_area": bands[y]["D"],
+                    "band_d_gla": round(bands[y]["D"] - round(ctr[y]["band_d_council"], 2), 2),
+                    "council_tax_requirement_m": round(ctr[y]["ctr"] / 1e6, 3), "tax_base": ctr[y]["tax_base"],
+                    "collection_rate": ctr[y]["collection_rate"], "source_ids": sorted({st["ctr_src"][y], st["bands_src"][y]}),
+                }
+                for y in st["years"]
+            ],
+            "budget": st["budget_history"],
+            "outturn": st["outturn_history"],
+            "quality": "sourced",
+        },
+        "funding": st["funding_lines"],
+        "services": st["services"],
+    }
+    cited = set(cited_sources(out))
+    out["meta"]["sources"] = [source_entry(reg[k]) for k in reg if k in cited]
+    return out
+
+
+def main(check_only: bool) -> int:
+    reg = {s["id"]: s for s in load_sources()}
+    stale = []
+    for b in boroughs():
+        try:
+            out = build_one(reg, b)
+        except CheckFailed as e:
+            print(f"boroughs {b['slug']}: {e}")
+            return 1
+        path = OUT / b["slug"] / "statement.json"
+        data = serialise(out)
+        if check_only:
+            if not path.exists() or path.read_bytes() != data:
+                stale.append(b["slug"])
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        bill = out["bill"]
+        print(f"boroughs {b['slug']}: Band D £{bill['band_d_total']:,.2f} (council £{bill['band_d_council']:,.2f}), "
+              f"{len(out['services'])} services, budget £{sum(s['m'] for s in out['services']):,.1f}m")
+    if stale:
+        print(f"boroughs: out of date: {', '.join(stale)}. Run python3 etl/boroughs.py and commit.")
+        return 1
+    if check_only:
+        print("boroughs: every statement is up to date; every check passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main("--check" in sys.argv))

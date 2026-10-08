@@ -56,19 +56,9 @@ def source_entry(s: Dict[str, Any]) -> Dict[str, Any]:
     return {k: s[k] for k in keys if k in s}
 
 
-def build() -> Dict[str, Any]:
-    reg = {s["id"]: s for s in load_sources()}
-    for s in reg.values():
-        path = ROOT / "data" / "raw" / s["file"]
-        if s.get("manual"):
-            # Read by hand into data/manual/; the build does not need the file, but if present it must be the one recorded.
-            check(not path.exists() or sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
-            continue
-        check(path.exists(), f"missing data/raw/{s['file']}: run python3 etl/fetch.py")
-        check(sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
-    seed = json.loads(SEED.read_text())
-    ons = seed["meta"]["council_code"]
-
+def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
+    """What the government returns say about one council, checked: council tax for five years, spending history,
+    outturn, and this year's budget by service and funding. The same for every council (etl/boroughs.py)."""
     # ---------------------------------------------------------- council tax, five years
     ctr: Dict[str, Dict[str, float]] = {}
     ctr_src: Dict[str, str] = {}
@@ -149,7 +139,13 @@ def build() -> Dict[str, Any]:
     check(set(svc) <= set(groups), f"unknown service groups {set(svc) - set(groups)}")
     check(set(fund) <= set(fgroups), f"unknown funding groups {set(fund) - set(fgroups)}")
     hb = svc.pop("housing_benefit", 0.0)
-    check(abs(hb) < 0.5, f"housing benefit should net to zero against its subsidy; it leaves {hb}k")
+    hb_note = ""
+    if abs(hb) >= 0.5:
+        # Housing benefit nets to nothing against its government subsidy in most boroughs (Hammersmith & Fulham's leaves
+        # under £500). Where something is left, it is counted with housing, so funding still equals spending, and said so.
+        check("housing" in svc, "housing benefit leaves a remainder but there is no housing group to hold it")
+        svc["housing"] += hb
+        hb_note = f" Includes housing benefit net of its government subsidy, £{m(hb)}m."
 
     ring: Dict[str, float] = {}
     for fid, v in fund.items():
@@ -166,7 +162,7 @@ def build() -> Dict[str, Any]:
             "id": gid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"],
             "m": m(v), "general_fund_m": m(v - ring.get(gid, 0.0)),
             "quality": "sourced", "source_id": ra_src,
-            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Book (data/manual/ra_service_map.csv).",
+            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Book (data/manual/ra_service_map.csv).{hb_note if gid == 'housing' else ''}",
         })
     funding_lines = []
     for fid, v in sorted(fund.items(), key=lambda kv: int(fgroups[kv[0]]["order"])):
@@ -192,6 +188,25 @@ def build() -> Dict[str, Any]:
     check(close(total_f, total_s, 0.0015 * len(services)), f"funding £{total_f}m ≠ spending £{total_s}m")
     general = sum(f["m"] for f in funding_lines if "ring_fenced_to" not in f)
     check(close(general, sum(s["general_fund_m"] for s in services), 0.0015 * len(services)), "general funding ≠ general-fund spending")
+    return {"now": now, "prev": prev, "ctr": ctr, "ctr_src": ctr_src, "bands": bands, "bands_src": bands_src, "years": years, "band_d_total": band_d_total, "band_d_gla": band_d_gla, "budget_history": budget_history, "outturn_history": outturn_history, "ra": ra, "ra2": ra2, "sg": sg, "fund": fund, "services": services, "funding_lines": funding_lines, "ra_src": ra_src}
+
+
+def build() -> Dict[str, Any]:
+    reg = {s["id"]: s for s in load_sources()}
+    for s in reg.values():
+        path = ROOT / "data" / "raw" / s["file"]
+        if s.get("manual"):
+            # Read by hand into data/manual/; the build does not need the file, but if present it must be the one recorded.
+            check(not path.exists() or sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
+            continue
+        check(path.exists(), f"missing data/raw/{s['file']}: run python3 etl/fetch.py")
+        check(sha256(path) == s["sha256"], f"{s['file']} does not match its SHA-256 in sources.json")
+    seed = json.loads(SEED.read_text())
+    ons = seed["meta"]["council_code"]
+
+    st = statement(reg, ons)
+    now, prev, ctr, ctr_src, bands, bands_src, years, band_d_total, band_d_gla, budget_history, outturn_history, ra, ra2, sg, fund, services, funding_lines, ra_src = (
+        st["now"], st["prev"], st["ctr"], st["ctr_src"], st["bands"], st["bands_src"], st["years"], st["band_d_total"], st["band_d_gla"], st["budget_history"], st["outturn_history"], st["ra"], st["ra2"], st["sg"], st["fund"], st["services"], st["funding_lines"], st["ra_src"])
 
     # ---------------------------------------------------------- carry over from the seed what still needs the budget report
     ny = seed["next_year"]

@@ -1,8 +1,8 @@
 import { SITE, STAGE } from "@/lib/site";
 import { Logo } from "./Logo";
-import { SectionNav } from "./SectionNav";
+import { SectionNav, type BoroughSections } from "./SectionNav";
 
-export function TopBar({ place, year }: { place: string; year: string }) {
+export function TopBar({ place, year, borough }: { place: string; year: string; borough?: BoroughSections }) {
   return (
     <header className="topbar">
       <div className="bar-in">
@@ -13,7 +13,7 @@ export function TopBar({ place, year }: { place: string; year: string }) {
             {STAGE}
           </span>
         </a>
-        <SectionNav />
+        <SectionNav borough={borough} />
         <span className="ctx">
           {place}, {year}
         </span>

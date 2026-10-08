@@ -205,3 +205,10 @@ Every Friday morning `.github/workflows/weekly-digest.yml` opens an issue with a
 - **Checks:** `etl/capital.py --check` in CI (every printed total, with rounding allowed; the account balances); a unit test proves a wrong figure, an undeclared misprint and an unbalanced account each stop the build. Every non-zero figure was matched against the report's text. Figures show as approx until the owner signs off both tables (`data/manual/README.md`).
 - Both pages sit under "Budget" in the menu, which is highlighted on them; the home page's budget section links to both; sitemap, llms.txt and llms-full.txt include them.
 
+## Phase 3: Kensington and Chelsea (9 Oct 2026, in review)
+
+- **/kensington-and-chelsea**: the bill by band with the Mayor of London's split, the £378m day-to-day budget by service and funding (balanced, with the same checks), council tax over five years, and all 50 councillors in 18 wards with each ward's May 2026 result (Conservative 34, Labour 13, Liberal Democrats 3). Its own menu highlights the section in view. Pledges, payments, decisions and the gap come later from the council's own papers (docs/BOROUGHS.md).
+- **Hammersmith & Fulham unchanged:** the shared build step and the shared page model were moved out of Hammersmith & Fulham's code with its build checked byte for byte and all its tests passing.
+- **Found and fixed:** payments in lieu for armed forces homes in the tax base; housing benefit's remainder; a band lookup that searched for "Hammersmith".
+- **Decision for the owner:** moving Hammersmith & Fulham's addresses under `/hammersmith-and-fulham` (plan item 12); not done (docs/BOROUGHS.md).
+

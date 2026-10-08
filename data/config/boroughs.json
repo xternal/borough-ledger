@@ -1,0 +1,13 @@
+{
+ "note": "Boroughs beyond Hammersmith & Fulham (whose pipeline is etl/build.py and content/). Each is built by etl/boroughs.py from the same government returns and checks; wards, councillors and election results by etl/borough_people.py. ONS codes from the ONS Open Geography Portal; the council's ModernGov web service where it has one.",
+ "boroughs": [
+  {
+   "slug": "kensington-and-chelsea",
+   "council": "Royal Borough of Kensington and Chelsea",
+   "short": "Kensington and Chelsea",
+   "ons": "E09000020",
+   "moderngov": "https://www.rbkc.gov.uk/committees",
+   "election_id": "local.kensington-and-chelsea.2026-05-07"
+  }
+ ]
+}

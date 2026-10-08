@@ -4,13 +4,18 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SECTIONS, isStatementPath, sectionForPath, sectionHref, type SectionId } from "@/lib/nav";
 
+/** A borough page's own sections, on that page: [id, label], each a part of the long page at `base`. */
+export type BoroughSections = { base: string; items: readonly (readonly [string, string])[] };
+
 /** The top bar's menu. Highlights the page's section, or on the statement the section in view, and keeps it visible on narrow screens. */
-export function SectionNav() {
+export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
   const path = usePathname() ?? "/";
-  const statement = isStatementPath(path);
-  const [inView, setInView] = useState<SectionId | null>(null);
+  const items = borough ? borough.items : SECTIONS;
+  const statement = borough ? path === borough.base : isStatementPath(path);
+  const [inView, setInView] = useState<string | null>(null);
   const nav = useRef<HTMLElement>(null);
-  const current = statement ? inView : sectionForPath(path);
+  const current = statement ? inView : borough ? null : sectionForPath(path);
+  const href = (id: string) => (borough ? `${borough.base}#${id}` : sectionHref(id as SectionId));
 
   // On the statement, follow the section in view: the last one whose top has passed just under the bar.
   useEffect(() => {
@@ -19,13 +24,13 @@ export function SectionNav() {
     const update = () => {
       frame = 0;
       const line = 96;
-      let found: SectionId | null = null;
-      for (const [id] of SECTIONS) {
+      let found: string | null = null;
+      for (const [id] of items) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= line) found = id;
       }
       // At the very bottom the last short section may never reach the line.
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) found = SECTIONS[SECTIONS.length - 1]![0];
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) found = items[items.length - 1]![0];
       setInView(found);
     };
     const onScroll = () => {
@@ -39,7 +44,7 @@ export function SectionNav() {
       window.removeEventListener("resize", onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, [statement]);
+  }, [statement, items]);
 
   // Keep the highlighted item visible when the menu scrolls sideways on a phone: straight away once layout and
   // fonts have settled, again if the menu changes size, and smoothly when the section in view changes.
@@ -69,8 +74,8 @@ export function SectionNav() {
 
   return (
     <nav className="sections" aria-label="Sections" ref={nav}>
-      {SECTIONS.map(([id, label]) => (
-        <a key={id} href={sectionHref(id)} data-section={id} aria-current={id === current ? (statement ? "location" : "page") : undefined}>
+      {items.map(([id, label]) => (
+        <a key={id} href={href(id)} data-section={id} aria-current={id === current ? (statement ? "location" : "page") : undefined}>
           {label}
         </a>
       ))}

@@ -31,6 +31,10 @@ Supplier pages for companies and charities link to their entry on the companies 
 
 Ward pages show each candidate's party and votes at the May 2026 election. Only the candidates elected, who are councillors, are named, through the council's councillor records; everyone else appears as their party's candidate (`etl/elections.py`, checked in CI).
 
+## Other boroughs
+
+Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from the council's own records with their public role only, election results naming only the councillors elected, and nothing about residents.
+
 ## Follow
 
 * Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs; not built yet).

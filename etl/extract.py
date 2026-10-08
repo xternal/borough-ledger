@@ -39,6 +39,8 @@ CTR_FIELDS = {
     "levies": "3a. Levies and special levies",
     "tax_base": "4. Tax base (after council tax reduction scheme)",
     "collection_rate": "5. Estimated collection rate",
+    # Payments in lieu for armed forces homes (Class O), added to the base: 0 in most boroughs, about 50 in Kensington and Chelsea.
+    "in_lieu": "6. Tax base adjustment (contributions in lieu of Class O exempt dwellings)",
     "setting_base": "7. Council tax base for council tax setting purposes",
     "band_d_council": "9. Average (Band D 2 Adult equivalent) council tax (including Adult Social Care precept and excluding local precepts)",
 }
@@ -57,8 +59,8 @@ def ctr_data(file: str, sheet: str, years: List[str], ons: str) -> Dict[str, Dic
             check(len(cols) == 1, f"{file}: {key} {when}: {len(cols)} columns")
             out[y][key] = as_number(row[cols[0]])
     for y, d in out.items():
-        # The return's own identity: tax base for setting = tax base × collection rate; CTR = setting base × Band D.
-        check(close(d["tax_base"] * d["collection_rate"], d["setting_base"], 2.0), f"{file} {y}: tax base × collection rate ≠ setting base")
+        # The return's own identity: tax base for setting = tax base × collection rate + payments in lieu; CTR = setting base × Band D.
+        check(close(d["tax_base"] * d["collection_rate"] + d["in_lieu"], d["setting_base"], 2.0), f"{file} {y}: tax base × collection rate + payments in lieu ≠ setting base")
         check(close(d["setting_base"] * d["band_d_council"], d["ctr"], 1000.0), f"{file} {y}: setting base × Band D ≠ council tax requirement")
     return out
 
@@ -66,8 +68,9 @@ def ctr_data(file: str, sheet: str, years: List[str], ons: str) -> Dict[str, Dic
 def area_bands(file: str, sheet: str, ons: str, first_band_col: int = -1) -> Dict[str, float]:
     """Area council tax (council plus GLA) for each band."""
     rows = read_ods(str(RAW / file))[sheet]
-    row = rows[find_rows(rows, "Hammersmith")[0]]
-    check(ons in row, f"{file}: Hammersmith row has no {ons}")
+    found = [r for r in rows if ons in r]
+    check(len(found) == 1, f"{file}: {len(found)} rows for {ons}")
+    row = found[0]
     if first_band_col < 0:
         hi = next(i for i, r in enumerate(rows) if r and str(r[0]).strip() in ("E Code", "E-code"))
         first_band_col = rows[hi].index("Band A")
