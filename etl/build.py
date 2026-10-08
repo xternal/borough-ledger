@@ -283,6 +283,7 @@ def build() -> Dict[str, Any]:
             "council_rise_pct": round((now["band_d_council"] / prev["band_d_council"] - 1) * 100, 2),
             "published_bands": bands[YEAR],
             "gla_note": seed["bill"]["gla_note"],
+            "gla_split": manual_gla(reg, band_d_gla, round(bands[PREV]["D"] - prev["band_d_council"], 2)),
             "quality": "sourced", "source_id": "ctr_2026-27",
             "method_note": "Council element from Table 10; area Band D and all bands from Table 9; GLA element is the difference.",
         },
@@ -424,6 +425,38 @@ def manual_next_year() -> Dict[str, Dict[str, str]]:
     """Next year's figures from data/manual/next_year_2027-28.csv (key, value, source_id, page, note), if extracted."""
     path = ROOT / "data" / "manual" / "next_year_2027-28.csv"
     return {r["key"]: r for r in read_csv(path.name) if r["value"]} if path.exists() else {}
+
+
+def manual_gla(reg: Dict[str, Any], band_d_gla: float, band_d_gla_prev: float) -> List[Dict[str, Any]]:
+    """The Mayor of London's share split into police, fire, transport and City Hall, from data/manual/gla_2026-27.csv.
+
+    The parts must add up to the GLA's own total, and that total must equal the GLA element the government's council tax
+    tables give for the borough (area Band D less the council's own), this year and last. Sourced once a person has
+    checked every line against the PDF (reviewed=yes); until then approx.
+    """
+    rows = read_csv("gla_2026-27.csv")
+    parts = [r for r in rows if r["kind"] == "part"]
+    total = [r for r in rows if r["kind"] == "total"]
+    check(len(total) == 1 and len(parts) >= 2, "gla_2026-27.csv needs one total row and its parts")
+    t = total[0]
+    for col, want in (("band_d", band_d_gla), ("band_d_prev", band_d_gla_prev)):
+        got = round(sum(float(r[col]) for r in parts), 2)
+        check(close(got, float(t[col]), 0.005), f"gla_2026-27.csv {col}: parts add up to {got}, the total row says {t[col]}")
+        check(close(float(t[col]), want, 0.005), f"gla_2026-27.csv {col}: GLA total {t[col]} differs from the government tables' GLA element {want}")
+    for r in rows:
+        check(r["source_id"] in reg and r["page"].isdigit(), f"gla_2026-27.csv {r['key']}: needs a known source and a page")
+        check(r["reviewed"] in ("no", "checked", "yes"), f"gla_2026-27.csv {r['key']}: reviewed must be no, checked or yes")
+    quality = "sourced" if all(r["reviewed"] == "yes" for r in rows) else "approx"
+    title = reg[t["source_id"]]["title"].split(":")[0]
+    return [
+        {
+            "id": r["key"], "label": r["label"], "phrase": r["phrase"], "official_term": r["official_term"],
+            "band_d": float(r["band_d"]), "band_d_prev": float(r["band_d_prev"]),
+            "quality": quality, "source_id": r["source_id"],
+            "method_note": f"{title}, PDF page {r['page']}. {r['note']}.",
+        }
+        for r in parts
+    ]
 
 
 def manifest(out: Dict[str, Any], files: Dict[str, bytes]) -> Dict[str, Any]:

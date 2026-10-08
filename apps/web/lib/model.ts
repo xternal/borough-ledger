@@ -120,6 +120,8 @@ export interface PageModel {
     spd: Figure;
     instalments: { options: number[]; f: Figure };
     glaNote: string;
+    /** The Mayor of London's Band D share by body, this year and last; empty until the GLA table is extracted. */
+    glaSplit: { id: string; label: string; phrase: string; officialTerm: string; f: Figure; prev: Figure }[];
   };
   funding: FlowLine[];
   services: FlowLine[];
@@ -379,6 +381,7 @@ export function buildModel(): PageModel {
       spd: of(R.single_person_discount, R.single_person_discount.value),
       instalments: { options: R.instalments.options, f: of(R.instalments, R.instalments.default) },
       glaNote: b.gla_note,
+      glaSplit: (b.gla_split ?? []).map((g) => ({ id: g.id, label: g.label, phrase: g.phrase, officialTerm: g.official_term, f: of(g, g.band_d), prev: of(g, g.band_d_prev) })),
     },
     funding,
     services,

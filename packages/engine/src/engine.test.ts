@@ -15,6 +15,7 @@ import {
   displayYear,
   nextFinancialYear,
   perBandDHome,
+  splitPence,
   type BalanceInput,
   type Scenario,
 } from "./index";
@@ -73,6 +74,26 @@ describe("your bill", () => {
 
   it("every band matches the government's published 2026/27 amount to the penny", () => {
     for (const b of BANDS) expect(Math.round(billFor(R, bandD, b, false).total * 100) / 100).toBe(C.bill.published_bands[b]);
+  });
+
+  it("the Mayor of London's share splits by body: the GLA's own Band D figures, and every band adds back to the penny", () => {
+    const split = C.bill.gla_split!;
+    const weights = split.map((g) => g.band_d);
+    expect(splitPence(C.bill.band_d_gla, weights)).toEqual(weights);
+    for (const b of BANDS)
+      for (const alone of [false, true]) {
+        const gla = Math.round(billFor(R, bandD, b, alone).gla * 100) / 100;
+        const parts = splitPence(gla, weights);
+        expect(Math.round(parts.reduce((a, p) => a + p, 0) * 100) / 100).toBe(gla);
+        parts.forEach((p, i) => expect(Math.abs(p - gla * (weights[i]! / C.bill.band_d_gla))).toBeLessThanOrEqual(0.01));
+      }
+  });
+
+  it("splitPence gives leftover pence to the largest remainders and refuses nonsense weights", () => {
+    expect(splitPence(1, [1, 1, 1])).toEqual([0.34, 0.33, 0.33]);
+    expect(splitPence(0.1, [3, 1])).toEqual([0.08, 0.02]);
+    expect(() => splitPence(1, [0, 0])).toThrow();
+    expect(() => splitPence(1, [2, -1])).toThrow();
   });
 
   it("council tax yield agrees with tax base × Band D × collection rate", () => {

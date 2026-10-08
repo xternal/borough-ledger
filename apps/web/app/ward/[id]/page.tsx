@@ -6,12 +6,13 @@ import { FollowLink } from "@/components/FollowLink";
 import { PageShell } from "@/components/PageShell";
 import { WardMap } from "@/components/WardMap";
 import { WardSchemes } from "@/components/WardSchemes";
+import { WardElection } from "@/components/WardElection";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { CONTACT, SITE } from "@/lib/site";
 import { wardJsonLd } from "@/lib/structured";
-import { NUMBER, WARD_MAP, partyMix, wardsOf } from "@/lib/wards";
+import { NUMBER, WARD_MAP, electionOf, partyMix, wardsOf } from "@/lib/wards";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!w) return {};
   const names = DATA.content.councillors.filter((c) => c.ward_id === id).map((c) => c.name);
   const title = `${w.name} ward, Hammersmith & Fulham: councillors and pledges | ${SITE.name}`;
-  const description = `${w.name} ward in Hammersmith & Fulham: your councillors (${names.join(", ")}), their party and posts, pledges about the area, and where to report street problems.`;
+  const description = `${w.name} ward in Hammersmith & Fulham: your councillors (${names.join(", ")}), their party and posts, how the ward voted in May 2026, pledges about the area, and where to report street problems.`;
   return { title, description, alternates: { canonical: `/ward/${id}`, types: feedAlternate(`/ward/${id}/feed.xml`, `${w.name} ward`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
 }
 
@@ -41,6 +42,7 @@ export default async function WardPage({ params }: Props) {
   const byId = new Map(wards.map((x) => [x.id, x]));
   const boroughWide = m.promises.filter((p) => !p.wardId).length;
   const n = w.councillors.length;
+  const vote = electionOf(w.id);
 
   return (
     <PageShell m={m}>
@@ -71,6 +73,8 @@ export default async function WardPage({ params }: Props) {
             </ul>
             <p className="small muted">From the council&rsquo;s own records on {formatDay(m.people.retrievedOn)}. Each page links to the councillor&rsquo;s profile and contact details on the council&rsquo;s website.</p>
           </section>
+
+          {vote ? <WardElection name={w.name} e={vote} /> : null}
 
           <section aria-labelledby="pledges-h" className="ward-sec">
             <h2 id="pledges-h">Pledges about {w.name}</h2>

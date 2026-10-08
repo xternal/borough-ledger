@@ -1,4 +1,4 @@
-import { DATA, type Figure, type WardScheme, type WardShape } from "@borough-ledger/schema";
+import { DATA, ELECTIONS_SOURCE_ID, type Figure, type WardScheme, type WardShape } from "@borough-ledger/schema";
 import type { CouncillorModel, PageModel, PromiseModel } from "./model";
 
 /** The borough's wards: boundaries from the ONS, councillors from the council's own records. Bundled, so it works on request too. */
@@ -109,4 +109,48 @@ export function partyMix(parties: string[]): string {
   const parts = [...counts].map(([p, n]) => `${NUMBER[n] ?? n} ${p}`);
   if (counts.size === 1) return `${parties.length === 2 ? "both" : "all"} ${parties[0]}`;
   return `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}`;
+}
+
+/** How the ward voted at the last borough election (etl/elections.py, from Democracy Club). Only councillors are named. */
+export interface ElectionView {
+  date: string;
+  seats: number;
+  ballots: Figure;
+  turnout: Figure;
+  rejected: Figure;
+  resultUrl: string;
+  dcUrl: string;
+  candidates: { party: string; partyId: string | null; votes: Figure; councillor: { id: string; name: string } | null }[];
+}
+
+export function electionOf(wardId: string): ElectionView | null {
+  const e = DATA.elections;
+  const w = e.wards[wardId];
+  if (!w) return null;
+  const f = (value: number): Figure => ({ value, quality: e.quality, sources: [ELECTIONS_SOURCE_ID] });
+  const names = new Map(DATA.content.councillors.map((c) => [c.id, c.name]));
+  return {
+    date: e.election.date,
+    seats: w.seats,
+    ballots: f(w.ballots),
+    turnout: f(w.turnout_pct),
+    rejected: f(w.rejected),
+    resultUrl: w.result_url,
+    dcUrl: w.dc_url,
+    candidates: w.candidates.map((c) => ({
+      party: c.party,
+      partyId: c.party_id ?? null,
+      votes: f(c.votes),
+      councillor: c.councillor_id ? { id: c.councillor_id, name: names.get(c.councillor_id) ?? c.councillor_id } : null,
+    })),
+  };
+}
+
+export const ELECTIONS_CREDIT = DATA.elections.source;
+
+/** A councillor's own result at the last borough election, if they won a seat then. */
+export function electedWith(councillorId: string, wardId: string): { date: string; votes: Figure } | null {
+  const e = electionOf(wardId);
+  const i = e?.candidates.findIndex((c) => c.councillor?.id === councillorId) ?? -1;
+  return e && i >= 0 ? { date: e.date, votes: e.candidates[i]!.votes } : null;
 }

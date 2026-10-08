@@ -6,7 +6,7 @@ import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER } from "@/lib/promises";
 import { promiseMarkdown } from "@/lib/promiseText";
 import { assertRenderable } from "@/lib/quality";
 import { MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
-import { WARD_SPEND, wardsOf } from "@/lib/wards";
+import { WARD_SPEND, electionOf, wardsOf } from "@/lib/wards";
 
 export const dynamic = "force-static";
 
@@ -40,7 +40,7 @@ ${STATUS_ORDER.map((s) => `- ${STATUS_LABEL[s]}: ${STATUS_MEANS[s]}`).join("\n")
 ## ${m.place.short} Council's money, ${m.place.yearLabel}
 
 - Council tax for a Band D home: ${fig(m.bill.total, "gbp2")}, of which the council's share is ${fig(m.bill.council, "gbp2")} and the Mayor of London's ${fig(m.bill.gla, "gbp2")}.
-- Day-to-day budget (net, including schools): ${fig(m.netBudget, "m1")}. The council funds ${fig(m.generalBudget, "m1")} of it itself, and council tax covers ${fig(m.ctShareGeneral, "share0")} of that.
+${m.bill.glaSplit.length ? `- The Mayor of London's share at Band D, by body: ${m.bill.glaSplit.map((g) => `${g.phrase} ${fig(g.f, "gbp2")}`).join(", ")}.\n` : ""}- Day-to-day budget (net, including schools): ${fig(m.netBudget, "m1")}. The council funds ${fig(m.generalBudget, "m1")} of it itself, and council tax covers ${fig(m.ctShareGeneral, "share0")} of that.
 - This year's gap between costs and funding, closed before the budget was set: ${fig(m.waterfall.gap, "m1")}; savings this year: ${fig(m.savingsThisYear, "m1")}.
 - Next year's gap (${m.place.nextYearLabel}): ${fig(m.balance.gap, "m1")}. General reserves: ${fig(m.balance.reservesGeneral, "m1")}, against a safe minimum of ${fig(m.balance.reservesMin, "m1")}.
 - Spending by service:
@@ -68,7 +68,9 @@ ${DECISIONS.decisions
 ${wardsOf(m)
   .map((w) => {
     const build = w.spend.schemes.length ? ` Building work paid for in the ward ${WARD_SPEND.first} to ${WARD_SPEND.last}: ${fig(w.spend.total, w.spend.total.value >= 1e6 ? "pm1" : "gbp0")}.` : "";
-    return `- ${w.name} (${SITE_URL}/ward/${w.id}): ${w.councillors.map((c) => `${c.name} (${c.party})`).join(", ")}.${build}`;
+    const e = electionOf(w.id);
+    const vote = e ? ` Turnout on ${e.date}: ${fig(e.turnout, "pct1")}; seats won: ${[...new Set(e.candidates.filter((c) => c.councillor).map((c) => c.party))].join(", ")}.` : "";
+    return `- ${w.name} (${SITE_URL}/ward/${w.id}): ${w.councillors.map((c) => `${c.name} (${c.party})`).join(", ")}.${vote}${build}`;
   })
   .join("\n")}
 

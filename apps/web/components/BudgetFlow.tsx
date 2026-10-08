@@ -4,6 +4,7 @@ import type { FlowLine, PageModel } from "@/lib/model";
 import { QUALITY_TITLE } from "@/lib/quality";
 import { Num, NumT } from "./Num";
 import { QualityLegend } from "./QualityLegend";
+import { ChartTable, DataTable } from "./ChartTable";
 
 interface FlowNode {
   id: string;
@@ -131,6 +132,24 @@ function RankedRows({ lines, max, kind }: { lines: FlowLine[]; max: number; kind
   );
 }
 
+function FlowTable({ caption, lines, total }: { caption: string; lines: FlowLine[]; total: Figure }) {
+  return (
+    <DataTable
+      caption={caption}
+      head={["", "£m", "Share of the net budget"]}
+      rows={lines.map((l) => ({
+        key: l.id,
+        cells: [
+          l.gap ? `${l.label} (one-off)` : l.label,
+          <Num key="m" f={l.f} fmt="m1" />,
+          <Num key="s" f={derive(l.f.value / total.value, l.f, total)} fmt="share1" />,
+        ],
+      }))}
+      foot={["Net budget", <Num key="m" f={total} fmt="m1" />, "100%"]}
+    />
+  );
+}
+
 export function BudgetFlow({ m }: { m: PageModel }) {
   const services = [...m.services].sort((a, z) => z.f.value - a.f.value);
   const max = Math.max(...m.funding.map((x) => x.f.value), ...services.map((x) => x.f.value));
@@ -161,6 +180,10 @@ export function BudgetFlow({ m }: { m: PageModel }) {
       </div>
       <div className="flow-desktop">
         <FlowChart funding={m.funding} services={m.services} total={m.netBudget} />
+        <ChartTable summary="Show the budget as a table">
+          <FlowTable caption={`Where the money comes from, ${m.place.yearLabel}`} lines={m.funding} total={m.netBudget} />
+          <FlowTable caption={`What it pays for, ${m.place.yearLabel}`} lines={services} total={m.netBudget} />
+        </ChartTable>
       </div>
       <div className="flow-mobile">
         <div>

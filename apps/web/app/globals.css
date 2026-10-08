@@ -679,6 +679,19 @@
     font-weight: 600;
     text-align: right;
   }
+  .legend2 .part {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding-left: 12px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .legend2 .part .amt {
+    font-weight: 500;
+  }
   .legend2 .sub {
     grid-column: 2 / -1;
     font-size: 12.5px;
@@ -1446,6 +1459,42 @@
   .more {
     margin-top: 12px;
   }
+  /* "Show as a table" under each chart */
+  .chart-table {
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .chart-table summary {
+    cursor: pointer;
+    font-weight: 550;
+    padding: 6px 0;
+  }
+  .chart-table .tablewrap + .tablewrap {
+    margin-top: 18px;
+  }
+  .chart-table caption {
+    text-align: left;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 10px 0 6px;
+  }
+  .chart-table tbody th,
+  .chart-table tfoot th {
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 400;
+    white-space: normal;
+  }
+  .chart-table tfoot th,
+  .chart-table tfoot td {
+    font-weight: 600;
+  }
+  .chart-table tr.group th {
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 500;
+    padding-top: 16px;
+  }
   .pay-section {
     padding-top: 56px;
   }
@@ -1724,6 +1773,36 @@
   .ward-sec h2 {
     font-size: 17px;
     margin-bottom: 8px;
+  }
+  .votes {
+    margin: 12px 0 10px;
+  }
+  .votes td.n {
+    position: relative;
+    min-width: 120px;
+  }
+  .votes .vbar {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    height: 6px;
+    margin-top: -3px;
+    border-radius: 3px;
+    background: var(--line);
+  }
+  .votes tr.won .vbar {
+    background: var(--accent);
+  }
+  .votes tbody th,
+  .votes td:last-child {
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 400;
+    white-space: normal;
+  }
+  .votes tr.won td,
+  .votes tr.won th {
+    font-weight: 600;
   }
   .cllrs {
     margin: 0 0 8px;

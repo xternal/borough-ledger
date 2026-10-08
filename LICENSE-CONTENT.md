@@ -14,7 +14,8 @@ The site's own text, the docs, the promise cards' structure and statuses, and th
 | Budget papers and councillor records | London Borough of Hammersmith & Fulham | The council's own terms; we take facts and figures from them with a citation and do not republish the documents |
 | Council tax tables, revenue and outturn returns | Ministry of Housing, Communities and Local Government | Open Government Licence v3.0 |
 | Ward boundaries (`data/build/ward_map.json`) | Office for National Statistics; contains OS data © Crown copyright and database right 2024 | Open Government Licence v3.0 |
-| Ward codes for the May 2026 election | Democracy Club | CC BY-SA 4.0 |
+| Ward election results of 7 May 2026 (`data/build/elections.json`), copied from the council's declarations | Democracy Club | CC BY-SA 4.0: reuse of that file must keep the same licence |
+| The Mayor of London's council tax by body (`data/manual/gla_2026-27.csv`) | Greater London Authority (Mayoral Decision MD3472) | Open Government Licence v3.0 |
 | Where each building scheme is: the `lat`, `lon` and `osm_name` columns of `data/manual/capital_scheme_wards.csv` | © OpenStreetMap contributors | Open Database License (ODbL) 1.0 |
 | Quotes from party manifestos | The parties | Quoted for review and news reporting, with the page and an archived copy; not relicensed |
 | Geist font (`apps/web/assets/fonts/`) | Vercel | SIL Open Font License 1.1 (`apps/web/assets/fonts/LICENSE.txt`) |

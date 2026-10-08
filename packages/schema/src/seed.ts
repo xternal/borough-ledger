@@ -195,6 +195,21 @@ export const CouncilYear = z.object({
     /** Every band as published by government, to the penny. The engine must reproduce these. */
     published_bands: z.record(Band, z.number().positive()),
     gla_note: z.string(),
+    /** The Mayor of London's share by body (police, fire, transport, City Hall), Band D, from the GLA's own decision. */
+    gla_split: z
+      .array(
+        z.object({
+          id: z.string(),
+          label: z.string(),
+          /** How the body reads inside a sentence: "the fire brigade". */
+          phrase: z.string(),
+          official_term: z.string(),
+          band_d: z.number().positive(),
+          band_d_prev: z.number().positive(),
+          ...provenance,
+        }),
+      )
+      .optional(),
     ...provenance,
   }),
   tax_base: z.object({
