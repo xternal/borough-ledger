@@ -6,6 +6,8 @@ describe("where you are", () => {
     expect(sectionForPath("/promises")).toBe("promises");
     expect(sectionForPath("/promise/lab-2026-parks")).toBe("promises");
     expect(sectionForPath("/decisions")).toBe("promises");
+    expect(sectionForPath("/party/labour")).toBe("promises");
+    expect(sectionForPath("/topic/health")).toBe("promises");
     expect(sectionForPath("/wards")).toBe("ward");
     expect(sectionForPath("/ward/addison")).toBe("ward");
     expect(sectionForPath("/councillor/stephen-cowan")).toBe("ward");

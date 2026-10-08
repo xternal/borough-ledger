@@ -1,5 +1,6 @@
 import { DATA, listTestValues } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
+import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL } from "@/lib/promises";
 import { CONTACT, MAKER, REPO, SITE, SITE_URL, STAGE } from "@/lib/site";
 
@@ -47,6 +48,8 @@ Data vintage: ${c.vintage}.
 - [Home](${SITE_URL}/)
 - [Promises](${SITE_URL}/promises)
 - [Council decisions](${SITE_URL}/decisions)
+${partiesOf(buildModel()).map((pt) => `- [${pt.name}: 2026 manifesto pledges](${SITE_URL}/party/${pt.id})`).join("\n")}
+${topicsOf(buildModel()).map((t) => `- [${t.area}: pledges from every party](${SITE_URL}/topic/${t.slug})`).join("\n")}
 - [Your ward: wards and councillors](${SITE_URL}/wards)
 - [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)

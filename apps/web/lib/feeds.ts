@@ -8,6 +8,7 @@ import { type Feed, type FeedItem, shorten, tag } from "./rss";
 import { SITE } from "./site";
 import { WARD_SPEND, wardsOf } from "./wards";
 import { DECISIONS, STEP_LABEL } from "./decisions";
+import { topicSlug } from "./topics";
 
 type EventType = (typeof EVENT_TYPES)[number];
 
@@ -195,6 +196,33 @@ export function wardFeed(id: string): Feed | null {
   };
 }
 
+export function partyFeed(id: string): Feed | null {
+  const m = buildModel();
+  const party = DATA.content.parties.find((pt) => pt.id === id);
+  const ps = m.promises.filter((p) => p.partyId === id);
+  if (!party || !ps.length) return null;
+  return {
+    title: `${SITE.name}: ${party.name} pledges`,
+    description: `Every ${party.short} pledge on ${SITE.name}: new cards, status changes, deadlines and replies.`,
+    path: `/party/${id}`,
+    self: `/party/${id}/feed.xml`,
+    items: PROMISES_FEED(ps),
+  };
+}
+
+export function topicFeed(slug: string): Feed | null {
+  const m = buildModel();
+  const ps = m.promises.filter((p) => topicSlug(p.area) === slug);
+  if (!ps.length) return null;
+  return {
+    title: `${SITE.name}: ${ps[0]!.area}`,
+    description: `Pledges on ${ps[0]!.area.toLowerCase()} from every party: new cards, status changes, deadlines and replies.`,
+    path: `/topic/${slug}`,
+    self: `/topic/${slug}/feed.xml`,
+    items: PROMISES_FEED(ps),
+  };
+}
+
 /** Every feed with a fixed address, for /follow and the tests. */
 export function allFeeds(): Feed[] {
   return [
@@ -205,5 +233,7 @@ export function allFeeds(): Feed[] {
     ...DATA.content.promises.map((p) => promiseFeed(p.id)!),
     ...DATA.content.wards.wards.map((w) => wardFeed(w.id)!),
     ...DATA.content.councillors.map((c) => councillorFeed(c.id)!),
+    ...DATA.content.parties.flatMap((pt) => partyFeed(pt.id) ?? []),
+    ...[...new Set(DATA.content.promises.map((p) => topicSlug(p.area)))].map((s) => topicFeed(s)!),
   ];
 }

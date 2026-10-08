@@ -73,11 +73,11 @@ export function standing(promises: readonly PromiseModel[]): string[] {
   return sides(promises).map((g) => {
     const ps = promises.filter((p) => p.side === g.id);
     const who = `${g.parties.join(" and ")}${g.id === "administration" ? ", which runs the council," : ", in opposition,"}`;
-    if (g.id === "opposition") return `${who} made ${ps.length} headline pledges; opposition pledges are costed so voters can compare, but cannot be delivered from opposition.`;
+    if (g.id === "opposition") return `${who} made ${ps.length} headline ${ps.length === 1 ? "pledge" : "pledges"}; opposition pledges are costed so voters can compare, but cannot be delivered from opposition.`;
     const parts = STATUS_ORDER.map((st) => [st, ps.filter((p) => p.status === st).length] as const)
       .filter(([, n]) => n > 0)
       .map(([st, n]) => `${n} ${(IN_WORDS[st] ?? [STATUS_LABEL[st], STATUS_LABEL[st]])[n === 1 ? 0 : 1]}`);
     const list = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}` : parts[0];
-    return `${who} made ${ps.length} headline pledges: ${list}.`;
+    return `${who} made ${ps.length} headline ${ps.length === 1 ? "pledge" : "pledges"}: ${list}.`;
   });
 }

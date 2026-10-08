@@ -166,3 +166,7 @@ Still to do: verify boroughbook.uk in Google Search Console as a Domain property
 - **IndexNow:** after each production deploy, `.github/workflows/indexnow.yml` sends the pages that changed to IndexNow (Bing, which feeds ChatGPT search and Copilot, plus Yandex and others). The key file is `/cd99e6aa5d02a98cce4df8abc80445fb.txt`, public by design.
 - Still to do by the owner: Google Search Console (Domain property) and Bing Webmaster Tools.
 
+## Party and topic pages (8 Oct 2026)
+
+`/party/<id>` (one per party with pledges) and `/topic/<slug>` (one per pledge topic, 10 so far) answer searches like "Labour Hammersmith manifesto pledges" or "Hammersmith parks". Each opens with where the pledges stand, lists them, shows the council decisions that moved them and answers a few questions, with structured data (CollectionPage, FAQPage, breadcrumbs) and its own feed. Topic pages show the council's budget for the topic only where a budget line honestly matches (six by name, community safety by hand); health, young people and jobs, and climate show none, because the matching budget would mislead (the hospital pledge is about the NHS). Every pledge card links its party and topic.
+

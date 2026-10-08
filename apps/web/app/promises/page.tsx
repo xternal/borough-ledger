@@ -7,6 +7,7 @@ import { PageShell } from "@/components/PageShell";
 import { PromisesIndex } from "@/components/PromisesIndex";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
+import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides, standing } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
@@ -46,6 +47,23 @@ export default function PromisesPage() {
         <p className="lede">{standing(m.promises).join(" ")}</p>
         <p className="small">
           <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them.
+        </p>
+        <p className="small">
+          By party:{" "}
+          {partiesOf(m).map((pt, i) => (
+            <span key={pt.id}>
+              {i ? ", " : ""}
+              <a href={`/party/${pt.id}`}>{pt.name}</a>
+            </span>
+          ))}
+          . By topic:{" "}
+          {topicsOf(m).map((t, i) => (
+            <span key={t.slug}>
+              {i ? ", " : ""}
+              <a href={`/topic/${t.slug}`}>{t.area}</a>
+            </span>
+          ))}
+          .
         </p>
         <FollowLink href="/promises/feed.xml" label="Follow every pledge by RSS" />
       </div>

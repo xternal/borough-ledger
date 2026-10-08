@@ -9,6 +9,7 @@ import { Num, TestMark } from "./Num";
 import { isOverdue, sides } from "@/lib/promises";
 import { useLedger } from "./LedgerState";
 import { CONTACT } from "@/lib/site";
+import { topicSlug } from "@/lib/topics";
 
 type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
 
@@ -195,7 +196,7 @@ export function Detail({
     <div className="detail">
       <div style={{ display: "grid", gap: 6 }}>
         <span className="muted small">
-          {who(p)}, {p.area}
+          {p.party ? who(p) : <a href={`/party/${p.partyId}`}>{p.actor}</a>}, <a href={`/topic/${topicSlug(p.area)}`}>{p.area}</a>
         </span>
         {(() => {
           const H = heading;
