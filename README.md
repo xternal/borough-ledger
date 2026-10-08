@@ -1,6 +1,6 @@
 # Borough Ledger: Hammersmith & Fulham
 
-An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://borough-ledger.vercel.app**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, every councillor by ward, and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
+An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://borough-ledger.vercel.app**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, your ward and its councillors (find it by postcode), and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
 
 Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from Public Ledger (the national version), sharing its ideas and later its code; "Borough Ledger" is a working title.
 
@@ -105,6 +105,7 @@ pnpm build:prod          # fails while any rendered value has quality "test"
 pnpm --filter @borough-ledger/schema report:test-values   # every test value still in the data
 pnpm --filter @borough-ledger/schema content:build        # compile content/ (promises, councillors) into data/build
 python3 etl/councillors.py                                # refresh councillors and wards from the council's ModernGov service
+python3 etl/ward_map.py                                   # ward boundaries from the ONS, drawn as SVG for /wards and each ward page
 python3 etl/payments.py --fetch                           # spend files: download archived ones, record hash, rows and total of new ones
 python3 etl/payments.py --draft-map                       # add new service areas to data/manual/payments_service_map.csv for review
 python3 etl/payments.py                                   # build data/build/payments (redacted, mapped, reconciled to each file)

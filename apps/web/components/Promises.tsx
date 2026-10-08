@@ -78,7 +78,7 @@ export function Promises({
           <h2 id="promises-h">Promises</h2>
           <p>
             Each party&rsquo;s headline pledges from its 2026 manifesto, quoted word for word, with the cost to the council and a timeline that ends in
-            delivery or in silence. <a href="/promises">All promises</a>, and <a href="/councillors">councillors by ward</a>.
+            delivery or in silence. <a href="/promises">All promises</a>, and <a href="/wards">your ward&rsquo;s councillors</a>.
           </p>
         </div>
       ) : (

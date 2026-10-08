@@ -5,8 +5,11 @@ describe("where you are", () => {
   it("highlights the section a page belongs to", () => {
     expect(sectionForPath("/promises")).toBe("promises");
     expect(sectionForPath("/promise/lab-2026-parks")).toBe("promises");
-    expect(sectionForPath("/councillor/stephen-cowan")).toBe("promises");
-    expect(sectionForPath("/councillors")).toBe("promises");
+    expect(sectionForPath("/wards")).toBe("ward");
+    expect(sectionForPath("/ward/addison")).toBe("ward");
+    expect(sectionForPath("/councillor/stephen-cowan")).toBe("ward");
+    expect(sectionForPath("/councillors")).toBe("ward");
+    expect(sectionForPath("/wardsxyz")).toBeNull();
     expect(sectionForPath("/payments")).toBe("payments");
     expect(sectionForPath("/payments/2026-06")).toBe("payments");
     expect(sectionForPath("/supplier/veolia-es-uk-ltd")).toBe("payments");
@@ -20,6 +23,7 @@ describe("where you are", () => {
     expect(isStatementPath("/payments")).toBe(false);
     expect(sectionHref("bill")).toBe("/#bill");
     expect(sectionHref("payments")).toBe("/payments");
+    expect(sectionHref("ward")).toBe("/wards");
   });
 });
 

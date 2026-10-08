@@ -4,6 +4,10 @@ const config: NextConfig = {
   transpilePackages: ["@borough-ledger/schema", "@borough-ledger/engine"],
   reactStrictMode: true,
   poweredByHeader: false,
+  // The councillors list became the ward pages (M6); keep old links working.
+  async redirects() {
+    return [{ source: "/councillors", destination: "/wards", permanent: true }];
+  },
   // Share images rendered on request read their fonts from disk; make sure the files ship with them (lib/ogFonts.ts).
   outputFileTracingIncludes: {
     "/balance/og": ["./assets/fonts/*.ttf"],

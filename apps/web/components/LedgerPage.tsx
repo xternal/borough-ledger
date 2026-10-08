@@ -11,6 +11,7 @@ import { Payments } from "@/components/Payments";
 import { Promises } from "@/components/Promises";
 import { ScrollTo } from "@/components/ScrollTo";
 import { TopBar } from "@/components/TopBar";
+import { WardSection } from "@/components/WardSection";
 import { Waterfall } from "@/components/Waterfall";
 import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
@@ -46,6 +47,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
           <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} />
           <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} />
         </LedgerStateProvider>
+        <WardSection m={m} />
         <Payments payments={m.payments} />
         <Method m={m} />
         <Footer council={m.place.short} hasTestData={m.hasTestData} />

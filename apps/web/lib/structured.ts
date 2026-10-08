@@ -1,6 +1,7 @@
 /* schema.org JSON-LD for the promise and councillor pages (search engines and AI search read it). */
 import type { PaymentSupplier, PaymentsIndex } from "@borough-ledger/schema";
 import type { CouncillorModel, PromiseModel } from "@/lib/model";
+import type { WardModel } from "@/lib/wards";
 import { SITE, SITE_URL } from "@/lib/site";
 
 const CONTEXT = "https://schema.org";
@@ -70,7 +71,47 @@ export function councillorJsonLd(c: CouncillorModel) {
         sameAs: [c.democracy_url],
       },
     },
-    breadcrumbs([["Home", "/"], ["Promises", "/promises"], [c.name, `/councillor/${c.id}`]]),
+    breadcrumbs([["Home", "/"], ["Your ward", "/wards"], [c.ward, `/ward/${c.wardId}`], [c.name, `/councillor/${c.id}`]]),
+  ] as const;
+}
+
+export function wardsJsonLd(wards: readonly WardModel[]) {
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "CollectionPage",
+      name: "Wards and councillors",
+      url: `${SITE_URL}/wards`,
+      inLanguage: "en-GB",
+      isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE_URL },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: wards.length,
+        itemListElement: wards.map((w, i) => ({ "@type": "ListItem", position: i + 1, name: `${w.name} ward`, url: `${SITE_URL}/ward/${w.id}` })),
+      },
+    },
+    breadcrumbs([["Home", "/"], ["Your ward", "/wards"]]),
+  ] as const;
+}
+
+/** A page about the ward as a place, with its councillors as the people it elects; not an official ward page. */
+export function wardJsonLd(w: WardModel, council: string) {
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "WebPage",
+      name: `${w.name} ward`,
+      url: `${SITE_URL}/ward/${w.id}`,
+      inLanguage: "en-GB",
+      about: {
+        "@type": "AdministrativeArea",
+        name: `${w.name} ward`,
+        identifier: w.ons_code,
+        containedInPlace: { "@type": "AdministrativeArea", name: council },
+      },
+      mentions: w.councillors.map((c) => ({ "@type": "Person", name: c.name, jobTitle: `Councillor for ${w.name} ward`, url: `${SITE_URL}/councillor/${c.id}` })),
+    },
+    breadcrumbs([["Home", "/"], ["Your ward", "/wards"], [w.name, `/ward/${w.id}`]]),
   ] as const;
 }
 

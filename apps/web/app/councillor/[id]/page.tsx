@@ -38,7 +38,8 @@ export default async function CouncillorPage({ params }: Props) {
       <div className="hero">
         <h1>{c.name}</h1>
         <p className="lede">
-          {c.party} councillor for {c.ward} ward{c.side === "administration" ? ", in the party running the council" : ", in opposition"}.
+          {c.party} councillor for <a href={`/ward/${c.wardId}`}>{c.ward} ward</a>
+          {c.side === "administration" ? ", in the party running the council" : ", in opposition"}.
         </p>
       </div>
       <div className="councillor">

@@ -86,6 +86,8 @@ export interface PromiseModel {
   made_on: string;
   venue: string;
   area: string;
+  /** Set when the pledge is about one ward only. */
+  wardId: string | null;
   /** The latest wording, with the page of its source. */
   text: string;
   page: number | null;
@@ -206,6 +208,7 @@ function promiseModel(K: typeof DATA.content, p: PromiseCard, costOf: (x: Promis
     made_on: p.made_on,
     venue: p.venue,
     area: p.area,
+    wardId: p.ward_id ?? null,
     text: latest.text,
     page: latest.page ?? null,
     versions: p.versions,
