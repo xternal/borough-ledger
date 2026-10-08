@@ -6,7 +6,8 @@ import { PageShell } from "@/components/PageShell";
 import { QualityGroup } from "@/components/QualityLegend";
 import { formatDay, formatMonth, formatMonthShort } from "@/lib/format";
 import { buildModel } from "@/lib/model";
-import { GROUP_QUALITY, KIND_LABEL, PAY, filesFor, groupLabel, payFig, suppliersById } from "@/lib/payments";
+import { GROUP_QUALITY, KIND_LABEL, PAY, companiesFile, companyOf, filesFor, groupLabel, payFig, suppliersById } from "@/lib/payments";
+import { companyPage } from "@borough-ledger/schema";
 import { SITE } from "@/lib/site";
 import { supplierJsonLd } from "@/lib/structured";
 
@@ -45,6 +46,8 @@ export default async function SupplierPage({ params }: Props) {
   const groups = Object.entries(s.groups);
   const gmax = Math.max(...groups.map(([, v]) => Math.abs(v)));
   const ch = `https://find-and-update.company-information.service.gov.uk/search?q=${encodeURIComponent(s.name)}`;
+  const co = s.kind === "public_body" ? null : companyOf(s.id);
+  const register = companiesFile().source;
 
   return (
     <PageShell m={m}>
@@ -62,14 +65,59 @@ export default async function SupplierPage({ params }: Props) {
         </p>
         <p className="small muted">
           The name is as the council wrote it.
-          {s.kind === "company" ? (
+          {s.kind !== "public_body" && !co ? (
             <>
               {" "}
-              <a href={ch}>Search Companies House</a> for the registered company; we do not link one automatically unless the match is certain.
+              It is not linked to a live company on the register: it may have closed, or the council&rsquo;s name for it may differ.{" "}
+              <a href={ch}>Search Companies House</a>.
             </>
           ) : null}
         </p>
       </div>
+
+      {co ? (
+        <section aria-labelledby="register-h" className="pay-section">
+          <div className="sec-head">
+            <h2 id="register-h">On the companies register</h2>
+          </div>
+          <dl className="register">
+            <dt>Registered as</dt>
+            <dd>
+              <a href={companyPage(co.number)} rel="noopener">
+                {co.name}
+              </a>
+              , company number {co.number}
+            </dd>
+            <dt>Status</dt>
+            <dd className={co.status === "Active" ? undefined : "warn"}>{co.status}</dd>
+            <dt>Type</dt>
+            <dd>
+              {co.type}
+              {co.incorporated ? `, formed ${formatMonth(co.incorporated.slice(0, 7))}` : ""}
+            </dd>
+            {co.business.length ? (
+              <>
+                <dt>What it does</dt>
+                <dd>{co.business.map((b) => b.replace(/\s*n\.e\.c\.?$/i, "")).join("; ")}</dd>
+              </>
+            ) : null}
+            {co.office_area ? (
+              <>
+                <dt>Registered office</dt>
+                <dd>In {co.office_area}</dd>
+              </>
+            ) : null}
+          </dl>
+          <p className="small muted">
+            {co.matched_on === "name"
+              ? "Linked because the council's name for it is exactly this company's name, and the company existed before the council first paid it."
+              : co.matched_on === "former_name"
+                ? `Linked because the council's name for it, ${co.former_name}, was this company's name while the council paid it; it has changed its name since.`
+                : "Linked by name and checked by hand: only the suffix differs (such as Ltd or plc), and the company existed before the council first paid it."}{" "}
+            From <a href={register.url}>{register.title}</a>, {formatDay(register.snapshot)}. What it does is the company&rsquo;s own description to Companies House.
+          </p>
+        </section>
+      ) : null}
 
       <section aria-labelledby="by-service-h" className="pay-section">
         <div className="sec-head">
@@ -158,7 +206,7 @@ export default async function SupplierPage({ params }: Props) {
           .
         </p>
       </section>
-      <JsonLd data={supplierJsonLd(s)} />
+      <JsonLd data={supplierJsonLd(s, co)} />
     </PageShell>
   );
 }

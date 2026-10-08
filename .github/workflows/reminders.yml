@@ -44,7 +44,8 @@ jobs:
           - [ ] Download the new XLSX from the council's procurement and financial data page into data/raw/payments/ with a browser.
           - [ ] python3 etl/payments.py --fetch, then --draft-map; check any new service areas (reviewed=yes).
           - [ ] python3 etl/payments.py; python3 etl/capital_wards.py --draft and check any new building schemes; python3 etl/capital_wards.py.
-          - [ ] Look at short payee names without an organisation word (docs/PRIVACY.md) before publishing."
+          - [ ] Look at short payee names without an organisation word (docs/PRIVACY.md) before publishing.
+          - [ ] Link new suppliers to the companies register: download the latest BasicCompanyDataAsOneFile zip from download.companieshouse.gov.uk into data/raw/companies_house/, record its date and SHA-256 in etl/companies_house.py, then python3 etl/companies_house.py --scan and python3 etl/companies_house.py; decide any new lines of data/manual/companies_house_matches.csv."
           fi
           if gh issue list --repo "$REPO" --state open --search "\"$title\" in:title" --json number --jq '.[0].number' | grep -q .; then
             echo "Already open: $title"

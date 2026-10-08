@@ -3,7 +3,7 @@ import { FollowLink } from "@/components/FollowLink";
 import { PageShell } from "@/components/PageShell";
 import { formatMonth, formatMonthShort } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
-import { GROUP_QUALITY, GROUPS, MONTHS, PAY, monthFile, payFig, suppliersById } from "@/lib/payments";
+import { GROUP_QUALITY, GROUPS, MONTHS, PAY, companiesFile, monthFile, payFig, suppliersById } from "@/lib/payments";
 import { paymentsJsonLd } from "@/lib/structured";
 import { Num } from "./Num";
 import { PaymentsMonth } from "./PaymentsMonth";
@@ -71,7 +71,9 @@ export function PaymentsLedger({ m, month }: { m: PageModel; month: string }) {
         <div className="sec-head">
           <h2 id="search-h">Who the council pays</h2>
           <p>
-            Search {PAY.suppliers.count.toLocaleString("en-GB")} organisations across every month. Companies, charities and public bodies have their own page.
+            Search {PAY.suppliers.count.toLocaleString("en-GB")} organisations across every month. Companies, charities and public bodies have their own page, and{" "}
+            {companiesFile().counts.matched!.toLocaleString("en-GB")} of them are linked to their entry on the companies register: status, type, what they do and where
+            their registered office is.
           </p>
         </div>
         <SupplierSearch quality={PAY.meta.quality} files={allFiles} />

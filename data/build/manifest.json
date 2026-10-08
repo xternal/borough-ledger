@@ -123,6 +123,10 @@
    "sha256": "806cbf524a4bd176586995ead21922ed2906cfce7b0b5678264f3f115be6997c"
   },
   {
+   "file": "data/manual/companies_house_matches.csv",
+   "sha256": "f1befc05c33b5ac841166963f7fbac8ab953fb9c07e1efaca71eb24b4e8b11cd"
+  },
+  {
    "file": "data/manual/funding_groups.csv",
    "sha256": "9acb1485776e95609ba99c22bfe904fbd75fbdc753f47f1030be7d5bafd269bf"
   },

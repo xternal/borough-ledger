@@ -1498,6 +1498,33 @@
   .pay-section {
     padding-top: 56px;
   }
+  .register {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 8px 20px;
+    margin: 0 0 12px;
+    font-size: 15px;
+    max-width: 72ch;
+  }
+  .register dt {
+    color: var(--muted);
+  }
+  .register dd {
+    margin: 0;
+  }
+  .register dd.warn {
+    color: var(--warn);
+    font-weight: 600;
+  }
+  @media (max-width: 520px) {
+    .register {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2px;
+    }
+    .register dd {
+      margin-bottom: 10px;
+    }
+  }
   .pay-h3 {
     margin: 32px 0 10px;
     font-size: 16px;
