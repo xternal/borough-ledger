@@ -1525,6 +1525,86 @@
       margin-bottom: 10px;
     }
   }
+  .flow-more {
+    margin-top: 18px;
+    max-width: 72ch;
+  }
+  /* /building and /council-homes */
+  .cap-groups {
+    display: grid;
+    gap: 6px;
+    max-width: 760px;
+  }
+  .cap-group summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 16px;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    list-style: none;
+  }
+  .cap-group summary::-webkit-details-marker {
+    display: none;
+  }
+  .cap-group summary:hover,
+  .cap-group[open] summary {
+    background: var(--sunk);
+  }
+  .cap-group summary .cap-l::before {
+    content: "+";
+    display: inline-block;
+    width: 1.1em;
+    color: var(--muted);
+  }
+  .cap-group[open] summary .cap-l::before {
+    content: "\2212";
+  }
+  .cap-v {
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .cap-group .track {
+    grid-column: 1 / -1;
+    height: 6px;
+    background: var(--sunk);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .cap-group .track i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+  }
+  .cap-lines {
+    list-style: none;
+    margin: 4px 0 10px;
+    padding: 0 10px 0 calc(10px + 1.1em);
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .cap-lines li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+  }
+  .cap-lines .cap-v {
+    font-weight: 500;
+  }
+  .cap-pledges {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    max-width: 72ch;
+  }
+  .row .track.muted-track i {
+    opacity: 0.45;
+  }
   .pay-h3 {
     margin: 32px 0 10px;
     font-size: 16px;

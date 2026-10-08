@@ -1,5 +1,5 @@
 /* schema.org JSON-LD for the promise and councillor pages (search engines and AI search read it). */
-import { companyPage, type PaymentSupplier, type PaymentsIndex, type RegisteredCompany } from "@borough-ledger/schema";
+import { DATA, companyPage, type PaymentSupplier, type PaymentsIndex, type RegisteredCompany } from "@borough-ledger/schema";
 import type { CouncillorModel, PromiseModel } from "@/lib/model";
 import type { WardModel } from "@/lib/wards";
 import { SITE, SITE_URL } from "@/lib/site";
@@ -201,3 +201,24 @@ export function supplierJsonLd(s: PaymentSupplier, co: RegisteredCompany | null 
     breadcrumbs([["Home", "/"], ["Payments", "/payments"], [s.name, `/supplier/${s.id}`]]),
   ] as const;
 }
+
+/** /building and /council-homes: a page about the council's own plan, based on its report. */
+export function capitalJsonLd(path: string, title: string, description: string, sourceId: string) {
+  const name = title.split(" | ")[0]!;
+  const source = DATA.sources.get(sourceId);
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "WebPage",
+      name,
+      description,
+      url: `${SITE_URL}/${path}`,
+      inLanguage: "en-GB",
+      publisher: PUBLISHER,
+      about: { "@type": "GovernmentOrganization", name: DATA.council.meta.council },
+      ...(source?.url ? { isBasedOn: { "@type": "Report", name: source.title, url: source.url, ...(source.published_on ? { datePublished: source.published_on } : {}) } } : {}),
+    },
+    breadcrumbs([["Home", "/"], ["Budget", "/#budget"], [name, `/${path}`]]),
+  ] as const;
+}
+

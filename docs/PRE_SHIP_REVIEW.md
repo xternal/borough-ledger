@@ -197,3 +197,11 @@ Every Friday morning `.github/workflows/weekly-digest.yml` opens an issue with a
 - **No people, no addresses.** Only register facts about the company are kept; the registered office is reduced to its local authority area and the postcode is dropped (docs/PRIVACY.md). Suppliers that could be a person are never matched. CI refuses any other field.
 - **Refresh:** the quarterly spend-file reminder now includes downloading the month's Companies House file and re-running the match.
 
+## Phase 2: the building programme and council homes (9 Oct 2026)
+
+- **/building** shows the council's four-year building programme (£135.0m, 2026/27 to 2029/30) by area, with every scheme folded underneath in residents' words (the council's name in a tooltip), how it is paid for (£75.4m borrowed), the debt for building work (falling from £375.8m to £356.5m), the schemes that are what a manifesto pledge names (Avonmore, green investment, parks, CCTV; any party's pledge is linked the same way), and a table of every scheme year by year.
+- **/council-homes** shows the ring-fenced council homes account: where the £113.0m of rent and service charges goes in 2026/27 and how much of every £1 (37p on interest and wear and tear, 24p running the service, 22p repairs), the 4.8% rent rise, council rents against private rents (£136.50 against at least £476 a week for one bedroom), the £317.2m of building work on council homes, the reserve (£5.9m, about 3 weeks of rent) and the ten-year plan (198 new homes; borrowing per home from £49,100 to £72,500).
+- **What does not add up in the council's papers, said openly:** the resolution approves £135.5m and £318.8m, but the report's own tables add up to £135.0m and £317.2m; one funding total is misprinted as a dash. Both are shown on /building.
+- **Checks:** `etl/capital.py --check` in CI (every printed total, with rounding allowed; the account balances); a unit test proves a wrong figure, an undeclared misprint and an unbalanced account each stop the build. Every non-zero figure was matched against the report's text. Figures show as approx until the owner signs off both tables (`data/manual/README.md`).
+- Both pages sit under "Budget" in the menu, which is highlighted on them; the home page's budget section links to both; sitemap, llms.txt and llms-full.txt include them.
+

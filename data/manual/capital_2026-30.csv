@@ -1,0 +1,89 @@
+account,section,group,label,plain,kind,y2026_27,y2027_28,y2028_29,y2029_30,total,page,note,pledges,reviewed
+hra,housing,,Major Refurbishment Works,Major refurbishment of blocks,spend,4.6,4.6,5.7,6.1,21.0,24,,,checked
+hra,housing,,Fire Safety Compliance Programme,Fire safety work,spend,2.3,2.5,4.3,4.7,13.9,24,,,checked
+hra,housing,,Fire Safety Complex Schemes,Fire safety work on complex blocks,spend,18.2,8.9,0,0,27.1,24,,,checked
+hra,housing,,Lift Schemes,Lifts,spend,4.0,2.5,0.5,0.6,7.6,24,,,checked
+hra,housing,,Heating Schemes,Heating,spend,2.2,2.0,2.0,2.1,8.4,24,,,checked
+hra,housing,,Safety Works - Electrical,Electrical safety,spend,3.8,3.5,3.0,3.3,13.5,24,,,checked
+hra,housing,,Safety Works,Other safety work,spend,4.2,3.6,7.5,8.1,23.4,24,,,checked
+hra,housing,,Void Works,Getting empty homes ready to let,spend,4.6,4.1,3.7,4.0,16.3,24,,,checked
+hra,housing,,Other Capital Improvements,Other improvements,spend,2.5,15.1,20.5,14.5,52.5,24,,,checked
+hra,housing,,Capitalised salaries,Staff who run the works,spend,8.0,7.3,7.1,7.7,30.2,24,,,checked
+hra,housing,,Capitalised repairs,Larger repairs paid from the building budget,spend,4.2,4.1,4.8,10.2,23.3,24,,,checked
+hra,housing,,Total Expenditure,,total,58.7,58.1,59.0,61.3,237.2,24,,,checked
+hra,housing,,Grants,,fund,0,0,0,0,0,24,,,checked
+hra,housing,,Section 106 / Community Infrastructure Levy (CIL),,fund,0,0,0,0,0,24,,,checked
+hra,housing,,Capital Receipts,,fund,50.5,0,0,0,50.5,24,,,checked
+hra,housing,,Major Repairs Reserve,,fund,5.5,21.8,18.1,18.8,64.2,24,,,checked
+hra,housing,,Revenue Contributions and Other Reserves,,fund,2.7,2.7,2.7,8.0,16.1,24,,,checked
+hra,housing,,Borrowing,,fund,0.0,33.6,38.2,34.6,106.4,24,,,checked
+hra,housing,,Total,,fund_total,58.7,58.1,59.0,61.3,237.2,24,,,checked
+gf,people,Children's Services,SEN sufficiency,School places for children with special educational needs,spend,3.0,3.0,3.3,0,9.3,25,,,checked
+gf,people,Children's Services,Carer Housing Adaptations,Adapting carers' homes,spend,0,0,0,0,0,25,,,checked
+gf,people,Children's Services,Basic Need Placement Sufficiency,School places,spend,0.3,0,0,0,0.3,25,,,checked
+gf,people,Children's Services,Windows & decarbonisation,School windows and cutting carbon,spend,3.9,0,0,0,3.9,25,,,checked
+gf,people,Children's Services,Family Hub Transformation Project,Family hubs,spend,0,0,0,0,0,25,,,checked
+gf,people,Children's Services,School Maintenance Programme,School repairs,spend,1.6,1.6,1.6,0,4.8,25,,,checked
+gf,people,Children's Services,Climate Investment in Schools (Salix),Cutting carbon in schools,spend,0,0,0,0,0,25,,,checked
+gf,people,,Total Expenditure,,total,8.8,4.6,4.9,0,18.3,25,,,checked
+gf,people,,Grants,,fund,3.0,4.1,3.3,0,10.4,25,,,checked
+gf,people,,Section 106 / Community Infrastructure Levy (CIL),,fund,3.9,0,0,0,3.9,25,,,checked
+gf,people,,Capital Receipts,,fund,0,0,0,0,0,25,,,checked
+gf,people,,Revenue Contributions and Other Reserves,,fund,1.9,0.5,1.6,0,4.0,25,,,checked
+gf,people,,Borrowing,,fund,0,0,0,0,0,25,,,checked
+gf,people,,Total,,fund_total,8.8,4.6,4.9,0,18.3,25,,,checked
+hra,place_hra,Development Programme,Hartopp & Lannoy,Hartopp and Lannoy,spend,0.9,0,0,0,0.9,26,,lab-2026-affordable-homes,checked
+hra,place_hra,Development Programme,Farm Lane,Farm Lane,spend,1.2,0,0,0,1.2,26,,lab-2026-affordable-homes,checked
+hra,place_hra,Development Programme,Avonmore HRA,Avonmore (council homes),spend,13.4,14.6,11.6,4.7,44.3,26,,lab-2026-affordable-homes,checked
+hra,place_hra,Development Programme,Lillie Road,Lillie Road,spend,3.8,0.0,0,0,3.8,26,,lab-2026-affordable-homes,checked
+hra,place_hra,Development Programme,Development Programme,New council homes,subtotal,19.3,14.6,11.6,4.7,50.2,26,,,checked
+hra,place_hra,Regeneration Capital Schemes,Edith Summerskill House,Edith Summerskill House,spend,9.4,9.4,9.4,0,28.2,26,,,checked
+hra,place_hra,Regeneration Capital Schemes,Old Laundry Yard,Old Laundry Yard,spend,1.6,0,0,0,1.6,26,,,checked
+hra,place_hra,Regeneration Capital Schemes,Place - HRA,Regeneration,subtotal,10.9,9.5,9.4,0,29.9,26,Table 4 (page 19) prints 29.8 for the same line,,checked
+hra,place_hra,,Total Expenditure,,total,30.2,24.2,20.9,4.7,80.0,26,,,checked
+hra,place_hra,,Grants,,fund,4.6,3.5,3.4,0,11.5,26,,,checked
+hra,place_hra,,Section 106 / Community Infrastructure Levy (CIL),,fund,6.0,6.0,6.0,0,18.0,26,,,checked
+hra,place_hra,,Capital Receipts,,fund,19.6,7.6,2.8,2.9,32.9,26,,,checked
+hra,place_hra,,Revenue Contributions and Other Reserves,,fund,0,7.1,0,0,0,26,"misprint: its four-year total is printed as a dash, but its 2027/28 figure is 7.1 and the totals for that year need it",,checked
+hra,place_hra,,Borrowing,,fund,0,0,8.8,1.9,10.6,26,,,checked
+hra,place_hra,,Total,,fund_total,30.2,24.2,20.9,4.7,80.0,26,,,checked
+gf,place_gf,Civic Campus,Hammersmith Town Hall Refurbishment,Hammersmith Town Hall refurbishment,spend,7.9,1.0,0,0,8.9,27,,,checked
+gf,place_gf,Civic Campus,Acquisition of commercial units,Buying shop units,spend,0,0.5,0,0,0.5,27,,,checked
+gf,place_gf,Civic Campus,Civic Campus Commercial Units Works,Work on the civic campus shop units,spend,2.0,0,0,0,2.0,27,,,checked
+gf,place_gf,Civic Campus,Commercial Units - Cinema Fit Out,Fitting out the cinema,spend,0.8,0,0,0,0.8,27,,,checked
+gf,place_gf,Civic Campus,Civic Campus,Town hall and civic campus,subtotal,10.6,1.5,0,0,12.2,27,,,checked
+gf,place_gf,Regeneration Capital Schemes (GF),West Kensington & Gibbs Green Public Realm,Streets and spaces on the West Kensington and Gibbs Green estates,spend,1.0,0.5,0,0,1.5,27,,,checked
+gf,place_gf,Regeneration Capital Schemes (GF),WMC JV Exit Costs,Costs of leaving a joint venture (WMC),spend,1.9,0,0,0,1.9,27,,,checked
+gf,place_gf,Regeneration Capital Schemes (GF),Regeneration Capital Schemes (GF),Regeneration,subtotal,2.9,0.5,0,0,3.4,27,,,checked
+gf,place_gf,Development Programme (GF),Mund Street - Dev,Mund Street,spend,0.3,0,0,0,0.3,27,,,checked
+gf,place_gf,Development Programme (GF),Avonmore GF,Avonmore (the council's share outside the council homes account),spend,7.8,26.5,2.0,0,36.3,27,,lab-2026-affordable-homes,checked
+gf,place_gf,Development Programme (GF),Development Programme (GF),New homes: the council's share outside the council homes account,subtotal,8.1,26.5,2.0,0,36.6,27,,,checked
+gf,place_gf,Planning and Corporate Property,Planned Maintenance/DDA Programme,Repairs and step-free access in council buildings,spend,3.1,2.4,2.4,2.4,10.3,27,,,checked
+gf,place_gf,Planning and Corporate Property,Nourish Project (Good Growth Fund),Nourish project,spend,0.2,0,0,0,0.2,27,,,checked
+gf,place_gf,Planning and Corporate Property,Carnwath Road,Carnwath Road,spend,1.9,0,0,0,1.9,27,,,checked
+gf,place_gf,Planning and Corporate Property,Planning and Corporate Property,Council buildings,subtotal,5.2,2.4,2.4,2.4,12.4,27,,,checked
+gf,place_gf,Climate Change and Transport,Footways and Carriageways - CCT,Pavements and roads (climate and transport),spend,0.2,0.2,0.2,0.2,0.6,27,,,checked
+gf,place_gf,Climate Change and Transport,Transport For London Schemes,Schemes paid for by Transport for London,spend,8.6,0,0,0,8.6,27,,,checked
+gf,place_gf,Climate Change and Transport,Other Climate & Transport Schemes - CCT,Other climate and transport schemes,spend,18.4,1.0,0,0,19.4,27,,,checked
+gf,place_gf,Climate Change and Transport,Green Investment Projects,Green investment projects,spend,2.0,0,0,0,2.0,27,,lab-2026-green-schemes,checked
+gf,place_gf,Climate Change and Transport,Climate Change and Transport,Climate and transport,subtotal,29.2,1.1,0.2,0.2,30.6,28,,,checked
+gf,place_gf,Hammersmith Bridge,Hammersmith Bridge Works,Hammersmith Bridge works,spend,3.2,0,0,0,3.2,28,,,checked
+gf,place_gf,Hammersmith Bridge,Hammersmith Bridge,Hammersmith Bridge,subtotal,3.2,0,0,0,3.2,28,,,checked
+gf,place_gf,Public Realm,Footways and Carriageways - PR,Pavements and roads,spend,1.9,1.9,1.9,1.9,7.5,28,,,checked
+gf,place_gf,Public Realm,Column Replacement,Replacing street light columns,spend,0.3,0.3,0.3,0.3,1.4,28,,,checked
+gf,place_gf,Public Realm,Parks Projects,Parks,spend,2.7,3.5,1.6,0,7.7,28,,lab-2026-parks con-2026-green-spaces,checked
+gf,place_gf,Public Realm,Public Realm,"Pavements, roads, street lights and parks",subtotal,4.9,5.7,3.8,2.2,16.6,28,,,checked
+gf,place_gf,Public Protection,Public CCTV,CCTV,spend,1.3,0.5,0,0,1.8,28,,lab-2026-ai-cctv,checked
+gf,place_gf,Public Protection,Public Protection,CCTV,subtotal,1.3,0.5,0,0,1.8,28,,,checked
+gf,place_gf,,Total Expenditure,,total,65.3,38.3,8.3,4.8,116.7,28,,,checked
+gf,place_gf,,Grants,,fund,12.4,1.0,0,0,13.4,28,,,checked
+gf,place_gf,,Section 106 / Community Infrastructure Levy (CIL),,fund,22.6,3.0,0,0,25.6,28,,,checked
+gf,place_gf,,Capital Receipts,,fund,0,0,2.0,0,2.0,28,,,checked
+gf,place_gf,,Revenue Contributions and Other Reserves,,fund,0.4,0,0,0,0.4,28,,,checked
+gf,place_gf,,Borrowing,,fund,29.9,34.3,6.3,4.8,75.4,28,,,checked
+gf,place_gf,,Total,,fund_total,65.3,38.3,8.3,4.8,116.7,28,,,checked
+gf,summary,,Sub-Total (General Fund),,summary,74.1,42.9,13.2,4.8,135.0,17,,,checked
+hra,summary,,Sub-Total (HRA),,summary,88.9,82.3,79.9,66.1,317.2,17,,,checked
+all,summary,,Total Expenditure,,summary,163.0,125.2,93.1,70.9,452.2,17,,,checked
+gf,debt,,Forecast Closing GF CFR,"Borrowing for building work still to repay, end of year",debt,384.8,374.5,362.5,356.5,,18,GF opening CFR 2026/27: 375.8,,checked
+hra,debt,,Forecast closing HRA CFR,"Borrowing for council homes still to repay, end of year",debt,563.3,586.8,633.8,670.2,,19,HRA opening CFR 2026/27: 563.3,,checked

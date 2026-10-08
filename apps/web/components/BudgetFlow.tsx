@@ -5,6 +5,7 @@ import { QUALITY_TITLE } from "@/lib/quality";
 import { Num, NumT } from "./Num";
 import { QualityLegend } from "./QualityLegend";
 import { ChartTable, DataTable } from "./ChartTable";
+import { HOMES, SPAN, capFig, homesFig, totalOf } from "@/lib/capital";
 
 interface FlowNode {
   id: string;
@@ -202,6 +203,11 @@ export function BudgetFlow({ m }: { m: PageModel }) {
         </div>
       </div>
       <QualityLegend items={m.qualityLegend.budget} />
+      <p className="flow-more">
+        This is day-to-day spending. The council also plans <a href="/building">building work</a> worth <Num f={capFig(totalOf("gf").total!)} fmt="m1" /> from{" "}
+        {SPAN}, and <a href="/council-homes">council homes</a> have an account of their own: rents and service charges of{" "}
+        <Num f={homesFig(-HOMES.budget.filter((b) => b.kind === "income").reduce((a, b) => a + b.now, 0))} fmt="m1" /> a year.
+      </p>
     </section>
   );
 }

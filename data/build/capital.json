@@ -1,0 +1,1414 @@
+{
+ "note": "Built by etl/capital.py from data/manual/capital_2026-30.csv and data/manual/council_homes_2026-27.csv. £m unless a fact says otherwise.",
+ "programme": {
+  "source_id": "capital_programme_2026-30",
+  "quality": "approx",
+  "years": [
+   "2026-27",
+   "2027-28",
+   "2028-29",
+   "2029-30"
+  ],
+  "sections": [
+   {
+    "id": "people",
+    "account": "gf",
+    "plain": "Schools and children",
+    "groups": [
+     {
+      "name": "Children's Services",
+      "plain": "Schools and children",
+      "lines": [
+       {
+        "label": "SEN sufficiency",
+        "plain": "School places for children with special educational needs",
+        "years": [
+         3.0,
+         3.0,
+         3.3,
+         0.0
+        ],
+        "total": 9.3,
+        "page": 25
+       },
+       {
+        "label": "Carer Housing Adaptations",
+        "plain": "Adapting carers' homes",
+        "years": [
+         0.0,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.0,
+        "page": 25
+       },
+       {
+        "label": "Basic Need Placement Sufficiency",
+        "plain": "School places",
+        "years": [
+         0.3,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.3,
+        "page": 25
+       },
+       {
+        "label": "Windows & decarbonisation",
+        "plain": "School windows and cutting carbon",
+        "years": [
+         3.9,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 3.9,
+        "page": 25
+       },
+       {
+        "label": "Family Hub Transformation Project",
+        "plain": "Family hubs",
+        "years": [
+         0.0,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.0,
+        "page": 25
+       },
+       {
+        "label": "School Maintenance Programme",
+        "plain": "School repairs",
+        "years": [
+         1.6,
+         1.6,
+         1.6,
+         0.0
+        ],
+        "total": 4.8,
+        "page": 25
+       },
+       {
+        "label": "Climate Investment in Schools (Salix)",
+        "plain": "Cutting carbon in schools",
+        "years": [
+         0.0,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.0,
+        "page": 25
+       }
+      ],
+      "subtotal": null
+     }
+    ],
+    "total": {
+     "label": "Total Expenditure",
+     "plain": "Total Expenditure",
+     "years": [
+      8.8,
+      4.6,
+      4.9,
+      0.0
+     ],
+     "total": 18.3,
+     "page": 25
+    },
+    "funding": [
+     {
+      "label": "Grants",
+      "plain": "Grants",
+      "years": [
+       3.0,
+       4.1,
+       3.3,
+       0.0
+      ],
+      "total": 10.4,
+      "page": 25
+     },
+     {
+      "label": "Section 106 / Community Infrastructure Levy (CIL)",
+      "plain": "Section 106 / Community Infrastructure Levy (CIL)",
+      "years": [
+       3.9,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 3.9,
+      "page": 25
+     },
+     {
+      "label": "Capital Receipts",
+      "plain": "Capital Receipts",
+      "years": [
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 0.0,
+      "page": 25
+     },
+     {
+      "label": "Revenue Contributions and Other Reserves",
+      "plain": "Revenue Contributions and Other Reserves",
+      "years": [
+       1.9,
+       0.5,
+       1.6,
+       0.0
+      ],
+      "total": 4.0,
+      "page": 25
+     },
+     {
+      "label": "Borrowing",
+      "plain": "Borrowing",
+      "years": [
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 0.0,
+      "page": 25
+     }
+    ]
+   },
+   {
+    "id": "place_gf",
+    "account": "gf",
+    "plain": "Streets, buildings, parks and regeneration",
+    "groups": [
+     {
+      "name": "Civic Campus",
+      "plain": "Town hall and civic campus",
+      "lines": [
+       {
+        "label": "Hammersmith Town Hall Refurbishment",
+        "plain": "Hammersmith Town Hall refurbishment",
+        "years": [
+         7.9,
+         1.0,
+         0.0,
+         0.0
+        ],
+        "total": 8.9,
+        "page": 27
+       },
+       {
+        "label": "Acquisition of commercial units",
+        "plain": "Buying shop units",
+        "years": [
+         0.0,
+         0.5,
+         0.0,
+         0.0
+        ],
+        "total": 0.5,
+        "page": 27
+       },
+       {
+        "label": "Civic Campus Commercial Units Works",
+        "plain": "Work on the civic campus shop units",
+        "years": [
+         2.0,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 2.0,
+        "page": 27
+       },
+       {
+        "label": "Commercial Units - Cinema Fit Out",
+        "plain": "Fitting out the cinema",
+        "years": [
+         0.8,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.8,
+        "page": 27
+       }
+      ],
+      "subtotal": {
+       "label": "Civic Campus",
+       "plain": "Town hall and civic campus",
+       "years": [
+        10.6,
+        1.5,
+        0.0,
+        0.0
+       ],
+       "total": 12.2,
+       "page": 27
+      }
+     },
+     {
+      "name": "Regeneration Capital Schemes (GF)",
+      "plain": "Regeneration",
+      "lines": [
+       {
+        "label": "West Kensington & Gibbs Green Public Realm",
+        "plain": "Streets and spaces on the West Kensington and Gibbs Green estates",
+        "years": [
+         1.0,
+         0.5,
+         0.0,
+         0.0
+        ],
+        "total": 1.5,
+        "page": 27
+       },
+       {
+        "label": "WMC JV Exit Costs",
+        "plain": "Costs of leaving a joint venture (WMC)",
+        "years": [
+         1.9,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 1.9,
+        "page": 27
+       }
+      ],
+      "subtotal": {
+       "label": "Regeneration Capital Schemes (GF)",
+       "plain": "Regeneration",
+       "years": [
+        2.9,
+        0.5,
+        0.0,
+        0.0
+       ],
+       "total": 3.4,
+       "page": 27
+      }
+     },
+     {
+      "name": "Development Programme (GF)",
+      "plain": "New homes: the council's share outside the council homes account",
+      "lines": [
+       {
+        "label": "Mund Street - Dev",
+        "plain": "Mund Street",
+        "years": [
+         0.3,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.3,
+        "page": 27
+       },
+       {
+        "label": "Avonmore GF",
+        "plain": "Avonmore (the council's share outside the council homes account)",
+        "years": [
+         7.8,
+         26.5,
+         2.0,
+         0.0
+        ],
+        "total": 36.3,
+        "page": 27,
+        "pledges": [
+         "lab-2026-affordable-homes"
+        ]
+       }
+      ],
+      "subtotal": {
+       "label": "Development Programme (GF)",
+       "plain": "New homes: the council's share outside the council homes account",
+       "years": [
+        8.1,
+        26.5,
+        2.0,
+        0.0
+       ],
+       "total": 36.6,
+       "page": 27
+      }
+     },
+     {
+      "name": "Planning and Corporate Property",
+      "plain": "Council buildings",
+      "lines": [
+       {
+        "label": "Planned Maintenance/DDA Programme",
+        "plain": "Repairs and step-free access in council buildings",
+        "years": [
+         3.1,
+         2.4,
+         2.4,
+         2.4
+        ],
+        "total": 10.3,
+        "page": 27
+       },
+       {
+        "label": "Nourish Project (Good Growth Fund)",
+        "plain": "Nourish project",
+        "years": [
+         0.2,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.2,
+        "page": 27
+       },
+       {
+        "label": "Carnwath Road",
+        "plain": "Carnwath Road",
+        "years": [
+         1.9,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 1.9,
+        "page": 27
+       }
+      ],
+      "subtotal": {
+       "label": "Planning and Corporate Property",
+       "plain": "Council buildings",
+       "years": [
+        5.2,
+        2.4,
+        2.4,
+        2.4
+       ],
+       "total": 12.4,
+       "page": 27
+      }
+     },
+     {
+      "name": "Climate Change and Transport",
+      "plain": "Climate and transport",
+      "lines": [
+       {
+        "label": "Footways and Carriageways - CCT",
+        "plain": "Pavements and roads (climate and transport)",
+        "years": [
+         0.2,
+         0.2,
+         0.2,
+         0.2
+        ],
+        "total": 0.6,
+        "page": 27
+       },
+       {
+        "label": "Transport For London Schemes",
+        "plain": "Schemes paid for by Transport for London",
+        "years": [
+         8.6,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 8.6,
+        "page": 27
+       },
+       {
+        "label": "Other Climate & Transport Schemes - CCT",
+        "plain": "Other climate and transport schemes",
+        "years": [
+         18.4,
+         1.0,
+         0.0,
+         0.0
+        ],
+        "total": 19.4,
+        "page": 27
+       },
+       {
+        "label": "Green Investment Projects",
+        "plain": "Green investment projects",
+        "years": [
+         2.0,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 2.0,
+        "page": 27,
+        "pledges": [
+         "lab-2026-green-schemes"
+        ]
+       }
+      ],
+      "subtotal": {
+       "label": "Climate Change and Transport",
+       "plain": "Climate and transport",
+       "years": [
+        29.2,
+        1.1,
+        0.2,
+        0.2
+       ],
+       "total": 30.6,
+       "page": 28
+      }
+     },
+     {
+      "name": "Hammersmith Bridge",
+      "plain": "Hammersmith Bridge",
+      "lines": [
+       {
+        "label": "Hammersmith Bridge Works",
+        "plain": "Hammersmith Bridge works",
+        "years": [
+         3.2,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 3.2,
+        "page": 28
+       }
+      ],
+      "subtotal": {
+       "label": "Hammersmith Bridge",
+       "plain": "Hammersmith Bridge",
+       "years": [
+        3.2,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "total": 3.2,
+       "page": 28
+      }
+     },
+     {
+      "name": "Public Realm",
+      "plain": "Pavements, roads, street lights and parks",
+      "lines": [
+       {
+        "label": "Footways and Carriageways - PR",
+        "plain": "Pavements and roads",
+        "years": [
+         1.9,
+         1.9,
+         1.9,
+         1.9
+        ],
+        "total": 7.5,
+        "page": 28
+       },
+       {
+        "label": "Column Replacement",
+        "plain": "Replacing street light columns",
+        "years": [
+         0.3,
+         0.3,
+         0.3,
+         0.3
+        ],
+        "total": 1.4,
+        "page": 28
+       },
+       {
+        "label": "Parks Projects",
+        "plain": "Parks",
+        "years": [
+         2.7,
+         3.5,
+         1.6,
+         0.0
+        ],
+        "total": 7.7,
+        "page": 28,
+        "pledges": [
+         "lab-2026-parks",
+         "con-2026-green-spaces"
+        ]
+       }
+      ],
+      "subtotal": {
+       "label": "Public Realm",
+       "plain": "Pavements, roads, street lights and parks",
+       "years": [
+        4.9,
+        5.7,
+        3.8,
+        2.2
+       ],
+       "total": 16.6,
+       "page": 28
+      }
+     },
+     {
+      "name": "Public Protection",
+      "plain": "CCTV",
+      "lines": [
+       {
+        "label": "Public CCTV",
+        "plain": "CCTV",
+        "years": [
+         1.3,
+         0.5,
+         0.0,
+         0.0
+        ],
+        "total": 1.8,
+        "page": 28,
+        "pledges": [
+         "lab-2026-ai-cctv"
+        ]
+       }
+      ],
+      "subtotal": {
+       "label": "Public Protection",
+       "plain": "CCTV",
+       "years": [
+        1.3,
+        0.5,
+        0.0,
+        0.0
+       ],
+       "total": 1.8,
+       "page": 28
+      }
+     }
+    ],
+    "total": {
+     "label": "Total Expenditure",
+     "plain": "Total Expenditure",
+     "years": [
+      65.3,
+      38.3,
+      8.3,
+      4.8
+     ],
+     "total": 116.7,
+     "page": 28
+    },
+    "funding": [
+     {
+      "label": "Grants",
+      "plain": "Grants",
+      "years": [
+       12.4,
+       1.0,
+       0.0,
+       0.0
+      ],
+      "total": 13.4,
+      "page": 28
+     },
+     {
+      "label": "Section 106 / Community Infrastructure Levy (CIL)",
+      "plain": "Section 106 / Community Infrastructure Levy (CIL)",
+      "years": [
+       22.6,
+       3.0,
+       0.0,
+       0.0
+      ],
+      "total": 25.6,
+      "page": 28
+     },
+     {
+      "label": "Capital Receipts",
+      "plain": "Capital Receipts",
+      "years": [
+       0.0,
+       0.0,
+       2.0,
+       0.0
+      ],
+      "total": 2.0,
+      "page": 28
+     },
+     {
+      "label": "Revenue Contributions and Other Reserves",
+      "plain": "Revenue Contributions and Other Reserves",
+      "years": [
+       0.4,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 0.4,
+      "page": 28
+     },
+     {
+      "label": "Borrowing",
+      "plain": "Borrowing",
+      "years": [
+       29.9,
+       34.3,
+       6.3,
+       4.8
+      ],
+      "total": 75.4,
+      "page": 28
+     }
+    ]
+   },
+   {
+    "id": "housing",
+    "account": "hra",
+    "plain": "Repairs and safety in existing council homes",
+    "groups": [
+     {
+      "name": "",
+      "plain": "Repairs and safety in existing council homes",
+      "lines": [
+       {
+        "label": "Major Refurbishment Works",
+        "plain": "Major refurbishment of blocks",
+        "years": [
+         4.6,
+         4.6,
+         5.7,
+         6.1
+        ],
+        "total": 21.0,
+        "page": 24
+       },
+       {
+        "label": "Fire Safety Compliance Programme",
+        "plain": "Fire safety work",
+        "years": [
+         2.3,
+         2.5,
+         4.3,
+         4.7
+        ],
+        "total": 13.9,
+        "page": 24
+       },
+       {
+        "label": "Fire Safety Complex Schemes",
+        "plain": "Fire safety work on complex blocks",
+        "years": [
+         18.2,
+         8.9,
+         0.0,
+         0.0
+        ],
+        "total": 27.1,
+        "page": 24
+       },
+       {
+        "label": "Lift Schemes",
+        "plain": "Lifts",
+        "years": [
+         4.0,
+         2.5,
+         0.5,
+         0.6
+        ],
+        "total": 7.6,
+        "page": 24
+       },
+       {
+        "label": "Heating Schemes",
+        "plain": "Heating",
+        "years": [
+         2.2,
+         2.0,
+         2.0,
+         2.1
+        ],
+        "total": 8.4,
+        "page": 24
+       },
+       {
+        "label": "Safety Works - Electrical",
+        "plain": "Electrical safety",
+        "years": [
+         3.8,
+         3.5,
+         3.0,
+         3.3
+        ],
+        "total": 13.5,
+        "page": 24
+       },
+       {
+        "label": "Safety Works",
+        "plain": "Other safety work",
+        "years": [
+         4.2,
+         3.6,
+         7.5,
+         8.1
+        ],
+        "total": 23.4,
+        "page": 24
+       },
+       {
+        "label": "Void Works",
+        "plain": "Getting empty homes ready to let",
+        "years": [
+         4.6,
+         4.1,
+         3.7,
+         4.0
+        ],
+        "total": 16.3,
+        "page": 24
+       },
+       {
+        "label": "Other Capital Improvements",
+        "plain": "Other improvements",
+        "years": [
+         2.5,
+         15.1,
+         20.5,
+         14.5
+        ],
+        "total": 52.5,
+        "page": 24
+       },
+       {
+        "label": "Capitalised salaries",
+        "plain": "Staff who run the works",
+        "years": [
+         8.0,
+         7.3,
+         7.1,
+         7.7
+        ],
+        "total": 30.2,
+        "page": 24
+       },
+       {
+        "label": "Capitalised repairs",
+        "plain": "Larger repairs paid from the building budget",
+        "years": [
+         4.2,
+         4.1,
+         4.8,
+         10.2
+        ],
+        "total": 23.3,
+        "page": 24
+       }
+      ],
+      "subtotal": null
+     }
+    ],
+    "total": {
+     "label": "Total Expenditure",
+     "plain": "Total Expenditure",
+     "years": [
+      58.7,
+      58.1,
+      59.0,
+      61.3
+     ],
+     "total": 237.2,
+     "page": 24
+    },
+    "funding": [
+     {
+      "label": "Grants",
+      "plain": "Grants",
+      "years": [
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 0.0,
+      "page": 24
+     },
+     {
+      "label": "Section 106 / Community Infrastructure Levy (CIL)",
+      "plain": "Section 106 / Community Infrastructure Levy (CIL)",
+      "years": [
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 0.0,
+      "page": 24
+     },
+     {
+      "label": "Capital Receipts",
+      "plain": "Capital Receipts",
+      "years": [
+       50.5,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "total": 50.5,
+      "page": 24
+     },
+     {
+      "label": "Major Repairs Reserve",
+      "plain": "Major Repairs Reserve",
+      "years": [
+       5.5,
+       21.8,
+       18.1,
+       18.8
+      ],
+      "total": 64.2,
+      "page": 24
+     },
+     {
+      "label": "Revenue Contributions and Other Reserves",
+      "plain": "Revenue Contributions and Other Reserves",
+      "years": [
+       2.7,
+       2.7,
+       2.7,
+       8.0
+      ],
+      "total": 16.1,
+      "page": 24
+     },
+     {
+      "label": "Borrowing",
+      "plain": "Borrowing",
+      "years": [
+       0.0,
+       33.6,
+       38.2,
+       34.6
+      ],
+      "total": 106.4,
+      "page": 24
+     }
+    ]
+   },
+   {
+    "id": "place_hra",
+    "account": "hra",
+    "plain": "New council homes and regeneration",
+    "groups": [
+     {
+      "name": "Development Programme",
+      "plain": "New council homes",
+      "lines": [
+       {
+        "label": "Hartopp & Lannoy",
+        "plain": "Hartopp and Lannoy",
+        "years": [
+         0.9,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 0.9,
+        "page": 26,
+        "pledges": [
+         "lab-2026-affordable-homes"
+        ]
+       },
+       {
+        "label": "Farm Lane",
+        "plain": "Farm Lane",
+        "years": [
+         1.2,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 1.2,
+        "page": 26,
+        "pledges": [
+         "lab-2026-affordable-homes"
+        ]
+       },
+       {
+        "label": "Avonmore HRA",
+        "plain": "Avonmore (council homes)",
+        "years": [
+         13.4,
+         14.6,
+         11.6,
+         4.7
+        ],
+        "total": 44.3,
+        "page": 26,
+        "pledges": [
+         "lab-2026-affordable-homes"
+        ]
+       },
+       {
+        "label": "Lillie Road",
+        "plain": "Lillie Road",
+        "years": [
+         3.8,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 3.8,
+        "page": 26,
+        "pledges": [
+         "lab-2026-affordable-homes"
+        ]
+       }
+      ],
+      "subtotal": {
+       "label": "Development Programme",
+       "plain": "New council homes",
+       "years": [
+        19.3,
+        14.6,
+        11.6,
+        4.7
+       ],
+       "total": 50.2,
+       "page": 26
+      }
+     },
+     {
+      "name": "Regeneration Capital Schemes",
+      "plain": "Regeneration",
+      "lines": [
+       {
+        "label": "Edith Summerskill House",
+        "plain": "Edith Summerskill House",
+        "years": [
+         9.4,
+         9.4,
+         9.4,
+         0.0
+        ],
+        "total": 28.2,
+        "page": 26
+       },
+       {
+        "label": "Old Laundry Yard",
+        "plain": "Old Laundry Yard",
+        "years": [
+         1.6,
+         0.0,
+         0.0,
+         0.0
+        ],
+        "total": 1.6,
+        "page": 26
+       }
+      ],
+      "subtotal": {
+       "label": "Place - HRA",
+       "plain": "Regeneration",
+       "years": [
+        10.9,
+        9.5,
+        9.4,
+        0.0
+       ],
+       "total": 29.9,
+       "page": 26,
+       "note": "Table 4 (page 19) prints 29.8 for the same line"
+      }
+     }
+    ],
+    "total": {
+     "label": "Total Expenditure",
+     "plain": "Total Expenditure",
+     "years": [
+      30.2,
+      24.2,
+      20.9,
+      4.7
+     ],
+     "total": 80.0,
+     "page": 26
+    },
+    "funding": [
+     {
+      "label": "Grants",
+      "plain": "Grants",
+      "years": [
+       4.6,
+       3.5,
+       3.4,
+       0.0
+      ],
+      "total": 11.5,
+      "page": 26
+     },
+     {
+      "label": "Section 106 / Community Infrastructure Levy (CIL)",
+      "plain": "Section 106 / Community Infrastructure Levy (CIL)",
+      "years": [
+       6.0,
+       6.0,
+       6.0,
+       0.0
+      ],
+      "total": 18.0,
+      "page": 26
+     },
+     {
+      "label": "Capital Receipts",
+      "plain": "Capital Receipts",
+      "years": [
+       19.6,
+       7.6,
+       2.8,
+       2.9
+      ],
+      "total": 32.9,
+      "page": 26
+     },
+     {
+      "label": "Revenue Contributions and Other Reserves",
+      "plain": "Revenue Contributions and Other Reserves",
+      "years": [
+       0.0,
+       7.1,
+       0.0,
+       0.0
+      ],
+      "total": 7.1,
+      "page": 26
+     },
+     {
+      "label": "Borrowing",
+      "plain": "Borrowing",
+      "years": [
+       0.0,
+       0.0,
+       8.8,
+       1.9
+      ],
+      "total": 10.6,
+      "page": 26
+     }
+    ]
+   }
+  ],
+  "summary": {
+   "gf": {
+    "label": "Sub-Total (General Fund)",
+    "plain": "Sub-Total (General Fund)",
+    "years": [
+     74.1,
+     42.9,
+     13.2,
+     4.8
+    ],
+    "total": 135.0,
+    "page": 17
+   },
+   "hra": {
+    "label": "Sub-Total (HRA)",
+    "plain": "Sub-Total (HRA)",
+    "years": [
+     88.9,
+     82.3,
+     79.9,
+     66.1
+    ],
+    "total": 317.2,
+    "page": 17
+   },
+   "all": {
+    "label": "Total Expenditure",
+    "plain": "Total Expenditure",
+    "years": [
+     163.0,
+     125.2,
+     93.1,
+     70.9
+    ],
+    "total": 452.2,
+    "page": 17
+   }
+  },
+  "resolution": {
+   "gf_m": 135.5,
+   "hra_m": 318.8,
+   "decision_id": "mg-73118",
+   "gf_gap_m": 0.5,
+   "hra_gap_m": 1.6
+  },
+  "debt": {
+   "gf": {
+    "plain": "Borrowing for building work still to repay, end of year",
+    "opening": 375.8,
+    "years": [
+     384.8,
+     374.5,
+     362.5,
+     356.5
+    ],
+    "page": 18
+   },
+   "hra": {
+    "plain": "Borrowing for council homes still to repay, end of year",
+    "opening": 563.3,
+    "years": [
+     563.3,
+     586.8,
+     633.8,
+     670.2
+    ],
+    "page": 19
+   }
+  },
+  "misprints": [
+   {
+    "label": "Revenue Contributions and Other Reserves",
+    "section": "New council homes and regeneration",
+    "used": 7.1,
+    "page": 26,
+    "note": "its four-year total is printed as a dash, but its 2027/28 figure is 7.1 and the totals for that year need it"
+   }
+  ]
+ },
+ "council_homes": {
+  "source_id": "hra_budget_2026-27",
+  "quality": "approx",
+  "years": [
+   "2025-26",
+   "2026-27"
+  ],
+  "budget": [
+   {
+    "key": "rents",
+    "kind": "income",
+    "label": "Rents (Gross)",
+    "plain": "Rent",
+    "prev": -85.2,
+    "now": -89.3,
+    "page": 164
+   },
+   {
+    "key": "service_charges",
+    "kind": "income",
+    "label": "Service Charges (Gross)",
+    "plain": "Service charges",
+    "prev": -19.1,
+    "now": -19.8,
+    "page": 164
+   },
+   {
+    "key": "other_income",
+    "kind": "income",
+    "label": "Other Income",
+    "plain": "Other income",
+    "prev": -4.0,
+    "now": -3.9,
+    "page": 164
+   },
+   {
+    "key": "void_rent_loss",
+    "kind": "spend",
+    "label": "Void Rent Loss",
+    "plain": "Rent lost while homes stand empty",
+    "prev": 1.6,
+    "now": 1.3,
+    "page": 164
+   },
+   {
+    "key": "repairs",
+    "kind": "spend",
+    "label": "Repairs and Maintenance",
+    "plain": "Repairs and maintenance",
+    "prev": 24.6,
+    "now": 25.1,
+    "page": 164
+   },
+   {
+    "key": "management",
+    "kind": "spend",
+    "label": "Housing Management",
+    "plain": "Running the housing service",
+    "prev": 30.7,
+    "now": 26.7,
+    "page": 164
+   },
+   {
+    "key": "regeneration",
+    "kind": "spend",
+    "label": "Regeneration & Development",
+    "plain": "Planning new homes",
+    "prev": 1.7,
+    "now": 3.2,
+    "page": 164
+   },
+   {
+    "key": "capital_charges",
+    "kind": "spend",
+    "label": "Capital Charges",
+    "plain": "Interest on debt and wear and tear on the homes",
+    "prev": 37.2,
+    "now": 41.7,
+    "page": 164
+   },
+   {
+    "key": "finance",
+    "kind": "spend",
+    "label": "Finance & Resources",
+    "plain": "Finance, including the provision for unpaid rent",
+    "prev": 4.6,
+    "now": 6.7,
+    "page": 164
+   },
+   {
+    "key": "contingency",
+    "kind": "spend",
+    "label": "Contingency",
+    "plain": "Kept back for the unexpected",
+    "prev": 1.1,
+    "now": 1.3,
+    "page": 164
+   },
+   {
+    "key": "corporate",
+    "kind": "spend",
+    "label": "Corporate Services",
+    "plain": "The council's central services",
+    "prev": 6.8,
+    "now": 7.0,
+    "page": 164
+   }
+  ],
+  "facts": {
+   "rent_rise_pct": {
+    "label": "Rent increase from 6 April 2026",
+    "value": 4.8,
+    "unit": "%",
+    "page": 158,
+    "note": "recommendation 3: September 2025 CPI + 1%"
+   },
+   "rent_rise_weekly": {
+    "label": "Average weekly rent increase",
+    "value": 6.69,
+    "unit": "£",
+    "page": 158,
+    "note": "recommendation 3"
+   },
+   "service_charge_rise_weekly": {
+    "label": "Average weekly service charge increase for tenants",
+    "value": 1.52,
+    "unit": "£",
+    "page": 158,
+    "note": "recommendation 5"
+   },
+   "rent_1bed_weekly": {
+    "label": "Weekly rent, one-bedroom council home",
+    "value": 136.5,
+    "unit": "£",
+    "page": 165,
+    "note": "paragraph 13"
+   },
+   "private_1bed_weekly": {
+    "label": "Weekly private rent, one bedroom, at least",
+    "value": 476.0,
+    "unit": "£",
+    "page": 165,
+    "note": "paragraph 13; ONS private rental market statistics, uprated by the council"
+   },
+   "rent_2bed_weekly": {
+    "label": "Weekly rent, two-bedroom council home",
+    "value": 141.15,
+    "unit": "£",
+    "page": 165,
+    "note": "paragraph 13"
+   },
+   "private_2bed_weekly": {
+    "label": "Weekly private rent, two bedrooms",
+    "value": 626.0,
+    "unit": "£",
+    "page": 165,
+    "note": "paragraph 13"
+   },
+   "rent_1pct_m": {
+    "label": "Rent income from each 1% of rent",
+    "value": 0.9,
+    "unit": "£m",
+    "page": 165,
+    "note": "paragraph 14"
+   },
+   "reserve_m": {
+    "label": "General reserve of the council homes account",
+    "value": 5.9,
+    "unit": "£m",
+    "page": 167,
+    "note": "paragraph 25 and Table 4: at 31 March 2025, and expected at 31 March 2027"
+   },
+   "homes": {
+    "label": "Council homes (average in the year)",
+    "value": 11885.0,
+    "unit": "homes",
+    "page": 170,
+    "note": "Appendix 1"
+   },
+   "new_homes_10y": {
+    "label": "New homes in the 10-year plan",
+    "value": 198.0,
+    "unit": "homes",
+    "page": 166,
+    "note": "paragraph 21"
+   },
+   "capital_10y_m": {
+    "label": "Building work on council homes over 10 years",
+    "value": 675.1,
+    "unit": "£m",
+    "page": 172,
+    "note": "Appendix 3, 2026/27 to 2035/36"
+   },
+   "retrofit_4y_m": {
+    "label": "Energy-saving work on council homes over four years",
+    "value": 49.0,
+    "unit": "£m",
+    "page": 166,
+    "note": "paragraph 22"
+   },
+   "interest_to_rent_pct": {
+    "label": "Interest as a share of rent income",
+    "value": 27.0,
+    "unit": "%",
+    "page": 174,
+    "note": "Appendix 5"
+   },
+   "interest_to_rent_pct_2035_36": {
+    "label": "Interest as a share of rent income, 2035/36",
+    "value": 24.0,
+    "unit": "%",
+    "page": 174,
+    "note": "Appendix 5"
+   },
+   "repairs_per_home": {
+    "label": "Repairs spending per home",
+    "value": 3000.0,
+    "unit": "£",
+    "page": 174,
+    "note": "Appendix 5"
+   },
+   "borrowing_per_home": {
+    "label": "Borrowing per home",
+    "value": 49100.0,
+    "unit": "£",
+    "page": 174,
+    "note": "Appendix 5"
+   },
+   "borrowing_per_home_2035_36": {
+    "label": "Borrowing per home, 2035/36",
+    "value": 72500.0,
+    "unit": "£",
+    "page": 174,
+    "note": "Appendix 5"
+   }
+  }
+ }
+}

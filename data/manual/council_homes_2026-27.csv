@@ -1,0 +1,31 @@
+key,kind,label,plain,y2025_26,y2026_27,unit,page,note,reviewed
+rents,income,Rents (Gross),Rent,-85.2,-89.3,£m,164,,checked
+service_charges,income,Service Charges (Gross),Service charges,-19.1,-19.8,£m,164,,checked
+other_income,income,Other Income,Other income,-4.0,-3.9,£m,164,,checked
+void_rent_loss,spend,Void Rent Loss,Rent lost while homes stand empty,1.6,1.3,£m,164,,checked
+repairs,spend,Repairs and Maintenance,Repairs and maintenance,24.6,25.1,£m,164,,checked
+management,spend,Housing Management,Running the housing service,30.7,26.7,£m,164,,checked
+regeneration,spend,Regeneration & Development,Planning new homes,1.7,3.2,£m,164,,checked
+capital_charges,spend,Capital Charges,Interest on debt and wear and tear on the homes,37.2,41.7,£m,164,,checked
+finance,spend,Finance & Resources,"Finance, including the provision for unpaid rent",4.6,6.7,£m,164,,checked
+contingency,spend,Contingency,Kept back for the unexpected,1.1,1.3,£m,164,,checked
+corporate,spend,Corporate Services,The council's central services,6.8,7.0,£m,164,,checked
+balance,total,Annual Balanced Budget,,0.0,0.0,£m,164,printed (0.0) and 0.0,checked
+rent_rise_pct,fact,Rent increase from 6 April 2026,,,4.8,%,158,recommendation 3: September 2025 CPI + 1%,checked
+rent_rise_weekly,fact,Average weekly rent increase,,,6.69,£,158,recommendation 3,checked
+service_charge_rise_weekly,fact,Average weekly service charge increase for tenants,,,1.52,£,158,recommendation 5,checked
+rent_1bed_weekly,fact,"Weekly rent, one-bedroom council home",,,136.50,£,165,paragraph 13,checked
+private_1bed_weekly,fact,"Weekly private rent, one bedroom, at least",,,476,£,165,"paragraph 13; ONS private rental market statistics, uprated by the council",checked
+rent_2bed_weekly,fact,"Weekly rent, two-bedroom council home",,,141.15,£,165,paragraph 13,checked
+private_2bed_weekly,fact,"Weekly private rent, two bedrooms",,,626,£,165,paragraph 13,checked
+rent_1pct_m,fact,Rent income from each 1% of rent,,,0.9,£m,165,paragraph 14,checked
+reserve_m,fact,General reserve of the council homes account,,,5.9,£m,167,"paragraph 25 and Table 4: at 31 March 2025, and expected at 31 March 2027",checked
+homes,fact,Council homes (average in the year),,,11885,homes,170,Appendix 1,checked
+new_homes_10y,fact,New homes in the 10-year plan,,,198,homes,166,paragraph 21,checked
+capital_10y_m,fact,Building work on council homes over 10 years,,,675.1,£m,172,"Appendix 3, 2026/27 to 2035/36",checked
+retrofit_4y_m,fact,Energy-saving work on council homes over four years,,,49,£m,166,paragraph 22,checked
+interest_to_rent_pct,fact,Interest as a share of rent income,,,27,%,174,Appendix 5,checked
+interest_to_rent_pct_2035_36,fact,"Interest as a share of rent income, 2035/36",,,24,%,174,Appendix 5,checked
+repairs_per_home,fact,Repairs spending per home,,,3000,£,174,Appendix 5,checked
+borrowing_per_home,fact,Borrowing per home,,,49100,£,174,Appendix 5,checked
+borrowing_per_home_2035_36,fact,"Borrowing per home, 2035/36",,,72500,£,174,Appendix 5,checked

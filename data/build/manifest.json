@@ -115,9 +115,23 @@
    "id": "gla_md3472_2026-27",
    "file": "gla_md3472_appendices_2026-27.pdf",
    "sha256": "09848894262457c7f11e03019f52b092fb9d05b0130ddec935713659423a1a33"
+  },
+  {
+   "id": "capital_programme_2026-30",
+   "file": "capital_programme_2026-30_full_council.pdf",
+   "sha256": "a21a7689beb1dff6549b6c9ca6f528557f3a000f082aa0cdb6115993472c1f7d"
+  },
+  {
+   "id": "hra_budget_2026-27",
+   "file": "cabinet_pack_2026-02-09.pdf",
+   "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
   }
  ],
  "manual": [
+  {
+   "file": "data/manual/capital_2026-30.csv",
+   "sha256": "e97f467b8607319caca304a7d1afd6b54f863f888415982f1d9d29ce025ba80c"
+  },
   {
    "file": "data/manual/capital_scheme_wards.csv",
    "sha256": "806cbf524a4bd176586995ead21922ed2906cfce7b0b5678264f3f115be6997c"
@@ -125,6 +139,10 @@
   {
    "file": "data/manual/companies_house_matches.csv",
    "sha256": "f1befc05c33b5ac841166963f7fbac8ab953fb9c07e1efaca71eb24b4e8b11cd"
+  },
+  {
+   "file": "data/manual/council_homes_2026-27.csv",
+   "sha256": "0ac9eadf3f2870c3b33623b5f1f7a7052b6dbf158bc7807a579e914fbe7a2fc1"
   },
   {
    "file": "data/manual/funding_groups.csv",
@@ -178,7 +196,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "57cde87598b8fc4c7945794e334d156c9c26150acaf0b52df373d792698c428e"
+   "sha256": "c05d8a0402ded50fdd0654a4d9837520b3f4fa6cb2ad0023978bfe1041409a2b"
   }
  ],
  "quality_counts": {
