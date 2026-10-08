@@ -21,7 +21,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - The gap: how this year's gap between costs and funding opened, and how it was closed with council tax, savings and reserves.
 - Balance it: next year's gap with the real choices a council has, including the referendum limit on council tax rises and the one-off nature of reserves.
 - Promises: each party's headline pledges from its 2026 manifesto, quoted word for word with the manifesto page, an archived copy, a status and a timeline. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
-- Councillors: all 50 councillors by ward, with their posts, from the council's own records.
+- Your ward: find any of the 21 wards by postcode or on a map, with its councillors (all 50, with their posts, from the council's own records), pledges about the ward, the wards next to it and a link to report street problems on FixMyStreet.
 - Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
 This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
@@ -38,13 +38,14 @@ Data vintage: ${c.vintage}.
 
 - [Home](${SITE_URL}/)
 - [Promises](${SITE_URL}/promises)
-- [Councillors by ward](${SITE_URL}/councillors)
+- [Your ward: wards and councillors](${SITE_URL}/wards)
 - [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)
 - [Sources](${SITE_URL}/sources)
 ${buildModel()
   .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d](${SITE_URL}/promise/${p.id})`)
   .join("\n")}
+${DATA.content.wards.wards.map((w) => `- [${w.name} ward](${SITE_URL}/ward/${w.id})`).join("\n")}
 `;
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

@@ -3,6 +3,7 @@ import hfRaw from "../../../data/build/hf_2026-27.json";
 import seedRaw from "../../../data/seed/hf_2026-27.json";
 import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/build/payments/index.json";
+import wardMapRaw from "../../../data/build/ward_map.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -11,7 +12,7 @@ import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {
@@ -115,6 +116,17 @@ describe("seed parses and cross-checks", () => {
     const r = raw();
     r.payments.months[0]!.total += 1;
     expect(() => parseDataset(r)).toThrow(/published plus withheld|do not add up/);
+  });
+
+  it("has one map shape for every ward, from the ONS, with neighbours both ways", () => {
+    expect(DATA.wardMap.wards.length).toBe(DATA.content.wards.wards.length);
+    expect(DATA.sources.get("ons_wards_2024")?.sha256).toBe(DATA.wardMap.source.sha256);
+    const missing = raw();
+    missing.wardMap.wards.pop();
+    expect(() => parseDataset(missing)).toThrow(/no shape for/);
+    const oneWay = raw();
+    oneWay.wardMap.wards[0]!.neighbours = [...oneWay.wardMap.wards[0]!.neighbours, oneWay.wardMap.wards[20]!.ons_code];
+    expect(() => parseDataset(oneWay)).toThrow(/not the other way/);
   });
 
   it("cites every payments file as a source with its hash", () => {

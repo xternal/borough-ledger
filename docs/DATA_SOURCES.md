@@ -81,3 +81,9 @@ The council's website answers scripts with "page not found", even with an honest
 
 DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the output is plain JSON that DuckDB can query directly (`read_json`) if anyone wants SQL.
 
+## In use (M6)
+
+- **Ward boundaries:** the ONS Open Geography Portal's Wards (December 2024) Boundaries UK BGC, generalised to 20 m, queried for the borough's 21 wards. `python3 etl/ward_map.py` saves the answer to `data/raw/` with its SHA-256 and projects it to SVG paths in `data/build/ward_map.json`, with each ward's neighbours (wards sharing a stretch of boundary). H&F's wards have not changed since May 2022; the May 2026 file is not served for queries yet. Open Government Licence; the map carries the ONS and Ordnance Survey attribution. The schema checks that every ward on the site has exactly one shape, matched by ONS code.
+- **Postcode to ward:** postcodes.io, called from the reader's browser, never from our servers (docs/PRIVACY.md). It answers with the ONS ward code, which matches the codes in `content/wards.yaml`; the names differ slightly ("College Park & Old Oak", "Shepherd's Bush Green"), so the site matches on codes only.
+- **FixMyStreet:** linked, never fetched or copied. Its ward pages use the ONS ward names; all 21 links were checked on 8 Oct 2026 (each page's heading names the ward), and an unknown name answers "Moved".
+

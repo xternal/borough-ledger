@@ -203,7 +203,7 @@
     height: 56px;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
   }
   @media (max-width: 520px) {
     .bar-in {
@@ -243,7 +243,7 @@
     font-weight: 500;
     text-decoration: none;
     color: var(--muted);
-    padding: 6px 10px;
+    padding: 6px 9px;
     border-radius: 6px;
     white-space: nowrap;
   }
@@ -262,7 +262,8 @@
     color: var(--muted);
     white-space: nowrap;
   }
-  @media (max-width: 860px) {
+  /* The place and year are in every page's heading too; give the menu the room first. */
+  @media (max-width: 1199px) {
     .ctx {
       display: none;
     }
@@ -1617,6 +1618,151 @@
     .councillor {
       grid-template-columns: minmax(0, 1fr);
       gap: 8px;
+    }
+  }
+
+  /* wards: postcode finder, map, ward pages */
+  .finder {
+    display: grid;
+    gap: 6px;
+    max-width: 520px;
+    margin-bottom: 8px;
+  }
+  .finder label {
+    font-weight: 550;
+    font-size: 14px;
+  }
+  .finder-row {
+    display: flex;
+    gap: 10px;
+  }
+  .finder input {
+    flex: 1;
+    min-width: 0;
+    font: 500 16px var(--font);
+    letter-spacing: 0.02em;
+    padding: 9px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .finder-msg {
+    min-height: 1.4em;
+    font-size: 14px;
+  }
+  .finder-msg.warn {
+    color: var(--warn);
+  }
+  .wardmap {
+    margin: 0;
+  }
+  .wardmap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .wm {
+    fill: var(--sunk);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-linejoin: round;
+    transition: fill 0.12s;
+  }
+  .wardmap a:hover .wm {
+    fill: var(--fund-soft);
+  }
+  .wm.near {
+    fill: var(--spend-soft);
+  }
+  .wm.on,
+  .wardmap a:hover .wm.on {
+    fill: var(--fund);
+    stroke: var(--fund);
+  }
+  .wm-l {
+    font: 500 8.5px var(--font);
+    fill: var(--muted);
+    pointer-events: none;
+  }
+  .wm-l.on {
+    font-size: 11px;
+    font-weight: 650;
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 3px;
+  }
+  .wards-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 16px;
+  }
+  .wards-layout .wardmap {
+    position: sticky;
+    top: 72px;
+  }
+  .ward-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+  .ward-sec {
+    padding-top: 0;
+    margin-bottom: 28px;
+    max-width: 62ch;
+  }
+  .ward-sec h2 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .cllrs {
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .cllrs li > a {
+    font-weight: 550;
+    margin-right: 8px;
+  }
+  .ward-aside {
+    position: sticky;
+    top: 72px;
+    display: grid;
+    gap: 10px;
+  }
+  .nearby {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .nearby .chip {
+    text-decoration: none;
+    display: inline-block;
+  }
+  @media (max-width: 860px) {
+    .wards-layout,
+    .ward-page {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+    .wards-layout .wardmap,
+    .ward-aside {
+      position: static;
+    }
+    .wards-layout .wardmap {
+      max-width: 420px;
+    }
+    .ward-aside .wardmap {
+      max-width: 300px;
     }
   }
 

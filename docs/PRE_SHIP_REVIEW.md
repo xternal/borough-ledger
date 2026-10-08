@@ -127,3 +127,10 @@ Still open before calling it a launch:
 - **Decide**: the final name (and with it a domain), whether to tell the council before launch (recommended: yes, offering a right of reply on the data), and a licence for the code and data now the repository is public.
 - **Search Console**: the verification code goes in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel.
 
+## Status after M6, ward view (8 Oct 2026)
+
+- **Your ward** is a new menu item and a section on the home page. Readers find their ward by postcode (looked up in their own browser at postcodes.io, docs/PRIVACY.md) or on a map drawn from the ONS boundaries, and land on a page for the ward: its councillors and their posts, pledges about the ward, the wards next to it, where to report street problems (FixMyStreet, linked only) and a reminder that council tax is the same in every ward.
+- `/councillors` became `/wards`, with a permanent redirect so old links keep working.
+- **Not yet:** council building schemes by ward. The spend files name places in about 200 capital projects ("Frank Banfield Park", "Edward Woods Fire Safety works"), but matching each to a ward needs a hand-checked table, like the payments mapping. Planned as the next change, shown as approx until checked.
+- No pledge card is about one ward yet. Ward pages say so and ask for ward leaflets at the contact address.
+

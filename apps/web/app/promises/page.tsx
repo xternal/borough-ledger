@@ -93,7 +93,7 @@ export default function PromisesPage() {
         </dl>
         <p className="muted small">
           A pledge moves up only on evidence from council papers. Any councillor or party named on a card can reply, and replies are published. Who
-          represents you: <a href="/councillors">councillors by ward</a>.
+          represents you: <a href="/wards">your ward&rsquo;s councillors</a>.
         </p>
       </section>
       <JsonLd data={promisesJsonLd(m.promises)} />

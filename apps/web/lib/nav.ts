@@ -5,6 +5,7 @@ export const SECTIONS = [
   ["gap", "The gap"],
   ["balance", "Balance it"],
   ["promises", "Promises"],
+  ["ward", "Your ward"],
   ["payments", "Payments"],
   ["method", "Method"],
 ] as const;
@@ -13,12 +14,14 @@ export type SectionId = (typeof SECTIONS)[number][0];
 
 /** Sections with a page of their own; the rest are parts of the home page. */
 export function sectionHref(id: SectionId): string {
+  if (id === "ward") return "/wards";
   return id === "promises" || id === "payments" ? `/${id}` : `/#${id}`;
 }
 
 /** The section a page belongs to, or null on the long pages where the section in view is highlighted instead. */
 export function sectionForPath(path: string): SectionId | null {
-  if (/^\/(promises|promise|councillors?)(\/|$)/.test(path)) return "promises";
+  if (/^\/(promises|promise)(\/|$)/.test(path)) return "promises";
+  if (/^\/(wards?|councillors?)(\/|$)/.test(path)) return "ward";
   if (/^\/(payments|supplier)(\/|$)/.test(path)) return "payments";
   if (/^\/sources(\/|$)/.test(path)) return "method";
   return null;

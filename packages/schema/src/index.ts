@@ -6,3 +6,4 @@ export * from "./content";
 export * from "./payments";
 export * from "./append-only";
 export * from "./deadlines";
+export * from "./wardmap";

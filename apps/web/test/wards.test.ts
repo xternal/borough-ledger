@@ -1,0 +1,75 @@
+import { describe, expect, it } from "vitest";
+import { DATA } from "@borough-ledger/schema";
+import { buildModel } from "@/lib/model";
+import { lookupWard, normalisePostcode, wardFromResult } from "@/lib/wardFinder";
+import { finderData, fixMyStreetUrl, partyMix, wardsOf } from "@/lib/wards";
+
+const m = buildModel();
+const { wards, councilCode } = finderData(m);
+const broadway = wards.find((w) => w.id === "hammersmith-broadway")!;
+
+describe("postcode to ward", () => {
+  it("accepts whole postcodes however they are typed, and nothing else", () => {
+    expect(normalisePostcode("w69ju")).toBe("W6 9JU");
+    expect(normalisePostcode(" sw6  1ab ")).toBe("SW6 1AB");
+    expect(normalisePostcode("NW10 6RB")).toBe("NW10 6RB");
+    expect(normalisePostcode("W6")).toBeNull();
+    expect(normalisePostcode("hello")).toBeNull();
+  });
+
+  it("finds our ward by its ONS code, and says when a postcode is in another borough", () => {
+    const ours = { postcode: "W6 9JU", admin_district: "Hammersmith and Fulham", codes: { admin_ward: broadway.ons_code, admin_district: councilCode } };
+    expect(wardFromResult(ours, wards, councilCode)).toEqual({ kind: "ward", id: "hammersmith-broadway", name: broadway.name, postcode: "W6 9JU" });
+    const ealing = { postcode: "W3 6RS", admin_district: "Ealing", codes: { admin_ward: "E05013520", admin_district: "E09000009" } };
+    expect(wardFromResult(ealing, wards, councilCode)).toEqual({ kind: "elsewhere", district: "Ealing", postcode: "W3 6RS" });
+    expect(wardFromResult(null, wards, councilCode)).toEqual({ kind: "not_found" });
+  });
+
+  it("sends the postcode in the body of a POST to postcodes.io, never in the address, and survives a failure", async () => {
+    let seen: { url: string; init?: RequestInit } | undefined;
+    const ok = (async (url: string, init?: RequestInit) => {
+      seen = { url, init };
+      return new Response(JSON.stringify({ status: 200, result: [{ query: "W6 9JU", result: { postcode: "W6 9JU", admin_district: "Hammersmith and Fulham", codes: { admin_ward: broadway.ons_code, admin_district: councilCode } } }] }));
+    }) as unknown as typeof fetch;
+    expect((await lookupWard("w6 9ju", wards, councilCode, ok)).kind).toBe("ward");
+    expect(seen!.init?.method).toBe("POST");
+    expect(seen!.url).not.toContain("9JU");
+    expect(String(seen!.init?.body)).toContain("W6 9JU");
+    expect(seen!.init?.credentials).toBe("omit");
+    const notFound = (async () => new Response(JSON.stringify({ status: 200, result: [{ query: "ZZ1 1ZZ", result: null }] }))) as unknown as typeof fetch;
+    expect(await lookupWard("ZZ1 1ZZ", wards, councilCode, notFound)).toEqual({ kind: "not_found" });
+    const down = (async () => {
+      throw new TypeError("offline");
+    }) as unknown as typeof fetch;
+    expect(await lookupWard("W6 9JU", wards, councilCode, down)).toEqual({ kind: "error" });
+    expect(await lookupWard("W6", wards, councilCode, down)).toEqual({ kind: "invalid" });
+  });
+});
+
+describe("ward pages", () => {
+  const all = wardsOf(m);
+
+  it("has every ward, each with its councillors, a shape and neighbours on the map", () => {
+    expect(all.length).toBe(DATA.content.wards.wards.length);
+    expect(all.flatMap((w) => w.councillors).length).toBe(m.people.councillors.length);
+    for (const w of all) {
+      expect(w.councillors.length).toBeGreaterThan(0);
+      expect(w.shape.path.startsWith("M")).toBe(true);
+      expect(w.neighbours.length).toBeGreaterThan(0);
+      for (const n of w.neighbours) expect(all.find((x) => x.id === n)?.neighbours).toContain(w.id);
+    }
+  });
+
+  it("links FixMyStreet by the ONS ward name, encoded as FixMyStreet expects", () => {
+    expect(fixMyStreetUrl("Addison")).toBe("https://www.fixmystreet.com/reports/Hammersmith+and+Fulham/Addison");
+    expect(fixMyStreetUrl("Shepherd's Bush Green")).toBe("https://www.fixmystreet.com/reports/Hammersmith+and+Fulham/Shepherd%27s+Bush+Green");
+    expect(fixMyStreetUrl("College Park & Old Oak")).toBe("https://www.fixmystreet.com/reports/Hammersmith+and+Fulham/College+Park+%26+Old+Oak");
+  });
+
+  it("describes each ward's councillors the same way for every party", () => {
+    expect(partyMix(["Labour", "Labour", "Labour"])).toBe("all Labour");
+    expect(partyMix(["Conservative", "Conservative"])).toBe("both Conservative");
+    expect(partyMix(["Labour", "Labour", "Conservative"])).toBe("two Labour and one Conservative");
+    expect(partyMix(["Conservative", "Labour", "Labour"])).toBe("one Conservative and two Labour");
+  });
+});

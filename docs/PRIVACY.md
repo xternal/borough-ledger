@@ -36,6 +36,12 @@ How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py
 * Photos: strip EXIF and location before storage; blur any residents' faces or addresses if visible.
 * No IP addresses stored; rate limiting uses a daily-salted hash.
 
+## Finding your ward by postcode
+
+* The lookup runs in the reader's browser. The postcode goes straight to postcodes.io (a free, open service using ONS data) in the body of an encrypted POST request, with no cookies and no referrer, so it never appears in an address, in our logs or in the page's URL afterwards.
+* We never see the postcode and nothing is stored. The ward page the reader lands on is the same for everyone in that ward.
+* Readers who would rather not send a postcode anywhere can pick their ward on the map or the list.
+
 ## Replies and corrections by email
 
 * The site shows one address, boroughs@guzh.uk, for corrections and for replies from anyone named on a card.
