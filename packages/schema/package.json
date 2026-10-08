@@ -17,7 +17,8 @@
     "content:deadlines": "tsx src/deadlines-cli.ts",
     "decisions:suggest": "tsx src/decision-links-cli.ts suggest",
     "decisions:apply": "tsx src/decision-links-cli.ts apply",
-    "decisions:probe": "tsx src/decision-links-cli.ts probe"
+    "decisions:probe": "tsx src/decision-links-cli.ts probe",
+    "digest": "tsx src/digest-cli.ts"
   },
   "dependencies": {
     "zod": "4.6.5",

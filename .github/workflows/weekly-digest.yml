@@ -1,0 +1,50 @@
+name: Weekly digest draft
+
+# Friday mornings: a draft Substack post about the past week at the council and what is coming up, written by Claude
+# from facts the site already holds (packages/schema/src/digest-cli.ts), every number checked against them. It opens
+# as an issue (GitHub emails the owner), with the facts underneath, for the owner to edit and post.
+on:
+  schedule:
+    - cron: "0 6 * * 5" # 06:00 UTC on Fridays: 07:00 BST in summer, 06:00 GMT in winter
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Week ending (YYYY-MM-DD); today if empty"
+        required: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 100 # enough history to see whether new spend data arrived this week
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Write the draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pnpm --filter @borough-ledger/schema digest "$RUNNER_TEMP/digest.md" ${{ inputs.date }}
+      - name: Open it as an issue, once per week
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          WEEK: ${{ inputs.date }}
+        run: |
+          week="${WEEK:-$(TZ=Europe/London date +%F)}"
+          title="Weekly digest draft: week ending $(date -d "$week" '+%-d %B %Y')"
+          gh label create digest --repo "$REPO" --color 2457f5 --description "Weekly Substack draft" --force >/dev/null
+          if gh issue list --repo "$REPO" --state all --label digest --search "\"$title\" in:title" --json number --jq '.[0].number' | grep -q .; then
+            echo "Already opened: $title"
+          else
+            gh issue create --repo "$REPO" --title "$title" --label digest --body-file "$RUNNER_TEMP/digest.md"
+          fi
