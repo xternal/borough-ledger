@@ -1,0 +1,53 @@
+name: Reminders
+
+# Jobs only a person can do, opened as issues on the day they fall due (GitHub emails the owner about new issues).
+#   - The council publishes each quarter's spend file within a month of the quarter's end, and its website refuses
+#     scripts, so the file is downloaded by hand: 1 Feb, 1 May, 1 Aug and 1 Nov.
+#   - The new year's budget is adopted by Full Council in late February: 1 March, the statement moves on a year.
+on:
+  schedule:
+    - cron: "0 8 1 2,5,8,11 *" # 08:00 UTC on the 1st: 08:00 GMT or 09:00 BST
+    - cron: "0 8 1 3 *"
+  workflow_dispatch:
+    inputs:
+      which:
+        description: "Open this reminder now"
+        type: choice
+        options: [spend-file, budget]
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Open the reminder, unless it is already open
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          WHICH: ${{ inputs.which || (github.event.schedule == '0 8 1 3 *' && 'budget' || 'spend-file') }}
+        run: |
+          if [ "$WHICH" = "budget" ]; then
+            title="Budget $(date -u +%Y): move the statement on a year"
+            body="Full Council adopted the new budget in late February. Steps (docs/BUILD_PLAN.md, M1):
+
+          - [ ] Download the Revenue Budget and Council Tax Levels report and the Cabinet pack into data/raw/ (the council's site refuses scripts).
+          - [ ] Extract the new year's tables into data/manual/ (gap waterfall, next year, savings, toggles) with page numbers, and check each against the report's own totals.
+          - [ ] Run python3 etl/fetch.py and python3 etl/build.py; update the council tax bands from the government tables.
+          - [ ] A person checks each new table once (data/manual/README.md).
+          - [ ] Check Balance it against what the council actually decided, and say so on the site."
+          else
+            title="Spend file: add the council's new quarter ($(date -u +%b\ %Y))"
+            body="The council should now have published last quarter's payments over £500 (within a month of the quarter's end).
+
+          - [ ] Download the new XLSX from the council's procurement and financial data page into data/raw/payments/ with a browser.
+          - [ ] python3 etl/payments.py --fetch, then --draft-map; check any new service areas (reviewed=yes).
+          - [ ] python3 etl/payments.py; python3 etl/capital_wards.py --draft and check any new building schemes; python3 etl/capital_wards.py.
+          - [ ] Look at short payee names without an organisation word (docs/PRIVACY.md) before publishing."
+          fi
+          if gh issue list --repo "$REPO" --state open --search "\"$title\" in:title" --json number --jq '.[0].number' | grep -q .; then
+            echo "Already open: $title"
+          else
+            gh issue create --repo "$REPO" --title "$title" --body "$body"
+          fi

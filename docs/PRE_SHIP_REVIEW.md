@@ -170,3 +170,11 @@ Still to do: verify boroughbook.uk in Google Search Console as a Domain property
 
 `/party/<id>` (one per party with pledges) and `/topic/<slug>` (one per pledge topic, 10 so far) answer searches like "Labour Hammersmith manifesto pledges" or "Hammersmith parks". Each opens with where the pledges stand, lists them, shows the council decisions that moved them and answers a few questions, with structured data (CollectionPage, FAQPage, breadcrumbs) and its own feed. Topic pages show the council's budget for the topic only where a budget line honestly matches (six by name, community safety by hand); health, young people and jobs, and climate show none, because the matching budget would mislead (the hospital pledge is about the NHS). Every pledge card links its party and topic.
 
+## Quality pass (8 Oct 2026)
+
+- **Accessibility 100** (Lighthouse) on home, promises, a pledge, a party, decisions and payments, up from 91 to 96. Text colours darkened to pass WCAG AA (4.5:1) on every background they sit on: faint grey #6b6b74, red #b91c1c, amber #92400e, and darker ink for status pills. In dark mode the faint grey is #8291a0 rather than the navy palette's #7d8b99, which falls to 4.45:1 on raised surfaces. Links that sit side by side on /decisions and in the payments file table have room to tap. Performance 95 to 100, best practices and SEO 100 on every page audited.
+- **Share images** for party and topic pages (status counts only, never money).
+- **Uptime:** `.github/workflows/uptime.yml` checks the main pages, their content and the old address's redirect every 30 minutes; a failed run emails the owner.
+- **Reminders:** `.github/workflows/reminders.yml` opens an issue on 1 Feb, May, Aug and Nov to add the council's new spend file by hand, and on 1 March to move the statement on to the new budget.
+- **CI pinned to Ubuntu 24.04**, so GitHub moving `ubuntu-latest` to Ubuntu 26 (from 19 Oct 2026) cannot break a build unannounced; move up on purpose later.
+

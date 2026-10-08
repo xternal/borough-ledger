@@ -13,7 +13,7 @@ concurrency:
 jobs:
   etl:
     name: ETL (sources, checks, build up to date)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,7 +34,7 @@ jobs:
 
   content:
     name: Content (promises, councillors, append-only history)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,7 +52,7 @@ jobs:
 
   check:
     name: Typecheck, test, preview build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     steps:
@@ -79,7 +79,7 @@ jobs:
     # This job proves it: with test data present, build:prod must fail on the test-data error;
     # with none left, build:prod must pass. Vercel production deploys run the same build:prod.
     name: Production build gate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     steps:
