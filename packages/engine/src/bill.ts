@@ -32,3 +32,23 @@ export function billFor(rules: Rules, bandD: BandD, band: Band, singlePerson: bo
 export function councilTaxYieldM(taxBaseBandDEq: number, bandDCouncil: number, collectionRate: number): number {
   return (taxBaseBandDEq * bandDCouncil * collectionRate) / 1e6;
 }
+
+/**
+ * Split an amount in proportion to weights, in whole pence that add back up to the amount (largest remainder, ties to
+ * the earlier weight). Splits any band's Mayor of London share by body: at Band D it gives the GLA's own figures.
+ */
+export function splitPence(amount: number, weights: number[]): number[] {
+  const pence = Math.round(amount * 100);
+  const sum = weights.reduce((a, w) => a + w, 0);
+  if (!(sum > 0) || weights.some((w) => w < 0)) throw new Error("splitPence needs non-negative weights with a positive sum");
+  const exact = weights.map((w) => (pence * w) / sum);
+  const out = exact.map((x) => Math.floor(x + 1e-9));
+  let left = pence - out.reduce((a, p) => a + p, 0);
+  const order = exact.map((x, i) => ({ r: x - out[i]!, i })).sort((a, z) => z.r - a.r || a.i - z.i);
+  for (const { i } of order) {
+    if (left <= 0) break;
+    out[i]! += 1;
+    left -= 1;
+  }
+  return out.map((p) => p / 100);
+}

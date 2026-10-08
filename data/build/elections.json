@@ -1,0 +1,1531 @@
+{
+ "note": "Ward results of the borough election, from Democracy Club (CC BY-SA 4.0), which copies each declaration from the council's result page. Built by etl/elections.py. Only elected candidates, who are councillors, are named; the others appear as their party's candidate.",
+ "election": {
+  "id": "local.hammersmith-and-fulham.2026-05-07",
+  "date": "2026-05-07",
+  "name": "Hammersmith & Fulham Council election"
+ },
+ "source": {
+  "title": "Democracy Club candidates and results",
+  "url": "https://candidates.democracyclub.org.uk/api/next/ballots/?election_id=local.hammersmith-and-fulham.2026-05-07",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "retrieved_on": "2026-10-08"
+ },
+ "quality": "sourced",
+ "spot_checks": [
+  {
+   "ward_id": "addison",
+   "on": "2026-10-08",
+   "result": "every figure matched"
+  },
+  {
+   "ward_id": "palace-and-hurlingham",
+   "on": "2026-10-08",
+   "result": "every figure matched"
+  }
+ ],
+ "wards": {
+  "addison": {
+   "name": "Addison",
+   "seats": 2,
+   "ballots": 3470,
+   "turnout_pct": 34.3,
+   "rejected": 11,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/addison-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.addison.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 958,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "jacolyn-daly"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 808,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "ross-melton"
+    },
+    {
+     "party": "Green Party",
+     "votes": 360,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 335,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 292,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 207,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 200,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 186,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 124,
+     "elected": false
+    }
+   ]
+  },
+  "avonmore": {
+   "name": "Avonmore",
+   "seats": 2,
+   "ballots": 3861,
+   "turnout_pct": 39.2,
+   "rejected": 4,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/avonmore-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.avonmore.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 918,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "laura-janes"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 794,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "joe-eaton"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 521,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 395,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 381,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 208,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 198,
+     "elected": false
+    },
+    {
+     "party": "Independent",
+     "votes": 189,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 131,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 126,
+     "elected": false
+    }
+   ]
+  },
+  "brook-green": {
+   "name": "Brook Green",
+   "seats": 2,
+   "ballots": 4773,
+   "turnout_pct": 45.5,
+   "rejected": 13,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/brook-green-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.brook-green.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1135,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "stala-antoniades"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1014,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "florent-sherifi"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 751,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 740,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 374,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 198,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 172,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 164,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 131,
+     "elected": false
+    },
+    {
+     "party": "Independent",
+     "votes": 94,
+     "elected": false
+    }
+   ]
+  },
+  "college-park-and-old-oak": {
+   "name": "College Park and Old Oak",
+   "seats": 3,
+   "ballots": 6044,
+   "turnout_pct": 31.0,
+   "rejected": 10,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/college-park-and-old-oak-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.college-park-old-oak.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1110,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "wesley-harcourt"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1090,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "alex-sanderson"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1034,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "bora-kwon"
+    },
+    {
+     "party": "Green Party",
+     "votes": 645,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 364,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 362,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 357,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 253,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 220,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 213,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 206,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 190,
+     "elected": false,
+     "party_id": "conservative"
+    }
+   ]
+  },
+  "coningham": {
+   "name": "Coningham",
+   "seats": 3,
+   "ballots": 8552,
+   "turnout_pct": 38.5,
+   "rejected": 15,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/coningham-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.coningham.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1399,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "lisa-homan"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1280,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "rowan-ree"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1229,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "rory-vaughan"
+    },
+    {
+     "party": "Green Party",
+     "votes": 860,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 825,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 792,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 353,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 320,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 315,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 302,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 294,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 233,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 182,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 168,
+     "elected": false
+    }
+   ]
+  },
+  "fulham-reach": {
+   "name": "Fulham Reach",
+   "seats": 3,
+   "ballots": 9362,
+   "turnout_pct": 41.0,
+   "rejected": 8,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/fulham-reach-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.fulham-reach.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1550,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "david-campbell"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1487,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "anna-magryta-urban"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1393,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "nikos-souslous"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 781,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 713,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 653,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 586,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 538,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 439,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 395,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 382,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 224,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 221,
+     "elected": false
+    }
+   ]
+  },
+  "fulham-town": {
+   "name": "Fulham Town",
+   "seats": 2,
+   "ballots": 4017,
+   "turnout_pct": 39.6,
+   "rejected": 2,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/fulham-town-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.fulham-town.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 990,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "victoria-brocklebank-fowler"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 906,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "liam-downer-sanderson"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 398,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 359,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 344,
+     "elected": false
+    },
+    {
+     "party": "Labour Party",
+     "votes": 309,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Green Party",
+     "votes": 262,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 245,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 204,
+     "elected": false
+    }
+   ]
+  },
+  "grove": {
+   "name": "Grove",
+   "seats": 2,
+   "ballots": 4328,
+   "turnout_pct": 43.1,
+   "rejected": 2,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/grove-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.grove.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1166,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "hannah-bulmer"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1159,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "stephen-cowan"
+    },
+    {
+     "party": "Green Party",
+     "votes": 422,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 411,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 391,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 214,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 200,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 187,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 178,
+     "elected": false
+    }
+   ]
+  },
+  "hammersmith-broadway": {
+   "name": "Hammersmith Broadway",
+   "seats": 2,
+   "ballots": 3948,
+   "turnout_pct": 39.7,
+   "rejected": 13,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/hammersmith-broadway-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.hammersmith-broadway.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 878,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "molly-mantle"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 826,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "callum-nimmo"
+    },
+    {
+     "party": "Green Party",
+     "votes": 507,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 404,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 293,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 248,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 235,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 208,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 199,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 150,
+     "elected": false
+    }
+   ]
+  },
+  "lillie": {
+   "name": "Lillie",
+   "seats": 2,
+   "ballots": 3315,
+   "turnout_pct": 37.3,
+   "rejected": 6,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/lillie-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.lillie.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 701,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "sharon-holder"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 665,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "lydia-paynter"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 549,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 536,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 327,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 194,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 176,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 167,
+     "elected": false
+    }
+   ]
+  },
+  "munster": {
+   "name": "Munster",
+   "seats": 3,
+   "ballots": 9100,
+   "turnout_pct": 38.4,
+   "rejected": 10,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/munster-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.munster.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1378,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "adronie-alford"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1305,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "dominic-stanton"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1241,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "stewart-waine"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 843,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 713,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 665,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Green Party",
+     "votes": 550,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 451,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 442,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 406,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 394,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 382,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 330,
+     "elected": false
+    }
+   ]
+  },
+  "palace-and-hurlingham": {
+   "name": "Palace & Hurlingham",
+   "seats": 3,
+   "ballots": 10574,
+   "turnout_pct": 45.9,
+   "rejected": 8,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/palace-and-hurlingham-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.palace-hurlingham.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 2037,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "amanda-lloyd-harris"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1972,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "jeremy-maddocks"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1952,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "aliya-afzal-khan"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 830,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 729,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 708,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Green Party",
+     "votes": 593,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 556,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 435,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 399,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 363,
+     "elected": false
+    }
+   ]
+  },
+  "parsons-green-and-sandford": {
+   "name": "Parsons Green & Sandford",
+   "seats": 2,
+   "ballots": 4407,
+   "turnout_pct": 41.3,
+   "rejected": 4,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/parsons-green-and-sandford-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.parsons-green-sandford.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1158,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "jose-afonso"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 1055,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "adrian-pascu-tulbure"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 404,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 385,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 319,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 244,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 239,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 218,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 194,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 191,
+     "elected": false
+    }
+   ]
+  },
+  "ravenscourt": {
+   "name": "Ravenscourt",
+   "seats": 2,
+   "ballots": 4365,
+   "turnout_pct": 46.6,
+   "rejected": 9,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/ravenscourt-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.ravenscourt.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1180,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "natalie-lindsay"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1109,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "harry-brackley"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 476,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 447,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 444,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 245,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 170,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 152,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 142,
+     "elected": false
+    }
+   ]
+  },
+  "sands-end": {
+   "name": "Sands End",
+   "seats": 3,
+   "ballots": 7746,
+   "turnout_pct": 35.0,
+   "rejected": 5,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/sands-end-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.sands-end.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 967,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "rob-harris"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 946,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "roseanne-meacher"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 941,
+     "elected": true,
+     "party_id": "conservative",
+     "councillor_id": "libby-hart"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 927,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 857,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 841,
+     "elected": false,
+     "party_id": "labour"
+    },
+    {
+     "party": "Green Party",
+     "votes": 472,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 410,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 357,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 327,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 260,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 224,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 217,
+     "elected": false
+    }
+   ]
+  },
+  "shepherds-bush-green": {
+   "name": "Shepherds Bush Green",
+   "seats": 2,
+   "ballots": 2792,
+   "turnout_pct": 38.8,
+   "rejected": 12,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/shepherds-bush-green-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.shepherds-bush-green.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 626,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "zarar-qayyum"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 584,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "mercy-umeh"
+    },
+    {
+     "party": "Green Party",
+     "votes": 409,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 344,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 214,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 178,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 119,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 116,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 104,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 98,
+     "elected": false,
+     "party_id": "conservative"
+    }
+   ]
+  },
+  "walham-green": {
+   "name": "Walham Green",
+   "seats": 2,
+   "ballots": 3774,
+   "turnout_pct": 39.7,
+   "rejected": 2,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/walham-green-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.walham-green.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 731,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "sam-kelly"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 730,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "genevieve-nwaogbe"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 642,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 631,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Green Party",
+     "votes": 314,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 261,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 216,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 131,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 118,
+     "elected": false
+    }
+   ]
+  },
+  "wendell-park": {
+   "name": "Wendell Park",
+   "seats": 2,
+   "ballots": 4631,
+   "turnout_pct": 45.4,
+   "rejected": 8,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/wendell-park-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.wendell-park.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1372,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "rebecca-harvey"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1102,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "asif-siddique"
+    },
+    {
+     "party": "Green Party",
+     "votes": 551,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 410,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 399,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 236,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 197,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 194,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 170,
+     "elected": false
+    }
+   ]
+  },
+  "west-kensington": {
+   "name": "West Kensington",
+   "seats": 3,
+   "ballots": 6162,
+   "turnout_pct": 33.8,
+   "rejected": 10,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/west-kensington-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.west-kensington.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1023,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "victoria-brignell"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 962,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "daryl-brown"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 885,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "florian-chevoppe-verdier"
+    },
+    {
+     "party": "Green Party",
+     "votes": 602,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 400,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 378,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 328,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 308,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 286,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 276,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 264,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 259,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 191,
+     "elected": false
+    }
+   ]
+  },
+  "white-city": {
+   "name": "White City",
+   "seats": 3,
+   "ballots": 7605,
+   "turnout_pct": 38.0,
+   "rejected": 7,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/white-city-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.white-city.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 1397,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "andrew-jones"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1335,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "natalia-perez"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 1275,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "frances-umeh"
+    },
+    {
+     "party": "Green Party",
+     "votes": 809,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 741,
+     "elected": false
+    },
+    {
+     "party": "Green Party",
+     "votes": 734,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 214,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 195,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 184,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 181,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 173,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 172,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 101,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 94,
+     "elected": false
+    }
+   ]
+  },
+  "wormholt": {
+   "name": "Wormholt",
+   "seats": 2,
+   "ballots": 3606,
+   "turnout_pct": 38.1,
+   "rejected": 7,
+   "result_url": "https://www.lbhf.gov.uk/councillors-and-democracy/elections/local-council-elections-2026/results/wormholt-ward-result",
+   "dc_url": "https://candidates.democracyclub.org.uk/elections/local.hammersmith-and-fulham.wormholt.2026-05-07/",
+   "candidates": [
+    {
+     "party": "Labour Party",
+     "votes": 965,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "nicole-trehy"
+    },
+    {
+     "party": "Labour Party",
+     "votes": 923,
+     "elected": true,
+     "party_id": "labour",
+     "councillor_id": "max-schmid"
+    },
+    {
+     "party": "Green Party",
+     "votes": 509,
+     "elected": false
+    },
+    {
+     "party": "Reform UK",
+     "votes": 264,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 238,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Reform UK",
+     "votes": 208,
+     "elected": false
+    },
+    {
+     "party": "Conservative and Unionist Party",
+     "votes": 192,
+     "elected": false,
+     "party_id": "conservative"
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 160,
+     "elected": false
+    },
+    {
+     "party": "Liberal Democrats",
+     "votes": 147,
+     "elected": false
+    }
+   ]
+  }
+ }
+}

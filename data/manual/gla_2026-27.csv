@@ -1,0 +1,6 @@
+key,kind,label,phrase,official_term,band_d,band_d_prev,source_id,page,note,reviewed
+police,part,Police,police,"Mayor's Office for Policing and Crime (MOPAC), which oversees the Metropolitan Police",334.13,319.13,gla_md3472_2026-27,4,"Appendix B, Band D table; the same £334.13 is Appendix A line 8 (page 1)",checked
+fire,part,Fire brigade,the fire brigade,"London Fire Commissioner (LFC), which runs the London Fire Brigade",76.85,71.72,gla_md3472_2026-27,4,"Appendix B, Band D table",checked
+transport,part,Transport,transport,Transport for London (TfL),77.09,77.09,gla_md3472_2026-27,4,"Appendix B, Band D table",checked
+city_hall,part,City Hall and the London Assembly,City Hall and the London Assembly,Greater London Authority (GLA): the Mayor's own budget and the London Assembly,22.44,22.44,gla_md3472_2026-27,4,"Appendix B, Band D table",checked
+total,total,Mayor of London,the Mayor of London,GLA basic amount of council tax for the 32 London boroughs,510.51,490.38,gla_md3472_2026-27,1,Appendix A line 9; the same total ends the Appendix B table (page 4),checked

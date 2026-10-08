@@ -6,6 +6,7 @@ import paymentsRaw from "../../../data/build/payments/index.json";
 import wardMapRaw from "../../../data/build/ward_map.json";
 import wardSpendRaw from "../../../data/build/ward_spend.json";
 import decisionsRaw from "../../../data/build/decisions.json";
+import electionsRaw from "../../../data/build/elections.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -14,7 +15,7 @@ import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {
@@ -26,6 +27,22 @@ describe("seed parses and cross-checks", () => {
     const r = raw();
     delete (r.council.funding[0] as { quality?: string }).quality;
     expect(() => parseDataset(r)).toThrow();
+  });
+
+  it("names nobody in election results but councillors, through their councillor record", () => {
+    const r = raw();
+    (r.elections.wards.addison!.candidates[2] as Record<string, unknown>).name = "A Candidate";
+    expect(() => parseDataset(r)).toThrow();
+    const r2 = raw();
+    const loser = r2.elections.wards.addison!.candidates.find((c) => !c.elected)! as { councillor_id?: string };
+    loser.councillor_id = "jacolyn-daly";
+    expect(() => parseDataset(r2)).toThrow(/only elected candidates link to a councillor/);
+  });
+
+  it("rejects an election result whose winner had fewer votes than a loser", () => {
+    const r = raw();
+    r.elections.wards.addison!.candidates[0]!.votes = 1;
+    expect(() => parseDataset(r)).toThrow(/fewer votes was elected/);
   });
 
   it("rejects an unknown source id", () => {

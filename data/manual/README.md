@@ -28,12 +28,19 @@ The council's budget papers are behind a firewall that blocks scripts, so they a
 | `savings_2026-27.csv` | Every named saving in Appendix C (Cabinet pack pages 61 to 66), £000, this year and next, with each directorate's total row | Lines add up to each directorate total in both years; service savings £9,524k match Table 2's £9.5m | Extracted 6 Oct 2026. [x] Human check: checked against the PDF by the project owner, 6 Oct 2026 |
 | `toggles_2027-28.csv` | Toggle costs modelled from the report, e.g. 20 extra law enforcement officers from £4.6m for 72 (PDF page 23) | Toggle ids exist | [x] Human check: the £4.6m for 72 officers checked against PDF page 23 by Claude; signed off by the project owner, 8 Oct 2026 |
 
+## Other hand-made tables
+
+| File | What | Automatic check | Human check |
+|---|---|---|---|
+| `gla_2026-27.csv` | The Mayor of London's Band D amount by body (police, fire brigade, transport, City Hall and the London Assembly), this year and last, from Mayoral Decision MD3472, Appendix B (PDF page 4), with the total from Appendix A line 9 (page 1). `phrase` is how each body reads inside a sentence; `reviewed` as above | The parts add up to the total in both years, and the total equals the GLA element of the government's council tax tables | Checked by Claude on 8 Oct 2026 (`reviewed=checked`) against the PDF. [ ] Human check: read the four lines against PDF page 4; sign off with `reviewed=yes`, which turns the figures from approx to sourced |
+
 Columns:
 
 ```
 gap_2026-27.csv         order,label,m,kind,page,note       kind ∈ pressure, funding, close, close_saving, close_oneoff, report_total, report_gap (optional)
 next_year_2027-28.csv   key,value,source_id,page,note      key ∈ gap_m, ct_assumed_pct, council_tax_m, planned_savings_m, minimum_safe_m, fees_income_m
 savings_2026-27.csv     id,directorate,service,label,k_2026_27,k_2027_28,kind,service_group,page   kind ∈ service, collection_fund, total
+gla_2026-27.csv         key,kind,label,phrase,official_term,band_d,band_d_prev,source_id,page,note,reviewed   kind ∈ part, total
 ```
 
 Signs follow the waterfall: pressures positive, extra government funding negative, closing lines negative.

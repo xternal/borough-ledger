@@ -1424,11 +1424,35 @@
      "date": "2026-05-01",
      "type": "promised",
      "text": "Re-pledged in the 2026 Labour manifesto"
+    },
+    {
+     "date": "2014-05-22",
+     "type": "promised",
+     "text": "Labour manifesto for the council elections of 22 May 2014: \"we will abolish home care charges\", which were then £12 an hour (PDF page 18)",
+     "evidence_url": "https://democracy.lbhf.gov.uk/documents/s50600/Final%2008.2%20Labour%20Administrations%20Manifesto.pdf"
+    },
+    {
+     "date": "2015-02-02",
+     "type": "in_plan",
+     "text": "Cabinet report, 2 February 2015: Cabinet approved ending home care charges on 31 March 2015, giving up £441,000 a year of income; the minutes call it a manifesto commitment delivered (report paragraphs 2.1 and 10.2)",
+     "evidence_url": "https://democracy.lbhf.gov.uk/documents/s60121/Abolish%20Homecare%20Charging%20Report%20V9B%2022%2001%202015.pdf"
+    },
+    {
+     "date": "2015-02-25",
+     "type": "budgeted",
+     "text": "Full Council minutes, 25 February 2015: councillors voted 25 to 0, with 15 not voting, to abolish home care charges on 31 March 2015; the £324,000 a year net cost was met from savings elsewhere in the 2015/16 budget (Cabinet report, paragraph 10.2)",
+     "evidence_url": "https://democracy.lbhf.gov.uk/ieListDocuments.aspx?CId=114&MId=3561"
+    },
+    {
+     "date": "2015-04-01",
+     "type": "delivering",
+     "text": "Full Council report, 17 October 2024: the council has not charged for home care since 1 April 2015, and says it is the only council in England not to (page 1)",
+     "evidence_url": "https://democracy.lbhf.gov.uk/documents/s129307/Free+Home+Care+Ten+Years+On.pdf"
     }
    ],
    "replies": [],
    "editor_check_required": false,
-   "editor_note": "Earlier history (2014 pledge, 2015 charges scrapped) is not yet sourced (PRE_SHIP_REVIEW B3); append those events once found."
+   "editor_note": "Earlier history (the 2014 pledge, the 2015 decisions and the end of charges) added 8 Oct 2026 from the 2014 manifesto and the council's own papers, read in full (PRE_SHIP_REVIEW B3)."
   },
   {
    "id": "lab-2026-affordable-homes",

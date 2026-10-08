@@ -21,6 +21,12 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     desc: "Council tax tables and the budget and spending returns every council files with government.",
     test: (s) => /Ministry|Department|HM Treasury|Office for/.test(s.publisher),
   },
+  {
+    id: "london",
+    label: "The Mayor of London",
+    desc: "The Mayor's council tax decision: how the Mayor's share of your bill splits between police, fire, transport and City Hall.",
+    test: (s) => s.publisher === "Greater London Authority",
+  },
   { id: "law", label: "Laws and regulations", desc: "The rules a council's budget and council tax must follow.", test: (s) => s.publisher === "legislation.gov.uk" },
   { id: "spend", label: "The council's spend files", desc: "Every payment over £500, published by the council each quarter.", test: (s) => s.id.startsWith("spend_") },
   {
@@ -28,6 +34,12 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     label: "Manifestos and councillor records",
     desc: "Each party's 2026 manifesto, archived, and the council's own list of councillors.",
     test: (s) => s.id.startsWith("manifesto:") || s.id.startsWith("content:"),
+  },
+  {
+    id: "elections",
+    label: "Election results",
+    desc: "Each ward's result at the May 2026 council election, copied from the council's declarations by Democracy Club.",
+    test: (s) => s.publisher === "Democracy Club",
   },
   { id: "method", label: "Our method", desc: "How figures are combined and modelled.", test: (s) => s.publisher === "Borough Book" },
 ];

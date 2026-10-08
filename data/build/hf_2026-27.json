@@ -208,6 +208,16 @@
     "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
    },
    {
+    "id": "gla_md3472_2026-27",
+    "title": "Mayoral Decision MD3472, Appendices: GLA council tax requirement and precept calculations for 2026-27, and the explanatory communication to council taxpayers",
+    "publisher": "Greater London Authority",
+    "url": "https://www.london.gov.uk/md3472-approval-2026-27-council-tax-and-precepts-and-communication-council-taxpayers",
+    "published_on": "2026-02-26",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.london.gov.uk/media/112084/download",
+    "sha256": "09848894262457c7f11e03019f52b092fb9d05b0130ddec935713659423a1a33"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Book method notes (docs/MODEL.md)",
     "publisher": "Borough Book",
@@ -234,6 +244,52 @@
    "H": 3039.02
   },
   "gla_note": "Mayor of London: police, fire brigade, transport and other GLA services",
+  "gla_split": [
+   {
+    "id": "police",
+    "label": "Police",
+    "phrase": "police",
+    "official_term": "Mayor's Office for Policing and Crime (MOPAC), which oversees the Metropolitan Police",
+    "band_d": 334.13,
+    "band_d_prev": 319.13,
+    "quality": "approx",
+    "source_id": "gla_md3472_2026-27",
+    "method_note": "Mayoral Decision MD3472, Appendices, PDF page 4. Appendix B, Band D table; the same £334.13 is Appendix A line 8 (page 1)."
+   },
+   {
+    "id": "fire",
+    "label": "Fire brigade",
+    "phrase": "the fire brigade",
+    "official_term": "London Fire Commissioner (LFC), which runs the London Fire Brigade",
+    "band_d": 76.85,
+    "band_d_prev": 71.72,
+    "quality": "approx",
+    "source_id": "gla_md3472_2026-27",
+    "method_note": "Mayoral Decision MD3472, Appendices, PDF page 4. Appendix B, Band D table."
+   },
+   {
+    "id": "transport",
+    "label": "Transport",
+    "phrase": "transport",
+    "official_term": "Transport for London (TfL)",
+    "band_d": 77.09,
+    "band_d_prev": 77.09,
+    "quality": "approx",
+    "source_id": "gla_md3472_2026-27",
+    "method_note": "Mayoral Decision MD3472, Appendices, PDF page 4. Appendix B, Band D table."
+   },
+   {
+    "id": "city_hall",
+    "label": "City Hall and the London Assembly",
+    "phrase": "City Hall and the London Assembly",
+    "official_term": "Greater London Authority (GLA): the Mayor's own budget and the London Assembly",
+    "band_d": 22.44,
+    "band_d_prev": 22.44,
+    "quality": "approx",
+    "source_id": "gla_md3472_2026-27",
+    "method_note": "Mayoral Decision MD3472, Appendices, PDF page 4. Appendix B, Band D table."
+   }
+  ],
   "quality": "sourced",
   "source_id": "ctr_2026-27",
   "method_note": "Council element from Table 10; area Band D and all bands from Table 9; GLA element is the difference."

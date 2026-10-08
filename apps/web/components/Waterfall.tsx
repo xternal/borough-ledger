@@ -4,6 +4,7 @@ import type { PageModel, WaterfallRowModel } from "@/lib/model";
 import { Num } from "./Num";
 import { SavingsList } from "./SavingsList";
 import { QualityLegend } from "./QualityLegend";
+import { ChartTable, DataTable, type TableLine } from "./ChartTable";
 
 const CLOSING = new Set<WaterfallRowModel["kind"]>(["close", "close_saving", "close_oneoff"]);
 
@@ -27,6 +28,29 @@ function sum(rows: WaterfallRowModel[]): Figure | null {
 
 function joinAnd(xs: string[]): string {
   return xs.length < 2 ? (xs[0] ?? "") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`;
+}
+
+/** Each step with the gap left after it, grouped as in the chart. */
+function stepTable(rows: WaterfallRowModel[]): TableLine[] {
+  const out: TableLine[] = [];
+  const seen: Figure[] = [];
+  const groups = new Set<string>();
+  let run = 0;
+  rows.forEach((r, i) => {
+    const h = heading(r.kind);
+    if (h && !groups.has(h)) {
+      groups.add(h);
+      out.push({ key: `g${i}`, group: h });
+    }
+    const step = r.kind !== "subtotal" && r.kind !== "total";
+    if (step) {
+      run += r.f.value;
+      seen.push(r.f);
+    }
+    const after = step ? derive(run, seen[0]!, ...seen.slice(1)) : r.f;
+    out.push({ key: String(i), cells: [r.label, step ? <Num key="c" f={r.f} fmt="sm1" /> : "", <Num key="a" f={after} fmt="m1" />] });
+  });
+  return out;
 }
 
 export function Waterfall({ m }: { m: PageModel }) {
@@ -84,6 +108,9 @@ export function Waterfall({ m }: { m: PageModel }) {
           );
         })}
       </div>
+      <ChartTable summary="Show the gap as a table">
+        <DataTable caption={`How the ${m.place.yearLabel} gap opened and closed, £m`} head={["Step", "Change", "Gap after this step"]} rows={stepTable(rows)} />
+      </ChartTable>
       <QualityLegend items={m.qualityLegend.gap} />
       <SavingsList savings={m.savings} place={m.place} />
     </section>

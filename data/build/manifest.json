@@ -110,6 +110,11 @@
    "id": "ro5_2024-25",
    "file": "RO5_LA_Data_2024-25_data_by_LA.ods",
    "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
+  },
+  {
+   "id": "gla_md3472_2026-27",
+   "file": "gla_md3472_appendices_2026-27.pdf",
+   "sha256": "09848894262457c7f11e03019f52b092fb9d05b0130ddec935713659423a1a33"
   }
  ],
  "manual": [
@@ -128,6 +133,10 @@
   {
    "file": "data/manual/gap_2026-27.csv",
    "sha256": "a47d5301ea1828f459740aee8e1958937889836c3f43fe3c5a1b7cdfe690c288"
+  },
+  {
+   "file": "data/manual/gla_2026-27.csv",
+   "sha256": "f0455746156db70da268aba631fd82c2f2e14523adae82fb5c621fc1a215ec81"
   },
   {
    "file": "data/manual/next_year_2027-28.csv",
@@ -165,11 +174,11 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "ea8ca134107a22304c878008da32597864fd9d283ba88f9471c20adae0f5943b"
+   "sha256": "57cde87598b8fc4c7945794e334d156c9c26150acaf0b52df373d792698c428e"
   }
  ],
  "quality_counts": {
-  "approx": 3,
+  "approx": 7,
   "modelled": 3,
   "sourced": 68
  }

@@ -9,6 +9,8 @@ import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { SITE } from "@/lib/site";
 import { councillorJsonLd } from "@/lib/structured";
+import { electedWith } from "@/lib/wards";
+import { Num } from "@/components/Num";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -34,6 +36,7 @@ export default async function CouncillorPage({ params }: Props) {
   if (!c) notFound();
   const colleagues = m.people.councillors.filter((x) => x.wardId === c.wardId && x.id !== c.id);
   const own = m.promises.filter((p) => p.actor === c.name);
+  const won = electedWith(c.id, c.wardId);
   const party = m.promises.filter((p) => p.partyId === c.partyId && p.actor !== c.name);
   return (
     <PageShell m={m}>
@@ -42,6 +45,12 @@ export default async function CouncillorPage({ params }: Props) {
         <p className="lede">
           {c.party} councillor for <a href={`/ward/${c.wardId}`}>{c.ward} ward</a>
           {c.side === "administration" ? ", in the party running the council" : ", in opposition"}.
+          {won ? (
+            <>
+              {" "}
+              Elected on {formatDay(won.date)} with <Num f={won.votes} fmt="int" /> votes (<a href={`/ward/${c.wardId}#vote-h`}>the ward&rsquo;s full result</a>).
+            </>
+          ) : null}
         </p>
         <FollowLink href={`/councillor/${c.id}/feed.xml`} label={`Follow ${c.name}'s pledges by RSS`} />
       </div>

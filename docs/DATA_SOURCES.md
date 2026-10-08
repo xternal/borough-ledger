@@ -27,7 +27,7 @@
 
 | Source | What | URL |
 |---|---|---|
-| GLA budget | Precept and what it funds (police, fire, transport) | https://www.london.gov.uk (budget pages) |
+| GLA council tax decision (MD3472, 26 Feb 2026) | The Mayor of London's Band D amount by body: police, fire, transport, City Hall | https://www.london.gov.uk/md3472-approval-2026-27-council-tax-and-precepts-and-communication-council-taxpayers ✓ in use |
 
 ## Places and people
 
@@ -45,7 +45,7 @@
 
 | Source | What | URL |
 |---|---|---|
-| Council election results | Seats, wards, councillors | Council website; ✓ summary at https://en.wikipedia.org/wiki/2026_Hammersmith_and_Fulham_London_Borough_Council_election |
+| Council election results | Votes, turnout and winners by ward | Democracy Club API, copied from the council's declarations ✓ in use; council pages at https://www.lbhf.gov.uk/councillors-and-democracy/elections |
 | Party manifestos 2026 | Pledges | Party websites; archive every copy |
 | Leaflets | Ward-level pledges | Reader submissions (photos), ElectionLeaflets.org archive if available |
 | Local press | Statements and coverage | Local outlets, Local Democracy Reporting Service |
@@ -92,4 +92,10 @@ DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the
 
 - **Council decisions:** the council's ModernGov web service (`mgWebService.asmx`, `GetMeetings` and `GetMeeting`) for Cabinet (committee 116) and Full Council (114) since 1 January 2026. The council's web pages refuse scripts, but its web service answers them; `etl/decisions.py` identifies itself honestly, keeps raw snapshots in `data/raw/decisions/` and writes `data/build/decisions.json` with a SHA-256 per meeting. Links on the site go to the council's own decision and meeting pages, which open normally in a browser.
 - **Suggested links:** the Claude API (model in `CLAUDE_MODEL`, default `claude-opus-5-5`), asked once per decision; `data/build/decision_assessments.json` records which decisions it has seen. The first 45 decisions were read by Claude in a working session on 8 Oct 2026 instead.
+
+## In use (Phase 1, 8 Oct 2026)
+
+- **The Mayor of London's share by body:** Mayoral Decision MD3472, Appendices (london.gov.uk/media/112084/download, SHA-256 in `etl/sources.json`; the file downloads by script but is marked manual so CI never depends on it). Appendix B's Band D table (PDF page 4) gives police £334.13, fire brigade £76.85, transport £77.09 and City Hall £22.44 for 2026/27, and last year's figures; Appendix A line 9 (page 1) gives the £510.51 total. Extracted by hand into `data/manual/gla_2026-27.csv`; `etl/build.py` checks that the parts add up to the total in both years and that the total equals the GLA element of the government's council tax tables (area Band D less the council's own). Other bands are split in proportion, in whole pence that add back up (`splitPence` in the engine).
+- **Ward election results:** Democracy Club's API (`/api/next/ballots/?election_id=local.hammersmith-and-fulham.2026-05-07`), CC BY-SA 4.0. Democracy Club copies each declaration from the council's result page and keeps its address. `python3 etl/elections.py` writes `data/build/elections.json`: seats, ballots, turnout, rejected papers and each candidate's party and votes. Only the elected are named, through the council's councillor records, matched by surname within the ward (the declarations use legal names, "Alexandra Sanderson" for Alex Sanderson). Addison and Palace and Hurlingham were read against the council's own result pages on 8 Oct 2026: every figure matched.
+- **Free home care history:** the 2014 Labour manifesto (held by the council as document s50600, PDF page 18), the Cabinet report of 2 February 2015 (s60121) with its decision from the ModernGov web service, the Full Council minutes of 25 February 2015 (vote 25 to 0, from the web service) and the Full Council report of 17 October 2024 (s129307). The council's documents refuse scripts; they were read in a browser.
 

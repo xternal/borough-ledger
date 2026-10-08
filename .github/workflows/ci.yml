@@ -31,6 +31,8 @@ jobs:
         run: python etl/capital_wards.py --check
       - name: Council decisions are well formed, with no private names and no middle dots
         run: python etl/decisions.py --check
+      - name: Ward election results hold together and name only councillors
+        run: python etl/elections.py --check
 
   content:
     name: Content (promises, councillors, append-only history)
