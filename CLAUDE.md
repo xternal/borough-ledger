@@ -1,6 +1,6 @@
-# CLAUDE.md — Borough Ledger
+# CLAUDE.md — Borough Book
 
-You are building **Borough Ledger**, an independent, resident-facing view of the London Borough of Hammersmith & Fulham's money and promises: your council tax bill, the council's budget, how this year's gap was closed, a tool to balance next year, a promise ledger, and the payments-over-£500 ledger. Read `README.md`, `docs/PRE_SHIP_REVIEW.md`, `docs/PRD.md`, `docs/DATA_MODEL.md` and `docs/MODEL.md` before writing code.
+You are building **Borough Book** (boroughbook.uk; called Borough Ledger until 8 Oct 2026, a name the code packages `@borough-ledger/*`, the repo, the Vercel project and the RSS item ids keep), an independent, resident-facing view of the London Borough of Hammersmith & Fulham's money and promises: your council tax bill, the council's budget, how this year's gap was closed, a tool to balance next year, a promise ledger, and the payments-over-£500 ledger. Read `README.md`, `docs/PRE_SHIP_REVIEW.md`, `docs/PRD.md`, `docs/DATA_MODEL.md` and `docs/MODEL.md` before writing code.
 
 The reference for look and behaviour is `prototype/index.html` (built from `prototype/template.html` + `data/seed/*.json` by `build_prototype.py`). Port it, including the visual direction in `docs/DESIGN_HANDOFF.md`.
 

@@ -27,8 +27,8 @@ export const CONTACT = "boroughs@guzh.uk";
 export const REPO = "https://github.com/xternal/borough-ledger";
 
 export const SITE = {
-  name: "Borough Ledger",
-  title: "Borough Ledger: where your council tax goes in Hammersmith & Fulham",
+  name: "Borough Book",
+  title: "Borough Book: where your council tax goes in Hammersmith & Fulham",
   description:
     "An independent, plain-English account of Hammersmith & Fulham Council's money and promises: your council tax bill by band, the budget, how this year's gap was closed, a tool to balance next year, and payments over £500. Not run by the council.",
 };

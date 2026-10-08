@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: SITE.title,
   description: SITE.description,
   applicationName: SITE.name,
-  alternates: { canonical: "/", types: feedAlternate("/feed.xml", "Borough Ledger: everything new") },
+  alternates: { canonical: "/", types: feedAlternate("/feed.xml", "Borough Book: everything new") },
   robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: {
     type: "website",

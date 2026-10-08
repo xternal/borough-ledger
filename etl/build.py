@@ -38,8 +38,8 @@ YEAR = "2026-27"
 PREV = "2025-26"
 METHOD = {
     "id": "borough_ledger_method",
-    "title": "Borough Ledger method notes (docs/MODEL.md)",
-    "publisher": "Borough Ledger",
+    "title": "Borough Book method notes (docs/MODEL.md)",
+    "publisher": "Borough Book",
     "url": "https://github.com/xternal/borough-ledger/blob/main/docs/MODEL.md",
     "note": "TODO(decide): the repository is private; publish the method page before launch.",
 }
@@ -166,7 +166,7 @@ def build() -> Dict[str, Any]:
             "id": gid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"],
             "m": m(v), "general_fund_m": m(v - ring.get(gid, 0.0)),
             "quality": "sourced", "source_id": ra_src,
-            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Ledger (data/manual/ra_service_map.csv).",
+            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Book (data/manual/ra_service_map.csv).",
         })
     funding_lines = []
     for fid, v in sorted(fund.items(), key=lambda kv: int(fgroups[kv[0]]["order"])):

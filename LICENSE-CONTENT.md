@@ -4,7 +4,7 @@ The code is under the MIT licence (`LICENSE`). Everything below keeps the licenc
 
 ## Ours: CC BY 4.0
 
-The site's own text, the docs, the promise cards' structure and statuses, and the tables we made (`data/manual/`, `content/`, `data/build/`, apart from what the next section names) are licensed under the [Creative Commons Attribution 4.0 International licence](https://creativecommons.org/licenses/by/4.0/). Reuse them for anything, including commercially, as long as you credit "Borough Ledger (Pavel Guzhikov)" and link to https://borough-ledger.vercel.app or this repository.
+The site's own text, the docs, the promise cards' structure and statuses, and the tables we made (`data/manual/`, `content/`, `data/build/`, apart from what the next section names) are licensed under the [Creative Commons Attribution 4.0 International licence](https://creativecommons.org/licenses/by/4.0/). Reuse them for anything, including commercially, as long as you credit "Borough Book (Pavel Guzhikov)" and link to https://boroughbook.uk or this repository.
 
 ## Theirs: kept under their own terms
 

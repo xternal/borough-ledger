@@ -3,7 +3,7 @@ import { ogFonts } from "@/lib/ogFonts";
 import { DATA } from "@borough-ledger/schema";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
 
-export const alt = "Borough Ledger: where your council tax goes. An independent project.";
+export const alt = "Borough Book: where your council tax goes. An independent project.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -19,7 +19,7 @@ export default async function Image() {
             <div style={{ width: "64%", background: "#2457F5" }} />
             <div style={{ width: "36%", background: "#A1A1AA" }} />
           </div>
-          Borough Ledger
+          Borough Book
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 68, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.04, maxWidth: 1040 }}>{`Where your council tax goes in ${place}`}</div>

@@ -1,14 +1,14 @@
-# Borough Ledger: Hammersmith & Fulham
+# Borough Book: Hammersmith & Fulham
 
-An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://borough-ledger.vercel.app**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, your ward and its councillors (find it by postcode), and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
+An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://boroughbook.uk**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, your ward and its councillors (find it by postcode), and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
 
-Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from Public Ledger (the national version), sharing its ideas and later its code; "Borough Ledger" is a working title.
+Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from Public Ledger (the national version), sharing its ideas and later its code. Called Borough Ledger until 8 Oct 2026; the code packages, repo and Vercel project keep that name.
 
 Where things stand and what is still open: `docs/PRE_SHIP_REVIEW.md`. The reference prototype in `prototype/` still runs on test data; the site does not.
 
 ## 1. The idea
 
-Your council tax bill is the only statement most residents ever get from their council, and it says almost nothing. Borough Ledger turns it into a readable account:
+Your council tax bill is the only statement most residents ever get from their council, and it says almost nothing. Borough Book turns it into a readable account:
 
 1. **Your bill.** Pick your band, see what you pay, how much goes to the council and how much to the Mayor of London, and what your share pays for.
 2. **The budget.** Where the council's money comes from (council tax, business rates, government grants, reserves) and what it pays for.
@@ -122,11 +122,11 @@ python3 etl/payments.py                                   # build data/build/pay
 | `content/` | Promise cards, parties, councillors and wards in YAML, edited by pull request; see `content/README.md` |
 | `data/config/rules.json` | Band ratios, single person discount, balanced budget rule, referendum limit, instalments, each with its legal source |
 
-Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. Set `NEXT_PUBLIC_SITE_URL` once the domain is chosen, and `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to the code Google Search Console gives for the site.
+Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build`. Production deployments run `build:prod`; previews run `build:preview`. `NEXT_PUBLIC_SITE_URL` on production is the site's own address (https://boroughbook.uk): it sets canonical links, the sitemap and feeds, and when it names a host other than borough-ledger.vercel.app every request to that old address is redirected to it (`next.config.ts`). `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` is optional: Search Console can verify the whole domain with a DNS record instead.
 
-**Alpha.** The public site at https://borough-ledger.vercel.app is the Alpha: a production build (no test values, open to search engines and AI crawlers, with `llms.txt` and a sitemap), marked "Alpha" next to the name (`STAGE` in `apps/web/lib/site.ts`). Every merge to `main` deploys it. Switches in "Balance it" whose cost is still a test value are held back by `etl/build.py` and named on the page as coming later (`next_year.pending_toggles`); they return once their cost is sourced. Pull request previews stay behind Vercel login.
+**Alpha.** The public site at https://boroughbook.uk is the Alpha: a production build (no test values, open to search engines and AI crawlers, with `llms.txt` and a sitemap), marked "Alpha" next to the name (`STAGE` in `apps/web/lib/site.ts`). Every merge to `main` deploys it. Switches in "Balance it" whose cost is still a test value are held back by `etl/build.py` and named on the page as coming later (`next_year.pending_toggles`); they return once their cost is sourced. Pull request previews stay behind Vercel login.
 
 ## 9. Licence
 
-Code: MIT (`LICENSE`). Our own text and data tables: CC BY 4.0, credit "Borough Ledger (Pavel Guzhikov)". Council, government, ONS and Democracy Club data keep their own licences, and manifesto quotes are not relicensed: see `LICENSE-CONTENT.md`.
+Code: MIT (`LICENSE`). Our own text and data tables: CC BY 4.0, credit "Borough Book (Pavel Guzhikov)". Council, government, ONS and Democracy Club data keep their own licences, and manifesto quotes are not relicensed: see `LICENSE-CONTENT.md`.
 

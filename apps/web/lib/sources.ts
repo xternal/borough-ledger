@@ -29,7 +29,7 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     desc: "Each party's 2026 manifesto, archived, and the council's own list of councillors.",
     test: (s) => s.id.startsWith("manifesto:") || s.id.startsWith("content:"),
   },
-  { id: "method", label: "Our method", desc: "How figures are combined and modelled.", test: (s) => s.publisher === "Borough Ledger" },
+  { id: "method", label: "Our method", desc: "How figures are combined and modelled.", test: (s) => s.publisher === "Borough Book" },
 ];
 
 /** Every source in exactly one group, in a fixed order; anything unmatched goes under "Other". */
