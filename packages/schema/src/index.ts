@@ -9,3 +9,4 @@ export * from "./deadlines";
 export * from "./wardmap";
 export * from "./wardspend";
 export * from "./decisions";
+export * from "./digest";

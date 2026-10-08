@@ -111,6 +111,7 @@ python3 etl/capital_wards.py                              # building schemes by 
 python3 etl/decisions.py                                  # Cabinet and Full Council decisions from the council's ModernGov web service
 pnpm --filter @borough-ledger/schema decisions:suggest out.json   # ask Claude about decisions not yet assessed (needs ANTHROPIC_API_KEY)
 pnpm --filter @borough-ledger/schema decisions:apply out.json     # add suggested links and events to content/ (for a pull request)
+pnpm --filter @borough-ledger/schema digest out.md [YYYY-MM-DD]      # the weekly digest draft (Claude with ANTHROPIC_API_KEY, else a plain version)
 python3 etl/payments.py --fetch                           # spend files: download archived ones, record hash, rows and total of new ones
 python3 etl/payments.py --draft-map                       # add new service areas to data/manual/payments_service_map.csv for review
 python3 etl/payments.py                                   # build data/build/payments (redacted, mapped, reconciled to each file)

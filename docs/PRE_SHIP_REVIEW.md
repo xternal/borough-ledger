@@ -178,3 +178,7 @@ Still to do: verify boroughbook.uk in Google Search Console as a Domain property
 - **Reminders:** `.github/workflows/reminders.yml` opens an issue on 1 Feb, May, Aug and Nov to add the council's new spend file by hand, and on 1 March to move the statement on to the new budget.
 - **CI pinned to Ubuntu 24.04**, so GitHub moving `ubuntu-latest` to Ubuntu 26 (from 19 Oct 2026) cannot break a build unannounced; move up on purpose later.
 
+## Weekly digest (8 Oct 2026)
+
+Every Friday morning `.github/workflows/weekly-digest.yml` opens an issue with a draft Substack post: the week's council decisions and any pledges they moved, replies, missed deadlines, new spend data, Cabinet and Full Council meetings in the next fortnight with their agendas (from the council's ModernGov service), pledge deadlines in the next 60 days, and a "number of the week" (building work in one ward, a different ward each week). Claude writes it in the owner's voice from those facts only; code rejects any draft with a number that is not one of the facts' numbers and falls back to a plain version. The facts are listed under the draft so it can be checked in a minute.
+
