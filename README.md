@@ -34,7 +34,7 @@ Your council tax bill is the only statement most residents ever get from their c
 | Your share | Income tax and NI | Council tax by band, with single person discount |
 | Promise cost unit | £ per household | £ per Band D home and % of the council's budget |
 | Opposition pledges | Costed | Costed and marked "Opposition pledge": cannot be delivered from opposition |
-| Extra modules | Demography, macro | Payments over £500, ward view, council decisions |
+| Extra modules | Demography, macro | Payments over £500, ward view, council decisions, the building programme and council homes, more boroughs |
 
 ## 4. MVP
 
@@ -88,6 +88,7 @@ Estimates are low-confidence until M0 is done.
 | `docs/DESIGN_HANDOFF.md` | Designer | Screens, components, tokens |
 | `docs/BUILD_PLAN.md` | Claude Code | Milestones with prompts |
 | `docs/SHARED_CORE.md` | Engineering | What to share with Public Ledger, and when |
+| `docs/BOROUGHS.md` | Engineering, owner | Adding boroughs: what each gets first, what adding Kensington and Chelsea found, the address decision, and a first run of the checks across all 32 |
 | `data/seed/*.json` | All | Prototype data, mostly test |
 | `prototype/` | Design, engineering | Clickable prototype; `index.html` is built by `build_prototype.py` |
 
