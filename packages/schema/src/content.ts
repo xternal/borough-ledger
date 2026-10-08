@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { DecisionLink } from "./decisions";
 import { Quality } from "./quality";
 import { Status } from "./seed";
 
@@ -92,6 +93,8 @@ export const ContentFile = z.object({
   councillors: z.array(Councillor),
   wards: WardsFile,
   promises: z.array(PromiseCard),
+  /** Council decisions linked to pledges, each confirmed by an editor (content/decision_links.yaml). */
+  decision_links: z.array(DecisionLink).default([]),
   /** Party with more than half the seats, or null under no overall control. */
   control: z.string().nullable(),
 });

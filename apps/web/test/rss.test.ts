@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DATA } from "@borough-ledger/schema";
-import { allFeeds, councillorFeed, paymentsFeed, promiseFeed, wardFeed } from "@/lib/feeds";
+import { allFeeds, councillorFeed, decisionsFeed, paymentsFeed, promiseFeed, wardFeed } from "@/lib/feeds";
 import { escapeXml, rfc822, renderFeed, sortItems } from "@/lib/rss";
 
 describe("RSS feeds", () => {
@@ -16,7 +16,7 @@ describe("RSS feeds", () => {
 
   it("gives every pledge, ward and councillor a feed, with unique item ids and no middle dots", () => {
     const feeds = allFeeds();
-    expect(feeds.length).toBe(3 + DATA.content.promises.length + DATA.content.wards.wards.length + DATA.content.councillors.length);
+    expect(feeds.length).toBe(4 + DATA.content.promises.length + DATA.content.wards.wards.length + DATA.content.councillors.length);
     for (const f of feeds) {
       const guids = f.items.map((i) => i.guid);
       expect(new Set(guids).size).toBe(guids.length);
@@ -41,6 +41,10 @@ describe("RSS feeds", () => {
     const wc = wardFeed("white-city")!;
     expect(wc.items.some((i) => i.title.startsWith("Building work in White City"))).toBe(true);
     expect(wardFeed("nowhere")).toBeNull();
+  });
+
+  it("has one item for every council decision", () => {
+    expect(decisionsFeed().items.length).toBe(DATA.decisions.decisions.length);
   });
 
   it("follows a councillor through their party's manifesto pledges", () => {

@@ -14,7 +14,9 @@
     "content:build": "tsx src/content-build.ts",
     "content:check": "tsx src/content-build.ts --check",
     "content:append-only": "tsx src/append-only-cli.ts",
-    "content:deadlines": "tsx src/deadlines-cli.ts"
+    "content:deadlines": "tsx src/deadlines-cli.ts",
+    "decisions:suggest": "tsx src/decision-links-cli.ts suggest",
+    "decisions:apply": "tsx src/decision-links-cli.ts apply"
   },
   "dependencies": {
     "zod": "4.6.5",

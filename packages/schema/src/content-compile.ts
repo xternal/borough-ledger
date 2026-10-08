@@ -1,9 +1,10 @@
 /* Node only: reads content/*.yaml. The app reads the compiled data/build/content.json instead. */
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 import { z } from "zod";
 import { checkContent, Councillor, Party, PromiseCard, WardsFile, type Content } from "./content";
+import { DecisionLink } from "./decisions";
 
 function readYaml(path: string): unknown {
   return parse(readFileSync(path, "utf8"));
@@ -31,7 +32,9 @@ export function compileContent(root: string): Content {
   const seats = new Map<string, number>();
   for (const c of councillors) seats.set(c.party, (seats.get(c.party) ?? 0) + 1);
   const control = [...seats].find(([, n]) => n > councillors.length / 2)?.[0] ?? null;
-  const content: Content = { parties, councillors, wards, promises, control };
+  const linksPath = join(root, "decision_links.yaml");
+  const decision_links = existsSync(linksPath) ? parseFile(z.object({ links: z.array(DecisionLink) }), linksPath).links : [];
+  const content: Content = { parties, councillors, wards, promises, decision_links, control };
   const problems = checkContent(content);
   if (problems.length) throw new Error(`content/ failed cross-checks:\n  ${problems.join("\n  ")}`);
   return content;

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DATA } from "@borough-ledger/schema";
-import { FollowLink } from "@/components/FollowLink";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { PromiseCardView } from "@/components/Promises";
@@ -40,7 +39,6 @@ export default async function PromisePage({ params }: Props) {
           <a href="/promises">All promises</a>
         </p>
         <PromiseCardView p={p} today={m.today} generalBudget={m.generalBudget} balance={m.balance} />
-        <FollowLink href={`/promise/${p.id}/feed.xml`} label="Follow this pledge by RSS" />
         {p.versions.length > 1 ? (
           <section aria-labelledby="versions-h" className="card-extra">
             <h2 id="versions-h">Earlier wording</h2>

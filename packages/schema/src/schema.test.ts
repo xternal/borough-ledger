@@ -5,6 +5,7 @@ import contentRaw from "../../../data/build/content.json";
 import paymentsRaw from "../../../data/build/payments/index.json";
 import wardMapRaw from "../../../data/build/ward_map.json";
 import wardSpendRaw from "../../../data/build/ward_spend.json";
+import decisionsRaw from "../../../data/build/decisions.json";
 import rulesRaw from "../../../data/config/rules.json";
 import { DATA, parseDataset } from "./data";
 import { appendOnlyProblems } from "./append-only";
@@ -13,7 +14,7 @@ import { checkContent, sideOf, type PromiseCard } from "./content";
 import { derive, fig, worst } from "./quality";
 import { listTestValues } from "./testValues";
 
-const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw });
+const raw = () => structuredClone({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw });
 
 describe("seed parses and cross-checks", () => {
   it("loads the committed seed", () => {

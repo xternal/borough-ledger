@@ -44,6 +44,7 @@ Use council figures first (budget report, cabinet papers). Otherwise a documente
 ## 5. Rewording, reply, process
 
 * Rewording → new version, visible diff.
+* Council decisions (M7): each day `.github/workflows/daily-decisions.yml` fetches Cabinet and Full Council decisions and asks Claude which open pledges of the party running the council each new one moves, with the decision's exact words (code rejects any quote not found word for word). Suggestions arrive as a pull request that appends the event to each card; merging it is the editor's confirmation, closing it rejects them. A status only moves up the ladder this way, never down, except to "failed" when a decision abandons a pledge. Opposition pledges are never linked: a council decision cannot move them, the same rule for every party.
 * Right of reply for any councillor or party, published within 5 working days. Replies and corrections go to boroughs@guzh.uk, which every card and footer shows; a reply is added to the card's `replies` as sent, with the sender's public role and the date.
 * Two editors per merge. Reader submissions go to triage; volume never changes a status.
 * Editors declare party membership and residence ward. Cards about a party an editor belongs to need a second editor from outside it.

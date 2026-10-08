@@ -5,6 +5,7 @@ describe("where you are", () => {
   it("highlights the section a page belongs to", () => {
     expect(sectionForPath("/promises")).toBe("promises");
     expect(sectionForPath("/promise/lab-2026-parks")).toBe("promises");
+    expect(sectionForPath("/decisions")).toBe("promises");
     expect(sectionForPath("/wards")).toBe("ward");
     expect(sectionForPath("/ward/addison")).toBe("ward");
     expect(sectionForPath("/councillor/stephen-cowan")).toBe("ward");

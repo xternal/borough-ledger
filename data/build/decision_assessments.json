@@ -1,0 +1,230 @@
+{
+ "note": "Decisions already put to the suggester (decision-links-cli.ts), so none is asked about twice.",
+ "assessed": {
+  "mg-71827": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72202": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72342": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72345": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72480": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72574": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 1
+  },
+  "mg-72599": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72603": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72606": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72797": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72826": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72843": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72910": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72911": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72944": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72967": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72969": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72970": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72973": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72976": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-72977": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 1
+  },
+  "mg-72979": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73031": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73099": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73117": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73118": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73119": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73120": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73122": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73169": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73174": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73278": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73348": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73361": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73362": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73367": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73368": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73396": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 1
+  },
+  "mg-73447": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73594": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73607": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73660": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73663": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73668": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73806": {
+   "on": "2026-10-08",
+   "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  }
+ }
+}
