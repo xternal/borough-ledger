@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { FollowLink } from "@/components/FollowLink";
 import { JsonLd } from "@/components/JsonLd";
 import { Num } from "@/components/Num";
 import { PageShell } from "@/components/PageShell";
 import { PromisesIndex } from "@/components/PromisesIndex";
 import { buildModel } from "@/lib/model";
+import { feedAlternate } from "@/lib/rss";
 import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
@@ -17,7 +19,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: "/promises" },
+  alternates: { canonical: "/promises", types: feedAlternate("/promises/feed.xml", "Every pledge") },
   openGraph: { title, description },
   twitter: { card: "summary_large_image", title, description },
 };
@@ -35,6 +37,7 @@ export default function PromisesPage() {
           What each party promised {m.place.short} in its 2026 manifesto, quoted word for word, and where each pledge stands now. Every party is held to the
           same rules.
         </p>
+        <FollowLink href="/promises/feed.xml" label="Follow every pledge by RSS" />
       </div>
 
       <div className="kpis kpis-3">

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DATA } from "@borough-ledger/schema";
+import { FollowLink } from "@/components/FollowLink";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
+import { feedAlternate } from "@/lib/rss";
 import { SITE } from "@/lib/site";
 import { councillorJsonLd } from "@/lib/structured";
 
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {};
   const title = `${c.name}, ${c.ward} ward | ${SITE.name}`;
   const description = `${c.name} (${c.party}), councillor for ${c.ward} in Hammersmith & Fulham: posts held and the pledges of their party, independently tracked.`;
-  return { title, description, alternates: { canonical: `/councillor/${id}` }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  return { title, description, alternates: { canonical: `/councillor/${id}`, types: feedAlternate(`/councillor/${id}/feed.xml`, `Pledges by ${c.name} and their party`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
 }
 
 export default async function CouncillorPage({ params }: Props) {
@@ -41,6 +43,7 @@ export default async function CouncillorPage({ params }: Props) {
           {c.party} councillor for <a href={`/ward/${c.wardId}`}>{c.ward} ward</a>
           {c.side === "administration" ? ", in the party running the council" : ", in opposition"}.
         </p>
+        <FollowLink href={`/councillor/${c.id}/feed.xml`} label={`Follow ${c.name}'s pledges by RSS`} />
       </div>
       <div className="councillor">
         <div>

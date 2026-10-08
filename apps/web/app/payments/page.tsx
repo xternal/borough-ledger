@@ -3,6 +3,7 @@ import { PaymentsLedger } from "@/components/PaymentsLedger";
 import { formatMonth } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { LATEST, PAY } from "@/lib/payments";
+import { feedAlternate } from "@/lib/rss";
 import { SITE } from "@/lib/site";
 
 const title = `Payments over £500 by Hammersmith & Fulham Council | ${SITE.name}`;
@@ -11,7 +12,7 @@ const description = `Search every payment in Hammersmith & Fulham Council's spen
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: "/payments" },
+  alternates: { canonical: "/payments", types: feedAlternate("/payments/feed.xml", "Payments over £500, month by month") },
   openGraph: { title, description },
   twitter: { card: "summary_large_image", title, description },
 };

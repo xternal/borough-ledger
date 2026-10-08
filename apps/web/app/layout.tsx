@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { feedAlternate } from "@/lib/rss";
 import { GeistSans } from "geist/font/sans";
 import { GOOGLE_SITE_VERIFICATION, INDEXABLE, SITE, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: SITE.title,
   description: SITE.description,
   applicationName: SITE.name,
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", types: feedAlternate("/feed.xml", "Borough Ledger: everything new") },
   robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: {
     type: "website",
