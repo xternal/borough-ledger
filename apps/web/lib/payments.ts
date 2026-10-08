@@ -3,12 +3,14 @@ import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import {
+  CompaniesFile,
   DATA,
   PaymentSuppliersFile,
   PaymentsMonthFile,
   type Figure,
   type PaymentSupplier,
   type PaymentsMonthFile as MonthFile,
+  type RegisteredCompany,
 } from "@borough-ledger/schema";
 
 export const PAY = DATA.payments;
@@ -40,6 +42,16 @@ export function suppliersById(): Map<string, PaymentSupplier> {
     suppliers = new Map(file.suppliers.map((s) => [s.id, s]));
   }
   return suppliers;
+}
+
+let companies: CompaniesFile | null = null;
+/** Suppliers matched to the companies register (etl/companies_house.py). */
+export function companiesFile(): CompaniesFile {
+  companies ??= CompaniesFile.parse(JSON.parse(readFileSync(join(buildDir(), "..", "companies.json"), "utf8")));
+  return companies;
+}
+export function companyOf(supplierId: string): RegisteredCompany | null {
+  return companiesFile().companies[supplierId] ?? null;
 }
 
 /** Every amount is the council's own figure from the files named. */

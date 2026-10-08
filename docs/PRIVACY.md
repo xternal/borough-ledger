@@ -23,6 +23,14 @@ How `etl/payments.py` applies these rules (tested in `etl/tests/test_payments.py
 * Supplier pages only for names that mark a company (Ltd, plc, LLP, CIC), a charity or a public body. Other organisations appear in the month tables without a page.
 * When in doubt, hold back: a business named after a person may be shown only as a total. That loses a little detail and never names anyone.
 
+## Suppliers on the companies register
+
+Supplier pages for companies and charities link to their entry on the companies register (`etl/companies_house.py`, from Companies House's free bulk file of live companies). Only register facts about the company are kept: its number, name, status, type, date formed and its own description of its business. The bulk file has no directors or other people. Of the registered office only the local authority area is kept, looked up from its postcode with postcodes.io; the address and postcode are never kept or shown, because a small company's registered office can be someone's home. Suppliers with no page (names that could be a person) are never matched.
+
+## Ward election results
+
+Ward pages show each candidate's party and votes at the May 2026 election. Only the candidates elected, who are councillors, are named, through the council's councillor records; everyone else appears as their party's candidate (`etl/elections.py`, checked in CI).
+
 ## Follow
 
 * Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs; not built yet).

@@ -10,4 +10,5 @@ export * from "./wardmap";
 export * from "./wardspend";
 export * from "./decisions";
 export * from "./elections";
+export * from "./companies";
 export * from "./digest";

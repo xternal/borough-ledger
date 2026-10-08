@@ -1,5 +1,5 @@
 /* schema.org JSON-LD for the promise and councillor pages (search engines and AI search read it). */
-import type { PaymentSupplier, PaymentsIndex } from "@borough-ledger/schema";
+import { companyPage, type PaymentSupplier, type PaymentsIndex, type RegisteredCompany } from "@borough-ledger/schema";
 import type { CouncillorModel, PromiseModel } from "@/lib/model";
 import type { WardModel } from "@/lib/wards";
 import { SITE, SITE_URL } from "@/lib/site";
@@ -177,7 +177,7 @@ export function paymentsJsonLd(p: PaymentsIndex, month: string, faq: readonly { 
 }
 
 /** An organisation the council pays, described from the council's own files. */
-export function supplierJsonLd(s: PaymentSupplier) {
+export function supplierJsonLd(s: PaymentSupplier, co: RegisteredCompany | null = null) {
   return [
     {
       "@context": CONTEXT,
@@ -185,7 +185,18 @@ export function supplierJsonLd(s: PaymentSupplier) {
       name: s.name,
       url: `${SITE_URL}/supplier/${s.id}`,
       inLanguage: "en-GB",
-      about: { "@type": s.kind === "public_body" ? "GovernmentOrganization" : "Organization", name: s.name },
+      about: {
+        "@type": s.kind === "public_body" ? "GovernmentOrganization" : "Organization",
+        name: s.name,
+        ...(co
+          ? {
+              legalName: co.name,
+              identifier: { "@type": "PropertyValue", propertyID: "Companies House company number", value: co.number },
+              sameAs: companyPage(co.number),
+              ...(co.incorporated ? { foundingDate: co.incorporated } : {}),
+            }
+          : {}),
+      },
     },
     breadcrumbs([["Home", "/"], ["Payments", "/payments"], [s.name, `/supplier/${s.id}`]]),
   ] as const;

@@ -33,6 +33,8 @@ jobs:
         run: python etl/decisions.py --check
       - name: Ward election results hold together and name only councillors
         run: python etl/elections.py --check
+      - name: Supplier links to the companies register hold no addresses or people, and hand matches are checked
+        run: python etl/companies_house.py --check
 
   content:
     name: Content (promises, councillors, append-only history)
