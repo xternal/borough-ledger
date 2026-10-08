@@ -1158,7 +1158,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true,
+   "editor_check_required": false,
    "editor_note": "'dvelopments' is the manifesto's own spelling, quoted as printed."
   },
   {
@@ -1188,7 +1188,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-high-streets",
@@ -1217,7 +1217,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-next-generation",
@@ -1246,7 +1246,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-parking-permit",
@@ -1275,7 +1275,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-police",
@@ -1304,7 +1304,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true,
+   "editor_check_required": false,
    "editor_note": "Cost not stated in the manifesto; cost it from Met charges for additional officers if a council source exists."
   },
   {
@@ -1334,7 +1334,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-social-care",
@@ -1363,7 +1363,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-tenants",
@@ -1392,7 +1392,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "hf-free-home-care",
@@ -1427,7 +1427,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true,
+   "editor_check_required": false,
    "editor_note": "Earlier history (2014 pledge, 2015 charges scrapped) is not yet sourced (PRE_SHIP_REVIEW B3); append those events once found."
   },
   {
@@ -1457,7 +1457,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-ai-cctv",
@@ -1486,7 +1486,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-best-value",
@@ -1515,7 +1515,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true,
+   "editor_check_required": false,
    "editor_note": "'Best value council in Britain' has no stated measure; free home care has its own card (hf-free-home-care)."
   },
   {
@@ -1545,7 +1545,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-high-streets",
@@ -1574,7 +1574,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-hospital",
@@ -1603,7 +1603,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true,
+   "editor_check_required": false,
    "editor_note": "How much and from where are not stated; decide within 7 days whether council documents supply them or the card is unscoreable."
   },
   {
@@ -1642,7 +1642,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-pathway-bond",
@@ -1671,7 +1671,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   }
  ],
  "control": "labour"

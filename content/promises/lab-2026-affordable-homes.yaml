@@ -17,4 +17,4 @@ events:
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
 replies: []
-editor_check_required: true
+editor_check_required: false

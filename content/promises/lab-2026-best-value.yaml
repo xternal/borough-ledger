@@ -17,5 +17,5 @@ events:
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
 replies: []
-editor_check_required: true
+editor_check_required: false
 editor_note: "'Best value council in Britain' has no stated measure; free home care has its own card (hf-free-home-care)."

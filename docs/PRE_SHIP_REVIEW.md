@@ -114,3 +114,16 @@ Still open before calling it a launch:
 ## Budget mapping signed off (8 Oct 2026)
 
 The project owner signed off every budget mapping table after Claude's pre-check (PR #18): ra_service_map, service_groups, funding_map, rs_outturn_map, funding_groups, payment_groups and the toggle cost in toggles_2027-28. Every hand-made table in data/manual/ now has its human check. The five small differences between the budget's government grouping and the payments ledger's team grouping (climate change costs, Supporting People, housing benefit administration, the coroner's court and the London levies) stay as they are.
+
+## Cards signed off, contact address, open repository (8 Oct 2026)
+
+- **Promise cards signed off.** The project owner and The Robot signed off all 18 cards against docs/editor-checks/2026-manifesto-cards.md, and the "Awaiting editor check" mark is off every card. The free home care card keeps its note about the history before 2026 (B3).
+- **Contact address.** Every footer, every promise card's right of reply, the FAQ and llms.txt now give boroughs@guzh.uk for corrections and replies (docs/PRIVACY.md, "Replies and corrections by email").
+- **Repository public.** GitHub stopped running Actions on the private repository on 8 Oct (billing). The project owner made it public, which makes Actions free. Before that the whole history was checked: no keys, tokens or key files, and no person's name in any earlier payments build. Commits so far carry the owner's own email address as author, as GitHub shows for any public repository.
+
+Still open before calling it a launch:
+
+- **B3**: the free home care history before 2026.
+- **Decide**: the final name (and with it a domain), whether to tell the council before launch (recommended: yes, offering a right of reply on the data), and a licence for the code and data now the repository is public.
+- **Search Console**: the verification code goes in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel.
+

@@ -21,5 +21,5 @@ events:
     type: "promised"
     text: "Re-pledged in the 2026 Labour manifesto"
 replies: []
-editor_check_required: true
+editor_check_required: false
 editor_note: "Earlier history (2014 pledge, 2015 charges scrapped) is not yet sourced (PRE_SHIP_REVIEW B3); append those events once found."
