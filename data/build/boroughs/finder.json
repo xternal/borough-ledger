@@ -104,6 +104,98 @@
    ]
   },
   {
+   "slug": "bexley",
+   "short": "Bexley",
+   "ons": "E09000004",
+   "wards": [
+    {
+     "id": "barnehurst",
+     "name": "Barnehurst",
+     "ons_code": "E05011217"
+    },
+    {
+     "id": "belvedere",
+     "name": "Belvedere",
+     "ons_code": "E05011218"
+    },
+    {
+     "id": "bexleyheath",
+     "name": "Bexleyheath",
+     "ons_code": "E05011219"
+    },
+    {
+     "id": "blackfen-and-lamorbey",
+     "name": "Blackfen & Lamorbey",
+     "ons_code": "E05011220"
+    },
+    {
+     "id": "blendon-and-penhill",
+     "name": "Blendon & Penhill",
+     "ons_code": "E05011221"
+    },
+    {
+     "id": "crayford",
+     "name": "Crayford",
+     "ons_code": "E05011222"
+    },
+    {
+     "id": "crook-log",
+     "name": "Crook Log",
+     "ons_code": "E05011223"
+    },
+    {
+     "id": "east-wickham",
+     "name": "East Wickham",
+     "ons_code": "E05011224"
+    },
+    {
+     "id": "erith",
+     "name": "Erith",
+     "ons_code": "E05011225"
+    },
+    {
+     "id": "falconwood-and-welling",
+     "name": "Falconwood & Welling",
+     "ons_code": "E05011226"
+    },
+    {
+     "id": "longlands",
+     "name": "Longlands",
+     "ons_code": "E05011227"
+    },
+    {
+     "id": "northumberland-heath",
+     "name": "Northumberland Heath",
+     "ons_code": "E05011228"
+    },
+    {
+     "id": "sidcup",
+     "name": "Sidcup",
+     "ons_code": "E05011230"
+    },
+    {
+     "id": "slade-green-and-northend",
+     "name": "Slade Green & Northend",
+     "ons_code": "E05011231"
+    },
+    {
+     "id": "st-marys-and-st-james",
+     "name": "St Mary's & St James",
+     "ons_code": "E05011229"
+    },
+    {
+     "id": "thamesmead-east",
+     "name": "Thamesmead East",
+     "ons_code": "E05011232"
+    },
+    {
+     "id": "west-heath",
+     "name": "West Heath",
+     "ons_code": "E05011233"
+    }
+   ]
+  },
+  {
    "slug": "birmingham",
    "short": "Birmingham",
    "ons": "E08000025",
@@ -1758,6 +1850,98 @@
    ]
   },
   {
+   "slug": "islington",
+   "short": "Islington",
+   "ons": "E09000019",
+   "wards": [
+    {
+     "id": "arsenal",
+     "name": "Arsenal",
+     "ons_code": "E05013697"
+    },
+    {
+     "id": "barnsbury",
+     "name": "Barnsbury",
+     "ons_code": "E05013698"
+    },
+    {
+     "id": "bunhill",
+     "name": "Bunhill",
+     "ons_code": "E05013699"
+    },
+    {
+     "id": "caledonian",
+     "name": "Caledonian",
+     "ons_code": "E05013700"
+    },
+    {
+     "id": "canonbury",
+     "name": "Canonbury",
+     "ons_code": "E05013701"
+    },
+    {
+     "id": "clerkenwell",
+     "name": "Clerkenwell",
+     "ons_code": "E05013702"
+    },
+    {
+     "id": "finsbury-park",
+     "name": "Finsbury Park",
+     "ons_code": "E05013703"
+    },
+    {
+     "id": "highbury",
+     "name": "Highbury",
+     "ons_code": "E05013704"
+    },
+    {
+     "id": "hillrise",
+     "name": "Hillrise",
+     "ons_code": "E05013705"
+    },
+    {
+     "id": "holloway",
+     "name": "Holloway",
+     "ons_code": "E05013706"
+    },
+    {
+     "id": "junction",
+     "name": "Junction",
+     "ons_code": "E05013707"
+    },
+    {
+     "id": "laycock",
+     "name": "Laycock",
+     "ons_code": "E05013708"
+    },
+    {
+     "id": "mildmay",
+     "name": "Mildmay",
+     "ons_code": "E05013709"
+    },
+    {
+     "id": "st-marys-and-st-james",
+     "name": "St Mary's and St James'",
+     "ons_code": "E05013710"
+    },
+    {
+     "id": "st-peters-and-canalside",
+     "name": "St Peter's and Canalside",
+     "ons_code": "E05013711"
+    },
+    {
+     "id": "tollington",
+     "name": "Tollington",
+     "ons_code": "E05013712"
+    },
+    {
+     "id": "tufnell-park",
+     "name": "Tufnell Park",
+     "ons_code": "E05013713"
+    }
+   ]
+  },
+  {
    "slug": "kensington-and-chelsea",
    "short": "Kensington and Chelsea",
    "ons": "E09000020",
@@ -3144,6 +3328,123 @@
      "id": "whitechapel",
      "name": "Whitechapel",
      "ons_code": "E05009336"
+    }
+   ]
+  },
+  {
+   "slug": "waltham-forest",
+   "short": "Waltham Forest",
+   "ons": "E09000031",
+   "wards": [
+    {
+     "id": "cann-hall",
+     "name": "Cann Hall",
+     "ons_code": "E05013882"
+    },
+    {
+     "id": "cathall",
+     "name": "Cathall",
+     "ons_code": "E05013883"
+    },
+    {
+     "id": "chapel-end",
+     "name": "Chapel End",
+     "ons_code": "E05013884"
+    },
+    {
+     "id": "chingford-green",
+     "name": "Chingford Green",
+     "ons_code": "E05013885"
+    },
+    {
+     "id": "endlebury",
+     "name": "Endlebury",
+     "ons_code": "E05013886"
+    },
+    {
+     "id": "forest",
+     "name": "Forest",
+     "ons_code": "E05013887"
+    },
+    {
+     "id": "grove-green",
+     "name": "Grove Green",
+     "ons_code": "E05013888"
+    },
+    {
+     "id": "hale-end-and-highams-park-south",
+     "name": "Hale End and Highams Park South",
+     "ons_code": "E05013889"
+    },
+    {
+     "id": "hatch-lane-and-highams-park-north",
+     "name": "Hatch Lane and Highams Park North",
+     "ons_code": "E05013890"
+    },
+    {
+     "id": "high-street",
+     "name": "High Street",
+     "ons_code": "E05013891"
+    },
+    {
+     "id": "higham-hill",
+     "name": "Higham Hill",
+     "ons_code": "E05013892"
+    },
+    {
+     "id": "hoe-street",
+     "name": "Hoe Street",
+     "ons_code": "E05013893"
+    },
+    {
+     "id": "larkswood",
+     "name": "Larkswood",
+     "ons_code": "E05013894"
+    },
+    {
+     "id": "lea-bridge",
+     "name": "Lea Bridge",
+     "ons_code": "E05013895"
+    },
+    {
+     "id": "leyton",
+     "name": "Leyton",
+     "ons_code": "E05013896"
+    },
+    {
+     "id": "leytonstone",
+     "name": "Leytonstone",
+     "ons_code": "E05013897"
+    },
+    {
+     "id": "markhouse",
+     "name": "Markhouse",
+     "ons_code": "E05013898"
+    },
+    {
+     "id": "st-james",
+     "name": "St James",
+     "ons_code": "E05013899"
+    },
+    {
+     "id": "upper-walthamstow",
+     "name": "Upper Walthamstow",
+     "ons_code": "E05013900"
+    },
+    {
+     "id": "valley",
+     "name": "Valley",
+     "ons_code": "E05013901"
+    },
+    {
+     "id": "william-morris",
+     "name": "William Morris",
+     "ons_code": "E05013902"
+    },
+    {
+     "id": "wood-street",
+     "name": "Wood Street",
+     "ons_code": "E05013903"
     }
    ]
   },

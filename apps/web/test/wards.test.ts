@@ -130,11 +130,11 @@ describe("postcode finder across boroughs", () => {
   it("says where a postcode outside the covered boroughs is", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");
-    // Islington: held back while its two council tax returns differ (docs/BOROUGHS.md).
-    expect(placeFromResult({ postcode: "N1 2UD", admin_district: "Islington", codes: { admin_ward: "E05013710", admin_district: "E09000019" } }, PLACES)).toEqual({
+    // Barnet: held back while its two council tax returns differ by £4.7m (docs/BOROUGHS.md).
+    expect(placeFromResult({ postcode: "NW9 4EW", admin_district: "Barnet", codes: { admin_ward: "E05013632", admin_district: "E09000003" } }, PLACES)).toEqual({
       kind: "elsewhere",
-      district: "Islington",
-      postcode: "N1 2UD",
+      district: "Barnet",
+      postcode: "NW9 4EW",
     });
   });
 });

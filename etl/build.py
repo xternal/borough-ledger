@@ -56,7 +56,7 @@ def source_entry(s: Dict[str, Any]) -> Dict[str, Any]:
     return {k: s[k] for k in keys if k in s}
 
 
-def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
+def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Dict[str, Any]:
     """What the government returns say about one council, checked: council tax for five years, spending history,
     outturn, and this year's budget by service and funding. The same for every council (etl/boroughs.py)."""
     # ---------------------------------------------------------- council tax, five years
@@ -142,7 +142,14 @@ def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
     # The budget return is in £000 and several councils' figure differs from the council tax return by £1,200 to £3,100
     # (Croydon, Ealing, Kingston, Lewisham, Newham, Wandsworth, Westminster: under 0.005%); £5,000 allows that and no
     # more. Islington (£23k) and the larger differences still stop the build (docs/BOROUGHS.md).
-    check(close(ra_ctr, now["ctr"], 5000) or close(ra_ctr, now["ctr"] + now["parish"], 5000), f"RA council tax requirement {ra.by_line('990')}k ≠ CTR return {now['ctr']} (or {now['ctr'] + now['parish']} with parishes)")
+    agree = close(ra_ctr, now["ctr"], 5000) or close(ra_ctr, now["ctr"] + now["parish"], 5000)
+    if returns_differ:
+        # The owner decided to publish a borough whose two returns differ by more (Islington, Bexley, Waltham Forest):
+        # the budget uses the budget return's figure, so it adds up, the bill the council tax return's, and the page says
+        # how far apart they are. Once the returns agree, the decision is no longer needed and the build says so.
+        check(not agree, f"RA council tax requirement {ra.by_line('990')}k now matches the CTR return; remove returns_differ for this borough")
+    else:
+        check(agree, f"RA council tax requirement {ra.by_line('990')}k ≠ CTR return {now['ctr']} (or {now['ctr'] + now['parish']} with parishes)")
 
     groups = {g["id"]: g for g in read_csv("service_groups.csv")}
     fgroups = {g["id"]: g for g in read_csv("funding_groups.csv")}
@@ -179,7 +186,7 @@ def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
         if abs(v) < 0.5:
             continue
         g = fgroups[fid]
-        src = "ctr_2026-27" if fid == "council_tax" else ("sg_2026-27" if any(k in fid for k in ("grant",)) else ra_src)
+        src = ("ra_2026-27" if returns_differ else "ctr_2026-27") if fid == "council_tax" else ("sg_2026-27" if any(k in fid for k in ("grant",)) else ra_src)
         line: Dict[str, Any] = {
             "id": fid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"], "kind": g["kind"], "m": m(v),
             "quality": "sourced", "source_id": src,
@@ -198,7 +205,9 @@ def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
     check(close(total_f, total_s, 0.0015 * len(services)), f"funding £{total_f}m ≠ spending £{total_s}m")
     general = sum(f["m"] for f in funding_lines if "ring_fenced_to" not in f)
     check(close(general, sum(s["general_fund_m"] for s in services), 0.0015 * len(services)), "general funding ≠ general-fund spending")
-    return {"now": now, "prev": prev, "ctr": ctr, "ctr_src": ctr_src, "bands": bands, "bands_src": bands_src, "years": years, "band_d_total": band_d_total, "band_d_gla": band_d_gla, "budget_history": budget_history, "outturn_history": outturn_history, "ra": ra, "ra2": ra2, "sg": sg, "fund": fund, "services": services, "funding_lines": funding_lines, "ra_src": ra_src}
+    # To the pound: the council tax return is exact, the budget return in £000.
+    differ = {"budget_return_m": round(ra_ctr / 1e6, 6), "council_tax_return_m": round(now["ctr"] / 1e6, 6)} if returns_differ else None
+    return {"differ": differ, "now": now, "prev": prev, "ctr": ctr, "ctr_src": ctr_src, "bands": bands, "bands_src": bands_src, "years": years, "band_d_total": band_d_total, "band_d_gla": band_d_gla, "budget_history": budget_history, "outturn_history": outturn_history, "ra": ra, "ra2": ra2, "sg": sg, "fund": fund, "services": services, "funding_lines": funding_lines, "ra_src": ra_src}
 
 
 def build() -> Dict[str, Any]:

@@ -77,7 +77,7 @@ def parish(reg: Dict[str, Any], ons: str) -> Dict[str, Any] | None:
 
 
 def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
-    st = statement(reg, b["ons"])
+    st = statement(reg, b["ons"], bool(b.get("returns_differ")))
     now, prev, ctr, bands = st["now"], st["prev"], st["ctr"], st["bands"]
     band_d_gla, band_d_total = st["band_d_gla"], st["band_d_total"]
     out: Dict[str, Any] = {
@@ -120,6 +120,10 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
         },
         "funding": st["funding_lines"],
         "services": st["services"],
+        **({"returns_differ": {
+            **st["differ"], "quality": "sourced", "source_id": "ra_2026-27",
+            "method_note": "Council tax requirement in the budget return (RA 2026-27 line 990, £000) and in the council tax return (Table 10).",
+        }} if st["differ"] else {}),
     }
     cited = set(cited_sources(out))
     out["meta"]["sources"] = [source_entry(reg[k]) for k in reg if k in cited]

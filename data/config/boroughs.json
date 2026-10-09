@@ -11,6 +11,16 @@
    "example_postcode": "IG11 7LU"
   },
   {
+   "slug": "bexley",
+   "council": "London Borough of Bexley",
+   "short": "Bexley",
+   "ons": "E09000004",
+   "moderngov": "https://democracy.bexley.gov.uk",
+   "election_id": "local.bexley.2026-05-07",
+   "example_postcode": "DA6 7AT",
+   "returns_differ": true
+  },
+  {
    "slug": "birmingham",
    "council": "Birmingham City Council",
    "short": "Birmingham",
@@ -156,6 +166,16 @@
    "moderngov": "https://democraticservices.hounslow.gov.uk",
    "election_id": "local.hounslow.2026-05-07",
    "example_postcode": "TW3 3EB"
+  },
+  {
+   "slug": "islington",
+   "council": "London Borough of Islington",
+   "short": "Islington",
+   "ons": "E09000019",
+   "moderngov": "https://democracy.islington.gov.uk",
+   "election_id": "local.islington.2026-05-07",
+   "example_postcode": "N1 2UD",
+   "returns_differ": true
   },
   {
    "slug": "kensington-and-chelsea",
@@ -335,6 +355,16 @@
    "election_id": "local.tower-hamlets.2026-05-07",
    "example_postcode": "E1 1BJ",
    "mayor_election_id": "mayor.tower-hamlets.2026-05-07"
+  },
+  {
+   "slug": "waltham-forest",
+   "council": "London Borough of Waltham Forest",
+   "short": "Waltham Forest",
+   "ons": "E09000031",
+   "moderngov": "https://democracy.walthamforest.gov.uk",
+   "election_id": "local.waltham-forest.2026-05-07",
+   "example_postcode": "E17 4JF",
+   "returns_differ": true
   },
   {
    "slug": "wandsworth",
