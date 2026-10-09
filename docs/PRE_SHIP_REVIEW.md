@@ -223,3 +223,7 @@ Every Sunday evening (18:00 BST, 17:00 GMT; Fridays until 9 Oct 2026) `.github/w
 
 Barking and Dagenham, Brent, Bromley, Camden, Hackney, Haringey, Harrow, Havering, Hounslow, Merton, Redbridge, Richmond upon Thames, Southwark, Sutton and Tower Hamlets join Kensington and Chelsea: bill, budget, council tax history, every councillor and ward result, the postcode finder and the borough selector, all from the same checked pipeline. Elected mayors (Hackney, Tower Hamlets), seats that changed hands since May, names written differently and missing turnout are handled without guessing (docs/BOROUGHS.md). Lambeth waits for its ModernGov service to answer.
 
+## Lambeth (9 Oct 2026)
+
+Lambeth joins: its councillor service answers, slowly (about 100 seconds), and lists an empty seat as "Vacancy", now read as an empty seat. 18 London boroughs on the site.
+

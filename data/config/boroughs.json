@@ -93,6 +93,15 @@
    "example_postcode": "W8 7NX"
   },
   {
+   "slug": "lambeth",
+   "council": "London Borough of Lambeth",
+   "short": "Lambeth",
+   "ons": "E09000022",
+   "moderngov": "https://moderngov.lambeth.gov.uk",
+   "election_id": "local.lambeth.2026-05-07",
+   "example_postcode": "SW2 1RW"
+  },
+  {
    "slug": "merton",
    "council": "London Borough of Merton",
    "short": "Merton",

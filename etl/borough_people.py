@@ -137,7 +137,8 @@ def get(url: str, tries: int = 6) -> bytes:
             time.sleep(1.5)
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json, application/xml"})
-            with urllib.request.urlopen(req, timeout=90) as r:
+            # Some councils' services take over a minute and a half to answer (Lambeth: 100 seconds on 9 Oct 2026).
+            with urllib.request.urlopen(req, timeout=180) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code not in (429, 500, 502, 503, 504) or attempt == tries - 1:
@@ -203,6 +204,8 @@ def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
             if b.get("mayor_election_id") and raw_name.startswith("Mayor "):
                 continue  # the elected mayor, listed under their old ward; the mayor comes from their own ballot
             full = re.sub(r"^(Councillor|Cllr\.?)\s+", "", raw_name)
+            if re.fullmatch(r"(?i)vacan(t|cy)( seat)?", full):
+                continue  # Lambeth lists an empty seat as a councillor called "Vacancy"
             party_name = (c.findtext("politicalpartytitle") or "").strip()
             if not party_name:
                 # The council lists this councillor without a party (Hackney's De Beauvoir): the party comes from their
