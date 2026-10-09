@@ -288,6 +288,18 @@
    "note": "Appendix C pages match the separately downloaded appendix (sha256 c9256238f2c7a640). Appendix B matches the Full Council copy (sha256 62631bbd537f9110) except one sentence on the settlement date."
   },
   {
+   "id": "cabinet_mtfs_2026-10-12",
+   "title": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31 (report to Cabinet)",
+   "publisher": "London Borough of Hammersmith & Fulham",
+   "url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431",
+   "asset_url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431",
+   "published_on": "2026-10-04",
+   "file": "cabinet_mtfs_2026-10-12.pdf",
+   "sha256": "12e9db68e66651bd51e24ee74dc41d35f3012d1ec66df8facaeff6a561f07804",
+   "manual": true,
+   "note": "30 pages, 685,133 bytes, last modified 4 October 2026. The council's server refuses scripted downloads; read in a browser on 9 October 2026."
+  },
+  {
    "id": "rs_2024-25",
    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, revenue summary (RS) by local authority",
    "publisher": "Ministry of Housing, Communities and Local Government",
