@@ -102,6 +102,18 @@ describe("postcode finder across boroughs", () => {
     expect(r2).toMatchObject({ kind: "ward", href: "/kensington-and-chelsea#ward-queens-gate", place: "Kensington and Chelsea", placeHref: "/kensington-and-chelsea" });
   });
 
+  it("finds a ward in Scotland: Glasgow's City Chambers", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const glasgow = PLACES.find((p) => p.short === "Glasgow")!;
+    const w = glasgow.wards.find((x) => x.name === "Anderston/City/Yorkhill")!;
+    expect(placeFromResult({ postcode: "G2 1DU", admin_district: "Glasgow City", codes: { admin_ward: w.ons_code, admin_district: "S12000049" } }, PLACES)).toMatchObject({
+      kind: "ward",
+      href: "/glasgow#ward-anderston-city-yorkhill",
+      placeHref: "/glasgow",
+    });
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

@@ -10,6 +10,7 @@ import decisionsRaw from "../../../data/build/decisions.json";
 import electionsRaw from "../../../data/build/elections.json";
 import capitalRaw from "../../../data/build/capital.json";
 import rulesRaw from "../../../data/config/rules.json";
+import rulesScotlandRaw from "../../../data/config/rules_scotland.json";
 import { checkContent, ContentFile, type Content } from "./content";
 import { checkPayments, PaymentsIndex } from "./payments";
 import { CouncilYear, Rules, type Source } from "./seed";
@@ -165,3 +166,16 @@ export function parseDataset(raw: { council: unknown; content: unknown; payments
 
 /** The parsed seed. Parsing happens once, at import; bad data fails the build. */
 export const DATA: Dataset = parseDataset({ council: hfRaw, content: contentRaw, payments: paymentsRaw, rules: rulesRaw, wardMap: wardMapRaw, wardSpend: wardSpendRaw, decisions: decisionsRaw, elections: electionsRaw, capital: capitalRaw });
+
+/** Scotland's council tax rules (data/config/rules_scotland.json): its own band ratios, Scottish Water's for the rest of
+ *  the bill, no referendums. Checked as England's are: every rule cites a source listed in the file. */
+export const RULES_SCOTLAND: Rules = (() => {
+  const r = Rules.parse(rulesScotlandRaw);
+  const ids = new Set(r.meta.sources.map((s) => s.id));
+  const cited = [r.band_ratios, r.others_band_ratios, r.single_person_discount, r.balanced_budget, r.instalments, ...Object.values(r.referendum_limit_pct)].filter(Boolean);
+  const problems = cited.filter((x) => !ids.has(x!.source_id)).map((x) => `rules_scotland: unknown source ${x!.source_id}`);
+  if (!ids.has(r.balanced_budget.s114_source_id)) problems.push(`rules_scotland: unknown source ${r.balanced_budget.s114_source_id}`);
+  if (!r.instalments.options.includes(r.instalments.default)) problems.push("rules_scotland: default instalments not among options");
+  if (problems.length) throw new Error(problems.join("; "));
+  return r;
+})();

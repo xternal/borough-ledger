@@ -1071,6 +1071,128 @@
    ]
   },
   {
+   "slug": "glasgow",
+   "short": "Glasgow",
+   "ons": "S12000049",
+   "wards": [
+    {
+     "id": "anderston-city-yorkhill",
+     "name": "Anderston/City/Yorkhill",
+     "ons_code": "S13002976"
+    },
+    {
+     "id": "baillieston",
+     "name": "Baillieston",
+     "ons_code": "S13002986"
+    },
+    {
+     "id": "calton",
+     "name": "Calton",
+     "ons_code": "S13002975"
+    },
+    {
+     "id": "canal",
+     "name": "Canal",
+     "ons_code": "S13002982"
+    },
+    {
+     "id": "cardonald",
+     "name": "Cardonald",
+     "ons_code": "S13002970"
+    },
+    {
+     "id": "dennistoun",
+     "name": "Dennistoun",
+     "ons_code": "S13002988"
+    },
+    {
+     "id": "drumchapel-anniesland",
+     "name": "Drumchapel/Anniesland",
+     "ons_code": "S13002980"
+    },
+    {
+     "id": "east-centre",
+     "name": "East Centre",
+     "ons_code": "S13002984"
+    },
+    {
+     "id": "garscadden-scotstounhill",
+     "name": "Garscadden/Scotstounhill",
+     "ons_code": "S13002979"
+    },
+    {
+     "id": "govan",
+     "name": "Govan",
+     "ons_code": "S13002971"
+    },
+    {
+     "id": "greater-pollok",
+     "name": "Greater Pollok",
+     "ons_code": "S13002969"
+    },
+    {
+     "id": "hillhead",
+     "name": "Hillhead",
+     "ons_code": "S13002977"
+    },
+    {
+     "id": "langside",
+     "name": "Langside",
+     "ons_code": "S13002973"
+    },
+    {
+     "id": "linn",
+     "name": "Linn",
+     "ons_code": "S13002967"
+    },
+    {
+     "id": "maryhill",
+     "name": "Maryhill",
+     "ons_code": "S13002981"
+    },
+    {
+     "id": "newlands-auldburn",
+     "name": "Newlands/Auldburn",
+     "ons_code": "S13002968"
+    },
+    {
+     "id": "north-east",
+     "name": "North East",
+     "ons_code": "S13003133"
+    },
+    {
+     "id": "partick-east-kelvindale",
+     "name": "Partick East/Kelvindale",
+     "ons_code": "S13002989"
+    },
+    {
+     "id": "pollokshields",
+     "name": "Pollokshields",
+     "ons_code": "S13002972"
+    },
+    {
+     "id": "shettleston",
+     "name": "Shettleston",
+     "ons_code": "S13002985"
+    },
+    {
+     "id": "southside-central",
+     "name": "Southside Central",
+     "ons_code": "S13002974"
+    },
+    {
+     "id": "springburn-robroyston",
+     "name": "Springburn/Robroyston",
+     "ons_code": "S13002983"
+    },
+    {
+     "id": "victoria-park",
+     "name": "Victoria Park",
+     "ons_code": "S13002978"
+    }
+   ]
+  },
+  {
    "slug": "hackney",
    "short": "Hackney",
    "ons": "E09000012",

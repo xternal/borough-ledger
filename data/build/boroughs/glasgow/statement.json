@@ -1,0 +1,370 @@
+{
+ "meta": {
+  "council": "Glasgow City Council",
+  "council_short": "Glasgow",
+  "council_code": "S12000049",
+  "slug": "glasgow",
+  "year": "2026-27",
+  "note": "Built by etl/scotland.py from the Scottish Government's returns and Scottish Water's charges, with the same checks as the English boroughs' where Scotland's returns allow.",
+  "vintage": "2026-07-24",
+  "sources": [
+   {
+    "id": "scot_ct_bands_2026-27",
+    "title": "Council Tax by band 2026-27 (Scottish Government, Council Tax datasets)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/council-tax-datasets/",
+    "published_on": "2026-03-31",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2019/04/council-tax-datasets/documents/average-council-tax-per-dwelling/council-tax-by-band-2026-27/council-tax-by-band-2026-27/govscot%3Adocument/CTAS%2B2026%2B-%2BCouncil%2BTax%2BAssumptions%2B-%2BCouncil%2BTax%2Bby%2BBand%2B-%2B2026-27.xlsx",
+    "sha256": "fa3f5ed1b3261293bb4603d0a3f5dff5d76ca65c10583af754c7701f7443b1ad"
+   },
+   {
+    "id": "scot_band_d_1996-2027",
+    "title": "Band D Council Tax rates by year, 1996-97 to 2026-27 (Scottish Government, Council Tax datasets)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/council-tax-datasets/",
+    "published_on": "2026-03-31",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2019/04/council-tax-datasets/documents/band-d/band-d-council-tax-1996-97-to-2019-20-data/band-d-council-tax-1996-97-to-2019-20-data/govscot%3Adocument/CTAS%2B2026%2B-%2BCouncil%2BTax%2BAssumptions%2B-%2BBand%2BD%2BCouncil%2BTax%2Brates%2Bby%2Byear%2B-%2B1996-97%2Bto%2B2026-27.xlsx",
+    "sha256": "4e56c333178733c63d8729608740fbf7bf3b3d62ae58c3ad9ea297ad8188cf16"
+   },
+   {
+    "id": "pobe_2026",
+    "title": "Local government 2025-26 provisional outturn and 2026-27 budget estimates, revenue workbook (revised 24 July 2026)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/local-government-2025-26-provisional-outturn-and-2026-27-budget-estimates/",
+    "published_on": "2026-07-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2026/06/local-government-2025-26-provisional-outturn-and-2026-27-budget-estimates/documents/provisional-outturn-budget-estimates---revenue-workbook/provisional-outturn-budget-estimates---revenue-workbook/govscot%3Adocument/POBE%2B2026%2B-%2BRevenue%2BWorkboook%2B-%2Brevised%2Bon%2B24%2BJuly%2B2026.xlsx",
+    "sha256": "9161083b04d620564472d3259e5af80a2c753885785d7c3e1e231b28b08b0681"
+   },
+   {
+    "id": "scottish_water_2026-27",
+    "title": "Scottish Water, unmetered household charges 2026/27 (leaflet, table on page 5)",
+    "publisher": "Scottish Water",
+    "url": "https://www.scottishwater.co.uk/help-and-resources/document-hub/your-home/charges",
+    "published_on": "2026-02-25",
+    "asset_url": "https://www.scottishwater.co.uk/-/media/scottishwater/document-hub/your-home/charges/2026/250226scottish-water-unmetered-household-charges-2026-27-leaflet.pdf",
+    "sha256": "7aed972b810702223de0aa32a5ff4e18138bb98a57be0cc0cf86742b5da3c7e6"
+   },
+   {
+    "id": "scottish_water_2025-26",
+    "title": "Scottish Water, unmetered household charges 2025/26 (leaflet, table on page 5)",
+    "publisher": "Scottish Water",
+    "url": "https://www.scottishwater.co.uk/help-and-resources/document-hub/your-home/charges",
+    "published_on": "2025-02-06",
+    "asset_url": "https://www.scottishwater.co.uk/-/media/scottishwater/document-hub/your-home/charges/2025/060225unmeteredhouseholdcharges25-26.pdf",
+    "sha256": "dd5da0496c45467040a2dbd593af7bdc6418607880486294b895b8404ed32b0c"
+   }
+  ]
+ },
+ "bill": {
+  "band_d_total": 2358.32,
+  "band_d_council": 1706.0,
+  "band_d_gla": 652.32,
+  "band_d_total_prev": 2211.39,
+  "band_d_council_prev": 1611.0,
+  "council_rise_pct": 5.9,
+  "published_bands": {
+   "A": 1572.21,
+   "B": 1834.25,
+   "C": 2096.28,
+   "D": 2358.32,
+   "E": 3038.77,
+   "F": 3714.49,
+   "G": 4428.12,
+   "H": 5484.34
+  },
+  "gla_note": "Scottish Water: water and sewerage",
+  "gla_split": [
+   {
+    "id": "water",
+    "label": "Water",
+    "phrase": "water",
+    "official_term": "Water supply charge",
+    "band_d": 301.95,
+    "band_d_prev": 277.92,
+    "quality": "approx",
+    "source_id": "scottish_water_2026-27",
+    "method_note": "Scottish Water, unmetered household charges 2026/27, page 5, Band D; 2025/26 from that year's leaflet. Other bands are Band D times Scottish Water's own ratios (Band H is twice Band D)."
+   },
+   {
+    "id": "sewerage",
+    "label": "Sewerage",
+    "phrase": "sewerage",
+    "official_term": "Waste water collection charge",
+    "band_d": 350.37,
+    "band_d_prev": 322.47,
+    "quality": "approx",
+    "source_id": "scottish_water_2026-27",
+    "method_note": "Scottish Water, unmetered household charges 2026/27, page 5, Band D; 2025/26 from that year's leaflet. Other bands are Band D times Scottish Water's own ratios (Band H is twice Band D)."
+   }
+  ],
+  "others": {
+   "name": "Scottish Water (water and sewerage)",
+   "to": "Scottish Water, for water and sewerage",
+   "short": "the water and sewerage charges",
+   "with": "water and sewerage",
+   "source": "Scottish Water's leaflet"
+  },
+  "quality": "sourced",
+  "source_id": "scot_ct_bands_2026-27",
+  "method_note": "Council tax by band from the Scottish Government's table (each band is Band D times Scotland's ratio); water and sewerage from Scottish Water's leaflet."
+ },
+ "history": {
+  "council_tax": [
+   {
+    "year": "2022-23",
+    "band_d_council": 1428.0,
+    "band_d_area": null,
+    "band_d_gla": null,
+    "council_tax_requirement_m": 260.233,
+    "tax_base": null,
+    "collection_rate": null,
+    "source_ids": [
+     "pobe_2026",
+     "scot_band_d_1996-2027"
+    ]
+   },
+   {
+    "year": "2023-24",
+    "band_d_council": 1499.0,
+    "band_d_area": null,
+    "band_d_gla": null,
+    "council_tax_requirement_m": 274.105,
+    "tax_base": null,
+    "collection_rate": null,
+    "source_ids": [
+     "pobe_2026",
+     "scot_band_d_1996-2027"
+    ]
+   },
+   {
+    "year": "2024-25",
+    "band_d_council": 1499.0,
+    "band_d_area": null,
+    "band_d_gla": null,
+    "council_tax_requirement_m": 276.965,
+    "tax_base": null,
+    "collection_rate": null,
+    "source_ids": [
+     "pobe_2026",
+     "scot_band_d_1996-2027"
+    ]
+   },
+   {
+    "year": "2025-26",
+    "band_d_council": 1611.0,
+    "band_d_area": 2211.39,
+    "band_d_gla": 600.39,
+    "council_tax_requirement_m": 296.021,
+    "tax_base": null,
+    "collection_rate": null,
+    "source_ids": [
+     "pobe_2026",
+     "scot_band_d_1996-2027",
+     "scottish_water_2025-26"
+    ]
+   },
+   {
+    "year": "2026-27",
+    "band_d_council": 1706.0,
+    "band_d_area": 2358.32,
+    "band_d_gla": 652.32,
+    "council_tax_requirement_m": 314.441,
+    "tax_base": null,
+    "collection_rate": null,
+    "source_ids": [
+     "pobe_2026",
+     "scot_band_d_1996-2027",
+     "scottish_water_2026-27"
+    ]
+   }
+  ],
+  "budget": [],
+  "outturn": [],
+  "quality": "sourced"
+ },
+ "funding": [
+  {
+   "id": "council_tax",
+   "label": "Council tax",
+   "official_term": "Council Tax (net of Council Tax Reduction)",
+   "desc": "What residents pay through the council's part of the bill, after Council Tax Reduction",
+   "kind": "council_tax",
+   "m": 314.441,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 42."
+  },
+  {
+   "id": "grg",
+   "label": "General Revenue Grant",
+   "official_term": "General Revenue Grant (GRG)",
+   "desc": "The council's main general grant from the Scottish Government",
+   "kind": "grant",
+   "m": 1340.488,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 38."
+  },
+  {
+   "id": "business_rates",
+   "label": "Business rates (Scotland's shared pot)",
+   "official_term": "Non-domestic rates distributable amount",
+   "desc": "Business rates are pooled across Scotland and shared out by the Scottish Government, so this is not what local businesses pay",
+   "kind": "business_rates",
+   "m": 443.947,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 41."
+  },
+  {
+   "id": "capital_resources",
+   "label": "Capital money used for day-to-day costs",
+   "official_term": "Use of capital resources to fund revenue costs as permitted by statute",
+   "desc": "One-off: money for building work used for day-to-day costs this year",
+   "kind": "other",
+   "m": 8.636,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 62.",
+   "gap": true
+  },
+  {
+   "id": "capital_fund",
+   "label": "Drawn from the capital fund",
+   "official_term": "Transfers from the Capital Fund",
+   "desc": "One-off: money set aside for building work used for day-to-day costs this year",
+   "kind": "reserves",
+   "m": 61.704,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 63.",
+   "gap": true
+  },
+  {
+   "id": "council_reserves",
+   "label": "Drawn from council reserves",
+   "official_term": "General Fund balance and other reserves",
+   "desc": "One-off: once spent, the gap returns the year after",
+   "kind": "reserves",
+   "m": 66.654,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 60 and 67 (General Fund balance at the start less at the end), 66.",
+   "gap": true,
+   "detail": [
+    {
+     "label": "General Fund balance",
+     "m": 64.844
+    },
+    {
+     "label": "Other reserves",
+     "m": 1.81
+    }
+   ]
+  }
+ ],
+ "services": [
+  {
+   "id": "schools",
+   "label": "Schools and education",
+   "official_term": "Education",
+   "desc": "Nursery, primary, secondary and special schools, school meals and community learning",
+   "m": 858.047,
+   "general_fund_m": 858.047,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 13 (£000, after the service's own grants)."
+  },
+  {
+   "id": "social_work",
+   "label": "Social work and care",
+   "official_term": "Social Work",
+   "desc": "Mostly paid to the city's Health and Social Care Partnership, which runs care for older and disabled adults and children's social work together with the NHS",
+   "m": 653.432,
+   "general_fund_m": 653.432,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 15 (£000, after the service's own grants)."
+  },
+  {
+   "id": "housing",
+   "label": "Housing and homelessness",
+   "official_term": "Non-HRA Housing",
+   "desc": "Homelessness and temporary accommodation, housing advice and other housing outside council rents",
+   "m": 111.106,
+   "general_fund_m": 111.106,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 21 (£000, after the service's own grants)."
+  },
+  {
+   "id": "running",
+   "label": "Running the council",
+   "official_term": "Central Services",
+   "desc": "Finance, IT, legal, collecting council tax and other central costs",
+   "m": 135.748,
+   "general_fund_m": 135.748,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 20 (£000, after the service's own grants)."
+  },
+  {
+   "id": "safety_regulation",
+   "label": "Community safety and regulation",
+   "official_term": "Environmental Services (part)",
+   "desc": "Environmental health, trading standards, flood defence, cemeteries and crematoria",
+   "m": 9.835,
+   "general_fund_m": 9.835,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 176, 178, 179, 180 (£000, after the service's own grants)."
+  },
+  {
+   "id": "streets",
+   "label": "Streets, waste and transport",
+   "official_term": "Roads & Transport; Environmental Services (waste)",
+   "desc": "Bins, recycling and waste disposal, roads, street lights and support for public transport, after parking income",
+   "m": 124.788,
+   "general_fund_m": 124.788,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 16, 185 (£000, after the service's own grants)."
+  },
+  {
+   "id": "planning",
+   "label": "Planning and the local economy",
+   "official_term": "Building, Planning & Development",
+   "desc": "Planning, building standards and economic development",
+   "m": 56.525,
+   "general_fund_m": 56.525,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 19 (£000, after the service's own grants)."
+  },
+  {
+   "id": "debt_levies",
+   "label": "Debt costs and levies",
+   "official_term": "Financing, investment and other operating income and expenditure",
+   "desc": "Interest and repayment of borrowing and PPP contracts, and building work paid for from the budget, less interest earned",
+   "m": 170.916,
+   "general_fund_m": 170.916,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 33 (£000, after the service's own grants)."
+  },
+  {
+   "id": "parks_culture",
+   "label": "Parks, libraries and leisure",
+   "official_term": "Culture and Related Services",
+   "desc": "Parks and open spaces, libraries, museums, sport and culture",
+   "m": 115.473,
+   "general_fund_m": 115.473,
+   "quality": "sourced",
+   "source_id": "pobe_2026",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 14 (£000, after the service's own grants)."
+  }
+ ]
+}

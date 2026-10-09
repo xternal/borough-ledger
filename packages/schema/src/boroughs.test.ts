@@ -19,7 +19,7 @@ describe("other boroughs", () => {
 
   it("refuses a losing candidate linked to a councillor", () => {
     const p = people();
-    const loser = p.wards[0]!.election.candidates.find((c) => !c.elected)!;
+    const loser = p.wards[0]!.election!.candidates.find((c) => !c.elected)!;
     loser.councillor_id = p.wards[0]!.councillor_ids[0];
     expect(checkBoroughPeople(p).join(" ")).toMatch(/losing candidate is named/);
   });

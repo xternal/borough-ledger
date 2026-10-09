@@ -44,6 +44,13 @@ export const Rules = z.object({
     value: z.record(Band, z.tuple([z.number().int().positive(), z.number().int().positive()])),
     ...provenance,
   }),
+  /** The rest of the bill's own band ratios, where they differ from the council's (Scottish Water's charges). */
+  others_band_ratios: z
+    .object({
+      value: z.record(Band, z.tuple([z.number().int().positive(), z.number().int().positive()])),
+      ...provenance,
+    })
+    .optional(),
   single_person_discount: z.object({ value: z.number().min(0).max(1), ...provenance }),
   balanced_budget: z.object({
     tolerance_m: z.number().nonnegative(),
@@ -167,11 +174,13 @@ export type Toggle = z.infer<typeof Toggle>;
 export const CouncilTaxYear = z.object({
   year: finYear,
   band_d_council: z.number().positive(),
-  band_d_area: z.number().positive(),
-  band_d_gla: z.number().positive(),
+  /** Null where the rest of the bill is not published for the year (Scottish Water's charges before 2025/26). */
+  band_d_area: z.number().positive().nullable(),
+  band_d_gla: z.number().positive().nullable(),
   council_tax_requirement_m: z.number().positive(),
-  tax_base: z.number().positive(),
-  collection_rate: z.number().min(0).max(1),
+  /** Null where the return gives no tax base or collection rate (Scotland). */
+  tax_base: z.number().positive().nullable(),
+  collection_rate: z.number().min(0).max(1).nullable(),
   source_ids: z.array(z.string()).min(1),
 });
 
@@ -196,7 +205,7 @@ export const CouncilYear = z.object({
     published_bands: z.record(Band, z.number().positive()),
     gla_note: z.string(),
     /** Outside London, who the rest of the bill goes to (police, fire, a combined authority). London: the Mayor of London. */
-    others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string() }).optional(),
+    others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string(), source: z.string().optional() }).optional(),
     /** Parish and town council precepts, paid only by homes in a parish: Band D on average across those parishes. */
     parish: z.object({ count: z.number().int().positive(), names: z.string().optional(), band_d: z.number().positive(), ...provenance }).optional(),
     /** The Mayor of London's share by body (police, fire, transport, City Hall), Band D, from the GLA's own decision. */

@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { BANDS, DATA, type Lever, type Rules } from "@borough-ledger/schema";
+import { readFileSync } from "node:fs";
+import { BANDS, DATA, RULES_SCOTLAND, type Lever, type Rules } from "@borough-ledger/schema";
 import { REFERENCE_INPUT } from "./fixtures";
 import {
   bandRatio,
   billFor,
+  othersRatio,
   buildWaterfall,
   checkBudget,
   computeBalance,
@@ -61,6 +63,34 @@ describe("council rules (config, sourced)", () => {
   it("every rule cites a source", () => {
     for (const id of [R.band_ratios.source_id, R.single_person_discount.source_id, R.balanced_budget.source_id, R.balanced_budget.s114_source_id])
       expect(DATA.sources.get(id)?.url).toMatch(/^https:\/\/www\.legislation\.gov\.uk\//);
+  });
+});
+
+describe("Scotland's rules (config, sourced)", () => {
+  const S = RULES_SCOTLAND;
+  // Glasgow's statement, built by etl/scotland.py from the Scottish Government's band table and Scottish Water's leaflet.
+  const G = JSON.parse(readFileSync(new URL("../../../data/build/boroughs/glasgow/statement.json", import.meta.url), "utf8"));
+
+  it("council tax bands are 240:280:320:360:473:585:705:882 over 360; Scottish Water's stay at ninths", () => {
+    const over360 = [240, 280, 320, 360, 473, 585, 705, 882];
+    BANDS.forEach((b, i) => expect(S.band_ratios.value[b]).toEqual([over360[i], 360]));
+    expect(bandRatio(S, "H")).toBeCloseTo(2.45, 10);
+    expect(othersRatio(S, "H")).toBe(2);
+    expect(othersRatio(R, "H")).toBe(bandRatio(R, "H")); // England: one set of ratios for the whole bill
+  });
+
+  it("Glasgow's every band matches the council's and Scottish Water's published amounts to the penny, and the discount takes 25% off both", () => {
+    const d = { council: G.bill.band_d_council, gla: G.bill.band_d_gla };
+    for (const b of BANDS) {
+      const full = billFor(S, d, b, false);
+      expect(Math.round(full.council * 100) / 100 + Math.round(full.gla * 100) / 100).toBeCloseTo(G.bill.published_bands[b], 10);
+      expect(billFor(S, d, b, true).total).toBeCloseTo(full.total * 0.75, 10);
+    }
+  });
+
+  it("there are no referendums, and ten instalments", () => {
+    for (const y of Object.values(S.referendum_limit_pct)) expect(y.threshold_pct).toBeNull();
+    expect(S.instalments.options).toEqual([10]);
   });
 });
 

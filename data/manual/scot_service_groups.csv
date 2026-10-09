@@ -1,0 +1,10 @@
+id,label,official_term,desc,pobe_rows,order
+schools,Schools and education,Education,"Nursery, primary, secondary and special schools, school meals and community learning",13,1
+social_work,Social work and care,Social Work,"Mostly paid to the city's Health and Social Care Partnership, which runs care for older and disabled adults and children's social work together with the NHS",15,2
+housing,Housing and homelessness,Non-HRA Housing,"Homelessness and temporary accommodation, housing advice and other housing outside council rents",21,3
+running,Running the council,Central Services,"Finance, IT, legal, collecting council tax and other central costs",20,4
+safety_regulation,Community safety and regulation,Environmental Services (part),"Environmental health, trading standards, flood defence, cemeteries and crematoria",176;178;179;180,5
+streets,"Streets, waste and transport",Roads & Transport; Environmental Services (waste),"Bins, recycling and waste disposal, roads, street lights and support for public transport, after parking income",16;185,6
+planning,Planning and the local economy,"Building, Planning & Development","Planning, building standards and economic development",19,7
+debt_levies,Debt costs and levies,"Financing, investment and other operating income and expenditure","Interest and repayment of borrowing and PPP contracts, and building work paid for from the budget, less interest earned",33,8
+parks_culture,"Parks, libraries and leisure",Culture and Related Services,"Parks and open spaces, libraries, museums, sport and culture",14,9

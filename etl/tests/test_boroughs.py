@@ -63,7 +63,9 @@ class BoroughsTest(unittest.TestCase):
         for name, pid in [("Labour and Cooperative Party", "labour"), ("Labour And Co Op Party", "labour"), ("Local Conservatives", "conservative"),
                           ("Conservative and Unionist Party", "conservative"), ("Liberal Democrat", "liberal-democrats"), ("Green Party", "green"),
                           ("Reform UK", "reform-uk"), ("Chislehurst Matters", "chislehurst-matters"),
-                          ("Lewisham Green Party Group", "green"), ("Independent Member", "independent"), ("Aspire", "aspire")]:
+                          ("Lewisham Green Party Group", "green"), ("Independent Member", "independent"), ("Aspire", "aspire"),
+                          ("Scottish Labour Party", "labour"), ("Scottish National Party (SNP)", "snp"), ("Scottish Green Party", "green"),
+                          ("Scottish Conservative and Unionist Party", "conservative"), ("Your Party", "your-party")]:
             self.assertEqual(BP.party_id(name), pid, name)
 
     def test_honours_and_degrees_after_a_name_do_not_hide_the_surname(self) -> None:
@@ -85,7 +87,8 @@ class BoroughsTest(unittest.TestCase):
         # New Addington North, which held none, pairs its winner with the councillor listed under another name.
         for b in BP.boroughs():
             path = BP.OUT / b["slug"] / "people.json"
-            if b.get("councillors_from") == "later" or not path.exists():
+            # Glasgow's list is the council's own (CoInS), which includes everyone elected at a by-election.
+            if b.get("councillors_from") in ("later", "coins") or not path.exists():
                 continue
             p = json.loads(path.read_text())
             by = [s for s in p["sources"] if "by-elections" in s["title"]]
@@ -100,6 +103,23 @@ class BoroughsTest(unittest.TestCase):
         croydon = json.loads((BP.OUT / "croydon" / "people.json").read_text())
         ward = next(w for w in croydon["wards"] if w["name"] == "New Addington North")
         self.assertFalse(any(c.get("left") for c in ward["election"]["candidates"]))
+
+    @unittest.skipUnless((ROOT / "data" / "raw" / "pobe_2026_revenue.xlsx").exists(), "Scottish returns not downloaded")
+    def test_glasgow_balances_and_its_bill_adds_up(self) -> None:
+        import scotland as S
+        reg = {s["id"]: s for s in load_sources()}
+        out = S.build_one(reg, next(b for b in S.councils() if b["slug"] == "glasgow"))
+        bill = out["bill"]
+        self.assertEqual(bill["band_d_council"], 1706.0)
+        self.assertAlmostEqual(bill["band_d_total"], bill["band_d_council"] + bill["band_d_gla"], places=2)
+        self.assertAlmostEqual(sum(p["band_d"] for p in bill["gla_split"]), bill["band_d_gla"], places=2)
+        self.assertAlmostEqual(sum(f["m"] for f in out["funding"]), sum(s["m"] for s in out["services"]), places=2)
+        self.assertTrue(all(f.get("gap") for f in out["funding"] if f["kind"] == "reserves"))
+        self.assertFalse(any("ring_fenced_to" in f for f in out["funding"]))
+
+    def test_a_scottish_council_is_built_by_its_own_returns_only(self) -> None:
+        self.assertNotIn("glasgow", [b["slug"] for b in B.boroughs()])
+        self.assertIn("glasgow", [b["slug"] for b in BP.boroughs()])
 
 
 if __name__ == "__main__":
