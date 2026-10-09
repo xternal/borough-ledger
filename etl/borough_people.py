@@ -54,15 +54,29 @@ def party_id(name: str) -> str:
     Party", "Labour And Co Op Party" and "Labour Party" are Labour; "Local Conservatives" and "Conservative and Unionist
     Party" are Conservative. Anything else keeps its own name. The same rule for every party."""
     n = name.lower()
-    for pattern, pid in ((r"^(scottish )?labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^(scottish )?liberal democrat", "liberal-democrats"),
+    for pattern, pid in ((r"^(scottish |welsh )?labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^(scottish |welsh )?liberal democrat", "liberal-democrats"),
                          (r"^scottish national party\b|^snp$", "snp"),
-                         (r"\bgreen party\b|^green$", "green"), (r"^(the )?reform uk", "reform-uk"), (r"^independent( member)?$", "independent")):
+                         # A party, not an alliance that includes one ("Plaid Cymru, Green Party, Common Ground", Cardiff)
+                         (r"^(the |scottish )?green party\b|^\w+ green party group$|\(green party\)$|^green$", "green"), (r"^(the )?reform uk", "reform-uk"),
+                         (r"^independent( member| / annibynnol)?$", "independent")):
         if re.search(pattern, n):
             return pid
-    return PARTY.get(name, slug(name))
+    return PARTY.get(name, slug(english(name)))
 
 
 PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK", "snp": "SNP"}
+
+
+def english(name: str) -> str:
+    """A bilingual name's English half: "Plaid Cymru, Green Party, Common Ground / Plaid Cymru, Plaid Werdd, Tir Cyffredin"."""
+    return name.split(" / ")[0].strip()
+
+
+def day_of(election_id: str) -> str:
+    """"local.cardiff.2022-05-05" -> "5 May 2022"."""
+    from datetime import date as D
+    d = D.fromisoformat(election_id.rsplit(".", 1)[-1])
+    return f"{d.day} {d.strftime('%B')} {d.year}"
 
 
 def ward_name(s: str) -> str:
@@ -98,7 +112,9 @@ def same_person(ballot: Dict[str, Any], listed: str) -> float:
     a = name_words(ballot["person"]["name"])
     full = name_words(f"{ballot['sopn_first_names']} {ballot['sopn_last_name']}")
     b = name_words(listed)
-    if a == b[: len(a)] or full == b[: len(full)]:
+    # Democracy Club sometimes leaves the ballot paper's names empty (Ealing's Northolt Mandeville, Newham's Stratford
+    # Olympic Park): an empty name matches nobody. It used to match everyone, and two winners' names were swapped.
+    if (a and a == b[: len(a)]) or (full and full == b[: len(full)]):
         return 1.0  # the same name, perhaps followed by honours or degrees
     for x in (a, full):
         if len(b) >= 2 and all(w in x for w in b[:2]) and b[0] == x[0]:
@@ -300,7 +316,7 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
     for w in ET.fromstring(mg).iter("ward"):
         title = (w.findtext("wardtitle") or "").strip()
         name = ward_name(title)
-        key = slug(name)
+        key = slug(b.get("ward_aliases", {}).get(name, name))  # Cardiff's "Radyr and Morganstown" is the ballots' "Radyr"
         if key not in by_ward:
             if re.search(r"(?i)mayor|no ward|borough[- ]wide|^$|^ward$", title):
                 continue  # the elected mayor is listed under a heading of their own; the mayor comes from their ballot
@@ -420,14 +436,14 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
         "sources": ([] if from_ballots else [
             {"title": f"{b['council']}, councillors by ward (ModernGov web service)", "url": f"{b['moderngov']}/mgWebService.asmx/GetCouncillorsByWard",
              "retrieved_on": retrieved, "sha256": hashlib.sha256(mg).hexdigest()}]) + [
-            {"title": f"Democracy Club, {b['short']} local election 7 May 2026", "url": f"{DC}?election_id={b['election_id']}",
+            {"title": f"Democracy Club, {b['short']} local election {day_of(b['election_id'])}", "url": f"{DC}?election_id={b['election_id']}",
              "retrieved_on": retrieved, "licence": "CC BY-SA 4.0", "sha256": hashlib.sha256(dc).hexdigest()},
-        ] + ([{"title": f"Democracy Club, by-elections to {'the ' if re.match(r'(London|Royal) Borough', b['council']) else ''}{b['council']} since 7 May 2026", "url": by_file["url"],
+        ] + ([{"title": f"Democracy Club, by-elections to {'the ' if re.match(r'(London|Royal) Borough', b['council']) else ''}{b['council']} since {day_of(b['election_id'])}", "url": by_file["url"],
                "retrieved_on": paths["byelections"].stem.rsplit("_", 1)[-1], "licence": "CC BY-SA 4.0",
                "sha256": hashlib.sha256(paths["byelections"].read_bytes()).hexdigest()}] if by_file else []),
-        "election": {"id": b["election_id"], "date": "2026-05-07"},
+        "election": {"id": b["election_id"], "date": b["election_id"].rsplit(".", 1)[-1]},
         # Parties without a common short name keep the name the council gives them, as written.
-        "parties": [{"id": p, "short": PARTY_SHORT.get(p) or next(c["party_name"] for c in councillors if c["party"] == p), "seats": n}
+        "parties": [{"id": p, "short": PARTY_SHORT.get(p) or english(next(c["party_name"] for c in councillors if c["party"] == p)), "seats": n}
                     for p, n in sorted(seats.items(), key=lambda kv: -kv[1])],
         "control": control,
         **({"mayor": mayor} if mayor else {}),
@@ -526,7 +542,7 @@ def people_list(b: Dict[str, Any], members: List[Tuple[str, str, str, str]], raw
         "note": "Generated by etl/borough_people.py. Do not edit by hand; re-run it.",
         "sources": [{"title": source["title"], "url": source["url"], "retrieved_on": retrieved, "sha256": hashlib.sha256(raw).hexdigest()}],
         "election": {"id": b["election_id"], "date": b["election_id"].rsplit(".", 1)[-1]},
-        "parties": [{"id": p, "short": PARTY_SHORT.get(p) or next(c["party_name"] for c in councillors if c["party"] == p), "seats": n}
+        "parties": [{"id": p, "short": PARTY_SHORT.get(p) or english(next(c["party_name"] for c in councillors if c["party"] == p)), "seats": n}
                     for p, n in sorted(seats.items(), key=lambda kv: (-kv[1], kv[0]))],
         "control": control,
         "wards": sorted(wards.values(), key=lambda w: w["name"]),

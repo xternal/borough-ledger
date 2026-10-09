@@ -126,6 +126,19 @@ describe("postcode finder across boroughs", () => {
     });
   });
 
+  it("finds a ward in Wales: Cardiff's County Hall", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const cardiff = PLACES.find((p) => p.short === "Cardiff")!;
+    const w = cardiff.wards.find((x) => x.ons_code === "W05001271")!;
+    expect(w.name).toBe("Butetown");
+    expect(placeFromResult({ postcode: "CF10 4UW", admin_district: "Cardiff", codes: { admin_ward: w.ons_code, admin_district: "W06000015" } }, PLACES)).toMatchObject({
+      kind: "ward",
+      href: "/cardiff#ward-butetown",
+      placeHref: "/cardiff",
+    });
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

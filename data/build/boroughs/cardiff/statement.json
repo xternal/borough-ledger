@@ -1,0 +1,368 @@
+{
+ "meta": {
+  "council": "Cardiff Council",
+  "council_short": "Cardiff",
+  "council_code": "W06000015",
+  "slug": "cardiff",
+  "year": "2026-27",
+  "note": "Built by etl/wales.py from StatsWales, with the same checks as the English boroughs' where Wales's returns allow.",
+  "vintage": "2026-09-04",
+  "sources": [
+   {
+    "id": "statswales_ct_composition_cardiff",
+    "title": "Composition of average band D council tax, Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/3ca971eb-7d9b-4b79-89fa-6d7f77431aad/start",
+    "published_on": "2026-03-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/3ca971eb-7d9b-4b79-89fa-6d7f77431aad/data/67ejhp3a9g0r?format=csv",
+    "sha256": "fcc0a3418f40af1aa57a3138f384f6a1268145be038e427243b0f7340dea9c3b"
+   },
+   {
+    "id": "statswales_br1_cardiff",
+    "title": "Budget requirement by authority (BR1), Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/27b3e04d-fce8-47dc-9e48-7d376c5ef1ca/start",
+    "published_on": "2026-03-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/27b3e04d-fce8-47dc-9e48-7d376c5ef1ca/data/klc1shs9xaxe?format=csv",
+    "sha256": "43ed89c361a6f85295573b7efba78a043153e2a44bc877ac3330be516e56be65"
+   },
+   {
+    "id": "statswales_ra_spend_cardiff",
+    "title": "Budgeted revenue expenditure by authority and service, Cardiff (StatsWales; row labels revised 4 September 2026)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/88384d5e-1a50-4496-849c-7195ddd4185f/start",
+    "published_on": "2026-09-04",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/88384d5e-1a50-4496-849c-7195ddd4185f/data/tvg4whry24xf?format=csv",
+    "sha256": "aec83beb6a90f83cab9114e520a589103cc09482dd5641b0e9c81ca39106f437"
+   },
+   {
+    "id": "statswales_ra_financing_cardiff",
+    "title": "Financing of revenue expenditure by authority, Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/48f882eb-eb8c-49b3-a35b-b6a74248358e/start",
+    "published_on": "2026-06-18",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/48f882eb-eb8c-49b3-a35b-b6a74248358e/data/ld43qrey1s4t?format=csv",
+    "sha256": "420f9a87beba51ae41277fe786ade6e0047582991e28b715bf7068409424b8aa"
+   }
+  ]
+ },
+ "bill": {
+  "band_d_total": 2008.86,
+  "band_d_council": 1603.72,
+  "band_d_gla": 405.14,
+  "band_d_total_prev": 1922.19,
+  "band_d_council_prev": 1543.52,
+  "council_rise_pct": 3.9,
+  "published_bands": {
+   "A": 1339.24,
+   "B": 1562.45,
+   "C": 1785.65,
+   "D": 2008.86,
+   "E": 2455.27,
+   "F": 2901.69,
+   "G": 3348.1,
+   "H": 4017.72,
+   "I": 4687.34
+  },
+  "gla_note": "South Wales Police",
+  "gla_split": [
+   {
+    "id": "police",
+    "label": "Police",
+    "phrase": "police",
+    "official_term": "South Wales Police and Crime Commissioner's precept",
+    "band_d": 405.14,
+    "band_d_prev": 378.67,
+    "quality": "sourced",
+    "source_id": "statswales_ct_composition_cardiff",
+    "method_note": "Composition of average band D council tax: police council tax within the county area, this year and last."
+   }
+  ],
+  "others": {
+   "name": "South Wales Police",
+   "to": "the South Wales Police and Crime Commissioner, for policing",
+   "short": "the police share",
+   "with": "police",
+   "source": "StatsWales council tax tables"
+  },
+  "parish": {
+   "count": 6,
+   "names": "Lisvane, Old St Mellons, Pentyrch, Radyr and Morganstown, St Fagans and Tongwynlais",
+   "total_m": 0.673734,
+   "kind": "community",
+   "quality": "sourced",
+   "source_id": "statswales_br1_cardiff",
+   "method_note": "Budget requirement (BR1): community council precepts. The council names the councils that set one."
+  },
+  "quality": "sourced",
+  "source_id": "statswales_ct_composition_cardiff",
+  "method_note": "Council and police Band D from StatsWales's composition of Band D; every band is Band D times the Welsh ratio (A to I). Outside a community council."
+ },
+ "history": {
+  "council_tax": [
+   {
+    "year": "2022-23",
+    "band_d_council": 1334.75,
+    "band_d_area": 1636.86,
+    "band_d_gla": 302.11,
+    "council_tax_requirement_m": 199.515,
+    "tax_base": 149107.2309,
+    "collection_rate": 0.985,
+    "source_ids": [
+     "statswales_br1_cardiff",
+     "statswales_ct_composition_cardiff"
+    ]
+   },
+   {
+    "year": "2023-24",
+    "band_d_council": 1387.47,
+    "band_d_area": 1711.94,
+    "band_d_gla": 324.47,
+    "council_tax_requirement_m": 209.331,
+    "tax_base": 150481.7097,
+    "collection_rate": 0.985,
+    "source_ids": [
+     "statswales_br1_cardiff",
+     "statswales_ct_composition_cardiff"
+    ]
+   },
+   {
+    "year": "2024-25",
+    "band_d_council": 1470.72,
+    "band_d_area": 1823.39,
+    "band_d_gla": 352.67,
+    "council_tax_requirement_m": 223.195,
+    "tax_base": 151372.0028,
+    "collection_rate": 0.985,
+    "source_ids": [
+     "statswales_br1_cardiff",
+     "statswales_ct_composition_cardiff"
+    ]
+   },
+   {
+    "year": "2025-26",
+    "band_d_council": 1543.52,
+    "band_d_area": 1922.19,
+    "band_d_gla": 378.67,
+    "council_tax_requirement_m": 237.67,
+    "tax_base": 153581.7506,
+    "collection_rate": 0.985,
+    "source_ids": [
+     "statswales_br1_cardiff",
+     "statswales_ct_composition_cardiff"
+    ]
+   },
+   {
+    "year": "2026-27",
+    "band_d_council": 1603.72,
+    "band_d_area": 2008.86,
+    "band_d_gla": 405.14,
+    "council_tax_requirement_m": 250.934,
+    "tax_base": 156050.0,
+    "collection_rate": 0.985,
+    "source_ids": [
+     "statswales_br1_cardiff",
+     "statswales_ct_composition_cardiff"
+    ]
+   }
+  ],
+  "budget": [],
+  "outturn": [],
+  "quality": "sourced"
+ },
+ "funding": [
+  {
+   "id": "council_tax",
+   "label": "Council tax",
+   "official_term": "Amount to be collected from council tax payers",
+   "kind": "council_tax",
+   "m": 210.607,
+   "desc": "What residents pay through the council's part of the bill, after Council Tax Reduction, including what it passes on to community councils",
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales financing of revenue expenditure, 2026-27 budget: amount to be collected from council tax payers."
+  },
+  {
+   "id": "rsg",
+   "label": "Revenue Support Grant",
+   "official_term": "Revenue support grant",
+   "kind": "grant",
+   "m": 584.882,
+   "desc": "The council's main general grant from the Welsh Government, which also pays for Council Tax Reduction",
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales financing of revenue expenditure, 2026-27 budget: revenue support grant."
+  },
+  {
+   "id": "business_rates",
+   "label": "Business rates (Wales's shared pot)",
+   "official_term": "Share of re-distributed non-domestic rates, less discretionary relief",
+   "kind": "business_rates",
+   "m": 131.716,
+   "desc": "Business rates are pooled across Wales and shared out per head of population, so this is not what local businesses pay; less the rate relief the council gives",
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales financing of revenue expenditure, 2026-27 budget: share of re-distributed non-domestic rates and discretionary non-domestic rate relief.",
+   "detail": [
+    {
+     "label": "Share of the pool",
+     "m": 132.116
+    },
+    {
+     "label": "Rate relief the council gives",
+     "m": -0.4
+    }
+   ]
+  },
+  {
+   "id": "specific_grants",
+   "label": "Specific government grants",
+   "official_term": "Specific grants",
+   "kind": "grant",
+   "m": 318.106,
+   "desc": "Grants for particular purposes, such as housing benefit and schools; the return does not say which services each pays for",
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales financing of revenue expenditure, 2026-27 budget: specific grants."
+  },
+  {
+   "id": "council_reserves",
+   "label": "Drawn from council reserves",
+   "official_term": "Appropriations from (+) / to (-) reserves",
+   "kind": "reserves",
+   "m": -7.187,
+   "desc": "One-off: once spent, the gap returns the year after",
+   "gap": true,
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales financing of revenue expenditure, 2026-27 budget: appropriations from (+) / to (-) reserves."
+  }
+ ],
+ "services": [
+  {
+   "id": "schools",
+   "label": "Schools and education",
+   "official_term": "Education",
+   "desc": "Schools' budgets, additional learning needs, school transport, further education and the youth service",
+   "m": 507.219,
+   "general_fund_m": 507.219,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Education. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "adult_care",
+   "label": "Care for older and disabled adults",
+   "official_term": "Social services (adults)",
+   "desc": "Care homes, home care and support for older people and disabled adults",
+   "m": 206.101,
+   "general_fund_m": 206.101,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Service strategy - adults social services; Older people (aged 65 and over) including older mentally ill; Adults aged under 65 with a physical disability or sensory impairment; Adults aged under 65 with learning disabilities; Adults aged under 65  with mental health needs; Other adult social services. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "children",
+   "label": "Children's services",
+   "official_term": "Children's and families services",
+   "desc": "Children in care, family support, safeguarding, youth justice and Flying Start",
+   "m": 159.59,
+   "general_fund_m": 159.59,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Children's and families services. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "housing",
+   "label": "Housing and homelessness",
+   "official_term": "Council fund housing",
+   "desc": "Homelessness and housing advice, Supporting People, and housing benefit paid out, which government grants largely cover. Council homes are a separate account",
+   "m": 150.738,
+   "general_fund_m": 150.738,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Council fund housing. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "streets",
+   "label": "Streets, waste and transport",
+   "official_term": "Roads and transport; waste and street cleansing",
+   "desc": "Bins, recycling and waste disposal, street cleaning, roads, street lights, public transport and the airport, after parking income",
+   "m": 82.576,
+   "general_fund_m": 82.576,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Roads and transport; Street cleansing; Waste collection; Waste disposal; Trade waste; Recycling; Waste minimisation; Climate change costs. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "safety_regulation",
+   "label": "Community safety and regulation",
+   "official_term": "Local environmental services (part)",
+   "desc": "Environmental health, trading standards, community safety, cemeteries, registration, elections and emergency planning",
+   "m": 6.759,
+   "general_fund_m": 6.759,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Local environmental services; -Street cleansing; -Waste collection; -Waste disposal; -Trade waste; -Recycling; -Waste minimisation; -Climate change costs. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "parks_culture",
+   "label": "Parks, libraries and leisure",
+   "official_term": "Libraries, culture, heritage, sport and recreation",
+   "desc": "Parks and open spaces, libraries, sport and culture",
+   "m": 19.7,
+   "general_fund_m": 19.7,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Libraries, culture, heritage, sport and recreation. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "planning",
+   "label": "Planning and the local economy",
+   "official_term": "Planning, economic and community development",
+   "desc": "Planning, building control, economic and community development",
+   "m": 12.697,
+   "general_fund_m": 12.697,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Planning, economic and community development. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "running",
+   "label": "Running the council",
+   "official_term": "Central administration; local tax collection; other revenue expenditure",
+   "desc": "Finance, IT, legal and democracy, collecting council tax, flood defence, coroners, and the precepts it passes on to community councils",
+   "m": 19.305,
+   "general_fund_m": 19.305,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Central administration; Local tax collection; Other revenue expenditure. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "debt_levies",
+   "label": "Debt costs and levies",
+   "official_term": "Debt financing costs",
+   "desc": "Interest and repayment of borrowing",
+   "m": 47.925,
+   "general_fund_m": 47.925,
+   "quality": "sourced",
+   "source_id": "statswales_ra_spend_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: Debt financing costs. Before specific grants, which the return does not split by service."
+  },
+  {
+   "id": "fire_levy",
+   "label": "Fire and rescue (levy)",
+   "official_term": "Levy to South Wales Fire and Rescue Authority",
+   "desc": "The council's contribution to South Wales Fire and Rescue Service. The return leaves it out of the service lines: it is the budget's gross total less those lines",
+   "m": 25.514,
+   "general_fund_m": 25.514,
+   "quality": "sourced",
+   "source_id": "statswales_ra_financing_cardiff",
+   "method_note": "StatsWales, 2026-27 budget, £ thousand: the financing table's gross revenue expenditure less the spending table's revenue expenditure. Before specific grants, which the return does not split by service."
+  }
+ ]
+}

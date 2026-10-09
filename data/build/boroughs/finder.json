@@ -889,6 +889,153 @@
    ]
   },
   {
+   "slug": "cardiff",
+   "short": "Cardiff",
+   "ons": "W06000015",
+   "wards": [
+    {
+     "id": "adamsdown",
+     "name": "Adamsdown",
+     "ons_code": "W05001270"
+    },
+    {
+     "id": "butetown",
+     "name": "Butetown",
+     "ons_code": "W05001271"
+    },
+    {
+     "id": "caerau",
+     "name": "Caerau",
+     "ons_code": "W05001272"
+    },
+    {
+     "id": "canton",
+     "name": "Canton",
+     "ons_code": "W05001273"
+    },
+    {
+     "id": "cathays",
+     "name": "Cathays",
+     "ons_code": "W05001274"
+    },
+    {
+     "id": "cyncoed",
+     "name": "Cyncoed",
+     "ons_code": "W05001275"
+    },
+    {
+     "id": "ely",
+     "name": "Ely",
+     "ons_code": "W05001276"
+    },
+    {
+     "id": "fairwater",
+     "name": "Fairwater",
+     "ons_code": "W05001277"
+    },
+    {
+     "id": "gabalfa",
+     "name": "Gabalfa",
+     "ons_code": "W05001278"
+    },
+    {
+     "id": "grangetown",
+     "name": "Grangetown",
+     "ons_code": "W05001279"
+    },
+    {
+     "id": "heath",
+     "name": "Heath",
+     "ons_code": "W05001280"
+    },
+    {
+     "id": "lisvane-and-thornhill",
+     "name": "Lisvane and Thornhill",
+     "ons_code": "W05001281"
+    },
+    {
+     "id": "llandaff",
+     "name": "Llandaff",
+     "ons_code": "W05001282"
+    },
+    {
+     "id": "llandaff-north",
+     "name": "Llandaff North",
+     "ons_code": "W05001283"
+    },
+    {
+     "id": "llanishen",
+     "name": "Llanishen",
+     "ons_code": "W05001284"
+    },
+    {
+     "id": "llanrumney",
+     "name": "Llanrumney",
+     "ons_code": "W05001285"
+    },
+    {
+     "id": "pentwyn",
+     "name": "Pentwyn",
+     "ons_code": "W05001286"
+    },
+    {
+     "id": "pentyrch-and-st-fagans",
+     "name": "Pentyrch and St Fagans",
+     "ons_code": "W05001287"
+    },
+    {
+     "id": "penylan",
+     "name": "Penylan",
+     "ons_code": "W05001288"
+    },
+    {
+     "id": "plasnewydd",
+     "name": "Plasnewydd",
+     "ons_code": "W05001289"
+    },
+    {
+     "id": "pontprennau-and-old-st-mellons",
+     "name": "Pontprennau and Old St Mellons",
+     "ons_code": "W05001290"
+    },
+    {
+     "id": "radyr",
+     "name": "Radyr and Morganstown",
+     "ons_code": "W05001291"
+    },
+    {
+     "id": "rhiwbina",
+     "name": "Rhiwbina",
+     "ons_code": "W05001292"
+    },
+    {
+     "id": "riverside",
+     "name": "Riverside",
+     "ons_code": "W05001293"
+    },
+    {
+     "id": "rumney",
+     "name": "Rumney",
+     "ons_code": "W05001294"
+    },
+    {
+     "id": "splott",
+     "name": "Splott",
+     "ons_code": "W05001295"
+    },
+    {
+     "id": "trowbridge",
+     "name": "Trowbridge",
+     "ons_code": "W05001296"
+    },
+    {
+     "id": "whitchurch-and-tongwynlais",
+     "name": "Whitchurch and Tongwynlais",
+     "ons_code": "W05001297"
+    }
+   ]
+  },
+  {
    "slug": "croydon",
    "short": "Croydon",
    "ons": "E09000008",

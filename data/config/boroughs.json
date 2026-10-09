@@ -82,6 +82,35 @@
    "example_postcode": "WC1H 9JE"
   },
   {
+   "slug": "cardiff",
+   "council": "Cardiff Council",
+   "short": "Cardiff",
+   "ons": "W06000015",
+   "nation": "wales",
+   "moderngov": "https://cardiff.moderngov.co.uk",
+   "election_id": "local.cardiff.2022-05-05",
+   "next_election": "2027-05-06",
+   "example_postcode": "CF10 4UW",
+   "ward_aliases": {
+    "Radyr and Morganstown": "Radyr"
+   },
+   "others": {
+    "name": "South Wales Police",
+    "to": "the South Wales Police and Crime Commissioner, for policing",
+    "short": "the police share",
+    "with": "police",
+    "source": "StatsWales council tax tables"
+   },
+   "community_councils": [
+    "Lisvane",
+    "Old St Mellons",
+    "Pentyrch",
+    "Radyr and Morganstown",
+    "St Fagans",
+    "Tongwynlais"
+   ]
+  },
+  {
    "slug": "croydon",
    "council": "London Borough of Croydon",
    "short": "Croydon",

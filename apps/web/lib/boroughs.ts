@@ -3,7 +3,7 @@
 import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { BoroughConfig, BoroughPeople, BoroughStatement, DATA, RULES_SCOTLAND, WardMap, checkBoroughPeople, derive, type Figure, type Rules } from "@borough-ledger/schema";
+import { BoroughConfig, BoroughPeople, BoroughStatement, DATA, RULES_SCOTLAND, RULES_WALES, WardMap, checkBoroughPeople, derive, type Figure, type Rules } from "@borough-ledger/schema";
 import { displayYear, nextFinancialYear } from "@borough-ledger/engine";
 import { statementModel, type PageModel, type StatementModel } from "./model";
 
@@ -54,7 +54,7 @@ export function boroughModel(slug: string): BoroughModel | null {
   const map = later ? null : WardMap.parse(read(`${dir}/wards_map.json`));
   const problems = people ? checkBoroughPeople(people) : [];
   if (problems.length) throw new Error(`${slug}: ${problems.join("; ")}`);
-  const rules = b.nation === "scotland" ? RULES_SCOTLAND : DATA.rules;
+  const rules = b.nation === "scotland" ? RULES_SCOTLAND : b.nation === "wales" ? RULES_WALES : DATA.rules;
   const S = statementModel(statement, rules);
   const year = statement.meta.year;
   const h = statement.history;

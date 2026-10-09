@@ -2,8 +2,8 @@
 import { z } from "zod";
 import type { Content } from "./content";
 
-// Ward codes: E05 in England, S13 in Scotland.
-const gss = z.string().regex(/^(E05|S13)\d{6}$/);
+// Ward codes: E05 in England, S13 in Scotland, W05 in Wales.
+const gss = z.string().regex(/^(E05|S13|W05)\d{6}$/);
 
 export const WardShape = z.object({
   ons_code: gss,
@@ -28,7 +28,7 @@ export const WardMap = z.object({
     retrieved_on: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     sha256: z.string().regex(/^[0-9a-f]{64}$/),
   }),
-  council_code: z.string().regex(/^(E0\d|S12)\d{6}$/),
+  council_code: z.string().regex(/^(E0\d|S12|W06)\d{6}$/),
   view_box: z.tuple([z.number().positive(), z.number().positive()]),
   wards: z.array(WardShape).min(1),
 });

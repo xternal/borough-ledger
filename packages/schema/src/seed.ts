@@ -32,8 +32,15 @@ const provenance = {
 export const Valued = z.object({ m: z.number(), ...provenance });
 export type Valued = z.infer<typeof Valued>;
 
-export const BANDS = ["A", "B", "C", "D", "E", "F", "G", "H"] as const;
+/** Council tax bands: A to H in England and Scotland; Wales adds I (its 2005 revaluation). */
+export const BANDS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"] as const;
 export const Band = z.enum(BANDS);
+/** The bands every nation has; I only where a nation's rules define it. */
+const EIGHT = ["A", "B", "C", "D", "E", "F", "G", "H"] as const;
+const byBand = <T extends z.ZodTypeAny>(v: T) =>
+  z.partialRecord(Band, v).refine((r) => EIGHT.every((b) => r[b] !== undefined), "bands A to H are all required");
+/** The bands a nation's rules define, in order: A to H, and I in Wales. */
+export const bandsOf = (rules: { band_ratios: { value: Partial<Record<(typeof BANDS)[number], unknown>> } }) => BANDS.filter((b) => rules.band_ratios.value[b] !== undefined);
 export type Band = z.infer<typeof Band>;
 
 /* ------------------------------------------------------------------ rules */
@@ -41,13 +48,13 @@ export type Band = z.infer<typeof Band>;
 export const Rules = z.object({
   meta: z.object({ note: z.string(), vintage: isoDate, sources: z.array(Source) }),
   band_ratios: z.object({
-    value: z.record(Band, z.tuple([z.number().int().positive(), z.number().int().positive()])),
+    value: byBand(z.tuple([z.number().int().positive(), z.number().int().positive()])),
     ...provenance,
   }),
   /** The rest of the bill's own band ratios, where they differ from the council's (Scottish Water's charges). */
   others_band_ratios: z
     .object({
-      value: z.record(Band, z.tuple([z.number().int().positive(), z.number().int().positive()])),
+      value: byBand(z.tuple([z.number().int().positive(), z.number().int().positive()])),
       ...provenance,
     })
     .optional(),
@@ -202,12 +209,24 @@ export const CouncilYear = z.object({
     band_d_council_prev: z.number().positive(),
     council_rise_pct: z.number(),
     /** Every band as published by government, to the penny. The engine must reproduce these. */
-    published_bands: z.record(Band, z.number().positive()),
+    published_bands: byBand(z.number().positive()),
     gla_note: z.string(),
     /** Outside London, who the rest of the bill goes to (police, fire, a combined authority). London: the Mayor of London. */
     others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string(), source: z.string().optional() }).optional(),
     /** Parish and town council precepts, paid only by homes in a parish: Band D on average across those parishes. */
-    parish: z.object({ count: z.number().int().positive(), names: z.string().optional(), band_d: z.number().positive(), ...provenance }).optional(),
+    /** Parish or town councils (England), or community councils (Wales: kind "community"), which only homes in their area
+     *  pay: their average Band D where the returns give it, otherwise what they raise in all (total_m). */
+    parish: z
+      .object({
+        count: z.number().int().positive(),
+        names: z.string().optional(),
+        band_d: z.number().positive().optional(),
+        total_m: z.number().positive().optional(),
+        kind: z.literal("community").optional(),
+        ...provenance,
+      })
+      .refine((p) => (p.band_d === undefined) !== (p.total_m === undefined), "a parish note gives either the average Band D or the total raised")
+      .optional(),
     /** The Mayor of London's share by body (police, fire, transport, City Hall), Band D, from the GLA's own decision. */
     gla_split: z
       .array(

@@ -19,7 +19,7 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     id: "government",
     label: "Government returns and statistics",
     desc: "Council tax tables and the budget and spending returns every council files with government.",
-    test: (s) => /Ministry|Department|HM Treasury|Office for|Scottish Government/.test(s.publisher),
+    test: (s) => /Ministry|Department|HM Treasury|Office for|Scottish Government|Welsh Government/.test(s.publisher),
   },
   {
     id: "london",

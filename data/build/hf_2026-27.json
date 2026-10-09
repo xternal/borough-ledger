@@ -293,6 +293,56 @@
     "sha256": "dd5da0496c45467040a2dbd593af7bdc6418607880486294b895b8404ed32b0c"
    },
    {
+    "id": "statswales_ct_composition_cardiff",
+    "title": "Composition of average band D council tax, Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/3ca971eb-7d9b-4b79-89fa-6d7f77431aad/start",
+    "published_on": "2026-03-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/3ca971eb-7d9b-4b79-89fa-6d7f77431aad/data/67ejhp3a9g0r?format=csv",
+    "sha256": "fcc0a3418f40af1aa57a3138f384f6a1268145be038e427243b0f7340dea9c3b"
+   },
+   {
+    "id": "statswales_ct_levels_cardiff",
+    "title": "Council tax levels by billing authority and band, Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/1988b6af-2a9c-43b6-8939-83e6cceb3903/start",
+    "published_on": "2026-03-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/1988b6af-2a9c-43b6-8939-83e6cceb3903/data/216waufslrpv?format=csv",
+    "sha256": "92e78391eade62672c582d468d323d2110fbfb8e01fa17b3d2e4a394ea87f651"
+   },
+   {
+    "id": "statswales_br1_cardiff",
+    "title": "Budget requirement by authority (BR1), Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/27b3e04d-fce8-47dc-9e48-7d376c5ef1ca/start",
+    "published_on": "2026-03-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/27b3e04d-fce8-47dc-9e48-7d376c5ef1ca/data/klc1shs9xaxe?format=csv",
+    "sha256": "43ed89c361a6f85295573b7efba78a043153e2a44bc877ac3330be516e56be65"
+   },
+   {
+    "id": "statswales_ra_spend_cardiff",
+    "title": "Budgeted revenue expenditure by authority and service, Cardiff (StatsWales; row labels revised 4 September 2026)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/88384d5e-1a50-4496-849c-7195ddd4185f/start",
+    "published_on": "2026-09-04",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/88384d5e-1a50-4496-849c-7195ddd4185f/data/tvg4whry24xf?format=csv",
+    "sha256": "aec83beb6a90f83cab9114e520a589103cc09482dd5641b0e9c81ca39106f437"
+   },
+   {
+    "id": "statswales_ra_financing_cardiff",
+    "title": "Financing of revenue expenditure by authority, Cardiff (StatsWales)",
+    "publisher": "Welsh Government",
+    "url": "https://stats.gov.wales/en-GB/48f882eb-eb8c-49b3-a35b-b6a74248358e/start",
+    "published_on": "2026-06-18",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://api.stats.gov.wales/v2/48f882eb-eb8c-49b3-a35b-b6a74248358e/data/ld43qrey1s4t?format=csv",
+    "sha256": "420f9a87beba51ae41277fe786ade6e0047582991e28b715bf7068409424b8aa"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Book method notes (docs/MODEL.md)",
     "publisher": "Borough Book",
