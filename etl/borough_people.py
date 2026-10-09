@@ -48,11 +48,17 @@ PARTY = {
     "Conservative Party": "conservative", "Conservative": "conservative", "Conservative and Unionist Party": "conservative", "Local Conservatives": "conservative",
     "Labour Party": "labour", "Labour": "labour", "Labour and Cooperative Party": "labour", "Labour and Co-operative Party": "labour",
     "Liberal Democrats": "liberal-democrats", "Green Party": "green", "Independent": "independent", "Reform UK": "reform-uk",
+    # Northern Ireland, as Belfast's list writes them ("Sinn Fein" without its accent).
+    "Sinn Fein": "sinn-fein", "Sinn Féin": "sinn-fein", "Democratic Unionist Party": "dup", "Alliance Party": "alliance", "Alliance Party of Northern Ireland": "alliance",
+    "Social Democratic and Labour Party": "sdlp", "SDLP (Social Democratic & Labour Party)": "sdlp", "Ulster Unionist Party": "uup",
+    "People Before Profit Alliance": "people-before-profit", "People Before Profit": "people-before-profit", "Traditional Unionist Voice": "tuv", "TUV - Traditional Unionist Voice": "tuv",
 }
 def party_id(name: str) -> str:
     """The party a councillor or candidate stands for, however the council or ballot writes it: "Labour and Co-operative
     Party", "Labour And Co Op Party" and "Labour Party" are Labour; "Local Conservatives" and "Conservative and Unionist
     Party" are Conservative. Anything else keeps its own name. The same rule for every party."""
+    if name.strip() in PARTY and PARTY[name.strip()] not in ("labour", "conservative", "liberal-democrats", "green", "independent", "reform-uk"):
+        return PARTY[name.strip()]  # Northern Ireland's parties, by their full names ("Social Democratic and Labour Party" is the SDLP, not Labour)
     n = name.lower()
     for pattern, pid in ((r"^(scottish |welsh )?labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^(scottish |welsh )?liberal democrat", "liberal-democrats"),
                          (r"^scottish national party\b|^snp$", "snp"),
@@ -64,7 +70,8 @@ def party_id(name: str) -> str:
     return PARTY.get(name, slug(english(name)))
 
 
-PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK", "snp": "SNP"}
+PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK", "snp": "SNP",
+               "sinn-fein": "Sinn Féin", "dup": "DUP", "alliance": "Alliance", "sdlp": "SDLP", "uup": "UUP", "people-before-profit": "People Before Profit", "tuv": "TUV"}
 
 
 def english(name: str) -> str:
@@ -472,22 +479,27 @@ def members_coins(b: Dict[str, Any], raw: bytes) -> List[Tuple[str, str, str, st
     return [(name, ward, party_of[mid], f"{base}/member.asp?id={mid}") for mid, name, ward in rows]
 
 
-def members_moderngov(b: Dict[str, Any], raw: bytes) -> List[Tuple[str, str, str, str]]:
-    """(name, ward, party, profile address) from a ModernGov web service's councillors by ward, where there is no result to
-    pair them with (Edinburgh's 2022 election by single transferable vote)."""
+def members_moderngov(b: Dict[str, Any], raw: bytes) -> List[Tuple[Any, ...]]:
+    """(name, ward, party, profile address, roles) from a ModernGov web service's councillors by ward, where there is no
+    result to pair them with (Edinburgh's 2022 election by single transferable vote; Belfast's 2023)."""
     out = []
     for w in ET.fromstring(raw).iter("ward"):
         title = (w.findtext("wardtitle") or "").strip()
         if re.search(r"(?i)mayor|no ward|borough[- ]wide|^$|^ward$", title):
             continue
         for c in w.iter("councillor"):
-            name = re.sub(r"^(Councillor|Cllr\.?)\s+", "", (c.findtext("fullusername") or "").strip())
+            raw = (c.findtext("fullusername") or "").strip()
+            # Belfast writes civic offices before the name: "The Rt. Hon. the Lord Mayor, Councillor ...", "The High Sheriff,
+            # Alderman ...". The office is a public role; the title is dropped from the name.
+            office = re.match(r"(?i)^the (?:rt\.? hon\.? the )?((?:deputy )?lord mayor|high sheriff),\s*", raw)
+            name = re.sub(r"^(Councillor|Cllr\.?|Alderman)\s+", "", raw[office.end():] if office else raw)
             if re.fullmatch(r"(?i)vacan(t|cy)( seat)?", name):
                 continue
             # Where the council gives no party, the political group it lists them in, as written (North Yorkshire: two
             # councillors with no party in its "NY Independent" group).
             party = (c.findtext("politicalpartytitle") or "").strip() or (c.findtext("politicalgrouptitle") or "").strip()
-            out.append((name, ward_name(title), party, f"{b['moderngov']}/mgUserInfo.aspx?UID={(c.findtext('councillorid') or '').strip()}"))
+            roles = [office.group(1).title()] if office else []
+            out.append((name, ward_name(title), party, f"{b['moderngov']}/mgUserInfo.aspx?UID={(c.findtext('councillorid') or '').strip()}", roles))
     return out
 
 
@@ -516,21 +528,26 @@ def people_list(b: Dict[str, Any], members: List[Tuple[str, str, str, str]], raw
     def norm(s: str) -> str:
         s = unicodedata.normalize("NFKD", H.unescape(s)).encode("ascii", "ignore").decode()
         return re.sub(r"[^a-z0-9]+", " ", s.lower().replace("&", " and ")).strip()
-    code_of = {norm(f["properties"]["WD24NM"]): (f["properties"]["WD24CD"], f["properties"]["WD24NM"]) for f in feats}
+    if b.get("areas") == "dea":
+        # Northern Ireland: councillors represent district electoral areas, matched by name to NISRA's lookup.
+        code_of = {norm(name): (code, name) for code, name in {(a["dea_code"], a["dea_name"]) for a in dea_lookup(b).values()}}
+    else:
+        code_of = {norm(f["properties"]["WD24NM"]): (f["properties"]["WD24CD"], f["properties"]["WD24NM"]) for f in feats}
     if not members:
         raise SystemExit(f"borough people {b['slug']}: no councillors read from {source['url']}")
     councillors: List[Dict[str, Any]] = []
     wards: Dict[str, Dict[str, Any]] = {}
-    for name, ward, party, url in members:
+    for name, ward, party, url, *rest in members:
         name, ward = H.unescape(name).strip(), H.unescape(ward).strip()
+        roles = rest[0] if rest else []
         if norm(ward) not in code_of:
-            raise SystemExit(f"borough people {b['slug']}: ward {ward!r} has no ONS boundary")
+            raise SystemExit(f"borough people {b['slug']}: ward {ward!r} has no ONS boundary{' or district electoral area' if b.get('areas') == 'dea' else ''}")
         if not party:
             raise SystemExit(f"borough people {b['slug']}: {name} has no party on the council's list")
         code, ons_name = code_of[norm(ward)]
         key = slug(ons_name)
         cid = slug(name)
-        councillors.append({"id": cid, "name": name, "party": party_id(party), "party_name": party, "ward_id": key, "roles": [], "democracy_url": url})
+        councillors.append({"id": cid, "name": name, "party": party_id(party), "party_name": PARTY_NAME.get(party, party), "ward_id": key, "roles": roles, "democracy_url": url})
         wards.setdefault(key, {"id": key, "ons_code": code, "name": ons_name, "councillor_ids": []})["councillor_ids"].append(cid)
     if len({c["id"] for c in councillors}) != len(councillors):
         raise SystemExit(f"borough people {b['slug']}: two councillors share a slug")
@@ -571,9 +588,26 @@ def people_unpaired(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]
                        paths["moderngov"].stem.rsplit("_", 1)[-1], paths["wards"])
 
 
+# How a party is written where the council's own list misspells it.
+PARTY_NAME = {"Sinn Fein": "Sinn Féin"}
+
+
+def dea_lookup(b: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+    """Ward code to district electoral area for one Northern Ireland council (data/manual/ni_ward_dea.csv, from NISRA's
+    lookup). The areas' names are in capitals there ("BLACK MOUNTAIN"); written here as the council writes them."""
+    import csv as C
+    with open(ROOT / "data" / "manual" / "ni_ward_dea.csv", newline="") as f:
+        rows = [r for r in C.DictReader(f) if r["lgd_code"] == b["ons"]]
+    if not rows:
+        raise SystemExit(f"borough people {b['slug']}: no wards in data/manual/ni_ward_dea.csv")
+    return {r["ward_code"]: {"ward_name": r["ward_name"], "dea_code": r["dea_code"], "dea_name": r["dea_name"].title()} for r in rows}
+
+
 def ward_shapes(b: Dict[str, str], path: Path) -> Dict[str, Any]:
     data = path.read_bytes()
     feats = json.loads(data)["features"]
+    if b.get("areas") == "dea":
+        return area_shapes(b, data, feats, path.stem.split("_")[-1])
     by_code = {f["properties"]["WD24CD"]: WM.rings(f["geometry"]) for f in feats}
     project, height = WM.projector([p for rs in by_code.values() for ring in rs for p in ring])
     near = WM.neighbours(by_code)
@@ -586,6 +620,71 @@ def ward_shapes(b: Dict[str, str], path: Path) -> Dict[str, Any]:
             {"ons_code": f["properties"]["WD24CD"], "ons_name": f["properties"]["WD24NM"], "path": WM.svg_path(by_code[f["properties"]["WD24CD"]], project),
              "label": list(project((float(f["properties"]["LONG"]), float(f["properties"]["LAT"])))), "neighbours": near[f["properties"]["WD24CD"]]}
             for f in sorted(feats, key=lambda f: f["properties"]["WD24CD"])
+        ],
+    }
+
+
+def dissolve(rs: List[List[Tuple[float, float]]]) -> List[List[Tuple[float, float]]]:
+    """The outline of several wards together. ONS boundaries share their vertices exactly where wards meet, so a segment
+    drawn by two of the wards is inside the area and is dropped; the segments left are chained back into rings. Where
+    the chain breaks (a boundary that does not match exactly), the ring is closed where it stopped: the outline is still
+    right, with at worst a stray line inside."""
+    from collections import Counter, defaultdict
+    key = lambda p: (round(p[0], 7), round(p[1], 7))  # noqa: E731
+    segs: List[Tuple[Tuple[float, float], Tuple[float, float]]] = []
+    for ring in rs:
+        pts = [key(p) for p in ring]
+        if pts[0] != pts[-1]:
+            pts.append(pts[0])
+        segs += [(pts[i], pts[i + 1]) for i in range(len(pts) - 1) if pts[i] != pts[i + 1]]
+    count = Counter(frozenset(sg) for sg in segs)
+    after: Dict[Tuple[float, float], List[Tuple[float, float]]] = defaultdict(list)
+    for a, z in segs:
+        if count[frozenset((a, z))] == 1:
+            after[a].append(z)
+    out: List[List[Tuple[float, float]]] = []
+    while True:
+        start = next((a for a, v in after.items() if v), None)
+        if start is None:
+            return out
+        ring, cur = [start], start
+        while after[cur]:
+            cur = after[cur].pop()
+            ring.append(cur)
+            if cur == start:
+                break
+        if ring[-1] != start:
+            ring.append(start)
+        if len(ring) > 3:
+            out.append(ring)
+
+
+def area_shapes(b: Dict[str, Any], data: bytes, feats: List[Dict[str, Any]], retrieved: str) -> Dict[str, Any]:
+    """Northern Ireland: each district electoral area drawn as its wards (ONS boundaries), which fit inside it exactly
+    (NISRA's lookup). Every ward must be in the lookup and every ward in the lookup on the map."""
+    lookup = dea_lookup(b)
+    codes = {f["properties"]["WD24CD"] for f in feats}
+    if codes != set(lookup):
+        raise SystemExit(f"borough people {b['slug']}: the ONS wards and NISRA's lookup differ: {sorted(codes ^ set(lookup))}")
+    rings: Dict[str, List[Any]] = {}
+    points: Dict[str, List[Tuple[float, float]]] = {}
+    for f in feats:
+        a = lookup[f["properties"]["WD24CD"]]["dea_code"]
+        rings.setdefault(a, []).extend(WM.rings(f["geometry"]))
+        points.setdefault(a, []).append((float(f["properties"]["LONG"]), float(f["properties"]["LAT"])))
+    name = {v["dea_code"]: v["dea_name"] for v in lookup.values()}
+    project, height = WM.projector([p for rs in rings.values() for ring in rs for p in ring])
+    near = WM.neighbours(rings)
+    return {
+        "note": "Generated by etl/borough_people.py. Do not edit by hand; re-run it. Each district electoral area is drawn as its wards, grouped by NISRA's ward to area lookup (data/manual/ni_ward_dea.csv).",
+        "source": {**WM.SOURCE, "attribution": WM.SOURCE["attribution"] + " Contains LPS Intellectual Property © Crown copyright and database right 2024.",
+                   "url": WM.SERVICE, "retrieved_on": retrieved, "sha256": hashlib.sha256(data).hexdigest()},
+        "council_code": b["ons"],
+        "view_box": [WM.WIDTH, height],
+        "wards": [
+            {"ons_code": a, "ons_name": name[a], "path": WM.svg_path(dissolve(rings[a]), project),
+             "label": list(project((sum(x for x, _ in points[a]) / len(points[a]), sum(y for _, y in points[a]) / len(points[a])))), "neighbours": near[a]}
+            for a in sorted(rings)
         ],
     }
 
@@ -639,6 +738,12 @@ def finder() -> Dict[str, Any]:
             out.append({"slug": b["slug"], "short": b["short"], "ons": b["ons"], "wards": []})  # a postcode opens the council's page
             continue
         p = json.loads((OUT / b["slug"] / "people.json").read_text())
+        if b.get("areas") == "dea":
+            # A postcode gives a ward (postcodes.io has no district electoral area): each ward opens its area.
+            area = {w["ons_code"]: w for w in p["wards"]}
+            out.append({"slug": b["slug"], "short": b["short"], "ons": b["ons"], "word": "area", "wards": [
+                {"id": area[a["dea_code"]]["id"], "name": area[a["dea_code"]]["name"], "ons_code": code} for code, a in sorted(dea_lookup(b).items())]})
+            continue
         out.append({"slug": b["slug"], "short": b["short"], "ons": b["ons"], "wards": [{"id": w["id"], "name": w["name"], "ons_code": w["ons_code"]} for w in p["wards"]]})
     return {"note": "Generated by etl/borough_people.py from each borough's people.json, for the postcode finder.", "boroughs": out}
 

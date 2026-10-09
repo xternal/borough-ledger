@@ -19,7 +19,7 @@ function repo(): string {
 
 // Read only while building (every borough page and share image is static), so the files need not be traced into the
 // server bundle.
-const read = (path: string) => JSON.parse(readFileSync(/*turbopackIgnore: true*/ join(/*turbopackIgnore: true*/ repo(), path), "utf8"));
+export const read = (path: string) => JSON.parse(readFileSync(/*turbopackIgnore: true*/ join(/*turbopackIgnore: true*/ repo(), path), "utf8"));
 
 export const BOROUGHS = BoroughConfig.parse(read("data/config/boroughs.json")).boroughs;
 export type Borough = (typeof BOROUGHS)[number];
@@ -44,7 +44,8 @@ const cache = new Map<string, BoroughModel>();
 
 export function boroughModel(slug: string): BoroughModel | null {
   const b = BOROUGHS.find((x) => x.slug === slug);
-  if (!b) return null;
+  // Northern Ireland's councils have rates, not council tax: lib/rates.ts.
+  if (!b || b.nation === "northern_ireland") return null;
   const hit = cache.get(slug);
   if (hit) return hit;
   const dir = `data/build/boroughs/${slug}`;

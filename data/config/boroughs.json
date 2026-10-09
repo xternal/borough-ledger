@@ -11,6 +11,19 @@
    "example_postcode": "IG11 7LU"
   },
   {
+   "slug": "belfast",
+   "council": "Belfast City Council",
+   "short": "Belfast",
+   "ons": "N09000003",
+   "nation": "northern_ireland",
+   "moderngov": "https://minutes.belfastcity.gov.uk",
+   "election_id": "local.belfast.2023-05-18",
+   "voting": "stv",
+   "areas": "dea",
+   "next_election": "2027-05-06",
+   "example_postcode": "BT1 5GS"
+  },
+  {
    "slug": "bexley",
    "council": "London Borough of Bexley",
    "short": "Bexley",

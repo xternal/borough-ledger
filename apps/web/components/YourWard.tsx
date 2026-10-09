@@ -19,7 +19,7 @@ export function YourWard({ current, results = true }: { current: string; results
   if (!ward) return null;
   return (
     <p className="your-ward" role="status">
-      Your ward is <b>{ward.name}</b>. <a href={ward.href}>{results ? "See its councillors and how it voted" : "See its councillors"}</a>.
+      Your {ward.word ?? "ward"} is <b>{ward.name}</b>. <a href={ward.href}>{results ? "See its councillors and how it voted" : "See its councillors"}</a>.
     </p>
   );
 }

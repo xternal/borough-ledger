@@ -343,6 +343,96 @@
     "sha256": "420f9a87beba51ae41277fe786ade6e0047582991e28b715bf7068409424b8aa"
    },
    {
+    "id": "dof_rate_poundages",
+    "title": "Rate poundages, 2024/25 to 2026/27 (Department of Finance)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "published_on": "2026-04-17",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "sha256": "a56a2026ef95b68236e292e07ce06514fbbc8fe938834907ff65047195605303"
+   },
+   {
+    "id": "dof_rate_poundages_archive_2024",
+    "title": "Rate poundages, 2022/23 and 2023/24 (Department of Finance, as archived on 27 February 2024)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "http://web.archive.org/web/20240227091632/https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "published_on": "2024-02-27",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "http://web.archive.org/web/20240227091632/https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "sha256": "b2fcce2ffa4c41ba7b984ffe9f089b1e9c8ff047bf2f4002e7c4bf7131154641"
+   },
+   {
+    "id": "dfc_rate_statistics_2026-27",
+    "title": "District council (NI) rate statistics 2026/2027, circular LG 08/2026 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/2026-02/lg-08-2026-rate-statistics.pdf",
+    "published_on": "2026-02-20",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/2026-02/lg-08-2026-rate-statistics.pdf",
+    "sha256": "a5d81eb0bd3b188f5dba2330a88481960388e2a4a8b3d2560c2fe81f7db45f7f"
+   },
+   {
+    "id": "dfc_rate_statistics_2025-26",
+    "title": "District council (NI) rate statistics 2025/2026, circular LG 04/2025 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/2025-02/lg-04-2025-rate-statistics-2025-26.pdf",
+    "published_on": "2025-02-18",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/2025-02/lg-04-2025-rate-statistics-2025-26.pdf",
+    "sha256": "109ade648665cbd606d9eadb8f244c00796e329f750efbfc8a3216e651224cdd"
+   },
+   {
+    "id": "dfc_rate_statistics_2024-25",
+    "title": "District council (NI) rate statistics 2024/2025, circular LG 07/2024 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-07-2024.pdf",
+    "published_on": "2024-02-29",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-07-2024.pdf",
+    "sha256": "da34ecb9a832224d9208536b526e06bdd46cdd007759ad7678cc116149813fd6"
+   },
+   {
+    "id": "dfc_rate_statistics_2023-24",
+    "title": "District council (NI) rate statistics 2023/2024, circular LG 09/2023 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-09-2023.pdf",
+    "published_on": "2023-02-22",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-09-2023.pdf",
+    "sha256": "5381f3099e06219256b0599f6ea1aa5270108bbde5cae353bd229cdf11760a7d"
+   },
+   {
+    "id": "belfast_spr_2026-02-13",
+    "title": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026: printed minutes (Revenue Estimates and District Rate 2026/27)",
+    "publisher": "Belfast City Council",
+    "url": "https://minutes.belfastcity.gov.uk/ieListDocuments.aspx?CId=163&MID=12501",
+    "published_on": "2026-02-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://minutes.belfastcity.gov.uk/documents/g12501/Printed%20minutes%2013th-Feb-2026%2009.30%20Strategic%20Policy%20and%20Resources%20Committee.pdf?T=1",
+    "sha256": "2c8b7f310ec7f04b78ca19c21c2e1d30c4e7c569695363652500c14c15d0d8d2"
+   },
+   {
+    "id": "dof_regional_rate_2026-27",
+    "title": "Executive agrees Regional Rate for 2026/27 (Department of Finance news release, 12 February 2026)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "https://www.finance-ni.gov.uk/news/executive-agrees-regional-rate-202627",
+    "published_on": "2026-02-12",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.finance-ni.gov.uk/news/executive-agrees-regional-rate-202627",
+    "sha256": "f902306201eb349f45559f0ad265df34a858108e69059faa4c42253014f9cd45"
+   },
+   {
+    "id": "nisra_ward_dea_lookup",
+    "title": "Lookup: Ward 2014 to DEA 2014 to LGD 2014, administrative geographies (NISRA, 2016, v1)",
+    "publisher": "Northern Ireland Statistics and Research Agency",
+    "url": "https://www.nisra.gov.uk/publications/geography-lookup-tables",
+    "published_on": "2025-04-01",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.nisra.gov.uk/files/nisra/documents/2025-04/geography-lookup-ward2014-to-dea2014-to-lgd2014-administrative-geographies-2016-v1.ods",
+    "sha256": "bac2893f49a634638c8eaeeca02d67643ce8f64f94e9f564a94f2839e18f087d"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Book method notes (docs/MODEL.md)",
     "publisher": "Borough Book",

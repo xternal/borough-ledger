@@ -87,7 +87,8 @@ export type Rules = z.infer<typeof Rules>;
 
 /* ------------------------------------------------------------------ council year */
 
-export const FUNDING_KINDS = ["council_tax", "grant", "business_rates", "other", "reserves"] as const;
+/** "rates": Northern Ireland's district rate, paid by homes and businesses alike. */
+export const FUNDING_KINDS = ["council_tax", "grant", "business_rates", "rates", "other", "reserves"] as const;
 
 export const FundingLine = z.object({
   id: z.string(),

@@ -19,7 +19,13 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     id: "government",
     label: "Government returns and statistics",
     desc: "Council tax tables and the budget and spending returns every council files with government.",
-    test: (s) => /Ministry|Department|HM Treasury|Office for|Scottish Government|Welsh Government/.test(s.publisher),
+    test: (s) => /Ministry|Department|HM Treasury|Office for|Scottish Government|Welsh Government|Statistics and Research Agency/.test(s.publisher),
+  },
+  {
+    id: "councils",
+    label: "Other councils' papers",
+    desc: "Budget decisions from a council's own minutes, where the government's statistics do not break them down (Belfast).",
+    test: (s) => s.publisher === "Belfast City Council",
   },
   {
     id: "london",

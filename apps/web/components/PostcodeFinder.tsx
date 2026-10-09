@@ -34,7 +34,7 @@ export function PostcodeFinder({
   const message = (r: PlaceLookup) => {
     switch (r.kind) {
       case "ward":
-        return `${r.postcode} is in ${r.name} ward, ${r.place}. Opening ${elsewhere(r) ? r.place : "it"}…`;
+        return `${r.postcode} is in ${r.name} ${r.word ?? "ward"}, ${r.place}. Opening ${elsewhere(r) ? r.place : "it"}…`;
       case "council":
         return `${r.postcode} is in ${r.place}. Opening its page…`;
       case "elsewhere":
@@ -61,7 +61,7 @@ export function PostcodeFinder({
         setBusy(false);
         if (elsewhere(r)) {
           try {
-            sessionStorage.setItem(YOUR_WARD_KEY, JSON.stringify({ place: r.place, name: r.name, href: r.href } satisfies YourWard));
+            sessionStorage.setItem(YOUR_WARD_KEY, JSON.stringify({ place: r.place, name: r.name, href: r.href, ...(r.word ? { word: r.word } : {}) } satisfies YourWard));
           } catch {
             // No storage (a private window): the page opens without the "your ward" line.
           }

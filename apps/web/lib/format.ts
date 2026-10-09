@@ -13,6 +13,7 @@ export type Fmt =
   | "share0" // 36%  (input as a fraction)
   | "share1" // 1.1% (input as a fraction)
   | "pence" // 66p  (input as a fraction of £1)
+  | "p4" // 0.4492p  (a rate poundage, input in £ per £1, as Northern Ireland's Department of Finance gives it)
   | "int"; // 38
 
 const MINUS = "−";
@@ -72,6 +73,8 @@ export function format(fmt: Fmt, raw: number): string {
       return format("pct0", raw * 100);
     case "share1":
       return format("pct1", raw * 100);
+    case "p4":
+      return `${nf(4, 4).format(raw * 100)}p`;
     case "pence":
       return `${Math.round(raw * 100)}p`;
     case "int":

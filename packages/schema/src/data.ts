@@ -12,6 +12,7 @@ import capitalRaw from "../../../data/build/capital.json";
 import rulesRaw from "../../../data/config/rules.json";
 import rulesScotlandRaw from "../../../data/config/rules_scotland.json";
 import rulesWalesRaw from "../../../data/config/rules_wales.json";
+import rulesNiRaw from "../../../data/config/rules_northern_ireland.json";
 import { checkContent, ContentFile, type Content } from "./content";
 import { checkPayments, PaymentsIndex } from "./payments";
 import { CouncilYear, Rules, type Source } from "./seed";
@@ -20,6 +21,7 @@ import { checkWardSpend, WardSpend } from "./wardspend";
 import { checkDecisionLinks, DecisionsFile } from "./decisions";
 import { checkElections, ElectionsFile } from "./elections";
 import { CapitalFile, checkCapital } from "./capital";
+import { RatesRules } from "./rates";
 import type { Quality } from "./quality";
 
 export interface Dataset {
@@ -185,3 +187,12 @@ function nationRules(raw: unknown, name: string): Rules {
 export const RULES_SCOTLAND: Rules = nationRules(rulesScotlandRaw, "rules_scotland");
 /** Wales's (data/config/rules_wales.json): nine bands, A to I; no referendums, but the Welsh Ministers can cap. */
 export const RULES_WALES: Rules = nationRules(rulesWalesRaw, "rules_wales");
+
+/** Northern Ireland's domestic rating rules (data/config/rules_northern_ireland.json): no bands, a capped capital value. */
+export const RULES_NI: RatesRules = (() => {
+  const r = RatesRules.parse(rulesNiRaw);
+  const ids = new Set(r.meta.sources.map((s) => s.id));
+  const missing = [r.capital_value_cap, r.valuation_date, r.lone_pensioner_allowance, r.instalments, r.balanced_budget].filter((x) => !ids.has(x.source_id));
+  if (missing.length) throw new Error(`rules_northern_ireland: unknown source ${missing.map((x) => x.source_id).join(", ")}`);
+  return r;
+})();
