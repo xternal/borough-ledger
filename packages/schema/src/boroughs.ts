@@ -20,7 +20,7 @@ export const BoroughConfig = z.object({
       seats_per_ward: z.number().int().positive().optional(),
       councillors_from: z.enum(["moderngov", "ballots"]).optional(),
       /** Outside London: who the rest of the bill goes to, and the bodies it splits into (government Tables 8d to 8f). */
-      others: z.object({ name: z.string(), to: z.string(), short: z.string() }).optional(),
+      others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string() }).optional(),
       precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),
       parish_names: z.string().optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */

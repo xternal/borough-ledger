@@ -35,7 +35,7 @@ const SECTIONS = [
 
 function words(m: BoroughModel) {
   const title = `Where your council tax goes in ${m.place.short} | ${SITE.name}`;
-  const description = `${m.place.short}: a Band D council tax bill of ${format("gbp2", m.bill.total.value)} in ${m.place.yearLabel}, split between the council and the Mayor of London; the council's ${format("m0", m.netBudget.value)} budget by service and where the money comes from; council tax over the years; and every ward's councillors and election result. From government returns and the council's own records.`;
+  const description = `${m.place.short}: a Band D council tax bill of ${format("gbp2", m.bill.total.value)} in ${m.place.yearLabel}, split between the council and ${m.bill.others.to}; the council's ${format("m0", m.netBudget.value)} budget by service and where the money comes from; council tax over the years; and every ward's councillors and election result. From government returns and the council's own records.`;
   return { title, description };
 }
 
@@ -181,7 +181,7 @@ export default async function BoroughPage({ params }: Props) {
                     The council&rsquo;s share
                   </th>
                   <th scope="col" className="n">
-                    Whole bill, with the Mayor of London
+                    Whole bill, with {m.bill.others.with}
                   </th>
                 </tr>
               </thead>
