@@ -270,7 +270,12 @@ export default async function BoroughPage({ params }: Props) {
       <TopBar place={m.place.short} year={m.place.yearLabel} borough={{ base: `/${borough}`, items: P ? SECTIONS : SECTIONS.filter(([id]) => id !== "councillors") }} />
       <main className="wrap" id="top">
         <div className="hero">
-          <HeroTop current={m.place.short} council={councilWithThe(m.place.council)} example={m.b.example_postcode ?? "W6 9JU"} />
+          <HeroTop
+            current={m.place.short}
+            council={councilWithThe(m.place.council)}
+            example={m.b.example_postcode ?? "W6 9JU"}
+            results={!!P?.wards.some((w) => w.election)}
+          />
           <h1>Where your council tax goes in {m.place.short}</h1>
           <p className="lede">
             A Band D home pays <Num f={m.bill.total} fmt="gbp2" /> this year, up <Num f={m.bill.risePct} fmt="pct1" />. Council tax covers about{" "}

@@ -6,7 +6,20 @@ import { YourWard } from "./YourWard";
 
 /** The top of a council's page: your postcode first, which opens your council and ward; or pick a place from the list;
  *  and that the project is not the council. */
-export function HeroTop({ current, council, example, children }: { current: string; council: string; example: string; children?: React.ReactNode }) {
+export function HeroTop({
+  current,
+  council,
+  example,
+  results = true,
+  children,
+}: {
+  current: string;
+  council: string;
+  example: string;
+  /** Whether the page shows how each ward voted (not where the counts are unpublished, as in Glasgow). */
+  results?: boolean;
+  children?: React.ReactNode;
+}) {
   return (
     <div className="hero-top">
       <div className="hero-switch">
@@ -16,7 +29,7 @@ export function HeroTop({ current, council, example, children }: { current: stri
           <BoroughPicker current={current} boroughs={[HOME_BOROUGH, ...OTHER_BOROUGHS]} />
         </div>
       </div>
-      <YourWard current={current} />
+      <YourWard current={current} results={results} />
       <p className="indep">
         Independent. Not run by or affiliated with {council}.{children ? <> {children}</> : null}
       </p>
