@@ -45,3 +45,20 @@ Recommended order: (1) merge Kensington and Chelsea at `/kensington-and-chelsea`
 
 So item 12's data side is mostly automatic, but six boroughs need a person's decision, and the page must say where returns disagree. The councillors' side needs each council's ModernGov address (most London boroughs use ModernGov; a few use other systems), found and checked one by one.
 
+## 15 more boroughs (9 Oct 2026)
+
+Live from this change, each at `/<slug>` with the same page as Kensington and Chelsea: Barking and Dagenham, Brent, Bromley, Camden, Hackney, Haringey, Harrow, Havering, Hounslow, Merton, Redbridge, Richmond upon Thames, Southwark, Sutton and Tower Hamlets: 15 more, so 16 boroughs beyond Hammersmith & Fulham and about 900 of their councillors. Every bill and budget passes the same checks as Hammersmith & Fulham's.
+
+**Held back:** Lambeth (its bill and budget pass, but its ModernGov service timed out on every try; add it when it answers), and the 14 boroughs in the table above whose returns disagree.
+
+What the councils' own records needed, all handled in `etl/borough_people.py` with Hammersmith & Fulham's rules unchanged:
+
+- **Elected mayors.** Hackney (Zoë Garbett, Green) and Tower Hamlets (Lutfur Rahman, Aspire) are run by a mayor elected on 7 May 2026. The page says so, from the mayoral ballot, and the mayor is not counted as a ward councillor (Hackney lists its mayor under her old ward).
+- **Names written differently.** The ballot paper gives full legal names ("Christopher William Stuart Phillips"), the council's list the everyday one ("Chris Phillips"), sometimes with "Dr" or honours and degrees ("Amer Agha MB BS, MSc, PHCM"), or a different spelling ("Davies", "Davis"). Each of May's winners is paired with a councillor on the council's list for the ward: the same name; one name inside the other; the same first name and a near-identical surname; or a surname only one councillor and one winner in the ward share. Every pairing that was not an exact name (about 200 of about 900) was read by Claude: all correct.
+- **Seats that changed hands since May.** Five winners are not on the council's current list (Camden: Regent's Park; Hackney: Dalston, where the new mayor gave up her seat, and Hackney Central; Haringey: Northumberland Park and Woodside), each matched by a different councillor now listed. They show as elected and "no longer on the council's list", not named. The build allows that only where an empty seat or a councillor who joined since accounts for it; anything else stops it.
+- **A councillor listed without a party** (Hackney, De Beauvoir): her party comes from her May ballot, and the post listed with the entry, which is not a council post, is left out.
+- **A candidate their party withdrew support from after nominations** is still on the ballot paper and can win (Harrow, North Harrow); they are kept. Hammersmith & Fulham's results had none, and are unchanged.
+- **Party names.** "Labour and Co-operative Party" and "Labour And Co Op Party" count as Labour; "Local Conservatives" (Bromley) and "Conservative and Unionist Party" as Conservative; "The Reform UK Group" (Havering) as Reform UK. Local parties keep their own names as the council writes them.
+- **Turnout or rejected papers not given** in some declarations (Brent, Harrow, Merton, Sutton, Tower Hamlets; Hackney's rejected papers): the page says the declaration gave none.
+- **Democracy Club limits how fast it is asked:** requests wait 1.5 seconds and retry with a pause when told to slow down.
+

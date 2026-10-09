@@ -15,8 +15,10 @@ export const Candidate = z
     party_id: z.string().optional(),
     votes: z.number().int().nonnegative(),
     elected: z.boolean(),
-    /** Set for every elected candidate, and only for them. */
+    /** Set for every elected candidate still on the council, and only for them. */
     councillor_id: z.string().optional(),
+    /** Elected, but not on the council's current list (the seat is vacant or changed hands): not named. */
+    left: z.literal(true).optional(),
   })
   .strict();
 export type Candidate = z.infer<typeof Candidate>;

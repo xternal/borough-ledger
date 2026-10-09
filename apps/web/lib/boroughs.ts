@@ -17,7 +17,9 @@ function repo(): string {
   return d;
 }
 
-const read = (path: string) => JSON.parse(readFileSync(join(repo(), path), "utf8"));
+// Read only while building (every borough page and share image is static), so the files need not be traced into the
+// server bundle.
+const read = (path: string) => JSON.parse(readFileSync(/*turbopackIgnore: true*/ join(/*turbopackIgnore: true*/ repo(), path), "utf8"));
 
 export const BOROUGHS = BoroughConfig.parse(read("data/config/boroughs.json")).boroughs;
 export type Borough = (typeof BOROUGHS)[number];

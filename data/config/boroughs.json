@@ -2,12 +2,150 @@
  "note": "Boroughs beyond Hammersmith & Fulham (whose pipeline is etl/build.py and content/). Each is built by etl/boroughs.py from the same government returns and checks; wards, councillors and election results by etl/borough_people.py. ONS codes from the ONS Open Geography Portal; the council's ModernGov web service where it has one.",
  "boroughs": [
   {
+   "slug": "barking-and-dagenham",
+   "council": "London Borough of Barking and Dagenham",
+   "short": "Barking and Dagenham",
+   "ons": "E09000002",
+   "moderngov": "https://lbbd.moderngov.co.uk",
+   "election_id": "local.barking-and-dagenham.2026-05-07",
+   "example_postcode": "IG11 7LU"
+  },
+  {
+   "slug": "brent",
+   "council": "London Borough of Brent",
+   "short": "Brent",
+   "ons": "E09000005",
+   "moderngov": "https://democracy.brent.gov.uk",
+   "election_id": "local.brent.2026-05-07",
+   "example_postcode": "HA9 0FJ"
+  },
+  {
+   "slug": "bromley",
+   "council": "London Borough of Bromley",
+   "short": "Bromley",
+   "ons": "E09000006",
+   "moderngov": "https://cds.bromley.gov.uk",
+   "election_id": "local.bromley.2026-05-07",
+   "example_postcode": "BR1 3UH"
+  },
+  {
+   "slug": "camden",
+   "council": "London Borough of Camden",
+   "short": "Camden",
+   "ons": "E09000007",
+   "moderngov": "https://camden.moderngov.co.uk",
+   "election_id": "local.camden.2026-05-07",
+   "example_postcode": "WC1H 9JE"
+  },
+  {
+   "slug": "hackney",
+   "council": "London Borough of Hackney",
+   "short": "Hackney",
+   "ons": "E09000012",
+   "moderngov": "https://hackney.moderngov.co.uk",
+   "election_id": "local.hackney.2026-05-07",
+   "example_postcode": "E8 1EA",
+   "mayor_election_id": "mayor.hackney.2026-05-07"
+  },
+  {
+   "slug": "haringey",
+   "council": "London Borough of Haringey",
+   "short": "Haringey",
+   "ons": "E09000014",
+   "moderngov": "https://www.minutes.haringey.gov.uk",
+   "election_id": "local.haringey.2026-05-07",
+   "example_postcode": "N22 8HQ"
+  },
+  {
+   "slug": "harrow",
+   "council": "London Borough of Harrow",
+   "short": "Harrow",
+   "ons": "E09000015",
+   "moderngov": "https://moderngov.harrow.gov.uk",
+   "election_id": "local.harrow.2026-05-07",
+   "example_postcode": "HA1 2XY"
+  },
+  {
+   "slug": "havering",
+   "council": "London Borough of Havering",
+   "short": "Havering",
+   "ons": "E09000016",
+   "moderngov": "https://democracy.havering.gov.uk",
+   "election_id": "local.havering.2026-05-07",
+   "example_postcode": "RM1 3BD"
+  },
+  {
+   "slug": "hounslow",
+   "council": "London Borough of Hounslow",
+   "short": "Hounslow",
+   "ons": "E09000018",
+   "moderngov": "https://democraticservices.hounslow.gov.uk",
+   "election_id": "local.hounslow.2026-05-07",
+   "example_postcode": "TW3 3EB"
+  },
+  {
    "slug": "kensington-and-chelsea",
    "council": "Royal Borough of Kensington and Chelsea",
    "short": "Kensington and Chelsea",
    "ons": "E09000020",
    "moderngov": "https://www.rbkc.gov.uk/committees",
-   "election_id": "local.kensington-and-chelsea.2026-05-07"
+   "election_id": "local.kensington-and-chelsea.2026-05-07",
+   "example_postcode": "W8 7NX"
+  },
+  {
+   "slug": "merton",
+   "council": "London Borough of Merton",
+   "short": "Merton",
+   "ons": "E09000024",
+   "moderngov": "https://democracy.merton.gov.uk",
+   "election_id": "local.merton.2026-05-07",
+   "example_postcode": "SM4 5DX"
+  },
+  {
+   "slug": "redbridge",
+   "council": "London Borough of Redbridge",
+   "short": "Redbridge",
+   "ons": "E09000026",
+   "moderngov": "https://moderngov.redbridge.gov.uk",
+   "election_id": "local.redbridge.2026-05-07",
+   "example_postcode": "IG1 1DD"
+  },
+  {
+   "slug": "richmond-upon-thames",
+   "council": "London Borough of Richmond upon Thames",
+   "short": "Richmond upon Thames",
+   "ons": "E09000027",
+   "moderngov": "https://cabnet.richmond.gov.uk",
+   "election_id": "local.richmond-upon-thames.2026-05-07",
+   "example_postcode": "TW1 3BZ"
+  },
+  {
+   "slug": "southwark",
+   "council": "London Borough of Southwark",
+   "short": "Southwark",
+   "ons": "E09000028",
+   "moderngov": "https://moderngov.southwark.gov.uk",
+   "election_id": "local.southwark.2026-05-07",
+   "example_postcode": "SE1 2QH"
+  },
+  {
+   "slug": "sutton",
+   "council": "London Borough of Sutton",
+   "short": "Sutton",
+   "ons": "E09000029",
+   "moderngov": "https://moderngov.sutton.gov.uk",
+   "election_id": "local.sutton.2026-05-07",
+   "example_postcode": "SM1 1EA"
+  },
+  {
+   "slug": "tower-hamlets",
+   "council": "London Borough of Tower Hamlets",
+   "short": "Tower Hamlets",
+   "ons": "E09000030",
+   "moderngov": "https://democracy.towerhamlets.gov.uk",
+   "election_id": "local.tower-hamlets.2026-05-07",
+   "example_postcode": "E1 1BJ",
+   "mayor_election_id": "mayor.tower-hamlets.2026-05-07"
   }
  ]
 }

@@ -75,8 +75,7 @@ def build(ballots: List[dict], retrieved_on: str) -> dict:
         w = wards[gss]
         candidates = []
         for c in b["candidacies"]:
-            if c.get("deselected"):
-                continue
+            # A candidate their party withdrew support from after nominations is still on the ballot paper and can win.
             row = {"party": c["party_name"], "votes": c["result"]["num_ballots"], "elected": bool(c["elected"])}
             if c["party"]["ec_id"] in PARTIES:
                 row["party_id"] = PARTIES[c["party"]["ec_id"]]

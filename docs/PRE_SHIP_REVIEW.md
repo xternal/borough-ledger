@@ -219,3 +219,7 @@ Every Friday morning `.github/workflows/weekly-digest.yml` opens an issue with a
 - **Postcode finder on the first screen** of every borough's page, for every borough on the site: a Hammersmith & Fulham postcode opens its ward page, a Kensington and Chelsea one its ward on the borough page (highlighted), and any other says which borough it is in and which boroughs are covered. The finder on /wards and the home page's ward section use the same lookup. The ward lists come from a small bundled file (`data/build/boroughs/finder.json`, written and checked by `etl/borough_people.py`), so pages rendered on request read no files.
 - Accessibility 100 on /, /kensington-and-chelsea and /wards (Lighthouse), with no experimental check failing.
 
+## 15 more boroughs (9 Oct 2026, in review)
+
+Barking and Dagenham, Brent, Bromley, Camden, Hackney, Haringey, Harrow, Havering, Hounslow, Merton, Redbridge, Richmond upon Thames, Southwark, Sutton and Tower Hamlets join Kensington and Chelsea: bill, budget, council tax history, every councillor and ward result, the postcode finder and the borough selector, all from the same checked pipeline. Elected mayors (Hackney, Tower Hamlets), seats that changed hands since May, names written differently and missing turnout are handled without guessing (docs/BOROUGHS.md). Lambeth waits for its ModernGov service to answer.
+

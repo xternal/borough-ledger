@@ -42,6 +42,17 @@ class BoroughsTest(unittest.TestCase):
         self.assertIn("no names beyond councillors", problems)
         self.assertIn("fewer votes was elected", problems)
 
+    def test_parties_are_recognised_however_they_are_written(self) -> None:
+        for name, pid in [("Labour and Cooperative Party", "labour"), ("Labour And Co Op Party", "labour"), ("Local Conservatives", "conservative"),
+                          ("Conservative and Unionist Party", "conservative"), ("Liberal Democrat", "liberal-democrats"), ("Green Party", "green"),
+                          ("Reform UK", "reform-uk"), ("Chislehurst Matters", "chislehurst-matters")]:
+            self.assertEqual(BP.party_id(name), pid, name)
+
+    def test_honours_and_degrees_after_a_name_do_not_hide_the_surname(self) -> None:
+        self.assertTrue(BP.ends_with_surname("Tariq Dar MBE", "DAR"))
+        self.assertTrue(BP.ends_with_surname("Amer Agha MB BS, MSc, PHCM", "AGHA"))
+        self.assertFalse(BP.ends_with_surname("Iftekhar Ahmed", "AGHA"))
+
     def test_a_two_word_surname_matches(self) -> None:
         self.assertTrue(BP.ends_with_surname("Natacha Tannous Ritchie", "TANNOUS RITCHIE"))
         self.assertFalse(BP.ends_with_surname("Natacha Ritchie", "TANNOUS"))

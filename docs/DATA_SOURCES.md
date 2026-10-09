@@ -115,3 +115,7 @@ DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the
 - **Ward codes, seats and results:** Democracy Club, `local.kensington-and-chelsea.2026-05-07` (18 wards), CC BY-SA 4.0.
 - **Ward boundaries:** the ONS Wards (December 2024) service already used, for LAD24CD E09000020.
 
+## In use (15 more boroughs, 9 Oct 2026)
+
+The same returns, Democracy Club and ONS sources as Kensington and Chelsea; each council's ModernGov web service for its councillors, listed in `data/config/boroughs.json` (Barking and Dagenham and Camden answer scripts only at their `*.moderngov.co.uk` address; Hackney's is at `hackney.moderngov.co.uk`). Hackney's and Tower Hamlets' mayoral results come from Democracy Club's mayoral ballots.
+

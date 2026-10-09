@@ -4,13 +4,13 @@
   {
    "title": "Royal Borough of Kensington and Chelsea, councillors by ward (ModernGov web service)",
    "url": "https://www.rbkc.gov.uk/committees/mgWebService.asmx/GetCouncillorsByWard",
-   "retrieved_on": "2026-10-08",
+   "retrieved_on": "2026-10-09",
    "sha256": "4fa56cf0a74b5734e204b9cf8e4479135b3a94f1ab41594bd5a1070daf25fc53"
   },
   {
    "title": "Democracy Club, Kensington and Chelsea local election 7 May 2026",
    "url": "https://candidates.democracyclub.org.uk/api/next/ballots/?election_id=local.kensington-and-chelsea.2026-05-07",
-   "retrieved_on": "2026-10-08",
+   "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "0f0ad6c0333ccd68f6f74becbaa0f291b71bf45c534bec185eaed3af9c9b5908"
   }
@@ -121,17 +121,20 @@
      {
       "party": "Reform UK",
       "votes": 137,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 127,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 124,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -177,17 +180,20 @@
      {
       "party": "Reform UK",
       "votes": 224,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 218,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 198,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Labour Party",
@@ -305,17 +311,20 @@
      {
       "party": "Reform UK",
       "votes": 213,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 176,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 142,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Independent",
@@ -391,17 +400,20 @@
      {
       "party": "Reform UK",
       "votes": 354,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 307,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 288,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Independent",
@@ -507,17 +519,20 @@
      {
       "party": "Reform UK",
       "votes": 203,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 198,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 195,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -599,7 +614,8 @@
      {
       "party": "Reform UK",
       "votes": 141,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Green Party",
@@ -616,7 +632,8 @@
      {
       "party": "Reform UK",
       "votes": 132,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Labour Party",
@@ -633,7 +650,8 @@
      {
       "party": "Reform UK",
       "votes": 118,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -695,12 +713,14 @@
      {
       "party": "Reform UK",
       "votes": 239,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 206,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -806,17 +826,20 @@
      {
       "party": "Reform UK",
       "votes": 139,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 113,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 99,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -898,17 +921,20 @@
      {
       "party": "Reform UK",
       "votes": 171,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 161,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 139,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -1014,17 +1040,20 @@
      {
       "party": "Reform UK",
       "votes": 119,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 108,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 99,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -1092,12 +1121,14 @@
      {
       "party": "Reform UK",
       "votes": 123,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 88,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -1173,17 +1204,20 @@
      {
       "party": "Reform UK",
       "votes": 271,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 247,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 226,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -1269,12 +1303,14 @@
      {
       "party": "Reform UK",
       "votes": 85,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 74,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -1356,12 +1392,14 @@
      {
       "party": "Reform UK",
       "votes": 120,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 115,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Labour Party",
@@ -1372,7 +1410,8 @@
      {
       "party": "Reform UK",
       "votes": 102,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -1454,12 +1493,14 @@
      {
       "party": "Reform UK",
       "votes": 188,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 185,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Labour Party",
@@ -1470,7 +1511,8 @@
      {
       "party": "Reform UK",
       "votes": 155,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      }
     ]
    }
@@ -1516,17 +1558,20 @@
      {
       "party": "Reform UK",
       "votes": 329,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 310,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 298,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Labour Party",
@@ -1630,12 +1675,14 @@
      {
       "party": "Reform UK",
       "votes": 144,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 122,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -1711,17 +1758,20 @@
      {
       "party": "Reform UK",
       "votes": 286,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 263,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Reform UK",
       "votes": 249,
-      "elected": false
+      "elected": false,
+      "party_id": "reform-uk"
      },
      {
       "party": "Liberal Democrats",
@@ -1945,7 +1995,7 @@
    "party_name": "Labour and Cooperative Party",
    "ward_id": "dalgarno",
    "roles": [
-    "Deputy Mayor and Opposition spokesperson\n: Environment"
+    "Deputy Mayor and Opposition spokesperson : Environment"
    ],
    "democracy_url": "https://www.rbkc.gov.uk/committees/mgUserInfo.aspx?UID=165"
   },
