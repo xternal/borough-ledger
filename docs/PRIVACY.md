@@ -37,10 +37,11 @@ Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from 
 
 ## Follow
 
-* Channels: RSS (stores nothing), email (double opt-in; stores email + followed IDs; not built yet).
+* Channels: RSS (stores nothing) and email about pledges (double opt-in; stores the address, encrypted, and the pledges followed).
 * RSS is live (8 Oct 2026): every feed is a static file built with the site, so nobody is logged as following anything, and feed links carry no tracking codes.
-* Follows can reveal political opinions, which are special category data under UK GDPR. Explicit consent at sign-up, minimal storage, no tracking in emails, one-click delete, DPIA before launch.
-* Local numbers are small: show aggregate follower counts only above 50, and never per ward below 50.
+* Email is built (9 Oct 2026, ported from LedgerGov.uk) and switched off until the owner sets it up: docs/EMAIL_ALERTS.md says how it works and what to set, and docs/DPIA_EMAIL.md is the impact assessment to finish first. The privacy notice at /privacy names the controller once email is on.
+* Follows can reveal political opinions, which are special category data under UK GDPR. Explicit consent at sign-up (the consent points sit above the button), minimal storage, no tracking in emails, one-click delete, a DPIA before launch.
+* Follower counts are not shown anywhere. If they ever are: aggregate only, above 50, and never per ward below 50.
 
 ## Contribute
 

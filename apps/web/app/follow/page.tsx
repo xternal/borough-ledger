@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { EmailFollow } from "@/components/EmailFollow";
 import { PageShell } from "@/components/PageShell";
+import { consentForForm, EMAIL_ALERTS } from "@/lib/follow";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { SITE } from "@/lib/site";
 import { wardsOf } from "@/lib/wards";
 
-const title = `Follow changes by RSS | ${SITE.name}`;
+const title = `Follow changes${EMAIL_ALERTS ? "" : " by RSS"} | ${SITE.name}`;
 const description =
   "Follow Hammersmith & Fulham's pledges, wards, councillors and council payments by RSS: no account, no email, and nobody knows who follows.";
 
@@ -37,6 +39,17 @@ export default function FollowPage() {
           follow feeds too. You need no account here and give us no email address, and we cannot see who follows anything.
         </p>
       </section>
+
+      {EMAIL_ALERTS ? (
+        <section aria-labelledby="email-h" className="ward-sec">
+          <h2 id="email-h">By email</h2>
+          <p>
+            Prefer email? Ask for one when any pledge changes, or use the form on a pledge&rsquo;s page to follow just that one. We send at most one email a day, and
+            every email has a link to stop.
+          </p>
+          <EmailFollow target={{ kind: "all", id: "*" }} consent={consentForForm()} heading="An email when any pledge changes. No account needed." />
+        </section>
+      ) : null}
 
       <section aria-labelledby="feeds-h" className="ward-sec">
         <h2 id="feeds-h">Feeds</h2>

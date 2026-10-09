@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DATA } from "@borough-ledger/schema";
+import { EmailFollow } from "@/components/EmailFollow";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { PromiseCardView } from "@/components/Promises";
+import { consentForForm, EMAIL_ALERTS } from "@/lib/follow";
 import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
@@ -63,6 +65,12 @@ export default async function PromisePage({ params }: Props) {
             </a>
           </p>
         </section>
+        {EMAIL_ALERTS ? (
+          <section aria-labelledby="alerts-h" className="card-extra">
+            <h2 id="alerts-h">Get an email when it changes</h2>
+            <EmailFollow target={{ kind: "promise", id: p.id }} consent={consentForForm()} heading="An email when its status, a deadline or a reply changes. No account needed." />
+          </section>
+        ) : null}
         {p.versions.length > 1 ? (
           <section aria-labelledby="versions-h" className="card-extra">
             <h2 id="versions-h">Earlier wording</h2>

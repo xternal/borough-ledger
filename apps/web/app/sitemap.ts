@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/promises`, lastModified: promisesChanged, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/decisions`, lastModified: decisionsChanged, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/wards`, lastModified: peopleChanged, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     ...DATA.content.wards.wards.map((w) => ({ url: `${SITE_URL}/ward/${w.id}`, lastModified: peopleChanged, changeFrequency: "monthly" as const, priority: 0.5 })),
     ...partiesOf(m).map((pt) => ({ url: `${SITE_URL}/party/${pt.id}`, lastModified: pt.changed, changeFrequency: "weekly" as const, priority: 0.8 })),
     ...topicsOf(m).map((t) => ({ url: `${SITE_URL}/topic/${t.slug}`, lastModified: t.changed, changeFrequency: "weekly" as const, priority: 0.7 })),

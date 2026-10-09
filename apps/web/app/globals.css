@@ -2411,3 +2411,71 @@
     color: var(--warn);
   }
 }
+
+@layer components {
+  /* email alerts: the follow form, and the confirm and manage pages */
+  .email-follow {
+    display: grid;
+    gap: 6px;
+    max-width: 560px;
+    margin: 12px 0 8px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: var(--sunk);
+  }
+  .email-follow-h {
+    margin: 0;
+    font-weight: 600;
+  }
+  .email-follow label {
+    font-weight: 550;
+    font-size: 14px;
+  }
+  .email-follow input {
+    flex: 1;
+    min-width: 0;
+    font: 500 16px var(--font);
+    padding: 9px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .email-follow-consent {
+    margin: 0 0 6px;
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .email-follow-done {
+    margin: 0;
+    font-weight: 550;
+  }
+  .follow-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .follow-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .follow-list form {
+    margin: 0;
+  }
+  .btn.danger {
+    background: var(--bg);
+    color: var(--bad);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+  }
+  .status-note {
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--sunk);
+  }
+}

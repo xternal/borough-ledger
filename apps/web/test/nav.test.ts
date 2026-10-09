@@ -17,6 +17,8 @@ describe("where you are", () => {
     expect(sectionForPath("/payments/2026-06")).toBe("payments");
     expect(sectionForPath("/supplier/veolia-es-uk-ltd")).toBe("payments");
     expect(sectionForPath("/sources")).toBe("method");
+    expect(sectionForPath("/follow/manage")).toBe("method");
+    expect(sectionForPath("/privacy")).toBe("method");
     expect(sectionForPath("/promisesxyz")).toBeNull();
   });
 
