@@ -11,6 +11,7 @@ import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides, standing } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
+import { share } from "@/lib/share";
 
 export const revalidate = 86400;
 
@@ -27,8 +28,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/promises", types: feedAlternate("/promises/feed.xml", "Every pledge") },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/promises", title, description),
 };
 
 export default function PromisesPage() {

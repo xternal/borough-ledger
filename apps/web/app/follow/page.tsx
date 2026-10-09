@@ -6,6 +6,7 @@ import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { SITE } from "@/lib/site";
 import { wardsOf } from "@/lib/wards";
+import { share } from "@/lib/share";
 
 const title = `Follow changes${EMAIL_ALERTS ? "" : " by RSS"} | ${SITE.name}`;
 const description =
@@ -15,8 +16,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/follow", types: feedAlternate("/feed.xml", `${SITE.name}: everything new`) },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/follow", title, description),
 };
 
 export default function FollowPage() {

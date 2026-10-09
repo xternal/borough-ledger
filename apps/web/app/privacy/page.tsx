@@ -5,6 +5,7 @@ import { PageShell } from "@/components/PageShell";
 import { EMAIL_ALERTS } from "@/lib/follow";
 import { buildModel } from "@/lib/model";
 import { CONTACT, MAKER, SITE } from "@/lib/site";
+import { share } from "@/lib/share";
 
 const title = `Privacy | ${SITE.name}`;
 const description = `What ${SITE.name} keeps about you: nothing to read the site, and for email alerts only your encrypted address and the pledges you follow.`;
@@ -13,8 +14,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/privacy" },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/privacy", title, description),
 };
 
 /** The privacy notice. The email section appears only when the site sends email, and names who holds the data then. */

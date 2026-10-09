@@ -18,6 +18,7 @@ import { format, formatDay } from "@/lib/format";
 import { isRatesCouncil, ratesModel } from "@/lib/rates";
 import { RatesPage, ratesWords } from "@/components/RatesPage";
 import { SITE, SITE_URL } from "@/lib/site";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ borough: string }> };
 
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const m = r ? null : boroughModel(borough);
   if (!r && !m) return {};
   const { title, description } = r ? ratesWords(r) : words(m!);
-  return { title, description, alternates: { canonical: `/${borough}` }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  return { title, description, alternates: { canonical: `/${borough}` }, ...share(`/${borough}`, title, description, { own: true }) };
 }
 
 export default async function BoroughPage({ params }: Props) {

@@ -11,6 +11,7 @@ import { SITE } from "@/lib/site";
 import { councillorJsonLd } from "@/lib/structured";
 import { electedWith } from "@/lib/wards";
 import { Num } from "@/components/Num";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {};
   const title = `${c.name}, ${c.ward} ward | ${SITE.name}`;
   const description = `${c.name} (${c.party}), councillor for ${c.ward} in Hammersmith & Fulham: posts held and the pledges of their party, independently tracked.`;
-  return { title, description, alternates: { canonical: `/councillor/${id}`, types: feedAlternate(`/councillor/${id}/feed.xml`, `Pledges by ${c.name} and their party`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  return { title, description, alternates: { canonical: `/councillor/${id}`, types: feedAlternate(`/councillor/${id}/feed.xml`, `Pledges by ${c.name} and their party`) }, ...share(`/councillor/${id}`, title, description, { own: true }) };
 }
 
 export default async function CouncillorPage({ params }: Props) {

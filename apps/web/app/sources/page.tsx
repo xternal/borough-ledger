@@ -5,6 +5,7 @@ import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
 import { groupSources } from "@/lib/sources";
+import { share } from "@/lib/share";
 
 const title = `Sources for Hammersmith & Fulham's money and promises | ${SITE.name}`;
 const description =
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/sources" },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/sources", title, description),
 };
 
 export default function SourcesPage() {

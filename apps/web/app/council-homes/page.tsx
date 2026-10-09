@@ -12,6 +12,7 @@ import { buildModel } from "@/lib/model";
 import { STATUS_LABEL } from "@/lib/promises";
 import { SITE } from "@/lib/site";
 import { capitalJsonLd } from "@/lib/structured";
+import { share } from "@/lib/share";
 
 const [PREV, NOW] = HOMES.years.map(yearLabel) as [string, string];
 const income = HOMES.budget.filter((b) => b.kind === "income");
@@ -25,8 +26,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/council-homes" },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/council-homes", title, description),
 };
 
 export default function CouncilHomesPage() {

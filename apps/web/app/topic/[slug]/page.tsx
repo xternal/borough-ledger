@@ -14,6 +14,7 @@ import { assertRenderable } from "@/lib/quality";
 import { feedAlternate } from "@/lib/rss";
 import { SITE, SITE_URL } from "@/lib/site";
 import { topicsOf, topicSlug, type TopicView } from "@/lib/topics";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -60,8 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: `/topic/${slug}`, types: feedAlternate(`/topic/${slug}/feed.xml`, `${topic.area}: pledges`) },
-    openGraph: { title, description },
-    twitter: { card: "summary_large_image", title, description },
+    ...share(`/topic/${slug}`, title, description, { own: true }),
   };
 }
 

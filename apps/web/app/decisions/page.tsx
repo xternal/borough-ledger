@@ -7,6 +7,7 @@ import { formatDay } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { feedAlternate } from "@/lib/rss";
 import { SITE, SITE_URL } from "@/lib/site";
+import { share } from "@/lib/share";
 
 export const revalidate = 86400;
 
@@ -18,8 +19,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/decisions", types: feedAlternate("/decisions/feed.xml", "Council decisions") },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/decisions", title, description),
 };
 
 /** Long decisions open on request, so the page stays a list of what was decided. */
