@@ -1,11 +1,12 @@
 name: Weekly digest draft
 
-# Friday mornings: a draft Substack post about the past week at the council and what is coming up, written by Claude
+# Sunday evenings: a draft Substack post for Monday about the past week at the council and what is coming up (Cabinet
+# usually meets on Mondays), written by Claude
 # from facts the site already holds (packages/schema/src/digest-cli.ts), every number checked against them. It opens
 # as an issue (GitHub emails the owner), with the facts underneath, for the owner to edit and post.
 on:
   schedule:
-    - cron: "0 6 * * 5" # 06:00 UTC on Fridays: 07:00 BST in summer, 06:00 GMT in winter
+    - cron: "0 17 * * 0" # 17:00 UTC on Sundays: 18:00 BST in summer, 17:00 GMT in winter; edit in the evening, post on Monday
   workflow_dispatch:
     inputs:
       date:
@@ -41,7 +42,9 @@ jobs:
           WEEK: ${{ inputs.date }}
         run: |
           week="${WEEK:-$(TZ=Europe/London date +%F)}"
-          title="Weekly digest draft: week ending $(date -d "$week" '+%-d %B %Y')"
+          # A Sunday run is the draft for the next day's post.
+          if [ "$(date -d "$week" +%u)" = "7" ]; then day=$(date -d "$week + 1 day" +%F); else day="$week"; fi
+          title="Weekly digest draft for $(date -d "$day" '+%A %-d %B %Y')"
           gh label create digest --repo "$REPO" --color 2457f5 --description "Weekly Substack draft" --force >/dev/null
           if gh issue list --repo "$REPO" --state all --label digest --search "\"$title\" in:title" --json number --jq '.[0].number' | grep -q .; then
             echo "Already opened: $title"
