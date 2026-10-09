@@ -8,6 +8,7 @@ export const PLACES: FinderPlace[] = [
   {
     short: DATA.council.meta.council_short,
     ons: DATA.council.meta.council_code,
+    href: "/",
     wards: DATA.content.wards.wards.map((w) => ({ name: w.name, ons_code: w.ons_code, href: `/ward/${w.id}` })),
   },
   ...finder.boroughs.map((b) => ({ short: b.short, ons: b.ons, href: `/${b.slug}`, wards: b.wards.map((w) => ({ name: w.name, ons_code: w.ons_code, href: `/${b.slug}#ward-${w.id}` })) })),

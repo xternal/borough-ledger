@@ -1,13 +1,25 @@
 import { HOME_BOROUGH, OTHER_BOROUGHS } from "@/lib/boroughList";
+import { COVERED, PLACES } from "@/lib/places";
 import { BoroughPicker } from "./BoroughPicker";
+import { PostcodeFinder } from "./PostcodeFinder";
+import { YourWard } from "./YourWard";
 
-/** The first line of a borough's page: which borough, a way to switch, and that the project is not the council. */
-export function HeroTop({ current, council, children }: { current: string; council: string; children?: React.ReactNode }) {
+/** The top of a council's page: your postcode first, which opens your council and ward; or pick a place from the list;
+ *  and that the project is not the council. */
+export function HeroTop({ current, council, example, children }: { current: string; council: string; example: string; children?: React.ReactNode }) {
   return (
     <div className="hero-top">
-      <BoroughPicker current={current} boroughs={[HOME_BOROUGH, ...OTHER_BOROUGHS]} />
-      <span className="indep">Independent. Not run by or affiliated with {council}.</span>
-      {children}
+      <div className="hero-switch">
+        <PostcodeFinder places={PLACES} covered={COVERED} example={example} here={current} label="Start with your postcode" compact />
+        <div className="hero-or">
+          <span>or choose</span>
+          <BoroughPicker current={current} boroughs={[HOME_BOROUGH, ...OTHER_BOROUGHS]} />
+        </div>
+      </div>
+      <YourWard current={current} />
+      <p className="indep">
+        Independent. Not run by or affiliated with {council}.{children ? <> {children}</> : null}
+      </p>
     </div>
   );
 }

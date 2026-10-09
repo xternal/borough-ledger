@@ -1,6 +1,6 @@
 /* Postcode to ward, in the reader's browser. The postcode goes from the browser to postcodes.io (a free, open
    service using ONS data) in the body of an encrypted request, so it is never in an address or our logs.
-   We never see it and nothing is stored (docs/PRIVACY.md). */
+   We never see it and it is never stored; only the ward found may be kept in the tab (YOUR_WARD_KEY, docs/PRIVACY.md). */
 
 export const POSTCODES_IO = "https://api.postcodes.io/postcodes?filter=postcode,admin_district,codes";
 
@@ -53,12 +53,17 @@ export async function lookupWard(input: string, wards: readonly FinderWard[], co
 
 /* ------------------------------------------------------------------ every borough on the site */
 
+/** The ward a postcode found, kept for this tab only (sessionStorage) so the council's page it opens can say "your ward".
+ *  The postcode itself is never kept. */
+export const YOUR_WARD_KEY = "bb:your-ward";
+export type YourWard = { place: string; name: string; href: string };
+
 /** A borough the finder knows: its ONS code, its page and, for each ward, the page (or part of a page) to open. A council
  *  whose wards are not on the site yet has none, and its postcodes open its page. */
 export type FinderPlace = { short: string; ons: string; href?: string; wards: { name: string; ons_code: string; href: string }[] };
 
 export type PlaceLookup =
-  | { kind: "ward"; place: string; name: string; href: string; postcode: string }
+  | { kind: "ward"; place: string; name: string; href: string; placeHref?: string; postcode: string }
   | { kind: "council"; place: string; href: string; postcode: string }
   | { kind: "elsewhere"; district: string; postcode: string }
   | { kind: "not_found" }
@@ -71,7 +76,7 @@ export function placeFromResult(result: Result, places: readonly FinderPlace[]):
   const postcode = result.postcode ?? "";
   const place = places.find((p) => p.ons === result.codes?.admin_district);
   const ward = place?.wards.find((w) => w.ons_code === result.codes?.admin_ward);
-  if (place && ward) return { kind: "ward", place: place.short, name: ward.name, href: ward.href, postcode };
+  if (place && ward) return { kind: "ward", place: place.short, name: ward.name, href: ward.href, ...(place.href ? { placeHref: place.href } : {}), postcode };
   if (place?.href && !place.wards.length) return { kind: "council", place: place.short, href: place.href, postcode };
   return { kind: "elsewhere", district: result.admin_district ?? "another area", postcode };
 }
