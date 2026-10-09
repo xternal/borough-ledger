@@ -50,3 +50,45 @@ export async function lookupWard(input: string, wards: readonly FinderWard[], co
     return { kind: "error" };
   }
 }
+
+/* ------------------------------------------------------------------ every borough on the site */
+
+/** A borough the finder knows: its ONS code and, for each ward, the page (or part of a page) to open. */
+export type FinderPlace = { short: string; ons: string; wards: { name: string; ons_code: string; href: string }[] };
+
+export type PlaceLookup =
+  | { kind: "ward"; place: string; name: string; href: string; postcode: string }
+  | { kind: "elsewhere"; district: string; postcode: string }
+  | { kind: "not_found" }
+  | { kind: "invalid" }
+  | { kind: "error" };
+
+/** Reads one postcodes.io result against every borough on the site. */
+export function placeFromResult(result: Result, places: readonly FinderPlace[]): PlaceLookup {
+  if (!result) return { kind: "not_found" };
+  const postcode = result.postcode ?? "";
+  const place = places.find((p) => p.ons === result.codes?.admin_district);
+  const ward = place?.wards.find((w) => w.ons_code === result.codes?.admin_ward);
+  if (place && ward) return { kind: "ward", place: place.short, name: ward.name, href: ward.href, postcode };
+  return { kind: "elsewhere", district: result.admin_district ?? "another area", postcode };
+}
+
+export async function lookupPlace(input: string, places: readonly FinderPlace[], fetchImpl: typeof fetch = fetch): Promise<PlaceLookup> {
+  const postcode = normalisePostcode(input);
+  if (!postcode) return { kind: "invalid" };
+  try {
+    const res = await fetchImpl(POSTCODES_IO, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ postcodes: [postcode] }),
+      credentials: "omit",
+      referrerPolicy: "no-referrer",
+      cache: "no-store",
+    });
+    if (!res.ok) return { kind: "error" };
+    const body = (await res.json()) as { result?: { result: Result }[] };
+    return placeFromResult(body.result?.[0]?.result ?? null, places);
+  } catch {
+    return { kind: "error" };
+  }
+}

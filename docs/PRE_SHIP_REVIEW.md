@@ -212,3 +212,10 @@ Every Friday morning `.github/workflows/weekly-digest.yml` opens an issue with a
 - **Found and fixed:** payments in lieu for armed forces homes in the tax base; housing benefit's remainder; a band lookup that searched for "Hammersmith".
 - **Decision for the owner:** moving Hammersmith & Fulham's addresses under `/hammersmith-and-fulham` (plan item 12); not done (docs/BOROUGHS.md).
 
+## First screen, borough selector and postcode finder (9 Oct 2026)
+
+- **First screen:** the separate "Independent project" row and its spacing are gone. The first line now holds the borough selector and the independence note together ("Independent. Not run by or affiliated with ..."), which still appears on every page (invariant 5); the hero's top padding went from 52px to 28px and the gap under the figures row from 72px to 48px.
+- **Borough selector:** a chip at the top of each borough's page listing every borough on the site, the current one marked (`aria-current`), as a plain disclosure of links that works without JavaScript; Escape or a click outside closes it.
+- **Postcode finder on the first screen** of every borough's page, for every borough on the site: a Hammersmith & Fulham postcode opens its ward page, a Kensington and Chelsea one its ward on the borough page (highlighted), and any other says which borough it is in and which boroughs are covered. The finder on /wards and the home page's ward section use the same lookup. The ward lists come from a small bundled file (`data/build/boroughs/finder.json`, written and checked by `etl/borough_people.py`), so pages rendered on request read no files.
+- Accessibility 100 on /, /kensington-and-chelsea and /wards (Lighthouse), with no experimental check failing.
+

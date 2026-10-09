@@ -7,6 +7,7 @@
 :root {
   --bg: #ffffff;
   --sunk: #f5f5f6;
+  --raised: #ffffff;
   --line: #e7e7ea;
   --line-strong: #d4d4d8;
   --ink: #0b0b0d;
@@ -34,6 +35,7 @@
   :root:not([data-theme="light"]) {
     --bg: #101820;
     --sunk: #1a2531;
+    --raised: #131d27;
     --line: #26323f;
     --line-strong: #364657;
     --ink: #e7edf3;
@@ -59,6 +61,7 @@
 :root[data-theme="dark"] {
   --bg: #101820;
   --sunk: #1a2531;
+  --raised: #131d27;
   --line: #26323f;
   --line-strong: #364657;
   --ink: #e7edf3;
@@ -277,9 +280,106 @@
 
   /* hero */
   .hero {
-    padding-block: 52px 32px;
+    padding-block: 28px 28px;
     display: grid;
-    gap: 16px;
+    gap: 14px;
+  }
+  /* First line of a borough's page: the borough picker and the independence note, on one line. */
+  .hero-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .indep {
+    color: var(--muted);
+  }
+  .picker {
+    position: relative;
+  }
+  .picker summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 12px;
+    min-height: 32px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 550;
+  }
+  .picker summary::-webkit-details-marker {
+    display: none;
+  }
+  .picker summary:hover,
+  .picker[open] summary {
+    background: var(--sunk);
+  }
+  .picker-k {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .picker[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .picker ul {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 300px;
+    max-width: calc(100vw - 32px);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--raised);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  }
+  .picker li a {
+    display: block;
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .picker li a:hover {
+    background: var(--sunk);
+  }
+  .picker li a[aria-current="page"] {
+    font-weight: 600;
+    background: var(--sunk);
+  }
+  .picker li a[aria-current="page"]::after {
+    content: " (this page)";
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .picker-more {
+    padding: 8px 10px 4px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .finder-compact {
+    margin-top: 6px;
+    margin-bottom: 0;
+    gap: 6px;
+  }
+  .finder-compact .finder-msg:empty {
+    display: none;
+  }
+  .finder-note {
+    font-size: 12px;
+    color: var(--faint);
   }
   .kicker {
     display: flex;
@@ -351,6 +451,11 @@
   section {
     padding-top: 72px;
     scroll-margin-top: 64px;
+  }
+  /* The first section straight after the figures row needs less air than the gaps between sections. */
+  .kpis + section,
+  .hero + section {
+    padding-top: 48px;
   }
   .sec-head {
     display: grid;
@@ -1719,7 +1824,7 @@
     color: var(--warn);
   }
   .page-kicker {
-    padding-top: 28px;
+    padding-top: 16px;
   }
   .card-page {
     display: grid;
@@ -1876,6 +1981,16 @@
     padding-top: 0;
     margin-bottom: 28px;
     max-width: 62ch;
+  }
+  /* The ward the postcode finder sent you to. */
+  .ward-sec[id] {
+    scroll-margin-top: 72px;
+  }
+  .ward-sec:target {
+    background: var(--sunk);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-inline: -14px;
   }
   .ward-sec h2 {
     font-size: 17px;

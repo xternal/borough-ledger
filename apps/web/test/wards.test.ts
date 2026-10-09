@@ -87,3 +87,29 @@ describe("ward pages", () => {
     expect(partyMix(["Conservative", "Labour", "Labour"])).toBe("one Conservative and two Labour");
   });
 });
+
+describe("postcode finder across boroughs", () => {
+  it("sends a Hammersmith & Fulham postcode to its ward page and a Kensington and Chelsea one to its ward on the borough page", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const hf = PLACES[0]!.wards[0]!;
+    const kc = PLACES.find((p) => p.short === "Kensington and Chelsea")!;
+    const r1 = placeFromResult({ postcode: "W6 9JU", admin_district: "Hammersmith and Fulham", codes: { admin_ward: hf.ons_code, admin_district: PLACES[0]!.ons } }, PLACES);
+    expect(r1).toMatchObject({ kind: "ward", href: hf.href });
+    expect(hf.href).toMatch(/^\/ward\//);
+    const w = kc.wards.find((x) => x.name === "Queen's Gate")!;
+    const r2 = placeFromResult({ postcode: "W8 5LS", admin_district: "Kensington and Chelsea", codes: { admin_ward: w.ons_code, admin_district: kc.ons } }, PLACES);
+    expect(r2).toMatchObject({ kind: "ward", href: "/kensington-and-chelsea#ward-queens-gate", place: "Kensington and Chelsea" });
+  });
+
+  it("says where a postcode outside the covered boroughs is", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    expect(placeFromResult({ postcode: "NW1 2DB", admin_district: "Camden", codes: { admin_ward: "E05013652", admin_district: "E09000007" } }, PLACES)).toEqual({
+      kind: "elsewhere",
+      district: "Camden",
+      postcode: "NW1 2DB",
+    });
+  });
+});
+

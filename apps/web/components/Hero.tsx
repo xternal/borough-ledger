@@ -1,6 +1,9 @@
 import type { PageModel } from "@/lib/model";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
 import { Num } from "./Num";
+import { HeroTop } from "./HeroTop";
+import { PostcodeFinder } from "./PostcodeFinder";
+import { COVERED, PLACES } from "@/lib/places";
 
 export function Hero({ m }: { m: PageModel }) {
   const { bill, place, balance } = m;
@@ -15,10 +18,9 @@ export function Hero({ m }: { m: PageModel }) {
   return (
     <>
       <div className="hero">
-        <div className="kicker">
-          <span>Independent project, not run by or affiliated with {place.short} Council</span>
+        <HeroTop current={place.short} council={`${place.short} Council`}>
           {m.hasTestData && ALLOW_TEST_DATA ? <span className="tagline">Prototype with test data. Figures underlined in red are invented.</span> : null}
-        </div>
+        </HeroTop>
         <h1>Where your council tax goes in {place.short}</h1>
         <p className="lede">
           A Band D home pays <b><Num f={bill.total} fmt="gbp2" /></b> this year, up <Num f={bill.risePct} fmt="pct2" />. Council tax covers about{" "}
@@ -26,6 +28,7 @@ export function Hero({ m }: { m: PageModel }) {
           <Num f={m.grantsShare} fmt="share0" />, including the money passed straight to schools, and business rates for{" "}
           <Num f={m.ratesShare} fmt="share0" />.
         </p>
+        <PostcodeFinder places={PLACES} covered={COVERED} example="W6 9JU" compact />
       </div>
       <div className="kpis">
         {kpis.map((k) => (

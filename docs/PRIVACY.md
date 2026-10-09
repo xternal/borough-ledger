@@ -53,6 +53,7 @@ Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from 
 
 * The lookup runs in the reader's browser. The postcode goes straight to postcodes.io (a free, open service using ONS data) in the body of an encrypted POST request, with no cookies and no referrer, so it never appears in an address, in our logs or in the page's URL afterwards.
 * We never see the postcode and nothing is stored. The ward page the reader lands on is the same for everyone in that ward.
+* The same finder now sits at the top of every borough's page and works for every borough on the site: a postcode in another covered borough opens that borough's ward, and one elsewhere is told which borough it is in. The list of wards it checks against is part of the page, so nothing about the postcode is sent to us at any step.
 * Readers who would rather not send a postcode anywhere can pick their ward on the map or the list.
 
 ## Council decisions
