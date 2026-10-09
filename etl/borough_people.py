@@ -98,7 +98,9 @@ def same_person(ballot: Dict[str, Any], listed: str) -> float:
     a = name_words(ballot["person"]["name"])
     full = name_words(f"{ballot['sopn_first_names']} {ballot['sopn_last_name']}")
     b = name_words(listed)
-    if a == b[: len(a)] or full == b[: len(full)]:
+    # Democracy Club sometimes leaves the ballot paper's names empty (Ealing's Northolt Mandeville, Newham's Stratford
+    # Olympic Park): an empty name matches nobody. It used to match everyone, and two winners' names were swapped.
+    if (a and a == b[: len(a)]) or (full and full == b[: len(full)]):
         return 1.0  # the same name, perhaps followed by honours or degrees
     for x in (a, full):
         if len(b) >= 2 and all(w in x for w in b[:2]) and b[0] == x[0]:

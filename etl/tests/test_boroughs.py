@@ -134,6 +134,39 @@ class BoroughsTest(unittest.TestCase):
             ct = next(f for f in st["funding"] if f["id"] == "council_tax")
             self.assertEqual(ct["source_id"], "ra_2026-27")  # the budget uses the budget return's figure, and says so
 
+    def test_an_empty_ballot_name_matches_nobody(self) -> None:
+        # Democracy Club sometimes leaves the ballot paper's names empty; they used to match every councillor.
+        cand = {"person": {"name": "Miriam Edna Rice"}, "sopn_first_names": "", "sopn_last_name": ""}
+        self.assertEqual(BP.same_person(cand, "Dominic Moffitt"), 0.0)
+        self.assertGreaterEqual(BP.same_person(cand, "Miriam Rice"), 0.85)
+
+    def test_every_named_winner_has_their_own_votes(self) -> None:
+        # Each winner the page names must be, on the ballot, the person with those votes: two names were once swapped.
+        import glob
+        for b in BP.boroughs():
+            path = BP.OUT / b["slug"] / "people.json"
+            snaps = sorted(glob.glob(str(BP.RAW / b["slug"] / "ballots_*.json")))
+            if not path.exists() or not snaps or BP.unpaired(b) or b.get("councillors_from") == "later":
+                continue
+            p = json.loads(path.read_text())
+            names = {c["id"]: c["name"] for c in p["councillors"]}
+            ballots = {BP.slug(BP.ward_name(x["post"]["label"])): x for x in json.loads(Path(snaps[-1]).read_text())}
+            for w in p["wards"]:
+                x = ballots.get(w["id"])
+                if not x or not w.get("election"):
+                    continue
+                for c in w["election"]["candidates"]:
+                    if c.get("councillor_id"):
+                        same = [k for k in x["candidacies"] if k["elected"] and k["result"]["num_ballots"] == c["votes"] and k["party_name"] == c["party"]]
+                        # The same person by name, by surname (short first names: "Nick" for "Nicholas"), or by first name
+                        # (a new surname, paired only where no by-election was held: Croydon's Afuah).
+                        listed = BP.name_words(names[c["councillor_id"]])
+                        def matches(k: dict) -> bool:
+                            words = BP.name_words(k["person"]["name"])
+                            return BP.same_person(k, names[c["councillor_id"]]) >= 0.85 or bool(words and (words[-1] in listed or words[0] == listed[0]))
+                        self.assertTrue(any(matches(k) for k in same),
+                                        f"{b['slug']} {w['name']}: {names[c['councillor_id']]} is named against {c['votes']} votes")
+
 
 if __name__ == "__main__":
     unittest.main()
