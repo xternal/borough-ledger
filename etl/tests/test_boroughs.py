@@ -121,6 +121,18 @@ class BoroughsTest(unittest.TestCase):
         self.assertNotIn("glasgow", [b["slug"] for b in B.boroughs()])
         self.assertIn("glasgow", [b["slug"] for b in BP.boroughs()])
 
+    def test_returns_that_differ_are_published_only_by_decision_and_said_on_the_page(self) -> None:
+        # Islington, Bexley and Waltham Forest: the owner chose to publish them although their two returns differ on
+        # council tax; every other borough must still agree to £5,000.
+        differ = sorted(b["slug"] for b in B.boroughs() if b.get("returns_differ"))
+        self.assertEqual(differ, ["bexley", "islington", "waltham-forest"])
+        for slug in differ:
+            st = json.loads((BP.OUT / slug / "statement.json").read_text())
+            d = st["returns_differ"]
+            self.assertGreater(abs(d["budget_return_m"] - d["council_tax_return_m"]), 0.005)
+            ct = next(f for f in st["funding"] if f["id"] == "council_tax")
+            self.assertEqual(ct["source_id"], "ra_2026-27")  # the budget uses the budget return's figure, and says so
+
 
 if __name__ == "__main__":
     unittest.main()

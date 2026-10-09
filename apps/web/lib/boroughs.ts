@@ -3,7 +3,7 @@
 import "server-only";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { BoroughConfig, BoroughPeople, BoroughStatement, DATA, RULES_SCOTLAND, WardMap, checkBoroughPeople, type Figure, type Rules } from "@borough-ledger/schema";
+import { BoroughConfig, BoroughPeople, BoroughStatement, DATA, RULES_SCOTLAND, WardMap, checkBoroughPeople, derive, type Figure, type Rules } from "@borough-ledger/schema";
 import { displayYear, nextFinancialYear } from "@borough-ledger/engine";
 import { statementModel, type PageModel, type StatementModel } from "./model";
 
@@ -32,6 +32,8 @@ export interface BoroughModel extends StatementModel {
   history: { year: string; label: string; council: Figure; area: Figure | null }[];
   /** The council tax rules of the council's nation: England's, or Scotland's (its own band ratios, Scottish Water's). */
   rules: Rules;
+  /** Where the budget return and the council tax return differ on council tax (published by the owner's decision). */
+  returnsDiffer: { budget: Figure; councilTax: Figure; apart: Figure } | null;
   /** Null where the councillors come later (councillors_later in the config says why). */
   people: BoroughPeople | null;
   map: WardMap | null;
@@ -77,6 +79,13 @@ export function boroughModel(slug: string): BoroughModel | null {
     people,
     map,
     rules,
+    returnsDiffer: (() => {
+      const d = statement.returns_differ;
+      if (!d) return null;
+      const budget: Figure = { value: Math.round(d.budget_return_m * 1e6), quality: d.quality, sources: ["ra_2026-27"] };
+      const councilTax: Figure = { value: Math.round(d.council_tax_return_m * 1e6), quality: d.quality, sources: ["ctr_2026-27"] };
+      return { budget, councilTax, apart: derive(Math.abs(budget.value - councilTax.value), budget, councilTax) };
+    })(),
     sources: [
       ...statement.meta.sources.filter((s): s is typeof s & { url: string } => !!s.url).map((s) => ({ title: s.title, url: s.url })),
       ...(people?.sources ?? []).map((s) => ({ title: s.title, url: s.url })),

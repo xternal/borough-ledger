@@ -243,3 +243,7 @@ Croydon, Ealing, Kingston upon Thames, Lewisham, Newham, Wandsworth and Westmins
 
 The first Scottish council: Scotland's own returns, rules and Scottish Water's charges, with the same standard of checks (docs/BOROUGHS.md). For the owner: check `data/manual/scottish_water.csv` against the two leaflets once (it shows as approx until then), and the grouping in `data/manual/scot_service_groups.csv`. 29 councils on the site.
 
+## Islington, Bexley and Waltham Forest (9 Oct 2026, in review)
+
+Three London boroughs whose two returns differ on council tax by £23,227 to £305,538, published by the owner's decision with both figures shown on the page (docs/BOROUGHS.md). 32 councils on the site.
+

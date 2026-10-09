@@ -110,3 +110,9 @@ What differs from England, and how it is checked:
 - **Councillors** from the council's own Northgate CoInS pages (every member's ward, and each party's members, which must add up to the same 85). Glasgow last elected in May 2022 by single transferable vote; Democracy Club has the winners but not the counts, so the page shows each ward's councillors and not how it voted. Scottish party names: Scottish Labour is Labour, the SNP is "SNP", Scottish Greens are Green.
 - English pages are unchanged; `etl/boroughs.py` builds England's only.
 
+## Islington, Bexley and Waltham Forest (9 Oct 2026)
+
+Published by the owner's decision although their two returns differ on council tax by more than rounding: Islington £23,227, Bexley £238,000, Waltham Forest £305,538 (budget return, RA line 990, against the council tax return, Table 10). `returns_differ: true` in the config records the decision; the build then requires the returns still to differ (once they agree, the flag must go) and keeps both figures in the statement. The budget uses the budget return's figure, so it adds up, and cites it; the bill uses the council tax return's; the page says both, to the pound, under the budget chart, and that we have not found the explanation. 28 London boroughs and 4 cities: 32 councils. Still held back: Barnet (£4.7m), Enfield (£13.5m), Greenwich (no council tax line in its budget return) and Hillingdon (a line reported as "...").
+
+Councillors: Bexley Conservative (28 of 45), Islington Labour (32 of 51), Waltham Forest Green (31 of 60); every May winner paired with the council's list, and every pairing that was not an exact name read by a person (Claude): all the same people, written with middle names, titles or short forms.
+

@@ -327,7 +327,20 @@ export default async function BoroughPage({ params }: Props) {
         >
           <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShareGeneral={m.ctShareGeneral} generalBudget={m.generalBudget} place={m.place} />
         </LedgerStateProvider>
-        <BudgetFlow m={m} legend={m.budgetLegend} />
+        <BudgetFlow
+          m={m}
+          legend={m.budgetLegend}
+          more={
+            m.returnsDiffer ? (
+              <p className="small muted">
+                The council&rsquo;s two returns to government do not agree on its council tax for {m.place.yearLabel}:{" "}
+                <Num f={m.returnsDiffer.budget} fmt="gbp0" /> in its budget return and <Num f={m.returnsDiffer.councilTax} fmt="gbp0" /> in its council tax return,{" "}
+                <Num f={m.returnsDiffer.apart} fmt="gbp0" /> apart. The budget here uses the budget return&rsquo;s figure, so it adds up; your bill uses the council tax
+                return&rsquo;s. There is probably an explanation; we have not found it yet.
+              </p>
+            ) : null
+          }
+        />
 
         <section id="history" aria-labelledby="history-h">
           <div className="sec-head">

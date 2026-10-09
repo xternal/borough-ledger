@@ -35,6 +35,8 @@ export const BoroughConfig = z.object({
       others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string(), source: z.string().optional() }).optional(),
       precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),
       parish_names: z.string().optional(),
+      /** The owner's decision to publish although the budget return and council tax return differ on council tax. */
+      returns_differ: z.boolean().optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */
       example_postcode: z.string().optional(),
       /** Where the borough elects its mayor, who runs the council. */
@@ -47,6 +49,10 @@ export type BoroughConfig = z.infer<typeof BoroughConfig>;
 // Scotland's returns give no tax base in the same form, and a borough's page does not use it.
 export const BoroughStatement = CouncilYear.pick({ meta: true, bill: true, tax_base: true, history: true, funding: true, services: true }).extend({
   tax_base: CouncilYear.shape.tax_base.optional(),
+  /** Where the owner published a borough whose two returns differ on council tax (Islington, Bexley, Waltham Forest). */
+  returns_differ: z
+    .object({ budget_return_m: z.number(), council_tax_return_m: z.number(), quality: z.enum(["sourced", "approx", "modelled", "test"]), source_id: z.string(), method_note: z.string() })
+    .optional(),
 });
 export type BoroughStatement = z.infer<typeof BoroughStatement>;
 
