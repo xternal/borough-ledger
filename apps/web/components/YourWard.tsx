@@ -5,7 +5,7 @@ import { YOUR_WARD_KEY, type YourWard as Ward } from "@/lib/wardFinder";
 
 /** After a postcode in the finder opened this council's page: the ward it found, and a link to its councillors. Kept in
  *  this tab only (sessionStorage); nothing is shown when the ward is in another council or storage is unavailable. */
-export function YourWard({ current }: { current: string }) {
+export function YourWard({ current, results = true }: { current: string; results?: boolean }) {
   const [ward, setWard] = useState<Ward | null>(null);
   useEffect(() => {
     try {
@@ -19,7 +19,7 @@ export function YourWard({ current }: { current: string }) {
   if (!ward) return null;
   return (
     <p className="your-ward" role="status">
-      Your ward is <b>{ward.name}</b>. <a href={ward.href}>See its councillors and how it voted</a>.
+      Your ward is <b>{ward.name}</b>. <a href={ward.href}>{results ? "See its councillors and how it voted" : "See its councillors"}</a>.
     </p>
   );
 }
