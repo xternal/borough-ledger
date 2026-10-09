@@ -21,8 +21,14 @@ export const BoroughConfig = z.object({
       /** "later" where no source a script may read lists the councillors yet (Leeds turns automated requests away):
        *  the page says why and links the council's own list, and the postcode finder opens the council's page. */
       /** "coins": the council's own Northgate CoInS pages (Glasgow), which list each councillor's ward and party. */
-      councillors_from: z.enum(["moderngov", "ballots", "later", "coins"]).optional(),
+      councillors_from: z.enum(["moderngov", "ballots", "later", "coins", "site"]).optional(),
       coins: z.url().optional(),
+      /** "site": the council's own councillors page (Highland), read by etl/borough_people.py's members_site. */
+      site: z.url().optional(),
+      /** False where the last election's counts are not published in full (North Yorkshire, 2022): the council's own list only. */
+      results: z.boolean().optional(),
+      /** "county" for a council covering a county or region rather than a city (Highland, North Yorkshire): listed apart. */
+      kind: z.literal("county").optional(),
       /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
       nation: z.enum(["england", "scotland"]).optional(),
       /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */

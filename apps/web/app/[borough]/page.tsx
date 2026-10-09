@@ -152,6 +152,12 @@ function Councillors({ m, P, map }: { m: BoroughModel; P: BoroughPeople; map: Wa
               order of choice; the next election is in {formatMonthYear(m.b.next_election ?? "")}. How each ward voted is not shown yet: Democracy Club has the winners
               but not the counts. The list is the council&rsquo;s own, so it includes everyone elected at by-elections since.{" "}
             </>
+          ) : !results ? (
+            <>
+              {m.place.short}&rsquo;s councillors were elected in {formatMonthYear(P.election.date)}; the next election is in {formatMonthYear(m.b.next_election ?? "")}.
+              How each ward voted is not shown: Democracy Club has only some of the counts. The list is the council&rsquo;s own, so it includes everyone elected at
+              by-elections since.{" "}
+            </>
           ) : null}
           {results ? <>Only the councillors elected are named here; everyone else stood as their party&rsquo;s candidate.</> : null}
         </p>

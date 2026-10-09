@@ -87,8 +87,9 @@ class BoroughsTest(unittest.TestCase):
         # New Addington North, which held none, pairs its winner with the councillor listed under another name.
         for b in BP.boroughs():
             path = BP.OUT / b["slug"] / "people.json"
-            # Glasgow's list is the council's own (CoInS), which includes everyone elected at a by-election.
-            if b.get("councillors_from") in ("later", "coins") or not path.exists():
+            # Where the list is the council's own with nothing to pair it with (Scotland, North Yorkshire), it includes
+            # everyone elected at a by-election already.
+            if b.get("councillors_from") == "later" or BP.unpaired(b) or not path.exists():
                 continue
             p = json.loads(path.read_text())
             by = [s for s in p["sources"] if "by-elections" in s["title"]]

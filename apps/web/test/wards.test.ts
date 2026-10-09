@@ -114,6 +114,18 @@ describe("postcode finder across boroughs", () => {
     });
   });
 
+  it("finds a ward in the Highlands: Inverness, the council's headquarters", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const highland = PLACES.find((p) => p.short === "Highland")!;
+    const w = highland.wards.find((x) => x.ons_code === "S13003002")!;
+    expect(w.name).toBe("Inverness West");
+    expect(placeFromResult({ postcode: "IV3 5NX", admin_district: "Highland", codes: { admin_ward: w.ons_code, admin_district: "S12000017" } }, PLACES)).toMatchObject({
+      kind: "ward",
+      placeHref: "/highland",
+    });
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

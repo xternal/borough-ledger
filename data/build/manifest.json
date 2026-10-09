@@ -216,11 +216,11 @@
   },
   {
    "file": "data/manual/scot_funding_groups.csv",
-   "sha256": "fc31d507fe8ea902b3305624c8162f5ae60b9fe4452b881dde8d05ab17e0e7e1"
+   "sha256": "ada7807120ab811799329448ac431c78afc55428dda2b5fd3db65629114829f5"
   },
   {
    "file": "data/manual/scot_service_groups.csv",
-   "sha256": "08721c250f3875c32172235868a7bc5ec8293889c50cc2f3ed238781bcc6453f"
+   "sha256": "0e4260390cb375b612de0d6f9028be0e668ac65c0d68e0453318bdd47361e06a"
   },
   {
    "file": "data/manual/scottish_water.csv",

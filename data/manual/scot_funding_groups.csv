@@ -5,4 +5,4 @@ business_rates,Business rates (Scotland's shared pot),Non-domestic rates distrib
 other_income,Other income,Other taxation and non-specific grant income,"Discretionary housing payment funding, tax increment financing, visitor levy and other income",43;44;45;46;47;48;49;50,other,false,4
 capital_resources,Capital money used for day-to-day costs,Use of capital resources to fund revenue costs as permitted by statute,One-off: money for building work used for day-to-day costs this year,62,other,true,5
 capital_fund,Drawn from the capital fund,Transfers from the Capital Fund,One-off: money set aside for building work used for day-to-day costs this year,63,reserves,true,6
-council_reserves,Drawn from council reserves,General Fund balance and other reserves,"One-off: once spent, the gap returns the year after",gf;66,reserves,true,7
+council_reserves,Drawn from council reserves,"General Fund balance, other reserves and transfers to council housing","One-off: once spent, the gap returns the year after",gf;65;66,reserves,true,7

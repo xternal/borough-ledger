@@ -247,3 +247,7 @@ The first Scottish council: Scotland's own returns, rules and Scottish Water's c
 
 Three London boroughs whose two returns differ on council tax by £23,227 to £305,538, published by the owner's decision with both figures shown on the page (docs/BOROUGHS.md). 32 councils on the site.
 
+## Edinburgh, Highland and North Yorkshire (9 Oct 2026, in review)
+
+Two more Scottish councils and North Yorkshire (docs/BOROUGHS.md); a "Counties and regions" heading in the picker; parished councils' history now outside a parish, as their bills. 35 councils.
+

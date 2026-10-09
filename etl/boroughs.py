@@ -107,7 +107,10 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
         "history": {
             "council_tax": [
                 {
-                    "year": y, "band_d_council": round(ctr[y]["band_d_council"], 2), "band_d_area": bands[y]["D"],
+                    # The whole bill outside a parish, as the bill shows it: the area Band D averages parish precepts in
+                    # (Birmingham, Leeds, Westminster, North Yorkshire), so they come out; elsewhere it is the area figure.
+                    "year": y, "band_d_council": round(ctr[y]["band_d_council"], 2),
+                    "band_d_area": round(ctr[y]["band_d_council"] + round(bands[y]["D"] - round(ctr[y]["band_d_council_incl"], 2), 2), 2),
                     "band_d_gla": round(bands[y]["D"] - round(ctr[y]["band_d_council_incl"], 2), 2),
                     "council_tax_requirement_m": round(ctr[y]["ctr"] / 1e6, 3), "tax_base": ctr[y]["tax_base"],
                     "collection_rate": ctr[y]["collection_rate"], "source_ids": sorted({st["ctr_src"][y], st["bands_src"][y]}),
