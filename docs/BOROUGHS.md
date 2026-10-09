@@ -66,3 +66,15 @@ What the councils' own records needed, all handled in `etl/borough_people.py` wi
 
 Added once its ModernGov service answered: it takes about 100 seconds, so requests now wait up to three minutes. Its list shows an empty seat as a councillor called "Vacancy", which is read as the empty seat it is. 62 councillors in 25 wards (one seat empty); three of May's winners are not on the council's list (Clapham Park and Streatham St Leonard's, each with a different councillor now listed; Myatt's Fields, where the seat is empty). Every non-exact pairing read: all correct. With Lambeth, 17 boroughs beyond Hammersmith & Fulham, 956 of their councillors.
 
+## Manchester and Birmingham (9 Oct 2026)
+
+The largest councils in Greater Manchester and the West Midlands, at `/manchester` and `/birmingham`, from the same returns and checks. What outside London needed, with every London borough's build unchanged byte for byte:
+
+- **No Mayor of London.** The rest of the bill is split by the bodies that set it, from the government's own Tables 8d to 8f, this year and last, and must add up to what the area Band D leaves after the council's share. Manchester: police £285.30 and fire and the Mayor of Greater Manchester's other services £153.95 (Greater Manchester's £439.25 includes its police functions, note aa). Birmingham: West Midlands Police £244.50 and fire and rescue £85.19.
+- **Parish and town councils.** The council tax requirement in Table 10 includes parish precepts (Birmingham: Sutton Coldfield and New Frankley, £2.68m); the checks now take them out, and the bill shown is what a home outside a parish pays, with the parishes' average Band D (£68.69) said beside it. Birmingham's budget return counts the parish precepts in its council tax line; the check accepts that, exactly. This also clears Westminster's parish check (Queen's Park) for later.
+- **Elections by thirds** (Manchester): one seat per ward was elected in May 2026; the ward's other councillors were elected earlier. A May winner missing from the council's list is allowed only where a seat is empty.
+- **No ModernGov service** (Birmingham, which uses another system): the councillors are May's 101 winners, as on the ballot papers, linked to their Democracy Club pages, and the page says changes since are not shown.
+- **History** starts in 2023/24 outside London, because the 2022/23 band table was taken from its London sheet only.
+- **Budget lines below zero** (Birmingham's planning and the local economy, a council tax deficit) cannot be drawn as a flow; they are named under the chart and kept in the tables.
+- Names: hyphenated surnames now pair ("Grace Worrall" and "Grace Tudor-Worrall"); no earlier pairing changed.
+

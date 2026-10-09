@@ -1,0 +1,640 @@
+{
+ "meta": {
+  "council": "Manchester City Council",
+  "council_short": "Manchester",
+  "council_code": "E08000003",
+  "slug": "manchester",
+  "year": "2026-27",
+  "note": "Built by etl/boroughs.py from government returns, with the same checks as Hammersmith & Fulham's.",
+  "vintage": "2026-06-11",
+  "sources": [
+   {
+    "id": "ctr_2026-27",
+    "title": "Council Tax levels set by local authorities in England 2026 to 2027, Table 10: council tax requirement data for billing authorities",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2026-to-2027",
+    "published_on": "2026-03-25",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a02eeeccd2e0e8b5b20b449/Table_10_2026-27.ods",
+    "sha256": "b5b8345743fb722e48699243d1654a3e35b96c89a14c6eb26888035c3e38feb0"
+   },
+   {
+    "id": "ct_bands_2026-27",
+    "title": "Council Tax levels set by local authorities in England 2026 to 2027, Table 9: area council tax by band",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2026-to-2027",
+    "published_on": "2026-03-25",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/69de1fa63e81003ae0422508/Tables_1-9_2026-27.ods",
+    "sha256": "66b7c20f70c804038c0a392ff2b7249fd09e83f4e88ac87d0278ce7e19da5537"
+   },
+   {
+    "id": "ra_2026-27",
+    "title": "Local authority revenue expenditure and financing England: 2026 to 2027 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2026-to-2027-budget-individual-local-authority-data",
+    "published_on": "2026-06-11",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a2962166d178a6fb7e32089/RA_2026-27_data_Part_1.ods",
+    "sha256": "3ea4d4c2218bc9f49bbf59a6fc82481acb6a3494d5b0f4e114cdb945730653db"
+   },
+   {
+    "id": "sg_2026-27",
+    "title": "Local authority revenue expenditure and financing England: 2026 to 2027 budget, specific and special grants (SG) by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2026-to-2027-budget-individual-local-authority-data",
+    "published_on": "2026-06-11",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a28119b6d178a6fb7e31f7f/SG_2026-27.ods",
+    "sha256": "6150792dcea97ca58b912a5fbf9fdc99562ba782fb7d6f5c8885e6ca1a17e3b5"
+   },
+   {
+    "id": "ct_bands_2025-26",
+    "title": "Council Tax levels set by local authorities in England, Table 9: area council tax by band 2025 to 2026",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2025-to-2026",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/69e88e1c9ca985145673b7f4/Tables_1-9_2025-26.ods",
+    "sha256": "7d9f98b6c152d276d7fb672db0a7cec866df24e175bb28ebb55cbe845a8afbc3"
+   },
+   {
+    "id": "ctr_2025-26",
+    "title": "Council Tax levels set by local authorities in England, Table 10: council tax requirement data for billing authorities, 2024 to 2025 and 2025 to 2026",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2025-to-2026",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a02f143e71c4cdf4026ba48/Table_10_2025-26.ods",
+    "sha256": "79766eb7b591a4f49e1e9f95cb6b0a232c7a9165945de9acb076769c002e6e5c"
+   },
+   {
+    "id": "ctr_2024-25",
+    "title": "Council Tax levels set by local authorities in England, Table 9 (revised): council tax requirement data for billing authorities, 2023 to 2024 and 2024 to 2025",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2024-to-2025",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/663a45b51834d96a0aa6d1d4/Table_9_24-25__revised_.ods",
+    "sha256": "ade111fc09ad25d5219cc2c16efa7170255099b2f1d2d884b2f652d0c1e244e6"
+   },
+   {
+    "id": "ct_bands_2024-25",
+    "title": "Council Tax levels set by local authorities in England, Table 8: area council tax by band 2024 to 2025",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2024-to-2025",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/65fad6739316f5001164c3ca/Table_8_24-25.ods",
+    "sha256": "249127ae1bff3f37bb335896f801524562de0dd9668c6c9cd64eacd8a8880245"
+   },
+   {
+    "id": "ctr_2023-24",
+    "title": "Council Tax levels set by local authorities in England, Table 9 (revised): council tax requirement data for billing authorities, 2022 to 2023 and 2023 to 2024",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2023-to-2024",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6604009fe8c442001a220323/TABLE_9__REVISED_.ods",
+    "sha256": "e17192480e5d99b1d67db9ec5ac649f42ede1f0626fb143e0c6c03c6a925a803"
+   },
+   {
+    "id": "ct_bands_2023-24",
+    "title": "Council Tax levels set by local authorities in England, Table 8 (revised): area council tax by band 2023 to 2024",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2023-to-2024",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/65e598777bc329020bb8c198/Table_8__REVISED_.ods",
+    "sha256": "c8ef95ed86fffd3d621cc45be2ac9c0121c200df77b93a8c4be91853b604cd8c"
+   },
+   {
+    "id": "ra_2025-26",
+    "title": "Local authority revenue expenditure and financing England: 2025 to 2026 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2025-to-2026-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/68527310cf42a58f50cac9df/RA_2025-26_data_Part_1.ods",
+    "sha256": "b6176cf91e0235b29b5cceffd0d9ccfaac8f75e4a986cd236d9dee80dc77c1f9"
+   },
+   {
+    "id": "ra_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6762a0a83229e84d9bbde757/RA_2024-25_data_Part_1.ods",
+    "sha256": "19231e891ec06f6aa5c8fed7794b247d5e5a3f59aca6ba59d7ec4efc7f41e8f1"
+   },
+   {
+    "id": "ra_2023-24",
+    "title": "Local authority revenue expenditure and financing England: 2023 to 2024 budget, revenue account (RA) data by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2023-to-2024-budget-individual-local-authority-data",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/649304495f7bb7000c7faefb/RA_2023-24_data_Part_1.ods",
+    "sha256": "f4020e200f7aa5dcf2028648f2c808b36b7241c9f10e6465b33d661439c16cc0"
+   },
+   {
+    "id": "rs_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, revenue summary (RS) by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a2aca48a3674dfd3eb50749/RS_LA_Data_2024-25_data_by_LA.ods",
+    "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c"
+   },
+   {
+    "id": "ro5_2024-25",
+    "title": "Local authority revenue expenditure and financing England: 2024 to 2025 outturn, cultural, environmental and planning services (RO5) by local authority",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2024-to-2025-individual-local-authority-data-outturn",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a291b72db0592d809052b7b/RO5_LA_Data_2024-25_data_by_LA.ods",
+    "sha256": "d1605afab6d58c1c925355e4094934d7ad91610eeca31d711c951e3ee4c2d1ba"
+   }
+  ]
+ },
+ "bill": {
+  "band_d_total": 2312.04,
+  "band_d_council": 1872.79,
+  "band_d_gla": 439.25,
+  "band_d_total_prev": 2183.03,
+  "band_d_council_prev": 1783.78,
+  "council_rise_pct": 4.99,
+  "published_bands": {
+   "A": 1541.36,
+   "B": 1798.25,
+   "C": 2055.15,
+   "D": 2312.04,
+   "E": 2825.83,
+   "F": 3339.61,
+   "G": 3853.4,
+   "H": 4624.08
+  },
+  "gla_note": "Mayor of Greater Manchester",
+  "gla_split": [
+   {
+    "id": "police",
+    "label": "Police",
+    "phrase": "police",
+    "official_term": "Greater Manchester Combined Authority, police functions",
+    "band_d": 285.3,
+    "band_d_prev": 270.3,
+    "quality": "sourced",
+    "source_id": "ct_bands_2026-27",
+    "method_note": "Council tax levels 2026 to 2027, Table 8d: Greater Manchester CA - Police Functions; 2025 to 2026 from the year before's tables."
+   },
+   {
+    "id": "gmca",
+    "label": "Fire and the Mayor's other services",
+    "phrase": "fire and the Mayor's other services",
+    "official_term": "Greater Manchester Combined Authority, less its police functions",
+    "band_d": 153.95,
+    "band_d_prev": 128.95,
+    "quality": "sourced",
+    "source_id": "ct_bands_2026-27",
+    "method_note": "Council tax levels 2026 to 2027, Table 8f: Greater Manchester less its police functions; 2025 to 2026 from the year before's tables."
+   }
+  ],
+  "others": {
+   "name": "Mayor of Greater Manchester",
+   "to": "the Mayor of Greater Manchester, for police, fire and other services",
+   "short": "the Mayor's share"
+  },
+  "quality": "sourced",
+  "source_id": "ctr_2026-27",
+  "method_note": "Council element from Table 10; area Band D and all bands from Table 9; GLA element is the difference."
+ },
+ "tax_base": {
+  "band_d_equivalents": 148514.02,
+  "collection_rate": 0.97,
+  "setting_base": 144058.6,
+  "quality": "sourced",
+  "source_id": "ctr_2026-27"
+ },
+ "history": {
+  "council_tax": [
+   {
+    "year": "2023-24",
+    "band_d_council": 1618.25,
+    "band_d_area": 1969.5,
+    "band_d_gla": 351.25,
+    "council_tax_requirement_m": 212.987,
+    "tax_base": 136388.7,
+    "collection_rate": 0.965,
+    "source_ids": [
+     "ct_bands_2023-24",
+     "ctr_2023-24"
+    ]
+   },
+   {
+    "year": "2024-25",
+    "band_d_council": 1699.0,
+    "band_d_area": 2068.25,
+    "band_d_gla": 369.25,
+    "council_tax_requirement_m": 229.259,
+    "tax_base": 139832.0,
+    "collection_rate": 0.965,
+    "source_ids": [
+     "ct_bands_2024-25",
+     "ctr_2024-25"
+    ]
+   },
+   {
+    "year": "2025-26",
+    "band_d_council": 1783.78,
+    "band_d_area": 2183.03,
+    "band_d_gla": 399.25,
+    "council_tax_requirement_m": 251.235,
+    "tax_base": 145952.75,
+    "collection_rate": 0.965,
+    "source_ids": [
+     "ct_bands_2025-26",
+     "ctr_2025-26"
+    ]
+   },
+   {
+    "year": "2026-27",
+    "band_d_council": 1872.79,
+    "band_d_area": 2312.04,
+    "band_d_gla": 439.25,
+    "council_tax_requirement_m": 269.792,
+    "tax_base": 148514.02,
+    "collection_rate": 0.97,
+    "source_ids": [
+     "ct_bands_2026-27",
+     "ctr_2026-27"
+    ]
+   }
+  ],
+  "budget": [
+   {
+    "year": "2023-24",
+    "revenue_expenditure_m": 1227.08,
+    "council_tax_requirement_m": 212.987,
+    "services_m": {
+     "adult_care": 247.852,
+     "children": 159.408,
+     "debt_levies": 96.683,
+     "housing": 59.562,
+     "parks_culture": 39.384,
+     "planning": 21.203,
+     "public_health": 55.568,
+     "running": 32.368,
+     "safety_regulation": 13.154,
+     "schools": 478.13,
+     "streets": 38.189
+    },
+    "source_id": "ra_2023-24"
+   },
+   {
+    "year": "2024-25",
+    "revenue_expenditure_m": 1313.963,
+    "council_tax_requirement_m": 229.26,
+    "services_m": {
+     "adult_care": 276.219,
+     "children": 195.643,
+     "debt_levies": 93.964,
+     "housing": 65.914,
+     "parks_culture": 41.173,
+     "planning": 26.671,
+     "public_health": 61.26,
+     "running": 33.981,
+     "safety_regulation": 14.361,
+     "schools": 476.174,
+     "streets": 41.76
+    },
+    "source_id": "ra_2024-25"
+   },
+   {
+    "year": "2025-26",
+    "revenue_expenditure_m": 1422.263,
+    "council_tax_requirement_m": 251.236,
+    "services_m": {
+     "adult_care": 314.808,
+     "children": 210.879,
+     "debt_levies": 103.675,
+     "housing": 70.398,
+     "parks_culture": 44.213,
+     "planning": 26.702,
+     "public_health": 60.917,
+     "running": 44.369,
+     "safety_regulation": 14.951,
+     "schools": 506.791,
+     "streets": 40.116
+    },
+    "source_id": "ra_2025-26"
+   },
+   {
+    "year": "2026-27",
+    "revenue_expenditure_m": 1491.926,
+    "council_tax_requirement_m": 269.792,
+    "services_m": {
+     "adult_care": 324.691,
+     "children": 228.285,
+     "debt_levies": 124.902,
+     "housing": 86.217,
+     "parks_culture": 46.489,
+     "planning": 28.376,
+     "public_health": 62.228,
+     "running": 35.522,
+     "safety_regulation": 16.368,
+     "schools": 506.092,
+     "streets": 47.248
+    },
+    "source_id": "ra_2026-27"
+   }
+  ],
+  "outturn": [
+   {
+    "year": "2024-25",
+    "revenue_expenditure_m": 1327.674,
+    "council_tax_requirement_m": 229.259,
+    "services_m": {
+     "adult_care": 287.999,
+     "children": 201.061,
+     "debt_levies": 93.843,
+     "housing": 76.362,
+     "parks_culture": 38.18,
+     "planning": 27.523,
+     "public_health": 55.813,
+     "running": 47.886,
+     "safety_regulation": 14.247,
+     "schools": 472.939,
+     "streets": 30.097
+    },
+    "housing_benefit_net_m": -18.276,
+    "reserves_m": {
+     "unallocated_start": 19.87,
+     "unallocated_end": 9.332,
+     "earmarked_start": 316.609,
+     "earmarked_end": 294.885
+    },
+    "source_ids": [
+     "rs_2024-25",
+     "ro5_2024-25"
+    ]
+   }
+  ],
+  "quality": "sourced"
+ },
+ "funding": [
+  {
+   "id": "council_tax",
+   "label": "Council tax",
+   "official_term": "Council tax requirement",
+   "desc": "What residents pay through the council's part of the bill",
+   "kind": "council_tax",
+   "m": 269.792,
+   "quality": "sourced",
+   "source_id": "ctr_2026-27"
+  },
+  {
+   "id": "business_rates",
+   "label": "Business rates kept locally",
+   "official_term": "Retained income from Rate Retention Scheme",
+   "desc": "The share of local business rates the council keeps",
+   "kind": "business_rates",
+   "m": 615.625,
+   "quality": "sourced",
+   "source_id": "ra_2026-27"
+  },
+  {
+   "id": "schools_grants",
+   "label": "Schools grants (ring-fenced)",
+   "official_term": "Dedicated Schools Grant and other education grants",
+   "desc": "Passed to schools; cannot be spent on anything else",
+   "kind": "grant",
+   "m": 444.198,
+   "quality": "sourced",
+   "source_id": "sg_2026-27",
+   "ring_fenced_to": "schools",
+   "detail": [
+    {
+     "label": "Dedicated Schools Grant (DSG)",
+     "m": 416.968
+    },
+    {
+     "label": "Pupil Premium Grant",
+     "m": 24.419
+    },
+    {
+     "label": "Universal Infants Free School Meals",
+     "m": 2.811
+    }
+   ]
+  },
+  {
+   "id": "public_health_grant",
+   "label": "Public health grant (ring-fenced)",
+   "official_term": "Public Health Grant",
+   "desc": "Can only be spent on public health",
+   "kind": "grant",
+   "m": 7.844,
+   "quality": "sourced",
+   "source_id": "sg_2026-27",
+   "ring_fenced_to": "public_health"
+  },
+  {
+   "id": "other_grants",
+   "label": "Other government grants",
+   "official_term": "Other specific and special grants within AEF",
+   "desc": "Grants for adult care, children and families, homelessness and others, including the income protection floor",
+   "kind": "grant",
+   "m": 146.135,
+   "quality": "sourced",
+   "source_id": "sg_2026-27",
+   "detail": [
+    {
+     "label": "Better Care Grant",
+     "m": 39.168
+    },
+    {
+     "label": "Other grants within AEF (enter in rows 801 - 898 below)",
+     "m": 28.076
+    },
+    {
+     "label": "Recovery Grant",
+     "m": 19.658
+    },
+    {
+     "label": "Families First Partnership (within Children, Families and Youth Grant)",
+     "m": 15.421
+    },
+    {
+     "label": "Crisis and Resilience Fund",
+     "m": 14.534
+    },
+    {
+     "label": "Homelessness, Rough Sleeping and Domestic Abuse Grant",
+     "m": 12.241
+    },
+    {
+     "label": "Packaging Extened Producer Responsibility (pEPR)",
+     "m": 7.088
+    },
+    {
+     "label": "Other Children, Families and Youth Grant",
+     "m": 4.657
+    },
+    {
+     "label": "The Private Finance Initiative (PFI)",
+     "m": 2.917
+    },
+    {
+     "label": "Housing Benefit Subsidy Admin Grant",
+     "m": 2.375
+    }
+   ]
+  },
+  {
+   "id": "other_income",
+   "label": "Council tax surplus and other",
+   "official_term": "Collection fund surplus and other items",
+   "desc": "Last year's council tax collected above estimate, and other items",
+   "kind": "other",
+   "m": -2.134,
+   "quality": "sourced",
+   "source_id": "ra_2026-27"
+  },
+  {
+   "id": "council_reserves",
+   "label": "Drawn from council reserves",
+   "official_term": "Appropriations from earmarked and unallocated reserves",
+   "desc": "One-off: once spent, the gap returns the year after",
+   "kind": "reserves",
+   "m": 10.466,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "gap": true,
+   "detail": [
+    {
+     "label": "Appropriations to(+)/ from(-) other earmarked financial reserves",
+     "m": 18.015
+    },
+    {
+     "label": "Appropriations to(+)/ from(-) unallocated financial reserves",
+     "m": -7.549
+    }
+   ]
+  }
+ ],
+ "services": [
+  {
+   "id": "schools",
+   "label": "Schools and education",
+   "official_term": "Education services",
+   "desc": "Schools' budgets, paid by ring-fenced government grants, plus education the council pays for itself such as special needs transport",
+   "m": 506.092,
+   "general_fund_m": 61.894,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 110, 120, 130, 140, 145, 165, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "adult_care",
+   "label": "Care for older and disabled adults",
+   "official_term": "Adult social care",
+   "desc": "Home care, care homes and support for disabled adults",
+   "m": 324.691,
+   "general_fund_m": 324.691,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 332, 333, 334, 335, 336, 337, 340, 341, 344, 345, 348, 349, 350, 351, 353, 354, 355, 356, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "children",
+   "label": "Children's services",
+   "official_term": "Children's social care",
+   "desc": "Children in care, family support, safeguarding and youth justice",
+   "m": 228.285,
+   "general_fund_m": 228.285,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 310, 313, 322, 323, 325, 326, 327, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "housing",
+   "label": "Housing and homelessness",
+   "official_term": "Housing services (general fund)",
+   "desc": "Temporary accommodation and homelessness, housing advice and licensing. Council homes are a separate ring-fenced account",
+   "m": 71.725,
+   "general_fund_m": 71.725,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 409, 440, 456, 457, 475, grouped by Borough Book (data/manual/ra_service_map.csv). Includes housing benefit net of its government subsidy, £-14.492m."
+  },
+  {
+   "id": "public_health",
+   "label": "Public health",
+   "official_term": "Public health",
+   "desc": "Sexual health, drug and alcohol services, health visiting and school nursing, paid by a ring-fenced grant",
+   "m": 62.228,
+   "general_fund_m": 54.384,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 361, 362, 363, 365, 366, 368, 370, 371, 372, 373, 374, 376, 378, 380, 381, 382, 383, 384, 385, 387, 389, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "running",
+   "label": "Running the council",
+   "official_term": "Central services and other services",
+   "desc": "Finance, IT, legal, collecting council tax, pension costs and services the return does not itemise",
+   "m": 35.522,
+   "general_fund_m": 35.522,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 604, 610, 625, 628, 650, 675, 681, 684, 831, 841, 871, 895, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "safety_regulation",
+   "label": "Community safety and regulation",
+   "official_term": "Environmental and regulatory services (part)",
+   "desc": "Law enforcement team, CCTV, environmental health, licensing, trading standards and cemeteries",
+   "m": 16.368,
+   "general_fund_m": 16.368,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 510, 519, 520, 521, 522, 523, 524, 525, 526, 527, 529, 530, 531, 532, 533, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "streets",
+   "label": "Streets, waste and transport",
+   "official_term": "Highways and transport; waste services",
+   "desc": "Bins, recycling, street cleaning, roads, street lights and concessionary travel, after parking income",
+   "m": 47.248,
+   "general_fund_m": 47.248,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 210, 230, 247, 248, 249, 252, 254, 258, 260, 272, 541, 570, 581, 582, 583, 584, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "planning",
+   "label": "Planning and the local economy",
+   "official_term": "Planning and development services",
+   "desc": "Planning applications, building control and economic development",
+   "m": 28.376,
+   "general_fund_m": 28.376,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 591, 592, 593, 594, 595, 596, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "debt_levies",
+   "label": "Debt costs and levies",
+   "official_term": "Capital financing and levies",
+   "desc": "Interest and repayment of borrowing, London-wide levies, less investment income",
+   "m": 124.902,
+   "general_fund_m": 124.902,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 822, 824, 828, 859, 865, 873, 881, 883, 886, 888, 889, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  },
+  {
+   "id": "parks_culture",
+   "label": "Parks, libraries and leisure",
+   "official_term": "Cultural and related services",
+   "desc": "Parks and open spaces, libraries, sport and culture",
+   "m": 46.489,
+   "general_fund_m": 46.489,
+   "quality": "sourced",
+   "source_id": "ra_2026-27",
+   "method_note": "Net current expenditure, RA 2026-27 lines 500, 501, 504, 505, 506, 507, grouped by Borough Book (data/manual/ra_service_map.csv)."
+  }
+ ]
+}

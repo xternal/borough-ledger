@@ -11,6 +11,39 @@
    "example_postcode": "IG11 7LU"
   },
   {
+   "slug": "birmingham",
+   "council": "Birmingham City Council",
+   "short": "Birmingham",
+   "ons": "E08000025",
+   "election_id": "local.birmingham.2026-05-07",
+   "example_postcode": "B1 1BB",
+   "councillors_from": "ballots",
+   "others": {
+    "name": "Police and fire (West Midlands)",
+    "to": "West Midlands Police and the fire and rescue service",
+    "short": "the police and fire share"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "West Midlands Police (police and crime commissioner)",
+     "table": "Table_8d",
+     "authority": "West Midlands Police"
+    },
+    {
+     "id": "fire",
+     "label": "Fire and rescue",
+     "phrase": "the fire and rescue service",
+     "official_term": "West Midlands Fire and Rescue Authority",
+     "table": "Table_8e",
+     "authority": "West Midlands Fire and Rescue Authority"
+    }
+   ],
+   "parish_names": "Sutton Coldfield Town Council and New Frankley in Birmingham Parish Council"
+  },
+  {
    "slug": "brent",
    "council": "London Borough of Brent",
    "short": "Brent",
@@ -100,6 +133,43 @@
    "moderngov": "https://moderngov.lambeth.gov.uk",
    "election_id": "local.lambeth.2026-05-07",
    "example_postcode": "SW2 1RW"
+  },
+  {
+   "slug": "manchester",
+   "council": "Manchester City Council",
+   "short": "Manchester",
+   "ons": "E08000003",
+   "moderngov": "https://democracy.manchester.gov.uk",
+   "election_id": "local.manchester.2026-05-07",
+   "example_postcode": "M60 2LA",
+   "elections": "thirds",
+   "seats_per_ward": 3,
+   "others": {
+    "name": "Mayor of Greater Manchester",
+    "to": "the Mayor of Greater Manchester, for police, fire and other services",
+    "short": "the Mayor's share"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "Greater Manchester Combined Authority, police functions",
+     "table": "Table_8d",
+     "authority": "Greater Manchester CA - Police Functions"
+    },
+    {
+     "id": "gmca",
+     "label": "Fire and the Mayor's other services",
+     "phrase": "fire and the Mayor's other services",
+     "official_term": "Greater Manchester Combined Authority, less its police functions",
+     "table": "Table_8f",
+     "authority": "Greater Manchester",
+     "minus": [
+      "police"
+     ]
+    }
+   ]
   },
   {
    "slug": "merton",

@@ -119,3 +119,9 @@ DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the
 
 The same returns, Democracy Club and ONS sources as Kensington and Chelsea; each council's ModernGov web service for its councillors, listed in `data/config/boroughs.json` (Barking and Dagenham and Camden answer scripts only at their `*.moderngov.co.uk` address; Hackney's is at `hackney.moderngov.co.uk`). Hackney's and Tower Hamlets' mayoral results come from Democracy Club's mayoral ballots.
 
+## In use (Manchester and Birmingham, 9 Oct 2026)
+
+- Council Tax levels 2026 to 2027 and 2025 to 2026, Tables 8d (police), 8e (fire and rescue) and 8f (combined authorities), already downloaded with Tables 1 to 9, for the split of the rest of the bill outside London.
+- Table 10's parish precept and parish tax base columns, for the parish note.
+- Manchester's ModernGov web service (`https://democracy.manchester.gov.uk`). Birmingham has none that answers; its councillors are Democracy Club's record of May's winners.
+

@@ -66,7 +66,8 @@ def name_words(name: str) -> List[str]:
     """Lower-case words of a name, accents removed ("Zoë" is "zoe"), honours and degrees kept (they never match a ballot name)."""
     import unicodedata
     plain = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode().lower()
-    words = [re.sub(r"[^a-z]", "", w) for w in re.findall(r"[a-z'’-]+", plain) if re.sub(r"[^a-z]", "", w)]
+    # Hyphenated names count as their parts, so "Tudor-Worrall" contains "Worrall".
+    words = [re.sub(r"[^a-z]", "", w) for w in re.findall(r"[a-z'’]+", plain) if re.sub(r"[^a-z]", "", w)]
     while words and words[0] in TITLES:
         words = words[1:]
     return words
@@ -87,6 +88,8 @@ def same_person(ballot: Dict[str, Any], listed: str) -> float:
     for x in (a, full):
         if len(b) >= 2 and all(w in x for w in b[:2]) and b[0] == x[0]:
             return 0.95  # the council writes fewer names: "Vanisha Solanki" for "Vanisha Surendra Bharti Solanki"
+        if len(x) >= 2 and all(w in b for w in x) and b[0] == x[0]:
+            return 0.92  # the council writes more: "Grace Tudor-Worrall" for "Grace Worrall"
         if len(x) >= 2 and x[0] == b[0] and difflib.SequenceMatcher(None, x[-1], b[min(len(b), len(x)) - 1]).ratio() >= 0.8:
             return 0.9  # the same first name, the surname spelt slightly differently: "Davies" and "Davis"
     last = name_words(ballot["sopn_last_name"])
@@ -157,7 +160,10 @@ def fetch(b: Dict[str, str], today: str) -> Dict[str, Path]:
     paths = {k: d / f"{k}_{today}.{ext}" for k, ext in (("moderngov", "xml"), ("ballots", "json"), ("wards", "json"), ("mayor", "json"))}
     if not b.get("mayor_election_id"):
         paths.pop("mayor")
-    paths["moderngov"].write_bytes(get(f"{b['moderngov']}/mgWebService.asmx/GetCouncillorsByWard"))
+    if b.get("councillors_from") == "ballots":
+        paths.pop("moderngov")  # no web service: the councillors are May's winners (Birmingham)
+    else:
+        paths["moderngov"].write_bytes(get(f"{b['moderngov']}/mgWebService.asmx/GetCouncillorsByWard"))
     ballots: List[dict] = []
     url = f"{DC}?{urllib.parse.urlencode({'election_id': b['election_id'], 'page_size': 50})}"
     while url:
@@ -176,7 +182,7 @@ def fetch(b: Dict[str, str], today: str) -> Dict[str, Path]:
 def latest(b: Dict[str, str]) -> Dict[str, Path]:
     d = RAW / b["slug"]
     out = {}
-    for k in ("moderngov", "ballots", "wards") + (("mayor",) if b.get("mayor_election_id") else ()):
+    for k in (() if b.get("councillors_from") == "ballots" else ("moderngov",)) + ("ballots", "wards") + (("mayor",) if b.get("mayor_election_id") else ()):
         files = sorted(d.glob(f"{k}_*"))
         if not files:
             raise SystemExit(f"borough people {b['slug']}: no {k} snapshot; run without --offline first")
@@ -184,10 +190,30 @@ def latest(b: Dict[str, str]) -> Dict[str, Path]:
     return out
 
 
-def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
-    mg, dc = paths["moderngov"].read_bytes(), paths["ballots"].read_bytes()
-    retrieved = paths["moderngov"].stem.rsplit("_", 1)[-1]
+def moderngov_from_ballots(ballots: List[dict]) -> bytes:
+    """Where a council has no web service (Birmingham), its councillors are May's winners, written in the same shape."""
+    out = ["<root>"]
+    for x in ballots:
+        out.append(f"<ward><wardtitle>{html_escape(x['post']['label'])}</wardtitle>")
+        for c in x["candidacies"]:
+            if c["elected"]:
+                out.append(f"<councillor><fullusername>{html_escape(c['person']['name'])}</fullusername><politicalpartytitle>{html_escape(c['party_name'])}</politicalpartytitle>"
+                           f"<keyposts></keyposts><councillorid>dc-{c['person']['id']}</councillorid></councillor>")
+        out.append("</ward>")
+    return ("".join(out) + "</root>").encode()
+
+
+def html_escape(t: str) -> str:
+    import html
+    return html.escape(t, quote=True)
+
+
+def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
+    dc = paths["ballots"].read_bytes()
     ballots = [x for x in json.loads(dc) if not x["cancelled"] and not x["by_election_reason"]]
+    from_ballots = b.get("councillors_from") == "ballots"
+    mg = moderngov_from_ballots(ballots) if from_ballots else paths["moderngov"].read_bytes()
+    retrieved = paths["ballots" if from_ballots else "moderngov"].stem.rsplit("_", 1)[-1]
     by_ward = {slug(x["post"]["label"]): x for x in ballots}
     councillors: List[Dict[str, Any]] = []
     wards: List[Dict[str, Any]] = []
@@ -218,11 +244,13 @@ def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
             councillors.append({
                 "id": cid, "name": full, "party": party_id(party_name), "party_name": party_name, "ward_id": key,
                 "roles": [p.strip() for p in re.split(r"\)\s*\(|;\s*", post) if p.strip()] if post else [],
-                "democracy_url": f"{b['moderngov']}/mgUserInfo.aspx?UID={(c.findtext('councillorid') or '').strip()}",
+                "democracy_url": (f"https://candidates.democracyclub.org.uk/person/{(c.findtext('councillorid') or '').strip().removeprefix('dc-')}/" if from_ballots
+                                  else f"{b['moderngov']}/mgUserInfo.aspx?UID={(c.findtext('councillorid') or '').strip()}"),
             })
         x = by_ward[key]
-        if len(ids) > x["winner_count"]:
-            raise SystemExit(f"borough people {b['slug']}: {name}: {len(ids)} councillors listed, {x['winner_count']} seats elected")
+        seats_total = b.get("seats_per_ward", x["winner_count"]) if b.get("elections") == "thirds" else x["winner_count"]
+        if len(ids) > seats_total:
+            raise SystemExit(f"borough people {b['slug']}: {name}: {len(ids)} councillors listed, {seats_total} seats")
         ward_cllrs = {i: next(c["name"] for c in councillors if c["id"] == i) for i in ids}
         winners = [cand for cand in x["candidacies"] if cand["elected"]]
         pairs = pair_winners(winners, ward_cllrs)
@@ -248,7 +276,9 @@ def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
         # only as far as a vacant seat or a councillor who joined since (not one of May's winners) accounts for it;
         # anything else is a name we failed to pair, and stops the build so a person looks.
         joined = [i for i in ids if i not in pairs.values()]
-        room = (x["winner_count"] - len(ids)) + len(joined)
+        # Elected by thirds (Manchester): the other councillors were elected in earlier years, so only an empty seat
+        # can explain a May winner who is not listed.
+        room = (seats_total - len(ids)) + (0 if b.get("elections") == "thirds" else len(joined))
         if len(unmatched) > room:
             raise SystemExit(f"borough people {b['slug']}: {name}: elected {', '.join(n for _, n in unmatched)} not on the council's list, and no seat changed hands")
         for r, n in unmatched:
@@ -261,6 +291,7 @@ def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
             "election": {
                 "seats": x["winner_count"], "ballots": r["num_turnout_reported"], "turnout_pct": r["turnout_percentage"], "rejected": r["num_spoilt_ballots"],
                 "result_url": r["source"], "dc_url": f"https://candidates.democracyclub.org.uk/elections/{x['ballot_paper_id']}/", "candidates": candidates,
+                **({"seats_total": seats_total} if seats_total != x["winner_count"] else {}),
             },
         })
     if len({c["id"] for c in councillors}) != len(councillors):
@@ -288,9 +319,10 @@ def people(b: Dict[str, str], paths: Dict[str, Path]) -> Dict[str, Any]:
     control = next((p for p, n in seats.items() if n * 2 > len(councillors)), None)
     return {
         "note": "Generated by etl/borough_people.py. Do not edit by hand; re-run it.",
-        "sources": [
+        **({"councillors_from": "ballots"} if from_ballots else {}),
+        "sources": ([] if from_ballots else [
             {"title": f"{b['council']}, councillors by ward (ModernGov web service)", "url": f"{b['moderngov']}/mgWebService.asmx/GetCouncillorsByWard",
-             "retrieved_on": retrieved, "sha256": hashlib.sha256(mg).hexdigest()},
+             "retrieved_on": retrieved, "sha256": hashlib.sha256(mg).hexdigest()}]) + [
             {"title": f"Democracy Club, {b['short']} local election 7 May 2026", "url": f"{DC}?election_id={b['election_id']}",
              "retrieved_on": retrieved, "licence": "CC BY-SA 4.0", "sha256": hashlib.sha256(dc).hexdigest()},
         ],
@@ -333,7 +365,7 @@ def check(p: Dict[str, Any], shapes: Dict[str, Any]) -> List[str]:
     codes = {w["ons_code"] for w in shapes["wards"]}
     if {w["ons_code"] for w in p["wards"]} != codes:
         problems.append("wards differ from the boundaries")
-    if sum(w["election"]["seats"] for w in p["wards"]) < len(ids):
+    if sum(w["election"].get("seats_total", w["election"]["seats"]) for w in p["wards"]) < len(ids):
         problems.append("more councillors than seats")
     for w in p["wards"]:
         e = w["election"]
@@ -349,7 +381,7 @@ def check(p: Dict[str, Any], shapes: Dict[str, Any]) -> List[str]:
                 problems.append(f"{w['id']}: only elected candidates link to a councillor of the ward, and every one still serving does")
         left = sum(1 for c in e["candidates"] if c.get("left"))
         joined = [i for i in w["councillor_ids"] if i not in {c.get("councillor_id") for c in e["candidates"]}]
-        if left > (e["seats"] - len(w["councillor_ids"])) + len(joined):
+        if left > (e.get("seats_total", e["seats"]) - len(w["councillor_ids"])) + (0 if "seats_total" in e else len(joined)):
             problems.append(f"{w['id']}: more winners marked as no longer listed than seats that changed hands")
     if "·" in json.dumps(p, ensure_ascii=False):
         problems.append("middle dot")
@@ -382,7 +414,7 @@ def main(argv: List[str]) -> None:
             print(f"borough people {b['slug']}: well formed.")
             continue
         today = date.today().isoformat()
-        fresh = (RAW / b["slug"] / f"moderngov_{today}.xml").exists() and (RAW / b["slug"] / f"wards_{today}.json").exists()
+        fresh = (RAW / b["slug"] / f"ballots_{today}.json").exists() and (RAW / b["slug"] / f"wards_{today}.json").exists()
         # Today's snapshots are reused, so a run that stopped part way does not ask everyone again.
         try:
             paths = latest(b) if "--offline" in argv or fresh else fetch(b, today)

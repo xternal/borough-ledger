@@ -121,8 +121,12 @@ export interface PageModel {
     spd: Figure;
     instalments: { options: number[]; f: Figure };
     glaNote: string;
-    /** The Mayor of London's Band D share by body, this year and last; empty until the GLA table is extracted. */
+    /** The Mayor of London's Band D share by body, this year and last; outside London, police, fire and the rest. */
     glaSplit: { id: string; label: string; phrase: string; officialTerm: string; f: Figure; prev: Figure }[];
+    /** Who the rest of the bill goes to: "Mayor of London (GLA)" in London, police and fire elsewhere. */
+    others: { name: string; to: string; short: string; quality: string; as: string };
+    /** Paid only by homes in a parish (Birmingham's two). */
+    parish: { count: number; names: string | null; f: Figure } | null;
   };
   funding: FlowLine[];
   services: FlowLine[];
@@ -322,6 +326,10 @@ export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "servic
     instalments: { options: R.instalments.options, f: of(R.instalments, R.instalments.default) },
     glaNote: b.gla_note,
     glaSplit: (b.gla_split ?? []).map((g) => ({ id: g.id, label: g.label, phrase: g.phrase, officialTerm: g.official_term, f: of(g, g.band_d), prev: of(g, g.band_d_prev) })),
+    others: b.others
+      ? { name: b.others.name, to: b.others.to, short: b.others.short, quality: `${b.others.name} by body (government council tax tables)`, as: "" }
+      : { name: "Mayor of London (GLA)", to: "the Mayor of London", short: "the Mayor’s share", quality: "Mayor's share by body (MD3472)", as: "Mayor of London: " },
+    parish: b.parish ? { count: b.parish.count, names: b.parish.names ?? null, f: of(b.parish, b.parish.band_d) } : null,
   };
   return {
     bill,

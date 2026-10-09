@@ -43,6 +43,9 @@ CTR_FIELDS = {
     "in_lieu": "6. Tax base adjustment (contributions in lieu of Class O exempt dwellings)",
     "setting_base": "7. Council tax base for council tax setting purposes",
     "band_d_council": "9. Average (Band D 2 Adult equivalent) council tax (including Adult Social Care precept and excluding local precepts)",
+    # Parish and town councils' precepts, which the requirement above includes; and Band D with them averaged in.
+    "parish": "2. Parish precepts",
+    "band_d_council_incl": "8. Average (Band D 2 Adult equivalent) council tax (including Adult Social Care precept and local precepts)",
 }
 
 
@@ -59,6 +62,9 @@ def ctr_data(file: str, sheet: str, years: List[str], ons: str) -> Dict[str, Dic
             check(len(cols) == 1, f"{file}: {key} {when}: {len(cols)} columns")
             out[y][key] = as_number(row[cols[0]])
     for y, d in out.items():
+        # The council's own requirement: the return's figure includes parish and town council precepts (Birmingham's
+        # Sutton Coldfield, Westminster's Queen's Park); Hammersmith & Fulham has none.
+        d["ctr"] -= d["parish"]
         # The return's own identity: tax base for setting = tax base × collection rate + payments in lieu; CTR = setting base × Band D.
         check(close(d["tax_base"] * d["collection_rate"] + d["in_lieu"], d["setting_base"], 2.0), f"{file} {y}: tax base × collection rate + payments in lieu ≠ setting base")
         check(close(d["setting_base"] * d["band_d_council"], d["ctr"], 1000.0), f"{file} {y}: setting base × Band D ≠ council tax requirement")

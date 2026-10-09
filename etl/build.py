@@ -75,13 +75,18 @@ def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
                 if y not in ctr or ex["years"][1] == y:  # prefer the release where y is the current year
                     ctr[y], ctr_src[y] = d, s["id"]
         elif ex.get("kind") == "area_bands":
+            if ex["sheet"] == "London" and not ons.startswith("E09"):
+                continue  # this year's band table was taken from its London sheet only; history starts a year later elsewhere
             bands[ex["year"]] = area_bands(s["file"], ex["sheet"], ons, ex.get("first_band_col", -1))
             bands_src[ex["year"]] = s["id"]
     years = sorted(set(ctr) & set(bands))
     check(YEAR in years and PREV in years, f"council tax data missing for {YEAR} or {PREV}")
     now, prev = ctr[YEAR], ctr[PREV]
-    band_d_total = bands[YEAR]["D"]
-    band_d_gla = round(band_d_total - now["band_d_council"], 2)
+    # The area Band D averages parish and town council precepts in (Birmingham, Westminster). The rest of the bill is what
+    # the area figure leaves after the council's share with those averaged in; the total is what a home outside a parish
+    # pays. Where there are no parishes (Hammersmith & Fulham) both are the area figures as before.
+    band_d_gla = round(bands[YEAR]["D"] - now["band_d_council_incl"], 2)
+    band_d_total = round(now["band_d_council"] + band_d_gla, 2)
 
     # ---------------------------------------------------------- spending history (RA budgets), checked year by year
     budget_history = []
@@ -132,7 +137,9 @@ def statement(reg: Dict[str, Any], ons: str) -> Dict[str, Any]:
     sg = read_la_row(str(ROOT / "data/raw" / reg["sg_2026-27"]["file"]), "SG_LA_Data_2026-27", ons)
     svc, svc_detail = ra_services(ra)
     fund, fund_detail = funding(ra, sg)
-    check(close(ra.by_line("990") * 1000, now["ctr"], 1000), f"RA council tax requirement {ra.by_line('990')}k ≠ CTR return {now['ctr']}")
+    # The budget return's council tax requirement matches the council's own, or (Birmingham) the one including parish precepts.
+    ra_ctr = ra.by_line("990") * 1000
+    check(close(ra_ctr, now["ctr"], 1000) or close(ra_ctr, now["ctr"] + now["parish"], 1000), f"RA council tax requirement {ra.by_line('990')}k ≠ CTR return {now['ctr']} (or {now['ctr'] + now['parish']} with parishes)")
 
     groups = {g["id"]: g for g in read_csv("service_groups.csv")}
     fgroups = {g["id"]: g for g in read_csv("funding_groups.csv")}
@@ -310,7 +317,7 @@ def build() -> Dict[str, Any]:
             "council_tax": [
                 {
                     "year": y, "band_d_council": round(ctr[y]["band_d_council"], 2), "band_d_area": bands[y]["D"],
-                    "band_d_gla": round(bands[y]["D"] - round(ctr[y]["band_d_council"], 2), 2),
+                    "band_d_gla": round(bands[y]["D"] - round(ctr[y]["band_d_council_incl"], 2), 2),
                     "council_tax_requirement_m": round(ctr[y]["ctr"] / 1e6, 3), "tax_base": ctr[y]["tax_base"],
                     "collection_rate": ctr[y]["collection_rate"], "source_ids": sorted({ctr_src[y], bands_src[y]}),
                 }
