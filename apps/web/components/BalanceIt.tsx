@@ -119,6 +119,14 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
           )}{" "}
           Reserves close it once; the gap returns the year after.
         </p>
+        {balance.revised ? (
+          <p className="callout">
+            <b>A new forecast.</b> In its October report to Cabinet, the council puts {place.nextYearLabel}&rsquo;s gap at{" "}
+            <Num f={balance.revised.gap} fmt="m1" /> before savings, rising to <Num f={balance.revised.last} fmt="m1" /> by {balance.revised.lastLabel}, mostly because
+            government funding falls and care costs rise. The tool below still starts from February&rsquo;s forecast until we have checked the new one, including whether it
+            already assumes a council tax rise.
+          </p>
+        ) : null}
       </div>
       <div className="balance">
         <div className="levers">

@@ -264,6 +264,8 @@ export const CouncilYear = z.object({
     pending_toggles: z.array(z.object({ id: z.string(), label: z.string(), todo: z.string() })).default([]),
     /** The council's medium-term forecast: cumulative gap for each year if nothing new is done. First entry is next year. */
     forecast: z.array(z.object({ year: finYear, gap_m: z.number(), ...provenance })).min(1),
+    /** The council's later forecast (October's Cabinet), shown beside the one above until its basis is checked. */
+    revised: z.object({ gap_m: z.number(), last_year: finYear, last_gap_m: z.number(), ...provenance }).optional(),
     ...provenance,
   }),
 });

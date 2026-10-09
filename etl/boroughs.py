@@ -83,7 +83,7 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
         "meta": {
             "council": b["council"], "council_short": b["short"], "council_code": b["ons"], "slug": b["slug"], "year": YEAR,
             "note": "Built by etl/boroughs.py from government returns, with the same checks as Hammersmith & Fulham's.",
-            "vintage": max(s["published_on"] for s in reg.values() if "published_on" in s),
+            "vintage": "",  # set below from the sources this borough cites, so another council's new report does not move it
             "sources": [],
         },
         "bill": {
@@ -122,6 +122,7 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
     }
     cited = set(cited_sources(out))
     out["meta"]["sources"] = [source_entry(reg[k]) for k in reg if k in cited]
+    out["meta"]["vintage"] = max(reg[k]["published_on"] for k in cited if "published_on" in reg[k])
     return out
 
 

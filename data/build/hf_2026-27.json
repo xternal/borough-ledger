@@ -5,7 +5,7 @@
   "council_code": "E09000013",
   "year": "2026-27",
   "note": "Built by etl/build.py from government returns. Values marked test or approx are carried over from data/seed until the council's budget report is extracted into data/manual/.",
-  "vintage": "2026-06-11",
+  "vintage": "2026-10-04",
   "sources": [
    {
     "id": "ctr_2026-27",
@@ -188,6 +188,15 @@
     "published_on": "2026-02-09",
     "asset_url": "https://democracy.lbhf.gov.uk/documents/g7859/Public%20reports%20pack%2009th-Feb-2026%2019.00%20Cabinet.pdf?T=10",
     "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
+   },
+   {
+    "id": "cabinet_mtfs_2026-10-12",
+    "title": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31 (report to Cabinet)",
+    "publisher": "London Borough of Hammersmith & Fulham",
+    "url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431",
+    "published_on": "2026-10-04",
+    "asset_url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431",
+    "sha256": "12e9db68e66651bd51e24ee74dc41d35f3012d1ec66df8facaeff6a561f07804"
    },
    {
     "id": "rs_2024-25",
@@ -1410,6 +1419,14 @@
     "source_id": "cabinet_pack_2026-02-09",
     "method_note": "Cabinet 9 February 2026, public reports pack, PDF page 57. Appendix B Table 2: Forecast Budget Gap 2028/29 (cumulative), assuming a 4.99% council tax rise in each year"
    }
-  ]
+  ],
+  "revised": {
+   "gap_m": 74.9,
+   "last_year": "2030-31",
+   "last_gap_m": 159.3,
+   "quality": "approx",
+   "source_id": "cabinet_mtfs_2026-10-12",
+   "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, PDF page 10. Table 4: Revised Budget Gap Before Savings, 2027/28. Not checked by a person yet; the report does not say whether it assumes a council tax rise"
+  }
  }
 }
