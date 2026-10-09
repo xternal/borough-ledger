@@ -78,3 +78,10 @@ The largest councils in Greater Manchester and the West Midlands, at `/mancheste
 - **Budget lines below zero** (Birmingham's planning and the local economy, a council tax deficit) cannot be drawn as a flow; they are named under the chart and kept in the tables.
 - Names: hyphenated surnames now pair ("Grace Worrall" and "Grace Tudor-Worrall"); no earlier pairing changed.
 
+## Leeds (9 Oct 2026)
+
+At `/leeds`, from the same returns and checks: Band D £2,271.51, of which the council's £1,903.74, police £278.28 (set by the Mayor of West Yorkshire, Table 8d; Table 8f's West Yorkshire figure is the same police precept, so it is not added again) and fire £89.49 (Table 8e). 31 parish and town councils add £46.32 on average at Band D. Budget £1,828.0m.
+
+- **Rounding.** The check that setting base × Band D = council tax requirement allowed £1,000; Band D is published to the penny, so a council with 250,000 Band D homes can be out by up to £1,250 from rounding alone. The allowance is now half a penny a home, never less than £1,000, so nothing that passed before can fail.
+- **No councillors yet.** Leeds' ModernGov site (democracy.leeds.gov.uk) answers 403 to any request that is not a person's browser, its web service included. We do not get round that. Democracy Club has every Leeds election, but rebuilding the 99 seats from three years of thirds needs to know who left at the three double elections of May 2026 and the by-elections since (Calverley and Farsley is vacant until 22 October), which only the council's notices say. So the page has no Councillors section: it says why and links the council's list (`councillors_from: "later"` and `councillors_later` in the config), and a Leeds postcode in the finder opens the Leeds page.
+

@@ -17,6 +17,8 @@ export function PostcodeFinder({ places, covered, example, compact = false }: { 
     switch (r.kind) {
       case "ward":
         return `${r.postcode} is in ${r.name} ward, ${r.place}. Opening it…`;
+      case "council":
+        return `${r.postcode} is in ${r.place}. Opening its page…`;
       case "elsewhere":
         return `${r.postcode} is in ${r.district}. Borough Book covers ${covered} so far.`;
       case "invalid":
@@ -39,7 +41,7 @@ export function PostcodeFinder({ places, covered, example, compact = false }: { 
         const r = await lookupPlace(value, places);
         setResult(r);
         setBusy(false);
-        if (r.kind === "ward") router.push(r.href);
+        if (r.kind === "ward" || r.kind === "council") router.push(r.href);
       }}
     >
       <label htmlFor={`${id}-pc`}>Find your ward and councillors</label>
@@ -64,7 +66,7 @@ export function PostcodeFinder({ places, covered, example, compact = false }: { 
           {busy ? "Finding…" : "Find"}
         </button>
       </div>
-      <p id={`${id}-msg`} className={result && result.kind !== "ward" ? "finder-msg warn" : "finder-msg"} aria-live="polite">
+      <p id={`${id}-msg`} className={result && result.kind !== "ward" && result.kind !== "council" ? "finder-msg warn" : "finder-msg"} aria-live="polite">
         {result ? message(result) : null}
       </p>
       <p id={`${id}-note`} className="finder-note">

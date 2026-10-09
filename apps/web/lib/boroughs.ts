@@ -29,8 +29,9 @@ export interface BoroughModel extends StatementModel {
   place: PageModel["place"];
   vintage: string;
   history: { year: string; label: string; council: Figure; area: Figure }[];
-  people: BoroughPeople;
-  map: WardMap;
+  /** Null where the councillors come later (councillors_later in the config says why). */
+  people: BoroughPeople | null;
+  map: WardMap | null;
   sources: { title: string; url: string }[];
 }
 
@@ -43,9 +44,10 @@ export function boroughModel(slug: string): BoroughModel | null {
   if (hit) return hit;
   const dir = `data/build/boroughs/${slug}`;
   const statement = BoroughStatement.parse(read(`${dir}/statement.json`));
-  const people = BoroughPeople.parse(read(`${dir}/people.json`));
-  const map = WardMap.parse(read(`${dir}/wards_map.json`));
-  const problems = checkBoroughPeople(people);
+  const later = b.councillors_from === "later";
+  const people = later ? null : BoroughPeople.parse(read(`${dir}/people.json`));
+  const map = later ? null : WardMap.parse(read(`${dir}/wards_map.json`));
+  const problems = people ? checkBoroughPeople(people) : [];
   if (problems.length) throw new Error(`${slug}: ${problems.join("; ")}`);
   const S = statementModel(statement, DATA.rules);
   const year = statement.meta.year;
@@ -72,8 +74,8 @@ export function boroughModel(slug: string): BoroughModel | null {
     map,
     sources: [
       ...statement.meta.sources.filter((s): s is typeof s & { url: string } => !!s.url).map((s) => ({ title: s.title, url: s.url })),
-      ...people.sources.map((s) => ({ title: s.title, url: s.url })),
-      { title: map.source.title, url: map.source.page },
+      ...(people?.sources ?? []).map((s) => ({ title: s.title, url: s.url })),
+      ...(map ? [{ title: map.source.title, url: map.source.page }] : []),
     ],
   };
   cache.set(slug, model);

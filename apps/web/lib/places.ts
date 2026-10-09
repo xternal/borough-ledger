@@ -10,7 +10,7 @@ export const PLACES: FinderPlace[] = [
     ons: DATA.council.meta.council_code,
     wards: DATA.content.wards.wards.map((w) => ({ name: w.name, ons_code: w.ons_code, href: `/ward/${w.id}` })),
   },
-  ...finder.boroughs.map((b) => ({ short: b.short, ons: b.ons, wards: b.wards.map((w) => ({ name: w.name, ons_code: w.ons_code, href: `/${b.slug}#ward-${w.id}` })) })),
+  ...finder.boroughs.map((b) => ({ short: b.short, ons: b.ons, href: `/${b.slug}`, wards: b.wards.map((w) => ({ name: w.name, ons_code: w.ons_code, href: `/${b.slug}#ward-${w.id}` })) })),
 ];
 
 /** "Hammersmith & Fulham and Kensington and Chelsea": the boroughs covered so far, for messages. */

@@ -17,6 +17,8 @@ export function WardFinder({ places, covered }: { places: FinderPlace[]; covered
     switch (r.kind) {
       case "ward":
         return `${r.postcode} is in ${r.name} ward, ${r.place}. Opening it…`;
+      case "council":
+        return `${r.postcode} is in ${r.place}. Opening its page…`;
       case "elsewhere":
         return `${r.postcode} is in ${r.district}. Borough Book covers ${covered} so far; your own council's website lists your councillors.`;
       case "invalid":
@@ -39,7 +41,7 @@ export function WardFinder({ places, covered }: { places: FinderPlace[]; covered
         const r = await lookupPlace(value, places);
         setResult(r);
         setBusy(false);
-        if (r.kind === "ward") router.push(r.href);
+        if (r.kind === "ward" || r.kind === "council") router.push(r.href);
       }}
     >
       <label htmlFor={`${id}-pc`}>Your postcode</label>
@@ -64,7 +66,7 @@ export function WardFinder({ places, covered }: { places: FinderPlace[]; covered
           {busy ? "Finding…" : "Find my ward"}
         </button>
       </div>
-      <p id={`${id}-msg`} className={result && result.kind !== "ward" ? "finder-msg warn" : "finder-msg"} aria-live="polite">
+      <p id={`${id}-msg`} className={result && result.kind !== "ward" && result.kind !== "council" ? "finder-msg warn" : "finder-msg"} aria-live="polite">
         {result ? message(result) : null}
       </p>
       <p id={`${id}-note`} className="small muted">
