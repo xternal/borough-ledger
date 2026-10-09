@@ -104,6 +104,358 @@
    ]
   },
   {
+   "slug": "birmingham",
+   "short": "Birmingham",
+   "ons": "E08000025",
+   "wards": [
+    {
+     "id": "acocks-green",
+     "name": "Acocks Green",
+     "ons_code": "E05011118"
+    },
+    {
+     "id": "allens-cross",
+     "name": "Allens Cross",
+     "ons_code": "E05011119"
+    },
+    {
+     "id": "alum-rock",
+     "name": "Alum Rock",
+     "ons_code": "E05011120"
+    },
+    {
+     "id": "aston",
+     "name": "Aston",
+     "ons_code": "E05011121"
+    },
+    {
+     "id": "balsall-heath-west",
+     "name": "Balsall Heath West",
+     "ons_code": "E05011122"
+    },
+    {
+     "id": "bartley-green",
+     "name": "Bartley Green",
+     "ons_code": "E05011123"
+    },
+    {
+     "id": "billesley",
+     "name": "Billesley",
+     "ons_code": "E05011124"
+    },
+    {
+     "id": "birchfield",
+     "name": "Birchfield",
+     "ons_code": "E05011125"
+    },
+    {
+     "id": "bordesley-and-highgate",
+     "name": "Bordesley & Highgate",
+     "ons_code": "E05011126"
+    },
+    {
+     "id": "bordesley-green",
+     "name": "Bordesley Green",
+     "ons_code": "E05011127"
+    },
+    {
+     "id": "bournbrook-and-selly-park",
+     "name": "Bournbrook & Selly Park",
+     "ons_code": "E05011128"
+    },
+    {
+     "id": "bournville-and-cotteridge",
+     "name": "Bournville & Cotteridge",
+     "ons_code": "E05011129"
+    },
+    {
+     "id": "brandwood-and-kings-heath",
+     "name": "Brandwood & King's Heath",
+     "ons_code": "E05011130"
+    },
+    {
+     "id": "bromford-and-hodge-hill",
+     "name": "Bromford & Hodge Hill",
+     "ons_code": "E05011131"
+    },
+    {
+     "id": "castle-vale",
+     "name": "Castle Vale",
+     "ons_code": "E05011132"
+    },
+    {
+     "id": "druids-heath-and-monyhull",
+     "name": "Druids Heath & Monyhull",
+     "ons_code": "E05011133"
+    },
+    {
+     "id": "edgbaston",
+     "name": "Edgbaston",
+     "ons_code": "E05011134"
+    },
+    {
+     "id": "erdington",
+     "name": "Erdington",
+     "ons_code": "E05011135"
+    },
+    {
+     "id": "frankley-great-park",
+     "name": "Frankley Great Park",
+     "ons_code": "E05011136"
+    },
+    {
+     "id": "garretts-green",
+     "name": "Garretts Green",
+     "ons_code": "E05011137"
+    },
+    {
+     "id": "glebe-farm-and-tile-cross",
+     "name": "Glebe Farm & Tile Cross",
+     "ons_code": "E05011138"
+    },
+    {
+     "id": "gravelly-hill",
+     "name": "Gravelly Hill",
+     "ons_code": "E05011139"
+    },
+    {
+     "id": "hall-green-north",
+     "name": "Hall Green North",
+     "ons_code": "E05011140"
+    },
+    {
+     "id": "hall-green-south",
+     "name": "Hall Green South",
+     "ons_code": "E05011141"
+    },
+    {
+     "id": "handsworth",
+     "name": "Handsworth",
+     "ons_code": "E05011142"
+    },
+    {
+     "id": "handsworth-wood",
+     "name": "Handsworth Wood",
+     "ons_code": "E05011143"
+    },
+    {
+     "id": "harborne",
+     "name": "Harborne",
+     "ons_code": "E05011144"
+    },
+    {
+     "id": "heartlands",
+     "name": "Heartlands",
+     "ons_code": "E05011145"
+    },
+    {
+     "id": "highters-heath",
+     "name": "Highter's Heath",
+     "ons_code": "E05011146"
+    },
+    {
+     "id": "holyhead",
+     "name": "Holyhead",
+     "ons_code": "E05011147"
+    },
+    {
+     "id": "kings-norton-north",
+     "name": "King's Norton North",
+     "ons_code": "E05011148"
+    },
+    {
+     "id": "kings-norton-south",
+     "name": "King's Norton South",
+     "ons_code": "E05011149"
+    },
+    {
+     "id": "kingstanding",
+     "name": "Kingstanding",
+     "ons_code": "E05011150"
+    },
+    {
+     "id": "ladywood",
+     "name": "Ladywood",
+     "ons_code": "E05011151"
+    },
+    {
+     "id": "longbridge-and-west-heath",
+     "name": "Longbridge & West Heath",
+     "ons_code": "E05011152"
+    },
+    {
+     "id": "lozells",
+     "name": "Lozells",
+     "ons_code": "E05011153"
+    },
+    {
+     "id": "moseley",
+     "name": "Moseley",
+     "ons_code": "E05011154"
+    },
+    {
+     "id": "nechells",
+     "name": "Nechells",
+     "ons_code": "E05011155"
+    },
+    {
+     "id": "newtown",
+     "name": "Newtown",
+     "ons_code": "E05011156"
+    },
+    {
+     "id": "north-edgbaston",
+     "name": "North Edgbaston",
+     "ons_code": "E05011157"
+    },
+    {
+     "id": "northfield",
+     "name": "Northfield",
+     "ons_code": "E05011158"
+    },
+    {
+     "id": "oscott",
+     "name": "Oscott",
+     "ons_code": "E05011159"
+    },
+    {
+     "id": "perry-barr",
+     "name": "Perry Barr",
+     "ons_code": "E05011160"
+    },
+    {
+     "id": "perry-common",
+     "name": "Perry Common",
+     "ons_code": "E05011161"
+    },
+    {
+     "id": "pype-hayes",
+     "name": "Pype Hayes",
+     "ons_code": "E05011162"
+    },
+    {
+     "id": "quinton",
+     "name": "Quinton",
+     "ons_code": "E05011163"
+    },
+    {
+     "id": "rubery-and-rednal",
+     "name": "Rubery & Rednal",
+     "ons_code": "E05011164"
+    },
+    {
+     "id": "shard-end",
+     "name": "Shard End",
+     "ons_code": "E05011165"
+    },
+    {
+     "id": "sheldon",
+     "name": "Sheldon",
+     "ons_code": "E05011166"
+    },
+    {
+     "id": "small-heath",
+     "name": "Small Heath",
+     "ons_code": "E05011167"
+    },
+    {
+     "id": "soho-and-jewellery-quarter",
+     "name": "Soho & Jewellery Quarter",
+     "ons_code": "E05011168"
+    },
+    {
+     "id": "south-yardley",
+     "name": "South Yardley",
+     "ons_code": "E05011169"
+    },
+    {
+     "id": "sparkbrook-and-balsall-heath-east",
+     "name": "Sparkbrook & Balsall Heath East",
+     "ons_code": "E05011170"
+    },
+    {
+     "id": "sparkhill",
+     "name": "Sparkhill",
+     "ons_code": "E05011171"
+    },
+    {
+     "id": "stirchley",
+     "name": "Stirchley",
+     "ons_code": "E05011172"
+    },
+    {
+     "id": "stockland-green",
+     "name": "Stockland Green",
+     "ons_code": "E05011173"
+    },
+    {
+     "id": "sutton-four-oaks",
+     "name": "Sutton Four Oaks",
+     "ons_code": "E05011174"
+    },
+    {
+     "id": "sutton-mere-green",
+     "name": "Sutton Mere Green",
+     "ons_code": "E05011175"
+    },
+    {
+     "id": "sutton-reddicap",
+     "name": "Sutton Reddicap",
+     "ons_code": "E05011176"
+    },
+    {
+     "id": "sutton-roughley",
+     "name": "Sutton Roughley",
+     "ons_code": "E05011177"
+    },
+    {
+     "id": "sutton-trinity",
+     "name": "Sutton Trinity",
+     "ons_code": "E05011178"
+    },
+    {
+     "id": "sutton-vesey",
+     "name": "Sutton Vesey",
+     "ons_code": "E05011179"
+    },
+    {
+     "id": "sutton-walmley-and-minworth",
+     "name": "Sutton Walmley & Minworth",
+     "ons_code": "E05011180"
+    },
+    {
+     "id": "sutton-wylde-green",
+     "name": "Sutton Wylde Green",
+     "ons_code": "E05011181"
+    },
+    {
+     "id": "tyseley-and-hay-mills",
+     "name": "Tyseley & Hay Mills",
+     "ons_code": "E05011182"
+    },
+    {
+     "id": "ward-end",
+     "name": "Ward End",
+     "ons_code": "E05011183"
+    },
+    {
+     "id": "weoley-and-selly-oak",
+     "name": "Weoley & Selly Oak",
+     "ons_code": "E05011184"
+    },
+    {
+     "id": "yardley-east",
+     "name": "Yardley East",
+     "ons_code": "E05011185"
+    },
+    {
+     "id": "yardley-west-and-stechford",
+     "name": "Yardley West & Stechford",
+     "ons_code": "E05011186"
+    }
+   ]
+  },
+  {
    "slug": "brent",
    "short": "Brent",
    "ons": "E09000005",
@@ -1235,6 +1587,173 @@
      "id": "west-dulwich",
      "name": "West Dulwich",
      "ons_code": "E05014119"
+    }
+   ]
+  },
+  {
+   "slug": "manchester",
+   "short": "Manchester",
+   "ons": "E08000003",
+   "wards": [
+    {
+     "id": "ancoats-and-beswick",
+     "name": "Ancoats and Beswick",
+     "ons_code": "E05011350"
+    },
+    {
+     "id": "ardwick",
+     "name": "Ardwick",
+     "ons_code": "E05011351"
+    },
+    {
+     "id": "baguley",
+     "name": "Baguley",
+     "ons_code": "E05011352"
+    },
+    {
+     "id": "brooklands",
+     "name": "Brooklands",
+     "ons_code": "E05011353"
+    },
+    {
+     "id": "burnage",
+     "name": "Burnage",
+     "ons_code": "E05011354"
+    },
+    {
+     "id": "charlestown",
+     "name": "Charlestown",
+     "ons_code": "E05011355"
+    },
+    {
+     "id": "cheetham",
+     "name": "Cheetham",
+     "ons_code": "E05011356"
+    },
+    {
+     "id": "chorlton",
+     "name": "Chorlton",
+     "ons_code": "E05011357"
+    },
+    {
+     "id": "chorlton-park",
+     "name": "Chorlton Park",
+     "ons_code": "E05011358"
+    },
+    {
+     "id": "clayton-and-openshaw",
+     "name": "Clayton and Openshaw",
+     "ons_code": "E05011359"
+    },
+    {
+     "id": "crumpsall",
+     "name": "Crumpsall",
+     "ons_code": "E05011360"
+    },
+    {
+     "id": "deansgate",
+     "name": "Deansgate",
+     "ons_code": "E05011361"
+    },
+    {
+     "id": "didsbury-east",
+     "name": "Didsbury East",
+     "ons_code": "E05011362"
+    },
+    {
+     "id": "didsbury-west",
+     "name": "Didsbury West",
+     "ons_code": "E05011363"
+    },
+    {
+     "id": "fallowfield",
+     "name": "Fallowfield",
+     "ons_code": "E05011364"
+    },
+    {
+     "id": "gorton-and-abbey-hey",
+     "name": "Gorton and Abbey Hey",
+     "ons_code": "E05011365"
+    },
+    {
+     "id": "harpurhey",
+     "name": "Harpurhey",
+     "ons_code": "E05011366"
+    },
+    {
+     "id": "higher-blackley",
+     "name": "Higher Blackley",
+     "ons_code": "E05011367"
+    },
+    {
+     "id": "hulme",
+     "name": "Hulme",
+     "ons_code": "E05011368"
+    },
+    {
+     "id": "levenshulme",
+     "name": "Levenshulme",
+     "ons_code": "E05011369"
+    },
+    {
+     "id": "longsight",
+     "name": "Longsight",
+     "ons_code": "E05011370"
+    },
+    {
+     "id": "miles-platting-and-newton-heath",
+     "name": "Miles Platting and Newton Heath",
+     "ons_code": "E05011371"
+    },
+    {
+     "id": "moss-side",
+     "name": "Moss Side",
+     "ons_code": "E05011372"
+    },
+    {
+     "id": "moston",
+     "name": "Moston",
+     "ons_code": "E05011373"
+    },
+    {
+     "id": "northenden",
+     "name": "Northenden",
+     "ons_code": "E05011374"
+    },
+    {
+     "id": "old-moat",
+     "name": "Old Moat",
+     "ons_code": "E05011375"
+    },
+    {
+     "id": "piccadilly",
+     "name": "Piccadilly",
+     "ons_code": "E05011376"
+    },
+    {
+     "id": "rusholme",
+     "name": "Rusholme",
+     "ons_code": "E05011377"
+    },
+    {
+     "id": "sharston",
+     "name": "Sharston",
+     "ons_code": "E05011378"
+    },
+    {
+     "id": "whalley-range",
+     "name": "Whalley Range",
+     "ons_code": "E05011379"
+    },
+    {
+     "id": "withington",
+     "name": "Withington",
+     "ons_code": "E05011380"
+    },
+    {
+     "id": "woodhouse-park",
+     "name": "Woodhouse Park",
+     "ons_code": "E05011381"
     }
    ]
   },

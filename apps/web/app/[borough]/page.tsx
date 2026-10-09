@@ -13,6 +13,7 @@ import { TopBar } from "@/components/TopBar";
 import { HeroTop } from "@/components/HeroTop";
 import { PostcodeFinder } from "@/components/PostcodeFinder";
 import { COVERED, PLACES } from "@/lib/places";
+import { councilWithThe } from "@/lib/boroughList";
 import { BOROUGHS, boroughModel, type BoroughModel } from "@/lib/boroughs";
 import { format, formatDay } from "@/lib/format";
 import { SITE, SITE_URL } from "@/lib/site";
@@ -77,7 +78,8 @@ export default async function BoroughPage({ params }: Props) {
   const seats = P.councillors.length;
   const fig = (v: number) => ({ value: v, quality: "sourced" as const, sources: [P.sources[0]!.url] });
   const shortOf = new Map(P.parties.map((x) => [x.id, x.short]));
-  const vacant = P.wards.reduce((a, w) => a + w.election.seats, 0) - seats;
+  const thirds = P.wards.some((w) => w.election.seats_total);
+  const vacant = P.wards.reduce((a, w) => a + (w.election.seats_total ?? w.election.seats), 0) - seats;
   const byId = new Map(P.councillors.map((c) => [c.id, c]));
   const first = m.history[0]!;
   const last = m.history[m.history.length - 1]!;
@@ -97,7 +99,7 @@ export default async function BoroughPage({ params }: Props) {
       <TopBar place={m.place.short} year={m.place.yearLabel} borough={{ base: `/${borough}`, items: SECTIONS }} />
       <main className="wrap" id="top">
         <div className="hero">
-          <HeroTop current={m.place.short} council={`the ${m.place.council}`} />
+          <HeroTop current={m.place.short} council={councilWithThe(m.place.council)} />
           <h1>Where your council tax goes in {m.place.short}</h1>
           <p className="lede">
             A Band D home pays <Num f={m.bill.total} fmt="gbp2" /> this year, up <Num f={m.bill.risePct} fmt="pct1" />. Council tax covers about{" "}
@@ -234,6 +236,10 @@ export default async function BoroughPage({ params }: Props) {
               ) : (
                 "No party has more than half the seats."
               )}{" "}
+              {thirds ? ` In May ${P.election.date.slice(0, 4)} one of each ward's seats was up for election; the ward's other councillors were elected in earlier years.` : ""}
+              {P.councillors_from === "ballots"
+                ? " The councillors are those elected in May, from the declarations: the council publishes no list we can read, so any change since is not shown."
+                : ""}{" "}
               Only the councillors elected are named here; everyone else stood as their party&rsquo;s candidate.
             </p>
           </div>
@@ -260,7 +266,7 @@ export default async function BoroughPage({ params }: Props) {
                     </ul>
                     <details className="chart-table">
                       <summary>
-                        How {w.name} voted
+                        How {w.name} voted{w.election.seats_total ? ` in May for ${w.election.seats === 1 ? "one" : w.election.seats} of its ${w.election.seats_total} seats` : ""}
                         {w.election.turnout_pct !== null ? (
                           <>
                             : turnout <Num f={fig(w.election.turnout_pct)} fmt="pct1" />
@@ -343,7 +349,7 @@ export default async function BoroughPage({ params }: Props) {
             </ul>
           </ChartTable>
         </section>
-        <Footer council={m.place.short} full={`the ${m.place.council}`} hasTestData={false} />
+        <Footer council={m.place.short} full={councilWithThe(m.place.council)} hasTestData={false} />
       </main>
       <JsonLd data={jsonLd} />
     </>

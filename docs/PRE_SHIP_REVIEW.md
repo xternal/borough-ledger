@@ -227,3 +227,7 @@ Barking and Dagenham, Brent, Bromley, Camden, Hackney, Haringey, Harrow, Haverin
 
 Lambeth joins: its councillor service answers, slowly (about 100 seconds), and lists an empty seat as "Vacancy", now read as an empty seat. 18 London boroughs on the site.
 
+## Manchester and Birmingham (9 Oct 2026, in review)
+
+The first councils outside London: Manchester City Council and Birmingham City Council, with their bills split into police, fire and the combined authority from the government's own tables (checked to the penny against the area Band D, this year and last), Birmingham's parish precepts shown apart, Manchester's elections by thirds and Birmingham's councillors from May's ballots (docs/BOROUGHS.md). 20 councils on the site.
+

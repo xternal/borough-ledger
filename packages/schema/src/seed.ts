@@ -195,6 +195,10 @@ export const CouncilYear = z.object({
     /** Every band as published by government, to the penny. The engine must reproduce these. */
     published_bands: z.record(Band, z.number().positive()),
     gla_note: z.string(),
+    /** Outside London, who the rest of the bill goes to (police, fire, a combined authority). London: the Mayor of London. */
+    others: z.object({ name: z.string(), to: z.string(), short: z.string() }).optional(),
+    /** Parish and town council precepts, paid only by homes in a parish: Band D on average across those parishes. */
+    parish: z.object({ count: z.number().int().positive(), names: z.string().optional(), band_d: z.number().positive(), ...provenance }).optional(),
     /** The Mayor of London's share by body (police, fire, transport, City Hall), Band D, from the GLA's own decision. */
     gla_split: z
       .array(

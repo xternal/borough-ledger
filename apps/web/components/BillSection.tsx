@@ -18,6 +18,8 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
   const gla = derive(b.gla, bill.gla, ...inputs);
   const total = derive(b.total, bill.total, ...inputs);
   const pc = (b.council / b.total) * 100;
+  // "Hammersmith & Fulham Council", but "Manchester City Council" where that is the council's own name.
+  const councilName = /Council$/.test(place.council) ? place.council : `${place.short} Council`;
   // The Mayor's share by body, in pence that add back up to it; at Band D these are the GLA's own figures.
   const glaParts = bill.glaSplit.length
     ? splitPence(b.gla, bill.glaSplit.map((g) => g.f.value)).map((v, i) => ({ ...bill.glaSplit[i]!, amt: derive(v, bill.glaSplit[i]!.f, ...inputs) }))
@@ -40,7 +42,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
       <div className="sec-head">
         <h2 id="bill-h">Your bill</h2>
         <p>
-          Pick your band. The council keeps <Num f={bill.councilShare} fmt="share0" /> of it; the rest goes to the Mayor of London.
+          Pick your band. The council keeps <Num f={bill.councilShare} fmt="share0" /> of it; the rest goes to {bill.others.to}.
         </p>
       </div>
       <div className="bill">
@@ -77,12 +79,12 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
             </div>
             <div className="legend2">
               <span className="sw" style={{ background: "var(--fund)" }} />
-              <span>{place.short} Council</span>
+              <span>{councilName}</span>
               <span className="amt">
                 <Num f={council} fmt="gbp2" />
               </span>
               <span className="sw" style={{ background: "var(--gla)" }} />
-              <span>Mayor of London (GLA)</span>
+              <span>{bill.others.name}</span>
               <span className="amt">
                 <Num f={gla} fmt="gbp2" />
               </span>
@@ -97,7 +99,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
               <span className="sub">
                 {glaChange ? (
                   <>
-                    At Band D the Mayor&rsquo;s share went {glaChange.value > 0 ? "up" : "down"} <Num f={derive(Math.abs(glaChange.value), glaChange)} fmt="gbp2" /> this
+                    At Band D {bill.others.short} went {glaChange.value > 0 ? "up" : "down"} <Num f={derive(Math.abs(glaChange.value), glaChange)} fmt="gbp2" /> this
                     year:{" "}
                     {changed.map((g, i) => (
                       <span key={g.id}>
@@ -115,7 +117,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
           </div>
           <div className="qrow">
             <QualityGroup q={bill.total.quality} text={`Band D bill for ${place.yearLabel}`} />
-            {glaParts.length > 0 && <QualityGroup q={worst(...bill.glaSplit.map((g) => g.f.quality))} text="Mayor's share by body (MD3472)" />}
+            {glaParts.length > 0 && <QualityGroup q={worst(...bill.glaSplit.map((g) => g.f.quality))} text={bill.others.quality} />}
           </div>
         </div>
         <div>
@@ -144,16 +146,23 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
                   key: s.id,
                   cells: [s.label, <Num key="v" f={s.share} fmt="gbp2" />, <Num key="p" f={derive(s.share.value / total.value, s.share, total)} fmt="share1" />],
                 })),
-                { key: "council", cells: [`${place.short} Council, all services`, <Num key="v" f={council} fmt="gbp2" />, <Num key="p" f={derive(b.council / b.total, council, total)} fmt="share1" />] },
+                { key: "council", cells: [`${councilName}, all services`, <Num key="v" f={council} fmt="gbp2" />, <Num key="p" f={derive(b.council / b.total, council, total)} fmt="share1" />] },
                 ...glaParts.map((g) => ({
                   key: `gla-${g.id}`,
-                  cells: [`Mayor of London: ${g.phrase}`, <Num key="v" f={g.amt} fmt="gbp2" />, <Num key="p" f={derive(g.amt.value / total.value, g.amt, total)} fmt="share1" />],
+                  cells: [`${bill.others.as}${bill.others.as ? g.phrase : g.label}`, <Num key="v" f={g.amt} fmt="gbp2" />, <Num key="p" f={derive(g.amt.value / total.value, g.amt, total)} fmt="share1" />],
                 })),
-                { key: "gla", cells: ["Mayor of London, all", <Num key="v" f={gla} fmt="gbp2" />, <Num key="p" f={derive(b.gla / b.total, gla, total)} fmt="share1" />] },
+                { key: "gla", cells: [`${bill.others.name}, all`, <Num key="v" f={gla} fmt="gbp2" />, <Num key="p" f={derive(b.gla / b.total, gla, total)} fmt="share1" />] },
               ]}
               foot={["Your bill", <Num key="v" f={total} fmt="gbp2" />, "100%"]}
             />
           </ChartTable>
+          {bill.parish ? (
+            <p className="small muted" style={{ marginTop: 14 }}>
+              Homes in {place.short}&rsquo;s {bill.parish.count === 1 ? "parish" : `${["", "one", "two", "three", "four", "five"][bill.parish.count] ?? bill.parish.count} parishes`}
+              {bill.parish.names ? ` (${bill.parish.names})` : ""} also pay their parish or town council: on average <Num f={bill.parish.f} fmt="gbp2" /> at Band D, on
+              top of the bill above.
+            </p>
+          ) : null}
           <p className="small muted" style={{ marginTop: 14 }}>
             Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself, after schools and public health, which
             have their own ring-fenced grants. Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants

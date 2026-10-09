@@ -26,6 +26,23 @@ class BoroughsTest(unittest.TestCase):
         housing = next(s for s in out["services"] if s["id"] == "housing")
         self.assertIn("housing benefit", housing["method_note"])
 
+    @unittest.skipUnless(RAW_PRESENT, "needs the government returns in data/raw/ (python3 etl/fetch.py)")
+    def test_outside_london_the_bill_splits_into_police_fire_and_parish_exactly(self) -> None:
+        reg = {s["id"]: s for s in load_sources()}
+        by = {b["slug"]: b for b in B.boroughs()}
+        man = B.build_one(reg, by["manchester"])["bill"]
+        self.assertAlmostEqual(sum(g["band_d"] for g in man["gla_split"]), man["band_d_gla"], places=2)
+        self.assertNotIn("parish", man)
+        brm = B.build_one(reg, by["birmingham"])["bill"]
+        # What a home outside Birmingham's two parishes pays; the parishes' own precept is shown apart.
+        self.assertAlmostEqual(brm["band_d_total"], brm["band_d_council"] + sum(g["band_d"] for g in brm["gla_split"]), places=2)
+        self.assertEqual(brm["parish"]["count"], 2)
+
+    def test_a_council_listing_vacancy_is_an_empty_seat_and_hyphenated_names_pair(self) -> None:
+        winner = {"person": {"name": "Grace Worrall"}, "sopn_first_names": "Grace", "sopn_last_name": "WORRALL"}
+        self.assertGreaterEqual(BP.same_person(winner, "Grace Tudor-Worrall"), 0.85)
+        self.assertEqual(BP.same_person(winner, "Dave Rawson"), 0.0)
+
     def people(self) -> tuple:
         d = ROOT / "data" / "build" / "boroughs" / KC
         return json.loads((d / "people.json").read_text()), json.loads((d / "wards_map.json").read_text())

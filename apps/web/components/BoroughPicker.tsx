@@ -41,7 +41,7 @@ export function BoroughPicker({ current, boroughs }: { current: string; boroughs
             </a>
           </li>
         ))}
-        <li className="picker-more">More London boroughs are on the way.</li>
+        <li className="picker-more">More boroughs are on the way.</li>
       </ul>
     </details>
   );

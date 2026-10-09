@@ -28,8 +28,12 @@ const RIGHT = 330;
 
 /** Laid out on the server with d3-sankey and drawn as plain SVG, so it renders without JavaScript. */
 function FlowChart({ funding, services, total }: { funding: FlowLine[]; services: FlowLine[]; total: Figure }) {
-  const left: FlowNode[] = funding.map((x) => ({ id: x.id, label: x.label, side: "L", f: x.f, gap: x.gap }));
-  const right: FlowNode[] = [...services].sort((a, z) => z.f.value - a.f.value).map((x) => ({ id: x.id, label: x.label, side: "R", f: x.f }));
+  // A flow cannot be drawn below zero: a line that brings in more than it costs is named under the chart instead.
+  const left: FlowNode[] = funding.filter((x) => x.f.value > 0).map((x) => ({ id: x.id, label: x.label, side: "L", f: x.f, gap: x.gap }));
+  const right: FlowNode[] = [...services]
+    .filter((x) => x.f.value > 0)
+    .sort((a, z) => z.f.value - a.f.value)
+    .map((x) => ({ id: x.id, label: x.label, side: "R", f: x.f }));
   const nodes: FlowNode[] = [...left, { id: "pot", label: "Net budget", side: "M" }, ...right];
   const links: FlowLink[] = [
     ...left.map((n) => ({ source: n.id, target: "pot", value: n.f!.value, gap: n.gap })),
@@ -153,6 +157,7 @@ function FlowTable({ caption, lines, total }: { caption: string; lines: FlowLine
 /** Any borough's budget. `more` is what follows the chart on that borough's page. */
 export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" | "services" | "netBudget" | "place">; legend: QualityItem[]; more?: React.ReactNode }) {
   const services = [...m.services].sort((a, z) => z.f.value - a.f.value);
+  const below = [...m.funding, ...m.services].filter((l) => l.f.value <= 0 && Math.abs(l.f.value) >= 0.05);
   const max = Math.max(...m.funding.map((x) => x.f.value), ...services.map((x) => x.f.value));
   return (
     <section id="budget" aria-labelledby="budget-h">
@@ -181,6 +186,18 @@ export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" |
       </div>
       <div className="flow-desktop">
         <FlowChart funding={m.funding} services={m.services} total={m.netBudget} />
+        {below.length ? (
+          <p className="small muted">
+            Not drawn in the flow, because they are below zero:{" "}
+            {below.map((l, i) => (
+              <span key={l.id}>
+                {i ? ", " : ""}
+                {l.label} (<Num f={l.f} fmt="m1" />)
+              </span>
+            ))}
+            . They are in the tables.
+          </p>
+        ) : null}
         <ChartTable summary="Show the budget as a table">
           <FlowTable caption={`Where the money comes from, ${m.place.yearLabel}`} lines={m.funding} total={m.netBudget} />
           <FlowTable caption={`What it pays for, ${m.place.yearLabel}`} lines={services} total={m.netBudget} />

@@ -12,8 +12,17 @@ export const BoroughConfig = z.object({
       council: z.string(),
       short: z.string(),
       ons: z.string(),
-      moderngov: z.url(),
+      /** The council's ModernGov web service; absent where there is none and the councillors are May's winners. */
+      moderngov: z.url().optional(),
       election_id: z.string(),
+      /** "thirds" where a third of the seats are elected each year (Manchester). */
+      elections: z.enum(["all", "thirds"]).optional(),
+      seats_per_ward: z.number().int().positive().optional(),
+      councillors_from: z.enum(["moderngov", "ballots"]).optional(),
+      /** Outside London: who the rest of the bill goes to, and the bodies it splits into (government Tables 8d to 8f). */
+      others: z.object({ name: z.string(), to: z.string(), short: z.string() }).optional(),
+      precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),
+      parish_names: z.string().optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */
       example_postcode: z.string().optional(),
       /** Where the borough elects its mayor, who runs the council. */
@@ -33,6 +42,8 @@ export const BoroughPeople = z.object({
   sources: z.array(z.object({ title: z.string(), url: z.url(), retrieved_on: isoDate, sha256: z.string(), licence: z.string().optional() })),
   election: z.object({ id: z.string(), date: isoDate }),
   parties: z.array(z.object({ id: z.string(), short: z.string(), seats: z.number().int().positive() })),
+  /** "ballots" where the council publishes no list a script can read: the councillors are May's winners (Birmingham). */
+  councillors_from: z.literal("ballots").optional(),
   /** The party with more than half the seats, or null: worked out from seats, never from a name (invariant 7). */
   control: z.string().nullable(),
   /** An elected mayor, who runs the council in the boroughs that have one. A public office holder, named. */
@@ -62,6 +73,8 @@ export const BoroughPeople = z.object({
         result_url: z.url(),
         dc_url: z.url(),
         candidates: z.array(Candidate),
+        /** Where only some seats were up in May (elections by thirds): how many councillors the ward has. */
+        seats_total: z.number().int().positive().optional(),
       }),
     }),
   ),
@@ -77,13 +90,13 @@ export function checkBoroughPeople(p: BoroughPeople): string[] {
   const byId = new Map(p.councillors.map((c) => [c.id, c]));
   for (const w of p.wards) {
     const won = w.election.candidates.filter((c) => c.elected);
-    if (won.length !== w.election.seats || w.councillor_ids.length > w.election.seats) problems.push(`${w.id}: seats, winners and councillors differ`);
+    if (won.length !== w.election.seats || w.councillor_ids.length > (w.election.seats_total ?? w.election.seats)) problems.push(`${w.id}: seats, winners and councillors differ`);
     for (const c of won) if (!c.left && byId.get(c.councillor_id ?? "")?.ward_id !== w.id) problems.push(`${w.id}: a winner is not one of the ward's councillors`);
     for (const c of w.election.candidates) if (!c.elected && (c.councillor_id || c.left)) problems.push(`${w.id}: a losing candidate is named`);
     // A winner no longer listed must be accounted for by a vacant seat or a councillor who joined since.
     const left = won.filter((c) => c.left).length;
-    const joined = w.councillor_ids.filter((id) => !won.some((c) => c.councillor_id === id)).length;
-    if (left > w.election.seats - w.councillor_ids.length + joined) problems.push(`${w.id}: more winners no longer listed than seats that changed hands`);
+    const joined = w.election.seats_total ? 0 : w.councillor_ids.filter((id) => !won.some((c) => c.councillor_id === id)).length;
+    if (left > (w.election.seats_total ?? w.election.seats) - w.councillor_ids.length + joined) problems.push(`${w.id}: more winners no longer listed than seats that changed hands`);
   }
   const total = p.parties.reduce((a, x) => a + x.seats, 0);
   if (total !== p.councillors.length) problems.push("party seats do not add up to the councillors");
