@@ -96,3 +96,17 @@ Croydon, Ealing, Kingston upon Thames, Lewisham, Newham, Wandsworth and Westmins
 
 No earlier borough's figures or councillors changed; each gained the by-election register as a source.
 
+## Glasgow: the first council in Scotland (9 Oct 2026)
+
+Glasgow City Council at `/glasgow`, built by `etl/scotland.py` from Scotland's own sources, with Scotland's own rules (`data/config/rules_scotland.json`). Band D £2,358.32 = council £1,706.00 + Scottish Water £652.32 (water £301.95, sewerage £350.37). Budget £2,235.9m. 85 councillors in 23 wards; no overall control (SNP 37, Labour 31).
+
+What differs from England, and how it is checked:
+
+- **Council tax bands** use Scotland's ratios, 240 to 882 over 360 (Local Government Finance Act 1992 s.74, as changed by SSI 2016/368). Every band in the Scottish Government's table must be Band D times its ratio; Band D must equal the five-year series.
+- **No police or fire precept.** The rest of the bill is Scottish Water's water and sewerage charges, read from its own leaflets (page 5 tables; the server refuses scripted downloads, so they were read in a browser and their sha256 recorded). They keep the older ratios (Band H is twice Band D), so the bill calculator now applies the rest of the bill's own ratios where a nation's rules give them (`others_band_ratios`). Water plus sewerage must equal the leaflet's combined row and every band Band D times its ratio. Kept in `data/manual/scottish_water.csv`, approx until a person checks it.
+- **Budget** from the Scottish Government's Provisional Outturn and Budget Estimates (POBE 2026, revised 24 July 2026), Glasgow's sheet, 2026-27 budget estimate. It gives each service after its own grants, so no funding is ring-fenced. Services are grouped in `data/manual/scot_service_groups.csv`; Social Work (£653.4m, almost all passed to the Health and Social Care Partnership, which runs adult and children's care with the NHS) is one group, "Social work and care", because the return does not split the partnership's money. Environmental Services is split into waste (with streets) and regulation, which must add back to its total. Funding: council tax after Council Tax Reduction (£314.4m, the same basis as England's), General Revenue Grant, the business rates pool's distribution, and £137.0m one-off (General Fund £64.8m, capital fund £61.7m, capital money £8.6m, other reserves £1.8m), which must equal the return's own deficit.
+- **No referendum limit**, and **ten instalments** (May to February) under the Scottish regulations (approx: two amendments are not yet consolidated on legislation.gov.uk).
+- **History**: council tax for five years from the Band D series; the whole bill only for 2025/26 and 2026/27, because Scottish Water's 2024/25 leaflet is an image.
+- **Councillors** from the council's own Northgate CoInS pages (every member's ward, and each party's members, which must add up to the same 85). Glasgow last elected in May 2022 by single transferable vote; Democracy Club has the winners but not the counts, so the page shows each ward's councillors and not how it voted. Scottish party names: Scottish Labour is Labour, the SNP is "SNP", Scottish Greens are Green.
+- English pages are unchanged; `etl/boroughs.py` builds England's only.
+

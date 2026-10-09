@@ -1,0 +1,177 @@
+{
+ "meta": {
+  "note": "Council finance rules for Scottish councils, beside data/config/rules.json for English ones. The engine reads these; nothing in code restates them. Each rule cites the law that sets it.",
+  "vintage": "2026-10-09",
+  "sources": [
+   {
+    "id": "lgfa1992_s74",
+    "title": "Local Government Finance Act 1992, section 74: different amounts for dwellings in different bands (Scotland), as substituted by the Council Tax (Substitution of Proportion) (Scotland) Order 2016 (SSI 2016/368) from 1 April 2017",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1992/14/section/74"
+   },
+   {
+    "id": "ssi_2016_368",
+    "title": "The Council Tax (Substitution of Proportion) (Scotland) Order 2016 (SSI 2016/368)",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ssi/2016/368/made"
+   },
+   {
+    "id": "lgfa1992_s79",
+    "title": "Local Government Finance Act 1992, section 79: discounts (Scotland)",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1992/14/section/79"
+   },
+   {
+    "id": "lgfa1992_s93",
+    "title": "Local Government Finance Act 1992, section 93: setting of council tax (Scotland)",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1992/14/section/93"
+   },
+   {
+    "id": "lgsa1973_s95",
+    "title": "Local Government (Scotland) Act 1973, section 95: financial administration",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1973/65/section/95"
+   },
+   {
+    "id": "lgfa1992_ch4za",
+    "title": "Local Government Finance Act 1992, Part I, Chapter 4ZA: referendums relating to council tax increases (England only)",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1992/14/part/I/chapter/4ZA"
+   },
+   {
+    "id": "ctae_scot_regs_1992_sch1",
+    "title": "The Council Tax (Administration and Enforcement) (Scotland) Regulations 1992 (SI 1992/1332), Schedule 1: council tax and council water charge instalments",
+    "publisher": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/uksi/1992/1332/schedule/1"
+   },
+   {
+    "id": "scottish_water_2026-27",
+    "title": "Scottish Water, unmetered household charges 2026/27 (leaflet, table on page 5)",
+    "publisher": "Scottish Water",
+    "url": "https://www.scottishwater.co.uk/-/media/scottishwater/document-hub/your-home/charges/2026/250226scottish-water-unmetered-household-charges-2026-27-leaflet.pdf"
+   }
+  ]
+ },
+ "band_ratios": {
+  "value": {
+   "A": [
+    240,
+    360
+   ],
+   "B": [
+    280,
+    360
+   ],
+   "C": [
+    320,
+    360
+   ],
+   "D": [
+    360,
+    360
+   ],
+   "E": [
+    473,
+    360
+   ],
+   "F": [
+    585,
+    360
+   ],
+   "G": [
+    705,
+    360
+   ],
+   "H": [
+    882,
+    360
+   ]
+  },
+  "quality": "sourced",
+  "source_id": "lgfa1992_s74",
+  "note": "Bands E to H were raised from 11/9, 13/9, 15/9 and 18/9 of Band D by SSI 2016/368 from April 2017."
+ },
+ "others_band_ratios": {
+  "value": {
+   "A": [
+    6,
+    9
+   ],
+   "B": [
+    7,
+    9
+   ],
+   "C": [
+    8,
+    9
+   ],
+   "D": [
+    9,
+    9
+   ],
+   "E": [
+    11,
+    9
+   ],
+   "F": [
+    13,
+    9
+   ],
+   "G": [
+    15,
+    9
+   ],
+   "H": [
+    18,
+    9
+   ]
+  },
+  "quality": "sourced",
+  "source_id": "scottish_water_2026-27",
+  "note": "Scottish Water's water and sewerage charges kept the older ratios when council tax's changed in 2017: its 2026/27 table on page 5 is Band D times these to the penny (Band H is twice Band D)."
+ },
+ "single_person_discount": {
+  "value": 0.25,
+  "quality": "sourced",
+  "source_id": "lgfa1992_s79",
+  "note": "Scottish Water's leaflet says the single occupancy discount applies to its charges too."
+ },
+ "balanced_budget": {
+  "tolerance_m": 0.005,
+  "tolerance_note": "£5,000. The Scottish Government's returns are in £ thousands, so sums of rounded lines can differ by a few thousand pounds. Anything larger is shown as still to find or spare, never rounded to balanced.",
+  "quality": "sourced",
+  "source_id": "lgfa1992_s93",
+  "s114_source_id": "lgsa1973_s95"
+ },
+ "referendum_limit_pct": {
+  "2026-27": {
+   "threshold_pct": null,
+   "excessive_if": "none",
+   "core": null,
+   "adult_social_care": null,
+   "applies_to": "Scottish councils: council tax referendums are an English rule",
+   "quality": "sourced",
+   "source_id": "lgfa1992_ch4za"
+  },
+  "2027-28": {
+   "threshold_pct": null,
+   "excessive_if": "none",
+   "core": null,
+   "adult_social_care": null,
+   "applies_to": "Scottish councils: council tax referendums are an English rule",
+   "quality": "sourced",
+   "source_id": "lgfa1992_ch4za"
+  }
+ },
+ "instalments": {
+  "options": [
+   10
+  ],
+  "default": 10,
+  "quality": "approx",
+  "source_id": "ctae_scot_regs_1992_sch1",
+  "note": "Monthly instalments from May, ending in February, for a bill issued before the year starts.",
+  "todo": "TODO(source): approx until the amendments of SSI 2000/166 and 2000/261, not yet applied on legislation.gov.uk, are read"
+ }
+}

@@ -245,6 +245,54 @@
     "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
    },
    {
+    "id": "scot_ct_bands_2026-27",
+    "title": "Council Tax by band 2026-27 (Scottish Government, Council Tax datasets)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/council-tax-datasets/",
+    "published_on": "2026-03-31",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2019/04/council-tax-datasets/documents/average-council-tax-per-dwelling/council-tax-by-band-2026-27/council-tax-by-band-2026-27/govscot%3Adocument/CTAS%2B2026%2B-%2BCouncil%2BTax%2BAssumptions%2B-%2BCouncil%2BTax%2Bby%2BBand%2B-%2B2026-27.xlsx",
+    "sha256": "fa3f5ed1b3261293bb4603d0a3f5dff5d76ca65c10583af754c7701f7443b1ad"
+   },
+   {
+    "id": "scot_band_d_1996-2027",
+    "title": "Band D Council Tax rates by year, 1996-97 to 2026-27 (Scottish Government, Council Tax datasets)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/council-tax-datasets/",
+    "published_on": "2026-03-31",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2019/04/council-tax-datasets/documents/band-d/band-d-council-tax-1996-97-to-2019-20-data/band-d-council-tax-1996-97-to-2019-20-data/govscot%3Adocument/CTAS%2B2026%2B-%2BCouncil%2BTax%2BAssumptions%2B-%2BBand%2BD%2BCouncil%2BTax%2Brates%2Bby%2Byear%2B-%2B1996-97%2Bto%2B2026-27.xlsx",
+    "sha256": "4e56c333178733c63d8729608740fbf7bf3b3d62ae58c3ad9ea297ad8188cf16"
+   },
+   {
+    "id": "pobe_2026",
+    "title": "Local government 2025-26 provisional outturn and 2026-27 budget estimates, revenue workbook (revised 24 July 2026)",
+    "publisher": "Scottish Government",
+    "url": "https://www.gov.scot/publications/local-government-2025-26-provisional-outturn-and-2026-27-budget-estimates/",
+    "published_on": "2026-07-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2026/06/local-government-2025-26-provisional-outturn-and-2026-27-budget-estimates/documents/provisional-outturn-budget-estimates---revenue-workbook/provisional-outturn-budget-estimates---revenue-workbook/govscot%3Adocument/POBE%2B2026%2B-%2BRevenue%2BWorkboook%2B-%2Brevised%2Bon%2B24%2BJuly%2B2026.xlsx",
+    "sha256": "9161083b04d620564472d3259e5af80a2c753885785d7c3e1e231b28b08b0681"
+   },
+   {
+    "id": "scottish_water_2026-27",
+    "title": "Scottish Water, unmetered household charges 2026/27 (leaflet, table on page 5)",
+    "publisher": "Scottish Water",
+    "url": "https://www.scottishwater.co.uk/help-and-resources/document-hub/your-home/charges",
+    "published_on": "2026-02-25",
+    "asset_url": "https://www.scottishwater.co.uk/-/media/scottishwater/document-hub/your-home/charges/2026/250226scottish-water-unmetered-household-charges-2026-27-leaflet.pdf",
+    "sha256": "7aed972b810702223de0aa32a5ff4e18138bb98a57be0cc0cf86742b5da3c7e6"
+   },
+   {
+    "id": "scottish_water_2025-26",
+    "title": "Scottish Water, unmetered household charges 2025/26 (leaflet, table on page 5)",
+    "publisher": "Scottish Water",
+    "url": "https://www.scottishwater.co.uk/help-and-resources/document-hub/your-home/charges",
+    "published_on": "2025-02-06",
+    "asset_url": "https://www.scottishwater.co.uk/-/media/scottishwater/document-hub/your-home/charges/2025/060225unmeteredhouseholdcharges25-26.pdf",
+    "sha256": "dd5da0496c45467040a2dbd593af7bdc6418607880486294b895b8404ed32b0c"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Book method notes (docs/MODEL.md)",
     "publisher": "Borough Book",

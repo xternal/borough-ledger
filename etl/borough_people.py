@@ -30,10 +30,16 @@ from typing import Any, Dict, List
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import ward_map as WM  # noqa: E402
-from boroughs import boroughs  # noqa: E402
+from boroughs import CONFIG  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "boroughs"
+
+
+def boroughs() -> List[Dict[str, Any]]:
+    """Every council on the site beyond Hammersmith & Fulham, English and Scottish."""
+    return json.loads(CONFIG.read_text())["boroughs"]
+
 OUT = ROOT / "data" / "build" / "boroughs"
 UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
 DC = "https://candidates.democracyclub.org.uk/api/next/ballots/"
@@ -48,14 +54,15 @@ def party_id(name: str) -> str:
     Party", "Labour And Co Op Party" and "Labour Party" are Labour; "Local Conservatives" and "Conservative and Unionist
     Party" are Conservative. Anything else keeps its own name. The same rule for every party."""
     n = name.lower()
-    for pattern, pid in ((r"^labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^liberal democrat", "liberal-democrats"),
+    for pattern, pid in ((r"^(scottish )?labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^(scottish )?liberal democrat", "liberal-democrats"),
+                         (r"^scottish national party\b|^snp$", "snp"),
                          (r"\bgreen party\b|^green$", "green"), (r"^(the )?reform uk", "reform-uk"), (r"^independent( member)?$", "independent")):
         if re.search(pattern, n):
             return pid
     return PARTY.get(name, slug(name))
 
 
-PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK"}
+PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK", "snp": "SNP"}
 
 
 def ward_name(s: str) -> str:
@@ -160,9 +167,30 @@ def get(url: str, tries: int = 6) -> bytes:
     raise RuntimeError("unreachable")
 
 
+def fetch_coins(b: Dict[str, str], today: str) -> Path:
+    """A council's Northgate CoInS pages (Glasgow): every member with their ward, and each party's members. Saved as
+    fetched, page by page, so a rebuild reads exactly what was read."""
+    base = b["coins"]
+    pages = {"allMembers.asp?sort=0&page=0&rec=500": "", "political.asp": ""}
+    for path in pages:
+        pages[path] = get(f"{base}/{path}").decode("iso-8859-1")
+    # Each party's page shows ten members unless asked for all of them on one page.
+    for link in sorted(set(re.findall(r'partyMembers\.asp\?sort=1&amp;id=\d+&amp;name=[^"\']+', pages["political.asp"]))):
+        path = link.replace("&amp;", "&") + "&page=0&rec=500"
+        pages[path] = get(f"{base}/{path}").decode("iso-8859-1")
+    path = RAW / b["slug"] / f"coins_{today}.json"
+    path.write_text(json.dumps({"base": base, "pages": pages}, ensure_ascii=False))
+    return path
+
+
 def fetch(b: Dict[str, str], today: str) -> Dict[str, Path]:
     d = RAW / b["slug"]
     d.mkdir(parents=True, exist_ok=True)
+    if b.get("councillors_from") == "coins":
+        query = {"where": f"LAD24CD='{b['ons']}'", "outFields": "WD24CD,WD24NM,LONG,LAT", "outSR": "4326", "f": "geojson"}
+        wards = d / f"wards_{today}.json"
+        wards.write_bytes(get(f"{WM.SERVICE}?{urllib.parse.urlencode(query)}"))
+        return {"coins": fetch_coins(b, today), "wards": wards}
     paths = {k: d / f"{k}_{today}.{ext}" for k, ext in (("moderngov", "xml"), ("ballots", "json"), ("wards", "json"), ("mayor", "json"))}
     if not b.get("mayor_election_id"):
         paths.pop("mayor")
@@ -208,7 +236,9 @@ def fetch_byelections(b: Dict[str, str], today: str) -> Path:
 def latest(b: Dict[str, str]) -> Dict[str, Path]:
     d = RAW / b["slug"]
     out = {}
-    for k in (() if b.get("councillors_from") == "ballots" else ("moderngov",)) + ("ballots", "wards") + (("mayor",) if b.get("mayor_election_id") else ()):
+    keys = (("coins", "wards") if b.get("councillors_from") == "coins" else
+            (() if b.get("councillors_from") == "ballots" else ("moderngov",)) + ("ballots", "wards") + (("mayor",) if b.get("mayor_election_id") else ()))
+    for k in keys:
         files = sorted(d.glob(f"{k}_*"))
         if not files:
             raise SystemExit(f"borough people {b['slug']}: no {k} snapshot; run without --offline first")
@@ -388,6 +418,62 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
     }
 
 
+def people_coins(b: Dict[str, Any], paths: Dict[str, Path], shapes_path: Path) -> Dict[str, Any]:
+    """Councillors from the council's own CoInS pages (Glasgow): name, ward and party for every member. Wards are matched
+    to the ONS boundaries by name. The last election's counts are not shown: Democracy Club has its winners, not its votes."""
+    import html as H
+    raw = paths["coins"].read_bytes()
+    snap = json.loads(raw)
+    base, pages = snap["base"], snap["pages"]
+    rows = re.findall(r'<a href="member\.asp\?id=(\d+)[^"]*"[^>]*>([^<]+)</a></td>\s*<td[^>]*>([^<]+)</td>', pages["allMembers.asp?sort=0&page=0&rec=500"])
+    party_of: Dict[str, str] = {}
+    for path, page in pages.items():
+        if not path.startswith("partyMembers.asp"):
+            continue
+        party = urllib.parse.unquote_plus(re.search(r"name=([^&]+)", path).group(1))
+        for mid in set(re.findall(r'member\.asp\?id=(\d+)', page)):
+            if mid in party_of and party_of[mid] != party:
+                raise SystemExit(f"borough people {b['slug']}: member {mid} is in two parties")
+            party_of[mid] = party
+    if sorted(party_of) != sorted(m for m, _, _ in rows):
+        raise SystemExit(f"borough people {b['slug']}: the party pages list {len(party_of)} members, the members' page {len(rows)}")
+    feats = json.loads(shapes_path.read_bytes())["features"]
+    norm = lambda s: re.sub(r"[^a-z0-9]+", " ", H.unescape(s).lower().replace("&", " and ")).strip()  # noqa: E731
+    code_of = {norm(f["properties"]["WD24NM"]): (f["properties"]["WD24CD"], f["properties"]["WD24NM"]) for f in feats}
+    councillors: List[Dict[str, Any]] = []
+    wards: Dict[str, Dict[str, Any]] = {}
+    for mid, name, ward in rows:
+        name, ward = H.unescape(name).strip(), H.unescape(ward).strip()
+        if norm(ward) not in code_of:
+            raise SystemExit(f"borough people {b['slug']}: ward {ward!r} has no ONS boundary")
+        if mid not in party_of:
+            raise SystemExit(f"borough people {b['slug']}: {name} is on no party's page")
+        code, ons_name = code_of[norm(ward)]
+        key = slug(ons_name)
+        cid = slug(name)
+        councillors.append({"id": cid, "name": name, "party": party_id(party_of[mid]), "party_name": party_of[mid], "ward_id": key, "roles": [],
+                            "democracy_url": f"{base}/member.asp?id={mid}"})
+        wards.setdefault(key, {"id": key, "ons_code": code, "name": ons_name, "councillor_ids": []})["councillor_ids"].append(cid)
+    if len({c["id"] for c in councillors}) != len(councillors):
+        raise SystemExit(f"borough people {b['slug']}: two councillors share a slug")
+    seats: Dict[str, int] = {}
+    for c in councillors:
+        seats[c["party"]] = seats.get(c["party"], 0) + 1
+    control = next((p for p, n in seats.items() if n * 2 > len(councillors)), None)
+    retrieved = paths["coins"].stem.rsplit("_", 1)[-1]
+    return {
+        "note": "Generated by etl/borough_people.py. Do not edit by hand; re-run it.",
+        "sources": [{"title": f"{b['council']}, council members and political groups (its CoInS pages)", "url": f"{base}/allMembers.asp",
+                     "retrieved_on": retrieved, "sha256": hashlib.sha256(raw).hexdigest()}],
+        "election": {"id": b["election_id"], "date": b["election_id"].rsplit(".", 1)[-1]},
+        "parties": [{"id": p, "short": PARTY_SHORT.get(p) or next(c["party_name"] for c in councillors if c["party"] == p), "seats": n}
+                    for p, n in sorted(seats.items(), key=lambda kv: (-kv[1], kv[0]))],
+        "control": control,
+        "wards": sorted(wards.values(), key=lambda w: w["name"]),
+        "councillors": sorted(councillors, key=lambda c: (c["ward_id"], c["name"])),
+    }
+
+
 def ward_shapes(b: Dict[str, str], path: Path) -> Dict[str, Any]:
     data = path.read_bytes()
     feats = json.loads(data)["features"]
@@ -416,9 +502,14 @@ def check(p: Dict[str, Any], shapes: Dict[str, Any]) -> List[str]:
     codes = {w["ons_code"] for w in shapes["wards"]}
     if {w["ons_code"] for w in p["wards"]} != codes:
         problems.append("wards differ from the boundaries")
-    if sum(w["election"].get("seats_total", w["election"]["seats"]) for w in p["wards"]) < len(ids):
+    if all("election" in w for w in p["wards"]) and sum(w["election"].get("seats_total", w["election"]["seats"]) for w in p["wards"]) < len(ids):
         problems.append("more councillors than seats")
     for w in p["wards"]:
+        if "election" not in w:
+            # No published counts (Glasgow): each listed councillor belongs to this ward, and nobody else is named.
+            if not w["councillor_ids"] or any(ids.get(i, {}).get("ward_id") != w["id"] for i in w["councillor_ids"]):
+                problems.append(f"{w['id']}: councillors and ward differ")
+            continue
         e = w["election"]
         won = [c for c in e["candidates"] if c["elected"]]
         if len(won) != e["seats"]:
@@ -470,14 +561,16 @@ def main(argv: List[str]) -> None:
             print(f"borough people {b['slug']}: well formed.")
             continue
         today = date.today().isoformat()
-        fresh = (RAW / b["slug"] / f"ballots_{today}.json").exists() and (RAW / b["slug"] / f"wards_{today}.json").exists()
+        first = "coins" if b.get("councillors_from") == "coins" else "ballots"
+        fresh = (RAW / b["slug"] / f"{first}_{today}.json").exists() and (RAW / b["slug"] / f"wards_{today}.json").exists()
         # Today's snapshots are reused, so a run that stopped part way does not ask everyone again.
         try:
             paths = latest(b) if "--offline" in argv or fresh else fetch(b, today)
         except (OSError, SystemExit) as e:
             print(f"borough people {b['slug']}: could not fetch ({e}); left as it was")
             continue
-        p, shapes = people(b, paths), ward_shapes(b, paths["wards"])
+        p = people_coins(b, paths, paths["wards"]) if b.get("councillors_from") == "coins" else people(b, paths)
+        shapes = ward_shapes(b, paths["wards"])
         problems = check(p, shapes)
         if problems:
             raise SystemExit(f"borough people {b['slug']}: " + "; ".join(problems[:10]))

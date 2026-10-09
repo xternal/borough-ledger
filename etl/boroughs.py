@@ -27,7 +27,8 @@ OUT = ROOT / "data" / "build" / "boroughs"
 
 
 def boroughs() -> List[Dict[str, Any]]:
-    return json.loads(CONFIG.read_text())["boroughs"]
+    """England's boroughs and cities; Scotland's councils are built by etl/scotland.py from Scotland's own returns."""
+    return [b for b in json.loads(CONFIG.read_text())["boroughs"] if b.get("nation", "england") == "england"]
 
 
 def preceptor_band_d(reg: Dict[str, Any], source_id: str, table: str, authority: str) -> float:

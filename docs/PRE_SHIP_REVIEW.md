@@ -239,3 +239,7 @@ Leeds City Council's bill (police set by the Mayor of West Yorkshire, fire, 31 p
 
 Croydon, Ealing, Kingston upon Thames, Lewisham, Newham, Wandsworth and Westminster: 28 councils on the site. The council tax agreement check allows £5,000 (these differ by £1,200 to £3,100); a May winner can be shown as no longer on the council's list only where the ward held a by-election since May (docs/BOROUGHS.md).
 
+## Glasgow (9 Oct 2026, in review)
+
+The first Scottish council: Scotland's own returns, rules and Scottish Water's charges, with the same standard of checks (docs/BOROUGHS.md). For the owner: check `data/manual/scottish_water.csv` against the two leaflets once (it shows as approx until then), and the grouping in `data/manual/scot_service_groups.csv`. 29 councils on the site.
+

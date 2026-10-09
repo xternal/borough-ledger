@@ -130,6 +130,31 @@
    "id": "hra_budget_2026-27",
    "file": "cabinet_pack_2026-02-09.pdf",
    "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
+  },
+  {
+   "id": "scot_ct_bands_2026-27",
+   "file": "scot_ct_by_band_2026-27.xlsx",
+   "sha256": "fa3f5ed1b3261293bb4603d0a3f5dff5d76ca65c10583af754c7701f7443b1ad"
+  },
+  {
+   "id": "scot_band_d_1996-2027",
+   "file": "scot_band_d_1996-97_to_2026-27.xlsx",
+   "sha256": "4e56c333178733c63d8729608740fbf7bf3b3d62ae58c3ad9ea297ad8188cf16"
+  },
+  {
+   "id": "pobe_2026",
+   "file": "pobe_2026_revenue.xlsx",
+   "sha256": "9161083b04d620564472d3259e5af80a2c753885785d7c3e1e231b28b08b0681"
+  },
+  {
+   "id": "scottish_water_2026-27",
+   "file": "scottish_water_unmetered_2026-27.pdf",
+   "sha256": "7aed972b810702223de0aa32a5ff4e18138bb98a57be0cc0cf86742b5da3c7e6"
+  },
+  {
+   "id": "scottish_water_2025-26",
+   "file": "scottish_water_unmetered_2025-26.pdf",
+   "sha256": "dd5da0496c45467040a2dbd593af7bdc6418607880486294b895b8404ed32b0c"
   }
  ],
  "manual": [
@@ -190,6 +215,18 @@
    "sha256": "e8c15d3230986a93a59bdcc8adff6827b9072467329bd3e5cf66f90db04a712b"
   },
   {
+   "file": "data/manual/scot_funding_groups.csv",
+   "sha256": "fc31d507fe8ea902b3305624c8162f5ae60b9fe4452b881dde8d05ab17e0e7e1"
+  },
+  {
+   "file": "data/manual/scot_service_groups.csv",
+   "sha256": "08721c250f3875c32172235868a7bc5ec8293889c50cc2f3ed238781bcc6453f"
+  },
+  {
+   "file": "data/manual/scottish_water.csv",
+   "sha256": "f72164f59f010cb9f25c65a90e9d3e7e5a9926344851f585764688d83aa47829"
+  },
+  {
    "file": "data/manual/service_groups.csv",
    "sha256": "ec0373bdea903f5c5b5b79edeade352b60a23472ee91580fa8ece754d798613f"
   },
@@ -201,7 +238,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "549a40ec74ad91802f17b791fec5bbb7c91929c69970b7cd4067059509e6c573"
+   "sha256": "9df220c34c0a0a014a650329be603bd5abb946e2abf1b649515ff244264f5c63"
   }
  ],
  "quality_counts": {

@@ -91,6 +91,27 @@
    "example_postcode": "W5 2HL"
   },
   {
+   "slug": "glasgow",
+   "council": "Glasgow City Council",
+   "short": "Glasgow",
+   "ons": "S12000049",
+   "nation": "scotland",
+   "scot_name": "Glasgow City",
+   "election_id": "local.glasgow-city.2022-05-05",
+   "voting": "stv",
+   "next_election": "2027-05-06",
+   "example_postcode": "G2 1DU",
+   "councillors_from": "coins",
+   "coins": "https://onlineservices.glasgow.gov.uk/councillorsandcommittees",
+   "others": {
+    "name": "Scottish Water (water and sewerage)",
+    "to": "Scottish Water, for water and sewerage",
+    "short": "the water and sewerage charges",
+    "with": "water and sewerage",
+    "source": "Scottish Water's leaflet"
+   }
+  },
+  {
    "slug": "hackney",
    "council": "London Borough of Hackney",
    "short": "Hackney",

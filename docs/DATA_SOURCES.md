@@ -133,3 +133,11 @@ The same returns, Democracy Club and ONS sources as Kensington and Chelsea; each
 
 Democracy Club's register of elections (`https://elections.democracyclub.org.uk/api/elections/`, CC BY-SA 4.0): every by-election to each council since 7 May 2026, saved with the ballots as `data/raw/boroughs/<slug>/byelections_<date>.json` and cited on each borough's councillors. The API's date filter is not relied on; dates are filtered in `etl/borough_people.py`.
 
+## In use: Scotland (9 Oct 2026)
+
+- Scottish Government, Council Tax datasets: Council Tax by band 2026-27, and Band D Council Tax rates by year 1996-97 to 2026-27 (`scot_ct_bands_2026-27`, `scot_band_d_1996-2027`).
+- Scottish Government, Local government 2025-26 provisional outturn and 2026-27 budget estimates, revenue workbook, revised 24 July 2026 (`pobe_2026`).
+- Scottish Water, unmetered household charges leaflets 2025/26 and 2026/27, table on page 5 (`scottish_water_2025-26`, `scottish_water_2026-27`). Read in a browser; the 2024/25 leaflet has no text.
+- Glasgow City Council's CoInS pages (`https://onlineservices.glasgow.gov.uk/councillorsandcommittees`): all members and each political group. Its main website shows a bot challenge, which we do not get round; these pages answer normally.
+- The law in `data/config/rules_scotland.json`: LGFA 1992 ss.74, 79 and 93, SSI 2016/368, SI 1992/1332 Schedule 1, LG(S)A 1973 s.95.
+

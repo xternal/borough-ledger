@@ -20,10 +20,19 @@ export const BoroughConfig = z.object({
       seats_per_ward: z.number().int().positive().optional(),
       /** "later" where no source a script may read lists the councillors yet (Leeds turns automated requests away):
        *  the page says why and links the council's own list, and the postcode finder opens the council's page. */
-      councillors_from: z.enum(["moderngov", "ballots", "later"]).optional(),
+      /** "coins": the council's own Northgate CoInS pages (Glasgow), which list each councillor's ward and party. */
+      councillors_from: z.enum(["moderngov", "ballots", "later", "coins"]).optional(),
+      coins: z.url().optional(),
+      /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
+      nation: z.enum(["england", "scotland"]).optional(),
+      /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */
+      scot_name: z.string().optional(),
+      /** Elected by single transferable vote (Scotland), with the next election's date. */
+      voting: z.literal("stv").optional(),
+      next_election: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
       councillors_later: z.object({ why: z.string(), url: z.url() }).optional(),
       /** Outside London: who the rest of the bill goes to, and the bodies it splits into (government Tables 8d to 8f). */
-      others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string() }).optional(),
+      others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string(), source: z.string().optional() }).optional(),
       precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),
       parish_names: z.string().optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */
@@ -35,7 +44,10 @@ export const BoroughConfig = z.object({
 });
 export type BoroughConfig = z.infer<typeof BoroughConfig>;
 
-export const BoroughStatement = CouncilYear.pick({ meta: true, bill: true, tax_base: true, history: true, funding: true, services: true });
+// Scotland's returns give no tax base in the same form, and a borough's page does not use it.
+export const BoroughStatement = CouncilYear.pick({ meta: true, bill: true, tax_base: true, history: true, funding: true, services: true }).extend({
+  tax_base: CouncilYear.shape.tax_base.optional(),
+});
 export type BoroughStatement = z.infer<typeof BoroughStatement>;
 
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
@@ -67,7 +79,9 @@ export const BoroughPeople = z.object({
       ons_code: z.string(),
       name: z.string(),
       councillor_ids: z.array(z.string()),
-      election: z.object({
+      /** Absent where the last election's counts are not published in a form we can read (Glasgow, 2022). */
+      election: z
+        .object({
         seats: z.number().int().positive(),
         /** Null where the declaration gave no turnout. */
         ballots: z.number().int().positive().nullable(),
@@ -78,7 +92,8 @@ export const BoroughPeople = z.object({
         candidates: z.array(Candidate),
         /** Where only some seats were up in May (elections by thirds): how many councillors the ward has. */
         seats_total: z.number().int().positive().optional(),
-      }),
+      })
+        .optional(),
     }),
   ),
   councillors: z.array(
@@ -92,6 +107,11 @@ export function checkBoroughPeople(p: BoroughPeople): string[] {
   const problems: string[] = [];
   const byId = new Map(p.councillors.map((c) => [c.id, c]));
   for (const w of p.wards) {
+    if (!w.election) {
+      if (!w.councillor_ids.length) problems.push(`${w.id}: no councillors and no result`);
+      for (const id of w.councillor_ids) if (byId.get(id)?.ward_id !== w.id) problems.push(`${w.id}: a councillor is listed in another ward`);
+      continue;
+    }
     const won = w.election.candidates.filter((c) => c.elected);
     if (won.length !== w.election.seats || w.councillor_ids.length > (w.election.seats_total ?? w.election.seats)) problems.push(`${w.id}: seats, winners and councillors differ`);
     for (const c of won) if (!c.left && byId.get(c.councillor_id ?? "")?.ward_id !== w.id) problems.push(`${w.id}: a winner is not one of the ward's councillors`);

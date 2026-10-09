@@ -27,7 +27,9 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
   const changed = bill.glaSplit.filter((g) => g.f.value !== g.prev.value);
   const glaChange = changed.length ? derive(changed.reduce((a, g) => a + g.f.value - g.prev.value, 0), changed[0]!.f, ...changed.flatMap((g) => [g.f, g.prev])) : null;
 
-  // Council tax pays for what ring-fenced grants do not, so split it by spending after those grants.
+  // Council tax pays for what ring-fenced grants do not, so split it by spending after those grants. Scotland's return
+  // gives each service after its grants already, so there is nothing to take off.
+  const ringFenced = services.some((s) => s.general && Math.abs(s.general.value - s.f.value) > 0.0005);
   const ranked = services.filter((s) => s.general && s.general.value > 0).sort((a, z) => z.general!.value - a.general!.value);
   // A service whose share rounds to nothing (in some boroughs, public health after its grant) is left out of the list.
   const shares = ranked
@@ -63,7 +65,12 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
               <Num f={total} fmt="gbp2" />
             </div>
             <div className="muted">
-              <Num f={perInstalment(lo)} fmt="gbp2" /> a month over {lo} instalments, or <Num f={perInstalment(hi)} fmt="gbp2" /> over {hi}
+              <Num f={perInstalment(lo)} fmt="gbp2" /> a month over {lo} instalments
+              {hi !== lo ? (
+                <>
+                  , or <Num f={perInstalment(hi)} fmt="gbp2" /> over {hi}
+                </>
+              ) : null}
             </div>
           </div>
           <label className="check">
@@ -164,8 +171,11 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
             </p>
           ) : null}
           <p className="small muted" style={{ marginTop: 14 }}>
-            Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself, after schools and public health, which
-            have their own ring-fenced grants. Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants
+            Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself,{" "}
+            {ringFenced
+              ? "after schools and public health, which have their own ring-fenced grants."
+              : "after the grants tied to particular services, which the budget return already takes off each one."}{" "}
+            Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants
             and business rates pay the rest.
           </p>
           <div className="qrow">

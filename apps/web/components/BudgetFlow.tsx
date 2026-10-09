@@ -164,8 +164,11 @@ export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" |
       <div className="sec-head">
         <h2 id="budget-h">The council&rsquo;s budget</h2>
         <p>
-          What the council spends on day-to-day services after fees and charges, and where the money comes from, including grants that can only be
-          spent on schools or public health. It must balance by law.
+          What the council spends on day-to-day services after fees and charges, and where the money comes from
+          {m.funding.some((f) => f.ringFencedTo)
+            ? ", including grants that can only be spent on schools or public health"
+            : "; grants tied to a particular service are already taken off it"}
+          . It must balance by law.
         </p>
       </div>
       <div className="flow-head">

@@ -329,7 +329,7 @@ export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "servic
     glaNote: b.gla_note,
     glaSplit: (b.gla_split ?? []).map((g) => ({ id: g.id, label: g.label, phrase: g.phrase, officialTerm: g.official_term, f: of(g, g.band_d), prev: of(g, g.band_d_prev) })),
     others: b.others
-      ? { name: b.others.name, to: b.others.to, short: b.others.short, with: b.others.with, quality: `${b.others.name} by body (government council tax tables)`, as: "" }
+      ? { name: b.others.name, to: b.others.to, short: b.others.short, with: b.others.with, quality: `${b.others.name} by body (${b.others.source ?? "government council tax tables"})`, as: "" }
       : { name: "Mayor of London (GLA)", to: "the Mayor of London", short: "the Mayor’s share", with: "the Mayor of London", quality: "Mayor's share by body (MD3472)", as: "Mayor of London: " },
     parish: b.parish ? { count: b.parish.count, names: b.parish.names ?? null, f: of(b.parish, b.parish.band_d) } : null,
   };
