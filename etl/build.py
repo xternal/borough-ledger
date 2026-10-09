@@ -287,6 +287,12 @@ def build() -> Dict[str, Any]:
         "pending_toggles": [{"id": t["id"], "label": t["label"], "todo": t.get("todo", "")}
                             for t in manual_toggles(ny["toggles"]) if t["quality"] == "test"],
         "forecast": forecast,
+        # A later forecast from the council (October's Cabinet), shown beside the one the tool uses: approx until a person
+        # checks the table and whether it is on the same basis (council tax rise and savings already assumed).
+        **({"revised": {
+            "gap_m": float(mny["revised_gap_m"]["value"]), "last_year": last, "last_gap_m": float(mny[f"revised_gap_{last}_m"]["value"]),
+            "quality": "approx", **cite("revised_gap_m"),
+        }} if "revised_gap_m" in mny and (last := next((k[len("revised_gap_"):-2] for k in sorted(mny, reverse=True) if k.startswith("revised_gap_2")), None)) else {}),
     }
 
     vintage = max(s["published_on"] for s in reg.values() if "published_on" in s)

@@ -102,6 +102,11 @@
    "sha256": "2441bc16a320a9c6b7e0dce11d6890c23ede25bd7f1830db517f61b785d630ce"
   },
   {
+   "id": "cabinet_mtfs_2026-10-12",
+   "file": "cabinet_mtfs_2026-10-12.pdf",
+   "sha256": "12e9db68e66651bd51e24ee74dc41d35f3012d1ec66df8facaeff6a561f07804"
+  },
+  {
    "id": "rs_2024-25",
    "file": "RS_LA_Data_2024-25_data_by_LA.ods",
    "sha256": "cfbf78c41ced0c8a03165edcbf024199180b782113c6a7acb7b2e74d1d8c290c"
@@ -162,7 +167,7 @@
   },
   {
    "file": "data/manual/next_year_2027-28.csv",
-   "sha256": "3bb54aca1806c46c570b1ae7148884a4374df894964eb22079e4ec496a88c32d"
+   "sha256": "4d2dd4fab289f33665bfc5307a8509019bd9f6548cecc05c9399e2980dfd7d43"
   },
   {
    "file": "data/manual/payment_groups.csv",
@@ -196,11 +201,11 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "c05d8a0402ded50fdd0654a4d9837520b3f4fa6cb2ad0023978bfe1041409a2b"
+   "sha256": "549a40ec74ad91802f17b791fec5bbb7c91929c69970b7cd4067059509e6c573"
   }
  ],
  "quality_counts": {
-  "approx": 7,
+  "approx": 8,
   "modelled": 3,
   "sourced": 68
  }

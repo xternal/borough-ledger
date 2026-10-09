@@ -486,6 +486,14 @@
   .sec-head p {
     color: var(--muted);
   }
+  /* news that changes what the section says, such as a newer forecast from the council */
+  .sec-head p.callout {
+    color: var(--ink);
+    background: var(--gap-soft);
+    border-left: 3px solid var(--gap);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
 
   /* quality marks: a coloured dot and a word */
   .q {

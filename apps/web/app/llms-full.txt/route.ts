@@ -43,7 +43,7 @@ ${STATUS_ORDER.map((s) => `- ${STATUS_LABEL[s]}: ${STATUS_MEANS[s]}`).join("\n")
 - Council tax for a Band D home: ${fig(m.bill.total, "gbp2")}, of which the council's share is ${fig(m.bill.council, "gbp2")} and the Mayor of London's ${fig(m.bill.gla, "gbp2")}.
 ${m.bill.glaSplit.length ? `- The Mayor of London's share at Band D, by body: ${m.bill.glaSplit.map((g) => `${g.phrase} ${fig(g.f, "gbp2")}`).join(", ")}.\n` : ""}- Day-to-day budget (net, including schools): ${fig(m.netBudget, "m1")}. The council funds ${fig(m.generalBudget, "m1")} of it itself, and council tax covers ${fig(m.ctShareGeneral, "share0")} of that.
 - This year's gap between costs and funding, closed before the budget was set: ${fig(m.waterfall.gap, "m1")}; savings this year: ${fig(m.savingsThisYear, "m1")}.
-- Next year's gap (${m.place.nextYearLabel}): ${fig(m.balance.gap, "m1")}. General reserves: ${fig(m.balance.reservesGeneral, "m1")}, against a safe minimum of ${fig(m.balance.reservesMin, "m1")}.
+- Next year's gap (${m.place.nextYearLabel}): ${fig(m.balance.gap, "m1")} in February's forecast${m.balance.revised ? `; ${fig(m.balance.revised.gap, "m1")} before savings in the council's October report to Cabinet, rising to ${fig(m.balance.revised.last, "m1")} by ${m.balance.revised.lastLabel}` : ""}. General reserves: ${fig(m.balance.reservesGeneral, "m1")}, against a safe minimum of ${fig(m.balance.reservesMin, "m1")}.
 - Spending by service:
 ${m.services.map((s) => `  - ${s.label}: ${fig(s.f, "m1")}`).join("\n")}
 

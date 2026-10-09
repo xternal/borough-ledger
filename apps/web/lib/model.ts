@@ -157,6 +157,8 @@ export interface PageModel {
     referendumNote: { text: string; f: Figure } | null;
     /** The council tax rise the gap forecast already assumes, if any. */
     ctAssumed: Figure | null;
+    /** The council's later forecast, shown beside the one the tool uses until its basis is checked. */
+    revised: { gap: Figure; lastLabel: string; last: Figure; source: string } | null;
     /** Three years from next year: the council's forecast gap where it has one, null where it does not forecast. */
     strip: { year: string; label: string; gap: Figure | null }[];
     /** Quality and sources shared by every number the tool computes. */
@@ -455,6 +457,9 @@ export function buildModel(): PageModel {
         const ct = ny.levers.find((l) => l.id === "ct_rise");
         return ct?.assumed !== undefined ? of(ct, ct.assumed) : null;
       })(),
+      revised: ny.revised
+        ? { gap: of(ny.revised, ny.revised.gap_m), lastLabel: displayYear(ny.revised.last_year), last: of(ny.revised, ny.revised.last_gap_m), source: ny.revised.source_id }
+        : null,
       computed,
       coef,
     },
