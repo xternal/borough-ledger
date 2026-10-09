@@ -195,7 +195,16 @@ export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" |
             {below.map((l, i) => (
               <span key={l.id}>
                 {i ? ", " : ""}
-                {l.label} (<Num f={l.f} fmt="m1" />)
+                {/* A draw on reserves below zero is money put into them (Edinburgh's surplus, Leeds): said that way round. */}
+                {/^Drawn from /.test(l.label) ? (
+                  <>
+                    {l.label.replace(/^Drawn from /, "Put into ")} (<Num f={derive(-l.f.value, l.f)} fmt="m1" />)
+                  </>
+                ) : (
+                  <>
+                    {l.label} (<Num f={l.f} fmt="m1" />)
+                  </>
+                )}
               </span>
             ))}
             . They are in the tables.

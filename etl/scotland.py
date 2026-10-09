@@ -101,13 +101,13 @@ def pobe(reg: Dict[str, Any], name: str) -> Callable[[int, str, str], float]:
     return value
 
 
-LABELS = {13: "Education", 14: "Culture and Related", 15: "Social Work", 16: "Roads & Transport", 18: "Environmental Services",
+LABELS = {13: "Education", 14: "Culture and Related", 15: "Social Work", 16: "Roads & Transport", 17: "Road Bridges", 18: "Environmental Services", 22: "Trading Services",
           19: "Building, Planning", 20: "Central Services", 21: "Non-HRA Housing", 23: "Total Net Revenue", 33: "Total Other Income",
           38: "Total General Revenue Grant", 41: "Total NDRI", 42: "Council Tax", 43: "Discretionary Housing", 44: "NDRI - TIF",
           45: "NDRI - BRIS", 46: "Visitor Levy", 47: "Government Grant", 48: "Glasgow City Region", 49: "Capital Grants", 50: "Other",
           51: "Total Taxation", 57: "Surplus (-) or Deficit", 60: "General Fund", 62: "Use of Capital Resources", 63: "Transfers to (+) Capital",
-          66: "Transfers to (+) / from (-) Other", 67: "General Fund", 176: "Cemetery", 178: "Flood Defence", 179: "Environmental Health",
-          180: "Trading Standards", 185: "Total Waste", 186: "Total Environmental"}
+          65: "Transfers to (+) / from (-) Housing Revenue", 66: "Transfers to (+) / from (-) Other", 67: "General Fund", 176: "Cemetery", 178: "Flood Defence", 179: "Environmental Health",
+          180: "Trading Standards", 185: "Total Waste", 186: "Total Environmental", 177: "Coast Protection"}
 
 
 def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
@@ -143,7 +143,7 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
     }
 
     # ---------------------------------------------------------------- spending by service, after each service's own grants
-    env = sum(k(r) for r in (176, 178, 179, 180, 185))
+    env = sum(k(r) for r in (176, 177, 178, 179, 180, 185))
     check(close(env, k(18), 0.5) and close(k(186), k(18), 0.5), f"{name}: environmental services' parts {env} ≠ total {k(18)}")
     services: List[Dict[str, Any]] = []
     for g in sorted(read_csv("scot_service_groups.csv"), key=lambda g: int(g["order"])):
@@ -162,7 +162,7 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
     check(close(taxes, k(51), 0.5), f"{name}: taxation and grant lines {taxes} ≠ total {k(51)}")
     check(close(k(23) + k(33) + k(51), k(57), 0.5), f"{name}: spending less funding ≠ the deficit in row 57")
     gf_draw = k(67) - k(60)  # balances are credits (negative): a smaller balance at the end is money drawn
-    check(close(-k(62) - k(63) - k(66) + gf_draw, k(57), 0.5), f"{name}: reserves, capital fund and capital money do not cover the deficit")
+    check(close(-k(62) - k(63) - k(65) - k(66) + gf_draw, k(57), 0.5), f"{name}: reserves, capital fund, capital money and council housing transfers do not cover the deficit")
     funding: List[Dict[str, Any]] = []
     for g in sorted(read_csv("scot_funding_groups.csv"), key=lambda g: int(g["order"])):
         parts_k = [(gf_draw if r == "gf" else -k(int(r))) for r in g["pobe_rows"].split(";")]
@@ -177,7 +177,8 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
         if g["one_off"] == "true":
             line["gap"] = True
         if g["id"] == "council_reserves":
-            line["detail"] = [{"label": "General Fund balance", "m": m(gf_draw)}, {"label": "Other reserves", "m": m(-k(66))}]
+            line["detail"] = [d for d in ({"label": "General Fund balance", "m": m(gf_draw)}, {"label": "Other reserves", "m": m(-k(66))},
+                                          {"label": "Transfer to council housing", "m": m(-k(65))}) if abs(d["m"]) >= 0.0005]
         funding.append(line)
     check(close(sum(f["m"] for f in funding), sum(s["m"] for s in services), 0.005), f"{name}: funding ≠ spending")
 

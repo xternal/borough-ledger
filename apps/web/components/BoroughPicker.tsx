@@ -4,14 +4,16 @@ import { useEffect, useId, useRef } from "react";
 import type { PlaceGroup } from "@/lib/boroughList";
 
 /** In this order, except that the group of the place you are on comes first. */
-const GROUPS: PlaceGroup[] = ["London boroughs", "Cities"];
+const GROUPS: PlaceGroup[] = ["London boroughs", "Cities", "Counties and regions"];
+const LABEL: Record<PlaceGroup, string> = { "London boroughs": "Borough", Cities: "City", "Counties and regions": "Area" };
 
 /** Which place you are looking at, and the others on the site, London boroughs and cities under their own headings. A
  *  plain disclosure of links, so it works without JavaScript; with it, a click outside or Escape closes it. */
 export function BoroughPicker({ current, boroughs }: { current: string; boroughs: { short: string; href: string; group: PlaceGroup }[] }) {
   const ref = useRef<HTMLDetailsElement>(null);
   const id = useId();
-  const kind = boroughs.find((b) => b.short === current)?.group === "Cities" ? "City" : "Borough";
+  const group = boroughs.find((b) => b.short === current)?.group ?? "London boroughs";
+  const kind = LABEL[group];
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
@@ -40,7 +42,7 @@ export function BoroughPicker({ current, boroughs }: { current: string; boroughs
         </svg>
       </summary>
       <div className="picker-panel">
-        {(kind === "City" ? [...GROUPS].reverse() : GROUPS).map((g, i) => {
+        {[group, ...GROUPS.filter((g) => g !== group)].map((g, i) => {
           const items = boroughs.filter((b) => b.group === g);
           if (!items.length) return null;
           return (

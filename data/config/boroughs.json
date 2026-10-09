@@ -101,6 +101,26 @@
    "example_postcode": "W5 2HL"
   },
   {
+   "slug": "edinburgh",
+   "council": "City of Edinburgh Council",
+   "short": "Edinburgh",
+   "ons": "S12000036",
+   "nation": "scotland",
+   "scot_name": "City of Edinburgh",
+   "moderngov": "https://democracy.edinburgh.gov.uk",
+   "election_id": "local.edinburgh.2022-05-05",
+   "voting": "stv",
+   "next_election": "2027-05-06",
+   "example_postcode": "EH1 1YJ",
+   "others": {
+    "name": "Scottish Water (water and sewerage)",
+    "to": "Scottish Water, for water and sewerage",
+    "short": "the water and sewerage charges",
+    "with": "water and sewerage",
+    "source": "Scottish Water's leaflet"
+   }
+  },
+  {
    "slug": "glasgow",
    "council": "Glasgow City Council",
    "short": "Glasgow",
@@ -157,6 +177,28 @@
    "moderngov": "https://democracy.havering.gov.uk",
    "election_id": "local.havering.2026-05-07",
    "example_postcode": "RM1 3BD"
+  },
+  {
+   "slug": "highland",
+   "council": "The Highland Council",
+   "short": "Highland",
+   "ons": "S12000017",
+   "nation": "scotland",
+   "scot_name": "Highland",
+   "election_id": "local.highland.2022-05-05",
+   "voting": "stv",
+   "next_election": "2027-05-06",
+   "example_postcode": "IV3 5NX",
+   "councillors_from": "site",
+   "site": "https://www.highland.gov.uk/councillors",
+   "others": {
+    "name": "Scottish Water (water and sewerage)",
+    "to": "Scottish Water, for water and sewerage",
+    "short": "the water and sewerage charges",
+    "with": "water and sewerage",
+    "source": "Scottish Water's leaflet"
+   },
+   "kind": "county"
   },
   {
    "slug": "hounslow",
@@ -309,6 +351,45 @@
    "election_id": "local.newham.2026-05-07",
    "example_postcode": "E16 2QU",
    "mayor_election_id": "mayor.newham.2026-05-07"
+  },
+  {
+   "slug": "north-yorkshire",
+   "council": "North Yorkshire Council",
+   "short": "North Yorkshire",
+   "ons": "E06000065",
+   "moderngov": "https://edemocracy.northyorks.gov.uk",
+   "election_id": "local.north-yorkshire.2022-05-05",
+   "results": false,
+   "next_election": "2027-05-06",
+   "example_postcode": "DL7 8AD",
+   "others": {
+    "name": "Mayor of York and North Yorkshire",
+    "to": "the Mayor of York and North Yorkshire, for police, fire and rescue",
+    "short": "the Mayor's share",
+    "with": "the Mayor of York and North Yorkshire"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "York and North Yorkshire Combined Authority, police functions",
+     "table": "Table_8d",
+     "authority": "York and North Yorkshire CA - Police Functions"
+    },
+    {
+     "id": "mayor_rest",
+     "label": "The rest of the Mayor's share",
+     "phrase": "the rest of the Mayor's share",
+     "official_term": "York and North Yorkshire Combined Authority, less its police functions (it also runs fire and rescue)",
+     "table": "Table_8f",
+     "authority": "York and North Yorkshire",
+     "minus": [
+      "police"
+     ]
+    }
+   ],
+   "kind": "county"
   },
   {
    "slug": "redbridge",

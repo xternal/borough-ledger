@@ -64,10 +64,14 @@ def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Di
     ctr_src: Dict[str, str] = {}
     bands: Dict[str, Dict[str, float]] = {}
     bands_src: Dict[str, str] = {}
+    revised_away: Dict[str, str] = {}
     for s in reg.values():
         ex = s.get("extract", {})
         if ex.get("kind") == "ctr_data":
             for y, d in ctr_data(s["file"], ex["sheet"], ex["years"], ons).items():
+                if d.pop("inconsistent", None):
+                    revised_away[y] = s["id"]  # a later release's revision of y that does not add up: not used
+                    continue
                 if y in ctr:
                     # The same year appears in two releases; they must agree (or the later one is a revision).
                     for k in ("band_d_council", "setting_base"):
@@ -79,6 +83,14 @@ def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Di
                 continue  # this year's band table was taken from its London sheet only; history starts a year later elsewhere
             bands[ex["year"]] = area_bands(s["file"], ex["sheet"], ons, ex.get("first_band_col", -1))
             bands_src[ex["year"]] = s["id"]
+    for y, sid in sorted(revised_away.items()):
+        if y in ctr:
+            print(f"note: council tax {y}: {sid}'s revision does not add up; {ctr_src[y]}'s own figures are used")
+            continue
+        # No release where the year adds up. Before the council's first sound year (North Yorkshire, formed in April
+        # 2023, has only its predecessors' totals for 2022-23) the history simply starts later; a gap stops the build.
+        check(bool(ctr) and y < min(ctr), f"council tax {y}: {sid}'s figures do not add up and no other release has the year")
+        print(f"note: council tax {y}: {sid}'s figures do not add up and the council has no release of its own; history starts in {min(ctr)}")
     years = sorted(set(ctr) & set(bands))
     check(YEAR in years and PREV in years, f"council tax data missing for {YEAR} or {PREV}")
     now, prev = ctr[YEAR], ctr[PREV]
@@ -97,6 +109,12 @@ def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Di
             groups_y, _ = ra_services(row, strict_lines=False)
         except CheckFailed as e:
             raise CheckFailed(f"{s['id']}: {e}")
+        except ValueError as e:
+            # "..." where the council did not yet exist (North Yorkshire before April 2023): skipped, before any year with
+            # figures only; "..." in a later year still stops the build.
+            check("'...'" in str(e) and not budget_history, f"{s['id']}: {e}")
+            print(f"note: {s['id']}: no figures for this council that year (\"...\"); budget history starts later")
+            continue
         groups_y.pop("housing_benefit", None)
         budget_history.append({
             "year": ex["year"], "revenue_expenditure_m": m(row.by_line("900")), "council_tax_requirement_m": m(row.by_line("990")),

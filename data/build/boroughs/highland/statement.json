@@ -1,9 +1,9 @@
 {
  "meta": {
-  "council": "Glasgow City Council",
-  "council_short": "Glasgow",
-  "council_code": "S12000049",
-  "slug": "glasgow",
+  "council": "The Highland Council",
+  "council_short": "Highland",
+  "council_code": "S12000017",
+  "slug": "highland",
   "year": "2026-27",
   "note": "Built by etl/scotland.py from the Scottish Government's returns and Scottish Water's charges, with the same checks as the English boroughs' where Scotland's returns allow.",
   "vintage": "2026-07-24",
@@ -59,21 +59,21 @@
   ]
  },
  "bill": {
-  "band_d_total": 2358.32,
-  "band_d_council": 1706.0,
+  "band_d_total": 2286.31,
+  "band_d_council": 1633.99,
   "band_d_gla": 652.32,
-  "band_d_total_prev": 2211.39,
-  "band_d_council_prev": 1611.0,
-  "council_rise_pct": 5.9,
+  "band_d_total_prev": 2127.48,
+  "band_d_council_prev": 1527.09,
+  "council_rise_pct": 7.0,
   "published_bands": {
-   "A": 1572.21,
-   "B": 1834.25,
-   "C": 2096.28,
-   "D": 2358.32,
-   "E": 3038.77,
-   "F": 3714.49,
-   "G": 4428.12,
-   "H": 5484.34
+   "A": 1524.21,
+   "B": 1778.24,
+   "C": 2032.28,
+   "D": 2286.31,
+   "E": 2944.16,
+   "F": 3597.47,
+   "G": 4287.1,
+   "H": 5307.92
   },
   "gla_note": "Scottish Water: water and sewerage",
   "gla_split": [
@@ -115,10 +115,10 @@
   "council_tax": [
    {
     "year": "2022-23",
-    "band_d_council": 1428.0,
+    "band_d_council": 1372.29,
     "band_d_area": null,
     "band_d_gla": null,
-    "council_tax_requirement_m": 260.233,
+    "council_tax_requirement_m": 136.667,
     "tax_base": null,
     "collection_rate": null,
     "source_ids": [
@@ -128,10 +128,10 @@
    },
    {
     "year": "2023-24",
-    "band_d_council": 1499.0,
+    "band_d_council": 1427.18,
     "band_d_area": null,
     "band_d_gla": null,
-    "council_tax_requirement_m": 274.105,
+    "council_tax_requirement_m": 144.159,
     "tax_base": null,
     "collection_rate": null,
     "source_ids": [
@@ -141,10 +141,10 @@
    },
    {
     "year": "2024-25",
-    "band_d_council": 1499.0,
+    "band_d_council": 1427.19,
     "band_d_area": null,
     "band_d_gla": null,
-    "council_tax_requirement_m": 276.965,
+    "council_tax_requirement_m": 153.234,
     "tax_base": null,
     "collection_rate": null,
     "source_ids": [
@@ -154,10 +154,10 @@
    },
    {
     "year": "2025-26",
-    "band_d_council": 1611.0,
-    "band_d_area": 2211.39,
+    "band_d_council": 1527.09,
+    "band_d_area": 2127.48,
     "band_d_gla": 600.39,
-    "council_tax_requirement_m": 296.021,
+    "council_tax_requirement_m": 165.717,
     "tax_base": null,
     "collection_rate": null,
     "source_ids": [
@@ -168,10 +168,10 @@
    },
    {
     "year": "2026-27",
-    "band_d_council": 1706.0,
-    "band_d_area": 2358.32,
+    "band_d_council": 1633.99,
+    "band_d_area": 2286.31,
     "band_d_gla": 652.32,
-    "council_tax_requirement_m": 314.441,
+    "council_tax_requirement_m": 183.323,
     "tax_base": null,
     "collection_rate": null,
     "source_ids": [
@@ -192,10 +192,10 @@
    "official_term": "Council Tax (net of Council Tax Reduction)",
    "desc": "What residents pay through the council's part of the bill, after Council Tax Reduction",
    "kind": "council_tax",
-   "m": 314.441,
+   "m": 183.323,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 42."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 42."
   },
   {
    "id": "grg",
@@ -203,10 +203,10 @@
    "official_term": "General Revenue Grant (GRG)",
    "desc": "The council's main general grant from the Scottish Government",
    "kind": "grant",
-   "m": 1340.488,
+   "m": 461.023,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 38."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 38."
   },
   {
    "id": "business_rates",
@@ -214,22 +214,21 @@
    "official_term": "Non-domestic rates distributable amount",
    "desc": "Business rates are pooled across Scotland and shared out by the Scottish Government, so this is not what local businesses pay",
    "kind": "business_rates",
-   "m": 443.947,
+   "m": 196.44,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 41."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 41."
   },
   {
-   "id": "capital_resources",
-   "label": "Capital money used for day-to-day costs",
-   "official_term": "Use of capital resources to fund revenue costs as permitted by statute",
-   "desc": "One-off: money for building work used for day-to-day costs this year",
+   "id": "other_income",
+   "label": "Other income",
+   "official_term": "Other taxation and non-specific grant income",
+   "desc": "Discretionary housing payment funding, tax increment financing, visitor levy and other income",
    "kind": "other",
-   "m": 8.636,
+   "m": 1.7,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 62.",
-   "gap": true
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 43, 44, 45, 46, 47, 48, 49, 50."
   },
   {
    "id": "capital_fund",
@@ -237,10 +236,10 @@
    "official_term": "Transfers from the Capital Fund",
    "desc": "One-off: money set aside for building work used for day-to-day costs this year",
    "kind": "reserves",
-   "m": 61.704,
+   "m": 9.746,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 63.",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 63.",
    "gap": true
   },
   {
@@ -249,19 +248,23 @@
    "official_term": "General Fund balance, other reserves and transfers to council housing",
    "desc": "One-off: once spent, the gap returns the year after",
    "kind": "reserves",
-   "m": 66.654,
+   "m": 7.19,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 60 and 67 (General Fund balance at the start less at the end), 65, 66.",
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 60 and 67 (General Fund balance at the start less at the end), 65, 66.",
    "gap": true,
    "detail": [
     {
      "label": "General Fund balance",
-     "m": 64.844
+     "m": 11.201
     },
     {
      "label": "Other reserves",
-     "m": 1.81
+     "m": -2.011
+    },
+    {
+     "label": "Transfer to council housing",
+     "m": -2.0
     }
    ]
   }
@@ -272,99 +275,99 @@
    "label": "Schools and education",
    "official_term": "Education",
    "desc": "Nursery, primary, secondary and special schools, school meals and community learning",
-   "m": 858.047,
-   "general_fund_m": 858.047,
+   "m": 399.611,
+   "general_fund_m": 399.611,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 13 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 13 (£000, after the service's own grants)."
   },
   {
    "id": "social_work",
    "label": "Social work and care",
    "official_term": "Social Work",
    "desc": "Care for older and disabled adults and children's social work, much of it paid to the NHS or to a joint board that runs care together with it",
-   "m": 653.432,
-   "general_fund_m": 653.432,
+   "m": 232.392,
+   "general_fund_m": 232.392,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 15 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 15 (£000, after the service's own grants)."
   },
   {
    "id": "housing",
    "label": "Housing and homelessness",
    "official_term": "Non-HRA Housing",
    "desc": "Homelessness and temporary accommodation, housing advice and other housing outside council rents",
-   "m": 111.106,
-   "general_fund_m": 111.106,
+   "m": 22.125,
+   "general_fund_m": 22.125,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 21 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 21 (£000, after the service's own grants)."
   },
   {
    "id": "running",
    "label": "Running the council",
    "official_term": "Central Services; Trading Services",
    "desc": "Finance, IT, legal, collecting council tax and other central costs, less any surplus from the council's trading services",
-   "m": 135.748,
-   "general_fund_m": 135.748,
+   "m": 7.23,
+   "general_fund_m": 7.23,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 20, 22 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 20, 22 (£000, after the service's own grants)."
   },
   {
    "id": "safety_regulation",
    "label": "Community safety and regulation",
    "official_term": "Environmental Services (part)",
    "desc": "Environmental health, trading standards, flood defence and coast protection, cemeteries and crematoria",
-   "m": 9.835,
-   "general_fund_m": 9.835,
+   "m": 7.982,
+   "general_fund_m": 7.982,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 176, 177, 178, 179, 180 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 176, 177, 178, 179, 180 (£000, after the service's own grants)."
   },
   {
    "id": "streets",
    "label": "Streets, waste and transport",
    "official_term": "Roads & Transport; Road Bridges; Environmental Services (waste)",
    "desc": "Bins, recycling and waste disposal, roads, bridges, street lights and support for public transport, after parking income",
-   "m": 124.788,
-   "general_fund_m": 124.788,
+   "m": 73.949,
+   "general_fund_m": 73.949,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, rows 16, 17, 185 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, rows 16, 17, 185 (£000, after the service's own grants)."
   },
   {
    "id": "planning",
    "label": "Planning and the local economy",
    "official_term": "Building, Planning & Development",
    "desc": "Planning, building standards and economic development",
-   "m": 56.525,
-   "general_fund_m": 56.525,
+   "m": 2.684,
+   "general_fund_m": 2.684,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 19 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 19 (£000, after the service's own grants)."
   },
   {
    "id": "debt_levies",
    "label": "Debt costs and levies",
    "official_term": "Financing, investment and other operating income and expenditure",
    "desc": "Interest and repayment of borrowing and PPP contracts, and building work paid for from the budget, less interest earned",
-   "m": 170.916,
-   "general_fund_m": 170.916,
+   "m": 91.71,
+   "general_fund_m": 91.71,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 33 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 33 (£000, after the service's own grants)."
   },
   {
    "id": "parks_culture",
    "label": "Parks, libraries and leisure",
    "official_term": "Culture and Related Services",
    "desc": "Parks and open spaces, libraries, museums, sport and culture",
-   "m": 115.473,
-   "general_fund_m": 115.473,
+   "m": 21.739,
+   "general_fund_m": 21.739,
    "quality": "sourced",
    "source_id": "pobe_2026",
-   "method_note": "POBE 2026 revenue workbook, sheet 'Glasgow City', 2026-27 budget estimate, row 14 (£000, after the service's own grants)."
+   "method_note": "POBE 2026 revenue workbook, sheet 'Highland', 2026-27 budget estimate, row 14 (£000, after the service's own grants)."
   }
  ]
 }

@@ -66,9 +66,18 @@ def ctr_data(file: str, sheet: str, years: List[str], ons: str) -> Dict[str, Dic
         # Sutton Coldfield, Westminster's Queen's Park); Hammersmith & Fulham has none.
         d["ctr"] -= d["parish"]
         # The return's own identity: tax base for setting = tax base × collection rate + payments in lieu; CTR = setting base × Band D.
-        check(close(d["tax_base"] * d["collection_rate"] + d["in_lieu"], d["setting_base"], 2.0), f"{file} {y}: tax base × collection rate + payments in lieu ≠ setting base")
-        # Band D is published to the penny, so the product can be out by half a penny a home: up to £1,250 in Leeds.
-        check(close(d["setting_base"] * d["band_d_council"], d["ctr"], max(1000.0, d["setting_base"] * 0.005)), f"{file} {y}: setting base × Band D ≠ council tax requirement")
+        # The collection rate is published to four places (98.49%), so the product can be out by half the last place on the
+        # whole base: up to 13 Band D equivalents in North Yorkshire.
+        ok = (close(d["tax_base"] * d["collection_rate"] + d["in_lieu"], d["setting_base"], max(2.0, d["tax_base"] * 0.00005)),
+              # Band D is published to the penny, so the product can be out by half a penny a home: up to £1,250 in Leeds.
+              close(d["setting_base"] * d["band_d_council"], d["ctr"], max(1000.0, d["setting_base"] * 0.005)))
+        if y == years[0] and not all(ok):
+            # A later release's figures for the year before that no longer add up (North Yorkshire's first year, 2023-24,
+            # revised in the 2024-25 release): marked, and used only if no release for that year itself adds up.
+            d["inconsistent"] = 1.0
+            continue
+        check(ok[0], f"{file} {y}: tax base × collection rate + payments in lieu ≠ setting base")
+        check(ok[1], f"{file} {y}: setting base × Band D ≠ council tax requirement")
     return out
 
 
