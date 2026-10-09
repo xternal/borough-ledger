@@ -62,7 +62,8 @@ class BoroughsTest(unittest.TestCase):
     def test_parties_are_recognised_however_they_are_written(self) -> None:
         for name, pid in [("Labour and Cooperative Party", "labour"), ("Labour And Co Op Party", "labour"), ("Local Conservatives", "conservative"),
                           ("Conservative and Unionist Party", "conservative"), ("Liberal Democrat", "liberal-democrats"), ("Green Party", "green"),
-                          ("Reform UK", "reform-uk"), ("Chislehurst Matters", "chislehurst-matters")]:
+                          ("Reform UK", "reform-uk"), ("Chislehurst Matters", "chislehurst-matters"),
+                          ("Lewisham Green Party Group", "green"), ("Independent Member", "independent"), ("Aspire", "aspire")]:
             self.assertEqual(BP.party_id(name), pid, name)
 
     def test_honours_and_degrees_after_a_name_do_not_hide_the_surname(self) -> None:
@@ -73,6 +74,32 @@ class BoroughsTest(unittest.TestCase):
     def test_a_two_word_surname_matches(self) -> None:
         self.assertTrue(BP.ends_with_surname("Natacha Tannous Ritchie", "TANNOUS RITCHIE"))
         self.assertFalse(BP.ends_with_surname("Natacha Ritchie", "TANNOUS"))
+
+    def test_a_ward_is_named_without_the_word_ward(self) -> None:
+        self.assertEqual(BP.ward_name("Alexandra Ward "), "Alexandra")
+        self.assertEqual(BP.ward_name("Wardour"), "Wardour")
+        self.assertEqual(BP.ward_name("Ward"), "Ward")
+
+    def test_a_may_winner_leaves_only_where_the_ward_held_a_by_election(self) -> None:
+        # Every winner shown as no longer on the council's list is in a ward that held a by-election since May; Croydon's
+        # New Addington North, which held none, pairs its winner with the councillor listed under another name.
+        for b in BP.boroughs():
+            path = BP.OUT / b["slug"] / "people.json"
+            if b.get("councillors_from") == "later" or not path.exists():
+                continue
+            p = json.loads(path.read_text())
+            by = [s for s in p["sources"] if "by-elections" in s["title"]]
+            self.assertEqual(len(by), 1, f"{b['slug']}: the by-election register is a source")
+            for w in p["wards"]:
+                left = [c for c in w["election"]["candidates"] if c.get("left")]
+                if left:
+                    snap = sorted((BP.RAW / b["slug"]).glob("byelections_*"))
+                    if snap:
+                        held = {e["ward_gss"] for e in json.loads(snap[-1].read_text())["byelections"] if not e["cancelled"]}
+                        self.assertIn(w["ons_code"], held, f"{b['slug']} {w['name']}")
+        croydon = json.loads((BP.OUT / "croydon" / "people.json").read_text())
+        ward = next(w for w in croydon["wards"] if w["name"] == "New Addington North")
+        self.assertFalse(any(c.get("left") for c in ward["election"]["candidates"]))
 
 
 if __name__ == "__main__":

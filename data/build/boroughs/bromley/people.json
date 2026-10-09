@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "d3b8c057667a8841af62aa56dd2d5e1d5ce96a9738d8c80ed51e8e5ece785821"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Bromley since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=BRY&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "f9f8d244e73cdfadad7c2992946dbd25c3e1c941255b15f06eb7be6cc5a52530"
   }
  ],
  "election": {

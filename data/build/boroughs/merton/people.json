@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "5ba4deb42f63419c452a08f6f4e6f98d30000fd4ee5b84ca344bf50229acffc5"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Merton since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=MRT&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "058be78cd83ce7d0cdcb2d356e78b3f73dd9744c888c0471085c2b914f50b2a8"
   }
  ],
  "election": {

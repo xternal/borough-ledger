@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "7d7d439dd17c3661e9c642564413bd58b65555e019d6973065dff756871352d8"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Southwark since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=SWK&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "69ff185cdab27ff27db6a1aec72b13b9fbb17ac937acfa85d522e1ce5258f06f"
   }
  ],
  "election": {

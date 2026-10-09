@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "32cb895ce5a00af13cf93e27240b66c5b2b994702386183c7fbfc386ed621d7b"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Haringey since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=HRY&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "10a8fee5787d989e2ac3df37d8810de2e4ab1badab9b11fda8832522cccedcb8"
   }
  ],
  "election": {

@@ -797,6 +797,280 @@
    ]
   },
   {
+   "slug": "croydon",
+   "short": "Croydon",
+   "ons": "E09000008",
+   "wards": [
+    {
+     "id": "addiscombe-east",
+     "name": "Addiscombe East",
+     "ons_code": "E05011462"
+    },
+    {
+     "id": "addiscombe-west",
+     "name": "Addiscombe West",
+     "ons_code": "E05011463"
+    },
+    {
+     "id": "bensham-manor",
+     "name": "Bensham Manor",
+     "ons_code": "E05011464"
+    },
+    {
+     "id": "broad-green",
+     "name": "Broad Green",
+     "ons_code": "E05011465"
+    },
+    {
+     "id": "coulsdon-town",
+     "name": "Coulsdon Town",
+     "ons_code": "E05011466"
+    },
+    {
+     "id": "crystal-palace-and-upper-norwood",
+     "name": "Crystal Palace and Upper Norwood",
+     "ons_code": "E05011467"
+    },
+    {
+     "id": "fairfield",
+     "name": "Fairfield",
+     "ons_code": "E05011468"
+    },
+    {
+     "id": "kenley",
+     "name": "Kenley",
+     "ons_code": "E05011469"
+    },
+    {
+     "id": "new-addington-north",
+     "name": "New Addington North",
+     "ons_code": "E05011470"
+    },
+    {
+     "id": "new-addington-south",
+     "name": "New Addington South",
+     "ons_code": "E05011471"
+    },
+    {
+     "id": "norbury-park",
+     "name": "Norbury Park",
+     "ons_code": "E05011473"
+    },
+    {
+     "id": "norbury-and-pollards-hill",
+     "name": "Norbury and Pollards Hill",
+     "ons_code": "E05011472"
+    },
+    {
+     "id": "old-coulsdon",
+     "name": "Old Coulsdon",
+     "ons_code": "E05011474"
+    },
+    {
+     "id": "park-hill-and-whitgift",
+     "name": "Park Hill and Whitgift",
+     "ons_code": "E05011475"
+    },
+    {
+     "id": "purley-oaks-and-riddlesdown",
+     "name": "Purley Oaks and Riddlesdown",
+     "ons_code": "E05011477"
+    },
+    {
+     "id": "purley-and-woodcote",
+     "name": "Purley and Woodcote",
+     "ons_code": "E05011476"
+    },
+    {
+     "id": "sanderstead",
+     "name": "Sanderstead",
+     "ons_code": "E05011478"
+    },
+    {
+     "id": "selhurst",
+     "name": "Selhurst",
+     "ons_code": "E05011479"
+    },
+    {
+     "id": "selsdon-vale-and-forestdale",
+     "name": "Selsdon Vale and Forestdale",
+     "ons_code": "E05011481"
+    },
+    {
+     "id": "selsdon-and-addington-village",
+     "name": "Selsdon and Addington Village",
+     "ons_code": "E05011480"
+    },
+    {
+     "id": "shirley-north",
+     "name": "Shirley North",
+     "ons_code": "E05011482"
+    },
+    {
+     "id": "shirley-south",
+     "name": "Shirley South",
+     "ons_code": "E05011483"
+    },
+    {
+     "id": "south-croydon",
+     "name": "South Croydon",
+     "ons_code": "E05011484"
+    },
+    {
+     "id": "south-norwood",
+     "name": "South Norwood",
+     "ons_code": "E05011485"
+    },
+    {
+     "id": "thornton-heath",
+     "name": "Thornton Heath",
+     "ons_code": "E05011486"
+    },
+    {
+     "id": "waddon",
+     "name": "Waddon",
+     "ons_code": "E05011487"
+    },
+    {
+     "id": "west-thornton",
+     "name": "West Thornton",
+     "ons_code": "E05011488"
+    },
+    {
+     "id": "woodside",
+     "name": "Woodside",
+     "ons_code": "E05011489"
+    }
+   ]
+  },
+  {
+   "slug": "ealing",
+   "short": "Ealing",
+   "ons": "E09000009",
+   "wards": [
+    {
+     "id": "central-greenford",
+     "name": "Central Greenford",
+     "ons_code": "E05013518"
+    },
+    {
+     "id": "dormers-wells",
+     "name": "Dormers Wells",
+     "ons_code": "E05013519"
+    },
+    {
+     "id": "ealing-broadway",
+     "name": "Ealing Broadway",
+     "ons_code": "E05013520"
+    },
+    {
+     "id": "ealing-common",
+     "name": "Ealing Common",
+     "ons_code": "E05013521"
+    },
+    {
+     "id": "east-acton",
+     "name": "East Acton",
+     "ons_code": "E05013522"
+    },
+    {
+     "id": "greenford-broadway",
+     "name": "Greenford Broadway",
+     "ons_code": "E05013523"
+    },
+    {
+     "id": "hanger-hill",
+     "name": "Hanger Hill",
+     "ons_code": "E05013524"
+    },
+    {
+     "id": "hanwell-broadway",
+     "name": "Hanwell Broadway",
+     "ons_code": "E05013525"
+    },
+    {
+     "id": "lady-margaret",
+     "name": "Lady Margaret",
+     "ons_code": "E05013526"
+    },
+    {
+     "id": "north-acton",
+     "name": "North Acton",
+     "ons_code": "E05013527"
+    },
+    {
+     "id": "north-greenford",
+     "name": "North Greenford",
+     "ons_code": "E05013528"
+    },
+    {
+     "id": "north-hanwell",
+     "name": "North Hanwell",
+     "ons_code": "E05013529"
+    },
+    {
+     "id": "northfield",
+     "name": "Northfield",
+     "ons_code": "E05013530"
+    },
+    {
+     "id": "northolt-mandeville",
+     "name": "Northolt Mandeville",
+     "ons_code": "E05013531"
+    },
+    {
+     "id": "northolt-west-end",
+     "name": "Northolt West End",
+     "ons_code": "E05013532"
+    },
+    {
+     "id": "norwood-green",
+     "name": "Norwood Green",
+     "ons_code": "E05013533"
+    },
+    {
+     "id": "perivale",
+     "name": "Perivale",
+     "ons_code": "E05013534"
+    },
+    {
+     "id": "pitshanger",
+     "name": "Pitshanger",
+     "ons_code": "E05013535"
+    },
+    {
+     "id": "south-acton",
+     "name": "South Acton",
+     "ons_code": "E05013536"
+    },
+    {
+     "id": "southall-broadway",
+     "name": "Southall Broadway",
+     "ons_code": "E05013537"
+    },
+    {
+     "id": "southall-green",
+     "name": "Southall Green",
+     "ons_code": "E05013538"
+    },
+    {
+     "id": "southall-west",
+     "name": "Southall West",
+     "ons_code": "E05013539"
+    },
+    {
+     "id": "southfield",
+     "name": "Southfield",
+     "ons_code": "E05013540"
+    },
+    {
+     "id": "walpole",
+     "name": "Walpole",
+     "ons_code": "E05013541"
+    }
+   ]
+  },
+  {
    "slug": "hackney",
    "short": "Hackney",
    "ons": "E09000012",
@@ -1459,6 +1733,108 @@
    ]
   },
   {
+   "slug": "kingston-upon-thames",
+   "short": "Kingston upon Thames",
+   "ons": "E09000021",
+   "wards": [
+    {
+     "id": "alexandra",
+     "name": "Alexandra",
+     "ons_code": "E05013928"
+    },
+    {
+     "id": "berrylands",
+     "name": "Berrylands",
+     "ons_code": "E05013929"
+    },
+    {
+     "id": "canbury-gardens",
+     "name": "Canbury Gardens",
+     "ons_code": "E05013930"
+    },
+    {
+     "id": "chessington-south-and-malden-rushett",
+     "name": "Chessington South and Malden Rushett",
+     "ons_code": "E05013931"
+    },
+    {
+     "id": "coombe-hill",
+     "name": "Coombe Hill",
+     "ons_code": "E05013932"
+    },
+    {
+     "id": "coombe-vale",
+     "name": "Coombe Vale",
+     "ons_code": "E05013933"
+    },
+    {
+     "id": "green-lane-and-st-james",
+     "name": "Green Lane and St James",
+     "ons_code": "E05013934"
+    },
+    {
+     "id": "hook-and-chessington-north",
+     "name": "Hook and Chessington North",
+     "ons_code": "E05013935"
+    },
+    {
+     "id": "king-georges-and-sunray",
+     "name": "King George's and Sunray",
+     "ons_code": "E05013936"
+    },
+    {
+     "id": "kingston-gate",
+     "name": "Kingston Gate",
+     "ons_code": "E05013937"
+    },
+    {
+     "id": "kingston-town",
+     "name": "Kingston Town",
+     "ons_code": "E05013938"
+    },
+    {
+     "id": "motspur-park-and-old-malden-east",
+     "name": "Motspur Park and Old Malden East",
+     "ons_code": "E05013939"
+    },
+    {
+     "id": "new-malden-village",
+     "name": "New Malden Village",
+     "ons_code": "E05013940"
+    },
+    {
+     "id": "norbiton",
+     "name": "Norbiton",
+     "ons_code": "E05013941"
+    },
+    {
+     "id": "old-malden",
+     "name": "Old Malden",
+     "ons_code": "E05013942"
+    },
+    {
+     "id": "st-marks-and-seething-wells",
+     "name": "St. Mark's and Seething Wells",
+     "ons_code": "E05013943"
+    },
+    {
+     "id": "surbiton-hill",
+     "name": "Surbiton Hill",
+     "ons_code": "E05013944"
+    },
+    {
+     "id": "tolworth",
+     "name": "Tolworth",
+     "ons_code": "E05013945"
+    },
+    {
+     "id": "tudor",
+     "name": "Tudor",
+     "ons_code": "E05013946"
+    }
+   ]
+  },
+  {
    "slug": "lambeth",
    "short": "Lambeth",
    "ons": "E09000022",
@@ -1595,6 +1971,108 @@
    "short": "Leeds",
    "ons": "E08000035",
    "wards": []
+  },
+  {
+   "slug": "lewisham",
+   "short": "Lewisham",
+   "ons": "E09000023",
+   "wards": [
+    {
+     "id": "bellingham",
+     "name": "Bellingham",
+     "ons_code": "E05013714"
+    },
+    {
+     "id": "blackheath",
+     "name": "Blackheath",
+     "ons_code": "E05013715"
+    },
+    {
+     "id": "brockley",
+     "name": "Brockley",
+     "ons_code": "E05013716"
+    },
+    {
+     "id": "catford-south",
+     "name": "Catford South",
+     "ons_code": "E05013717"
+    },
+    {
+     "id": "crofton-park",
+     "name": "Crofton Park",
+     "ons_code": "E05013718"
+    },
+    {
+     "id": "deptford",
+     "name": "Deptford",
+     "ons_code": "E05013719"
+    },
+    {
+     "id": "downham",
+     "name": "Downham",
+     "ons_code": "E05013720"
+    },
+    {
+     "id": "evelyn",
+     "name": "Evelyn",
+     "ons_code": "E05013721"
+    },
+    {
+     "id": "forest-hill",
+     "name": "Forest Hill",
+     "ons_code": "E05013722"
+    },
+    {
+     "id": "grove-park",
+     "name": "Grove Park",
+     "ons_code": "E05013723"
+    },
+    {
+     "id": "hither-green",
+     "name": "Hither Green",
+     "ons_code": "E05013724"
+    },
+    {
+     "id": "ladywell",
+     "name": "Ladywell",
+     "ons_code": "E05013725"
+    },
+    {
+     "id": "lee-green",
+     "name": "Lee Green",
+     "ons_code": "E05013726"
+    },
+    {
+     "id": "lewisham-central",
+     "name": "Lewisham Central",
+     "ons_code": "E05013727"
+    },
+    {
+     "id": "new-cross-gate",
+     "name": "New Cross Gate",
+     "ons_code": "E05013728"
+    },
+    {
+     "id": "perry-vale",
+     "name": "Perry Vale",
+     "ons_code": "E05013729"
+    },
+    {
+     "id": "rushey-green",
+     "name": "Rushey Green",
+     "ons_code": "E05013730"
+    },
+    {
+     "id": "sydenham",
+     "name": "Sydenham",
+     "ons_code": "E05013731"
+    },
+    {
+     "id": "telegraph-hill",
+     "name": "Telegraph Hill",
+     "ons_code": "E05013732"
+    }
+   ]
   },
   {
    "slug": "manchester",
@@ -1867,6 +2345,133 @@
      "id": "wimbledon-town-and-dundonald",
      "name": "Wimbledon Town and Dundonald",
      "ons_code": "E05013829"
+    }
+   ]
+  },
+  {
+   "slug": "newham",
+   "short": "Newham",
+   "ons": "E09000025",
+   "wards": [
+    {
+     "id": "beckton",
+     "name": "Beckton",
+     "ons_code": "E05013904"
+    },
+    {
+     "id": "boleyn",
+     "name": "Boleyn",
+     "ons_code": "E05013905"
+    },
+    {
+     "id": "canning-town-north",
+     "name": "Canning Town North",
+     "ons_code": "E05013906"
+    },
+    {
+     "id": "canning-town-south",
+     "name": "Canning Town South",
+     "ons_code": "E05013907"
+    },
+    {
+     "id": "custom-house",
+     "name": "Custom House",
+     "ons_code": "E05013908"
+    },
+    {
+     "id": "east-ham",
+     "name": "East Ham",
+     "ons_code": "E05013909"
+    },
+    {
+     "id": "east-ham-south",
+     "name": "East Ham South",
+     "ons_code": "E05013910"
+    },
+    {
+     "id": "forest-gate-north",
+     "name": "Forest Gate North",
+     "ons_code": "E05013911"
+    },
+    {
+     "id": "forest-gate-south",
+     "name": "Forest Gate South",
+     "ons_code": "E05013912"
+    },
+    {
+     "id": "green-street-east",
+     "name": "Green Street East",
+     "ons_code": "E05013913"
+    },
+    {
+     "id": "green-street-west",
+     "name": "Green Street West",
+     "ons_code": "E05013914"
+    },
+    {
+     "id": "little-ilford",
+     "name": "Little Ilford",
+     "ons_code": "E05013915"
+    },
+    {
+     "id": "manor-park",
+     "name": "Manor Park",
+     "ons_code": "E05013916"
+    },
+    {
+     "id": "maryland",
+     "name": "Maryland",
+     "ons_code": "E05013917"
+    },
+    {
+     "id": "plaistow-north",
+     "name": "Plaistow North",
+     "ons_code": "E05013918"
+    },
+    {
+     "id": "plaistow-south",
+     "name": "Plaistow South",
+     "ons_code": "E05013919"
+    },
+    {
+     "id": "plaistow-west-and-canning-town-east",
+     "name": "Plaistow West and Canning Town East",
+     "ons_code": "E05013920"
+    },
+    {
+     "id": "plashet",
+     "name": "Plashet",
+     "ons_code": "E05013921"
+    },
+    {
+     "id": "royal-albert",
+     "name": "Royal Albert",
+     "ons_code": "E05013922"
+    },
+    {
+     "id": "royal-victoria",
+     "name": "Royal Victoria",
+     "ons_code": "E05013923"
+    },
+    {
+     "id": "stratford",
+     "name": "Stratford",
+     "ons_code": "E05013924"
+    },
+    {
+     "id": "stratford-olympic-park",
+     "name": "Stratford Olympic Park",
+     "ons_code": "E05013925"
+    },
+    {
+     "id": "wall-end",
+     "name": "Wall End",
+     "ons_code": "E05013926"
+    },
+    {
+     "id": "west-ham",
+     "name": "West Ham",
+     "ons_code": "E05013927"
     }
    ]
   },
@@ -2417,6 +3022,220 @@
      "id": "whitechapel",
      "name": "Whitechapel",
      "ons_code": "E05009336"
+    }
+   ]
+  },
+  {
+   "slug": "wandsworth",
+   "short": "Wandsworth",
+   "ons": "E09000032",
+   "wards": [
+    {
+     "id": "balham",
+     "name": "Balham",
+     "ons_code": "E05014009"
+    },
+    {
+     "id": "battersea-park",
+     "name": "Battersea Park",
+     "ons_code": "E05014010"
+    },
+    {
+     "id": "east-putney",
+     "name": "East Putney",
+     "ons_code": "E05014011"
+    },
+    {
+     "id": "falconbrook",
+     "name": "Falconbrook",
+     "ons_code": "E05014012"
+    },
+    {
+     "id": "furzedown",
+     "name": "Furzedown",
+     "ons_code": "E05014013"
+    },
+    {
+     "id": "lavender",
+     "name": "Lavender",
+     "ons_code": "E05014014"
+    },
+    {
+     "id": "nine-elms",
+     "name": "Nine Elms",
+     "ons_code": "E05014015"
+    },
+    {
+     "id": "northcote",
+     "name": "Northcote",
+     "ons_code": "E05014016"
+    },
+    {
+     "id": "roehampton",
+     "name": "Roehampton",
+     "ons_code": "E05014017"
+    },
+    {
+     "id": "shaftesbury-and-queenstown",
+     "name": "Shaftesbury & Queenstown",
+     "ons_code": "E05014019"
+    },
+    {
+     "id": "south-balham",
+     "name": "South Balham",
+     "ons_code": "E05014020"
+    },
+    {
+     "id": "southfields",
+     "name": "Southfields",
+     "ons_code": "E05014021"
+    },
+    {
+     "id": "st-marys",
+     "name": "St Mary's",
+     "ons_code": "E05014018"
+    },
+    {
+     "id": "thamesfield",
+     "name": "Thamesfield",
+     "ons_code": "E05014022"
+    },
+    {
+     "id": "tooting-bec",
+     "name": "Tooting Bec",
+     "ons_code": "E05014023"
+    },
+    {
+     "id": "tooting-broadway",
+     "name": "Tooting Broadway",
+     "ons_code": "E05014024"
+    },
+    {
+     "id": "trinity",
+     "name": "Trinity",
+     "ons_code": "E05014025"
+    },
+    {
+     "id": "wandle",
+     "name": "Wandle",
+     "ons_code": "E05014026"
+    },
+    {
+     "id": "wandsworth-common",
+     "name": "Wandsworth Common",
+     "ons_code": "E05014027"
+    },
+    {
+     "id": "wandsworth-town",
+     "name": "Wandsworth Town",
+     "ons_code": "E05014028"
+    },
+    {
+     "id": "west-hill",
+     "name": "West Hill",
+     "ons_code": "E05014029"
+    },
+    {
+     "id": "west-putney",
+     "name": "West Putney",
+     "ons_code": "E05014030"
+    }
+   ]
+  },
+  {
+   "slug": "westminster",
+   "short": "Westminster",
+   "ons": "E09000033",
+   "wards": [
+    {
+     "id": "abbey-road",
+     "name": "Abbey Road",
+     "ons_code": "E05013792"
+    },
+    {
+     "id": "bayswater",
+     "name": "Bayswater",
+     "ons_code": "E05013793"
+    },
+    {
+     "id": "church-street",
+     "name": "Church Street",
+     "ons_code": "E05013794"
+    },
+    {
+     "id": "harrow-road",
+     "name": "Harrow Road",
+     "ons_code": "E05013795"
+    },
+    {
+     "id": "hyde-park",
+     "name": "Hyde Park",
+     "ons_code": "E05013796"
+    },
+    {
+     "id": "knightsbridge-and-belgravia",
+     "name": "Knightsbridge and Belgravia",
+     "ons_code": "E05013797"
+    },
+    {
+     "id": "lancaster-gate",
+     "name": "Lancaster Gate",
+     "ons_code": "E05013798"
+    },
+    {
+     "id": "little-venice",
+     "name": "Little Venice",
+     "ons_code": "E05013799"
+    },
+    {
+     "id": "maida-vale",
+     "name": "Maida Vale",
+     "ons_code": "E05013800"
+    },
+    {
+     "id": "marylebone",
+     "name": "Marylebone",
+     "ons_code": "E05013801"
+    },
+    {
+     "id": "pimlico-north",
+     "name": "Pimlico North",
+     "ons_code": "E05013802"
+    },
+    {
+     "id": "pimlico-south",
+     "name": "Pimlico South",
+     "ons_code": "E05013803"
+    },
+    {
+     "id": "queens-park",
+     "name": "Queen's Park",
+     "ons_code": "E05013804"
+    },
+    {
+     "id": "regents-park",
+     "name": "Regent's Park",
+     "ons_code": "E05013805"
+    },
+    {
+     "id": "st-jamess",
+     "name": "St James's",
+     "ons_code": "E05013806"
+    },
+    {
+     "id": "vincent-square",
+     "name": "Vincent Square",
+     "ons_code": "E05013807"
+    },
+    {
+     "id": "west-end",
+     "name": "West End",
+     "ons_code": "E05013808"
+    },
+    {
+     "id": "westbourne",
+     "name": "Westbourne",
+     "ons_code": "E05013809"
     }
    ]
   }

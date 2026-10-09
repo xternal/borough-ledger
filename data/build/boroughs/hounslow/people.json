@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "be5f152c076c32915933ba8c40dad7044786620aaa727838090224121004c0b3"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Hounslow since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=HNS&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "3932fce50f3b5ef37924b271b6e83ff8e4bd323ddfa7e8ce1104cd455e8da3c9"
   }
  ],
  "election": {

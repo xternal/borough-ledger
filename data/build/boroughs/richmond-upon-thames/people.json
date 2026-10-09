@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "dbe104ed582f31479c8b6ce18395e73e851ca0ae3c6f84ca088578c5b1b29132"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Richmond upon Thames since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=RIC&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "d15bfcac9b375b67a5740f3b0d077f046f6578ff4efe330a5a3f6150003d7046"
   }
  ],
  "election": {

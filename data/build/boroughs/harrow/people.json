@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "98cf6f5149050244b596ba70f5ab09e2af5362acd06de933c4d5f4c317e313d7"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Harrow since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=HRW&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "9b231701e985b3b30c5566dd32394705f4c43b2890fa53b7c13804534407f1ba"
   }
  ],
  "election": {

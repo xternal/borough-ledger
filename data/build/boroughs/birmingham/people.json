@@ -8,6 +8,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "e1a130e6132cdc6c01c134d00eb015f243367cf4ddaef6af5ef25be46b9ea647"
+  },
+  {
+   "title": "Democracy Club, by-elections to Birmingham City Council since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=BIR&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "4056278cc15f6936c6937af5af7b67eeb6713d062f2e881d45de7eb8fea5eb12"
   }
  ],
  "election": {

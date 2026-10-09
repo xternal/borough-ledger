@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "c0c9b919f206f603412b951b9a85dfb3b6b0fdef765a8f49a7b2debf453efcd4"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Redbridge since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=RDB&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "3a13e1afae27477d2291fc82f088e98e200f72463b39e5f5a15949b516f98f21"
   }
  ],
  "election": {
