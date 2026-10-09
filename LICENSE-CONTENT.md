@@ -15,6 +15,7 @@ The site's own text, the docs, the promise cards' structure and statuses, and th
 | Council tax tables, revenue and outturn returns | Ministry of Housing, Communities and Local Government | Open Government Licence v3.0 |
 | Ward boundaries (`data/build/ward_map.json`) | Office for National Statistics; contains OS data © Crown copyright and database right 2024 | Open Government Licence v3.0 |
 | Ward election results of 7 May 2026 (`data/build/elections.json`), copied from the council's declarations | Democracy Club | CC BY-SA 4.0: reuse of that file must keep the same licence |
+| Other boroughs' ward results and ward codes (`data/build/boroughs/*/people.json`) | Democracy Club | CC BY-SA 4.0: reuse of those files must keep the same licence |
 | The Mayor of London's council tax by body (`data/manual/gla_2026-27.csv`) | Greater London Authority (Mayoral Decision MD3472) | Open Government Licence v3.0 |
 | Where each building scheme is: the `lat`, `lon` and `osm_name` columns of `data/manual/capital_scheme_wards.csv` | © OpenStreetMap contributors | Open Database License (ODbL) 1.0 |
 | Company register facts on supplier pages (`data/build/companies.json`) | Companies House | Provided free; Companies House states no restrictions on use (no formal licence) |

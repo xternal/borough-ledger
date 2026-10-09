@@ -27,7 +27,10 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
 
   // Council tax pays for what ring-fenced grants do not, so split it by spending after those grants.
   const ranked = services.filter((s) => s.general && s.general.value > 0).sort((a, z) => z.general!.value - a.general!.value);
-  const shares = ranked.map((s) => ({ ...s, share: derive((s.general!.value / generalBudget.value) * b.council, s.general!, generalBudget, council) }));
+  // A service whose share rounds to nothing (in some boroughs, public health after its grant) is left out of the list.
+  const shares = ranked
+    .map((s) => ({ ...s, share: derive((s.general!.value / generalBudget.value) * b.council, s.general!, generalBudget, council) }))
+    .filter((s) => s.share.value >= 0.5);
   const max = shares[0]?.share.value ?? 1;
   const [lo, hi] = [Math.min(...bill.instalments.options), Math.max(...bill.instalments.options)];
   const perInstalment = (n: number) => derive(b.total / n, total, bill.instalments.f);

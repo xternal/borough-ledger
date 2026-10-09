@@ -1,11 +1,10 @@
 import { sankey, sankeyLinkHorizontal } from "d3-sankey";
 import { derive, type Figure } from "@borough-ledger/schema";
-import type { FlowLine, PageModel } from "@/lib/model";
+import type { FlowLine, PageModel, QualityItem } from "@/lib/model";
 import { QUALITY_TITLE } from "@/lib/quality";
 import { Num, NumT } from "./Num";
 import { QualityLegend } from "./QualityLegend";
 import { ChartTable, DataTable } from "./ChartTable";
-import { HOMES, SPAN, capFig, homesFig, totalOf } from "@/lib/capital";
 
 interface FlowNode {
   id: string;
@@ -151,7 +150,8 @@ function FlowTable({ caption, lines, total }: { caption: string; lines: FlowLine
   );
 }
 
-export function BudgetFlow({ m }: { m: PageModel }) {
+/** Any borough's budget. `more` is what follows the chart on that borough's page. */
+export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" | "services" | "netBudget" | "place">; legend: QualityItem[]; more?: React.ReactNode }) {
   const services = [...m.services].sort((a, z) => z.f.value - a.f.value);
   const max = Math.max(...m.funding.map((x) => x.f.value), ...services.map((x) => x.f.value));
   return (
@@ -202,12 +202,8 @@ export function BudgetFlow({ m }: { m: PageModel }) {
           <RankedRows lines={services} max={max} kind="spend" />
         </div>
       </div>
-      <QualityLegend items={m.qualityLegend.budget} />
-      <p className="flow-more">
-        This is day-to-day spending. The council also plans <a href="/building">building work</a> worth <Num f={capFig(totalOf("gf").total!)} fmt="m1" /> from{" "}
-        {SPAN}, and <a href="/council-homes">council homes</a> have an account of their own: rents and service charges of{" "}
-        <Num f={homesFig(-HOMES.budget.filter((b) => b.kind === "income").reduce((a, b) => a + b.now, 0))} fmt="m1" /> a year.
-      </p>
+      <QualityLegend items={legend} />
+      {more}
     </section>
   );
 }

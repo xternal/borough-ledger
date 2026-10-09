@@ -108,3 +108,10 @@ DuckDB is not used: the whole ledger adds up in Python in a few seconds, and the
 - **The building programme:** Four Year Capital Programme 2026-30 and Capital Strategy 2026/27, the version Full Council adopted on 25 February 2026 (`mgConvert2PDF.aspx?ID=134079`, 28 pages, SHA-256 in `etl/sources.json`). The council's site refuses scripts, so it was read in a browser; its Appendix 1 matches the Cabinet version in the downloaded Cabinet pack (pages 152 to 156) line for line. Extracted by hand into `data/manual/capital_2026-30.csv` and checked by `etl/capital.py` against every printed total. The resolution names £135.5m and £318.8m while the report's tables add up to £135.0m and £317.2m; the site shows the tables and says so.
 - **Council homes:** the Housing Revenue Account budget report to Cabinet, 9 February 2026, in the Cabinet pack already downloaded (pages 157 to 178). Table 1 and the quoted facts are in `data/manual/council_homes_2026-27.csv`, each with its page.
 
+## In use (Kensington and Chelsea, 9 Oct 2026)
+
+- **Bill, budget, history:** the same government returns already downloaded for Hammersmith & Fulham (they cover every council), read for ONS code E09000020 by `etl/boroughs.py` with the same checks.
+- **Councillors:** the Royal Borough's ModernGov web service (`https://www.rbkc.gov.uk/committees/mgWebService.asmx`, `GetCouncillorsByWard`), which answers scripts.
+- **Ward codes, seats and results:** Democracy Club, `local.kensington-and-chelsea.2026-05-07` (18 wards), CC BY-SA 4.0.
+- **Ward boundaries:** the ONS Wards (December 2024) service already used, for LAD24CD E09000020.
+

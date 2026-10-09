@@ -13,6 +13,7 @@ import {
   sideOf,
   partyOf,
   type Quality,
+  type CouncilYear,
   type Rules,
   type Saving,
   type Source,
@@ -256,11 +257,13 @@ function londonToday(): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
 }
 
-export function buildModel(): PageModel {
-  const { council: C, rules: R, content: K } = DATA;
-  const tol = R.balanced_budget.tolerance_m;
+/** What any borough's statement shows from the government returns: the bill and the budget, checked to balance. */
+export type StatementModel = Pick<PageModel, "bill" | "funding" | "services" | "netBudget" | "generalBudget" | "ctShare" | "grantsShare" | "ratesShare" | "ctShareGeneral"> & {
+  budgetLegend: QualityItem[];
+};
 
-  const budget = checkBudget(C.funding, C.services, tol);
+export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "services">, R: Rules): StatementModel {
+  const budget = checkBudget(C.funding, C.services, R.balanced_budget.tolerance_m);
   if (!budget.balances)
     throw new Error(`Budget does not balance: funding £${budget.fundingM}m vs spending £${budget.spendingM}m`);
 
@@ -307,6 +310,39 @@ export function buildModel(): PageModel {
   const grantsShare = byKind("grant");
   const ratesShare = byKind("business_rates");
   const ctShareGeneral = derive(ct.f.value / generalBudget.value, ct.f, generalBudget);
+
+  const bill: PageModel["bill"] = {
+    council,
+    gla,
+    total,
+    risePct: derive((b.band_d_total / b.band_d_total_prev - 1) * 100, total, prev),
+    councilShare: derive(b.band_d_council / b.band_d_total, council, total),
+    ratios: of(R.band_ratios, 1),
+    spd: of(R.single_person_discount, R.single_person_discount.value),
+    instalments: { options: R.instalments.options, f: of(R.instalments, R.instalments.default) },
+    glaNote: b.gla_note,
+    glaSplit: (b.gla_split ?? []).map((g) => ({ id: g.id, label: g.label, phrase: g.phrase, officialTerm: g.official_term, f: of(g, g.band_d), prev: of(g, g.band_d_prev) })),
+  };
+  return {
+    bill,
+    funding,
+    services,
+    netBudget,
+    generalBudget,
+    ctShare,
+    grantsShare,
+    ratesShare,
+    ctShareGeneral,
+    budgetLegend: [...C.funding, ...C.services].map((x) => ({ label: x.label, quality: x.quality })),
+  };
+}
+
+export function buildModel(): PageModel {
+  const { council: C, rules: R, content: K } = DATA;
+  const tol = R.balanced_budget.tolerance_m;
+
+  const S = statementModel(C, R);
+  const { funding, services, netBudget, generalBudget, ctShare, grantsShare, ratesShare, ctShareGeneral } = S;
 
   /* gap */
   const wf = buildWaterfall(C.gap_2026_27, tol);
@@ -371,18 +407,7 @@ export function buildModel(): PageModel {
     today: londonToday(),
     hasTestData: listTestValues(DATA).length > 0,
     rules: R,
-    bill: {
-      council,
-      gla,
-      total,
-      risePct: derive((b.band_d_total / b.band_d_total_prev - 1) * 100, total, prev),
-      councilShare: derive(b.band_d_council / b.band_d_total, council, total),
-      ratios: of(R.band_ratios, 1),
-      spd: of(R.single_person_discount, R.single_person_discount.value),
-      instalments: { options: R.instalments.options, f: of(R.instalments, R.instalments.default) },
-      glaNote: b.gla_note,
-      glaSplit: (b.gla_split ?? []).map((g) => ({ id: g.id, label: g.label, phrase: g.phrase, officialTerm: g.official_term, f: of(g, g.band_d), prev: of(g, g.band_d_prev) })),
-    },
+    bill: S.bill,
     funding,
     services,
     netBudget,
@@ -457,7 +482,7 @@ export function buildModel(): PageModel {
       ).values(),
     ],
     qualityLegend: {
-      budget: [...C.funding, ...C.services].map((x) => ({ label: x.label, quality: x.quality })),
+      budget: S.budgetLegend,
       gap: C.gap_2026_27.filter(isGapValueLine).map((x) => ({ label: x.label, quality: x.quality })),
     },
   };
