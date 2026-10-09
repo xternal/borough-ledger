@@ -13,6 +13,7 @@ import { feedAlternate } from "@/lib/rss";
 import { CONTACT, SITE } from "@/lib/site";
 import { wardJsonLd } from "@/lib/structured";
 import { NUMBER, WARD_MAP, electionOf, partyMix, wardsOf } from "@/lib/wards";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const names = DATA.content.councillors.filter((c) => c.ward_id === id).map((c) => c.name);
   const title = `${w.name} ward, Hammersmith & Fulham: councillors and pledges | ${SITE.name}`;
   const description = `${w.name} ward in Hammersmith & Fulham: your councillors (${names.join(", ")}), their party and posts, how the ward voted in May 2026, pledges about the area, and where to report street problems.`;
-  return { title, description, alternates: { canonical: `/ward/${id}`, types: feedAlternate(`/ward/${id}/feed.xml`, `${w.name} ward`) }, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  return { title, description, alternates: { canonical: `/ward/${id}`, types: feedAlternate(`/ward/${id}/feed.xml`, `${w.name} ward`) }, ...share(`/ward/${id}`, title, description, { own: true }) };
 }
 
 export default async function WardPage({ params }: Props) {

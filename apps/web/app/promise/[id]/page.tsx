@@ -14,6 +14,7 @@ import { STATUS_LABEL } from "@/lib/promises";
 import { dateModified, promiseQA, promiseSummary } from "@/lib/promiseText";
 import { shorten } from "@/lib/rss";
 import { promiseJsonLd } from "@/lib/structured";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -38,8 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/promise/${id}`,
       types: { ...feedAlternate(`/promise/${id}/feed.xml`, `Changes to this pledge`), "text/markdown": [{ url: `/promise/${id}.md`, title: "This pledge as Markdown" }] },
     },
-    openGraph: { type: "article", title, description, modifiedTime: dateModified(p), publishedTime: p.versions[0]!.recorded_on },
-    twitter: { card: "summary_large_image", title, description },
+    ...share(`/promise/${id}`, title, description, { own: true, og: { type: "article", modifiedTime: dateModified(p), publishedTime: p.versions[0]!.recorded_on } }),
   };
 }
 

@@ -5,11 +5,14 @@ import { PageShell } from "@/components/PageShell";
 import { describeTarget, EMAIL_ALERTS, targetHref } from "@/lib/follow";
 import { buildModel } from "@/lib/model";
 import { getServer } from "@/lib/server";
+import { share } from "@/lib/share";
 import { SITE } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: `Your alerts | ${SITE.name}`,
+  description: "See and change your email alerts about pledges on Borough Book, or stop them and delete your data.",
+  ...share("/follow/manage", `Your alerts | ${SITE.name}`, "See and change your email alerts about pledges on Borough Book, or stop them and delete your data."),
   robots: { index: false, follow: false },
   referrer: "no-referrer",
 };

@@ -35,6 +35,11 @@ const config: NextConfig = {
     "/promise/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
     "/party/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
     "/topic/[slug]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/ward/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/councillor/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/payments/[month]/opengraph-image": ["./assets/fonts/*.ttf"],
+    // Drawn on request, so the supplier list ships with it.
+    "/supplier/[id]/og": ["./assets/fonts/*.ttf", "../../data/build/payments/suppliers.json", "../../pnpm-workspace.yaml"],
   },
 };
 

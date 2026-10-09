@@ -9,6 +9,7 @@ import { buildModel } from "@/lib/model";
 import { SITE } from "@/lib/site";
 import { wardsJsonLd } from "@/lib/structured";
 import { WARD_MAP, wardsOf } from "@/lib/wards";
+import { share } from "@/lib/share";
 
 export const revalidate = 86400;
 
@@ -20,8 +21,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/wards" },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/wards", title, description),
 };
 
 export default function WardsPage() {

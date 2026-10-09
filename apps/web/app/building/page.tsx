@@ -8,6 +8,7 @@ import { format } from "@/lib/format";
 import { buildModel } from "@/lib/model";
 import { SITE } from "@/lib/site";
 import { capitalJsonLd } from "@/lib/structured";
+import { share } from "@/lib/share";
 
 const gf = totalOf("gf");
 const hra = totalOf("hra");
@@ -18,8 +19,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/building" },
-  openGraph: { title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...share("/building", title, description),
 };
 
 export default function BuildingPage() {

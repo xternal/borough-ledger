@@ -12,6 +12,7 @@ import { feedAlternate } from "@/lib/rss";
 import { SITE, SITE_URL } from "@/lib/site";
 import { partiesOf, topicSlug } from "@/lib/topics";
 import { DATA } from "@borough-ledger/schema";
+import { share } from "@/lib/share";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -62,8 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: `/party/${id}`, types: feedAlternate(`/party/${id}/feed.xml`, `${party.short} pledges`) },
-    openGraph: { title, description },
-    twitter: { card: "summary_large_image", title, description },
+    ...share(`/party/${id}`, title, description, { own: true }),
   };
 }
 

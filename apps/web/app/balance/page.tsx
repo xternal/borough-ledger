@@ -4,6 +4,7 @@ import { LedgerPage } from "@/components/LedgerPage";
 import { buildModel } from "@/lib/model";
 import { shareSummary } from "@/lib/shareText";
 import { SITE } from "@/lib/site";
+import { share } from "@/lib/share";
 
 type Props = { searchParams: Promise<{ s?: string | string[] }> };
 
@@ -20,8 +21,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     title: `${sum.title} | ${SITE.name}`,
     description,
     alternates: { canonical: "/balance" },
-    openGraph: { title: sum.title, description, images: [{ url: image, width: 1200, height: 630 }] },
-    twitter: { card: "summary_large_image", title: sum.title, description, images: [image] },
+    ...share("/balance", sum.title, description, { image: { url: image, alt: `${sum.title}: ${sum.status}` } }),
   };
 }
 

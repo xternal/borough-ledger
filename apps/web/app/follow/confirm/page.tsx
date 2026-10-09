@@ -5,11 +5,14 @@ import { PageShell } from "@/components/PageShell";
 import { consentForForm, describeTarget, EMAIL_ALERTS } from "@/lib/follow";
 import { buildModel } from "@/lib/model";
 import { getServer } from "@/lib/server";
+import { share } from "@/lib/share";
 import { SITE } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: `Confirm your alerts | ${SITE.name}`,
+  description: "Confirm your email alerts about pledges on Borough Book.",
+  ...share("/follow/confirm", `Confirm your alerts | ${SITE.name}`, "Confirm your email alerts about pledges on Borough Book."),
   robots: { index: false, follow: false },
   referrer: "no-referrer",
 };
