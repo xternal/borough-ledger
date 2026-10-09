@@ -11,7 +11,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
 const MOVED = SITE_URL && new URL(SITE_URL).host !== OLD_HOST ? SITE_URL : null;
 
 const config: NextConfig = {
-  transpilePackages: ["@borough-ledger/schema", "@borough-ledger/engine"],
+  transpilePackages: ["@borough-ledger/schema", "@borough-ledger/engine", "@borough-ledger/server"],
+  // Email alerts' database drivers run as they are on the server (packages/server).
+  serverExternalPackages: ["@electric-sql/pglite", "pg"],
   reactStrictMode: true,
   poweredByHeader: false,
   // Old addresses keep working: the Vercel address once the site has its own domain, and /councillors (now /wards, M6).

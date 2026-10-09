@@ -13,3 +13,6 @@ apps/web/.test-data-report.json
 reports/
 data/raw/
 etl/**/__pycache__/
+
+# Email alerts: the local development database (PGlite)
+.data/

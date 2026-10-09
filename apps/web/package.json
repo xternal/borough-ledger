@@ -15,6 +15,8 @@
   "dependencies": {
     "@borough-ledger/engine": "workspace:*",
     "@borough-ledger/schema": "workspace:*",
+    "@borough-ledger/server": "workspace:*",
+    "altcha": "3.3.0",
     "d3-sankey": "0.12.3",
     "geist": "1.7.2",
     "next": "16.3.8",
