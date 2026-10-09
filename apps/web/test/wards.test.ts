@@ -95,11 +95,11 @@ describe("postcode finder across boroughs", () => {
     const hf = PLACES[0]!.wards[0]!;
     const kc = PLACES.find((p) => p.short === "Kensington and Chelsea")!;
     const r1 = placeFromResult({ postcode: "W6 9JU", admin_district: "Hammersmith and Fulham", codes: { admin_ward: hf.ons_code, admin_district: PLACES[0]!.ons } }, PLACES);
-    expect(r1).toMatchObject({ kind: "ward", href: hf.href });
+    expect(r1).toMatchObject({ kind: "ward", href: hf.href, placeHref: "/" });
     expect(hf.href).toMatch(/^\/ward\//);
     const w = kc.wards.find((x) => x.name === "Queen's Gate")!;
     const r2 = placeFromResult({ postcode: "W8 5LS", admin_district: "Kensington and Chelsea", codes: { admin_ward: w.ons_code, admin_district: kc.ons } }, PLACES);
-    expect(r2).toMatchObject({ kind: "ward", href: "/kensington-and-chelsea#ward-queens-gate", place: "Kensington and Chelsea" });
+    expect(r2).toMatchObject({ kind: "ward", href: "/kensington-and-chelsea#ward-queens-gate", place: "Kensington and Chelsea", placeHref: "/kensington-and-chelsea" });
   });
 
   it("opens the council's page where its wards are not on the site yet", async () => {

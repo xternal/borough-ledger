@@ -11,8 +11,6 @@ import { Num } from "@/components/Num";
 import { QualityGroup } from "@/components/QualityLegend";
 import { TopBar } from "@/components/TopBar";
 import { HeroTop } from "@/components/HeroTop";
-import { PostcodeFinder } from "@/components/PostcodeFinder";
-import { COVERED, PLACES } from "@/lib/places";
 import { councilWithThe } from "@/lib/boroughList";
 import { BOROUGHS, boroughModel, type BoroughModel } from "@/lib/boroughs";
 import { format, formatDay } from "@/lib/format";
@@ -260,7 +258,7 @@ export default async function BoroughPage({ params }: Props) {
       <TopBar place={m.place.short} year={m.place.yearLabel} borough={{ base: `/${borough}`, items: P ? SECTIONS : SECTIONS.filter(([id]) => id !== "councillors") }} />
       <main className="wrap" id="top">
         <div className="hero">
-          <HeroTop current={m.place.short} council={councilWithThe(m.place.council)} />
+          <HeroTop current={m.place.short} council={councilWithThe(m.place.council)} example={m.b.example_postcode ?? "W6 9JU"} />
           <h1>Where your council tax goes in {m.place.short}</h1>
           <p className="lede">
             A Band D home pays <Num f={m.bill.total} fmt="gbp2" /> this year, up <Num f={m.bill.risePct} fmt="pct1" />. Council tax covers about{" "}
@@ -268,7 +266,6 @@ export default async function BoroughPage({ params }: Props) {
             <Num f={m.grantsShare} fmt="share0" />, including the money passed straight to schools, and business rates{" "}
             <Num f={m.ratesShare} fmt="share0" />.
           </p>
-          <PostcodeFinder places={PLACES} covered={COVERED} example={m.b.example_postcode ?? "W6 9JU"} compact />
           <div className="kpis">
             <div className="kpi">
               <span className="l">Band D bill</span>
