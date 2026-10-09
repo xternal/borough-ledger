@@ -105,10 +105,10 @@ describe("postcode finder across boroughs", () => {
   it("says where a postcode outside the covered boroughs is", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");
-    expect(placeFromResult({ postcode: "NW1 2DB", admin_district: "Camden", codes: { admin_ward: "E05013652", admin_district: "E09000007" } }, PLACES)).toEqual({
+    expect(placeFromResult({ postcode: "SW1A 2AA", admin_district: "Westminster", codes: { admin_ward: "E05013806", admin_district: "E09000033" } }, PLACES)).toEqual({
       kind: "elsewhere",
-      district: "Camden",
-      postcode: "NW1 2DB",
+      district: "Westminster",
+      postcode: "SW1A 2AA",
     });
   });
 });

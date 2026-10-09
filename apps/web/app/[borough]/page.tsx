@@ -25,9 +25,6 @@ export function generateStaticParams() {
   return BOROUGHS.map((b) => ({ borough: b.slug }));
 }
 
-/** A postcode to show in the finder, at the borough's town hall. */
-const EXAMPLE: Record<string, string> = { "kensington-and-chelsea": "W8 7NX" };
-
 const SECTIONS = [
   ["bill", "Your bill"],
   ["budget", "Budget"],
@@ -80,6 +77,7 @@ export default async function BoroughPage({ params }: Props) {
   const seats = P.councillors.length;
   const fig = (v: number) => ({ value: v, quality: "sourced" as const, sources: [P.sources[0]!.url] });
   const shortOf = new Map(P.parties.map((x) => [x.id, x.short]));
+  const vacant = P.wards.reduce((a, w) => a + w.election.seats, 0) - seats;
   const byId = new Map(P.councillors.map((c) => [c.id, c]));
   const first = m.history[0]!;
   const last = m.history[m.history.length - 1]!;
@@ -107,7 +105,7 @@ export default async function BoroughPage({ params }: Props) {
             <Num f={m.grantsShare} fmt="share0" />, including the money passed straight to schools, and business rates{" "}
             <Num f={m.ratesShare} fmt="share0" />.
           </p>
-          <PostcodeFinder places={PLACES} covered={COVERED} example={EXAMPLE[borough] ?? "W8 7NX"} compact />
+          <PostcodeFinder places={PLACES} covered={COVERED} example={m.b.example_postcode ?? "W6 9JU"} compact />
           <div className="kpis">
             <div className="kpi">
               <span className="l">Band D bill</span>
@@ -132,19 +130,27 @@ export default async function BoroughPage({ params }: Props) {
               </span>
               <span className="s">of the budget</span>
             </div>
-            <div className="kpi">
-              <span className="l">Council control</span>
-              <span className="v">{control?.short ?? "No overall control"}</span>
-              <span className="s">
-                {control ? (
-                  <>
-                    <Num f={fig(control.seats)} fmt="int" /> of <Num f={fig(seats)} fmt="int" /> seats
-                  </>
-                ) : (
-                  "no party has more than half the seats"
-                )}
-              </span>
-            </div>
+            {P.mayor ? (
+              <div className="kpi">
+                <span className="l">Run by an elected mayor</span>
+                <span className="v">{shortOf.get(P.mayor.party_id) ?? P.mayor.party}</span>
+                <span className="s">{P.mayor.name}</span>
+              </div>
+            ) : (
+              <div className="kpi">
+                <span className="l">Council control</span>
+                <span className="v">{control?.short ?? "No overall control"}</span>
+                <span className="s">
+                  {control ? (
+                    <>
+                      <Num f={fig(control.seats)} fmt="int" /> of <Num f={fig(seats)} fmt="int" /> seats
+                    </>
+                  ) : (
+                    "no party has more than half the seats"
+                  )}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -204,9 +210,31 @@ export default async function BoroughPage({ params }: Props) {
                   {x.short} <Num f={fig(x.seats)} fmt="int" />
                 </span>
               ))}{" "}
-              of <Num f={fig(seats)} fmt="int" /> seats since the election on {formatDay(P.election.date)}.{" "}
-              {control ? `${control.short} has more than half, so runs the council.` : "No party has more than half the seats."} Only the councillors elected are
-              named here; everyone else stood as their party&rsquo;s candidate.
+              of the <Num f={fig(seats)} fmt="int" /> councillors on the council&rsquo;s list
+              {vacant > 0 ? (
+                <>
+                  , with <Num f={fig(vacant)} fmt="int" /> {vacant === 1 ? "seat" : "seats"} empty
+                </>
+              ) : null}
+              .{" "}
+              {P.mayor ? (
+                <>
+                  The council is run by its elected mayor, {P.mayor.name} ({shortOf.get(P.mayor.party_id) ?? P.mayor.party}), elected on {formatDay(P.election.date)}
+                  {P.mayor.votes ? (
+                    <>
+                      {" "}
+                      with <Num f={fig(P.mayor.votes)} fmt="int" /> votes
+                    </>
+                  ) : null}{" "}
+                  (<a href={P.mayor.result_url}>result</a>).{" "}
+                  {control ? `${control.short} has more than half the seats.` : "No party has more than half the seats."}
+                </>
+              ) : control ? (
+                `${control.short} has more than half the seats, so runs the council.`
+              ) : (
+                "No party has more than half the seats."
+              )}{" "}
+              Only the councillors elected are named here; everyone else stood as their party&rsquo;s candidate.
             </p>
           </div>
           <div className="ward-page">
@@ -232,7 +260,12 @@ export default async function BoroughPage({ params }: Props) {
                     </ul>
                     <details className="chart-table">
                       <summary>
-                        How {w.name} voted: turnout <Num f={fig(w.election.turnout_pct)} fmt="pct1" />
+                        How {w.name} voted
+                        {w.election.turnout_pct !== null ? (
+                          <>
+                            : turnout <Num f={fig(w.election.turnout_pct)} fmt="pct1" />
+                          </>
+                        ) : null}
                       </summary>
                       <div className="tablewrap votes">
                         <table>
@@ -248,20 +281,32 @@ export default async function BoroughPage({ params }: Props) {
                           </thead>
                           <tbody>
                             {w.election.candidates.map((c, i) => (
-                              <tr key={i} className={c.councillor_id ? "won" : undefined}>
+                              <tr key={i} className={c.elected ? "won" : undefined}>
                                 <th scope="row">{c.party}</th>
                                 <td className="n">
                                   <span className="vbar" aria-hidden="true" style={{ width: `calc((100% - 80px) * ${(c.votes / top).toFixed(3)})` }} />
                                   <Num f={fig(c.votes)} fmt="int" />
                                 </td>
-                                <td>{c.councillor_id ? byId.get(c.councillor_id)?.name : null}</td>
+                                <td>{c.councillor_id ? byId.get(c.councillor_id)?.name : c.left ? <span className="muted">No longer on the council&rsquo;s list</span> : null}</td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
                       </div>
                       <p className="small muted">
-                        <Num f={fig(w.election.ballots)} fmt="int" /> people voted; <Num f={fig(w.election.rejected)} fmt="int" /> ballot papers were rejected. From
+                        {w.election.ballots !== null ? (
+                          <>
+                            <Num f={fig(w.election.ballots)} fmt="int" /> people voted.{" "}
+                          </>
+                        ) : (
+                          "The declaration gave no turnout. "
+                        )}
+                        {w.election.rejected !== null ? (
+                          <>
+                            <Num f={fig(w.election.rejected)} fmt="int" /> ballot papers were rejected.{" "}
+                          </>
+                        ) : null}
+                        From
                         the <a href={w.election.result_url}>council&rsquo;s declaration</a>, via <a href={w.election.dc_url}>Democracy Club</a> (CC BY-SA 4.0).
                       </p>
                     </details>

@@ -6,7 +6,20 @@ import { Candidate } from "./elections";
 
 export const BoroughConfig = z.object({
   note: z.string(),
-  boroughs: z.array(z.object({ slug: z.string(), council: z.string(), short: z.string(), ons: z.string(), moderngov: z.url(), election_id: z.string() })),
+  boroughs: z.array(
+    z.object({
+      slug: z.string(),
+      council: z.string(),
+      short: z.string(),
+      ons: z.string(),
+      moderngov: z.url(),
+      election_id: z.string(),
+      /** A postcode in the borough (its town hall) for the finder's example. */
+      example_postcode: z.string().optional(),
+      /** Where the borough elects its mayor, who runs the council. */
+      mayor_election_id: z.string().optional(),
+    }),
+  ),
 });
 export type BoroughConfig = z.infer<typeof BoroughConfig>;
 
@@ -22,6 +35,18 @@ export const BoroughPeople = z.object({
   parties: z.array(z.object({ id: z.string(), short: z.string(), seats: z.number().int().positive() })),
   /** The party with more than half the seats, or null: worked out from seats, never from a name (invariant 7). */
   control: z.string().nullable(),
+  /** An elected mayor, who runs the council in the boroughs that have one. A public office holder, named. */
+  mayor: z
+    .object({
+      name: z.string(),
+      party: z.string(),
+      party_id: z.string(),
+      votes: z.number().int().positive().nullable(),
+      turnout_pct: z.number().positive().max(100).nullable(),
+      result_url: z.url(),
+      dc_url: z.url(),
+    })
+    .optional(),
   wards: z.array(
     z.object({
       id: z.string(),
@@ -30,9 +55,10 @@ export const BoroughPeople = z.object({
       councillor_ids: z.array(z.string()),
       election: z.object({
         seats: z.number().int().positive(),
-        ballots: z.number().int().positive(),
-        turnout_pct: z.number().positive().max(100),
-        rejected: z.number().int().nonnegative(),
+        /** Null where the declaration gave no turnout. */
+        ballots: z.number().int().positive().nullable(),
+        turnout_pct: z.number().positive().max(100).nullable(),
+        rejected: z.number().int().nonnegative().nullable(),
         result_url: z.url(),
         dc_url: z.url(),
         candidates: z.array(Candidate),
@@ -51,9 +77,13 @@ export function checkBoroughPeople(p: BoroughPeople): string[] {
   const byId = new Map(p.councillors.map((c) => [c.id, c]));
   for (const w of p.wards) {
     const won = w.election.candidates.filter((c) => c.elected);
-    if (won.length !== w.election.seats || w.councillor_ids.length !== w.election.seats) problems.push(`${w.id}: seats, winners and councillors differ`);
-    for (const c of won) if (byId.get(c.councillor_id ?? "")?.ward_id !== w.id) problems.push(`${w.id}: a winner is not one of the ward's councillors`);
-    for (const c of w.election.candidates) if (!c.elected && c.councillor_id) problems.push(`${w.id}: a losing candidate is named`);
+    if (won.length !== w.election.seats || w.councillor_ids.length > w.election.seats) problems.push(`${w.id}: seats, winners and councillors differ`);
+    for (const c of won) if (!c.left && byId.get(c.councillor_id ?? "")?.ward_id !== w.id) problems.push(`${w.id}: a winner is not one of the ward's councillors`);
+    for (const c of w.election.candidates) if (!c.elected && (c.councillor_id || c.left)) problems.push(`${w.id}: a losing candidate is named`);
+    // A winner no longer listed must be accounted for by a vacant seat or a councillor who joined since.
+    const left = won.filter((c) => c.left).length;
+    const joined = w.councillor_ids.filter((id) => !won.some((c) => c.councillor_id === id)).length;
+    if (left > w.election.seats - w.councillor_ids.length + joined) problems.push(`${w.id}: more winners no longer listed than seats that changed hands`);
   }
   const total = p.parties.reduce((a, x) => a + x.seats, 0);
   if (total !== p.councillors.length) problems.push("party seats do not add up to the councillors");
