@@ -21,7 +21,8 @@
    "others": {
     "name": "Police and fire (West Midlands)",
     "to": "West Midlands Police and the fire and rescue service",
-    "short": "the police and fire share"
+    "short": "the police and fire share",
+    "with": "police and fire"
    },
    "precepts": [
     {
@@ -147,7 +148,8 @@
    "others": {
     "name": "Mayor of Greater Manchester",
     "to": "the Mayor of Greater Manchester, for police, fire and other services",
-    "short": "the Mayor's share"
+    "short": "the Mayor's share",
+    "with": "the Mayor of Greater Manchester"
    },
    "precepts": [
     {

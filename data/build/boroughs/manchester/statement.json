@@ -194,7 +194,8 @@
   "others": {
    "name": "Mayor of Greater Manchester",
    "to": "the Mayor of Greater Manchester, for police, fire and other services",
-   "short": "the Mayor's share"
+   "short": "the Mayor's share",
+   "with": "the Mayor of Greater Manchester"
   },
   "quality": "sourced",
   "source_id": "ctr_2026-27",
