@@ -1,7 +1,7 @@
 import { JsonLd } from "@/components/JsonLd";
 import { FollowLink } from "@/components/FollowLink";
 import { PageShell } from "@/components/PageShell";
-import { formatMonth, formatMonthShort } from "@/lib/format";
+import { formatDay, formatMonth, formatMonthShort } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
 import { GROUP_QUALITY, GROUPS, MONTHS, PAY, companiesFile, monthFile, payFig, suppliersById } from "@/lib/payments";
 import { paymentsJsonLd } from "@/lib/structured";
@@ -35,6 +35,24 @@ export const PAYMENTS_FAQ = [
 ];
 
 /** /payments and /payments/[month]: every payment in one month, the month-by-month totals, and the files behind them. */
+/** Suppliers whose company is in one status on the register, with the supplier page they open. */
+const troubled = (status: string) =>
+  Object.entries(companiesFile().companies)
+    .filter(([, co]) => co.status === status)
+    .map(([id, co]) => ({ id, co }));
+/** "Act Too Ltd" and "ACT TOO LIMITED" are one name; "Inform CPI Ltd" and "05599551 LIMITED" are not. Brackets the council
+ *  adds ("(Use 3000128)") are ignored. */
+const nameKey = (n: string) =>
+  n
+    .toUpperCase()
+    .replace(/\([^)]*\)/g, " ")
+    .replace(/&/g, " AND ")
+    .replace(/[^A-Z0-9 ]/g, "")
+    .replace(/\b(LTD|LIMITED|PLC|LLP|UK)\b/g, " ")
+    .replace(/\s+/g, "");
+const sameName = (a: string, b: string) => nameKey(a) === nameKey(b) || nameKey(a.replace(/\(([^)]*)\)/g, "$1")) === nameKey(b.replace(/\(([^)]*)\)/g, "$1"));
+const coFig = (v: number) => ({ value: v, quality: "sourced" as const, sources: [companiesFile().source.url] });
+
 export function PaymentsLedger({ m, month }: { m: PageModel; month: string }) {
   const idx = PAY.months.find((x) => x.month === month)!;
   const file = monthFile(month);
@@ -73,8 +91,25 @@ export function PaymentsLedger({ m, month }: { m: PageModel; month: string }) {
           <p>
             Search {PAY.suppliers.count.toLocaleString("en-GB")} organisations across every month. Companies, charities and public bodies have their own page, and{" "}
             {companiesFile().counts.matched!.toLocaleString("en-GB")} of them are linked to their entry on the companies register: status, type, what they do and where
-            their registered office is.
+            their registered office is. In the register&rsquo;s file of {formatDay(companiesFile().source.snapshot)},{" "}
+            <Num f={coFig(troubled("In liquidation").length)} fmt="int" /> are in liquidation and <Num f={coFig(troubled("In administration").length)} fmt="int" /> in
+            administration. That is their status, not a finding about them.
           </p>
+          <details className="chart-table">
+            <summary>The suppliers in liquidation or administration</summary>
+            <ul className="small">
+              {[...troubled("In liquidation"), ...troubled("In administration")]
+                .map((x) => ({ ...x, paid: suppliersById().get(x.id)?.name ?? x.co.name }))
+                .sort((a, z) => a.paid.localeCompare(z.paid))
+                .map(({ id, co, paid }) => (
+                  <li key={id}>
+                    <a href={`/supplier/${id}`}>{paid}</a>
+                    {sameName(paid, co.name) ? "" : ` (now ${co.name} on the register)`},{" "}
+                    <span className="muted">{co.status.toLowerCase()}</span>
+                  </li>
+                ))}
+            </ul>
+          </details>
         </div>
         <SupplierSearch quality={PAY.meta.quality} files={allFiles} />
       </section>
