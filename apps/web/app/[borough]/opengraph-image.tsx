@@ -4,7 +4,7 @@ import { LOGO_DATA_URI } from "@/lib/logo";
 import { BOROUGHS } from "@/lib/boroughs";
 import { councilWithThe } from "@/lib/boroughList";
 
-export const alt = "Borough Book: where your council tax goes. An independent project.";
+export const alt = "Borough Book: where your council tax or rates go. An independent project.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,6 +16,8 @@ export function generateStaticParams() {
 export default async function Image({ params }: { params: Promise<{ borough: string }> }) {
   const { borough } = await params;
   const b = BOROUGHS.find((x) => x.slug === borough)!;
+  // Northern Ireland's homes pay rates, not council tax.
+  const rates = b.nation === "northern_ireland";
   const fonts = await ogFonts();
   return new ImageResponse(
     (
@@ -25,8 +27,8 @@ export default async function Image({ params }: { params: Promise<{ borough: str
           Borough Book
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 68, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.04, maxWidth: 1040 }}>{`Where your council tax goes in ${b.short}`}</div>
-          <div style={{ fontSize: 30, color: "#61616B", maxWidth: 960 }}>{"Your bill, the council’s budget, council tax over the years, and every ward’s councillors."}</div>
+          <div style={{ fontSize: 68, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.04, maxWidth: 1040 }}>{`Where your ${rates ? "rates go" : "council tax goes"} in ${b.short}`}</div>
+          <div style={{ fontSize: 30, color: "#61616B", maxWidth: 960 }}>{rates ? "Your bill from your home’s value, the council’s budget, rates over the years, and every area’s councillors." : "Your bill, the council’s budget, council tax over the years, and every ward’s councillors."}</div>
         </div>
         <div style={{ display: "flex", fontSize: 22, color: "#61616B" }}>{`Independent. Not run by or affiliated with ${councilWithThe(b.council)}.`}</div>
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 12, display: "flex" }}>

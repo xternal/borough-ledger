@@ -1,0 +1,6 @@
+year,council,domestic_district,domestic_regional,domestic_total,source_id,where,reviewed
+2022-23,Belfast,0.003562,0.004574,0.008136,dof_rate_poundages_archive_2024,"table ""Poundages 2022 - 2023"", Belfast row",checked
+2023-24,Belfast,0.003847,0.004848,0.008695,dof_rate_poundages_archive_2024,"table ""Poundages 2023 - 2024"", Belfast row",checked
+2024-25,Belfast,0.004056,0.005042,0.009098,dof_rate_poundages,"table ""Poundages 2024 to 2025"", Belfast row",checked
+2025-26,Belfast,0.004299,0.005294,0.009593,dof_rate_poundages,"table ""Poundages 2025 to 2026"", Belfast row",checked
+2026-27,Belfast,0.004492,0.005559,0.010051,dof_rate_poundages,"table ""Poundages 2026 to 2027"", Belfast row",checked

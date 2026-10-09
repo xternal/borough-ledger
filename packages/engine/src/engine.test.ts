@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { BANDS, DATA, RULES_SCOTLAND, RULES_WALES, bandsOf, type Lever, type Rules } from "@borough-ledger/schema";
+import { BANDS, DATA, RULES_NI, RULES_SCOTLAND, RULES_WALES, bandsOf, type Lever, type Rules } from "@borough-ledger/schema";
 import { REFERENCE_INPUT } from "./fixtures";
 import {
   bandRatio,
@@ -17,6 +17,7 @@ import {
   displayYear,
   nextFinancialYear,
   perBandDHome,
+  ratesBill,
   splitPence,
   type BalanceInput,
   type Scenario,
@@ -365,5 +366,39 @@ describe("scenario links", () => {
   it("round-trips the live levers, including the forecast's 4.99%", () => {
     const s = { ...defaultScenario(live), levers: { ...defaultScenario(live).levers, ct_rise: 4.99, fees: 3 } };
     expect(decodeScenario(live, encodeScenario(live, s))).toEqual(s);
+  });
+});
+
+describe("Northern Ireland's domestic rates", () => {
+  const cap = RULES_NI.capital_value_cap.value;
+  const allowance = RULES_NI.lone_pensioner_allowance.value;
+  // Belfast 2026-27: district 0.4492p and regional 0.5559p in the pound (Department of Finance).
+  const p = { district: 0.004492, regional: 0.005559 };
+
+  it("is the capital value times the two rates, with no bands", () => {
+    const b = ratesBill(123_000, p, { cap, allowance }, false);
+    expect(b.rateable).toBe(123_000);
+    expect(b.district).toBeCloseTo(552.516, 6);
+    expect(b.regional).toBeCloseTo(683.757, 6);
+    expect(b.total).toBeCloseTo(1236.273, 6);
+  });
+
+  it("ignores value above the £400,000 cap", () => {
+    expect(cap).toBe(400_000);
+    expect(ratesBill(650_000, p, { cap, allowance }, false)).toEqual(ratesBill(400_000, p, { cap, allowance }, false));
+    expect(ratesBill(650_000, p, { cap, allowance }, false).rateable).toBe(400_000);
+  });
+
+  it("takes 20% off both parts for a lone pensioner", () => {
+    expect(allowance).toBe(0.2);
+    const full = ratesBill(150_000, p, { cap, allowance }, false);
+    const lpa = ratesBill(150_000, p, { cap, allowance }, true);
+    expect(lpa.total).toBeCloseTo(full.total * 0.8, 9);
+    expect(lpa.district / lpa.regional).toBeCloseTo(full.district / full.regional, 12);
+  });
+
+  it("refuses a value that is not a number of pounds", () => {
+    expect(() => ratesBill(-1, p, { cap, allowance }, false)).toThrow();
+    expect(() => ratesBill(Number.NaN, p, { cap, allowance }, false)).toThrow();
   });
 });

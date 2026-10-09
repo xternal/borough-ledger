@@ -14,3 +14,4 @@ export * from "./companies";
 export * from "./capital";
 export * from "./boroughs";
 export * from "./digest";
+export * from "./rates";

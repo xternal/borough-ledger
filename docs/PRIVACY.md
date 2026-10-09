@@ -33,7 +33,7 @@ Ward pages show each candidate's party and votes at the May 2026 election. Only 
 
 ## Other boroughs
 
-Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from the council's own records with their public role only, election results naming only the councillors elected, and nothing about residents.
+Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from the council's own records with their public role only, election results naming only the councillors elected, and nothing about residents. Belfast's councillor list also carries councillors' phone numbers and email addresses; the snapshot stays in `data/raw` (not committed) and only names, areas, parties and civic offices are published. The Belfast bill calculator, like every other, runs in the browser: the capital value typed into it is never sent.
 
 ## Follow
 

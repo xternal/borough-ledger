@@ -139,6 +139,22 @@ describe("postcode finder across boroughs", () => {
     });
   });
 
+  it("finds the area in Northern Ireland: a ward in Belfast opens its district electoral area", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const belfast = PLACES.find((p) => p.short === "Belfast")!;
+    // Councillors represent areas; postcodes.io gives the ward (BT1 5GS: Central), which lies wholly inside Botanic.
+    expect(belfast.wards).toHaveLength(60);
+    expect(new Set(belfast.wards.map((w) => w.href)).size).toBe(10);
+    expect(placeFromResult({ postcode: "BT1 5GS", admin_district: "Belfast", codes: { admin_ward: "N08000315", admin_district: "N09000003" } }, PLACES)).toMatchObject({
+      kind: "ward",
+      name: "Botanic",
+      word: "area",
+      href: "/belfast#ward-botanic",
+      placeHref: "/belfast",
+    });
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

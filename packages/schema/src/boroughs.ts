@@ -30,9 +30,12 @@ export const BoroughConfig = z.object({
       /** "county" for a council covering a county or region rather than a city (Highland, North Yorkshire): listed apart. */
       kind: z.literal("county").optional(),
       /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
-      nation: z.enum(["england", "scotland", "wales"]).optional(),
+      nation: z.enum(["england", "scotland", "wales", "northern_ireland"]).optional(),
       /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */
       scot_name: z.string().optional(),
+      /** Northern Ireland: councillors represent district electoral areas, several wards each, so the page shows areas and the
+       *  postcode finder maps a ward to its area (data/manual/ni_ward_dea.csv). */
+      areas: z.literal("dea").optional(),
       /** Elected by single transferable vote (Scotland), with the next election's date. */
       voting: z.literal("stv").optional(),
       next_election: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),

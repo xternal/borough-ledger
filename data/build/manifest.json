@@ -180,9 +180,58 @@
    "id": "statswales_ra_financing_cardiff",
    "file": "statswales_ra_financing_cardiff.csv",
    "sha256": "420f9a87beba51ae41277fe786ade6e0047582991e28b715bf7068409424b8aa"
+  },
+  {
+   "id": "dof_rate_poundages",
+   "file": "dof_rate_poundages_2026-10-09.html",
+   "sha256": "a56a2026ef95b68236e292e07ce06514fbbc8fe938834907ff65047195605303"
+  },
+  {
+   "id": "dof_rate_poundages_archive_2024",
+   "file": "dof_rate_poundages_archive_2024-02-27.html",
+   "sha256": "b2fcce2ffa4c41ba7b984ffe9f089b1e9c8ff047bf2f4002e7c4bf7131154641"
+  },
+  {
+   "id": "dfc_rate_statistics_2026-27",
+   "file": "dfc_rate_statistics_2026-27.pdf",
+   "sha256": "a5d81eb0bd3b188f5dba2330a88481960388e2a4a8b3d2560c2fe81f7db45f7f"
+  },
+  {
+   "id": "dfc_rate_statistics_2025-26",
+   "file": "dfc_rate_statistics_2025-26.pdf",
+   "sha256": "109ade648665cbd606d9eadb8f244c00796e329f750efbfc8a3216e651224cdd"
+  },
+  {
+   "id": "dfc_rate_statistics_2024-25",
+   "file": "dfc_rate_statistics_2024-25.pdf",
+   "sha256": "da34ecb9a832224d9208536b526e06bdd46cdd007759ad7678cc116149813fd6"
+  },
+  {
+   "id": "dfc_rate_statistics_2023-24",
+   "file": "dfc_rate_statistics_2023-24.pdf",
+   "sha256": "5381f3099e06219256b0599f6ea1aa5270108bbde5cae353bd229cdf11760a7d"
+  },
+  {
+   "id": "belfast_spr_2026-02-13",
+   "file": "belfast_spr_minutes_2026-02-13.pdf",
+   "sha256": "2c8b7f310ec7f04b78ca19c21c2e1d30c4e7c569695363652500c14c15d0d8d2"
+  },
+  {
+   "id": "dof_regional_rate_2026-27",
+   "file": "dof_regional_rate_2026-27.html",
+   "sha256": "f902306201eb349f45559f0ad265df34a858108e69059faa4c42253014f9cd45"
+  },
+  {
+   "id": "nisra_ward_dea_lookup",
+   "file": "nisra_ward2014_dea2014.ods",
+   "sha256": "bac2893f49a634638c8eaeeca02d67643ce8f64f94e9f564a94f2839e18f087d"
   }
  ],
  "manual": [
+  {
+   "file": "data/manual/belfast_budget.csv",
+   "sha256": "1a48162814342388d60ac6565d2c69fdc37f927fffb612de107630019e3edfc0"
+  },
   {
    "file": "data/manual/capital_2026-30.csv",
    "sha256": "e97f467b8607319caca304a7d1afd6b54f863f888415982f1d9d29ce025ba80c"
@@ -218,6 +267,18 @@
   {
    "file": "data/manual/next_year_2027-28.csv",
    "sha256": "4d2dd4fab289f33665bfc5307a8509019bd9f6548cecc05c9399e2980dfd7d43"
+  },
+  {
+   "file": "data/manual/ni_poundages.csv",
+   "sha256": "26e4c00d6ae4c923a20329b40aeb7b9dfb59cffb1671d7bd39d89a59b062ad28"
+  },
+  {
+   "file": "data/manual/ni_rate_statistics.csv",
+   "sha256": "99551c72f2864646b401aef55b5b8b723d87c1ed2ecb1866154e32936de8af4e"
+  },
+  {
+   "file": "data/manual/ni_ward_dea.csv",
+   "sha256": "6d5781d8ebad79a315d1a24d52be9b9991f3b095f80de8e94b36c74d97c874e9"
   },
   {
    "file": "data/manual/payment_groups.csv",
@@ -267,7 +328,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "9addafba10db1a17941b10a1cad4871617b7e1b67efd210a9b158360413f33a9"
+   "sha256": "ff334ee0419fba80060754e9453ee2b0092d492f7211cd6ea9890ff1f92d0575"
   }
  ],
  "quality_counts": {

@@ -1,0 +1,268 @@
+{
+ "meta": {
+  "council": "Belfast City Council",
+  "council_short": "Belfast",
+  "council_code": "N09000003",
+  "slug": "belfast",
+  "year": "2026-27",
+  "note": "Built by etl/northern_ireland.py from the Department of Finance's rate poundages, the Department for Communities' rate statistics and the council's minutes, read into data/manual/ and checked against each other.",
+  "vintage": "2026-04-17",
+  "sources": [
+   {
+    "id": "dof_rate_poundages",
+    "title": "Rate poundages, 2024/25 to 2026/27 (Department of Finance)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "published_on": "2026-04-17",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "sha256": "a56a2026ef95b68236e292e07ce06514fbbc8fe938834907ff65047195605303"
+   },
+   {
+    "id": "dof_rate_poundages_archive_2024",
+    "title": "Rate poundages, 2022/23 and 2023/24 (Department of Finance, as archived on 27 February 2024)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "http://web.archive.org/web/20240227091632/https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "published_on": "2024-02-27",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "http://web.archive.org/web/20240227091632/https://www.finance-ni.gov.uk/articles/rate-poundages",
+    "sha256": "b2fcce2ffa4c41ba7b984ffe9f089b1e9c8ff047bf2f4002e7c4bf7131154641"
+   },
+   {
+    "id": "dfc_rate_statistics_2026-27",
+    "title": "District council (NI) rate statistics 2026/2027, circular LG 08/2026 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/2026-02/lg-08-2026-rate-statistics.pdf",
+    "published_on": "2026-02-20",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/2026-02/lg-08-2026-rate-statistics.pdf",
+    "sha256": "a5d81eb0bd3b188f5dba2330a88481960388e2a4a8b3d2560c2fe81f7db45f7f"
+   },
+   {
+    "id": "dfc_rate_statistics_2025-26",
+    "title": "District council (NI) rate statistics 2025/2026, circular LG 04/2025 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/2025-02/lg-04-2025-rate-statistics-2025-26.pdf",
+    "published_on": "2025-02-18",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/2025-02/lg-04-2025-rate-statistics-2025-26.pdf",
+    "sha256": "109ade648665cbd606d9eadb8f244c00796e329f750efbfc8a3216e651224cdd"
+   },
+   {
+    "id": "dfc_rate_statistics_2024-25",
+    "title": "District council (NI) rate statistics 2024/2025, circular LG 07/2024 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-07-2024.pdf",
+    "published_on": "2024-02-29",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-07-2024.pdf",
+    "sha256": "da34ecb9a832224d9208536b526e06bdd46cdd007759ad7678cc116149813fd6"
+   },
+   {
+    "id": "dfc_rate_statistics_2023-24",
+    "title": "District council (NI) rate statistics 2023/2024, circular LG 09/2023 (Department for Communities)",
+    "publisher": "Department for Communities (Northern Ireland)",
+    "url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-09-2023.pdf",
+    "published_on": "2023-02-22",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.communities-ni.gov.uk/sites/default/files/publications/communities/lg-09-2023.pdf",
+    "sha256": "5381f3099e06219256b0599f6ea1aa5270108bbde5cae353bd229cdf11760a7d"
+   },
+   {
+    "id": "belfast_spr_2026-02-13",
+    "title": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026: printed minutes (Revenue Estimates and District Rate 2026/27)",
+    "publisher": "Belfast City Council",
+    "url": "https://minutes.belfastcity.gov.uk/ieListDocuments.aspx?CId=163&MID=12501",
+    "published_on": "2026-02-24",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://minutes.belfastcity.gov.uk/documents/g12501/Printed%20minutes%2013th-Feb-2026%2009.30%20Strategic%20Policy%20and%20Resources%20Committee.pdf?T=1",
+    "sha256": "2c8b7f310ec7f04b78ca19c21c2e1d30c4e7c569695363652500c14c15d0d8d2"
+   },
+   {
+    "id": "dof_regional_rate_2026-27",
+    "title": "Executive agrees Regional Rate for 2026/27 (Department of Finance news release, 12 February 2026)",
+    "publisher": "Department of Finance (Northern Ireland)",
+    "url": "https://www.finance-ni.gov.uk/news/executive-agrees-regional-rate-202627",
+    "published_on": "2026-02-12",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.finance-ni.gov.uk/news/executive-agrees-regional-rate-202627",
+    "sha256": "f902306201eb349f45559f0ad265df34a858108e69059faa4c42253014f9cd45"
+   }
+  ]
+ },
+ "rates": {
+  "district": 0.004492,
+  "regional": 0.005559,
+  "district_prev": 0.004299,
+  "regional_prev": 0.005294,
+  "quality": "approx",
+  "source_id": "dof_rate_poundages",
+  "method_note": "Department of Finance, Rate Poundages: domestic district and regional rates for Belfast, in £ per £1 of capital value; each district rate matches the Department for Communities' rate statistics."
+ },
+ "example_value": {
+  "value": 123000,
+  "label": "the average capital value of a home in Northern Ireland",
+  "quality": "sourced",
+  "source_id": "dof_regional_rate_2026-27",
+  "method_note": "Department of Finance, 12 February 2026, note 2: the average capital value in the Domestic Valuation List. There is no official average for Belfast."
+ },
+ "amount_raised": {
+  "m": 227.760695,
+  "reserves_m": 0.0,
+  "quality": "approx",
+  "source_id": "dfc_rate_statistics_2026-27",
+  "method_note": "Department for Communities, District Council Rate Statistics 2026/2027, Table 1 (page 1): total amount to be raised, and the balance applied from reserves (none)."
+ },
+ "history": [
+  {
+   "year": "2022-23",
+   "district": 0.003562,
+   "regional": 0.004574,
+   "amount_raised_m": 178.932441,
+   "quality": "approx",
+   "source_ids": [
+    "dfc_rate_statistics_2023-24",
+    "dof_rate_poundages_archive_2024"
+   ]
+  },
+  {
+   "year": "2023-24",
+   "district": 0.003847,
+   "regional": 0.004848,
+   "amount_raised_m": 193.600657,
+   "quality": "approx",
+   "source_ids": [
+    "dfc_rate_statistics_2023-24",
+    "dfc_rate_statistics_2024-25",
+    "dof_rate_poundages_archive_2024"
+   ]
+  },
+  {
+   "year": "2024-25",
+   "district": 0.004056,
+   "regional": 0.005042,
+   "amount_raised_m": 206.052912,
+   "quality": "approx",
+   "source_ids": [
+    "dfc_rate_statistics_2024-25",
+    "dfc_rate_statistics_2025-26",
+    "dof_rate_poundages"
+   ]
+  },
+  {
+   "year": "2025-26",
+   "district": 0.004299,
+   "regional": 0.005294,
+   "amount_raised_m": 220.08148,
+   "quality": "approx",
+   "source_ids": [
+    "dfc_rate_statistics_2025-26",
+    "dfc_rate_statistics_2026-27",
+    "dof_rate_poundages"
+   ]
+  },
+  {
+   "year": "2026-27",
+   "district": 0.004492,
+   "regional": 0.005559,
+   "amount_raised_m": 227.760695,
+   "quality": "approx",
+   "source_ids": [
+    "dfc_rate_statistics_2026-27",
+    "dof_rate_poundages"
+   ]
+  }
+ ],
+ "funding": [
+  {
+   "id": "district_rates",
+   "label": "District rates (homes and businesses)",
+   "official_term": "Estimated amount to be raised via district rates (rateable)",
+   "kind": "rates",
+   "m": 220.388739,
+   "desc": "The council's part of every rates bill, paid by homes and businesses alike. The regional rate on the same bill goes to the Executive, not the council",
+   "quality": "approx",
+   "source_id": "dfc_rate_statistics_2026-27",
+   "method_note": "Department for Communities, District Council Rate Statistics 2026/2027, Table 2 (page 2): estimated amount to be raised via district rates."
+  },
+  {
+   "id": "derating_grant",
+   "label": "De-rating grant",
+   "official_term": "Estimated de-rating grant",
+   "kind": "grant",
+   "m": 7.371956,
+   "desc": "Paid by the Executive to make up the rates that some property, such as factories, is let off",
+   "quality": "approx",
+   "source_id": "dfc_rate_statistics_2026-27",
+   "method_note": "Department for Communities, District Council Rate Statistics 2026/2027, Table 2 (page 2): estimated de-rating grant."
+  }
+ ],
+ "services": [
+  {
+   "id": "people_communities",
+   "label": "Bins, streets, parks, leisure and communities",
+   "official_term": "People and Communities Committee cash limit",
+   "desc": "Bin collections and recycling, street cleaning, parks and open spaces, leisure centres, community services and environmental health",
+   "m": 111.192369,
+   "general_fund_m": 111.192369,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026, resolution 2: the People and Communities Committee's cash limit for 2026-27 (page 3)."
+  },
+  {
+   "id": "strategic_policy_resources",
+   "label": "Running the council, and city funds",
+   "official_term": "Strategic Policy and Resources Committee cash limit",
+   "desc": "The council's own finance, staff, property and legal services, with £0.9m for the Belfast Investment Fund and £3.0m towards the Belfast Region City Deal",
+   "m": 59.697435,
+   "general_fund_m": 59.697435,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026, resolution 2: the Strategic Policy and Resources Committee's cash limit, including £900,000 for the Belfast Investment Fund and £3,000,000 for City Deal for 2026-27 (page 3)."
+  },
+  {
+   "id": "capital_financing",
+   "label": "Paying for past building projects",
+   "official_term": "Capital financing budget",
+   "desc": "Repaying the loans and setting aside money for buildings, parks and other long-term projects",
+   "m": 25.774022,
+   "general_fund_m": 25.774022,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026, resolution 2: the Capital Financing Budget for 2026-27 (page 3)."
+  },
+  {
+   "id": "city_growth_regeneration",
+   "label": "Jobs, tourism, culture and regeneration",
+   "official_term": "City Growth and Regeneration Committee cash limit",
+   "desc": "Help for businesses and jobs, tourism, events, culture and the arts, markets and regenerating the city centre",
+   "m": 23.958554,
+   "general_fund_m": 23.958554,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026, resolution 2: the City Growth and Regeneration Committee's cash limit for 2026-27 (page 3)."
+  },
+  {
+   "id": "growth_fund",
+   "label": "Growth fund",
+   "official_term": "Growth fund",
+   "desc": "Set aside for new spending this year. The minutes give it only as £4.2m, so this is what the total leaves once the other lines are taken off",
+   "m": 4.172896,
+   "general_fund_m": 4.172896,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "The amount to be raised (Department for Communities, Table 1) less the four committees' cash limits and the capital financing budget; the minutes say \"A growth fund of 4.2m\" (page 3)."
+  },
+  {
+   "id": "planning",
+   "label": "Planning",
+   "official_term": "Planning Committee cash limit",
+   "desc": "Deciding planning applications and preparing the city's plan for how land is used",
+   "m": 2.965419,
+   "general_fund_m": 2.965419,
+   "quality": "approx",
+   "source_id": "belfast_spr_2026-02-13",
+   "method_note": "Belfast City Council, Strategic Policy and Resources Committee, 13 February 2026, resolution 2: the Planning Committee's cash limit for 2026-27 (page 3)."
+  }
+ ]
+}

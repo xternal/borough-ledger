@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "note": "Northern Ireland's domestic rating rules, for Belfast (etl/northern_ireland.py, apps/web RatesBill). Homes pay rates, not council tax: capital value times the district and regional rates. Read from nidirect and the Department for Communities on 9 October 2026.",
+    "vintage": "2026-04-09",
+    "sources": [
+      {
+        "id": "nidirect_rates_calculated",
+        "title": "How rate bills are calculated (nidirect)",
+        "publisher": "Northern Ireland Executive (nidirect)",
+        "url": "https://www.nidirect.gov.uk/articles/how-rate-bills-are-calculated",
+        "published_on": "2026-03-19",
+        "licence": "OGL-UK-3.0"
+      },
+      {
+        "id": "nisr_2009_77",
+        "title": "The Rates (Maximum Capital Value) (Amendment) Regulations (Northern Ireland) 2009 (SR 2009/77)",
+        "publisher": "legislation.gov.uk",
+        "url": "https://www.legislation.gov.uk/nisr/2009/77",
+        "licence": "OGL-UK-3.0"
+      },
+      {
+        "id": "nidirect_lone_pensioner_allowance",
+        "title": "Lone Pensioner Allowance (nidirect)",
+        "publisher": "Northern Ireland Executive (nidirect)",
+        "url": "https://www.nidirect.gov.uk/articles/lone-pensioner-allowance",
+        "licence": "OGL-UK-3.0"
+      },
+      {
+        "id": "nidirect_rate_bill",
+        "title": "Introducing your rate bill (nidirect)",
+        "publisher": "Northern Ireland Executive (nidirect)",
+        "url": "https://www.nidirect.gov.uk/articles/introducing-your-rate-bill",
+        "licence": "OGL-UK-3.0"
+      },
+      {
+        "id": "dfc_rate_statistics_2026-27_rules",
+        "title": "District council (NI) rate statistics 2026/2027, circular LG 08/2026, introduction (Department for Communities)",
+        "publisher": "Department for Communities",
+        "url": "https://www.communities-ni.gov.uk/sites/default/files/2026-02/lg-08-2026-rate-statistics.pdf",
+        "published_on": "2026-02-20",
+        "licence": "OGL-UK-3.0"
+      }
+    ]
+  },
+  "capital_value_cap": {
+    "value": 400000,
+    "quality": "sourced",
+    "source_id": "nidirect_rates_calculated",
+    "note": "\"The maximum capital valuation for a domestic property is £400,000\": value above it is disregarded. Set by SR 2007/184, lowered from £500,000 by SR 2009/77 from 1 April 2009. A 2025 review proposed £485,000; nothing has changed for 2026-27."
+  },
+  "valuation_date": {
+    "value": "2005-01-01",
+    "quality": "sourced",
+    "source_id": "nidirect_rates_calculated",
+    "note": "Capital value is \"based on property values on 1 January 2005\" (Rates (Northern Ireland) Order 1977, Schedule 12, paragraph 7(4)). No new valuation of homes has been set."
+  },
+  "lone_pensioner_allowance": {
+    "value": 0.2,
+    "age": 70,
+    "quality": "sourced",
+    "source_id": "nidirect_lone_pensioner_allowance",
+    "note": "20 per cent off for someone aged 70 or over who lives alone; not means tested; by application (Land & Property Services, or the Housing Executive for its tenants)."
+  },
+  "instalments": {
+    "value": 10,
+    "quality": "sourced",
+    "source_id": "nidirect_rate_bill",
+    "note": "\"You can make one payment for the full amount or spread payments over ten months.\""
+  },
+  "balanced_budget": {
+    "tolerance_m": 0.001,
+    "quality": "sourced",
+    "source_id": "dfc_rate_statistics_2026-27_rules",
+    "note": "Local Government Finance Act (Northern Ireland) 2011, section 3: each year a council estimates its income and spending and fixes the amount to be raised by rates. Funding must equal spending to £1,000."
+  }
+}

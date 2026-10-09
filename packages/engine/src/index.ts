@@ -6,3 +6,4 @@ export * from "./costing";
 export * from "./years";
 export * from "./medium";
 export * from "./scenario";
+export * from "./rates";
