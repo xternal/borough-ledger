@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "ed3fb0f6d865437013489d7d647ff1ccbf23e036721c3323e462bb000869ee3e"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Camden since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=CMD&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "25783ed6150446f9e1ad739624886fda7795a9f6c662f0a99f135dba749d15a2"
   }
  ],
  "election": {

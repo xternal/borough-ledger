@@ -37,6 +37,7 @@ RAW = ROOT / "data" / "raw" / "boroughs"
 OUT = ROOT / "data" / "build" / "boroughs"
 UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
 DC = "https://candidates.democracyclub.org.uk/api/next/ballots/"
+EE = "https://elections.democracyclub.org.uk/api/elections/"
 PARTY = {
     "Conservative Party": "conservative", "Conservative": "conservative", "Conservative and Unionist Party": "conservative", "Local Conservatives": "conservative",
     "Labour Party": "labour", "Labour": "labour", "Labour and Cooperative Party": "labour", "Labour and Co-operative Party": "labour",
@@ -48,13 +49,18 @@ def party_id(name: str) -> str:
     Party" are Conservative. Anything else keeps its own name. The same rule for every party."""
     n = name.lower()
     for pattern, pid in ((r"^labour\b", "labour"), (r"\bconservatives?\b", "conservative"), (r"^liberal democrat", "liberal-democrats"),
-                         (r"^(the )?green party|^green$", "green"), (r"^(the )?reform uk", "reform-uk"), (r"^independent$", "independent")):
+                         (r"\bgreen party\b|^green$", "green"), (r"^(the )?reform uk", "reform-uk"), (r"^independent( member)?$", "independent")):
         if re.search(pattern, n):
             return pid
     return PARTY.get(name, slug(name))
 
 
 PARTY_SHORT = {"conservative": "Conservative", "labour": "Labour", "liberal-democrats": "Liberal Democrats", "green": "Green", "independent": "Independent", "reform-uk": "Reform UK"}
+
+
+def ward_name(s: str) -> str:
+    """A ward's name without the " Ward" some councils add to every one (Kingston upon Thames: "Alexandra Ward")."""
+    return re.sub(r"(?i)\s+ward$", "", s.strip())
 
 
 def slug(s: str) -> str:
@@ -171,12 +177,32 @@ def fetch(b: Dict[str, str], today: str) -> Dict[str, Path]:
         ballots += page["results"]
         url = page.get("next")
     paths["ballots"].write_text(json.dumps(ballots, ensure_ascii=False))
+    paths["byelections"] = fetch_byelections(b, today)
     if b.get("mayor_election_id"):
         mayor = json.loads(get(f"{DC}?{urllib.parse.urlencode({'election_id': b['mayor_election_id'], 'page_size': 5})}"))["results"]
         (d / f"mayor_{today}.json").write_text(json.dumps(mayor, ensure_ascii=False))
     query = {"where": f"LAD24CD='{b['ons']}'", "outFields": "WD24CD,WD24NM,LONG,LAT", "outSR": "4326", "f": "geojson"}
     paths["wards"].write_bytes(get(f"{WM.SERVICE}?{urllib.parse.urlencode(query)}"))
     return paths
+
+
+def fetch_byelections(b: Dict[str, str], today: str) -> Path:
+    """Every by-election to the council since May's election, from Democracy Club's register of elections: a May winner
+    can only have left, and someone new joined, where their ward held one."""
+    org = json.loads(get(f"{EE}{b['election_id']}/"))["organisation"]["official_identifier"]
+    day = b["election_id"].rsplit(".", 1)[-1]
+    query = {"organisation_identifier": org, "organisation_type": "local-authority", "poll_open_date__gt": day, "identifier_type": "ballot", "page_size": 100}
+    first = url = f"{EE}?{urllib.parse.urlencode(query)}"
+    out: List[Dict[str, Any]] = []
+    while url:
+        page = json.loads(get(url))
+        out += [{"election_id": e["election_id"], "date": e["poll_open_date"], "cancelled": bool(e.get("cancelled")),
+                 "ward_gss": ((e.get("division") or {}).get("official_identifier") or "").removeprefix("gss:")}
+                for e in page["results"] if ".by." in e["election_id"] and e["poll_open_date"] > day]  # the API's date filter is not relied on
+        url = page.get("next")
+    path = RAW / b["slug"] / f"byelections_{today}.json"
+    path.write_text(json.dumps({"url": first, "byelections": sorted(out, key=lambda e: e["election_id"])}, ensure_ascii=False))
+    return path
 
 
 def latest(b: Dict[str, str]) -> Dict[str, Path]:
@@ -187,6 +213,9 @@ def latest(b: Dict[str, str]) -> Dict[str, Path]:
         if not files:
             raise SystemExit(f"borough people {b['slug']}: no {k} snapshot; run without --offline first")
         out[k] = files[-1]
+    by = sorted(d.glob("byelections_*"))
+    if by:
+        out["byelections"] = by[-1]
     return out
 
 
@@ -214,14 +243,18 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
     from_ballots = b.get("councillors_from") == "ballots"
     mg = moderngov_from_ballots(ballots) if from_ballots else paths["moderngov"].read_bytes()
     retrieved = paths["ballots" if from_ballots else "moderngov"].stem.rsplit("_", 1)[-1]
-    by_ward = {slug(x["post"]["label"]): x for x in ballots}
+    by_ward = {slug(ward_name(x["post"]["label"])): x for x in ballots}
+    # Wards that held a by-election since May (None where that register was not read, as before it was).
+    by_file = json.loads(paths["byelections"].read_text()) if "byelections" in paths else None
+    by_elected = {e["ward_gss"] for e in by_file["byelections"] if not e["cancelled"]} if by_file else None
     councillors: List[Dict[str, Any]] = []
     wards: List[Dict[str, Any]] = []
     for w in ET.fromstring(mg).iter("ward"):
-        name = (w.findtext("wardtitle") or "").strip()
+        title = (w.findtext("wardtitle") or "").strip()
+        name = ward_name(title)
         key = slug(name)
         if key not in by_ward:
-            if re.search(r"(?i)mayor|no ward|borough[- ]wide|^$", name):
+            if re.search(r"(?i)mayor|no ward|borough[- ]wide|^$|^ward$", title):
                 continue  # the elected mayor is listed under a heading of their own; the mayor comes from their ballot
             raise SystemExit(f"borough people {b['slug']}: ward {name!r} has no Democracy Club ballot")
         ids = []
@@ -276,9 +309,22 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
         # only as far as a vacant seat or a councillor who joined since (not one of May's winners) accounts for it;
         # anything else is a name we failed to pair, and stops the build so a person looks.
         joined = [i for i in ids if i not in pairs.values()]
+        gss = x["post"]["id"].removeprefix("gss:")
+        if unmatched and joined and by_elected is not None and gss not in by_elected:
+            # No by-election in the ward since May, so nobody new can have joined: the listed councillor we could not pair
+            # is May's winner under another name (Croydon, New Addington North: "Afuah Ahorgah-Dorfia" on the ballot,
+            # "Afuah Asantewaa Agyemang" on the council's list). Paired where it is one name and one councillor;
+            # anything else stops the build so a person looks.
+            if len(unmatched) != 1 or len(joined) != 1:
+                raise SystemExit(f"borough people {b['slug']}: {name}: {len(unmatched)} winners and {len(joined)} councillors unpaired, and no by-election since May")
+            r0, n0 = unmatched.pop()
+            r0["councillor_id"] = joined[0]
+            me = next(c for c in councillors if c["id"] == joined[0])
+            print(f"borough people {b['slug']}: {name}: {n0} (on the ballot) is {me['name']} (on the council's list): no by-election since May")
+            joined = []
         # Elected by thirds (Manchester): the other councillors were elected in earlier years, so only an empty seat
         # can explain a May winner who is not listed.
-        room = (seats_total - len(ids)) + (0 if b.get("elections") == "thirds" else len(joined))
+        room = (seats_total - len(ids)) + (0 if b.get("elections") == "thirds" or (by_elected is not None and gss not in by_elected) else len(joined))
         if len(unmatched) > room:
             raise SystemExit(f"borough people {b['slug']}: {name}: elected {', '.join(n for _, n in unmatched)} not on the council's list, and no seat changed hands")
         for r, n in unmatched:
@@ -290,7 +336,10 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
             "id": key, "ons_code": x["post"]["id"].removeprefix("gss:"), "name": name, "councillor_ids": ids,
             "election": {
                 "seats": x["winner_count"], "ballots": r["num_turnout_reported"], "turnout_pct": r["turnout_percentage"], "rejected": r["num_spoilt_ballots"],
-                "result_url": r["source"], "dc_url": f"https://candidates.democracyclub.org.uk/elections/{x['ballot_paper_id']}/", "candidates": candidates,
+                # The declaration's address; where Democracy Club recorded it as heard ("At the count", Ealing's North
+                # Hanwell), its own page for the ballot.
+                "result_url": r["source"] if re.match(r"https?://", r["source"] or "") else f"https://candidates.democracyclub.org.uk/elections/{x['ballot_paper_id']}/",
+                "dc_url": f"https://candidates.democracyclub.org.uk/elections/{x['ballot_paper_id']}/", "candidates": candidates,
                 **({"seats_total": seats_total} if seats_total != x["winner_count"] else {}),
             },
         })
@@ -325,7 +374,9 @@ def people(b: Dict[str, Any], paths: Dict[str, Path]) -> Dict[str, Any]:
              "retrieved_on": retrieved, "sha256": hashlib.sha256(mg).hexdigest()}]) + [
             {"title": f"Democracy Club, {b['short']} local election 7 May 2026", "url": f"{DC}?election_id={b['election_id']}",
              "retrieved_on": retrieved, "licence": "CC BY-SA 4.0", "sha256": hashlib.sha256(dc).hexdigest()},
-        ],
+        ] + ([{"title": f"Democracy Club, by-elections to {'the ' if re.match(r'(London|Royal) Borough', b['council']) else ''}{b['council']} since 7 May 2026", "url": by_file["url"],
+               "retrieved_on": paths["byelections"].stem.rsplit("_", 1)[-1], "licence": "CC BY-SA 4.0",
+               "sha256": hashlib.sha256(paths["byelections"].read_bytes()).hexdigest()}] if by_file else []),
         "election": {"id": b["election_id"], "date": "2026-05-07"},
         # Parties without a common short name keep the name the council gives them, as written.
         "parties": [{"id": p, "short": PARTY_SHORT.get(p) or next(c["party_name"] for c in councillors if c["party"] == p), "seats": n}

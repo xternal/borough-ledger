@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "0f0ad6c0333ccd68f6f74becbaa0f291b71bf45c534bec185eaed3af9c9b5908"
+  },
+  {
+   "title": "Democracy Club, by-elections to the Royal Borough of Kensington and Chelsea since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=KEC&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "3a968ec3e14f3da07c1798e33dad915ed20e25fcb654265e943d304bd37f7c98"
   }
  ],
  "election": {

@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "5b94a3dacfb85983d8143a95b25650f56642c5f9d5c9bf69f03596a1fd2065b7"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Barking and Dagenham since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=BDG&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "ded11fdfaea7d296b429955235fa85d4655c1cbc2e6e5c3a5b408cff956bb180"
   }
  ],
  "election": {

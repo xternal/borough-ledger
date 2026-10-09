@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "b066a330f7f91ad2129dde11ad670cab9efbb4e3c96f8666fec4e621d01b1702"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Hackney since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=HCK&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "a39a4e0b38b8ab88e1aef7f0b3951ba83c2f5f8781617af58c8bb180b7aace14"
   }
  ],
  "election": {

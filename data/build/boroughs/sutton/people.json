@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "2ce3e66b78e61a36bdaabe241b66d7e4bc0115a32a50c27300d65fffe2f34cb7"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Sutton since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=STN&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "9ffab9e62b50f548951324d7e94a4c9de65122f6b6134d856f2e3442c893cec1"
   }
  ],
  "election": {

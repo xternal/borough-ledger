@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "d1291b71ae893cf01b8cda3c621152caa1b699e7760d6ac492f41bc988ccf86d"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Brent since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=BEN&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "a1e9d8c914bc2e25eafb0a55c52290b8d5c0b09a1fe84549189737e24b65763f"
   }
  ],
  "election": {

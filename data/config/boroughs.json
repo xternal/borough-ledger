@@ -72,6 +72,25 @@
    "example_postcode": "WC1H 9JE"
   },
   {
+   "slug": "croydon",
+   "council": "London Borough of Croydon",
+   "short": "Croydon",
+   "ons": "E09000008",
+   "moderngov": "https://democracy.croydon.gov.uk",
+   "election_id": "local.croydon.2026-05-07",
+   "example_postcode": "CR0 1EA",
+   "mayor_election_id": "mayor.croydon.2026-05-07"
+  },
+  {
+   "slug": "ealing",
+   "council": "London Borough of Ealing",
+   "short": "Ealing",
+   "ons": "E09000009",
+   "moderngov": "https://ealing.moderngov.co.uk",
+   "election_id": "local.ealing.2026-05-07",
+   "example_postcode": "W5 2HL"
+  },
+  {
    "slug": "hackney",
    "council": "London Borough of Hackney",
    "short": "Hackney",
@@ -127,6 +146,15 @@
    "example_postcode": "W8 7NX"
   },
   {
+   "slug": "kingston-upon-thames",
+   "council": "Royal Borough of Kingston upon Thames",
+   "short": "Kingston upon Thames",
+   "ons": "E09000021",
+   "moderngov": "https://moderngov.kingston.gov.uk",
+   "election_id": "local.kingston-upon-thames.2026-05-07",
+   "example_postcode": "KT1 1EU"
+  },
+  {
    "slug": "lambeth",
    "council": "London Borough of Lambeth",
    "short": "Lambeth",
@@ -173,6 +201,16 @@
      "authority": "West Yorkshire Fire and Rescue Authority"
     }
    ]
+  },
+  {
+   "slug": "lewisham",
+   "council": "London Borough of Lewisham",
+   "short": "Lewisham",
+   "ons": "E09000023",
+   "moderngov": "https://councilmeetings.lewisham.gov.uk",
+   "election_id": "local.lewisham.2026-05-07",
+   "example_postcode": "SE6 4RU",
+   "mayor_election_id": "mayor.lewisham.2026-05-07"
   },
   {
    "slug": "manchester",
@@ -222,6 +260,16 @@
    "example_postcode": "SM4 5DX"
   },
   {
+   "slug": "newham",
+   "council": "London Borough of Newham",
+   "short": "Newham",
+   "ons": "E09000025",
+   "moderngov": "https://mgov.newham.gov.uk",
+   "election_id": "local.newham.2026-05-07",
+   "example_postcode": "E16 2QU",
+   "mayor_election_id": "mayor.newham.2026-05-07"
+  },
+  {
    "slug": "redbridge",
    "council": "London Borough of Redbridge",
    "short": "Redbridge",
@@ -266,6 +314,25 @@
    "election_id": "local.tower-hamlets.2026-05-07",
    "example_postcode": "E1 1BJ",
    "mayor_election_id": "mayor.tower-hamlets.2026-05-07"
+  },
+  {
+   "slug": "wandsworth",
+   "council": "London Borough of Wandsworth",
+   "short": "Wandsworth",
+   "ons": "E09000032",
+   "moderngov": "https://democracy.wandsworth.gov.uk",
+   "election_id": "local.wandsworth.2026-05-07",
+   "example_postcode": "SW18 2PU"
+  },
+  {
+   "slug": "westminster",
+   "council": "Westminster City Council",
+   "short": "Westminster",
+   "ons": "E09000033",
+   "moderngov": "https://committees.westminster.gov.uk",
+   "election_id": "local.westminster.2026-05-07",
+   "example_postcode": "SW1E 6QP",
+   "parish_names": "Queen's Park Community Council"
   }
  ]
 }

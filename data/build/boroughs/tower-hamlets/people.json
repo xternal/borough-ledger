@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "505c3be0770269203c0299c3b2db007f58c4b5175a9f85ecd0c2aacad82e5c05"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Tower Hamlets since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=TWH&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "685ca8c3588d0686a1397d86e59492f03f70820b5ee89f8b3cf4bb9c568b6505"
   }
  ],
  "election": {

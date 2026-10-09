@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "17e96bf7b6f7e1a4066157fd591b2ebca1d7103102d835694638d47538445452"
+  },
+  {
+   "title": "Democracy Club, by-elections to Manchester City Council since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=MAN&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "137ca988a4478aa99bb6e0440dfeb2ac01cd96cac3879ccffc060946880f71be"
   }
  ],
  "election": {

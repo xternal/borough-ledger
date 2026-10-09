@@ -235,3 +235,7 @@ The first councils outside London: Manchester City Council and Birmingham City C
 
 Leeds City Council's bill (police set by the Mayor of West Yorkshire, fire, 31 parishes shown apart), budget and five years of council tax, from the same returns and checks. No councillors yet: Leeds' democracy site turns automated requests away, and the page says so and links the council's own list (docs/BOROUGHS.md). The rounding allowance in one Table 10 check now scales with the council's size. 21 councils on the site.
 
+## Seven more London boroughs (9 Oct 2026, in review)
+
+Croydon, Ealing, Kingston upon Thames, Lewisham, Newham, Wandsworth and Westminster: 28 councils on the site. The council tax agreement check allows £5,000 (these differ by £1,200 to £3,100); a May winner can be shown as no longer on the council's list only where the ward held a by-election since May (docs/BOROUGHS.md).
+

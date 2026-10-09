@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "3775a13c20e99ab3e72d424a4922b7cd1cdcbd4c549ec5a46deb5115ae7e4047"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Havering since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=HAV&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "da40bce4051c147ab535338cb0f05e9d3890b14649e9168391b4f2545009fdc1"
   }
  ],
  "election": {

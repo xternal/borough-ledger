@@ -13,6 +13,13 @@
    "retrieved_on": "2026-10-09",
    "licence": "CC BY-SA 4.0",
    "sha256": "738b7d1003cbac695865974d536180beba12ca48fabd386bcbd68d9df19141d6"
+  },
+  {
+   "title": "Democracy Club, by-elections to the London Borough of Lambeth since 7 May 2026",
+   "url": "https://elections.democracyclub.org.uk/api/elections/?organisation_identifier=LBH&organisation_type=local-authority&poll_open_date__gt=2026-05-07&identifier_type=ballot&page_size=100",
+   "retrieved_on": "2026-10-09",
+   "licence": "CC BY-SA 4.0",
+   "sha256": "c3ed7d9c71563c7614e0d61fdaa34754775bd65bc4cf95cc44b35808dfe7744b"
   }
  ],
  "election": {

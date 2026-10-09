@@ -118,10 +118,11 @@ describe("postcode finder across boroughs", () => {
   it("says where a postcode outside the covered boroughs is", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");
-    expect(placeFromResult({ postcode: "SW1A 2AA", admin_district: "Westminster", codes: { admin_ward: "E05013806", admin_district: "E09000033" } }, PLACES)).toEqual({
+    // Islington: held back while its two council tax returns differ (docs/BOROUGHS.md).
+    expect(placeFromResult({ postcode: "N1 2UD", admin_district: "Islington", codes: { admin_ward: "E05013710", admin_district: "E09000019" } }, PLACES)).toEqual({
       kind: "elsewhere",
-      district: "Westminster",
-      postcode: "SW1A 2AA",
+      district: "Islington",
+      postcode: "N1 2UD",
     });
   });
 });
