@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { BANDS, DATA, RULES_SCOTLAND, type Lever, type Rules } from "@borough-ledger/schema";
+import { BANDS, DATA, RULES_SCOTLAND, RULES_WALES, bandsOf, type Lever, type Rules } from "@borough-ledger/schema";
 import { REFERENCE_INPUT } from "./fixtures";
 import {
   bandRatio,
@@ -45,14 +45,20 @@ const scenario = (levers: Scenario["levers"], toggles: Scenario["toggles"] = {})
 describe("council rules (config, sourced)", () => {
   it("band ratios are the statutory 6:7:8:9:11:13:15:18 over 9", () => {
     const ninths = [6, 7, 8, 9, 11, 13, 15, 18];
-    BANDS.forEach((b, i) => expect(R.band_ratios.value[b]).toEqual([ninths[i], 9]));
+    bandsOf(R).forEach((b, i) => expect(R.band_ratios.value[b]).toEqual([ninths[i], 9]));
     expect(bandRatio(R, "D")).toBe(1);
     expect(bandRatio(R, "H")).toBe(2);
   });
 
+  it("England and Scotland have bands A to H; only a nation whose rules define Band I (Wales) has it", () => {
+    expect(bandsOf(R)).toEqual(BANDS.slice(0, 8));
+    expect(bandsOf(RULES_SCOTLAND)).toEqual(BANDS.slice(0, 8));
+    expect(() => bandRatio(R, "I")).toThrow(/no Band I/);
+  });
+
   it("single person discount is 25%", () => {
     expect(R.single_person_discount.value).toBe(0.25);
-    for (const b of BANDS) {
+    for (const b of bandsOf(R)) {
       const full = billFor(R, bandD, b, false);
       const alone = billFor(R, bandD, b, true);
       expect(alone.total).toBeCloseTo(full.total * 0.75, 10);
@@ -73,7 +79,7 @@ describe("Scotland's rules (config, sourced)", () => {
 
   it("council tax bands are 240:280:320:360:473:585:705:882 over 360; Scottish Water's stay at ninths", () => {
     const over360 = [240, 280, 320, 360, 473, 585, 705, 882];
-    BANDS.forEach((b, i) => expect(S.band_ratios.value[b]).toEqual([over360[i], 360]));
+    bandsOf(S).forEach((b, i) => expect(S.band_ratios.value[b]).toEqual([over360[i], 360]));
     expect(bandRatio(S, "H")).toBeCloseTo(2.45, 10);
     expect(othersRatio(S, "H")).toBe(2);
     expect(othersRatio(R, "H")).toBe(bandRatio(R, "H")); // England: one set of ratios for the whole bill
@@ -81,7 +87,7 @@ describe("Scotland's rules (config, sourced)", () => {
 
   it("Glasgow's every band matches the council's and Scottish Water's published amounts to the penny, and the discount takes 25% off both", () => {
     const d = { council: G.bill.band_d_council, gla: G.bill.band_d_gla };
-    for (const b of BANDS) {
+    for (const b of bandsOf(S)) {
       const full = billFor(S, d, b, false);
       expect(Math.round(full.council * 100) / 100 + Math.round(full.gla * 100) / 100).toBeCloseTo(G.bill.published_bands[b], 10);
       expect(billFor(S, d, b, true).total).toBeCloseTo(full.total * 0.75, 10);
@@ -94,6 +100,26 @@ describe("Scotland's rules (config, sourced)", () => {
   });
 });
 
+describe("Wales's rules (config, sourced)", () => {
+  const W = RULES_WALES;
+  const C2 = JSON.parse(readFileSync(new URL("../../../data/build/boroughs/cardiff/statement.json", import.meta.url), "utf8"));
+
+  it("nine bands, A to I, at 6 to 21 ninths of Band D", () => {
+    expect(bandsOf(W)).toEqual([...BANDS]);
+    expect(bandRatio(W, "I")).toBeCloseTo(21 / 9, 10);
+  });
+
+  it("Cardiff's every band, A to I, is Band D times its ratio to the penny, council and police together", () => {
+    const d = { council: C2.bill.band_d_council, gla: C2.bill.band_d_gla };
+    for (const b of bandsOf(W)) expect(Math.round(billFor(W, d, b, false).total * 100) / 100).toBeCloseTo(C2.bill.published_bands[b], 10);
+  });
+
+  it("no referendums; ten instalments or twelve", () => {
+    for (const y of Object.values(W.referendum_limit_pct)) expect(y.threshold_pct).toBeNull();
+    expect(W.instalments.options).toEqual([10, 12]);
+  });
+});
+
 describe("your bill", () => {
   it("Band D reproduces the published split: council £1,009.00 + Mayor of London £510.51 = £1,519.51", () => {
     const d = billFor(R, bandD, "D", false);
@@ -103,14 +129,14 @@ describe("your bill", () => {
   });
 
   it("every band matches the government's published 2026/27 amount to the penny", () => {
-    for (const b of BANDS) expect(Math.round(billFor(R, bandD, b, false).total * 100) / 100).toBe(C.bill.published_bands[b]);
+    for (const b of bandsOf(R)) expect(Math.round(billFor(R, bandD, b, false).total * 100) / 100).toBe(C.bill.published_bands[b]);
   });
 
   it("the Mayor of London's share splits by body: the GLA's own Band D figures, and every band adds back to the penny", () => {
     const split = C.bill.gla_split!;
     const weights = split.map((g) => g.band_d);
     expect(splitPence(C.bill.band_d_gla, weights)).toEqual(weights);
-    for (const b of BANDS)
+    for (const b of bandsOf(R))
       for (const alone of [false, true]) {
         const gla = Math.round(billFor(R, bandD, b, alone).gla * 100) / 100;
         const parts = splitPence(gla, weights);

@@ -43,9 +43,21 @@ def main(check_only: bool) -> int:
                 print(f"missing   {s['file']}")
                 bad += 1
                 continue
-            req = urllib.request.Request(s["asset_url"], headers={"User-Agent": UA})
-            with urllib.request.urlopen(req, timeout=120) as r, open(path, "wb") as out:
-                out.write(r.read())
+            data = b""
+            for attempt in range(3):
+                # gov.scot once answered GitHub's runners with empty bodies: an empty file is retried, never kept.
+                req = urllib.request.Request(s["asset_url"], headers={"User-Agent": UA})
+                with urllib.request.urlopen(req, timeout=120) as r:
+                    data = r.read()
+                if data:
+                    break
+                import time
+                time.sleep(15 * (attempt + 1))
+            if not data:
+                print(f"EMPTY     {s['file']}: the server sent nothing, three times")
+                bad += 1
+                continue
+            path.write_bytes(data)
             print(f"fetched   {s['file']}")
         got = sha256(path)
         if got != s["sha256"]:

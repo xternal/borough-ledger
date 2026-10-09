@@ -29,6 +29,8 @@ jobs:
         run: python etl/boroughs.py --check
       - name: Scottish councils pass their checks and match a fresh build
         run: python etl/scotland.py --check
+      - name: Welsh councils pass their checks and match a fresh build
+        run: python etl/wales.py --check
       - name: Other boroughs' councillors and results hold together and name only councillors
         run: python etl/borough_people.py --check
       - name: Payments reconcile to every council file (raw files are not in CI, so the committed build is checked)

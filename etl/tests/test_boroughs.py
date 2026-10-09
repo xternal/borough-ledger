@@ -134,6 +134,18 @@ class BoroughsTest(unittest.TestCase):
             ct = next(f for f in st["funding"] if f["id"] == "council_tax")
             self.assertEqual(ct["source_id"], "ra_2026-27")  # the budget uses the budget return's figure, and says so
 
+    @unittest.skipUnless((ROOT / "data" / "raw" / "statswales_ra_spend_cardiff.csv").exists(), "StatsWales downloads not present")
+    def test_cardiff_balances_with_its_fire_levy_and_nine_bands(self) -> None:
+        import wales as W
+        reg = {s["id"]: s for s in load_sources()}
+        out = W.build_one(reg, next(b for b in W.councils() if b["slug"] == "cardiff"))
+        bill = out["bill"]
+        self.assertEqual(sorted(bill["published_bands"]), list("ABCDEFGHI"))
+        self.assertAlmostEqual(bill["band_d_total"], bill["band_d_council"] + bill["band_d_gla"], places=2)
+        fire = next(s for s in out["services"] if s["id"] == "fire_levy")
+        self.assertGreater(fire["m"], 20)
+        self.assertAlmostEqual(sum(f["m"] for f in out["funding"]), sum(s["m"] for s in out["services"]), places=2)
+        self.assertEqual(bill["parish"]["count"], 6)
     def test_an_empty_ballot_name_matches_nobody(self) -> None:
         # Democracy Club sometimes leaves the ballot paper's names empty; they used to match every councillor.
         cand = {"person": {"name": "Miriam Edna Rice"}, "sopn_first_names": "", "sopn_last_name": ""}

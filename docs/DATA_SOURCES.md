@@ -141,3 +141,7 @@ Democracy Club's register of elections (`https://elections.democracyclub.org.uk/
 - Glasgow City Council's CoInS pages (`https://onlineservices.glasgow.gov.uk/councillorsandcommittees`): all members and each political group. Its main website shows a bot challenge, which we do not get round; these pages answer normally.
 - The law in `data/config/rules_scotland.json`: LGFA 1992 ss.74, 79 and 93, SSI 2016/368, SI 1992/1332 Schedule 1, LG(S)A 1973 s.95.
 
+## In use: Wales (9 Oct 2026)
+
+StatsWales has moved to `https://stats.gov.wales` with an API at `https://api.stats.gov.wales/v2/` (datasets by id; a council's rows by a stable filter id). Cardiff's: composition of average Band D, council tax levels by band, budget requirement (BR1), budgeted revenue expenditure by service, and its financing. Cardiff's own website and ModernGov pages show a bot challenge, which we do not get round; its ModernGov web service answers normally. Snapshots of it include councillors' home addresses where they gave them, and stay in `data/raw` (not committed); only names, wards and parties are published.
+

@@ -167,7 +167,9 @@ export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" |
           What the council spends on day-to-day services after fees and charges, and where the money comes from
           {m.funding.some((f) => f.ringFencedTo)
             ? ", including grants that can only be spent on schools or public health"
-            : "; grants tied to a particular service are already taken off it"}
+            : m.funding.some((f) => f.id === "specific_grants")
+              ? ", including specific grants, which the return does not tie to particular services"
+              : "; grants tied to a particular service are already taken off it"}
           . It must balance by law.
         </p>
       </div>

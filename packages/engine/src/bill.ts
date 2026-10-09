@@ -2,15 +2,17 @@ import type { Band, Rules } from "@borough-ledger/schema";
 
 /** Statutory band proportion, e.g. A = 6/9, H = 18/9 in England; 240/360 and 882/360 in Scotland. */
 export function bandRatio(rules: Rules, band: Band): number {
-  const [num, den] = rules.band_ratios.value[band];
-  return num / den;
+  const r = rules.band_ratios.value[band];
+  if (!r) throw new Error(`no Band ${band} in these rules`);
+  return r[0] / r[1];
 }
 
 /** The rest of the bill's band proportion: the council's, except where it has its own (Scottish Water's water and
  *  sewerage charges kept 6/9 to 18/9 when Scottish council tax bands changed in 2017). */
 export function othersRatio(rules: Rules, band: Band): number {
-  const [num, den] = (rules.others_band_ratios ?? rules.band_ratios).value[band];
-  return num / den;
+  const r = (rules.others_band_ratios ?? rules.band_ratios).value[band];
+  if (!r) throw new Error(`no Band ${band} in these rules`);
+  return r[0] / r[1];
 }
 
 export interface BandD {

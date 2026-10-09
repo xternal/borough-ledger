@@ -155,6 +155,31 @@
    "id": "scottish_water_2025-26",
    "file": "scottish_water_unmetered_2025-26.pdf",
    "sha256": "dd5da0496c45467040a2dbd593af7bdc6418607880486294b895b8404ed32b0c"
+  },
+  {
+   "id": "statswales_ct_composition_cardiff",
+   "file": "statswales_ct_composition_cardiff.csv",
+   "sha256": "fcc0a3418f40af1aa57a3138f384f6a1268145be038e427243b0f7340dea9c3b"
+  },
+  {
+   "id": "statswales_ct_levels_cardiff",
+   "file": "statswales_ct_levels_cardiff.csv",
+   "sha256": "92e78391eade62672c582d468d323d2110fbfb8e01fa17b3d2e4a394ea87f651"
+  },
+  {
+   "id": "statswales_br1_cardiff",
+   "file": "statswales_br1_cardiff.csv",
+   "sha256": "43ed89c361a6f85295573b7efba78a043153e2a44bc877ac3330be516e56be65"
+  },
+  {
+   "id": "statswales_ra_spend_cardiff",
+   "file": "statswales_ra_spend_cardiff.csv",
+   "sha256": "aec83beb6a90f83cab9114e520a589103cc09482dd5641b0e9c81ca39106f437"
+  },
+  {
+   "id": "statswales_ra_financing_cardiff",
+   "file": "statswales_ra_financing_cardiff.csv",
+   "sha256": "420f9a87beba51ae41277fe786ade6e0047582991e28b715bf7068409424b8aa"
   }
  ],
  "manual": [
@@ -233,12 +258,16 @@
   {
    "file": "data/manual/toggles_2027-28.csv",
    "sha256": "57ebbc574e5a8e8ef175b161c2b5c66d4a6528990e01012f04e1de795e430c5b"
+  },
+  {
+   "file": "data/manual/wales_service_groups.csv",
+   "sha256": "0efe12e3228fd25e995682cf1cd08ff05531355a3352b8807a9f64cef48a994d"
   }
  ],
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "9df220c34c0a0a014a650329be603bd5abb946e2abf1b649515ff244264f5c63"
+   "sha256": "9addafba10db1a17941b10a1cad4871617b7e1b67efd210a9b158360413f33a9"
   }
  ],
  "quality_counts": {

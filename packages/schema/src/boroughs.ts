@@ -30,7 +30,7 @@ export const BoroughConfig = z.object({
       /** "county" for a council covering a county or region rather than a city (Highland, North Yorkshire): listed apart. */
       kind: z.literal("county").optional(),
       /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
-      nation: z.enum(["england", "scotland"]).optional(),
+      nation: z.enum(["england", "scotland", "wales"]).optional(),
       /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */
       scot_name: z.string().optional(),
       /** Elected by single transferable vote (Scotland), with the next election's date. */
@@ -41,6 +41,10 @@ export const BoroughConfig = z.object({
       others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string(), source: z.string().optional() }).optional(),
       precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),
       parish_names: z.string().optional(),
+      /** Wales: the community councils that set a precept, as the council lists them (Cardiff: six of its 36 communities). */
+      community_councils: z.array(z.string()).optional(),
+      /** ModernGov ward titles that differ from the ballots' (Cardiff: "Radyr and Morganstown" is the ballots' "Radyr"). */
+      ward_aliases: z.record(z.string(), z.string()).optional(),
       /** The owner's decision to publish although the budget return and council tax return differ on council tax. */
       returns_differ: z.boolean().optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */

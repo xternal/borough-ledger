@@ -1,12 +1,15 @@
 "use client";
 
-import { BANDS, derive, worst, type Figure } from "@borough-ledger/schema";
+import { bandsOf, derive, worst, type Figure } from "@borough-ledger/schema";
 import { billFor, splitPence } from "@borough-ledger/engine";
 import type { PageModel } from "@/lib/model";
 import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 import { useLedger } from "./LedgerState";
 import { ChartTable, DataTable } from "./ChartTable";
+
+/** "two", "six": small counts in words, as the page says them; larger ones in figures. */
+const numberWord = (n: number) => ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"][n] ?? String(n);
 
 type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShareGeneral" | "generalBudget" | "place">;
 
@@ -29,7 +32,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
 
   // Council tax pays for what ring-fenced grants do not, so split it by spending after those grants. Scotland's return
   // gives each service after its grants already, so there is nothing to take off.
-  const ringFenced = services.some((s) => s.general && Math.abs(s.general.value - s.f.value) > 0.0005);
+  const basis = bill.splitBasis;
   const ranked = services.filter((s) => s.general && s.general.value > 0).sort((a, z) => z.general!.value - a.general!.value);
   // A service whose share rounds to nothing (in some boroughs, public health after its grant) is left out of the list.
   const shares = ranked
@@ -50,7 +53,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
       <div className="bill">
         <div className="bill-main">
           <div className="seg" role="group" aria-label="Council tax band">
-            {BANDS.map((x) => (
+            {bandsOf(rules).map((x) => (
               <button key={x} type="button" aria-pressed={x === band} onClick={() => setBand(x)}>
                 {x}
               </button>
@@ -107,13 +110,17 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
                 {glaChange ? (
                   <>
                     At Band D {bill.others.short} went {glaChange.value > 0 ? "up" : "down"} <Num f={derive(Math.abs(glaChange.value), glaChange)} fmt="gbp2" /> this
-                    year:{" "}
-                    {changed.map((g, i) => (
-                      <span key={g.id}>
-                        {i ? (i === changed.length - 1 ? " and " : ", ") : ""}
-                        <Num f={derive(Math.abs(g.f.value - g.prev.value), g.f, g.prev)} fmt="gbp2" /> {g.f.value > g.prev.value ? "more" : "less"} for {g.phrase}
-                      </span>
-                    ))}
+                    year
+                    {/* One body only (South Wales Police): nothing to break down. */}
+                    {bill.glaSplit.length > 1 ? ": " : ""}
+                    {bill.glaSplit.length > 1
+                      ? changed.map((g, i) => (
+                          <span key={g.id}>
+                            {i ? (i === changed.length - 1 ? " and " : ", ") : ""}
+                            <Num f={derive(Math.abs(g.f.value - g.prev.value), g.f, g.prev)} fmt="gbp2" /> {g.f.value > g.prev.value ? "more" : "less"} for {g.phrase}
+                          </span>
+                        ))
+                      : null}
                     .
                   </>
                 ) : (
@@ -165,18 +172,37 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
           </ChartTable>
           {bill.parish ? (
             <p className="small muted" style={{ marginTop: 14 }}>
-              Homes in {place.short}&rsquo;s {bill.parish.count === 1 ? "parish" : `${["", "one", "two", "three", "four", "five"][bill.parish.count] ?? bill.parish.count} parishes`}
-              {bill.parish.names ? ` (${bill.parish.names})` : ""} also pay their parish or town council: on average <Num f={bill.parish.f} fmt="gbp2" /> at Band D, on
-              top of the bill above.
+              {bill.parish.per === "total" ? (
+                <>
+                  Homes in the areas of {place.short}&rsquo;s {numberWord(bill.parish.count)} {bill.parish.word}s
+                  {bill.parish.names ? ` (${bill.parish.names})` : ""} also pay their {bill.parish.word}, on top of the bill above. Together they raise{" "}
+                  <Num f={bill.parish.f} fmt="gbp0" /> this year.
+                </>
+              ) : (
+                <>
+                  Homes in {place.short}&rsquo;s {bill.parish.count === 1 ? "parish" : `${numberWord(bill.parish.count)} parishes`}
+                  {bill.parish.names ? ` (${bill.parish.names})` : ""} also pay their {bill.parish.word}: on average <Num f={bill.parish.f} fmt="gbp2" /> at Band D, on top
+                  of the bill above.
+                </>
+              )}
             </p>
           ) : null}
           <p className="small muted" style={{ marginTop: 14 }}>
-            Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself,{" "}
-            {ringFenced
-              ? "after schools and public health, which have their own ring-fenced grants."
-              : "after the grants tied to particular services, which the budget return already takes off each one."}{" "}
-            Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants
-            and business rates pay the rest.
+            {basis === "before_grants" ? (
+              <>
+                Split in proportion to everything the council spends, <Num f={generalBudget} fmt="m0" />, including what specific government grants pay for: the
+                budget return does not say which services those grants go to. Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of it;
+                government grants and business rates pay the rest.
+              </>
+            ) : (
+              <>
+                Split in proportion to the <Num f={generalBudget} fmt="m0" /> the council pays for itself,{" "}
+                {basis === "after_ring_fenced"
+                  ? "after schools and public health, which have their own ring-fenced grants."
+                  : "after the grants tied to particular services, which the budget return already takes off each one."}{" "}
+                Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants and business rates pay the rest.
+              </>
+            )}
           </p>
           <div className="qrow">
             <QualityGroup q={worst(...services.map((s) => s.f.quality))} text={`Split by service, ${place.yearLabel} budget return`} />

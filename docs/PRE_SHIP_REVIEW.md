@@ -251,3 +251,7 @@ Three London boroughs whose two returns differ on council tax by £23,227 to £3
 
 Two more Scottish councils and North Yorkshire (docs/BOROUGHS.md); a "Counties and regions" heading in the picker; parished councils' history now outside a parish, as their bills. 35 councils.
 
+## Cardiff (9 Oct 2026, in review)
+
+The first Welsh council: Band I, the fire levy shown as its own calculated line, community councils as a total, councillors from 2022 with by-elections accounted for (docs/BOROUGHS.md). For the owner: check `data/manual/wales_service_groups.csv`, and the six community councils' names against Cardiff's council tax resolution of 5 March 2026 once. 36 councils.
+

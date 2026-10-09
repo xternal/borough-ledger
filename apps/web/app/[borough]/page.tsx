@@ -159,6 +159,12 @@ function Councillors({ m, P, map }: { m: BoroughModel; P: BoroughPeople; map: Wa
               by-elections since.{" "}
             </>
           ) : null}
+          {results && m.b.next_election ? (
+            <>
+              These are the results of the {formatMonthYear(P.election.date)} election; the next is in {formatMonthYear(m.b.next_election)}. Where a ward has held a
+              by-election since, a winner no longer on the council&rsquo;s list is shown but not named.{" "}
+            </>
+          ) : null}
           {results ? <>Only the councillors elected are named here; everyone else stood as their party&rsquo;s candidate.</> : null}
         </p>
       </div>
