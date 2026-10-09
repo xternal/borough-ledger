@@ -18,7 +18,10 @@ export const BoroughConfig = z.object({
       /** "thirds" where a third of the seats are elected each year (Manchester). */
       elections: z.enum(["all", "thirds"]).optional(),
       seats_per_ward: z.number().int().positive().optional(),
-      councillors_from: z.enum(["moderngov", "ballots"]).optional(),
+      /** "later" where no source a script may read lists the councillors yet (Leeds turns automated requests away):
+       *  the page says why and links the council's own list, and the postcode finder opens the council's page. */
+      councillors_from: z.enum(["moderngov", "ballots", "later"]).optional(),
+      councillors_later: z.object({ why: z.string(), url: z.url() }).optional(),
       /** Outside London: who the rest of the bill goes to, and the bodies it splits into (government Tables 8d to 8f). */
       others: z.object({ name: z.string(), to: z.string(), short: z.string(), with: z.string() }).optional(),
       precepts: z.array(z.object({ id: z.string(), label: z.string(), phrase: z.string(), official_term: z.string(), table: z.string(), authority: z.string(), minus: z.array(z.string()).optional() })).optional(),

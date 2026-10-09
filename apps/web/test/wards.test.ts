@@ -102,6 +102,19 @@ describe("postcode finder across boroughs", () => {
     expect(r2).toMatchObject({ kind: "ward", href: "/kensington-and-chelsea#ward-queens-gate", place: "Kensington and Chelsea" });
   });
 
+  it("opens the council's page where its wards are not on the site yet", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const leeds = PLACES.find((p) => p.short === "Leeds")!;
+    expect(leeds.wards).toEqual([]);
+    expect(placeFromResult({ postcode: "LS1 1UR", admin_district: "Leeds", codes: { admin_ward: "E05011409", admin_district: leeds.ons } }, PLACES)).toEqual({
+      kind: "council",
+      place: "Leeds",
+      href: "/leeds",
+      postcode: "LS1 1UR",
+    });
+  });
+
   it("says where a postcode outside the covered boroughs is", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

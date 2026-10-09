@@ -125,3 +125,7 @@ The same returns, Democracy Club and ONS sources as Kensington and Chelsea; each
 - Table 10's parish precept and parish tax base columns, for the parish note.
 - Manchester's ModernGov web service (`https://democracy.manchester.gov.uk`). Birmingham has none that answers; its councillors are Democracy Club's record of May's winners.
 
+## Not usable: Leeds' ModernGov (9 Oct 2026)
+
+`https://democracy.leeds.gov.uk` answers 403 Forbidden to every request that is not a person's browser, its `mgWebService.asmx` included. Leeds' councillors are not shown until the council opens it or publishes the list another way; we do not disguise our requests.
+

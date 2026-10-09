@@ -67,7 +67,8 @@ def ctr_data(file: str, sheet: str, years: List[str], ons: str) -> Dict[str, Dic
         d["ctr"] -= d["parish"]
         # The return's own identity: tax base for setting = tax base × collection rate + payments in lieu; CTR = setting base × Band D.
         check(close(d["tax_base"] * d["collection_rate"] + d["in_lieu"], d["setting_base"], 2.0), f"{file} {y}: tax base × collection rate + payments in lieu ≠ setting base")
-        check(close(d["setting_base"] * d["band_d_council"], d["ctr"], 1000.0), f"{file} {y}: setting base × Band D ≠ council tax requirement")
+        # Band D is published to the penny, so the product can be out by half a penny a home: up to £1,250 in Leeds.
+        check(close(d["setting_base"] * d["band_d_council"], d["ctr"], max(1000.0, d["setting_base"] * 0.005)), f"{file} {y}: setting base × Band D ≠ council tax requirement")
     return out
 
 

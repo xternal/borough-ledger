@@ -231,3 +231,7 @@ Lambeth joins: its councillor service answers, slowly (about 100 seconds), and l
 
 The first councils outside London: Manchester City Council and Birmingham City Council, with their bills split into police, fire and the combined authority from the government's own tables (checked to the penny against the area Band D, this year and last), Birmingham's parish precepts shown apart, Manchester's elections by thirds and Birmingham's councillors from May's ballots (docs/BOROUGHS.md). 20 councils on the site.
 
+## Leeds (9 Oct 2026, in review)
+
+Leeds City Council's bill (police set by the Mayor of West Yorkshire, fire, 31 parishes shown apart), budget and five years of council tax, from the same returns and checks. No councillors yet: Leeds' democracy site turns automated requests away, and the page says so and links the council's own list (docs/BOROUGHS.md). The rounding allowance in one Table 10 check now scales with the council's size. 21 councils on the site.
+

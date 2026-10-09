@@ -136,6 +136,45 @@
    "example_postcode": "SW2 1RW"
   },
   {
+   "slug": "leeds",
+   "council": "Leeds City Council",
+   "short": "Leeds",
+   "ons": "E08000035",
+   "election_id": "local.leeds.2026-05-07",
+   "example_postcode": "LS1 1UR",
+   "elections": "thirds",
+   "seats_per_ward": 3,
+   "councillors_from": "later",
+   "councillors_later": {
+    "why": "Leeds City Council’s democracy website turns away requests from software like ours, so its list of councillors is not shown here yet.",
+    "url": "https://democracy.leeds.gov.uk/mgMemberIndex.aspx?FN=WARD&VW=LIST&PIC=0"
+   },
+   "others": {
+    "name": "Police and fire (West Yorkshire)",
+    "to": "the Mayor of West Yorkshire, for police, and the fire and rescue service",
+    "short": "the police and fire share",
+    "with": "police and fire"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "West Yorkshire Combined Authority, police functions (the Mayor of West Yorkshire)",
+     "table": "Table_8d",
+     "authority": "West Yorkshire CA - Police Functions"
+    },
+    {
+     "id": "fire",
+     "label": "Fire and rescue",
+     "phrase": "the fire and rescue service",
+     "official_term": "West Yorkshire Fire and Rescue Authority",
+     "table": "Table_8e",
+     "authority": "West Yorkshire Fire and Rescue Authority"
+    }
+   ]
+  },
+  {
    "slug": "manchester",
    "council": "Manchester City Council",
    "short": "Manchester",
