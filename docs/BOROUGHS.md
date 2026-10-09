@@ -49,7 +49,7 @@ So item 12's data side is mostly automatic, but six boroughs need a person's dec
 
 Live from this change, each at `/<slug>` with the same page as Kensington and Chelsea: Barking and Dagenham, Brent, Bromley, Camden, Hackney, Haringey, Harrow, Havering, Hounslow, Merton, Redbridge, Richmond upon Thames, Southwark, Sutton and Tower Hamlets: 15 more, so 16 boroughs beyond Hammersmith & Fulham and about 900 of their councillors. Every bill and budget passes the same checks as Hammersmith & Fulham's.
 
-**Held back:** Lambeth (its bill and budget pass, but its ModernGov service timed out on every try; add it when it answers), and the 14 boroughs in the table above whose returns disagree.
+**Held back:** the 14 boroughs in the table above whose returns disagree. (Lambeth, held back at first because its ModernGov service timed out, was added the same day: it answers, but takes about 100 seconds.)
 
 What the councils' own records needed, all handled in `etl/borough_people.py` with Hammersmith & Fulham's rules unchanged:
 
@@ -61,4 +61,8 @@ What the councils' own records needed, all handled in `etl/borough_people.py` wi
 - **Party names.** "Labour and Co-operative Party" and "Labour And Co Op Party" count as Labour; "Local Conservatives" (Bromley) and "Conservative and Unionist Party" as Conservative; "The Reform UK Group" (Havering) as Reform UK. Local parties keep their own names as the council writes them.
 - **Turnout or rejected papers not given** in some declarations (Brent, Harrow, Merton, Sutton, Tower Hamlets; Hackney's rejected papers): the page says the declaration gave none.
 - **Democracy Club limits how fast it is asked:** requests wait 1.5 seconds and retry with a pause when told to slow down.
+
+## Lambeth (9 Oct 2026)
+
+Added once its ModernGov service answered: it takes about 100 seconds, so requests now wait up to three minutes. Its list shows an empty seat as a councillor called "Vacancy", which is read as the empty seat it is. 62 councillors in 25 wards (one seat empty); three of May's winners are not on the council's list (Clapham Park and Streatham St Leonard's, each with a different councillor now listed; Myatt's Fields, where the seat is empty). Every non-exact pairing read: all correct. With Lambeth, 17 boroughs beyond Hammersmith & Fulham, 956 of their councillors.
 

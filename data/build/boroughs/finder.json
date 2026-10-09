@@ -1107,6 +1107,138 @@
    ]
   },
   {
+   "slug": "lambeth",
+   "short": "Lambeth",
+   "ons": "E09000022",
+   "wards": [
+    {
+     "id": "brixton-acre-lane",
+     "name": "Brixton Acre Lane",
+     "ons_code": "E05014095"
+    },
+    {
+     "id": "brixton-north",
+     "name": "Brixton North",
+     "ons_code": "E05014096"
+    },
+    {
+     "id": "brixton-rush-common",
+     "name": "Brixton Rush Common",
+     "ons_code": "E05014097"
+    },
+    {
+     "id": "brixton-windrush",
+     "name": "Brixton Windrush",
+     "ons_code": "E05014098"
+    },
+    {
+     "id": "clapham-common-and-abbeville",
+     "name": "Clapham Common and Abbeville",
+     "ons_code": "E05014099"
+    },
+    {
+     "id": "clapham-east",
+     "name": "Clapham East",
+     "ons_code": "E05014100"
+    },
+    {
+     "id": "clapham-park",
+     "name": "Clapham Park",
+     "ons_code": "E05014101"
+    },
+    {
+     "id": "clapham-town",
+     "name": "Clapham Town",
+     "ons_code": "E05014102"
+    },
+    {
+     "id": "gipsy-hill",
+     "name": "Gipsy Hill",
+     "ons_code": "E05014103"
+    },
+    {
+     "id": "herne-hill-and-loughborough-junction",
+     "name": "Herne Hill and Loughborough Junction",
+     "ons_code": "E05014104"
+    },
+    {
+     "id": "kennington",
+     "name": "Kennington",
+     "ons_code": "E05014105"
+    },
+    {
+     "id": "knights-hill",
+     "name": "Knight's Hill",
+     "ons_code": "E05014106"
+    },
+    {
+     "id": "myatts-fields",
+     "name": "Myatt's Fields",
+     "ons_code": "E05014107"
+    },
+    {
+     "id": "oval",
+     "name": "Oval",
+     "ons_code": "E05014108"
+    },
+    {
+     "id": "st-martins",
+     "name": "St Martin's",
+     "ons_code": "E05014109"
+    },
+    {
+     "id": "stockwell-east",
+     "name": "Stockwell East",
+     "ons_code": "E05014110"
+    },
+    {
+     "id": "stockwell-west-and-larkhall",
+     "name": "Stockwell West and Larkhall",
+     "ons_code": "E05014111"
+    },
+    {
+     "id": "streatham-common-and-vale",
+     "name": "Streatham Common and Vale",
+     "ons_code": "E05014112"
+    },
+    {
+     "id": "streatham-hill-east",
+     "name": "Streatham Hill East",
+     "ons_code": "E05014113"
+    },
+    {
+     "id": "streatham-hill-west-and-thornton",
+     "name": "Streatham Hill West and Thornton",
+     "ons_code": "E05014114"
+    },
+    {
+     "id": "streatham-st-leonards",
+     "name": "Streatham St Leonard's",
+     "ons_code": "E05014115"
+    },
+    {
+     "id": "streatham-wells",
+     "name": "Streatham Wells",
+     "ons_code": "E05014116"
+    },
+    {
+     "id": "vauxhall",
+     "name": "Vauxhall",
+     "ons_code": "E05014117"
+    },
+    {
+     "id": "waterloo-and-south-bank",
+     "name": "Waterloo and South Bank",
+     "ons_code": "E05014118"
+    },
+    {
+     "id": "west-dulwich",
+     "name": "West Dulwich",
+     "ons_code": "E05014119"
+    }
+   ]
+  },
+  {
    "slug": "merton",
    "short": "Merton",
    "ons": "E09000024",
