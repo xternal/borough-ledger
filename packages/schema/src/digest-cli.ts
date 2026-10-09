@@ -1,4 +1,4 @@
-/* Weekly digest draft (run by .github/workflows/weekly-digest.yml on Friday mornings):
+/* Weekly digest draft (run by .github/workflows/weekly-digest.yml on Sunday evenings, for posting on Monday):
 
      tsx src/digest-cli.ts <out.md> [YYYY-MM-DD]
 
@@ -63,8 +63,11 @@ Rules, all of them strict:
 - Never use the middle dot character.
 - Shape: a short catchy title as a Markdown "#" heading, a one-line hook, then the sections that have facts ("This week", "Coming up", "Deadlines", "Number of the week"), and a closing nudge to look up your ward at ${SITE}/wards and to reply to boroughs@guzh.uk. Skip sections with no facts. 200 to 400 words.`;
 
+/** The day the post goes out: the Monday after a Sunday run, otherwise the day itself. */
+const publishDay = (today: string) => (new Date(`${today}T12:00:00Z`).getUTCDay() === 0 ? addDays(today, 1) : today);
+
 async function write(facts: Fact[], today: string): Promise<{ draft: string; note: string }> {
-  const plain = templateDraft(facts, today, SITE);
+  const plain = templateDraft(facts, publishDay(today), SITE);
   if (!process.env.ANTHROPIC_API_KEY) return { draft: plain, note: "No ANTHROPIC_API_KEY: the plain version." };
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -73,13 +76,13 @@ async function write(facts: Fact[], today: string): Promise<{ draft: string; not
       model: MODEL,
       max_tokens: 1500,
       system: VOICE,
-      messages: [{ role: "user", content: `The week ending ${today}. The facts:\n${JSON.stringify(facts, null, 1)}` }],
+      messages: [{ role: "user", content: `The week ending ${today}; the post goes out on ${publishDay(today)}, so "coming up" starts that day. The facts:\n${JSON.stringify(facts, null, 1)}` }],
     }),
   });
   if (!res.ok) return { draft: plain, note: `Claude API ${res.status}: the plain version.` };
   const body = (await res.json()) as { content: { type: string; text?: string }[] };
   const draft = body.content.map((c) => c.text ?? "").join("").trim();
-  const check = draftNumbersOk(draft, facts, ["500", "boroughs", today, SITE]);
+  const check = draftNumbersOk(draft, facts, ["500", "boroughs", today, publishDay(today), SITE]);
   if (!check.ok) return { draft: plain, note: `Claude's draft used numbers not in the facts (${check.stray.join(", ")}), so here is the plain version.` };
   if (draft.includes("\u00b7")) return { draft: draft.replace(/\u00b7/g, ","), note: "Middle dots replaced with commas." };
   return { draft, note: `Written by ${MODEL} from the facts below; every number checked against them.` };
