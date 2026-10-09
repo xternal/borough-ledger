@@ -1,5 +1,5 @@
 import type { PageModel } from "@/lib/model";
-import { finderData } from "@/lib/wards";
+import { COVERED, PLACES } from "@/lib/places";
 import { WardFinder } from "./WardFinder";
 
 /** The home page's way in to the ward pages: who represents you, found by postcode. */
@@ -17,7 +17,7 @@ export function WardSection({ m }: { m: PageModel }) {
           <a href="/wards">pick your ward on the map</a>.
         </p>
       </div>
-      <WardFinder {...finderData(m)} place={m.place.short} />
+      <WardFinder places={PLACES} covered={COVERED} />
     </section>
   );
 }
