@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { BoroughConfig, BoroughPeople, BoroughStatement, DATA, RULES_SCOTLAND, RULES_WALES, WardMap, checkBoroughPeople, derive, type Figure, type Rules } from "@borough-ledger/schema";
 import { displayYear, nextFinancialYear } from "@borough-ledger/engine";
 import { adultCare } from "./adultCare";
+import { childrenCare } from "./childrenCare";
 import { statementModel, type PageModel, type StatementModel } from "./model";
 
 function repo(): string {
@@ -93,6 +94,7 @@ export function boroughModel(slug: string): BoroughModel | null {
       ...(people?.sources ?? []).map((s) => ({ title: s.title, url: s.url })),
       ...(map ? [{ title: map.source.title, url: map.source.page }] : []),
       ...(adultCare(b.ons) ? [adultCare(b.ons)!.source] : []),
+      ...(childrenCare(b.ons)?.sources ?? []),
     ],
   };
   cache.set(slug, model);

@@ -230,6 +230,21 @@
    "id": "asc_finance_2024-25",
    "file": "asc_finance_2024-25_tables.ods",
    "sha256": "c2ff7f38db06da67f2af3d05c30e4a2f4321be0505d3c7218991a695c57d6dd7"
+  },
+  {
+   "id": "dfe_s251_childrens_2024-25",
+   "file": "dfe_s251_childrens_2024-25.csv",
+   "sha256": "2dc5356f1c70805fb15cddf28086e4e42989f1ec5e7314d5208f41acab161a4e"
+  },
+  {
+   "id": "dfe_cla_rates_2025",
+   "file": "dfe_cla_rates_2025.csv",
+   "sha256": "bef282202bf5629b218634a7835309cda9d6b16133c71a73a2f8e53aec90be32"
+  },
+  {
+   "id": "dfe_cla_31_march_2025",
+   "file": "dfe_cla_31_march_2025.csv",
+   "sha256": "b5c8cebeffaaae5bad235ef968f1fa650e9542fd2d4c3278347bc6f920c1b674"
   }
  ],
  "manual": [
@@ -341,7 +356,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "5d260a8497444aeab61573c6f8a5a3fda41078c2aa1fb2f65ee3ead594075314"
+   "sha256": "13fdea38981ec8226e3218c41dc3ce78c3057f3cb16c34e90c6e0dd5f356cdb2"
   }
  ],
  "quality_counts": {

@@ -36,6 +36,9 @@ jobs:
 
       - name: Adult care costs are up to date and add up
         run: python etl/adult_care.py --check
+
+      - name: Children's care figures are up to date and add up
+        run: python etl/children_care.py --check
       - name: Other boroughs' councillors and results hold together and name only councillors
         run: python etl/borough_people.py --check
       - name: Payments reconcile to every council file (raw files are not in CI, so the committed build is checked)

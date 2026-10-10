@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DATA, derive } from "@borough-ledger/schema";
 import { AdultCare } from "@/components/AdultCare";
+import { ChildrenCare } from "@/components/ChildrenCare";
 import { BillSection } from "@/components/BillSection";
 import { ControlKpi, Councillors } from "@/components/BoroughCouncillors";
 import { BudgetFlow } from "@/components/BudgetFlow";
@@ -17,6 +18,7 @@ import { councilWithThe } from "@/lib/boroughList";
 import { BOROUGHS, boroughModel, type BoroughModel } from "@/lib/boroughs";
 import { format, formatDay } from "@/lib/format";
 import { adultCare } from "@/lib/adultCare";
+import { childrenCare } from "@/lib/childrenCare";
 import { isRatesCouncil, ratesModel } from "@/lib/rates";
 import { RatesPage, ratesWords } from "@/components/RatesPage";
 import { SITE, SITE_URL } from "@/lib/site";
@@ -67,6 +69,7 @@ export default async function BoroughPage({ params }: Props) {
   const map = m.map;
   // England only: the government's adult social care finance report covers English councils.
   const care = adultCare(m.b.ons);
+  const kids = childrenCare(m.b.ons);
   const first = m.history[0]!;
   const last = m.history[m.history.length - 1]!;
   const jsonLd = [
@@ -158,6 +161,7 @@ export default async function BoroughPage({ params }: Props) {
         />
 
         {care ? <AdultCare care={care} council={m.place.council} /> : null}
+        {kids ? <ChildrenCare care={kids} council={m.place.council} short={m.place.short} /> : null}
 
         <section id="history" aria-labelledby="history-h">
           <div className="sec-head">

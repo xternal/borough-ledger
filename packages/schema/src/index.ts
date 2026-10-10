@@ -16,3 +16,4 @@ export * from "./boroughs";
 export * from "./digest";
 export * from "./rates";
 export * from "./adultcare";
+export * from "./childrencare";
