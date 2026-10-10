@@ -633,6 +633,50 @@
     "kind": "asc_finance"
    },
    "note": "Each council's adult social care finance return (ASC-FR) for 2024/25: gross spending by type of care (Tables 14, 43, 44) and average unit costs (Tables 51 and 52). The 13 November version corrects the unit costs in Tables 52 and 55."
+  },
+  {
+   "id": "dfe_s251_childrens_2024-25",
+   "title": "LA and school expenditure, financial year 2024-25: children's and young people's services by local authority (Section 251 outturn)",
+   "publisher": "Department for Education",
+   "url": "https://explore-education-statistics.service.gov.uk/find-statistics/la-and-school-expenditure/2024-25",
+   "asset_url": "https://content.explore-education-statistics.service.gov.uk/api/data-set-files/dd41e0af-9d41-497d-86b7-eeea599c0059/download",
+   "file": "dfe_s251_childrens_2024-25.csv",
+   "sha256": "2dc5356f1c70805fb15cddf28086e4e42989f1ec5e7314d5208f41acab161a4e",
+   "published_on": "2025-12-11",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "dfe_s251"
+   },
+   "note": "Gross spending by Section 251 line, £. Wandsworth's and Middlesbrough's 2024-25 figures are withheld (\"c\") over data quality concerns. The Department has decided to stop this series; 2025-26 outturn moves to GOV.UK."
+  },
+  {
+   "id": "dfe_cla_rates_2025",
+   "title": "Children looked after in England including adoptions, reporting year 2025: number and rate per 10,000 children",
+   "publisher": "Department for Education",
+   "url": "https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions/2025",
+   "asset_url": "https://content.explore-education-statistics.service.gov.uk/api/data-set-files/4cf02bf8-b4c7-46e5-a63e-702b431db15b/download",
+   "file": "dfe_cla_rates_2025.csv",
+   "sha256": "bef282202bf5629b218634a7835309cda9d6b16133c71a73a2f8e53aec90be32",
+   "published_on": "2025-11-20",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "dfe_cla_rates"
+   }
+  },
+  {
+   "id": "dfe_cla_31_march_2025",
+   "title": "Children looked after in England including adoptions, reporting year 2025: children looked after on 31 March by characteristics",
+   "publisher": "Department for Education",
+   "url": "https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions/2025",
+   "asset_url": "https://content.explore-education-statistics.service.gov.uk/api/data-set-files/c1d5ac76-d738-42c7-be46-f915da3485eb/download",
+   "file": "dfe_cla_31_march_2025.csv",
+   "sha256": "b5c8cebeffaaae5bad235ef968f1fa650e9542fd2d4c3278347bc6f920c1b674",
+   "published_on": "2025-11-26",
+   "licence": "OGL-UK-3.0",
+   "extract": {
+    "kind": "dfe_cla_characteristics"
+   },
+   "note": "Replaced on 26 November 2025 to correct percentages; counts unaffected. \"c\": withheld to protect children's identities."
   }
  ]
 }
