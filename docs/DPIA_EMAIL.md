@@ -6,7 +6,7 @@
 
 Borough Book lets readers ask for an email when a council election pledge changes. A DPIA is needed because what someone follows can reveal their political opinions, which are special category data (UK GDPR Article 9), even though the pledges themselves are public.
 
-* **Controller:** the person or company in `FOLLOW_CONTROLLER` (to be decided by the owner).
+* **Controller:** Empatiq Limited, as for LedgerGov.uk (decided by the owner on 10 October 2026), named on the site through `FOLLOW_CONTROLLER`.
 * **Processors:** Resend (email delivery; US company; sees each address and alert); Neon (database, London region); Vercel (hosting; request logs).
 * **People affected:** members of the public who sign up. No one else: the alerts carry only public pledge information.
 * **Lawful basis:** consent (Article 6(1)(a)), and explicit consent for the special category data (Article 9(2)(a)). PECR: the emails are only those the reader asked for, each with an unsubscribe link.
@@ -45,7 +45,8 @@ Access and deletion through the manage link in every email, or by writing to the
 
 ## 5. Sign-off (owner)
 
-- [ ] Controller decided and set in `FOLLOW_CONTROLLER`
+- [x] Controller decided: Empatiq Limited (10 October 2026)
+- [ ] `FOLLOW_CONTROLLER` set to `Empatiq Limited` in Vercel (production)
 - [ ] ICO fee checked
 - [ ] Resend's data processing terms and transfer basis checked (R6)
 - [ ] Neon project created in London
