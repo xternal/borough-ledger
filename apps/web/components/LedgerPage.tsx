@@ -1,5 +1,6 @@
 import type { Scenario } from "@borough-ledger/engine";
 import { BalanceIt } from "@/components/BalanceIt";
+import { AdultCare } from "@/components/AdultCare";
 import { BillSection } from "@/components/BillSection";
 import { CouncilTaxOptions } from "@/components/CouncilTaxOptions";
 import { BudgetFlow } from "@/components/BudgetFlow";
@@ -19,6 +20,12 @@ import { HOMES, SPAN, capFig, homesFig, totalOf } from "@/lib/capital";
 import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
+
+import { adultCare } from "@/lib/adultCare";
+import { DATA as HF_DATA } from "@borough-ledger/schema";
+
+/** What care for adults costs here (the government's finance report), shown under the budget. */
+const CARE = adultCare(HF_DATA.council.meta.council_code);
 
 /** The whole statement. `/` renders it as is; `/balance` opens it on a shared scenario. */
 export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initialScenario?: Scenario; focus?: string }) {
@@ -68,6 +75,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
               </p>
             }
           />
+          {CARE ? <AdultCare care={CARE} council={m.place.council} /> : null}
           <Waterfall m={m} />
           <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} />
           <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} />

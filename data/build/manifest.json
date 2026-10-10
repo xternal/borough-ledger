@@ -225,6 +225,11 @@
    "id": "nisra_ward_dea_lookup",
    "file": "nisra_ward2014_dea2014.ods",
    "sha256": "bac2893f49a634638c8eaeeca02d67643ce8f64f94e9f564a94f2839e18f087d"
+  },
+  {
+   "id": "asc_finance_2024-25",
+   "file": "asc_finance_2024-25_tables.ods",
+   "sha256": "c2ff7f38db06da67f2af3d05c30e4a2f4321be0505d3c7218991a695c57d6dd7"
   }
  ],
  "manual": [
@@ -336,7 +341,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "d7dae888e2ce9f0ffc863579220ca4e33543faefd2ea749fbc5f025128113e03"
+   "sha256": "5d260a8497444aeab61573c6f8a5a3fda41078c2aa1fb2f65ee3ead594075314"
   }
  ],
  "quality_counts": {
