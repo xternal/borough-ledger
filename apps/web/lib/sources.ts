@@ -24,8 +24,8 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
   {
     id: "councils",
     label: "Other councils' papers",
-    desc: "Budget decisions from a council's own minutes, where the government's statistics do not break them down (Belfast).",
-    test: (s) => s.publisher === "Belfast City Council",
+    desc: "What other councils publish themselves, where the government's statistics do not cover it: Belfast's budget decisions, South Oxfordshire's notice of council tax, Henley Town Council's budget and Oxfordshire's councillors.",
+    test: (s) => /\bCouncil$/.test(s.publisher),
   },
   {
     id: "london",

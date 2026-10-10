@@ -138,6 +138,10 @@ def ra_services(ra: LaRow, strict_lines: bool = False) -> Tuple[Dict[str, float]
     check(close(service_lines, ra.by_line("799"), 0.5), f"RA service lines sum to {service_lines}, TOTAL SERVICE EXPENDITURE is {ra.by_line('799')}")
     revenue = sum(groups.values())
     check(close(revenue, ra.by_line("900"), 0.5), f"RA mapped lines sum to {revenue}, REVENUE EXPENDITURE is {ra.by_line('900')}")
+    # Fire and rescue only where the council runs it (most county councils); elsewhere the group is empty and left out.
+    if not groups.get("fire"):
+        groups.pop("fire", None)
+        detail.pop("fire", None)
     return groups, detail
 
 
@@ -219,6 +223,8 @@ def outturn(rs: LaRow, ro5: LaRow) -> Dict[str, float]:
     streets_env = sum(as_number(ro5.values.get(c.index)) for c in nce if c.label.startswith(STREETS_ENV))
     groups["streets"] = groups.get("streets", 0.0) + streets_env
     groups["safety_regulation"] = groups.get("safety_regulation", 0.0) + env - streets_env
+    if not groups.get("fire"):
+        groups.pop("fire", None)
     return groups
 
 

@@ -16,7 +16,8 @@ export const ChildrenCareFile = z.object({
   england: z.object({ spend_m: m, children: z.number().int().positive(), home_year: z.number().positive(), home_year_quality: Quality, home_year_method: z.string() }),
   /** By the council's ONS code. Spending in £m (null where the Department withheld it); counts null where withheld ("c"). */
   councils: z.record(
-    z.string().regex(/^E0\d{7}$/),
+    // Unitaries (E06), metropolitan districts (E08), London boroughs (E09) and county councils (E10).
+    z.string().regex(/^E(0[689]|10)\d{6}$/),
     z.object({
       name: z.string(),
       la_code: z.string(),

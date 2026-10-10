@@ -133,7 +133,7 @@ ra_line,asset_id,section,label,role,group
 598,planbsn,Planning and Development Services,Business Support (b),line,planning
 599,plantot,Planning and Development Services,TOTAL PLANNING AND DEVELOPMENT SERVICES,total,
 601,poltot,Police,TOTAL POLICE SERVICES,line,running
-602,frstot,Fire,TOTAL FIRE AND RESCUE SERVICES,line,running
+602,frstot,Fire,TOTAL FIRE AND RESCUE SERVICES,line,fire
 604,cencrn,Central Services,Coroners' court services,line,running
 605,cencrtoth,Central Services,Other court services,line,running
 610,cencrp,Central Services,Corporate and democratic core,line,running

@@ -259,7 +259,8 @@ def load_groups() -> List[Dict[str, Any]]:
     for path, in_budget in ((MANUAL / "service_groups.csv", True), (MANUAL / "payment_groups.csv", False)):
         with open(path, newline="") as f:
             for g in csv.DictReader(f):
-                if g["id"] == "housing_benefit":
+                # Fire and rescue is London Fire Brigade's (the Mayor's), so no Hammersmith & Fulham payment can be in it.
+                if g["id"] in ("housing_benefit", "fire"):
                     continue
                 groups.append({"id": g["id"], "label": g["label"], "desc": g["desc"], "in_budget": in_budget, "order": int(g["order"])})
     return sorted(groups, key=lambda g: g["order"])

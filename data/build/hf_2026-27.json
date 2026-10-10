@@ -5,7 +5,7 @@
   "council_code": "E09000013",
   "year": "2026-27",
   "note": "Built by etl/build.py from government returns. Values marked test or approx are carried over from data/seed until the council's budget report is extracted into data/manual/.",
-  "vintage": "2026-10-04",
+  "vintage": "2026-10-10",
   "sources": [
    {
     "id": "ctr_2026-27",
@@ -471,6 +471,51 @@
     "licence": "OGL-UK-3.0",
     "asset_url": "https://content.explore-education-statistics.service.gov.uk/api/data-set-files/c1d5ac76-d738-42c7-be46-f915da3485eb/download",
     "sha256": "b5c8cebeffaaae5bad235ef968f1fa650e9542fd2d4c3278347bc6f920c1b674"
+   },
+   {
+    "id": "sodc_council_tax_notice_2026-27",
+    "title": "South Oxfordshire District Council, notice of council tax for 2026/27 (every parish, Bands A to H)",
+    "publisher": "South Oxfordshire District Council",
+    "url": "https://www.southandvale.gov.uk/app/uploads/sites/2/2026/03/South-council-tax-2026-27-advert-for-publication.pdf",
+    "published_on": "2026-02-13",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://www.southandvale.gov.uk/app/uploads/sites/2/2026/03/South-council-tax-2026-27-advert-for-publication.pdf",
+    "sha256": "c48a2c0bf28fb6c9339f138f4f4b87c3e1a551d1384a596cd7995bfa17ecfee0"
+   },
+   {
+    "id": "henley_town_budget_2026-27",
+    "title": "Henley Town Council, 2026/7 budget (version 0.4, 3 December 2025), page 1: precept and tax base",
+    "publisher": "Henley Town Council",
+    "url": "https://www.henleytowncouncil.gov.uk/your-council/finance-transparency/",
+    "published_on": "2025-12-03"
+   },
+   {
+    "id": "oxfordshire_councillors_2026-10-10",
+    "title": "Oxfordshire County Council, councillors by division (ModernGov web service)",
+    "publisher": "Oxfordshire County Council",
+    "url": "https://mycouncil.oxfordshire.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "published_on": "2026-10-10",
+    "asset_url": "https://mycouncil.oxfordshire.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+    "sha256": "17dffcc404192eeaae86c015da40a33d790dc72a7491d12d5127492ab7ce3894"
+   },
+   {
+    "id": "lgr_oxfordshire_decision_2026-07-16",
+    "title": "Local government reorganisation: decision letter to Oxfordshire council leaders, 16 July 2026",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "url": "https://assets.publishing.service.gov.uk/media/6a58d37d60a6e36813cb42f5/Local_government_reorganisation_-_decision_letter_to_Oxfordshire_council_leaders.pdf",
+    "published_on": "2026-07-16",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/6a58d37d60a6e36813cb42f5/Local_government_reorganisation_-_decision_letter_to_Oxfordshire_council_leaders.pdf",
+    "sha256": "2650bca77022a09ca12696cc2cd5584a163a19211a0a1f7c303d88b3dc4cc947"
+   },
+   {
+    "id": "sodc_lgr_2026-07-16",
+    "title": "South Oxfordshire District Council: government confirms three new unitary councils for Oxfordshire and West Berkshire in 2028",
+    "publisher": "South Oxfordshire District Council",
+    "url": "https://www.southoxon.gov.uk/lgr/government-confirms-three-new-unitary-councils-for-oxfordshire-and-west-berkshire-in-2028/",
+    "published_on": "2026-07-16",
+    "asset_url": "https://www.southoxon.gov.uk/lgr/government-confirms-three-new-unitary-councils-for-oxfordshire-and-west-berkshire-in-2028/",
+    "sha256": "a1f3c18c61013faddd2a8952ee93165fd2e95ebee454886928afc869696233c7"
    },
    {
     "id": "borough_ledger_method",

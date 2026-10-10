@@ -28,6 +28,13 @@ class AdultCareTest(unittest.TestCase):
         self.assertAlmostEqual(sum(hf["settings_k"].values()) + hf["spend_k"]["short_term"] + hf["spend_k"]["other"], hf["spend_k"]["total"], delta=1.5)
         self.assertEqual(json.loads(A.OUT.read_text()), json.loads(A.serialise(out)))
 
+    def test_a_two_tier_area_shows_its_county_council_not_its_district(self) -> None:
+        # South Oxfordshire District Council runs no social care; Oxfordshire County Council does.
+        codes = {c["ons"] for c in A.councils()}
+        self.assertIn("E10000025", codes)
+        self.assertNotIn("E07000179", codes)
+        self.assertEqual(A.build(REG)["councils"]["E10000025"]["name"], "Oxfordshire")
+
     def test_a_table_that_does_not_add_up_stops_the_build(self) -> None:
         real = A.read_ods
 

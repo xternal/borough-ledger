@@ -11,9 +11,12 @@ import { ChartTable, DataTable } from "./ChartTable";
 /** "two", "six": small counts in words, as the page says them; larger ones in figures. */
 const numberWord = (n: number) => ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"][n] ?? String(n);
 
-type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShareGeneral" | "generalBudget" | "place">;
+type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShareGeneral" | "generalBudget" | "place"> & {
+  /** What pays for the rest besides council tax, where it is not grants and business rates (South Oxfordshire keeps none). */
+  rest?: string;
+};
 
-export function BillSection({ bill, rules, services, ctShareGeneral, generalBudget, place }: Props) {
+export function BillSection({ bill, rules, services, ctShareGeneral, generalBudget, place, rest = "government grants and business rates" }: Props) {
   const { band, singlePerson, setBand, setSinglePerson } = useLedger();
   const b = billFor(rules, { council: bill.council.value, gla: bill.gla.value }, band, singlePerson);
   const inputs: Figure[] = [bill.ratios, ...(singlePerson ? [bill.spd] : [])];
@@ -192,7 +195,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
               <>
                 Split in proportion to everything the council spends, <Num f={generalBudget} fmt="m0" />, including what specific government grants pay for: the
                 budget return does not say which services those grants go to. Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of it;
-                government grants and business rates pay the rest.
+                {rest} pay the rest.
               </>
             ) : (
               <>
@@ -200,7 +203,7 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
                 {basis === "after_ring_fenced"
                   ? "after schools and public health, which have their own ring-fenced grants."
                   : "after the grants tied to particular services, which the budget return already takes off each one."}{" "}
-                Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; government grants and business rates pay the rest.
+                Council tax pays about <Num f={ctShareGeneral} fmt="pence" /> of every £1 of that; {rest} pay the rest.
               </>
             )}
           </p>

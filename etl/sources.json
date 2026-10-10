@@ -677,6 +677,65 @@
     "kind": "dfe_cla_characteristics"
    },
    "note": "Replaced on 26 November 2025 to correct percentages; counts unaffected. \"c\": withheld to protect children's identities."
+  },
+  {
+   "id": "sodc_council_tax_notice_2026-27",
+   "title": "South Oxfordshire District Council, notice of council tax for 2026/27 (every parish, Bands A to H)",
+   "publisher": "South Oxfordshire District Council",
+   "url": "https://www.southandvale.gov.uk/app/uploads/sites/2/2026/03/South-council-tax-2026-27-advert-for-publication.pdf",
+   "asset_url": "https://www.southandvale.gov.uk/app/uploads/sites/2/2026/03/South-council-tax-2026-27-advert-for-publication.pdf",
+   "file": "sodc_council_tax_notice_2026-27.pdf",
+   "sha256": "c48a2c0bf28fb6c9339f138f4f4b87c3e1a551d1384a596cd7995bfa17ecfee0",
+   "published_on": "2026-02-13",
+   "licence": "OGL-UK-3.0",
+   "manual": true,
+   "note": "One page; tax set by Council on 12 February 2026. Henley's row and a parish with no precept (Adwell) read into data/manual/town_councils_2026-27.csv."
+  },
+  {
+   "id": "henley_town_budget_2026-27",
+   "title": "Henley Town Council, 2026/7 budget (version 0.4, 3 December 2025), page 1: precept and tax base",
+   "publisher": "Henley Town Council",
+   "url": "https://www.henleytowncouncil.gov.uk/your-council/finance-transparency/",
+   "published_on": "2025-12-03",
+   "manual": true,
+   "note": "Precept £1,066,182 on a tax base of 6,258.8. The town's own leaflet says Band D £170.18; the precept over the tax base is £170.35, as South Oxfordshire's statutory notice has it, so the notice's figure is used. Linked from the page as \"2026-27 Budget figures.pdf\" (a Google Drive file)."
+  },
+  {
+   "id": "oxfordshire_councillors_2026-10-10",
+   "title": "Oxfordshire County Council, councillors by division (ModernGov web service)",
+   "publisher": "Oxfordshire County Council",
+   "url": "https://mycouncil.oxfordshire.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+   "asset_url": "https://mycouncil.oxfordshire.gov.uk/mgWebService.asmx/GetCouncillorsByWard",
+   "file": "oxfordshire_councillors_2026-10-10.xml",
+   "sha256": "17dffcc404192eeaae86c015da40a33d790dc72a7491d12d5127492ab7ce3894",
+   "published_on": "2026-10-10",
+   "manual": true,
+   "note": "Retrieved 10 October 2026; the two divisions that cover Henley-on-Thames read into data/manual/town_county_divisions_2026.csv. The snapshot also holds contact details, which are not published."
+  },
+  {
+   "id": "lgr_oxfordshire_decision_2026-07-16",
+   "title": "Local government reorganisation: decision letter to Oxfordshire council leaders, 16 July 2026",
+   "publisher": "Ministry of Housing, Communities and Local Government",
+   "url": "https://assets.publishing.service.gov.uk/media/6a58d37d60a6e36813cb42f5/Local_government_reorganisation_-_decision_letter_to_Oxfordshire_council_leaders.pdf",
+   "asset_url": "https://assets.publishing.service.gov.uk/media/6a58d37d60a6e36813cb42f5/Local_government_reorganisation_-_decision_letter_to_Oxfordshire_council_leaders.pdf",
+   "file": "lgr_oxfordshire_decision_2026-07-16.pdf",
+   "sha256": "2650bca77022a09ca12696cc2cd5584a163a19211a0a1f7c303d88b3dc4cc947",
+   "published_on": "2026-07-16",
+   "licence": "OGL-UK-3.0",
+   "manual": true,
+   "note": "Three unitary councils; South Oxfordshire, less 25 parishes that go to Greater Oxford, joins Ridgeway Council; elections in May 2027 replace scheduled elections; subject to a Structural Changes Order approved by Parliament; implemented by April 2028."
+  },
+  {
+   "id": "sodc_lgr_2026-07-16",
+   "title": "South Oxfordshire District Council: government confirms three new unitary councils for Oxfordshire and West Berkshire in 2028",
+   "publisher": "South Oxfordshire District Council",
+   "url": "https://www.southoxon.gov.uk/lgr/government-confirms-three-new-unitary-councils-for-oxfordshire-and-west-berkshire-in-2028/",
+   "asset_url": "https://www.southoxon.gov.uk/lgr/government-confirms-three-new-unitary-councils-for-oxfordshire-and-west-berkshire-in-2028/",
+   "file": "sodc_lgr_2026-07-16.html",
+   "sha256": "a1f3c18c61013faddd2a8952ee93165fd2e95ebee454886928afc869696233c7",
+   "published_on": "2026-07-16",
+   "manual": true,
+   "note": "Lists the 25 South Oxfordshire parishes going to Greater Oxford Council; Henley is not one of them. Elections May 2027; the new council begins 1 April 2028."
   }
  ]
 }

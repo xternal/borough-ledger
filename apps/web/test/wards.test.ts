@@ -167,6 +167,13 @@ describe("postcode finder across boroughs", () => {
     }
   });
 
+  it("finds a ward in a two-tier area: Henley-on-Thames, in South Oxfordshire", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    const r = { postcode: "RG9 2AQ", admin_district: "South Oxfordshire", codes: { admin_ward: "E05015558", admin_district: "E07000179" } };
+    expect(placeFromResult(r, PLACES)).toMatchObject({ kind: "ward", href: "/south-oxfordshire#ward-henley-on-thames" });
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

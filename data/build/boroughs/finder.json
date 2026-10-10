@@ -4219,6 +4219,118 @@
    ]
   },
   {
+   "slug": "south-oxfordshire",
+   "short": "South Oxfordshire",
+   "ons": "E07000179",
+   "wards": [
+    {
+     "id": "benson-and-crowmarsh",
+     "name": "Benson and Crowmarsh",
+     "ons_code": "E05009733"
+    },
+    {
+     "id": "berinsfield",
+     "name": "Berinsfield",
+     "ons_code": "E05009734"
+    },
+    {
+     "id": "chalgrove",
+     "name": "Chalgrove",
+     "ons_code": "E05009735"
+    },
+    {
+     "id": "chinnor",
+     "name": "Chinnor",
+     "ons_code": "E05009736"
+    },
+    {
+     "id": "cholsey",
+     "name": "Cholsey",
+     "ons_code": "E05011701"
+    },
+    {
+     "id": "didcot-north-east",
+     "name": "Didcot North East",
+     "ons_code": "E05011702"
+    },
+    {
+     "id": "didcot-south",
+     "name": "Didcot South",
+     "ons_code": "E05011703"
+    },
+    {
+     "id": "didcot-west",
+     "name": "Didcot West",
+     "ons_code": "E05009740"
+    },
+    {
+     "id": "forest-hill-and-holton",
+     "name": "Forest Hill and Holton",
+     "ons_code": "E05011704"
+    },
+    {
+     "id": "garsington-and-horspath",
+     "name": "Garsington and Horspath",
+     "ons_code": "E05009742"
+    },
+    {
+     "id": "goring",
+     "name": "Goring",
+     "ons_code": "E05009743"
+    },
+    {
+     "id": "haseley-brook",
+     "name": "Haseley Brook",
+     "ons_code": "E05011705"
+    },
+    {
+     "id": "henley-on-thames",
+     "name": "Henley-on-Thames",
+     "ons_code": "E05015558"
+    },
+    {
+     "id": "kidmore-end-and-whitchurch",
+     "name": "Kidmore End and Whitchurch",
+     "ons_code": "E05011707"
+    },
+    {
+     "id": "sandford-and-the-wittenhams",
+     "name": "Sandford and the Wittenhams",
+     "ons_code": "E05011708"
+    },
+    {
+     "id": "sonning-common",
+     "name": "Sonning Common",
+     "ons_code": "E05012854"
+    },
+    {
+     "id": "thame",
+     "name": "Thame",
+     "ons_code": "E05009749"
+    },
+    {
+     "id": "wallingford",
+     "name": "Wallingford",
+     "ons_code": "E05011710"
+    },
+    {
+     "id": "watlington",
+     "name": "Watlington",
+     "ons_code": "E05009751"
+    },
+    {
+     "id": "wheatley",
+     "name": "Wheatley",
+     "ons_code": "E05011711"
+    },
+    {
+     "id": "woodcote-and-rotherfield",
+     "name": "Woodcote and Rotherfield",
+     "ons_code": "E05015559"
+    }
+   ]
+  },
+  {
    "slug": "southwark",
    "short": "Southwark",
    "ons": "E09000028",

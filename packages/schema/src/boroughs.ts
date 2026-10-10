@@ -29,7 +29,13 @@ export const BoroughConfig = z.object({
       results: z.boolean().optional(),
       /** "county" for a council covering a county or region rather than a city (Highland, North Yorkshire): listed apart. */
       /** "town" for a town that is not a city (Swindon): the picker calls it a town. */
-      kind: z.enum(["county", "town"]).optional(),
+      kind: z.enum(["county", "town", "district"]).optional(),
+      /** In a two-tier area, the county council that takes most of the bill: its budget is shown too (etl/boroughs.py). */
+      county: z.object({ ons: z.string(), council: z.string(), short: z.string(), precept_id: z.string() }).optional(),
+      /** Town councils named on the page (Henley-on-Thames), from data/manual/town_councils_2026-27.csv. */
+      towns: z.array(z.string()).optional(),
+      /** A planned change to the council itself, with its sources (Oxfordshire's reorganisation). */
+      reorganisation: z.object({ note: z.string(), source_ids: z.array(z.string()).min(1) }).optional(),
       /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
       nation: z.enum(["england", "scotland", "wales", "northern_ireland"]).optional(),
       /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */
@@ -65,6 +71,41 @@ export type BoroughConfig = z.infer<typeof BoroughConfig>;
 // Scotland's returns give no tax base in the same form, and a borough's page does not use it.
 export const BoroughStatement = CouncilYear.pick({ meta: true, bill: true, tax_base: true, history: true, funding: true, services: true }).extend({
   tax_base: CouncilYear.shape.tax_base.optional(),
+  /** In a two-tier area, the county council's own budget (it sends no bills, so it has no statement of its own). */
+  county: z
+    .object({
+      council: z.string(),
+      council_short: z.string(),
+      council_code: z.string(),
+      band_d: z.number(),
+      council_tax_requirement_m: z.number(),
+      tax_base: z.number(),
+      funding: CouncilYear.shape.funding,
+      services: CouncilYear.shape.services,
+      quality: z.enum(["sourced", "approx", "modelled", "test"]),
+      source_id: z.string(),
+      method_note: z.string(),
+    })
+    .optional(),
+  towns: z
+    .array(
+      z.object({
+        town: z.string(),
+        council: z.string(),
+        ward: z.string(),
+        band_d: z.number(),
+        whole_band_d: z.number(),
+        precept_m: z.number(),
+        tax_base: z.number(),
+        divisions: z.array(z.object({ division: z.string(), councillor: z.string(), party: z.string(), source_id: z.string() })),
+        quality: z.enum(["sourced", "approx", "modelled", "test"]),
+        source_id: z.string(),
+        source_ids: z.array(z.string()),
+        method_note: z.string(),
+      }),
+    )
+    .optional(),
+  reorganisation: z.object({ note: z.string(), quality: z.enum(["sourced", "approx", "modelled", "test"]), source_id: z.string(), source_ids: z.array(z.string()) }).optional(),
   /** Where the owner published a borough whose two returns differ on council tax (Islington, Bexley, Waltham Forest). */
   returns_differ: z
     .object({ budget_return_m: z.number(), council_tax_return_m: z.number(), quality: z.enum(["sourced", "approx", "modelled", "test"]), source_id: z.string(), method_note: z.string() })
