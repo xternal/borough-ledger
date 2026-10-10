@@ -63,7 +63,9 @@ describe("daily pledge alerts", () => {
     expect(sent[0]!.to).toBe("a@example.org");
     expect(sent[0]!.subject).toBe("Pledge update: Change 2 to p1");
     expect(sent[0]!.text).toContain("What happened, number 2.\nhttps://borough.test/promise/p1");
-    expect(sent[0]!.text).not.toContain("p2");
+    // Only the followed pledge: no item or link for p2 (the manage link is random, so look for the item and its address).
+    expect(sent[0]!.text).not.toContain("to p2");
+    expect(sent[0]!.text).not.toContain("/promise/p2");
     expect(sent[0]!.unsubscribeUrl).toMatch(/^https:\/\/borough\.test\/api\/follow\/unsubscribe\?t=/);
 
     // Nothing is sent twice.

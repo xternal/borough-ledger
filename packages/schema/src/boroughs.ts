@@ -28,7 +28,8 @@ export const BoroughConfig = z.object({
       /** False where the last election's counts are not published in full (North Yorkshire, 2022): the council's own list only. */
       results: z.boolean().optional(),
       /** "county" for a council covering a county or region rather than a city (Highland, North Yorkshire): listed apart. */
-      kind: z.literal("county").optional(),
+      /** "town" for a town that is not a city (Swindon): the picker calls it a town. */
+      kind: z.enum(["county", "town"]).optional(),
       /** Scotland's councils have their own rules (data/config/rules_scotland.json) and returns (etl/scotland.py). */
       nation: z.enum(["england", "scotland", "wales", "northern_ireland"]).optional(),
       /** The council's name in the Scottish Government's returns: the POBE workbook's sheet, the council tax tables' row. */
@@ -50,6 +51,8 @@ export const BoroughConfig = z.object({
       ward_aliases: z.record(z.string(), z.string()).optional(),
       /** The owner's decision to publish although the budget return and council tax return differ on council tax. */
       returns_differ: z.boolean().optional(),
+      /** The ward boundaries the council's wards are drawn on: December 2024's unless redrawn for the May 2026 election. */
+      wards_from: z.enum(["2024", "2026"]).optional(),
       /** A postcode in the borough (its town hall) for the finder's example. */
       example_postcode: z.string().optional(),
       /** Where the borough elects its mayor, who runs the council. */
