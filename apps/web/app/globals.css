@@ -2516,3 +2516,13 @@
     }
   }
 }
+
+@layer components {
+  /* what care for adults costs: the government's average costs, then where the money went */
+  .care-kpis .kpi .l {
+    min-height: 2.6em;
+  }
+  .care-h {
+    margin: 22px 0 12px;
+  }
+}
