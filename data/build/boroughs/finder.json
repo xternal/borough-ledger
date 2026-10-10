@@ -3314,6 +3314,118 @@
    ]
   },
   {
+   "slug": "milton-keynes",
+   "short": "Milton Keynes",
+   "ons": "E06000042",
+   "wards": [
+    {
+     "id": "bletchley-park-and-fenny-stratford",
+     "name": "Bletchley Park & Fenny Stratford",
+     "ons_code": "E05016588"
+    },
+    {
+     "id": "bletchley-south",
+     "name": "Bletchley South",
+     "ons_code": "E05016589"
+    },
+    {
+     "id": "bletchley-west",
+     "name": "Bletchley West",
+     "ons_code": "E05016590"
+    },
+    {
+     "id": "bradwell",
+     "name": "Bradwell",
+     "ons_code": "E05016591"
+    },
+    {
+     "id": "broughton-and-moulsoe",
+     "name": "Broughton & Moulsoe",
+     "ons_code": "E05016592"
+    },
+    {
+     "id": "campbell-park-and-willen",
+     "name": "Campbell Park & Willen",
+     "ons_code": "E05016593"
+    },
+    {
+     "id": "central-milton-keynes",
+     "name": "Central Milton Keynes",
+     "ons_code": "E05016594"
+    },
+    {
+     "id": "danesborough",
+     "name": "Danesborough",
+     "ons_code": "E05016595"
+    },
+    {
+     "id": "furzton",
+     "name": "Furzton",
+     "ons_code": "E05016596"
+    },
+    {
+     "id": "great-linford",
+     "name": "Great Linford",
+     "ons_code": "E05016597"
+    },
+    {
+     "id": "hanslope",
+     "name": "Hanslope",
+     "ons_code": "E05016598"
+    },
+    {
+     "id": "new-bradwell",
+     "name": "New Bradwell",
+     "ons_code": "E05016599"
+    },
+    {
+     "id": "newport-pagnell",
+     "name": "Newport Pagnell",
+     "ons_code": "E05016600"
+    },
+    {
+     "id": "olney-and-rural",
+     "name": "Olney & Rural",
+     "ons_code": "E05016601"
+    },
+    {
+     "id": "ouzel-valley",
+     "name": "Ouzel Valley",
+     "ons_code": "E05016602"
+    },
+    {
+     "id": "stony-stratford",
+     "name": "Stony Stratford",
+     "ons_code": "E05016603"
+    },
+    {
+     "id": "tattenhoe",
+     "name": "Tattenhoe",
+     "ons_code": "E05016604"
+    },
+    {
+     "id": "walton",
+     "name": "Walton",
+     "ons_code": "E05016605"
+    },
+    {
+     "id": "watling",
+     "name": "Watling",
+     "ons_code": "E05016606"
+    },
+    {
+     "id": "wolverton",
+     "name": "Wolverton",
+     "ons_code": "E05016607"
+    },
+    {
+     "id": "woughton-and-fishermead",
+     "name": "Woughton & Fishermead",
+     "ons_code": "E05016608"
+    }
+   ]
+  },
+  {
    "slug": "newham",
    "short": "Newham",
    "ons": "E09000025",
@@ -4332,6 +4444,138 @@
      "id": "worcester-park-south",
      "name": "Worcester Park South",
      "ons_code": "E05013773"
+    }
+   ]
+  },
+  {
+   "slug": "swindon",
+   "short": "Swindon",
+   "ons": "E06000030",
+   "wards": [
+    {
+     "id": "badbury-park-eldene-and-liden",
+     "name": "Badbury Park, Eldene & Liden",
+     "ons_code": "E05016280"
+    },
+    {
+     "id": "blunsdon",
+     "name": "Blunsdon",
+     "ons_code": "E05016281"
+    },
+    {
+     "id": "broadgreen",
+     "name": "Broadgreen",
+     "ons_code": "E05016282"
+    },
+    {
+     "id": "chiseldon-and-ridgeway",
+     "name": "Chiseldon & Ridgeway",
+     "ons_code": "E05016283"
+    },
+    {
+     "id": "covingham-and-nythe",
+     "name": "Covingham & Nythe",
+     "ons_code": "E05016284"
+    },
+    {
+     "id": "gorse-hill",
+     "name": "Gorse Hill",
+     "ons_code": "E05016285"
+    },
+    {
+     "id": "haydon-wick",
+     "name": "Haydon Wick",
+     "ons_code": "E05016286"
+    },
+    {
+     "id": "highworth",
+     "name": "Highworth",
+     "ons_code": "E05016287"
+    },
+    {
+     "id": "kingshill",
+     "name": "Kingshill",
+     "ons_code": "E05016288"
+    },
+    {
+     "id": "lower-stratton",
+     "name": "Lower Stratton",
+     "ons_code": "E05016289"
+    },
+    {
+     "id": "lydiard-freshbrook-and-toothill",
+     "name": "Lydiard, Freshbrook & Toothill",
+     "ons_code": "E05016290"
+    },
+    {
+     "id": "old-town-and-lawn",
+     "name": "Old Town & Lawn",
+     "ons_code": "E05016291"
+    },
+    {
+     "id": "parks",
+     "name": "Parks",
+     "ons_code": "E05016292"
+    },
+    {
+     "id": "penhill-and-pinehurst",
+     "name": "Penhill & Pinehurst",
+     "ons_code": "E05016293"
+    },
+    {
+     "id": "priory-vale",
+     "name": "Priory Vale",
+     "ons_code": "E05016294"
+    },
+    {
+     "id": "queens-park",
+     "name": "Queen's Park",
+     "ons_code": "E05016295"
+    },
+    {
+     "id": "rodbourne-cheney",
+     "name": "Rodbourne Cheney",
+     "ons_code": "E05016296"
+    },
+    {
+     "id": "rodbourne-ferndale-and-western",
+     "name": "Rodbourne Ferndale & Western",
+     "ons_code": "E05016297"
+    },
+    {
+     "id": "shaw-and-westlea",
+     "name": "Shaw & Westlea",
+     "ons_code": "E05016298"
+    },
+    {
+     "id": "south-marston",
+     "name": "South Marston",
+     "ons_code": "E05016299"
+    },
+    {
+     "id": "st-andrews-east",
+     "name": "St Andrews East",
+     "ons_code": "E05016300"
+    },
+    {
+     "id": "st-andrews-west-and-tadpole",
+     "name": "St Andrews West & Tadpole",
+     "ons_code": "E05016301"
+    },
+    {
+     "id": "upper-stratton",
+     "name": "Upper Stratton",
+     "ons_code": "E05016302"
+    },
+    {
+     "id": "walcot",
+     "name": "Walcot",
+     "ons_code": "E05016303"
+    },
+    {
+     "id": "wroughton-and-wichelstowe",
+     "name": "Wroughton & Wichelstowe",
+     "ons_code": "E05016304"
     }
    ]
   },

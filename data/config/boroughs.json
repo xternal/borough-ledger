@@ -385,6 +385,40 @@
    "example_postcode": "SM4 5DX"
   },
   {
+   "slug": "milton-keynes",
+   "council": "Milton Keynes City Council",
+   "short": "Milton Keynes",
+   "ons": "E06000042",
+   "moderngov": "https://milton-keynes.moderngov.co.uk",
+   "election_id": "local.milton-keynes.2026-05-07",
+   "example_postcode": "MK9 3EJ",
+   "others": {
+    "name": "Police and fire",
+    "to": "Thames Valley Police and Buckinghamshire and Milton Keynes Fire Authority",
+    "short": "the police and fire share",
+    "with": "police and fire"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "Thames Valley Police (police and crime commissioner)",
+     "table": "Table_8d",
+     "authority": "Thames Valley Police"
+    },
+    {
+     "id": "fire",
+     "label": "Fire and rescue",
+     "phrase": "the fire and rescue service",
+     "official_term": "Buckinghamshire and Milton Keynes Fire Authority",
+     "table": "Table_8e",
+     "authority": "Buckinghamshire and Milton Keynes Fire Authority"
+    }
+   ],
+   "wards_from": "2026"
+  },
+  {
    "slug": "newham",
    "council": "London Borough of Newham",
    "short": "Newham",
@@ -468,6 +502,41 @@
    "moderngov": "https://moderngov.sutton.gov.uk",
    "election_id": "local.sutton.2026-05-07",
    "example_postcode": "SM1 1EA"
+  },
+  {
+   "slug": "swindon",
+   "council": "Swindon Borough Council",
+   "short": "Swindon",
+   "ons": "E06000030",
+   "moderngov": "https://ww5.swindon.gov.uk/moderngov",
+   "election_id": "local.swindon.2026-05-07",
+   "example_postcode": "SN1 2JH",
+   "kind": "town",
+   "others": {
+    "name": "Police and fire",
+    "to": "Wiltshire Police and Dorset and Wiltshire Fire and Rescue",
+    "short": "the police and fire share",
+    "with": "police and fire"
+   },
+   "precepts": [
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "Wiltshire Police (police and crime commissioner)",
+     "table": "Table_8d",
+     "authority": "Wiltshire Police"
+    },
+    {
+     "id": "fire",
+     "label": "Fire and rescue",
+     "phrase": "the fire and rescue service",
+     "official_term": "Dorset and Wiltshire Fire and Rescue Authority",
+     "table": "Table_8e",
+     "authority": "Dorset and Wiltshire Fire and Rescue Authority"
+    }
+   ],
+   "wards_from": "2026"
   },
   {
    "slug": "tower-hamlets",

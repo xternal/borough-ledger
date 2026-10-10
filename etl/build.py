@@ -346,7 +346,8 @@ def build() -> Dict[str, Any]:
         },
         "bill": {
             "band_d_total": band_d_total, "band_d_council": now["band_d_council"], "band_d_gla": band_d_gla,
-            "band_d_total_prev": bands[PREV]["D"], "band_d_council_prev": prev["band_d_council"],
+            # Last year's whole bill outside a parish, like this year's: the area Band D averages parish precepts in.
+            "band_d_total_prev": round(prev["band_d_council"] + round(bands[PREV]["D"] - prev["band_d_council_incl"], 2), 2), "band_d_council_prev": prev["band_d_council"],
             "council_rise_pct": round((now["band_d_council"] / prev["band_d_council"] - 1) * 100, 2),
             "published_bands": bands[YEAR],
             "gla_note": seed["bill"]["gla_note"],

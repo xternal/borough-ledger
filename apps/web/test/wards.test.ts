@@ -155,6 +155,18 @@ describe("postcode finder across boroughs", () => {
     });
   });
 
+  it("finds wards redrawn for May 2026: Swindon's and Milton Keynes' civic offices", async () => {
+    const { PLACES } = await import("@/lib/places");
+    const { placeFromResult } = await import("@/lib/wardFinder");
+    // postcodes.io already gives the new wards' codes, the same as the ONS's May 2026 boundaries.
+    for (const [postcode, district, ons, ward, href] of [
+      ["SN1 2JH", "Swindon", "E06000030", "E05016295", "/swindon#ward-queens-park"],
+      ["MK9 3EJ", "Milton Keynes", "E06000042", "E05016594", "/milton-keynes#ward-central-milton-keynes"],
+    ] as const) {
+      expect(placeFromResult({ postcode, admin_district: district, codes: { admin_ward: ward, admin_district: ons } }, PLACES)).toMatchObject({ kind: "ward", href });
+    }
+  });
+
   it("opens the council's page where its wards are not on the site yet", async () => {
     const { PLACES } = await import("@/lib/places");
     const { placeFromResult } = await import("@/lib/wardFinder");

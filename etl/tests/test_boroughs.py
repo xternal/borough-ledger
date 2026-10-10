@@ -182,3 +182,19 @@ class BoroughsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BillRiseTest(unittest.TestCase):
+    def test_last_years_bill_is_outside_a_parish_like_this_years(self) -> None:
+        """The rise compares like with like: last year's whole bill is the council's share plus the rest of the bill, both
+        outside a parish, as this year's is. (The government's area Band D averages parish precepts in; using it made
+        Swindon's and Milton Keynes' bills look as if they had fallen.)"""
+        for f in sorted((ROOT / "data" / "build" / "boroughs").glob("*/statement.json")):
+            b = json.loads(f.read_text()).get("bill") or {}
+            if not b.get("gla_split") or "band_d_total_prev" not in b:
+                continue
+            parts = b["band_d_council_prev"] + sum(g["band_d_prev"] for g in b["gla_split"])
+            with self.subTest(council=f.parent.name):
+                self.assertAlmostEqual(b["band_d_total_prev"], parts, delta=0.02)
+                self.assertGreater(b["band_d_total"], b["band_d_total_prev"])  # every council on the site raised its bill this year
+
