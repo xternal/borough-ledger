@@ -151,14 +151,15 @@ export function CouncilTaxRise({ m, band, path }: { m: PageModel; band: Band; pa
 
       <section id="have-your-say" aria-labelledby="say-h" className="ward-sec">
         <h2 id="say-h">Have your say</h2>
-        <ol className="timeline">
+        <ol className="ct-timetable">
           {ct.timetable.map((t) => (
             <li key={t.id}>
               <b>
                 {when(t.start, t.end)}
                 {t.proposed ? " (proposed)" : ""}
-              </b>{" "}
-              {t.label}.
+              </b>
+              <span>
+                {t.label}.
               {t.id === "engagement" ? (
                 t.url ? (
                   <>
@@ -169,6 +170,7 @@ export function CouncilTaxRise({ m, band, path }: { m: PageModel; band: Band; pa
                   " We will link the council's page here when it opens."
                 )
               ) : null}
+              </span>
             </li>
           ))}
         </ol>
