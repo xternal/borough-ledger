@@ -38,6 +38,8 @@ const config: NextConfig = {
     "/ward/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
     "/councillor/[id]/opengraph-image": ["./assets/fonts/*.ttf"],
     "/payments/[month]/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/council-tax-rise/opengraph-image": ["./assets/fonts/*.ttf"],
+    "/council-tax-rise/[band]/opengraph-image": ["./assets/fonts/*.ttf"],
     "/supplier/[id]/og": ["./assets/fonts/*.ttf"],
   },
 };

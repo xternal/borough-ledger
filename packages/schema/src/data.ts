@@ -71,6 +71,10 @@ export function provenanceRefs(d: Omit<Dataset, "sources" | "wardMap" | "wardSpe
   c.history.council_tax.forEach((h) =>
     h.source_ids.forEach((id) => out.push({ path: `history.council_tax.${h.year}`, quality: c.history.quality, source_id: id })),
   );
+  if (c.next_year.revised) add("next_year.revised", c.next_year.revised);
+  if (c.next_year.govt_funding) add("next_year.govt_funding", c.next_year.govt_funding);
+  if (c.next_year.ct_options) add("next_year.ct_options", c.next_year.ct_options);
+  if (c.next_year.timetable) add("next_year.timetable", c.next_year.timetable);
   c.next_year.levers.forEach((l) => add(`next_year.levers.${l.id}`, l));
   c.next_year.toggles.forEach((t) => add(`next_year.toggles.${t.id}`, t));
   const pay = d.payments;

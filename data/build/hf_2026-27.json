@@ -1615,6 +1615,111 @@
    "quality": "approx",
    "source_id": "cabinet_mtfs_2026-10-12",
    "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, PDF page 10. Table 4: Revised Budget Gap Before Savings, 2027/28. Not checked by a person yet; the report does not say whether it assumes a council tax rise"
+  },
+  "govt_funding": {
+   "from_year": "2025-26",
+   "from_m": 150.5,
+   "to_year": "2029-30",
+   "to_m": 72.4,
+   "quality": "approx",
+   "source_id": "cabinet_mtfs_2026-10-12",
+   "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, PDF page 1. Summary: in 2025/26 we received £150.5m in Government funding. Not checked by a person yet"
+  },
+  "ct_options": {
+   "gla_rise_pct": 5.0,
+   "options": [
+    {
+     "pct": 100.0,
+     "hf_band_d": 2018.0,
+     "gla_band_d": 536.04,
+     "total_band_d": 2554.04,
+     "hf_increase": 1009.0,
+     "hf_per_week": 19.4,
+     "total_increase": 1034.53,
+     "total_per_week": 19.89,
+     "raises_to_2030_31_m": 113.2,
+     "shortfall_m": 46.1
+    },
+    {
+     "pct": 125.0,
+     "hf_band_d": 2270.25,
+     "gla_band_d": 536.04,
+     "total_band_d": 2806.29,
+     "hf_increase": 1261.25,
+     "hf_per_week": 24.25,
+     "total_increase": 1286.78,
+     "total_per_week": 24.75,
+     "raises_to_2030_31_m": 138.7,
+     "shortfall_m": 20.6
+    },
+    {
+     "pct": 150.0,
+     "hf_band_d": 2522.5,
+     "gla_band_d": 536.04,
+     "total_band_d": 3058.54,
+     "hf_increase": 1513.5,
+     "hf_per_week": 29.11,
+     "total_increase": 1539.03,
+     "total_per_week": 29.6,
+     "raises_to_2030_31_m": 163.9,
+     "shortfall_m": 0.0
+    }
+   ],
+   "quality": "approx",
+   "source_id": "cabinet_mtfs_2026-10-12",
+   "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, Tables 7 to 9 (PDF pages 15 and 16) and the summary (pages 1 and 2). Rises in the council's own share of Band D; the Mayor of London's share is assumed to rise 5%."
+  },
+  "timetable": {
+   "items": [
+    {
+     "id": "cabinet_mtfs",
+     "start": "2026-10-12",
+     "label": "Cabinet considers the revised four-year plan, with the three council tax options",
+     "proposed": false,
+     "url": "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431"
+    },
+    {
+     "id": "engagement",
+     "start": "2026-10-19",
+     "end": "2026-11-15",
+     "label": "The council asks residents, businesses and others for their views: which services matter most to them, and what they expect of council tax",
+     "proposed": false
+    },
+    {
+     "id": "feedback",
+     "start": "2026-11",
+     "end": "2026-12",
+     "label": "A summary of what people said",
+     "proposed": false
+    },
+    {
+     "id": "scrutiny",
+     "start": "2026-12",
+     "label": "Councillors scrutinise the savings and investment proposals",
+     "proposed": false
+    },
+    {
+     "id": "settlement",
+     "start": "2026-12",
+     "label": "The government announces each council's funding for 2027/28",
+     "proposed": false
+    },
+    {
+     "id": "cabinet_budget",
+     "start": "2027-02-15",
+     "label": "Cabinet considers the draft 2027/28 budget",
+     "proposed": true
+    },
+    {
+     "id": "council_budget",
+     "start": "2027-03-01",
+     "label": "Full Council sets the 2027/28 budget and council tax",
+     "proposed": true
+    }
+   ],
+   "quality": "approx",
+   "source_id": "cabinet_mtfs_2026-10-12",
+   "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, Table 11 (PDF page 19) and paragraph 6.4 (page 16)."
   }
  }
 }

@@ -106,6 +106,27 @@ export interface PromiseModel {
   test?: boolean;
 }
 
+export interface CtOption {
+  /** The rise in the council's own share of the bill, in percent. */
+  pct: number;
+  council: Figure;
+  gla: Figure;
+  total: Figure;
+  /** What it raises by 2030/31, and what it leaves still to find (zero: broadly balances). */
+  raises: Figure;
+  shortfall: Figure;
+}
+
+export interface CtOptionsModel {
+  /** The rise the report assumes for the Mayor of London's share. */
+  glaRise: Figure;
+  options: CtOption[];
+  funding: { fromLabel: string; from: Figure; toLabel: string; to: Figure } | null;
+  gap2030: { label: string; gap: Figure } | null;
+  timetable: { id: string; start: string; end?: string; label: string; proposed: boolean; url?: string }[];
+  timetableQuality: Figure;
+}
+
 export interface PageModel {
   place: { council: string; short: string; yearLabel: string; nextYearLabel: string; yearAfterLabel: string };
   today: string;
@@ -170,6 +191,9 @@ export interface PageModel {
   };
   /** This year's referendum limit, for the rules in Method. */
   referendumLimitNow: Figure;
+  /** October's three council tax options for next year (the report to Cabinet, Tables 7 to 9), the government funding
+   *  behind them and the timetable to the decision; null until extracted. Band D figures: other bands follow by ratio. */
+  ctOptions: CtOptionsModel | null;
   politics: { control: string; seats: Figure; totalSeats: Figure };
   promises: PromiseModel[];
   people: { councillors: CouncillorModel[]; wards: { id: string; name: string; ons_code: string; councillor_ids: string[] }[]; retrievedOn: string };
@@ -476,6 +500,25 @@ export function buildModel(): PageModel {
       coef,
     },
     referendumLimitNow: of(limitNow, nonNull(limitNow.threshold_pct, `referendum threshold for ${C.meta.year}`)),
+    ctOptions: ny.ct_options
+      ? {
+          glaRise: of(ny.ct_options, ny.ct_options.gla_rise_pct),
+          options: ny.ct_options.options.map((o) => ({
+            pct: o.pct,
+            council: of(ny.ct_options!, o.hf_band_d),
+            gla: of(ny.ct_options!, o.gla_band_d),
+            total: of(ny.ct_options!, o.total_band_d),
+            raises: of(ny.ct_options!, o.raises_to_2030_31_m),
+            shortfall: of(ny.ct_options!, o.shortfall_m),
+          })),
+          funding: ny.govt_funding
+            ? { fromLabel: displayYear(ny.govt_funding.from_year), from: of(ny.govt_funding, ny.govt_funding.from_m), toLabel: displayYear(ny.govt_funding.to_year), to: of(ny.govt_funding, ny.govt_funding.to_m) }
+            : null,
+          gap2030: ny.revised ? { label: displayYear(ny.revised.last_year), gap: of(ny.revised, ny.revised.last_gap_m) } : null,
+          timetable: ny.timetable?.items ?? [],
+          timetableQuality: ny.timetable ? of(ny.timetable, 0) : of(ny.ct_options, 0),
+        }
+      : null,
     politics: politicsOf(K),
     people: {
       councillors: K.councillors.map((c) => ({

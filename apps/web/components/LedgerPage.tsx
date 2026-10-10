@@ -1,6 +1,7 @@
 import type { Scenario } from "@borough-ledger/engine";
 import { BalanceIt } from "@/components/BalanceIt";
 import { BillSection } from "@/components/BillSection";
+import { CouncilTaxOptions } from "@/components/CouncilTaxOptions";
 import { BudgetFlow } from "@/components/BudgetFlow";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -44,6 +45,18 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
         <Hero m={m} />
         <LedgerStateProvider input={m.balance.input} initialScenario={initialScenario}>
           <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShareGeneral={m.ctShareGeneral} generalBudget={m.generalBudget} place={m.place} />
+          {m.ctOptions ? (
+            <section id="next-bill" aria-labelledby="next-bill-h">
+              <div className="sec-head">
+                <h2 id="next-bill-h">Your bill next year: the council&rsquo;s three options</h2>
+                <p>
+                  The council&rsquo;s report to Cabinet on 12 October 2026 sets out three options for {m.place.nextYearLabel}. Nothing is decided yet. For the band you
+                  picked above:
+                </p>
+              </div>
+              <CouncilTaxOptions bill={m.bill} rules={m.rules} place={m.place} ct={m.ctOptions} compact />
+            </section>
+          ) : null}
           <BudgetFlow
             m={m}
             legend={m.qualityLegend.budget}

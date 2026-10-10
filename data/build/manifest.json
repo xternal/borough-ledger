@@ -230,7 +230,11 @@
  "manual": [
   {
    "file": "data/manual/belfast_budget.csv",
-   "sha256": "1a48162814342388d60ac6565d2c69fdc37f927fffb612de107630019e3edfc0"
+   "sha256": "51989790878ac6f3063825201e940a21b5683c152d04f33d9ceaade72416db07"
+  },
+  {
+   "file": "data/manual/budget_timetable_2027-28.csv",
+   "sha256": "b5509b932d83f10287bd7cfa822b74c5ac327fd7adf3a5240ecfb832bd957b15"
   },
   {
    "file": "data/manual/capital_2026-30.csv",
@@ -247,6 +251,10 @@
   {
    "file": "data/manual/council_homes_2026-27.csv",
    "sha256": "0ac9eadf3f2870c3b33623b5f1f7a7052b6dbf158bc7807a579e914fbe7a2fc1"
+  },
+  {
+   "file": "data/manual/council_tax_options_2027-28.csv",
+   "sha256": "ee233907a0ee74e8f423152b90bedb6d9f6527a77023c629979145f74bcb431f"
   },
   {
    "file": "data/manual/funding_groups.csv",
@@ -266,15 +274,15 @@
   },
   {
    "file": "data/manual/next_year_2027-28.csv",
-   "sha256": "4d2dd4fab289f33665bfc5307a8509019bd9f6548cecc05c9399e2980dfd7d43"
+   "sha256": "982d9542a415bdd1d7e54e7c2b974276ce3ee29479d9553aa9ce8950ab400d60"
   },
   {
    "file": "data/manual/ni_poundages.csv",
-   "sha256": "26e4c00d6ae4c923a20329b40aeb7b9dfb59cffb1671d7bd39d89a59b062ad28"
+   "sha256": "61da1b71d808872cb26dea3fed3d2e20ad24f159973dcccee2bf980698f6ee6c"
   },
   {
    "file": "data/manual/ni_rate_statistics.csv",
-   "sha256": "99551c72f2864646b401aef55b5b8b723d87c1ed2ecb1866154e32936de8af4e"
+   "sha256": "9dbf6fcf8b979d1bbbfbcd747cef12419e1d1d47c1f7aceec48d3ce760faf5eb"
   },
   {
    "file": "data/manual/ni_ward_dea.csv",
@@ -328,11 +336,11 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "ff334ee0419fba80060754e9453ee2b0092d492f7211cd6ea9890ff1f92d0575"
+   "sha256": "b0ba5c11b190fe55926e65143ee60a5e5906cb3060f7af045e01341979a51a8f"
   }
  ],
  "quality_counts": {
-  "approx": 8,
+  "approx": 11,
   "modelled": 3,
   "sourced": 68
  }

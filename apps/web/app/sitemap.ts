@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { DATA } from "@borough-ledger/schema";
+import { DATA, bandsOf } from "@borough-ledger/schema";
 import { DECISIONS } from "@/lib/decisions";
 import { buildModel } from "@/lib/model";
 import { MONTHS, suppliersById } from "@/lib/payments";
@@ -20,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${SITE_URL}/`, lastModified: DATA.council.meta.vintage, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/balance`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.6 },
+    ...(DATA.council.next_year.ct_options
+      ? [
+          { url: `${SITE_URL}/council-tax-rise`, lastModified: DATA.council.meta.vintage, changeFrequency: "weekly" as const, priority: 0.9 },
+          ...bandsOf(DATA.rules).map((b) => ({ url: `${SITE_URL}/council-tax-rise/band-${b.toLowerCase()}`, lastModified: DATA.council.meta.vintage, changeFrequency: "weekly" as const, priority: 0.6 })),
+        ]
+      : []),
     ...OTHER_BOROUGHS.map((b) => ({ url: `${SITE_URL}${b.href}`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE_URL}/building`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/council-homes`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.7 },
