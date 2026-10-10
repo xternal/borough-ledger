@@ -24,7 +24,9 @@ class CouncilTaxOptionsTest(unittest.TestCase):
         self.assertEqual([x["total_band_d"] for x in o], [2554.04, 2806.29, 3058.54])
         self.assertEqual([x["total_per_week"] for x in o], [19.89, 24.75, 29.60])
         self.assertEqual(o[-1]["shortfall_m"], 0)
-        self.assertEqual(out["ct_options"]["quality"], "approx")  # until a person marks the rows "yes"
+        # Sourced only once a person has marked every row "yes".
+        reviewed = all(r["reviewed"] == "yes" for r in B.read_csv("council_tax_options_2027-28.csv"))
+        self.assertEqual(out["ct_options"]["quality"], "sourced" if reviewed else "approx")
         self.assertEqual(out["timetable"]["items"][-1]["id"], "council_budget")
 
     def test_a_wrong_figure_stops_the_build(self) -> None:

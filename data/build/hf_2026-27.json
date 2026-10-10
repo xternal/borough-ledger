@@ -1665,7 +1665,7 @@
      "shortfall_m": 0.0
     }
    ],
-   "quality": "approx",
+   "quality": "sourced",
    "source_id": "cabinet_mtfs_2026-10-12",
    "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, Tables 7 to 9 (PDF pages 15 and 16) and the summary (pages 1 and 2). Rises in the council's own share of Band D; the Mayor of London's share is assumed to rise 5%."
   },
@@ -1717,7 +1717,7 @@
      "proposed": true
     }
    ],
-   "quality": "approx",
+   "quality": "sourced",
    "source_id": "cabinet_mtfs_2026-10-12",
    "method_note": "Cabinet 12 October 2026, General Fund Medium Term Financial Plan 2027/28 to 2030/31, Table 11 (PDF page 19) and paragraph 6.4 (page 16)."
   }
