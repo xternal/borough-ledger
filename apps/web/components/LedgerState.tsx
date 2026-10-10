@@ -17,8 +17,19 @@ interface LedgerState {
 
 const Ctx = createContext<LedgerState | null>(null);
 
-export function LedgerStateProvider({ input, initialScenario, children }: { input: BalanceInput; initialScenario?: Scenario; children: React.ReactNode }) {
-  const [band, setBand] = useState<Band>("D");
+export function LedgerStateProvider({
+  input,
+  initialScenario,
+  initialBand = "D",
+  children,
+}: {
+  input: BalanceInput;
+  initialScenario?: Scenario;
+  /** The band a page opens on (a band's own options page); Band D otherwise. */
+  initialBand?: Band;
+  children: React.ReactNode;
+}) {
+  const [band, setBand] = useState<Band>(initialBand);
   const [singlePerson, setSinglePerson] = useState(false);
   const [scenario, setScenario] = useState<Scenario>(() => initialScenario ?? defaultScenario(input));
 

@@ -2479,3 +2479,26 @@
     background: var(--sunk);
   }
 }
+
+@layer components {
+  /* next year's council tax options: your band's bill under each, and the timetable to the decision */
+  .ct-options {
+    display: grid;
+    gap: 10px;
+  }
+  .ct-options .seg {
+    justify-self: start;
+  }
+  .ct-table th[scope="row"] {
+    font-weight: 500;
+  }
+  .ct-more {
+    margin: 4px 0 0;
+    font-weight: 550;
+  }
+  .timeline {
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+  }
+}

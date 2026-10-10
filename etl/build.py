@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
@@ -323,6 +324,14 @@ def build() -> Dict[str, Any]:
             "gap_m": float(mny["revised_gap_m"]["value"]), "last_year": last, "last_gap_m": float(mny[f"revised_gap_{last}_m"]["value"]),
             "quality": "approx", **cite("revised_gap_m"),
         }} if "revised_gap_m" in mny and (last := next((k[len("revised_gap_"):-2] for k in sorted(mny, reverse=True) if k.startswith("revised_gap_2")), None)) else {}),
+        # The government's funding for the council, before and after the change in how it is shared out (October's Cabinet).
+        **({"govt_funding": {
+            "from_year": "2025-26", "from_m": float(mny["govt_funding_2025-26_m"]["value"]), "to_year": "2029-30", "to_m": float(mny["govt_funding_2029-30_m"]["value"]),
+            "quality": "approx", **cite("govt_funding_2025-26_m"),
+        }} if "govt_funding_2025-26_m" in mny and "govt_funding_2029-30_m" in mny else {}),
+        # October's three council tax options for 2027/28 and the timetable to the decision.
+        **(manual_ct_options(reg, now["band_d_council"], band_d_gla, float(mny["revised_gap_2030-31_m"]["value"]))
+           if (ROOT / "data" / "manual" / "council_tax_options_2027-28.csv").exists() and "revised_gap_2030-31_m" in mny else {}),
     }
 
     vintage = max(s["published_on"] for s in reg.values() if "published_on" in s)
@@ -483,6 +492,60 @@ def manual_next_year() -> Dict[str, Dict[str, str]]:
     """Next year's figures from data/manual/next_year_2027-28.csv (key, value, source_id, page, note), if extracted."""
     path = ROOT / "data" / "manual" / "next_year_2027-28.csv"
     return {r["key"]: r for r in read_csv(path.name) if r["value"]} if path.exists() else {}
+
+
+def manual_ct_options(reg: Dict[str, Any], band_d_council: float, band_d_gla: float, gap_2030_31: float) -> Dict[str, Any]:
+    """The council's three council tax options for 2027/28 (data/manual/council_tax_options_2027-28.csv, from the report to
+    Cabinet on 12 October 2026, Tables 7 to 9) and its budget timetable (budget_timetable_2027-28.csv, Table 11).
+
+    The options are rises in the council's own share of the bill, not the whole bill: each must be this year's council
+    Band D (from the government's tables) times one plus the rise, and the Mayor of London's share this year's plus the
+    5% the report assumes. Every total, increase and weekly figure must follow from those, and what each option raises
+    plus what it leaves to find must be the gap the report forecasts by 2030/31. Sourced once a person has checked the
+    rows against the report (reviewed=yes); until then approx.
+    """
+    rows = read_csv("council_tax_options_2027-28.csv")
+    check(len(rows) == 3, "council_tax_options_2027-28.csv: expected three options")
+    gla_rise = 5.0
+    gla = round(band_d_gla * (1 + gla_rise / 100), 2)
+    total_now = round(band_d_council + band_d_gla, 2)
+    options = []
+    for r in rows:
+        check(r["source_id"] in reg, f"council_tax_options: unknown source {r['source_id']}")
+        check(r["reviewed"] in ("no", "checked", "yes"), "council_tax_options: reviewed must be no, checked or yes")
+        pct = float(r["option_pct"])
+        f = {k: float(r[k]) for k in ("hf_band_d", "gla_band_d", "total_band_d", "hf_increase", "hf_per_week", "total_increase", "total_per_week", "raises_to_2030_31_m", "shortfall_m")}
+        what = f"council_tax_options {pct:g}%"
+        check(close(f["hf_band_d"], round(band_d_council * (1 + pct / 100), 2), 0.006), f"{what}: the council's Band D is not this year's £{band_d_council:.2f} plus {pct:g}%")
+        check(close(f["gla_band_d"], gla, 0.006), f"{what}: the Mayor's share is not this year's £{band_d_gla:.2f} plus {gla_rise:g}%")
+        check(close(f["total_band_d"], f["hf_band_d"] + f["gla_band_d"], 0.006), f"{what}: the parts do not add up to the total")
+        check(close(f["hf_increase"], f["hf_band_d"] - band_d_council, 0.006) and close(f["total_increase"], f["total_band_d"] - total_now, 0.006), f"{what}: increases do not follow")
+        check(close(f["hf_per_week"], round(f["hf_increase"] / 52, 2), 0.006) and close(f["total_per_week"], round(f["total_increase"] / 52, 2), 0.006), f"{what}: weekly figures are not the yearly ones over 52 weeks")
+        # What it raises and what it leaves to find make the whole gap; the top option "broadly balances" (raises at least it).
+        check(close(f["raises_to_2030_31_m"] + f["shortfall_m"], gap_2030_31, 0.05) if f["shortfall_m"] else f["raises_to_2030_31_m"] >= gap_2030_31,
+              f"{what}: raises £{f['raises_to_2030_31_m']}m and leaves £{f['shortfall_m']}m, but the gap to 2030/31 is £{gap_2030_31}m")
+        options.append({"pct": pct, **{k: v for k, v in f.items()}, "reviewed": r["reviewed"], "pages": r["pages"]})
+    check([o["pct"] for o in options] == sorted(o["pct"] for o in options), "council_tax_options: options out of order")
+    title = reg["cabinet_mtfs_2026-10-12"]["title"].split(" (")[0]
+    t_rows = read_csv("budget_timetable_2027-28.csv")
+    for r in t_rows:
+        check(r["source_id"] in reg and r["proposed"] in ("yes", "no") and r["reviewed"] in ("no", "checked", "yes"), f"budget_timetable {r['id']}: bad row")
+        check(bool(re.fullmatch(r"\d{4}-\d{2}(-\d{2})?", r["start"])) and (not r["end"] or bool(re.fullmatch(r"\d{4}-\d{2}(-\d{2})?", r["end"]))), f"budget_timetable {r['id']}: dates are YYYY-MM or YYYY-MM-DD")
+    check([r["start"] for r in t_rows] == sorted(r["start"] for r in t_rows), "budget_timetable: milestones out of order")
+    q = lambda rs: "sourced" if all(r["reviewed"] == "yes" for r in rs) else "approx"  # noqa: E731
+    return {
+        "ct_options": {
+            "gla_rise_pct": gla_rise,
+            "options": [{k: v for k, v in o.items() if k not in ("reviewed", "pages")} for o in options],
+            "quality": q(rows), "source_id": "cabinet_mtfs_2026-10-12",
+            "method_note": f"{title}, Tables 7 to 9 (PDF pages 15 and 16) and the summary (pages 1 and 2). Rises in the council's own share of Band D; the Mayor of London's share is assumed to rise {gla_rise:g}%.",
+        },
+        "timetable": {
+            "items": [{"id": r["id"], "start": r["start"], **({"end": r["end"]} if r["end"] else {}), "label": r["label"], "proposed": r["proposed"] == "yes", **({"url": r["url"]} if r["url"] else {})} for r in t_rows],
+            "quality": q(t_rows), "source_id": "cabinet_mtfs_2026-10-12",
+            "method_note": f"{title}, Table 11 (PDF page 19) and paragraph 6.4 (page 16).",
+        },
+    }
 
 
 def manual_gla(reg: Dict[str, Any], band_d_gla: float, band_d_gla_prev: float) -> List[Dict[str, Any]]:

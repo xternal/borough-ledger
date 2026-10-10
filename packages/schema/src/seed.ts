@@ -295,6 +295,48 @@ export const CouncilYear = z.object({
     forecast: z.array(z.object({ year: finYear, gap_m: z.number(), ...provenance })).min(1),
     /** The council's later forecast (October's Cabinet), shown beside the one above until its basis is checked. */
     revised: z.object({ gap_m: z.number(), last_year: finYear, last_gap_m: z.number(), ...provenance }).optional(),
+    /** The government's funding for the council before and after the change in how it is shared out (October's Cabinet). */
+    govt_funding: z.object({ from_year: finYear, from_m: z.number(), to_year: finYear, to_m: z.number(), ...provenance }).optional(),
+    /** October's three council tax options for next year: rises in the council's own share of Band D (etl/build.py checks
+     *  every figure follows from this year's bill). shortfall_m 0: the option broadly balances the budget. */
+    ct_options: z
+      .object({
+        gla_rise_pct: z.number(),
+        options: z
+          .array(
+            z.object({
+              pct: z.number().positive(),
+              hf_band_d: z.number(),
+              gla_band_d: z.number(),
+              total_band_d: z.number(),
+              hf_increase: z.number(),
+              hf_per_week: z.number(),
+              total_increase: z.number(),
+              total_per_week: z.number(),
+              raises_to_2030_31_m: z.number(),
+              shortfall_m: z.number().nonnegative(),
+            }),
+          )
+          .min(1),
+        ...provenance,
+      })
+      .optional(),
+    /** The council's timetable from the options to the decision; dates YYYY-MM-DD, or YYYY-MM where it gives a month. */
+    timetable: z
+      .object({
+        items: z.array(
+          z.object({
+            id: z.string(),
+            start: z.string().regex(/^\d{4}-\d{2}(-\d{2})?$/),
+            end: z.string().regex(/^\d{4}-\d{2}(-\d{2})?$/).optional(),
+            label: z.string(),
+            proposed: z.boolean(),
+            url: z.url().optional(),
+          }),
+        ),
+        ...provenance,
+      })
+      .optional(),
     ...provenance,
   }),
 });
