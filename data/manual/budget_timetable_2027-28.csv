@@ -1,8 +1,8 @@
 id,start,end,label,proposed,url,source_id,page,reviewed
-cabinet_mtfs,2026-10-12,,"Cabinet considers the revised four-year plan, with the three council tax options",no,https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431,cabinet_mtfs_2026-10-12,19,checked
-engagement,2026-10-19,2026-11-15,"The council asks residents, businesses and others for their views: which services matter most to them, and what they expect of council tax",no,,cabinet_mtfs_2026-10-12,"16, 19",checked
-feedback,2026-11,2026-12,"A summary of what people said",no,,cabinet_mtfs_2026-10-12,19,checked
-scrutiny,2026-12,,"Councillors scrutinise the savings and investment proposals",no,,cabinet_mtfs_2026-10-12,19,checked
-settlement,2026-12,,"The government announces each council's funding for 2027/28",no,,cabinet_mtfs_2026-10-12,19,checked
-cabinet_budget,2027-02-15,,"Cabinet considers the draft 2027/28 budget",yes,,cabinet_mtfs_2026-10-12,19,checked
-council_budget,2027-03-01,,"Full Council sets the 2027/28 budget and council tax",yes,,cabinet_mtfs_2026-10-12,19,checked
+cabinet_mtfs,2026-10-12,,"Cabinet considers the revised four-year plan, with the three council tax options",no,https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431,cabinet_mtfs_2026-10-12,19,yes
+engagement,2026-10-19,2026-11-15,"The council asks residents, businesses and others for their views: which services matter most to them, and what they expect of council tax",no,,cabinet_mtfs_2026-10-12,"16, 19",yes
+feedback,2026-11,2026-12,"A summary of what people said",no,,cabinet_mtfs_2026-10-12,19,yes
+scrutiny,2026-12,,"Councillors scrutinise the savings and investment proposals",no,,cabinet_mtfs_2026-10-12,19,yes
+settlement,2026-12,,"The government announces each council's funding for 2027/28",no,,cabinet_mtfs_2026-10-12,19,yes
+cabinet_budget,2027-02-15,,"Cabinet considers the draft 2027/28 budget",yes,,cabinet_mtfs_2026-10-12,19,yes
+council_budget,2027-03-01,,"Full Council sets the 2027/28 budget and council tax",yes,,cabinet_mtfs_2026-10-12,19,yes
