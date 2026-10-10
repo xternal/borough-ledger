@@ -28,7 +28,7 @@ No names, no IP addresses, no open or click tracking, no follower counts on the 
 
 Do these in order. `MAIL_PROVIDER=resend` goes last: once it is set, a build fails with the name of any setting still missing, and the live site stays on the previous deployment until it is fixed.
 
-1. **Decide who holds the data.** This is the controller named in the consent text and the privacy notice: your name, or your company's. Check whether you need to pay the ICO data protection fee (https://ico.org.uk/fee). Read and finish [DPIA_EMAIL.md](DPIA_EMAIL.md).
+1. **Who holds the data: Empatiq Limited** (decided 10 October 2026), named in the consent text and the privacy notice through `FOLLOW_CONTROLLER`. Check whether you need to pay the ICO data protection fee (https://ico.org.uk/fee). Read and finish [DPIA_EMAIL.md](DPIA_EMAIL.md).
 2. **Database.** Create a Neon project in the London region (AWS Europe West 2). Copy the pooled connection string. Tables are created on first use.
 3. **Resend.** Add and verify the sending domain (for example `boroughbook.uk`, with the DNS records Resend gives). In the domain's settings turn **off** open tracking and click tracking. Create an API key with sending access only. Add a webhook to `https://boroughbook.uk/api/mail/resend` for `email.bounced` and `email.complained`, and copy its signing secret.
 4. **Secrets.** Make four random values, one at a time:
@@ -43,7 +43,7 @@ Do these in order. `MAIL_PROVIDER=resend` goes last: once it is set, a build fai
    | Name | Value |
    |---|---|
    | `DATABASE_URL` | Neon's pooled connection string |
-   | `FOLLOW_CONTROLLER` | who holds the data, as it should read: "Pavel Guzhikov" or a company name |
+   | `FOLLOW_CONTROLLER` | `Empatiq Limited` (decided by the owner on 10 October 2026: the same controller as LedgerGov.uk) |
    | `BB_ENCRYPTION_KEY` | random value 1 |
    | `BB_LOOKUP_PEPPER` | random value 2 |
    | `ALTCHA_HMAC_KEY` | random value 3 |
