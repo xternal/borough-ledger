@@ -257,5 +257,5 @@ The first Welsh council: Band I, the fire levy shown as its own calculated line,
 
 ## Belfast (9 Oct 2026, in review)
 
-The first council in Northern Ireland: rates from a home's capital value instead of bands, the budget by committee, councillors by district electoral area (docs/BOROUGHS.md). For the owner: look once at `data/manual/ni_poundages.csv` (against the Department of Finance's page), `ni_rate_statistics.csv` (against the four circulars, pages 1 to 4) and `belfast_budget.csv` (against page 3 of the committee minutes), and mark each row "yes": until then every Belfast figure shows as approx. 37 councils.
+The first council in Northern Ireland: rates from a home's capital value instead of bands, the budget by committee, councillors by district electoral area (docs/BOROUGHS.md). For the owner: look once at `data/manual/ni_poundages.csv` (against the Department of Finance's page), `ni_rate_statistics.csv` (against the four circulars, pages 1 to 4) and `belfast_budget.csv` (against page 3 of the committee minutes), and mark each row "yes": until then every Belfast figure shows as approx. 37 councils. Checked by the owner against the sources and marked "yes" (10 October 2026): every figure is now sourced except the growth fund, which is the difference (approx), and bills on a given value, which are our arithmetic (modelled).
 
