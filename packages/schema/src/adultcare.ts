@@ -22,6 +22,8 @@ export const AdultCareFile = z.object({
       name: z.string(),
       spend_k: z.object({ total: k, long_term: k, short_term: k, other: k }),
       settings_k: z.object({ care_homes: k, home_care: k, supported_living: k, direct_payments: k, supported_accommodation: k, other_long_term: k }),
+      /** Long-term care for working-age adults (18 to 64) and for older people (65 and over). */
+      long_term_by_age_k: z.object({ working_age: k, older: k }),
       home_care_from: z.enum(["agencies", "the council"]),
       unit: Units,
       unit_prev: Units,

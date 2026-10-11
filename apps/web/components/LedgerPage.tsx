@@ -1,6 +1,8 @@
 import type { Scenario } from "@borough-ledger/engine";
 import { BalanceIt } from "@/components/BalanceIt";
 import { AdultCare } from "@/components/AdultCare";
+import { CareCompare } from "@/components/CareCompare";
+import { MakeYourCase } from "@/components/MakeYourCase";
 import { ChildrenCare } from "@/components/ChildrenCare";
 import { BillSection } from "@/components/BillSection";
 import { CouncilTaxOptions } from "@/components/CouncilTaxOptions";
@@ -22,7 +24,8 @@ import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
-import { adultCare } from "@/lib/adultCare";
+import { adultCare, careComparison } from "@/lib/adultCare";
+import { adultCareCase, budgetWants, caseSetup } from "@/lib/makeYourCase";
 import { childrenCare } from "@/lib/childrenCare";
 import { DATA as HF_DATA } from "@borough-ledger/schema";
 
@@ -33,6 +36,7 @@ const KIDS = childrenCare(HF_DATA.council.meta.council_code);
 
 /** The whole statement. `/` renders it as is; `/balance` opens it on a shared scenario. */
 export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initialScenario?: Scenario; focus?: string }) {
+  const careCase = adultCareCase(m, HF_DATA.council.meta.council_code);
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -80,9 +84,19 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
             }
           />
           {CARE ? <AdultCare care={CARE} council={m.place.council} /> : null}
+          {careCase && CARE ? (
+            <MakeYourCase
+              id="case-care"
+              setup={careCase.setup}
+              wants={careCase.wants}
+              facts={careCase.facts}
+              page={`${SITE_URL}/#case-care`}
+              compare={<CareCompare cmp={careComparison(HF_DATA.council.meta.council_code)!} yearLabel={CARE.yearLabel} />}
+            />
+          ) : null}
           {KIDS ? <ChildrenCare care={KIDS} council={m.place.council} short={m.place.short} /> : null}
           <Waterfall m={m} />
-          <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} />
+          <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} makeCase={{ setup: caseSetup("budget", m), wants: budgetWants(m), site: SITE_URL }} />
           <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} />
         </LedgerStateProvider>
         <WardSection m={m} />

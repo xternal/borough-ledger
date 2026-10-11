@@ -313,6 +313,10 @@
    "sha256": "f0455746156db70da268aba631fd82c2f2e14523adae82fb5c621fc1a215ec81"
   },
   {
+   "file": "data/manual/make_your_case.csv",
+   "sha256": "80e07b589df95eedda09b847ca19f017277807c61ccc023aae5c688fe14682e9"
+  },
+  {
    "file": "data/manual/next_year_2027-28.csv",
    "sha256": "982d9542a415bdd1d7e54e7c2b974276ce3ee29479d9553aa9ce8950ab400d60"
   },
@@ -365,6 +369,10 @@
    "sha256": "d46b61cebda8d764b71521a099c8425bd3ad3d9313edf7edc60bbc540ebf2d1b"
   },
   {
+   "file": "data/manual/take_part_2026-27.csv",
+   "sha256": "b162a31e2fe57d1e6f39040039a7d16fa931e66e0e012659bfdb14a8587a3e8d"
+  },
+  {
    "file": "data/manual/toggles_2027-28.csv",
    "sha256": "57ebbc574e5a8e8ef175b161c2b5c66d4a6528990e01012f04e1de795e430c5b"
   },
@@ -384,7 +392,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "f6bb7f40d95de6dc4232477dbf299f7953afb78a1b948a3808d36a2edd3a397e"
+   "sha256": "0f109e2aefc09db4f12307818a423b4baeb3ecc592e82f9f7d3bb08d036c1f25"
   }
  ],
  "quality_counts": {
