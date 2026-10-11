@@ -1,8 +1,8 @@
 id,kind,meeting,deadline,threshold,label,url,source_id,reviewed
-question_2026-10-21,question,2026-10-21,2026-10-09T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,checked
-question_2027-01-27,question,2027-01-27,2027-01-15T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,checked
-question_2027-02-24,question,2027-02-24,2027-02-12T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,checked
-petition_cabinet_member,petition,,,100,the Cabinet Member responsible,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,checked
-petition_cabinet,petition,,,250,a Cabinet debate,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,checked
-petition_council,petition,,,5000,a Full Council debate,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,checked
-deputation,deputation,,,10,"speak at Cabinet or a scrutiny committee about an item on its agenda; the request form, signed by 10 electors, is due three working days before the meeting",https://www.lbhf.gov.uk/councillors-and-democracy/councillors-committees-and-decisions/take-part-democratic-process,lbhf_take_part_2026-27,checked
+question_2026-10-21,question,2026-10-21,2026-10-09T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,yes
+question_2027-01-27,question,2027-01-27,2027-01-15T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,yes
+question_2027-02-24,question,2027-02-24,2027-02-12T12:00,,Full Council,https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u,lbhf_take_part_2026-27,yes
+petition_cabinet_member,petition,,,100,the Cabinet Member responsible,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,yes
+petition_cabinet,petition,,,250,a Cabinet debate,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,yes
+petition_council,petition,,,5000,a Full Council debate,https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1,lbhf_take_part_2026-27,yes
+deputation,deputation,,,10,"speak at Cabinet or a scrutiny committee about an item on its agenda; the request form, signed by 10 electors, is due three working days before the meeting",https://www.lbhf.gov.uk/councillors-and-democracy/councillors-committees-and-decisions/take-part-democratic-process,lbhf_take_part_2026-27,yes
