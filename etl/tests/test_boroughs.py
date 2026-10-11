@@ -220,7 +220,7 @@ class TwoTierTest(unittest.TestCase):
         [t] = B.towns(self.b, 2461.30)
         self.assertEqual((t["town"], t["band_d"], t["whole_band_d"]), ("Henley-on-Thames", 170.35, 2631.65))
         self.assertEqual([d["division"] for d in t["divisions"]], ["Henley", "Sonning Common & Henley South"])
-        self.assertEqual(t["quality"], "approx")  # checked by Claude; sourced once the owner reviews it
+        self.assertEqual(t["quality"], "sourced")  # reviewed by the owner (both tables marked "yes")
 
     def test_a_town_whose_bill_does_not_add_up_is_refused(self) -> None:
         real = B.read_csv

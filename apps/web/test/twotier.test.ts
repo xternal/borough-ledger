@@ -20,7 +20,7 @@ describe("a two-tier area: South Oxfordshire and Henley-on-Thames", () => {
     expect(m.bill.total.value).toBe(2461.3);
   });
 
-  it("splits Henley-on-Thames's bill four ways, adding up to the whole, and marks it until the owner has reviewed it", () => {
+  it("splits Henley-on-Thames's bill four ways, adding up to the whole, as the owner reviewed it", () => {
     const [t] = m.towns;
     expect(t!.id).toBe("henley-on-thames");
     expect(t!.parts.map((p) => [p.label, p.f.value])).toEqual([
@@ -33,7 +33,7 @@ describe("a two-tier area: South Oxfordshire and Henley-on-Thames", () => {
     expect(t!.whole.value).toBe(2631.65);
     expect(t!.ward?.councillors.map((c) => c.name)).toEqual(["Ken Arlett", "Stefan Gawrysiak", "Kellie Hinton"]);
     expect(t!.divisions).toHaveLength(2);
-    expect([t!.quality, t!.townPart.quality]).toEqual(["approx", "approx"]);
+    expect([t!.quality, t!.townPart.quality]).toEqual(["sourced", "sourced"]);
   });
 
   it("uses the county's figures for care, which the county runs", () => {

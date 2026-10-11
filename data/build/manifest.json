@@ -370,11 +370,11 @@
   },
   {
    "file": "data/manual/town_councils_2026-27.csv",
-   "sha256": "8fdd9f10b961ba7fe5f2631e57460564432d486b8a1726d42ce42f323a590d96"
+   "sha256": "ab7f93781e5ec0309663d7ed0b6769afaced8d09f8e80ed049a978cebd8b7d5f"
   },
   {
    "file": "data/manual/town_county_divisions_2026.csv",
-   "sha256": "781d95c22287d5fb884acd108b6f0b1ddfa83744ab3bca04cbea55c0a0556296"
+   "sha256": "2e6f351b6efa875db85c46817c8d0116c412585ade9af6bce6d08f693c6ced07"
   },
   {
    "file": "data/manual/wales_service_groups.csv",
