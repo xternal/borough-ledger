@@ -27,7 +27,7 @@ const LEFT = 300;
 const RIGHT = 330;
 
 /** Laid out on the server with d3-sankey and drawn as plain SVG, so it renders without JavaScript. */
-function FlowChart({ funding, services, total }: { funding: FlowLine[]; services: FlowLine[]; total: Figure }) {
+function FlowChart({ id, label, funding, services, total }: { id: string; label: string; funding: FlowLine[]; services: FlowLine[]; total: Figure }) {
   // A flow cannot be drawn below zero: a line that brings in more than it costs is named under the chart instead.
   const left: FlowNode[] = funding.filter((x) => x.f.value > 0).map((x) => ({ id: x.id, label: x.label, side: "L", f: x.f, gap: x.gap }));
   const right: FlowNode[] = [...services]
@@ -52,9 +52,9 @@ function FlowChart({ funding, services, total }: { funding: FlowLine[]; services
   const pot = g.nodes.find((n) => n.id === "pot")!;
 
   return (
-    <svg id="sankey" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Flow of council funding into services">
+    <svg id={`${id}-sankey`} className="sankey" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}>
       <defs>
-        <pattern id="flow-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <pattern id={`${id}-hatch`} width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <rect width="7" height="7" style={{ fill: "var(--gap-soft)" }} />
           <line x1="0" y1="0" x2="0" y2="7" style={{ stroke: "var(--gap)", strokeWidth: 2.2 }} />
         </pattern>
@@ -63,7 +63,7 @@ function FlowChart({ funding, services, total }: { funding: FlowLine[]; services
         {g.links.map((l, i) => {
           const s = l.source as FlowNode;
           const t = l.target as FlowNode;
-          const stroke = l.gap ? "url(#flow-hatch)" : t.id === "pot" ? "var(--fund-soft)" : "var(--spend-soft)";
+          const stroke = l.gap ? `url(#${id}-hatch)` : t.id === "pot" ? "var(--fund-soft)" : "var(--spend-soft)";
           return (
             <path key={i} d={path(l) ?? undefined} fill="none" strokeWidth={Math.max(1, l.width ?? 1)} style={{ stroke }}>
               <title>{`${s.label} to ${t.label}`}</title>
@@ -154,15 +154,32 @@ function FlowTable({ caption, lines, total }: { caption: string; lines: FlowLine
   );
 }
 
-/** Any borough's budget. `more` is what follows the chart on that borough's page. */
-export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" | "services" | "netBudget" | "place">; legend: QualityItem[]; more?: React.ReactNode }) {
-  const services = [...m.services].sort((a, z) => z.f.value - a.f.value);
+/** Any council's budget. `more` is what follows the chart on that council's page. Where a page shows two (a district and
+    its county), each has its own `id` and `title`, and `lead` says whose it is. */
+export function BudgetFlow({
+  m,
+  legend,
+  more,
+  id = "budget",
+  title = "The council’s budget",
+  lead,
+}: {
+  m: Pick<PageModel, "funding" | "services" | "netBudget" | "place">;
+  legend: QualityItem[];
+  more?: React.ReactNode;
+  id?: string;
+  title?: string;
+  lead?: React.ReactNode;
+}) {
+  // A service the council does not run at all (a district's schools) is left out here; `more` can say who runs it.
+  const services = m.services.filter((x) => x.f.value !== 0).sort((a, z) => z.f.value - a.f.value);
   const below = [...m.funding, ...m.services].filter((l) => l.f.value <= 0 && Math.abs(l.f.value) >= 0.05);
   const max = Math.max(...m.funding.map((x) => x.f.value), ...services.map((x) => x.f.value));
   return (
-    <section id="budget" aria-labelledby="budget-h">
+    <section id={id} aria-labelledby={`${id}-h`}>
       <div className="sec-head">
-        <h2 id="budget-h">The council&rsquo;s budget</h2>
+        <h2 id={`${id}-h`}>{title}</h2>
+        {lead ? <p>{lead}</p> : null}
         <p>
           What the council spends on day-to-day services after fees and charges, and where the money comes from
           {m.funding.some((f) => f.ringFencedTo)
@@ -190,7 +207,7 @@ export function BudgetFlow({ m, legend, more }: { m: Pick<PageModel, "funding" |
         </div>
       </div>
       <div className="flow-desktop">
-        <FlowChart funding={m.funding} services={m.services} total={m.netBudget} />
+        <FlowChart id={id} label={`${title}: funding flowing into services`} funding={m.funding} services={services} total={m.netBudget} />
         {below.length ? (
           <p className="small muted">
             Not drawn in the flow, because they are below zero:{" "}

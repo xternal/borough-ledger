@@ -1102,6 +1102,38 @@
     "nursing_18_64": 1373.18,
     "home_care_hour": 20.75
    }
+  },
+  "E10000025": {
+   "name": "Oxfordshire",
+   "spend_k": {
+    "total": 361763.23,
+    "long_term": 274905.1,
+    "short_term": 9338.0,
+    "other": 77520.13
+   },
+   "settings_k": {
+    "care_homes": 126832.04,
+    "home_care": 41727.36,
+    "supported_living": 63210.12,
+    "direct_payments": 31446.48,
+    "supported_accommodation": 4002.39,
+    "other_long_term": 7686.71
+   },
+   "home_care_from": "agencies",
+   "unit": {
+    "residential_65": 1013.1,
+    "nursing_65": 1122.9,
+    "residential_18_64": 2222.6,
+    "nursing_18_64": 1283.68,
+    "home_care_hour": 29.0
+   },
+   "unit_prev": {
+    "residential_65": 983.77,
+    "nursing_65": 1133.81,
+    "residential_18_64": 2099.71,
+    "nursing_18_64": 1465.55,
+    "home_care_hour": 27.59
+   }
   }
  }
 }

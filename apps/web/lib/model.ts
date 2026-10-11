@@ -295,19 +295,17 @@ export type StatementModel = Pick<PageModel, "bill" | "funding" | "services" | "
   budgetLegend: QualityItem[];
 };
 
-export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "services">, R: Rules): StatementModel {
+const sumOf = (lines: FlowLine[], pick: (l: FlowLine) => Figure = (l) => l.f): Figure => {
+  const [first, ...rest] = lines.map(pick);
+  if (!first) throw new Error("no lines to add up");
+  return derive(lines.reduce((a, l) => a + pick(l).value, 0), first, ...rest);
+};
+
+/** One council's budget as flow lines, checked to balance: any council's, or a county council's in a two-tier area. */
+export function budgetModel(C: Pick<CouncilYear, "funding" | "services">, R: Rules) {
   const budget = checkBudget(C.funding, C.services, R.balanced_budget.tolerance_m);
   if (!budget.balances)
     throw new Error(`Budget does not balance: funding £${budget.fundingM}m vs spending £${budget.spendingM}m`);
-
-  /* bill */
-  const b = C.bill;
-  const council = of(b, b.band_d_council);
-  const gla = of(b, b.band_d_gla);
-  const total = of(b, b.band_d_total);
-  const prev = of(b, b.band_d_total_prev);
-
-  /* budget */
   const funding: FlowLine[] = C.funding.map((x) => ({
     id: x.id,
     label: x.label,
@@ -324,15 +322,24 @@ export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "servic
     desc: x.desc,
     general: of(x, x.general_fund_m),
   }));
-  const sumOf = (lines: FlowLine[], pick: (l: FlowLine) => Figure = (l) => l.f): Figure => {
-    const [first, ...rest] = lines.map(pick);
-    if (!first) throw new Error("no lines to add up");
-    return derive(lines.reduce((a, l) => a + pick(l).value, 0), first, ...rest);
-  };
-  const netBudget = sumOf(funding);
+  return { funding, services, netBudget: sumOf(funding), budgetLegend: [...C.funding, ...C.services].map((x) => ({ label: x.label, quality: x.quality })) };
+}
+
+export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "services">, R: Rules): StatementModel {
+  /* bill */
+  const b = C.bill;
+  const council = of(b, b.band_d_council);
+  const gla = of(b, b.band_d_gla);
+  const total = of(b, b.band_d_total);
+  const prev = of(b, b.band_d_total_prev);
+
+  /* budget */
+  const { funding, services, netBudget, budgetLegend } = budgetModel(C, R);
   const generalBudget = sumOf(services, (l) => l.general!);
   const byKind = (kind: string) => {
     const lines = C.funding.filter((x) => x.kind === kind).map((x) => funding.find((f) => f.id === x.id)!);
+    // South Oxfordshire's and the Vale of White Horse's 2026/27 returns keep no business rates (RA line 970 is 0).
+    if (!lines.length && kind === "business_rates") return derive(0, netBudget);
     if (!lines.length) throw new Error(`funding has no ${kind} line`);
     const t = sumOf(lines);
     return derive(t.value / netBudget.value, t, netBudget);
@@ -379,7 +386,7 @@ export function statementModel(C: Pick<CouncilYear, "bill" | "funding" | "servic
     grantsShare,
     ratesShare,
     ctShareGeneral,
-    budgetLegend: [...C.funding, ...C.services].map((x) => ({ label: x.label, quality: x.quality })),
+    budgetLegend,
   };
 }
 

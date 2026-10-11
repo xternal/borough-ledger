@@ -16,7 +16,8 @@ export const AdultCareFile = z.object({
   source_id: z.string(),
   /** By the council's ONS code. Spending in £ thousand; unit costs in £ a week (homes) or £ an hour (home care). */
   councils: z.record(
-    z.string().regex(/^E0\d{7}$/),
+    // Unitaries (E06), metropolitan districts (E08), London boroughs (E09) and county councils (E10).
+    z.string().regex(/^E(0[689]|10)\d{6}$/),
     z.object({
       name: z.string(),
       spend_k: z.object({ total: k, long_term: k, short_term: k, other: k }),

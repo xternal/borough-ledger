@@ -13,6 +13,7 @@ import { LedgerStateProvider } from "@/components/LedgerState";
 import { Num } from "@/components/Num";
 import { QualityGroup } from "@/components/QualityLegend";
 import { TopBar } from "@/components/TopBar";
+import { TownBill } from "@/components/TownBill";
 import { HeroTop } from "@/components/HeroTop";
 import { councilWithThe } from "@/lib/boroughList";
 import { BOROUGHS, boroughModel, type BoroughModel } from "@/lib/boroughs";
@@ -39,9 +40,33 @@ const SECTIONS = [
   ["councillors", "Councillors"],
 ] as const;
 
+/** A two-tier area's menu: its towns, then the county's budget before the district's (the county sets most of the bill). */
+function sectionsOf(m: BoroughModel) {
+  if (!m.county) return SECTIONS;
+  return [
+    ["bill", "Your bill"],
+    ...m.towns.map((t) => [t.id, t.town] as const),
+    ["county-budget", "County budget"],
+    ["budget", "District budget"],
+    ["history", "Over the years"],
+    ["councillors", "Councillors"],
+  ] as const;
+}
+
+/** "a, b, and c" where the items have "and" in them ("schools and education"), else "a, b and c". */
+const list = (xs: string[]) =>
+  xs.length < 2 ? (xs[0] ?? "") : `${xs.slice(0, -1).join(", ")}${xs.some((x) => / and /.test(x)) ? ", and " : " and "}${xs[xs.length - 1]}`;
+const topServices = (lines: BoroughModel["services"], n: number) =>
+  [...lines]
+    .sort((a, z) => z.f.value - a.f.value)
+    .slice(0, n)
+    .map((l) => l.label.charAt(0).toLowerCase() + l.label.slice(1));
+
 function words(m: BoroughModel) {
   const title = `Where your council tax goes in ${m.place.short} | ${SITE.name}`;
-  const description = `${m.place.short}: a Band D council tax bill of ${format("gbp2", m.bill.total.value)} in ${m.place.yearLabel}, split between the council and ${m.bill.others.to}; the council's ${format("m0", m.netBudget.value)} budget by service and where the money comes from; council tax over the years; and every ward's councillors and election result. From government returns and the council's own records.`;
+  const description = m.county
+    ? `${m.place.short}: a Band D council tax bill of ${format("gbp2", m.bill.total.value)} in ${m.place.yearLabel}, split between ${m.county.council}, the police and ${m.place.council}; both councils' budgets by service and where the money comes from; ${m.towns.length ? `what ${list(m.towns.map((t) => t.town))} pays with its town council; ` : ""}council tax over the years; and every ward's councillors and election result. From government returns and the councils' own records.`
+    : `${m.place.short}: a Band D council tax bill of ${format("gbp2", m.bill.total.value)} in ${m.place.yearLabel}, split between the council and ${m.bill.others.to}; the council's ${format("m0", m.netBudget.value)} budget by service and where the money comes from; council tax over the years; and every ward's councillors and election result. From government returns and the council's own records.`;
   return { title, description };
 }
 
@@ -67,9 +92,14 @@ export default async function BoroughPage({ params }: Props) {
   const { title, description } = words(m);
   const P = m.people;
   const map = m.map;
-  // England only: the government's adult social care finance report covers English councils.
-  const care = adultCare(m.b.ons);
-  const kids = childrenCare(m.b.ons);
+  // England only: the government's adult social care finance report covers English councils. In a two-tier area the
+  // county runs social care, so its figures are shown.
+  const careBy = m.county ? { ons: m.county.ons, council: m.county.council, short: m.county.short } : { ons: m.b.ons, council: m.place.council, short: m.place.short };
+  const care = adultCare(careBy.ons);
+  const kids = childrenCare(careBy.ons);
+  const K = m.county;
+  const others = K ? m.bill.glaSplit.filter((g) => g.f !== K.bandD) : [];
+  const notRun = K ? m.services.filter((s) => s.f.value === 0).map((s) => s.label.charAt(0).toLowerCase() + s.label.slice(1)) : [];
   const first = m.history[0]!;
   const last = m.history[m.history.length - 1]!;
   const jsonLd = [
@@ -85,16 +115,29 @@ export default async function BoroughPage({ params }: Props) {
   ];
   return (
     <>
-      <TopBar place={m.place.short} year={m.place.yearLabel} borough={{ base: `/${borough}`, items: P ? SECTIONS : SECTIONS.filter(([id]) => id !== "councillors") }} />
+      <TopBar place={m.place.short} year={m.place.yearLabel} borough={{ base: `/${borough}`, items: P ? sectionsOf(m) : sectionsOf(m).filter(([id]) => id !== "councillors") }} />
       <main className="wrap" id="top">
         <div className="hero">
           <HeroTop
             current={m.place.short}
-            council={councilWithThe(m.place.council)}
+            council={`${councilWithThe(m.place.council)}${K ? ` or ${K.council}` : ""}`}
             example={m.b.example_postcode ?? "W6 9JU"}
             results={!!P?.wards.some((w) => w.election)}
           />
           <h1>Where your council tax goes in {m.place.short}</h1>
+          {K ? (
+            <p className="lede">
+              A Band D home pays <Num f={m.bill.total} fmt="gbp2" /> this year, up <Num f={m.bill.risePct} fmt="pct1" />. Most of it,{" "}
+              <Num f={K.bandD} fmt="gbp2" />, goes to {K.council}, which spends most on {list(topServices(K.budget.services, 3))}. Of the rest,{" "}
+              {others.map((g, i) => (
+                <span key={g.id}>
+                  {i ? ", " : ""}
+                  <Num f={g.f} fmt="gbp2" /> goes to {g.phrase === "police" ? "the police" : g.phrase}
+                </span>
+              ))}{" "}
+              and <Num f={m.bill.council} fmt="gbp2" /> to {m.place.council}, which spends most of its own budget on {topServices(m.services, 1)[0]}.
+            </p>
+          ) : (
           <p className="lede">
             A Band D home pays <Num f={m.bill.total} fmt="gbp2" /> this year, up <Num f={m.bill.risePct} fmt="pct1" />. Council tax covers about{" "}
             <Num f={m.ctShare} fmt="share0" /> of what the council spends on day-to-day services; government grants pay{" "}
@@ -102,6 +145,7 @@ export default async function BoroughPage({ params }: Props) {
             {m.funding.some((f) => f.ringFencedTo) ? ", including the money passed straight to schools," : ","} and business rates{" "}
             <Num f={m.ratesShare} fmt="share0" />.
           </p>
+          )}
           <div className="kpis">
             <div className="kpi">
               <span className="l">Band D bill</span>
@@ -112,20 +156,41 @@ export default async function BoroughPage({ params }: Props) {
                 up <Num f={m.bill.risePct} fmt="pct1" /> on last year
               </span>
             </div>
-            <div className="kpi">
-              <span className="l">Council budget</span>
-              <span className="v">
-                <Num f={m.netBudget} fmt="m0" />
-              </span>
-              <span className="s">day-to-day, including schools</span>
-            </div>
-            <div className="kpi">
-              <span className="l">Paid by council tax</span>
-              <span className="v">
-                <Num f={m.ctShare} fmt="share0" />
-              </span>
-              <span className="s">of the budget</span>
-            </div>
+            {K ? (
+              <>
+                <div className="kpi">
+                  <span className="l">County council budget</span>
+                  <span className="v">
+                    <Num f={K.budget.netBudget} fmt="m0" />
+                  </span>
+                  <span className="s">{K.short}&rsquo;s, day-to-day, including schools</span>
+                </div>
+                <div className="kpi">
+                  <span className="l">District council budget</span>
+                  <span className="v">
+                    <Num f={m.netBudget} fmt="m0" />
+                  </span>
+                  <span className="s">{m.place.short}&rsquo;s, day-to-day</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="kpi">
+                  <span className="l">Council budget</span>
+                  <span className="v">
+                    <Num f={m.netBudget} fmt="m0" />
+                  </span>
+                  <span className="s">day-to-day, including schools</span>
+                </div>
+                <div className="kpi">
+                  <span className="l">Paid by council tax</span>
+                  <span className="v">
+                    <Num f={m.ctShare} fmt="share0" />
+                  </span>
+                  <span className="s">of the budget</span>
+                </div>
+              </>
+            )}
             {P ? (
               <ControlKpi P={P} />
             ) : (
@@ -140,16 +205,74 @@ export default async function BoroughPage({ params }: Props) {
           </div>
         </div>
 
+        {m.reorganisation ? (
+          <section id="changes" aria-labelledby="changes-h">
+            <div className="sec-head">
+              <h2 id="changes-h">Your councils are changing</h2>
+              <p className="callout">{m.reorganisation.note}</p>
+            </div>
+            <p className="small muted">
+              From{" "}
+              {m.reorganisation.sources.map((x, i) => (
+                <span key={x.url}>
+                  {i ? " and " : ""}
+                  <a href={x.url}>{x.title}</a>
+                </span>
+              ))}
+              .
+            </p>
+          </section>
+        ) : null}
+
         <LedgerStateProvider
           input={{ gapM: 0, levers: [], toggles: [], reserves: { general_m: 0, minimum_safe_m: 0 }, referendumThresholdPct: null, toleranceM: DATA.rules.balanced_budget.tolerance_m }}
         >
-          <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShareGeneral={m.ctShareGeneral} generalBudget={m.generalBudget} place={m.place} />
+          <BillSection
+            bill={m.bill}
+            rules={m.rules}
+            services={m.services.filter((x) => x.f.value !== 0)}
+            ctShareGeneral={m.ctShareGeneral}
+            generalBudget={m.generalBudget}
+            place={m.place}
+            {...(m.funding.some((f) => f.id === "business_rates") ? {} : { rest: "government grants and other income" })}
+          />
         </LedgerStateProvider>
+        {m.towns.map((t) => (
+          <TownBill key={t.id} t={t} council={m.place.council} county={K?.council ?? null} yearLabel={m.place.yearLabel} />
+        ))}
+        {K ? (
+          <BudgetFlow
+            id="county-budget"
+            title={`${K.council}’s budget`}
+            lead={
+              <>
+                The county council sets the biggest part of the bill, <Num f={K.bandD} fmt="gbp2" /> at Band D, and runs schools, social care and roads across{" "}
+                {K.short}. It sends no bills of its own: {m.place.council} collects its share with yours.
+              </>
+            }
+            m={{ ...K.budget, place: m.place }}
+            legend={K.budget.budgetLegend}
+          />
+        ) : null}
         <BudgetFlow
           m={m}
           legend={m.budgetLegend}
+          {...(K ? { title: `${m.place.council}’s budget` } : {})}
           more={
-            m.returnsDiffer ? (
+            K ? (
+              <>
+                {notRun.length ? (
+                  <p className="small muted">
+                    Nothing here for {list(notRun)}: {K.council} runs {notRun.length > 1 ? "them" : "it"} (see its budget above).
+                  </p>
+                ) : null}
+                {!m.funding.some((f) => f.id === "business_rates") ? (
+                  <p className="small muted">
+                    The council&rsquo;s budget return keeps no business rates for {m.place.yearLabel} (it shows nothing on that line), so there is none in the flow.
+                  </p>
+                ) : null}
+              </>
+            ) : m.returnsDiffer ? (
               <p className="small muted">
                 The council&rsquo;s two returns to government do not agree on its council tax for {m.place.yearLabel}:{" "}
                 <Num f={m.returnsDiffer.budget} fmt="gbp0" /> in its budget return and <Num f={m.returnsDiffer.councilTax} fmt="gbp0" /> in its council tax return,{" "}
@@ -160,8 +283,8 @@ export default async function BoroughPage({ params }: Props) {
           }
         />
 
-        {care ? <AdultCare care={care} council={m.place.council} /> : null}
-        {kids ? <ChildrenCare care={kids} council={m.place.council} short={m.place.short} /> : null}
+        {care ? <AdultCare care={care} council={careBy.council} /> : null}
+        {kids ? <ChildrenCare care={kids} council={careBy.council} short={careBy.short} /> : null}
 
         <section id="history" aria-labelledby="history-h">
           <div className="sec-head">
@@ -238,7 +361,7 @@ export default async function BoroughPage({ params }: Props) {
             </ul>
           </ChartTable>
         </section>
-        <Footer council={m.place.short} full={councilWithThe(m.place.council)} hasTestData={false} />
+        <Footer council={m.place.short} full={`${councilWithThe(m.place.council)}${K ? ` or ${K.council}` : ""}`} hasTestData={false} />
       </main>
       <JsonLd data={jsonLd} />
     </>

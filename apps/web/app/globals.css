@@ -560,16 +560,16 @@
     color: var(--muted);
     padding-top: 16px;
   }
-  #sankey .qdot {
+  .sankey .qdot {
     fill: var(--idle);
   }
-  #sankey .qdot.sourced {
+  .sankey .qdot.sourced {
     fill: var(--good);
   }
-  #sankey .qdot.approx {
+  .sankey .qdot.approx {
     fill: var(--warn);
   }
-  #sankey .qdot.test {
+  .sankey .qdot.test {
     fill: var(--bad);
   }
 
@@ -918,25 +918,25 @@
     margin-right: 6px;
     vertical-align: 1px;
   }
-  #sankey {
+  .sankey {
     display: block;
     width: 100%;
     height: auto;
   }
-  #sankey text {
+  .sankey text {
     font-family: var(--font);
     font-size: 13.5px;
     fill: var(--ink);
     font-weight: 500;
   }
-  #sankey text.v,
-  #sankey tspan.v {
+  .sankey text.v,
+  .sankey tspan.v {
     font-size: 12.5px;
     fill: var(--muted);
     font-weight: 400;
     font-variant-numeric: tabular-nums;
   }
-  #sankey text.mid {
+  .sankey text.mid {
     font-size: 16px;
     font-weight: 600;
     font-variant-numeric: tabular-nums;

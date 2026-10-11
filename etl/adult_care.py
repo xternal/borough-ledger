@@ -46,7 +46,8 @@ def table(book: Dict[str, List[list]], name: str) -> Dict[str, Dict[str, Any]]:
     head = [str(h).strip() for h in rows[hi]]
     out = {}
     for r in rows[hi + 1:]:
-        if not r or not isinstance(r[0], str) or not r[0].startswith("E0"):
+        # Unitaries (E06), metropolitan districts (E08), London boroughs (E09) and county councils (E10): not regions.
+        if not r or not isinstance(r[0], str) or not r[0].startswith(("E06", "E08", "E09", "E10")):
             continue
         out[r[0]] = {h: (None if isinstance(v, str) and v.startswith("[") else v) for h, v in zip(head, r)}
     return out
@@ -58,10 +59,13 @@ def num(row: Dict[str, Any], col: str) -> Optional[float]:
 
 
 def councils() -> List[Dict[str, str]]:
-    """Every English council on the site: Hammersmith & Fulham and the English councils in data/config/boroughs.json."""
+    """Every English council on the site that runs social care: Hammersmith & Fulham, the single-tier councils in
+    data/config/boroughs.json, and the county council of each two-tier area (Oxfordshire for South Oxfordshire)."""
     cfg = json.loads((ROOT / "data" / "config" / "boroughs.json").read_text())["boroughs"]
     seed = json.loads((ROOT / "data" / "seed" / "hf_2026-27.json").read_text())["meta"]
-    return [{"slug": "", "ons": seed["council_code"]}] + [{"slug": b["slug"], "ons": b["ons"]} for b in cfg if b["ons"].startswith("E")]
+    out = [{"slug": "", "ons": seed["council_code"]}] + [{"slug": b["slug"], "ons": b["ons"]} for b in cfg if b["ons"].startswith("E") and not b.get("county")]
+    # In a two-tier area the county runs social care: its figures, not the district's.
+    return out + [{"slug": b["slug"], "ons": b["county"]["ons"]} for b in cfg if b.get("county")]
 
 
 def build(reg: Dict[str, Any]) -> Dict[str, Any]:

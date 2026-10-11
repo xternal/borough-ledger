@@ -17,8 +17,8 @@ from typing import Any, Dict, List
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from build import PREV, YEAR, cited_sources, manual_gla, serialise, source_entry, statement  # noqa: E402
-from extract import CheckFailed, check, close  # noqa: E402
+from build import PREV, YEAR, budget, cited_sources, manual_gla, serialise, source_entry, statement  # noqa: E402
+from extract import CheckFailed, check, close, read_csv  # noqa: E402
 from fetch import ROOT, load_sources  # noqa: E402
 from ods import read_ods  # noqa: E402
 
@@ -76,6 +76,65 @@ def parish(reg: Dict[str, Any], ons: str) -> Dict[str, Any] | None:
             "method_note": "Table 10: parish precepts divided by the tax base of the parishes that set one."}
 
 
+def precepting(reg: Dict[str, Any], ons: str) -> Dict[str, float]:
+    """A county's council tax requirement and tax base for 2026/27, from Table 10's precepting authorities' sheet (counties
+    send no bills, so they are not in the billing authorities' sheet)."""
+    rows = read_ods(str(ROOT / "data" / "raw" / reg["ctr_2026-27"]["file"]))["Data_Precepting"]
+    hi = next(i for i, r in enumerate(rows) if r and r[0] == "E-code")
+    head = [str(h or "") for h in rows[hi]]
+    row = next(r for r in rows[hi + 1:] if len(r) > 1 and r[1] == ons)
+    # Each measure has two columns, last year then this year: take the second.
+    col = lambda prefix: [j for j, h in enumerate(head) if h.startswith(prefix)][1]  # noqa: E731
+    return {"ctr": float(row[col("1. Council Tax Requirement")]), "tax_base": float(row[col("2. Council tax base")])}
+
+
+def county_statement(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
+    """In a two-tier area, the county council's budget too: it takes most of the bill (schools, care, roads and, in most
+    counties, fire). Its council tax requirement must be its Band D (Table 8b) times its tax base, and its budget
+    return must match it and balance, like every council's."""
+    c = b["county"]
+    part = next(p for p in b["precepts"] if p["id"] == c["precept_id"])
+    band_d = preceptor_band_d(reg, "ct_bands_2026-27", part["table"], part["authority"])
+    pre = precepting(reg, c["ons"])
+    check(close(pre["ctr"], band_d * pre["tax_base"], max(1000.0, pre["tax_base"] * 0.005)),
+          f"{c['council']}: council tax requirement £{pre['ctr']:,.0f} is not Band D £{band_d} × tax base {pre['tax_base']:,}")
+    bud = budget(reg, c["ons"], [pre["ctr"]], False, f"Table 10 council tax requirement £{pre['ctr']:,.0f}")
+    return {
+        "council": c["council"], "council_short": c["short"], "council_code": c["ons"], "band_d": round(band_d, 2),
+        "council_tax_requirement_m": round(pre["ctr"] / 1e6, 6), "tax_base": pre["tax_base"],
+        "funding": bud["funding_lines"], "services": bud["services"],
+        "quality": "sourced", "source_id": "ctr_2026-27",
+        "method_note": "Band D from Table 8b; council tax requirement and tax base from Table 10 (precepting authorities); budget from the RA and SG returns.",
+    }
+
+
+def towns(b: Dict[str, Any], band_d_total: float) -> List[Dict[str, Any]]:
+    """Town councils named on a council's page (Henley-on-Thames), from data/manual/town_councils_2026-27.csv: the town's
+    Band D is its whole bill in the district's statutory notice less the bill where no parish precept is set, which must be
+    this page's bill outside a parish; and it must be the town's precept over its tax base, to the penny."""
+    out = []
+    divisions = read_csv("town_county_divisions_2026.csv")
+    for r in read_csv("town_councils_2026-27.csv"):
+        if r["borough"] != b["slug"] or r["town"] not in b.get("towns", []):
+            continue
+        band_d, whole, none = float(r["band_d"]), float(r["whole_band_d"]), float(r["no_precept_band_d"])
+        check(close(none, band_d_total, 0.006), f"{r['town']}: the notice's bill without a parish precept ({r['no_precept_parish']}) £{none} is not this page's £{band_d_total}")
+        check(close(whole - none, band_d, 0.006), f"{r['town']}: Band D £{band_d} is not the notice's £{whole} less £{none}")
+        check(close(float(r["precept"]) / float(r["tax_base"]), band_d, 0.006), f"{r['town']}: precept over tax base is £{float(r['precept']) / float(r['tax_base']):.2f}, not £{band_d}")
+        check(r["reviewed"] in ("no", "checked", "yes"), f"{r['town']}: reviewed must be no, checked or yes")
+        divs = [d for d in divisions if d["borough"] == b["slug"] and d["town"] == r["town"]]
+        out.append({
+            "town": r["town"], "council": r["council"], "ward": r["ward"], "band_d": band_d, "whole_band_d": whole,
+            "precept_m": round(float(r["precept"]) / 1e6, 6), "tax_base": float(r["tax_base"]),
+            "divisions": [{"division": d["division"], "councillor": d["councillor"], "party": d["party"], "source_id": d["source_id"]} for d in divs],
+            "quality": "sourced" if r["reviewed"] == "yes" and all(d["reviewed"] == "yes" for d in divs) else "approx",
+            "source_id": r["source_id"], "source_ids": [r["check_source_id"]] + sorted({d["source_id"] for d in divs}),
+            "method_note": f"The district's notice of council tax: {r['town']} £{whole:,.2f} at Band D, {r['no_precept_parish']} (no parish precept) £{none:,.2f}; the difference is the town council's share. Checked against the town council's precept and tax base.",
+        })
+    check(len(out) == len(b.get("towns", [])), f"{b['slug']}: a town in the config has no row in town_councils_2026-27.csv")
+    return out
+
+
 def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
     st = statement(reg, b["ons"], bool(b.get("returns_differ")))
     now, prev, ctr, bands = st["now"], st["prev"], st["ctr"], st["bands"]
@@ -124,6 +183,10 @@ def build_one(reg: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
         },
         "funding": st["funding_lines"],
         "services": st["services"],
+        **({"county": county_statement(reg, b)} if b.get("county") else {}),
+        **({"towns": towns(b, band_d_total)} if b.get("towns") else {}),
+        **({"reorganisation": {"note": b["reorganisation"]["note"], "quality": "sourced", "source_id": b["reorganisation"]["source_ids"][0],
+                               "source_ids": b["reorganisation"]["source_ids"]}} if b.get("reorganisation") else {}),
         **({"returns_differ": {
             **st["differ"], "quality": "sourced", "source_id": "ra_2026-27",
             "method_note": "Council tax requirement in the budget return (RA 2026-27 line 990, £000) and in the council tax return (Table 10).",

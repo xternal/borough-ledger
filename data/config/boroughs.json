@@ -486,6 +486,57 @@
    "example_postcode": "TW1 3BZ"
   },
   {
+   "slug": "south-oxfordshire",
+   "council": "South Oxfordshire District Council",
+   "short": "South Oxfordshire",
+   "ons": "E07000179",
+   "kind": "district",
+   "moderngov": "https://democratic.southoxon.gov.uk",
+   "election_id": "local.south-oxfordshire.2023-05-04",
+   "next_election": "2027-05-06",
+   "example_postcode": "RG9 2AQ",
+   "others": {
+    "name": "County council and police",
+    "to": "Oxfordshire County Council, which also runs fire and rescue, and Thames Valley Police",
+    "short": "the county and police share",
+    "with": "the county council and police"
+   },
+   "precepts": [
+    {
+     "id": "county",
+     "label": "Oxfordshire County Council",
+     "phrase": "the county council",
+     "official_term": "Oxfordshire County Council (county precept; it also runs fire and rescue)",
+     "table": "Table_8b",
+     "authority": "Oxfordshire"
+    },
+    {
+     "id": "police",
+     "label": "Police",
+     "phrase": "police",
+     "official_term": "Thames Valley Police (police and crime commissioner)",
+     "table": "Table_8d",
+     "authority": "Thames Valley Police"
+    }
+   ],
+   "county": {
+    "ons": "E10000025",
+    "council": "Oxfordshire County Council",
+    "short": "Oxfordshire",
+    "precept_id": "county"
+   },
+   "towns": [
+    "Henley-on-Thames"
+   ],
+   "reorganisation": {
+    "note": "The government decided on 16 July 2026 to replace Oxfordshire's county and district councils with three unitary councils, each running every council service in its area. South Oxfordshire, apart from 25 parishes that go to Greater Oxford, would join the Vale of White Horse and West Berkshire in Ridgeway Council; Henley-on-Thames is not one of the 25. Elections to the new councils are planned for May 2027, in place of the district's scheduled elections, and the new councils would take over on 1 April 2028. It needs Parliament to approve an order first.",
+    "source_ids": [
+     "lgr_oxfordshire_decision_2026-07-16",
+     "sodc_lgr_2026-07-16"
+    ]
+   }
+  },
+  {
    "slug": "southwark",
    "council": "London Borough of Southwark",
    "short": "Southwark",

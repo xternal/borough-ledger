@@ -57,6 +57,86 @@ def source_entry(s: Dict[str, Any]) -> Dict[str, Any]:
     return {k: s[k] for k in keys if k in s}
 
 
+def budget(reg: Dict[str, Any], ons: str, ctr_candidates: List[float], returns_differ: bool = False, against: str = "") -> Dict[str, Any]:
+    """The 2026/27 budget by service and funding from the RA and SG returns, checked to balance, and its council tax
+    requirement checked against the council tax figures (a billing council's return, or a county's precept in the
+    precepting authorities' table)."""
+    ra = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27"]["file"]), "RA_LA_Data_2026-27", ons)
+    ra2 = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27_part2"]["file"]), "RA_LA_Data_2026-27", ons)
+    sg = read_la_row(str(ROOT / "data/raw" / reg["sg_2026-27"]["file"]), "SG_LA_Data_2026-27", ons)
+    svc, svc_detail = ra_services(ra)
+    fund, fund_detail = funding(ra, sg)
+    # The budget return's council tax requirement matches the council's own, or (Birmingham) the one including parish precepts.
+    ra_ctr = ra.by_line("990") * 1000
+    # The budget return is in £000 and several councils' figure differs from the council tax return by £1,200 to £3,100
+    # (Croydon, Ealing, Kingston, Lewisham, Newham, Wandsworth, Westminster: under 0.005%); £5,000 allows that and no
+    # more. Islington (£23k) and the larger differences still stop the build (docs/BOROUGHS.md).
+    agree = any(close(ra_ctr, c, 5000) for c in ctr_candidates)
+    if returns_differ:
+        # The owner decided to publish a borough whose two returns differ by more (Islington, Bexley, Waltham Forest):
+        # the budget uses the budget return's figure, so it adds up, the bill the council tax return's, and the page says
+        # how far apart they are. Once the returns agree, the decision is no longer needed and the build says so.
+        check(not agree, f"RA council tax requirement {ra.by_line('990')}k now matches the CTR return; remove returns_differ for this borough")
+    else:
+        check(agree, f"RA council tax requirement {ra.by_line('990')}k ≠ {against}")
+
+    groups = {g["id"]: g for g in read_csv("service_groups.csv")}
+    fgroups = {g["id"]: g for g in read_csv("funding_groups.csv")}
+    check(set(svc) <= set(groups), f"unknown service groups {set(svc) - set(groups)}")
+    check(set(fund) <= set(fgroups), f"unknown funding groups {set(fund) - set(fgroups)}")
+    hb = svc.pop("housing_benefit", 0.0)
+    hb_note = ""
+    if abs(hb) >= 0.5:
+        # Housing benefit nets to nothing against its government subsidy in most boroughs (Hammersmith & Fulham's leaves
+        # under £500). Where something is left, it is counted with housing, so funding still equals spending, and said so.
+        check("housing" in svc, "housing benefit leaves a remainder but there is no housing group to hold it")
+        svc["housing"] += hb
+        hb_note = f" Includes housing benefit net of its government subsidy, £{m(hb)}m."
+
+    ring: Dict[str, float] = {}
+    for fid, v in fund.items():
+        to = fgroups[fid]["ring_fenced_to"]
+        if to:
+            ring[to] = ring.get(to, 0.0) + v
+
+    ra_src = "ra_2026-27"
+    services = []
+    for gid, v in sorted(svc.items(), key=lambda kv: int(groups[kv[0]]["order"])):
+        g = groups[gid]
+        lines = ", ".join(sorted({ln for ln, _, val in svc_detail[gid] if val}, key=float))
+        services.append({
+            "id": gid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"],
+            "m": m(v), "general_fund_m": m(v - ring.get(gid, 0.0)),
+            "quality": "sourced", "source_id": ra_src,
+            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Book (data/manual/ra_service_map.csv).{hb_note if gid == 'housing' else ''}",
+        })
+    funding_lines = []
+    for fid, v in sorted(fund.items(), key=lambda kv: int(fgroups[kv[0]]["order"])):
+        if abs(v) < 0.5:
+            continue
+        g = fgroups[fid]
+        src = ("ra_2026-27" if returns_differ else "ctr_2026-27") if fid == "council_tax" else ("sg_2026-27" if any(k in fid for k in ("grant",)) else ra_src)
+        line: Dict[str, Any] = {
+            "id": fid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"], "kind": g["kind"], "m": m(v),
+            "quality": "sourced", "source_id": src,
+        }
+        if g["ring_fenced_to"]:
+            line["ring_fenced_to"] = g["ring_fenced_to"]
+        if g["one_off"] == "true":
+            line["gap"] = True
+        if len(fund_detail.get(fid, [])) > 1:
+            line["detail"] = [{"label": lbl, "m": m(val)} for lbl, val in sorted(fund_detail[fid], key=lambda x: -x[1])]
+        funding_lines.append(line)
+
+    # Identities, to the £1,000 of the published data.
+    total_f = sum(f["m"] for f in funding_lines)
+    total_s = sum(s["m"] for s in services)
+    check(close(total_f, total_s, 0.0015 * len(services)), f"funding £{total_f}m ≠ spending £{total_s}m")
+    general = sum(f["m"] for f in funding_lines if "ring_fenced_to" not in f)
+    check(close(general, sum(s["general_fund_m"] for s in services), 0.0015 * len(services)), "general funding ≠ general-fund spending")
+    return {"ra": ra, "ra2": ra2, "sg": sg, "fund": fund, "services": services, "funding_lines": funding_lines, "ra_src": ra_src, "ra_ctr": ra_ctr}
+
+
 def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Dict[str, Any]:
     """What the government returns say about one council, checked: council tax for five years, spending history,
     outturn, and this year's budget by service and funding. The same for every council (etl/boroughs.py)."""
@@ -151,79 +231,8 @@ def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Di
         })
 
     # ---------------------------------------------------------- budget 2026/27 (RA and SG)
-    ra = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27"]["file"]), "RA_LA_Data_2026-27", ons)
-    ra2 = read_la_row(str(ROOT / "data/raw" / reg["ra_2026-27_part2"]["file"]), "RA_LA_Data_2026-27", ons)
-    sg = read_la_row(str(ROOT / "data/raw" / reg["sg_2026-27"]["file"]), "SG_LA_Data_2026-27", ons)
-    svc, svc_detail = ra_services(ra)
-    fund, fund_detail = funding(ra, sg)
-    # The budget return's council tax requirement matches the council's own, or (Birmingham) the one including parish precepts.
-    ra_ctr = ra.by_line("990") * 1000
-    # The budget return is in £000 and several councils' figure differs from the council tax return by £1,200 to £3,100
-    # (Croydon, Ealing, Kingston, Lewisham, Newham, Wandsworth, Westminster: under 0.005%); £5,000 allows that and no
-    # more. Islington (£23k) and the larger differences still stop the build (docs/BOROUGHS.md).
-    agree = close(ra_ctr, now["ctr"], 5000) or close(ra_ctr, now["ctr"] + now["parish"], 5000)
-    if returns_differ:
-        # The owner decided to publish a borough whose two returns differ by more (Islington, Bexley, Waltham Forest):
-        # the budget uses the budget return's figure, so it adds up, the bill the council tax return's, and the page says
-        # how far apart they are. Once the returns agree, the decision is no longer needed and the build says so.
-        check(not agree, f"RA council tax requirement {ra.by_line('990')}k now matches the CTR return; remove returns_differ for this borough")
-    else:
-        check(agree, f"RA council tax requirement {ra.by_line('990')}k ≠ CTR return {now['ctr']} (or {now['ctr'] + now['parish']} with parishes)")
-
-    groups = {g["id"]: g for g in read_csv("service_groups.csv")}
-    fgroups = {g["id"]: g for g in read_csv("funding_groups.csv")}
-    check(set(svc) <= set(groups), f"unknown service groups {set(svc) - set(groups)}")
-    check(set(fund) <= set(fgroups), f"unknown funding groups {set(fund) - set(fgroups)}")
-    hb = svc.pop("housing_benefit", 0.0)
-    hb_note = ""
-    if abs(hb) >= 0.5:
-        # Housing benefit nets to nothing against its government subsidy in most boroughs (Hammersmith & Fulham's leaves
-        # under £500). Where something is left, it is counted with housing, so funding still equals spending, and said so.
-        check("housing" in svc, "housing benefit leaves a remainder but there is no housing group to hold it")
-        svc["housing"] += hb
-        hb_note = f" Includes housing benefit net of its government subsidy, £{m(hb)}m."
-
-    ring: Dict[str, float] = {}
-    for fid, v in fund.items():
-        to = fgroups[fid]["ring_fenced_to"]
-        if to:
-            ring[to] = ring.get(to, 0.0) + v
-
-    ra_src = "ra_2026-27"
-    services = []
-    for gid, v in sorted(svc.items(), key=lambda kv: int(groups[kv[0]]["order"])):
-        g = groups[gid]
-        lines = ", ".join(sorted({ln for ln, _, val in svc_detail[gid] if val}, key=float))
-        services.append({
-            "id": gid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"],
-            "m": m(v), "general_fund_m": m(v - ring.get(gid, 0.0)),
-            "quality": "sourced", "source_id": ra_src,
-            "method_note": f"Net current expenditure, RA 2026-27 lines {lines}, grouped by Borough Book (data/manual/ra_service_map.csv).{hb_note if gid == 'housing' else ''}",
-        })
-    funding_lines = []
-    for fid, v in sorted(fund.items(), key=lambda kv: int(fgroups[kv[0]]["order"])):
-        if abs(v) < 0.5:
-            continue
-        g = fgroups[fid]
-        src = ("ra_2026-27" if returns_differ else "ctr_2026-27") if fid == "council_tax" else ("sg_2026-27" if any(k in fid for k in ("grant",)) else ra_src)
-        line: Dict[str, Any] = {
-            "id": fid, "label": g["label"], "official_term": g["official_term"], "desc": g["desc"], "kind": g["kind"], "m": m(v),
-            "quality": "sourced", "source_id": src,
-        }
-        if g["ring_fenced_to"]:
-            line["ring_fenced_to"] = g["ring_fenced_to"]
-        if g["one_off"] == "true":
-            line["gap"] = True
-        if len(fund_detail.get(fid, [])) > 1:
-            line["detail"] = [{"label": lbl, "m": m(val)} for lbl, val in sorted(fund_detail[fid], key=lambda x: -x[1])]
-        funding_lines.append(line)
-
-    # Identities, to the £1,000 of the published data.
-    total_f = sum(f["m"] for f in funding_lines)
-    total_s = sum(s["m"] for s in services)
-    check(close(total_f, total_s, 0.0015 * len(services)), f"funding £{total_f}m ≠ spending £{total_s}m")
-    general = sum(f["m"] for f in funding_lines if "ring_fenced_to" not in f)
-    check(close(general, sum(s["general_fund_m"] for s in services), 0.0015 * len(services)), "general funding ≠ general-fund spending")
+    bud = budget(reg, ons, [now["ctr"], now["ctr"] + now["parish"]], returns_differ, f"CTR return {now['ctr']} (or {now['ctr'] + now['parish']} with parishes)")
+    ra, ra2, sg, fund, services, funding_lines, ra_src, ra_ctr = (bud[k] for k in ("ra", "ra2", "sg", "fund", "services", "funding_lines", "ra_src", "ra_ctr"))
     # To the pound: the council tax return is exact, the budget return in £000.
     differ = {"budget_return_m": round(ra_ctr / 1e6, 6), "council_tax_return_m": round(now["ctr"] / 1e6, 6)} if returns_differ else None
     return {"differ": differ, "now": now, "prev": prev, "ctr": ctr, "ctr_src": ctr_src, "bands": bands, "bands_src": bands_src, "years": years, "band_d_total": band_d_total, "band_d_gla": band_d_gla, "budget_history": budget_history, "outturn_history": outturn_history, "ra": ra, "ra2": ra2, "sg": sg, "fund": fund, "services": services, "funding_lines": funding_lines, "ra_src": ra_src}
@@ -232,6 +241,8 @@ def statement(reg: Dict[str, Any], ons: str, returns_differ: bool = False) -> Di
 def build() -> Dict[str, Any]:
     reg = {s["id"]: s for s in load_sources()}
     for s in reg.values():
+        if "file" not in s:
+            continue  # cited by its page only (Henley Town Council's budget, a shared-drive file): nothing to fingerprint
         path = ROOT / "data" / "raw" / s["file"]
         if s.get("manual"):
             # Read by hand into data/manual/; the build does not need the file, but if present it must be the one recorded.
@@ -599,7 +610,8 @@ def manifest(out: Dict[str, Any], files: Dict[str, bytes]) -> Dict[str, Any]:
     manual = sorted(p for p in (ROOT / "data" / "manual").glob("*.csv"))
     return {
         "generated_by": "etl/build.py",
-        "inputs": [{"id": s["id"], "file": s["file"], "sha256": s["sha256"]} for s in reg],
+        # A source read only as a web page (Henley Town Council's budget) has no file to hash.
+        "inputs": [{"id": s["id"], "file": s["file"], "sha256": s["sha256"]} for s in reg if "file" in s],
         "manual": [{"file": f"data/manual/{p.name}", "sha256": sha256(p)} for p in manual],
         "outputs": [{"file": f"data/build/{k}", "sha256": hashlib.sha256(v).hexdigest()} for k, v in files.items()],
         "quality_counts": dict(sorted(counts.items())),

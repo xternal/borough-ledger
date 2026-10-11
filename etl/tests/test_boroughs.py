@@ -5,11 +5,13 @@ import json
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import borough_people as BP  # noqa: E402
 import boroughs as B  # noqa: E402
+from extract import CheckFailed  # noqa: E402
 from fetch import ROOT, load_sources  # noqa: E402
 
 KC = "kensington-and-chelsea"
@@ -182,6 +184,54 @@ class BoroughsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TwoTierTest(unittest.TestCase):
+    """South Oxfordshire: a district inside Oxfordshire, whose county council sets most of the bill, and Henley-on-Thames,
+    whose town council adds its own share."""
+
+    def setUp(self) -> None:
+        self.b = next(b for b in B.boroughs() if b["slug"] == "south-oxfordshire")
+        self.reg = {s["id"]: s for s in load_sources()}
+
+    @unittest.skipUnless(RAW_PRESENT, "needs the government returns in data/raw/ (python3 etl/fetch.py)")
+    def test_the_county_balances_and_its_tax_is_its_band_d_times_its_base(self) -> None:
+        c = B.county_statement(self.reg, self.b)
+        self.assertEqual(c["band_d"], 2006.78)
+        self.assertAlmostEqual(c["council_tax_requirement_m"], c["band_d"] * c["tax_base"] / 1e6, delta=c["council_tax_requirement_m"] * 0.005)
+        self.assertAlmostEqual(sum(f["m"] for f in c["funding"]), sum(s["m"] for s in c["services"]), delta=0.02)
+        self.assertIn("fire", {s["id"] for s in c["services"]})  # Oxfordshire runs its own fire and rescue service
+
+    @unittest.skipUnless(RAW_PRESENT, "needs the government returns in data/raw/ (python3 etl/fetch.py)")
+    def test_a_county_tax_that_is_not_band_d_times_the_base_is_refused(self) -> None:
+        real = B.precepting(self.reg, "E10000025")
+        with mock.patch.object(B, "precepting", return_value={**real, "ctr": real["ctr"] * 1.02}):
+            with self.assertRaises(CheckFailed):
+                B.county_statement(self.reg, self.b)
+
+    def test_only_a_council_that_runs_fire_and_rescue_has_a_fire_line(self) -> None:
+        for path in sorted((ROOT / "data" / "build" / "boroughs").glob("*/statement.json")):
+            s = json.loads(path.read_text())
+            self.assertNotIn("fire", {x["id"] for x in s["services"]}, path.parent.name)
+            if s.get("county"):
+                self.assertIn("fire", {x["id"] for x in s["county"]["services"]}, path.parent.name)
+
+    def test_henleys_share_is_its_precept_over_its_tax_base(self) -> None:
+        [t] = B.towns(self.b, 2461.30)
+        self.assertEqual((t["town"], t["band_d"], t["whole_band_d"]), ("Henley-on-Thames", 170.35, 2631.65))
+        self.assertEqual([d["division"] for d in t["divisions"]], ["Henley", "Sonning Common & Henley South"])
+        self.assertEqual(t["quality"], "approx")  # checked by Claude; sourced once the owner reviews it
+
+    def test_a_town_whose_bill_does_not_add_up_is_refused(self) -> None:
+        real = B.read_csv
+        for field, change in (("precept", 5000.0), ("whole_band_d", 0.05)):
+            rows = [{**r, field: str(float(r[field]) + change)} for r in real("town_councils_2026-27.csv")]
+            with mock.patch.object(B, "read_csv", side_effect=lambda name, rows=rows: rows if name.startswith("town_councils") else real(name)):
+                with self.assertRaises(CheckFailed, msg=field):
+                    B.towns(self.b, 2461.30)
+        # The notice's bill where no parish precept is set must be this page's bill outside a parish.
+        with self.assertRaises(CheckFailed):
+            B.towns(self.b, 2461.31)
 
 
 class BillRiseTest(unittest.TestCase):

@@ -1053,6 +1053,36 @@
     "other_residential": null,
     "other": 0
    }
+  },
+  "E10000025": {
+   "name": "Oxfordshire",
+   "la_code": "931",
+   "withheld": false,
+   "spend_m": {
+    "residential": 52.72447,
+    "fostering": 19.049503,
+    "adoption": 7.794527,
+    "special_guardianship": 3.6917,
+    "other": 16.892979,
+    "short_breaks": 0.003283,
+    "family_friends": 2.008938,
+    "education": 0.974034,
+    "leaving_care": 3.850612,
+    "asylum": 0.380926,
+    "total": 107.370972,
+    "childrens_services": 178.822629
+   },
+   "children": 800,
+   "placements": {
+    "foster": 509,
+    "childrens_homes": 133,
+    "supported_accommodation": 29,
+    "with_parents": 31,
+    "adoption": null,
+    "residential_schools": 12,
+    "other_residential": null,
+    "other": 79
+   }
   }
  }
 }

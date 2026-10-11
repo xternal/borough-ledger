@@ -9,7 +9,7 @@ Service Expenditure - Cultural and related services,line,parks_culture
 Service Expenditure - Environmental and regulatory services,line,environmental_split
 Service Expenditure - Planning and development services,line,planning
 Service Expenditure - Police services,line,running
-Service Expenditure - Fire and rescue services,line,running
+Service Expenditure - Fire and rescue services,line,fire
 Service Expenditure - Central services,line,running
 Service Expenditure - Other services,line,running
 Service Expenditure - TOTAL SERVICE EXPENDITURE (total of lines 190 to 698),total,
