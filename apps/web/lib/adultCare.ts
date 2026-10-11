@@ -61,3 +61,69 @@ export function adultCare(ons: string): AdultCareModel | null {
     source: { title: FILE.source.title, url: FILE.source.url! },
   };
 }
+
+export interface UnitComparison {
+  id: "residential_65" | "home_care_hour";
+  label: string;
+  per: "week" | "hour";
+  f: Figure;
+  /** 1 is the lowest cost among `of` councils. */
+  rank: number;
+  of: number;
+  median: Figure;
+  low: { name: string; f: Figure };
+  high: { name: string; f: Figure };
+}
+
+export interface CareComparison {
+  /** London boroughs for a London borough; otherwise every English council on the site. */
+  group: string;
+  units: UnitComparison[];
+  byAge: { workingAge: Figure; older: Figure };
+  /** Across every English council on the site: how many spend more on working-age adults than on older people. */
+  moreForWorkingAge: { count: number; of: number };
+}
+
+/** How one council's costs compare with similar councils', from the same report. Cheapest is not the same as best: the
+    page says so, and shows no ranking of results until it has them. */
+export function careComparison(ons: string): CareComparison | null {
+  const c = FILE.councils[ons];
+  if (!c) return null;
+  const f = (v: number) => fig(v, FILE.quality, FILE.source_id);
+  const london = ons.startsWith("E09");
+  const peers = Object.entries(FILE.councils).filter(([k]) => !london || k.startsWith("E09"));
+  const units = (
+    [
+      ["residential_65", "A week in a care home, aged 65 or over", "week"],
+      ["home_care_hour", "An hour of care at home", "hour"],
+    ] as const
+  ).flatMap(([id, label, per]) => {
+    const vals = peers
+      .map(([k, v]) => ({ k, name: v.name, v: v.unit[id] }))
+      .filter((x): x is { k: string; name: string; v: number } => x.v !== null)
+      .sort((a, z) => a.v - z.v);
+    const rank = vals.findIndex((x) => x.k === ons) + 1;
+    if (!rank || c.unit[id] === null) return [];
+    const mid = vals.length % 2 ? vals[(vals.length - 1) / 2]!.v : (vals[vals.length / 2 - 1]!.v + vals[vals.length / 2]!.v) / 2;
+    return [
+      {
+        id,
+        label,
+        per,
+        f: f(c.unit[id]!),
+        rank,
+        of: vals.length,
+        median: f(Math.round(mid * 100) / 100),
+        low: { name: vals[0]!.name, f: f(vals[0]!.v) },
+        high: { name: vals[vals.length - 1]!.name, f: f(vals[vals.length - 1]!.v) },
+      },
+    ];
+  });
+  const all = Object.values(FILE.councils);
+  return {
+    group: london ? "London boroughs" : "English councils",
+    units,
+    byAge: { workingAge: f(c.long_term_by_age_k.working_age / 1000), older: f(c.long_term_by_age_k.older / 1000) },
+    moreForWorkingAge: { count: all.filter((x) => x.long_term_by_age_k.working_age > x.long_term_by_age_k.older).length, of: all.length },
+  };
+}

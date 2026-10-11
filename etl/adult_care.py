@@ -101,6 +101,8 @@ def build(reg: Dict[str, Any]) -> Dict[str, Any]:
             "name": name,
             "spend_k": {k: round(v, 2) for k, v in spend.items()},
             "settings_k": settings,
+            # Long-term care by age (Tables 43 and 44), which add up to Table 14's long-term care (checked above).
+            "long_term_by_age_k": {"working_age": round(num(t43[ons], "Total"), 2), "older": round(num(t44[ons], "Total"), 2)},
             "home_care_from": "agencies" if num(t51[ons], f"External: {YEAR}") is not None else "the council",
             "unit": {k: (round(v, 2) if v is not None else None) for k, v in now.items()},
             "unit_prev": {k: (round(v, 2) if v is not None else None) for k, v in prev.items()},

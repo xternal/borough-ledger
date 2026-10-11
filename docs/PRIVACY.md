@@ -57,6 +57,14 @@ Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from 
 * The same finder is the first thing on every council's page and works for every council on the site. A postcode in the council already open opens its ward. A postcode in another covered council opens that council's page at the top, and the name of the ward it found (never the postcode) is kept in the browser tab's session storage so the page can say "Your ward is ..."; it stays in that tab only, is never sent to us, and goes when the tab is closed. A postcode elsewhere is told which council it is in. The list of wards it checks against is part of the page, so nothing about the postcode is sent to us at any step.
 * Readers who would rather not send a postcode anywhere can pick their ward on the map or the list.
 
+## Make your case
+
+* The letter is drafted in the reader's browser from what they choose and type. Nothing they choose or write is sent to us, stored or counted: the owner decided (11 Oct 2026) that the site does not tally what people send, so there is nothing to keep and nothing to moderate.
+* Finding their councillors uses the same postcode lookup as above (browser to postcodes.io). The postcode is not put in the letter.
+* The reader sends the letter themselves: they copy it, or "Open in my email" hands it to their own email app (a `mailto:` link with no address in it; the letter never leaves their device until they send it), or they paste it into WriteToThem, mySociety's free service, which asks for their postcode and address itself under its own privacy policy. We publish no councillors' email addresses; each councillor's council page has theirs.
+* The Freedom of Information links open WhatDoTheyKnow (also mySociety) with our suggested question filled in. Nothing the reader typed goes into those links.
+* Councillors are named only as the council publishes them: each ward's councillors, and the administration's lead and each opposition party's spokesperson on the subject, side by side.
+
 ## Council decisions
 
 * Only the formal decision is kept: Cabinet's decision text, or for Full Council the resolution (the words after "RESOLVED"). The debate in the minutes, which can name members of the public who spoke, is never stored or shown.

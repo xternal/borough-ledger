@@ -20,7 +20,7 @@ function statusLine(remaining: number, status: string): string {
 }
 
 /** Plain-language summary of a balance-it scenario, for the share image and the page's link preview. */
-export function shareSummary(m: PageModel, s: Scenario): ShareSummary {
+export function shareSummary(m: Pick<PageModel, "balance" | "place">, s: Scenario): ShareSummary {
   const { balance, place } = m;
   const base = defaultScenario(balance.input);
   const years = mediumTerm(

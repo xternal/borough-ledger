@@ -17,3 +17,4 @@ export * from "./digest";
 export * from "./rates";
 export * from "./adultcare";
 export * from "./childrencare";
+export * from "./makeyourcase";

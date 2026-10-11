@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import { derive, fig, worst, type Figure, type Lever, type LeverId } from "@borough-ledger/schema";
 import { billFor, computeBalance, encodeScenario, leverValue, mediumTerm, nextYearCouncil, type MediumTermYear, type PartId } from "@borough-ledger/engine";
 import { formatLever } from "@/lib/format";
+import type { CaseSetup } from "@/lib/makeYourCase";
 import type { PageModel } from "@/lib/model";
+import { shareSummary } from "@/lib/shareText";
+import { MakeYourCase, type CaseWant } from "./MakeYourCase";
 import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 import { useLedger } from "./LedgerState";
 
-type Props = Pick<PageModel, "balance" | "bill" | "rules" | "place">;
+type Props = Pick<PageModel, "balance" | "bill" | "rules" | "place"> & {
+  /** Make your case under the tool, with the reader's choices as the letter's figures. */
+  makeCase?: { setup: CaseSetup; wants: CaseWant[]; site: string };
+};
 
 const PART: Record<PartId, { label: string; colour: string }> = {
   council_tax: { label: "Council tax", colour: "var(--fund)" },
@@ -20,7 +26,7 @@ const PART: Record<PartId, { label: string; colour: string }> = {
   reserves: { label: "Reserves, one-off", colour: "hatch" },
 };
 
-export function BalanceIt({ balance, bill, rules, place }: Props) {
+export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
   const { band, singlePerson, scenario, setLever, setToggle } = useLedger();
   const r = computeBalance(balance.input, scenario);
   // Outcomes depend on the gap and every choice; each lever's own effect carries only that lever's provenance.
@@ -255,8 +261,37 @@ export function BalanceIt({ balance, bill, rules, place }: Props) {
           </div>
         </aside>
       </div>
+      {makeCase ? (
+        <MakeYourCase
+          id="case-budget"
+          level={3}
+          setup={makeCase.setup}
+          wants={makeCase.wants}
+          facts={budgetFacts(shareSummary({ balance, place }, scenario), `${makeCase.site}${path}`, !!code)}
+          page={`${makeCase.site}${path}`}
+          intro="Balanced it your way? Send your budget to the councillors who will set the real one, with a link so they can open your choices."
+        />
+      ) : null}
     </section>
   );
+}
+
+/** The reader's own budget, in words, for their letter: the same summary as the share card, and a link to open it. */
+function budgetFacts(sum: ReturnType<typeof shareSummary>, url: string, changed: boolean) {
+  const lower = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
+  const outcome = sum.status === "Balanced" ? "balances" : `has ${lower(sum.status)}`;
+  const source = "Balance it on Borough Book, which starts from the council's own forecast";
+  return [
+    {
+      id: "result",
+      label: `My choices: ${lower(sum.status)}`,
+      text: changed ? `With my choices (${sum.choices.map(lower).join("; ")}), next year's budget ${outcome}.` : `With nothing changed, the council's own forecast for next year ${outcome}.`,
+      source,
+      on: true,
+    },
+    ...(sum.later ? [{ id: "later", label: "What happens the year after", text: `${sum.later}.`, source, on: true }] : []),
+    ...(changed ? [{ id: "link", label: "A link to open my choices", text: `My choices, to open and check: ${url}`, source, on: true }] : []),
+  ];
 }
 
 /** The next three years if nothing else changes: recurring choices keep saving, one-off money comes back. */

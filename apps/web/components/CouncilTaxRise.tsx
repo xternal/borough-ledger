@@ -3,7 +3,6 @@
 import { derive, type Band } from "@borough-ledger/schema";
 import type { PageModel } from "@/lib/model";
 import { formatDay, formatMonthYear } from "@/lib/format";
-import { COVERED, PLACES } from "@/lib/places";
 import { SITE_URL } from "@/lib/site";
 import { optionName } from "@/lib/ctOptions";
 import { CouncilTaxOptions } from "./CouncilTaxOptions";
@@ -11,7 +10,8 @@ import { JsonLd } from "./JsonLd";
 import { LedgerStateProvider } from "./LedgerState";
 import { Num } from "./Num";
 import { PageShell } from "./PageShell";
-import { PostcodeFinder } from "./PostcodeFinder";
+import { MakeYourCase } from "./MakeYourCase";
+import { councilTaxCase } from "@/lib/makeYourCase";
 
 /** "19 October to 15 November 2026", "December 2026", "15 February 2027". */
 export function when(start: string, end?: string): string {
@@ -51,7 +51,7 @@ export function riseQA(m: PageModel): { q: string; a: string }[] {
     },
     {
       q: "How can I have my say?",
-      a: `${engage ? `The council asks residents, businesses and others for their views from ${when(engage.start, engage.end)}: which services matter most to them, and what they expect of council tax. ` : ""}You can also write to your ward councillors at any time; find them by postcode on this page.`,
+      a: `${engage ? `The council asks residents, businesses and others for their views from ${when(engage.start, engage.end)}: which services matter most to them, and what they expect of council tax. ` : ""}You can also write to your ward councillors, or to those who lead on the budget for each side: this page helps you draft the letter in your own words and finds them by postcode. Anyone who lives, works or studies in the borough can also put a question to Full Council, or start a petition.`,
     },
     {
       q: "Is Borough Book the council?",
@@ -64,6 +64,7 @@ export function CouncilTaxRise({ m, band, path }: { m: PageModel; band: Band; pa
   const ct = m.ctOptions!;
   const top = ct.options[ct.options.length - 1]!;
   const qa = riseQA(m);
+  const taxCase = councilTaxCase(m);
   const bandD = ct.options.map((o) => ({ o, rise: derive((o.total.value / m.bill.total.value - 1) * 100, o.total, m.bill.total) }));
   return (
     <PageShell m={m}>
@@ -174,8 +175,17 @@ export function CouncilTaxRise({ m, band, path }: { m: PageModel; band: Band; pa
             </li>
           ))}
         </ol>
-        <p>Your ward councillors vote on the budget at Full Council. Find them, and how to contact them, by postcode:</p>
-        <PostcodeFinder places={PLACES} covered={COVERED} example="W6 9JU" label="Your postcode" />
+        {taxCase ? (
+          <MakeYourCase
+            id="case-council-tax"
+            level={3}
+            setup={taxCase.setup}
+            wants={taxCase.wants}
+            facts={taxCase.facts}
+            page={`${SITE_URL}${path}`}
+            intro="Prefer one of the options, or none of them? Your ward councillors vote on it at Full Council. Tell them, or the councillors who lead on the budget for each side, before they decide."
+          />
+        ) : null}
         <p className="small muted">
           From the council&rsquo;s{" "}
           <a href={ct.timetable.find((t) => t.id === "cabinet_mtfs")?.url ?? "https://democracy.lbhf.gov.uk/mgConvert2PDF.aspx?ID=136431"}>

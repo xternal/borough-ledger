@@ -1,0 +1,11 @@
+topic,order,who,text,source_ids,where,reviewed
+adult_care,1,law,"The council must assess anyone who appears to need care and support, and meet the needs that are eligible.",care_act_2014_s9 care_act_2014_s18,,checked
+adult_care,2,government,"The government sets most of the council's money, and how far council tax can rise.",lgfs_2026-27_response,,checked
+adult_care,3,council,"The council chooses the prices it pays care homes and home care agencies, how much goes on helping people stay at home, and whether to charge for care, which the law allows but does not require.",care_act_2014_s14,,checked
+adult_care,4,council,"Hammersmith & Fulham has not charged for care at home since April 2015; its own report says it is the only council in England not to.",lbhf_free_home_care_2024-10-17,page 1,checked
+council_tax,1,law,"Raising council tax by more than the government's limit needs a local referendum.",lgfa1992_s52zb,,checked
+council_tax,2,government,"For 2027/28 and 2028/29 the government has said it will set no limit for Hammersmith & Fulham and five other councils with low council tax, so no referendum would be needed.",lgfs_2026-27_response,,checked
+council_tax,3,council,"Cabinet proposes the rise and Full Council sets it, with the budget.",cabinet_mtfs_2026-10-12,page 19,checked
+budget,1,law,"The council must set a budget that balances: what it spends is paid for by council tax, grants and other income, or reserves.",lgfa1992_s31a,,checked
+budget,2,government,"The government sets most of the council's money, and how far council tax can rise.",lgfs_2026-27_response,,checked
+budget,3,council,"Cabinet proposes the budget and Full Council sets it: which services to fund, what to save and how much to raise council tax.",cabinet_mtfs_2026-10-12,page 19,checked

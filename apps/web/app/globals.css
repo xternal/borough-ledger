@@ -2526,3 +2526,210 @@
     margin: 22px 0 12px;
   }
 }
+
+@layer components {
+  /* Make your case: who decides, how it compares, what a resident can do, and a letter in their own words */
+  .myc-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    display: grid;
+    gap: 12px;
+  }
+  .myc-step,
+  .myc-letter,
+  .myc-draft {
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .myc-step > h3,
+  .myc-step > h4,
+  .myc-letter > h3,
+  .myc-letter > h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+  .myc-n {
+    display: inline-grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--sunk);
+    font-size: 13px;
+    font-weight: 550;
+  }
+  .myc-who,
+  .myc-actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .myc-who li {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+  }
+  .myc-who li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .myc-tag {
+    justify-self: start;
+    font-size: 12px;
+    font-weight: 550;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .myc-tag.law {
+    background: var(--sunk);
+    color: var(--ink);
+  }
+  .myc-tag.government {
+    background: color-mix(in srgb, var(--warn) 13%, transparent);
+    color: var(--warn);
+  }
+  .myc-tag.council {
+    background: color-mix(in srgb, var(--fund) 12%, transparent);
+    color: var(--fund-ink);
+  }
+  .myc-actions li {
+    padding: 7px 0;
+    line-height: 1.55;
+  }
+  .myc-compare p {
+    margin: 0 0 8px;
+  }
+  .myc-unit {
+    margin-bottom: 14px;
+  }
+  .myc-range {
+    position: relative;
+    height: 22px;
+    margin: 4px 10px 2px;
+  }
+  .myc-range i {
+    position: absolute;
+    display: block;
+  }
+  .myc-range .track {
+    left: 0;
+    right: 0;
+    top: 9px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line-strong);
+  }
+  .myc-range .mid {
+    top: 4px;
+    width: 2px;
+    height: 14px;
+    margin-left: -1px;
+    background: var(--muted);
+  }
+  .myc-range .dot {
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    border-radius: 50%;
+    background: var(--fund);
+    box-shadow: 0 0 0 2px var(--raised);
+  }
+  .myc-ends {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .myc-gap {
+    border: 1px dashed var(--line-strong);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--muted);
+  }
+  .myc-letter {
+    display: grid;
+    gap: 16px;
+  }
+  .myc-letter fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+  }
+  .myc-letter legend,
+  .myc-own label {
+    font-weight: 550;
+    font-size: 14px;
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .myc-letter .seg {
+    justify-self: start;
+  }
+  .myc-finder {
+    margin: 2px 0 4px 28px;
+  }
+  .myc-own {
+    display: grid;
+  }
+  .myc-own textarea {
+    width: 100%;
+    min-height: 96px;
+    font: 400 15px/1.5 var(--font);
+    padding: 9px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    resize: vertical;
+  }
+  .myc-err {
+    color: var(--bad);
+    font-size: 13px;
+    margin: 0;
+  }
+  .myc-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .myc-draft {
+    margin-top: 12px;
+    display: grid;
+    gap: 12px;
+  }
+  .myc-draft pre {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: 400 14px/1.6 var(--font);
+    background: var(--sunk);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .myc-draft p {
+    margin: 0;
+  }
+  @media (max-width: 560px) {
+    .myc-who li {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .myc-finder {
+      margin-left: 0;
+    }
+  }
+}

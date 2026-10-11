@@ -49,6 +49,10 @@ export default function PrivacyPage() {
             The postcode finder sends your postcode from your browser straight to postcodes.io, a free service using official data. We never see it, and it is never
             stored.
           </li>
+          <li>
+            Make your case drafts a letter in your browser from what you choose and write. We never see it and nothing is stored or counted: you copy it, or open it in
+            your own email app, or paste it into WriteToThem (a free service run by the charity mySociety), which sends it for you under its own privacy policy.
+          </li>
           <li>Vercel, which serves the site, keeps standard request logs (including IP addresses) for a short time to run and protect it.</li>
           <li>RSS feeds are plain files: nobody is recorded as following anything.</li>
         </ul>

@@ -31,6 +31,10 @@
     "supported_accommodation": 3800.08,
     "other_long_term": 3298.81
    },
+   "long_term_by_age_k": {
+    "working_age": 34615.45,
+    "older": 41082.14
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1123.84,
@@ -62,6 +66,10 @@
     "direct_payments": 10817.17,
     "supported_accommodation": 1660.72,
     "other_long_term": 2345.49
+   },
+   "long_term_by_age_k": {
+    "working_age": 43831.83,
+    "older": 35673.21
    },
    "home_care_from": "agencies",
    "unit": {
@@ -95,6 +103,10 @@
     "supported_accommodation": 852.76,
     "other_long_term": 4427.67
    },
+   "long_term_by_age_k": {
+    "working_age": 35804.84,
+    "older": 45962.69
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1070.87,
@@ -126,6 +138,10 @@
     "direct_payments": 66354.42,
     "supported_accommodation": 0,
     "other_long_term": 19654.05
+   },
+   "long_term_by_age_k": {
+    "working_age": 218816.46,
+    "older": 213333.92
    },
    "home_care_from": "agencies",
    "unit": {
@@ -159,6 +175,10 @@
     "supported_accommodation": 12.81,
     "other_long_term": 6823.89
    },
+   "long_term_by_age_k": {
+    "working_age": 61776.23,
+    "older": 54575.84
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1009.66,
@@ -190,6 +210,10 @@
     "direct_payments": 11517.75,
     "supported_accommodation": 4365.1,
     "other_long_term": 2914.5
+   },
+   "long_term_by_age_k": {
+    "working_age": 68895.77,
+    "older": 53659.08
    },
    "home_care_from": "agencies",
    "unit": {
@@ -223,6 +247,10 @@
     "supported_accommodation": 251.64,
     "other_long_term": 6638.86
    },
+   "long_term_by_age_k": {
+    "working_age": 48241.1,
+    "older": 51465.22
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1100.56,
@@ -254,6 +282,10 @@
     "direct_payments": 11160.0,
     "supported_accommodation": 583.0,
     "other_long_term": 6171.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 76559.0,
+    "older": 81303.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -287,6 +319,10 @@
     "supported_accommodation": 0,
     "other_long_term": 3248.56
    },
+   "long_term_by_age_k": {
+    "working_age": 53281.98,
+    "older": 46166.81
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1278.18,
@@ -318,6 +354,10 @@
     "direct_payments": 11550.0,
     "supported_accommodation": 523.0,
     "other_long_term": 6874.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 61523.0,
+    "older": 58963.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -351,6 +391,10 @@
     "supported_accommodation": 16359.5,
     "other_long_term": 8478.43
    },
+   "long_term_by_age_k": {
+    "working_age": 67481.49,
+    "older": 52927.27
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 999.65,
@@ -382,6 +426,10 @@
     "direct_payments": 8616.41,
     "supported_accommodation": 17594.98,
     "other_long_term": 6943.91
+   },
+   "long_term_by_age_k": {
+    "working_age": 43968.83,
+    "older": 51097.94
    },
    "home_care_from": "agencies",
    "unit": {
@@ -415,6 +463,10 @@
     "supported_accommodation": 36.88,
     "other_long_term": 4514.49
    },
+   "long_term_by_age_k": {
+    "working_age": 45861.95,
+    "older": 57292.86
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1190.31,
@@ -446,6 +498,10 @@
     "direct_payments": 8030.0,
     "supported_accommodation": 653.0,
     "other_long_term": 1738.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 48983.0,
+    "older": 46945.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -479,6 +535,10 @@
     "supported_accommodation": 21863.0,
     "other_long_term": 3231.0
    },
+   "long_term_by_age_k": {
+    "working_age": 60131.0,
+    "older": 38189.0
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1177.48,
@@ -510,6 +570,10 @@
     "direct_payments": 7435.43,
     "supported_accommodation": 2148.62,
     "other_long_term": 3581.83
+   },
+   "long_term_by_age_k": {
+    "working_age": 24310.29,
+    "older": 32882.47
    },
    "home_care_from": "agencies",
    "unit": {
@@ -543,6 +607,10 @@
     "supported_accommodation": 0,
     "other_long_term": 5765.0
    },
+   "long_term_by_age_k": {
+    "working_age": 32475.0,
+    "older": 25171.0
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1407.01,
@@ -574,6 +642,10 @@
     "direct_payments": 6238.26,
     "supported_accommodation": 26816.1,
     "other_long_term": 8841.5
+   },
+   "long_term_by_age_k": {
+    "working_age": 72598.87,
+    "older": 56067.82
    },
    "home_care_from": "agencies",
    "unit": {
@@ -607,6 +679,10 @@
     "supported_accommodation": 0,
     "other_long_term": 22022.0
    },
+   "long_term_by_age_k": {
+    "working_age": 172102.0,
+    "older": 144155.0
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 781.85,
@@ -638,6 +714,10 @@
     "direct_payments": 16668.73,
     "supported_accommodation": 25167.03,
     "other_long_term": 1805.23
+   },
+   "long_term_by_age_k": {
+    "working_age": 59086.18,
+    "older": 51997.43
    },
    "home_care_from": "agencies",
    "unit": {
@@ -671,6 +751,10 @@
     "supported_accommodation": 57687.0,
     "other_long_term": 52750.0
    },
+   "long_term_by_age_k": {
+    "working_age": 159032.0,
+    "older": 92327.0
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 728.21,
@@ -702,6 +786,10 @@
     "direct_payments": 5596.65,
     "supported_accommodation": 1060.12,
     "other_long_term": 7330.42
+   },
+   "long_term_by_age_k": {
+    "working_age": 32834.19,
+    "older": 32706.62
    },
    "home_care_from": "agencies",
    "unit": {
@@ -735,6 +823,10 @@
     "supported_accommodation": 6126.35,
     "other_long_term": 3126.46
    },
+   "long_term_by_age_k": {
+    "working_age": 49403.65,
+    "older": 51069.37
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1039.71,
@@ -766,6 +858,10 @@
     "direct_payments": 29481.0,
     "supported_accommodation": 24118.0,
     "other_long_term": 7897.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 69743.0,
+    "older": 52174.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -799,6 +895,10 @@
     "supported_accommodation": 2368.04,
     "other_long_term": 13118.06
    },
+   "long_term_by_age_k": {
+    "working_age": 83384.21,
+    "older": 199889.85
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1274.26,
@@ -830,6 +930,10 @@
     "direct_payments": 14210.0,
     "supported_accommodation": 0,
     "other_long_term": 6767.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 55206.0,
+    "older": 51100.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -863,6 +967,10 @@
     "supported_accommodation": 0,
     "other_long_term": 2989.06
    },
+   "long_term_by_age_k": {
+    "working_age": 34314.93,
+    "older": 38881.55
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1388.78,
@@ -894,6 +1002,10 @@
     "direct_payments": 7099.71,
     "supported_accommodation": 5067.93,
     "other_long_term": 2383.82
+   },
+   "long_term_by_age_k": {
+    "working_age": 56944.59,
+    "older": 45715.58
    },
    "home_care_from": "agencies",
    "unit": {
@@ -927,6 +1039,10 @@
     "supported_accommodation": 2170.0,
     "other_long_term": 5761.0
    },
+   "long_term_by_age_k": {
+    "working_age": 41087.0,
+    "older": 44784.0
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1087.8,
@@ -958,6 +1074,10 @@
     "direct_payments": 6194.0,
     "supported_accommodation": 1543.0,
     "other_long_term": 4994.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 54943.0,
+    "older": 35671.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -991,6 +1111,10 @@
     "supported_accommodation": 4277.8,
     "other_long_term": 10578.62
    },
+   "long_term_by_age_k": {
+    "working_age": 67824.65,
+    "older": 63210.5
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1157.43,
@@ -1022,6 +1146,10 @@
     "direct_payments": 11463.0,
     "supported_accommodation": 26392.0,
     "other_long_term": 5824.0
+   },
+   "long_term_by_age_k": {
+    "working_age": 56770.0,
+    "older": 44552.0
    },
    "home_care_from": "agencies",
    "unit": {
@@ -1055,6 +1183,10 @@
     "supported_accommodation": 0,
     "other_long_term": 4803.73
    },
+   "long_term_by_age_k": {
+    "working_age": 59551.49,
+    "older": 48464.21
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1261.72,
@@ -1087,6 +1219,10 @@
     "supported_accommodation": 0,
     "other_long_term": 3379.82
    },
+   "long_term_by_age_k": {
+    "working_age": 28274.48,
+    "older": 53377.32
+   },
    "home_care_from": "agencies",
    "unit": {
     "residential_65": 1271.18,
@@ -1118,6 +1254,10 @@
     "direct_payments": 31446.48,
     "supported_accommodation": 4002.39,
     "other_long_term": 7686.71
+   },
+   "long_term_by_age_k": {
+    "working_age": 137491.11,
+    "older": 137413.99
    },
    "home_care_from": "agencies",
    "unit": {
