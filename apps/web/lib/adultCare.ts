@@ -127,3 +127,63 @@ export function careComparison(ons: string): CareComparison | null {
     moreForWorkingAge: { count: all.filter((x) => x.long_term_by_age_k.working_age > x.long_term_by_age_k.older).length, of: all.length },
   };
 }
+
+export type Versus = "lower" | "higher" | "about the same";
+
+export interface CareResult {
+  id: "satisfied" | "in_control" | "feel_safe";
+  /** What people said, after the share: "were extremely or very satisfied with their care and support". */
+  label: string;
+  f: Figure;
+  /** Give or take, in percentage points (the survey's 95% margin of error). */
+  moe: number;
+  respondents: number;
+  london: { f: Figure; vs: Versus } | null;
+  england: { f: Figure; vs: Versus };
+}
+
+const RESULT_LABEL: Record<CareResult["id"], string> = {
+  satisfied: "were extremely or very satisfied with their care and support",
+  in_control: "said they had control over their daily life",
+  feel_safe: "said they felt safe",
+};
+
+/** "lower than London and England", "about the same as London, lower than England". */
+export function versusText(r: Pick<CareResult, "london" | "england">): string {
+  const parts = [...(r.london ? [["London", r.london.vs] as const] : []), ["England", r.england.vs] as const];
+  const groups = new Map<Versus, string[]>();
+  for (const [where, vs] of parts) groups.set(vs, [...(groups.get(vs) ?? []), where]);
+  return [...groups].map(([vs, places]) => `${vs === "about the same" ? "about the same as" : `${vs} than`} ${places.join(" and ")}`).join(", ");
+}
+
+/** Lower or higher only where the gap is bigger than the two margins of error together; otherwise about the same. */
+export function versus(a: { pct: number; moe: number }, b: { pct: number; moe: number }): Versus {
+  const gap = a.pct - b.pct;
+  if (Math.abs(gap) <= Math.hypot(a.moe, b.moe)) return "about the same";
+  return gap < 0 ? "lower" : "higher";
+}
+
+/** What people who get care from one council say in the government's yearly survey, beside London (for a London borough)
+    and England. A survey of a few hundred people: every figure carries its margin of error, and nothing is ranked. */
+export function careResults(ons: string): { yearLabel: string; source: { title: string; url: string }; respondents: number; items: CareResult[] } | null {
+  const R = FILE.results;
+  const c = R.councils[ons];
+  if (!c) return null;
+  const f = (v: number) => fig(v / 100, R.quality, R.source_id);
+  const london = ons.startsWith("E09");
+  const items = (["satisfied", "in_control", "feel_safe"] as const).map((id) => ({
+    id,
+    label: RESULT_LABEL[id],
+    f: f(c[id].pct),
+    moe: c[id].moe,
+    respondents: c[id].respondents,
+    london: london ? { f: f(R.london[id].pct), vs: versus(c[id], R.london[id]) } : null,
+    england: { f: f(R.england[id].pct), vs: versus(c[id], R.england[id]) },
+  }));
+  return {
+    yearLabel: displayYear(R.year),
+    source: { title: R.source.title, url: R.source.url! },
+    respondents: Math.max(...items.map((i) => i.respondents)),
+    items,
+  };
+}

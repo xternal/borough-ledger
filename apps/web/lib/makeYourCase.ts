@@ -7,7 +7,7 @@
 import { DATA, MakeYourCaseFile, worst, type CaseTopic, type Quality } from "@borough-ledger/schema";
 import raw from "../../../data/build/make_your_case.json";
 import type { CaseWant } from "@/components/MakeYourCase";
-import { adultCare, careComparison } from "./adultCare";
+import { adultCare, careComparison, careResults, versusText } from "./adultCare";
 import { optionName } from "./ctOptions";
 import { format } from "./format";
 import { listOf, type CaseDates, type LetterFact } from "./letter";
@@ -172,6 +172,22 @@ export function adultCareCase(m: PageModel, ons: string): { setup: CaseSetup; wa
       source: src,
       on: false,
     },
+    ...(() => {
+      const r = careResults(ons);
+      const sat = r?.items.find((i) => i.id === "satisfied");
+      if (!r || !sat) return [];
+      assertRenderable(sat.f.quality, "make your case: care survey");
+      const pct = (x: number) => `${Math.round(x * 100)}%`;
+      return [
+        {
+          id: "satisfied",
+          label: `${pct(sat.f.value)} of people who get care are extremely or very satisfied with it (${versusText(sat)})`,
+          text: `In the government's ${r.yearLabel} survey, ${pct(sat.f.value)} of people who get care from the council ${sat.label}, give or take ${Math.round(sat.moe)} points${sat.london ? `; ${pct(sat.london.f.value)} across London` : ""} and ${pct(sat.england.f.value)} across England.`,
+          source: `the government's adult social care outcomes framework for ${r.yearLabel}, ${r.source.url}`,
+          on: false,
+        },
+      ];
+    })(),
     ...(free && freeSrc?.url
       ? [{ id: "free", label: "No charge for care at home since 2015", text: free.text, source: `the council's report to Full Council of 17 October 2024, ${freeSrc.url}`, on: false }]
       : []),

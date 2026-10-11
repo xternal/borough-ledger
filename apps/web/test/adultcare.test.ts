@@ -22,3 +22,27 @@ describe("what care for adults costs", () => {
     expect(adultCare("S12000049")).toBeNull(); // Glasgow
   });
 });
+
+describe("what people who get care say", () => {
+  it("gives Hammersmith & Fulham's answers with their margins, beside London and England, without ranking", async () => {
+    const { careResults, versus, versusText } = await import("@/lib/adultCare");
+    const r = careResults("E09000013")!;
+    expect(r.yearLabel).toBe("2024/25");
+    expect(r.items.map((i) => [i.id, Math.round(i.f.value * 1000) / 10, i.moe, i.london?.vs, i.england.vs])).toEqual([
+      ["satisfied", 55.3, 4.8, "lower", "lower"],
+      ["in_control", 67.5, 4.5, "about the same", "lower"],
+      ["feel_safe", 56, 4.7, "lower", "lower"],
+    ]);
+    expect(versusText(r.items[1]!)).toBe("about the same as London, lower than England");
+    // A gap inside the two margins together is "about the same", whichever way it points.
+    expect(versus({ pct: 60, moe: 5 }, { pct: 65, moe: 0.5 })).toBe("about the same");
+    expect(versus({ pct: 72, moe: 2 }, { pct: 65, moe: 0.5 })).toBe("higher");
+  });
+
+  it("compares a council outside London with England only (Oxfordshire, for South Oxfordshire)", async () => {
+    const { careResults } = await import("@/lib/adultCare");
+    const r = careResults("E10000025")!;
+    expect(r.items.every((i) => i.london === null)).toBe(true);
+    expect(careResults("S12000049")).toBeNull(); // Glasgow: England's survey only
+  });
+});

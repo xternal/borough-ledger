@@ -531,6 +531,22 @@
     "url": "https://www.lbhf.gov.uk/councillors-and-democracy/councillors-committees-and-decisions/take-part-democratic-process"
    },
    {
+    "id": "dhsc_ascof_2024-25",
+    "title": "Measures from the Adult Social Care Outcomes Framework, England: 2024 to 2025, time series data (23 January 2026)",
+    "publisher": "Department of Health and Social Care",
+    "url": "https://www.gov.uk/government/statistics/measures-from-the-adult-social-care-outcomes-framework-england-2024-to-2025",
+    "published_on": "2026-01-23",
+    "licence": "OGL-UK-3.0",
+    "asset_url": "https://assets.publishing.service.gov.uk/media/69736afc95ec95e3414fd502/dhsc-ascof-england-2024-to-2025-time-series-data-january-23-2026.ods",
+    "sha256": "e4b06416b2b5b31ba9c4db7d64f52cce5c8cffc95e391458e2e5c626f1439226"
+   },
+   {
+    "id": "lbhf_calendar_2027",
+    "title": "Hammersmith & Fulham Council, calendar of meetings, February and March 2027 (its statutory notice of meetings)",
+    "publisher": "London Borough of Hammersmith & Fulham",
+    "url": "https://democracy.lbhf.gov.uk/mgCalendarMonthView.aspx?M=2&DD=2027&CID=0&OT=&C=-1&MR=0&DI=0&ME=0"
+   },
+   {
     "id": "borough_ledger_method",
     "title": "Borough Book method notes (docs/MODEL.md)",
     "publisher": "Borough Book",
@@ -1806,13 +1822,17 @@
      "id": "cabinet_budget",
      "start": "2027-02-15",
      "label": "Cabinet considers the draft 2027/28 budget",
-     "proposed": true
+     "proposed": true,
+     "note": "The council's calendar of meetings, checked on 11 October 2026, has Cabinet on 8 February 2027, not 15 February.",
+     "note_url": "https://democracy.lbhf.gov.uk/mgCalendarMonthView.aspx?M=2&DD=2027&CID=0&OT=&C=-1&MR=0&DI=0&ME=0"
     },
     {
      "id": "council_budget",
      "start": "2027-03-01",
      "label": "Full Council sets the 2027/28 budget and council tax",
-     "proposed": true
+     "proposed": true,
+     "note": "The council's calendar of meetings, checked on 11 October 2026, has Full Council on 24 February 2027 and none in March.",
+     "note_url": "https://democracy.lbhf.gov.uk/mgCalendarMonthView.aspx?M=2&DD=2027&CID=0&OT=&C=-1&MR=0&DI=0&ME=0"
     }
    ],
    "quality": "sourced",

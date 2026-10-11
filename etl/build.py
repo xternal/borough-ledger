@@ -544,6 +544,8 @@ def manual_ct_options(reg: Dict[str, Any], band_d_council: float, band_d_gla: fl
         check(r["source_id"] in reg and r["proposed"] in ("yes", "no") and r["reviewed"] in ("no", "checked", "yes"), f"budget_timetable {r['id']}: bad row")
         check(bool(re.fullmatch(r"\d{4}-\d{2}(-\d{2})?", r["start"])) and (not r["end"] or bool(re.fullmatch(r"\d{4}-\d{2}(-\d{2})?", r["end"]))), f"budget_timetable {r['id']}: dates are YYYY-MM or YYYY-MM-DD")
     check([r["start"] for r in t_rows] == sorted(r["start"] for r in t_rows), "budget_timetable: milestones out of order")
+    for r in t_rows:
+        check(bool(r["note"]) == bool(r["note_source_id"]) and (not r["note_source_id"] or r["note_source_id"] in reg), f"budget_timetable {r['id']}: a note needs a source we hold")
     q = lambda rs: "sourced" if all(r["reviewed"] == "yes" for r in rs) else "approx"  # noqa: E731
     return {
         "ct_options": {
@@ -553,7 +555,8 @@ def manual_ct_options(reg: Dict[str, Any], band_d_council: float, band_d_gla: fl
             "method_note": f"{title}, Tables 7 to 9 (PDF pages 15 and 16) and the summary (pages 1 and 2). Rises in the council's own share of Band D; the Mayor of London's share is assumed to rise {gla_rise:g}%.",
         },
         "timetable": {
-            "items": [{"id": r["id"], "start": r["start"], **({"end": r["end"]} if r["end"] else {}), "label": r["label"], "proposed": r["proposed"] == "yes", **({"url": r["url"]} if r["url"] else {})} for r in t_rows],
+            "items": [{"id": r["id"], "start": r["start"], **({"end": r["end"]} if r["end"] else {}), "label": r["label"], "proposed": r["proposed"] == "yes", **({"url": r["url"]} if r["url"] else {}),
+                       **({"note": r["note"], "note_url": reg[r["note_source_id"]]["url"]} if r["note"] else {})} for r in t_rows],
             "quality": q(t_rows), "source_id": "cabinet_mtfs_2026-10-12",
             "method_note": f"{title}, Table 11 (PDF page 19) and paragraph 6.4 (page 16).",
         },

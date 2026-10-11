@@ -123,7 +123,7 @@ export interface CtOptionsModel {
   options: CtOption[];
   funding: { fromLabel: string; from: Figure; toLabel: string; to: Figure } | null;
   gap2030: { label: string; gap: Figure } | null;
-  timetable: { id: string; start: string; end?: string; label: string; proposed: boolean; url?: string }[];
+  timetable: { id: string; start: string; end?: string; label: string; proposed: boolean; url?: string; note?: string; note_url?: string }[];
   timetableQuality: Figure;
 }
 

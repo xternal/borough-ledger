@@ -35,6 +35,26 @@ class AdultCareTest(unittest.TestCase):
         self.assertNotIn("E07000179", codes)
         self.assertEqual(A.build(REG)["councils"]["E10000025"]["name"], "Oxfordshire")
 
+    def test_what_people_say_has_every_council_london_and_england(self) -> None:
+        r = A.build(REG)["results"]
+        self.assertEqual(r["councils"]["E09000013"]["satisfied"], {"pct": 55.3, "moe": 4.8, "respondents": 345})
+        self.assertEqual(r["london"]["satisfied"]["pct"], 60.7)
+        self.assertEqual(r["england"]["satisfied"]["pct"], 65.1)
+        self.assertEqual(set(r["councils"]), {c["ons"] for c in A.councils()})
+
+    def test_a_council_missing_from_the_survey_stops_the_build(self) -> None:
+        real = A.read_ods
+
+        def tampered(path: str):
+            book = real(path)
+            if "Table_4a" in book:
+                book["Table_4a"] = [r for r in book["Table_4a"] if not (r and len(r) > 2 and r[2] == "E09000013")]
+            return book
+
+        with mock.patch.object(A, "read_ods", tampered):
+            with self.assertRaises(CheckFailed):
+                A.build(REG)
+
     def test_a_table_that_does_not_add_up_stops_the_build(self) -> None:
         real = A.read_ods
 

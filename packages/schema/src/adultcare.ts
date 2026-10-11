@@ -7,6 +7,9 @@ const k = z.number();
 const unit = z.number().positive().nullable();
 const Units = z.object({ residential_65: unit, nursing_65: unit, residential_18_64: unit, nursing_18_64: unit, home_care_hour: unit });
 
+const Survey = z.object({ pct: z.number().min(0).max(100), moe: z.number().positive(), respondents: z.number().int().positive() });
+const SurveyResults = z.object({ satisfied: Survey, in_control: Survey, feel_safe: Survey });
+
 export const AdultCareFile = z.object({
   note: z.string(),
   year: z.string().regex(/^\d{4}-\d{2}$/),
@@ -29,5 +32,16 @@ export const AdultCareFile = z.object({
       unit_prev: Units,
     }),
   ),
+  /** What people who get care say (the outcomes framework, from the Adult Social Care Survey): per cent, margin of error
+      in percentage points, and how many answered. */
+  results: z.object({
+    year: z.string().regex(/^\d{4}-\d{2}$/),
+    source: Source,
+    quality: Quality,
+    source_id: z.string(),
+    london: SurveyResults,
+    england: SurveyResults,
+    councils: z.record(z.string().regex(/^E(0[689]|10)\d{6}$/), SurveyResults),
+  }),
 });
 export type AdultCareFile = z.infer<typeof AdultCareFile>;

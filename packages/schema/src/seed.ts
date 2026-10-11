@@ -332,6 +332,9 @@ export const CouncilYear = z.object({
             label: z.string(),
             proposed: z.boolean(),
             url: z.url().optional(),
+            /** Where another of the council's own papers says something different (its calendar of meetings), with its link. */
+            note: z.string().optional(),
+            note_url: z.url().optional(),
           }),
         ),
         ...provenance,

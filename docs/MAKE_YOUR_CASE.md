@@ -5,7 +5,7 @@ A panel that turns a figure into something a resident can act on, live for Hamme
 ## What it shows
 
 1. **Who decides.** What the law requires, what the government decides, what the council chooses, each with its source (`data/manual/make_your_case.csv`). This keeps residents from asking the council for what only Parliament can change, and the reverse.
-2. **How it compares** (care only so far). The council's costs among similar councils from the government's own averages, and who the money is for. Costs only: satisfaction with care and the regulator's rating are not on the site yet, and the panel says so.
+2. **How it compares** (care only so far). The council's costs among similar councils from the government's own averages, who the money is for, and whether it works: what people who get care say in the government's survey (satisfied, in control of their daily life, safe), beside London and England, with margins of error. The care regulator's rating is not on the site yet, and the panel says so.
 3. **What you can do, and by when.** The council's consultation, writing to councillors, a question to Full Council (the next open deadline, worked out in the reader's browser), petitions, deputations, Freedom of Information requests (pre-filled on WhatDoTheyKnow), and the MP where it is the government's part.
 4. **A letter.** The reader chooses what they want, who to write to (their ward councillors by postcode, or those who lead on it for each side), which figures to include, and writes a sentence or two of their own. The letter lists each figure's source once, and ends with what is open now and when it is decided.
 
@@ -25,4 +25,4 @@ A panel that turns a figure into something a resident can act on, live for Hamme
 
 ## Later
 
-Every service line and every council; results data (satisfaction, the regulator's ratings) beside costs; following a spending line by email (the Follow system handles pledges only today); an "Asked and answered" record of residents' questions at Full Council.
+Every service line and every council; the care regulator's ratings beside costs; following a spending line by email (the Follow system handles pledges only today); an "Asked and answered" record of residents' questions at Full Council.
