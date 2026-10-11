@@ -70,7 +70,7 @@
      "care_act_2014_s18"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -79,7 +79,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -88,7 +88,7 @@
      "care_act_2014_s14"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -97,7 +97,7 @@
      "lbhf_free_home_care_2024-10-17"
     ],
     "where": "page 1",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ],
   "council_tax": [
@@ -108,7 +108,7 @@
      "lgfa1992_s52zb"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -117,7 +117,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -126,7 +126,7 @@
      "cabinet_mtfs_2026-10-12"
     ],
     "where": "page 19",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ],
   "budget": [
@@ -137,7 +137,7 @@
      "lgfa1992_s31a"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -146,7 +146,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -155,7 +155,7 @@
      "cabinet_mtfs_2026-10-12"
     ],
     "where": "page 19",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ]
  },
@@ -167,7 +167,7 @@
     "deadline": "2026-10-09T12:00",
     "label": "Full Council",
     "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    },
    {
@@ -175,7 +175,7 @@
     "deadline": "2027-01-15T12:00",
     "label": "Full Council",
     "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    },
    {
@@ -183,7 +183,7 @@
     "deadline": "2027-02-12T12:00",
     "label": "Full Council",
     "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=FcHYUH-3lUOjujtAfK8NiDngNdyByuRBqb6xhYgQlvVURFRHM1VYSjc0WlQxN1dSNVVDNVlOU09KWS4u",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    }
   ],
@@ -192,21 +192,21 @@
     "threshold": 100,
     "leads_to": "the Cabinet Member responsible",
     "url": "https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    },
    {
     "threshold": 250,
     "leads_to": "a Cabinet debate",
     "url": "https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    },
    {
     "threshold": 5000,
     "leads_to": "a Full Council debate",
     "url": "https://democracy.lbhf.gov.uk/mgEPetitionListDisplay.aspx?bcr=1",
-    "quality": "approx",
+    "quality": "sourced",
     "source_id": "lbhf_take_part_2026-27"
    }
   ],
@@ -214,7 +214,7 @@
    "people": 10,
    "what": "speak at Cabinet or a scrutiny committee about an item on its agenda; the request form, signed by 10 electors, is due three working days before the meeting",
    "url": "https://www.lbhf.gov.uk/councillors-and-democracy/councillors-committees-and-decisions/take-part-democratic-process",
-   "quality": "approx",
+   "quality": "sourced",
    "source_id": "lbhf_take_part_2026-27"
   }
  }
