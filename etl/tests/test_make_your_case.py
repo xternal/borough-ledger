@@ -46,6 +46,15 @@ class MakeYourCaseTest(unittest.TestCase):
                 M.build()
         self.assertEqual(M.clear_working_days(date(2027, 1, 15), date(2027, 1, 27)), 7)
 
+    def test_priorities_compare_every_london_borough_on_the_site(self) -> None:
+        out = M.build()["compare"]
+        self.assertEqual(set(out), set(M.SERVICE))
+        for topic, c in out.items():
+            self.assertEqual(len(c["councils"]), 28, topic)
+            self.assertTrue(all(r["council_code"].startswith("E09") for r in c["councils"]))
+        hf = next(r for r in out["housing"]["councils"] if r["council_code"] == "E09000013")
+        self.assertEqual((hf["m"], hf["share"]), (43.498, 0.1704))
+
     def test_rows_are_approx_until_the_owner_reviews_them(self) -> None:
         out = M.build()
         for rows in out["topics"].values():

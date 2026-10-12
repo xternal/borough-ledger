@@ -4,7 +4,8 @@
    handed to the MakeYourCase component as plain data. One standard for every party (CLAUDE.md invariant 7): the
    administration's lead and each opposition party's spokesperson are offered side by side, and every choice of what to
    ask for gets the same treatment. */
-import { DATA, MakeYourCaseFile, worst, type CaseTopic, type Quality } from "@borough-ledger/schema";
+import { DATA, MakeYourCaseFile, fig, worst, type CaseTopic, type Figure, type Quality } from "@borough-ledger/schema";
+import { displayYear } from "@borough-ledger/engine";
 import raw from "../../../data/build/make_your_case.json";
 import type { CaseWant } from "@/components/MakeYourCase";
 import { adultCare, careComparison, careResults, versusText } from "./adultCare";
@@ -40,6 +41,9 @@ const SUBJECT: Record<CaseTopic, string> = {
   adult_care: "Care for adults",
   council_tax: "Council tax next year",
   budget: "Next year's budget",
+  streets_waste: "Bins and streets",
+  libraries_leisure: "Libraries, parks and leisure",
+  housing: "Housing and homelessness",
 };
 
 /** Who leads on each subject, by the title the council gives their role. */
@@ -47,6 +51,9 @@ const ROLE: Record<CaseTopic, RegExp> = {
   adult_care: /social care/i,
   council_tax: /finance/i,
   budget: /finance/i,
+  streets_waste: /^(Shadow )?Cabinet Member for the Environment, Arts and Culture$/,
+  libraries_leisure: /^(Shadow )?Cabinet Member for the Environment, Arts and Culture$/,
+  housing: /^(Shadow )?Cabinet Member for Housing and Homelessness$/,
 };
 
 /** Questions a resident might put under the Freedom of Information Act: facts the site does not have. */
@@ -68,6 +75,32 @@ const FOI: Record<CaseTopic, CaseSetup["foi"]> = {
       label: "How the three options were worked out",
       title: "Council tax options for 2027/28",
       text: "Please send me the calculations behind the three council tax options for 2027/28 in the report to Cabinet of 12 October 2026, including the tax base and collection rate assumed for each option.",
+    },
+  ],
+  streets_waste: [
+    {
+      label: "Missed bin collections",
+      title: "Missed household bin collections",
+      text: "Please tell me, for each month from April 2025 to September 2026, how many missed household bin collections were reported to the council, and how many of them were collected within two working days.",
+    },
+    {
+      label: "What parking brings in, and where it goes",
+      title: "Parking income and how it is spent",
+      text: "Please tell me the council's income from parking charges and from parking fines in 2024/25 and 2025/26, and what any surplus was spent on.",
+    },
+  ],
+  libraries_leisure: [
+    {
+      label: "Library opening hours and visits",
+      title: "Library opening hours and visits",
+      text: "Please tell me, for each library the council runs, its weekly opening hours and its number of visits in 2019/20 and in 2025/26.",
+    },
+  ],
+  housing: [
+    {
+      label: "Families in temporary accommodation",
+      title: "Households in temporary accommodation",
+      text: "Please tell me, for the last day of each quarter from April 2024 to September 2026, how many households the council had in temporary accommodation, how many of them were in bed and breakfast, and how many were placed outside the borough.",
     },
   ],
   budget: [
@@ -258,4 +291,88 @@ export function budgetWants(m: PageModel): CaseWant[] {
     { id: "mine", label: "Here is my budget", sentence: `Here is how I would balance the council's ${m.place.nextYearLabel} budget, using the Balance it tool on Borough Book.` },
     { id: "ask", label: "Ask a question", sentence: `I have a question about the council's ${m.place.nextYearLabel} budget.` },
   ];
+}
+
+
+/** What residents call each service in a sentence: "spend more on bin collections and streets". */
+const PHRASE: Partial<Record<CaseTopic, string>> = {
+  streets_waste: "bin collections and streets",
+  libraries_leisure: "libraries, parks and leisure",
+  housing: "housing and helping homeless people",
+};
+
+export interface ServiceComparison {
+  label: string;
+  yearLabel: string;
+  m: Figure;
+  /** Share of the money the council pays for itself, as a fraction. */
+  f: Figure;
+  /** 1 is the smallest share among `of` London boroughs. */
+  rank: number;
+  of: number;
+  median: Figure;
+  low: { name: string; f: Figure };
+  high: { name: string; f: Figure };
+}
+
+/** How much of the money a London borough pays for itself goes on one everyday service, beside every other London borough
+    on the site (etl/make_your_case.py). A share, so councils of different sizes compare without population figures. */
+export function serviceComparison(topic: CaseTopic, ons: string): ServiceComparison | null {
+  const c = FILE.compare[topic];
+  if (!c) return null;
+  const f = (v: number) => fig(v, c.quality, c.source_id);
+  const rows = [...c.councils].sort((a, z) => a.share - z.share);
+  const rank = rows.findIndex((r) => r.council_code === ons) + 1;
+  if (!rank) return null;
+  const mid = rows.length % 2 ? rows[(rows.length - 1) / 2]!.share : (rows[rows.length / 2 - 1]!.share + rows[rows.length / 2]!.share) / 2;
+  const me = rows[rank - 1]!;
+  return {
+    label: c.label,
+    yearLabel: displayYear(c.year),
+    m: f(me.m),
+    f: f(me.share),
+    rank,
+    of: rows.length,
+    median: f(mid),
+    low: { name: rows[0]!.name, f: f(rows[0]!.share) },
+    high: { name: rows[rows.length - 1]!.name, f: f(rows[rows.length - 1]!.share) },
+  };
+}
+
+/** "the 7th smallest share of 28", or "the 4th largest". */
+export const placeOf = (rank: number, of: number) => (rank > of / 2 ? `the ${ordinal(of - rank + 1)} largest share of ${of}` : `the ${ordinal(rank)} smallest share of ${of}`);
+const pence = (share: number) => `${share < 0 ? "−" : ""}${Math.abs(Math.round(share * 100))}p`;
+export { pence };
+
+/** An everyday service: who decides, how the council's priorities compare, and a letter. */
+export function serviceCase(m: PageModel, topic: "streets_waste" | "libraries_leisure" | "housing", ons: string): { setup: CaseSetup; wants: CaseWant[]; facts: LetterFact[]; cmp: ServiceComparison } | null {
+  const cmp = serviceComparison(topic, ons);
+  if (!cmp) return null;
+  assertRenderable(cmp.f.quality, "make your case: service comparison");
+  const ra = FILE.sources.find((x) => x.id === "ra_2026-27");
+  const src = `the council's budget return to government for ${cmp.yearLabel}${ra?.url ? `, ${ra.url}` : ""}`;
+  const phrase = PHRASE[topic]!;
+  const facts: LetterFact[] = [
+    {
+      id: "spend",
+      label: `What it costs the council: ${format("m1", cmp.m.value)} in ${cmp.yearLabel}`,
+      text: `${cmp.label} costs the council ${format("m1", cmp.m.value)} in ${cmp.yearLabel}, after fees and charges${topic === "streets_waste" ? " such as parking" : ""} and after grants tied to it.`,
+      source: src,
+      on: true,
+    },
+    {
+      id: "share",
+      label: `${pence(cmp.f.value)} of every £1 the council pays for itself; the middle London borough ${pence(cmp.median.value)}`,
+      text: `That is ${pence(cmp.f.value)} of every £1 the council pays for itself, ${placeOf(cmp.rank, cmp.of)} London boroughs we compared; the borough in the middle puts ${pence(cmp.median.value)}.`,
+      source: src,
+      on: true,
+    },
+  ];
+  const wants: CaseWant[] = [
+    { id: "more", label: "Spend more", sentence: `I would like the council to spend more on ${phrase}, and to say how it would pay for it.` },
+    { id: "less", label: "Spend less", sentence: `I would like the council to spend less on ${phrase}, and to say what that would mean for the people who rely on it.` },
+    { id: "differently", label: "Spend it differently", sentence: `I would like the council to change how it spends the money for ${phrase}.` },
+    { id: "ask", label: "Ask a question", sentence: `I have a question about the council's spending on ${phrase}.` },
+  ];
+  return { setup: caseSetup(topic, m), wants, facts, cmp };
 }

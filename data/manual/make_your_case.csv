@@ -9,3 +9,13 @@ council_tax,3,council,"Cabinet proposes the rise and Full Council sets it, with 
 budget,1,law,"The council must set a budget that balances: what it spends is paid for by council tax, grants and other income, or reserves.",lgfa1992_s31a,,yes
 budget,2,government,"The government sets most of the council's money, and how far council tax can rise.",lgfs_2026-27_response,,yes
 budget,3,council,"Cabinet proposes the budget and Full Council sets it: which services to fund, what to save and how much to raise council tax.",cabinet_mtfs_2026-10-12,page 19,yes
+streets_waste,1,law,"The council must collect household waste, and keep the roads and pavements it is responsible for in repair.",epa_1990_s45 highways_act_1980_s41,,checked
+streets_waste,2,government,"The government sets most of the council's money, and how far council tax can rise.",lgfs_2026-27_response,,checked
+streets_waste,3,council,"How often bins are collected and streets are swept is for the council: the law sets the duty, not how often.",epa_1990_s45,,checked
+streets_waste,4,council,"The council decides where you can park on its roads and what it charges; the money it raises is taken off this spending.",rtra_1984_s45,,checked
+libraries_leisure,1,law,"The council must run a comprehensive and efficient library service for everyone who wants to use it.",plma_1964_s7,,checked
+libraries_leisure,2,government,"The Secretary of State can step in where a council fails that duty, and the government sets most of the council's money.",plma_1964_s10 lgfs_2026-27_response,,checked
+libraries_leisure,3,council,"Within that duty, the council chooses how many libraries to keep and when they open, and how much to spend on parks, leisure centres and the arts.",plma_1964_s7,,checked
+housing,1,law,"The council must try to prevent or end homelessness for anyone eligible, and must give temporary accommodation to people who may be in priority need, such as families with children, while it decides what it owes them.",ha_1996_s189b ha_1996_s188 ha_1996_s189,,checked
+housing,2,government,"The government sets most of the council's money, and how far council tax can rise.",lgfs_2026-27_response,,checked
+housing,3,council,"The council decides who comes first for council and housing association homes, in its own allocation scheme, and how much it spends on preventing homelessness.",ha_1996_s166a,,checked

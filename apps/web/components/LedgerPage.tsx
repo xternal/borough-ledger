@@ -3,6 +3,8 @@ import { BalanceIt } from "@/components/BalanceIt";
 import { AdultCare } from "@/components/AdultCare";
 import { CareCompare } from "@/components/CareCompare";
 import { MakeYourCase } from "@/components/MakeYourCase";
+import { ServiceCases } from "@/components/ServiceCases";
+import { ServiceCompare } from "@/components/ServiceCompare";
 import { ChildrenCare } from "@/components/ChildrenCare";
 import { BillSection } from "@/components/BillSection";
 import { CouncilTaxOptions } from "@/components/CouncilTaxOptions";
@@ -25,7 +27,7 @@ import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
 import { adultCare, careComparison, careResults } from "@/lib/adultCare";
-import { adultCareCase, budgetWants, caseSetup } from "@/lib/makeYourCase";
+import { adultCareCase, budgetWants, caseSetup, serviceCase } from "@/lib/makeYourCase";
 import { childrenCare } from "@/lib/childrenCare";
 import { DATA as HF_DATA } from "@borough-ledger/schema";
 
@@ -37,6 +39,10 @@ const KIDS = childrenCare(HF_DATA.council.meta.council_code);
 /** The whole statement. `/` renders it as is; `/balance` opens it on a shared scenario. */
 export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initialScenario?: Scenario; focus?: string }) {
   const careCase = adultCareCase(m, HF_DATA.council.meta.council_code);
+  const serviceCases = (["streets_waste", "libraries_leisure", "housing"] as const).flatMap((t) => {
+    const c = serviceCase(m, t, HF_DATA.council.meta.council_code);
+    return c ? [{ setup: c.setup, wants: c.wants, facts: c.facts, compare: <ServiceCompare cmp={c.cmp} council={m.place.short} /> }] : [];
+  });
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -83,6 +89,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
               </p>
             }
           />
+          {serviceCases.length ? <ServiceCases cases={serviceCases} page={`${SITE_URL}/#case-services`} /> : null}
           {CARE ? <AdultCare care={CARE} council={m.place.council} results={careResults(HF_DATA.council.meta.council_code)} /> : null}
           {careCase && CARE ? (
             <MakeYourCase

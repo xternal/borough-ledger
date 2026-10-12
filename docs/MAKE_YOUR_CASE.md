@@ -1,11 +1,11 @@
 # Make your case
 
-A panel that turns a figure into something a resident can act on, live for Hammersmith & Fulham on three subjects: care for adults (under "What care for adults costs" on `/`), council tax next year (`/council-tax-rise`, "Have your say") and next year's budget (under Balance it, on `/` and `/balance`). Decided by the owner on 11 Oct 2026.
+A panel that turns a figure into something a resident can act on, live for Hammersmith & Fulham on six subjects: care for adults (under "What care for adults costs" on `/`), council tax next year (`/council-tax-rise`, "Have your say"), next year's budget (under Balance it, on `/` and `/balance`), and three everyday services the reader picks from under the budget on `/` (`#case-services`): bins and streets, libraries, parks and leisure, and housing and homelessness. Decided by the owner on 11 Oct 2026; the services followed on 12 Oct.
 
 ## What it shows
 
 1. **Who decides.** What the law requires, what the government decides, what the council chooses, each with its source (`data/manual/make_your_case.csv`). This keeps residents from asking the council for what only Parliament can change, and the reverse.
-2. **How it compares** (care only so far). The council's costs among similar councils from the government's own averages, who the money is for, and whether it works: what people who get care say in the government's survey (satisfied, in control of their daily life, safe), beside London and England, with margins of error. The care regulator's rating is not on the site yet, and the panel says so.
+2. **How it compares.** For the services: how many pence of every £1 the council pays for itself go on the service, beside every London borough on the site (`compare` in `make_your_case.json`, from each council's 2026/27 budget return, after fees and charges). Priorities, not value for money, and the panel says so. For care: The council's costs among similar councils from the government's own averages, who the money is for, and whether it works: what people who get care say in the government's survey (satisfied, in control of their daily life, safe), beside London and England, with margins of error. The care regulator's rating is not on the site yet, and the panel says so.
 3. **What you can do, and by when.** The council's consultation, writing to councillors, a question to Full Council (the next open deadline, worked out in the reader's browser), petitions, deputations, Freedom of Information requests (pre-filled on WhatDoTheyKnow), and the MP where it is the government's part.
 4. **A letter.** The reader chooses what they want, who to write to (their ward councillors by postcode, or those who lead on it for each side), which figures to include, and writes a sentence or two of their own. The letter lists each figure's source once, and ends with what is open now and when it is decided.
 
@@ -25,4 +25,4 @@ A panel that turns a figure into something a resident can act on, live for Hamme
 
 ## Later
 
-Every service line and every council; the care regulator's ratings beside costs; following a spending line by email (the Follow system handles pledges only today); an "Asked and answered" record of residents' questions at Full Council.
+Every service line, and councils beyond Hammersmith & Fulham; the care regulator's ratings beside costs; following a spending line by email (the Follow system handles pledges only today); an "Asked and answered" record of residents' questions at Full Council.
