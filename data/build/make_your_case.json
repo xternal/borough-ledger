@@ -231,7 +231,7 @@
      "highways_act_1980_s41"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -240,7 +240,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -249,7 +249,7 @@
      "epa_1990_s45"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -258,7 +258,7 @@
      "rtra_1984_s45"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ],
   "libraries_leisure": [
@@ -269,7 +269,7 @@
      "plma_1964_s7"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -279,7 +279,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -288,7 +288,7 @@
      "plma_1964_s7"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ],
   "housing": [
@@ -301,7 +301,7 @@
      "ha_1996_s189"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "government",
@@ -310,7 +310,7 @@
      "lgfs_2026-27_response"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    },
    {
     "who": "council",
@@ -319,7 +319,7 @@
      "ha_1996_s166a"
     ],
     "where": "",
-    "quality": "approx"
+    "quality": "sourced"
    }
   ]
  },
