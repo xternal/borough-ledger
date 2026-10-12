@@ -5,7 +5,7 @@
   "engines": { "node": ">=22.12 <23 || >=24" },
   "scripts": {
     "typecheck": "pnpm -r typecheck",
-    "test": "pnpm -r test",
+    "test": "pnpm -r --workspace-concurrency=$([ -n \"$CI\" ] && echo 4 || echo 1) test",
     "build:preview": "pnpm --filter @borough-ledger/web build:preview",
     "build:prod": "pnpm --filter @borough-ledger/web build:prod",
     "dev": "pnpm --filter @borough-ledger/web dev",
