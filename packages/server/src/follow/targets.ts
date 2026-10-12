@@ -33,4 +33,4 @@ export function sameTarget(a: Target, b: Target): boolean {
 }
 
 /** Fallback names when the app does not supply content-based ones (tests, scripts). */
-export const plainDescribe: DescribeTarget = (t) => (t.kind === "all" ? "Every pledge on Borough Book" : `Pledge ${t.id}`);
+export const plainDescribe: DescribeTarget = (t) => (t.kind === "all" ? "Every pledge on BoroughBook.UK" : `Pledge ${t.id}`);

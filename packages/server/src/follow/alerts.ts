@@ -111,8 +111,8 @@ export async function runAlerts(ctx: FollowContext, items: AlertItem[], opts: { 
       const links = await linksFor(db, config, id);
       await ctx.mail.send({
         to: decrypt(config.encryptionKey, s.address_enc),
-        subject: news.length === 1 ? `Pledge update: ${news[0]!.title}` : `${news.length} pledge updates on Borough Book`,
-        text: [news.length === 1 ? "A pledge you follow on Borough Book has changed:" : "Pledges you follow on Borough Book have changed:", "", body(news, config.siteUrl), "", mailFooter(links.manageUrl)].join("\n"),
+        subject: news.length === 1 ? `Pledge update: ${news[0]!.title}` : `${news.length} pledge updates on BoroughBook.UK`,
+        text: [news.length === 1 ? "A pledge you follow on BoroughBook.UK has changed:" : "Pledges you follow on BoroughBook.UK have changed:", "", body(news, config.siteUrl), "", mailFooter(links.manageUrl)].join("\n"),
         unsubscribeUrl: links.unsubscribeUrl,
       });
       for (const it of news) await db.query("INSERT INTO delivery (guid, subscription_id, at) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING", [it.guid, id, now.toISOString()]);

@@ -11,7 +11,7 @@ import { type DescribeTarget, type Target, type TargetKind, plainDescribe, sameT
 
 /**
  * Follow a pledge by email without an account (docs/PRIVACY.md), ported from
- * LedgerGov.uk's follow service.
+ * LedgerGov.UK's follow service.
  *
  * Double opt-in. A request creates (or extends) an unconfirmed subscription
  * and mails a confirmation link; the link opens a page whose button POSTs,
@@ -68,7 +68,7 @@ export function manageUrl(config: Config, token: string): string {
   return `${config.siteUrl}/follow/manage?t=${encodeURIComponent(token)}`;
 }
 
-/** The privacy notice: who runs Borough Book, what is kept, for how long, and readers' rights. */
+/** The privacy notice: who runs BoroughBook.UK, what is kept, for how long, and readers' rights. */
 export function privacyUrl(config: Config): string {
   return `${config.siteUrl}${PRIVACY_PATH}`;
 }
@@ -119,7 +119,7 @@ export function mailFooter(manage: string): string {
     manage,
     "",
     "Keep this link to yourself: anyone who has it can change your alerts.",
-    "Borough Book is independent of every council and party. It never shows who follows what, and never shares or sells its list.",
+    "BoroughBook.UK is independent of every council and party. It never shows who follows what, and never shares or sells its list.",
   ].join("\n");
 }
 
@@ -227,9 +227,9 @@ export async function requestEmailFollow(ctx: FollowContext, input: { email: str
   if (plan.kind === "confirm") {
     await ctx.mail.send({
       to: email,
-      subject: "Confirm your pledge alerts from Borough Book",
+      subject: "Confirm your pledge alerts from BoroughBook.UK",
       text: [
-        "Please confirm that you want an email from Borough Book when one of these changes:",
+        "Please confirm that you want an email from BoroughBook.UK when one of these changes:",
         "",
         bullets(names),
         "",
@@ -239,9 +239,9 @@ export async function requestEmailFollow(ctx: FollowContext, input: { email: str
         `The link works for ${CONFIRM_TTL_DAYS} days. If you did not ask for this, ignore this email. We will delete your address after ${CONFIRM_TTL_DAYS} days and send you nothing more.`,
         "",
         "We store your email address, encrypted, and what you follow. Nothing else. We never show who follows what, and never share or sell our list.",
-        `Who runs Borough Book, what we keep and your rights: ${privacyUrl(config)}`,
+        `Who runs BoroughBook.UK, what we keep and your rights: ${privacyUrl(config)}`,
         "",
-        "Borough Book",
+        "BoroughBook.UK",
         config.siteUrl,
       ].join("\n"),
     });
@@ -249,9 +249,9 @@ export async function requestEmailFollow(ctx: FollowContext, input: { email: str
     const manage = manageUrl(config, plan.manageToken);
     await ctx.mail.send({
       to: email,
-      subject: "Confirm what to add to your Borough Book alerts",
+      subject: "Confirm what to add to your BoroughBook.UK alerts",
       text: [
-        "A request came in to add these to the alerts this address gets from Borough Book:",
+        "A request came in to add these to the alerts this address gets from BoroughBook.UK:",
         "",
         bullets(names),
         "",
@@ -268,7 +268,7 @@ export async function requestEmailFollow(ctx: FollowContext, input: { email: str
     const manage = manageUrl(config, plan.manageToken);
     await ctx.mail.send({
       to: email,
-      subject: "You already follow this on Borough Book",
+      subject: "You already follow this on BoroughBook.UK",
       text: ["A request came in to follow:", "", bullets(names), "", "This address already gets alerts about it, so nothing has changed.", "", mailFooter(manage)].join("\n"),
       unsubscribeUrl: unsubscribeUrl(config, plan.manageToken),
     });
@@ -362,7 +362,7 @@ export async function confirmEmailFollow(ctx: FollowContext, token: unknown): Pr
   try {
     await ctx.mail.send({
       to: decrypt(config.encryptionKey, result.row.address_enc),
-      subject: "Your pledge alerts from Borough Book are on",
+      subject: "Your pledge alerts from BoroughBook.UK are on",
       text: [
         "Thanks for confirming. You follow:",
         "",

@@ -78,7 +78,7 @@ describe("daily pledge alerts", () => {
     await runAlerts(ctx(at(1)), [item("p1", 0)], { pauseMs: 0 });
     await runAlerts(ctx(at(2)), [item("p1", 0), item("p1", 1), item("p2", 0)], { pauseMs: 0 });
     expect(sent).toHaveLength(1);
-    expect(sent[0]!.subject).toBe("2 pledge updates on Borough Book");
+    expect(sent[0]!.subject).toBe("2 pledge updates on BoroughBook.UK");
     expect(sent[0]!.text).toContain("Change 1 to p1");
     expect(sent[0]!.text).toContain("Change 0 to p2");
   });

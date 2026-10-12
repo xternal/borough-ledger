@@ -6,7 +6,7 @@ import { HOME_BOROUGH, OTHER_BOROUGHS } from "@/lib/boroughList";
 export function Footer({ council, hasTestData, full }: { council: string; hasTestData: boolean; full?: string }) {
   return (
     <footer>
-      <span>Borough Book is an independent project. It is not run by, endorsed by or affiliated with {full ?? `${council} Council`}.</span>
+      <span>BoroughBook.UK is an independent project. It is not run by, endorsed by or affiliated with {full ?? `${council} Council`}.</span>
       <span>
         Spotted a mistake, or named on a card? Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. The code and data are <a href={REPO}>open on GitHub</a>. <a href="/follow">Follow changes</a>. <a href="/privacy">Privacy</a>.
       </span>

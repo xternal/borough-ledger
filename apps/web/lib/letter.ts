@@ -38,7 +38,7 @@ export function draftLetter(x: LetterInput): { subject: string; body: string } {
     parts.push(`${sources.length > 1 ? "They come from" : "From"} ${sources.join("; and ")}.`);
   }
   parts.push(`${x.closing} I would be grateful for your reply.`);
-  parts.push(`The figures are gathered, each with its source, at ${x.page} (Borough Book, an independent site).`);
+  parts.push(`The figures are gathered, each with its source, at ${x.page} (BoroughBook.UK, an independent site).`);
   parts.push("Yours sincerely,");
   return { subject: `${x.subject}: a resident's view`, body: parts.join("\n\n") };
 }

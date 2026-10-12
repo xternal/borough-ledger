@@ -1,4 +1,4 @@
-/** The Borough Book mark, inline so the top bar needs no extra request. Same drawing as app/icon.svg (lib/logo.ts). */
+/** The BoroughBook.UK mark, inline so the top bar needs no extra request. Same drawing as app/icon.svg (lib/logo.ts). */
 export function Logo({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">

@@ -20,7 +20,7 @@ export function WardFinder({ places, covered }: { places: FinderPlace[]; covered
       case "council":
         return `${r.postcode} is in ${r.place}. Opening its page…`;
       case "elsewhere":
-        return `${r.postcode} is in ${r.district}. Borough Book covers ${covered} so far; your own council's website lists your councillors.`;
+        return `${r.postcode} is in ${r.district}. BoroughBook.UK covers ${covered} so far; your own council's website lists your councillors.`;
       case "invalid":
         return "That does not look like a full postcode, such as W6 9JU.";
       case "not_found":

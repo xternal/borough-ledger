@@ -38,7 +38,7 @@ export function PostcodeFinder({
       case "council":
         return `${r.postcode} is in ${r.place}. Opening its page…`;
       case "elsewhere":
-        return `${r.postcode} is in ${r.district}. Borough Book covers ${covered} so far.`;
+        return `${r.postcode} is in ${r.district}. BoroughBook.UK covers ${covered} so far.`;
       case "invalid":
         return `That does not look like a full postcode, such as ${example}.`;
       case "not_found":

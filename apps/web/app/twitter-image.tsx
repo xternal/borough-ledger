@@ -4,7 +4,7 @@ import { DATA } from "@borough-ledger/schema";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
 import { LOGO_DATA_URI } from "@/lib/logo";
 
-export const alt = "Borough Book: where your council tax goes. An independent project.";
+export const alt = "BoroughBook.UK: where your council tax goes. An independent project.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -17,7 +17,7 @@ export default async function Image() {
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#FFFFFF", color: "#0B0B0D", padding: "72px 80px", fontFamily: "Geist" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, fontWeight: 600 }}>
           <img src={LOGO_DATA_URI} width={36} height={36} alt="" />
-          Borough Book
+          BoroughBook.UK
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 68, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.04, maxWidth: 1040 }}>{`Where your council tax goes in ${place}`}</div>

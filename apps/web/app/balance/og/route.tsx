@@ -17,7 +17,7 @@ export async function GET(req: Request) {
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#FFFFFF", color: "#0B0B0D", padding: "64px 80px", fontFamily: "Geist" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 28, fontWeight: 600 }}>
           <img src={LOGO_DATA_URI} width={34} height={34} alt="" />
-          {`Borough Book: ${sum.title}`}
+          {`BoroughBook.UK: ${sum.title}`}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 84, fontWeight: 600, letterSpacing: "-0.03em", color: short ? "#DC2626" : "#15803D" }}>{sum.status}</div>

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Borough Book. A resident's statement: bill first, then the council's budget, the gap and how it closed,
+/* BoroughBook.UK. A resident's statement: bill first, then the council's budget, the gap and how it closed,
    a balance-it tool for next year, promises, and the payments ledger. White, hairlines, numbers first.
    Tokens from docs/DESIGN_HANDOFF.md. No council colours, crest or typeface. */
 
@@ -30,7 +30,7 @@
   --idle: #8b8b94;
   --font: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-/* Dark mode: deep navy slate (#101820), as in Public Ledger, never black. Every text colour passes WCAG AA on bg and sunk. */
+/* Dark mode: deep navy slate (#101820), as in LedgerGov.UK, never black. Every text colour passes WCAG AA on bg and sunk. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #101820;

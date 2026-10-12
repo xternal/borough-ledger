@@ -54,8 +54,8 @@ export function riseQA(m: PageModel): { q: string; a: string }[] {
       a: `${engage ? `The council asks residents, businesses and others for their views from ${when(engage.start, engage.end)}: which services matter most to them, and what they expect of council tax. ` : ""}You can also write to your ward councillors, or to those who lead on the budget for each side: this page helps you draft the letter in your own words and finds them by postcode. Anyone who lives, works or studies in the borough can also put a question to Full Council, or start a petition.`,
     },
     {
-      q: "Is Borough Book the council?",
-      a: "No. Borough Book is an independent project, not run by or affiliated with any council or party. Every figure here comes from the council's own report, with its page.",
+      q: "Is BoroughBook.UK the council?",
+      a: "No. BoroughBook.UK is an independent project, not run by or affiliated with any council or party. Every figure here comes from the council's own report, with its page.",
     },
   ];
 }

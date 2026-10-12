@@ -1,6 +1,6 @@
 # Email alerts about pledges
 
-Readers can ask for an email when a pledge changes, or when any pledge changes. Ported from LedgerGov.uk's follow system (`packages/server`), cut down to what Borough Book needs: email only, pledges only, at most one email a day.
+Readers can ask for an email when a pledge changes, or when any pledge changes. Ported from LedgerGov.UK's follow system (`packages/server`), cut down to what BoroughBook.UK needs: email only, pledges only, at most one email a day.
 
 **It is off until the owner switches it on.** With `MAIL_PROVIDER` unset, the site builds and runs with no database and no secrets, every follow endpoint answers 404, and pages offer RSS only, as before.
 
@@ -43,12 +43,12 @@ Do these in order. `MAIL_PROVIDER=resend` goes last: once it is set, a build fai
    | Name | Value |
    |---|---|
    | `DATABASE_URL` | Neon's pooled connection string |
-   | `FOLLOW_CONTROLLER` | `Empatiq Limited` (decided by the owner on 10 October 2026: the same controller as LedgerGov.uk) |
+   | `FOLLOW_CONTROLLER` | `Empatiq Limited` (decided by the owner on 10 October 2026: the same controller as LedgerGov.UK) |
    | `BB_ENCRYPTION_KEY` | random value 1 |
    | `BB_LOOKUP_PEPPER` | random value 2 |
    | `ALTCHA_HMAC_KEY` | random value 3 |
    | `CRON_SECRET` | random value 4 (Vercel Cron sends it to the alerts job) |
-   | `MAIL_FROM` | `Borough Book <alerts@boroughbook.uk>` |
+   | `MAIL_FROM` | `BoroughBook.UK <alerts@boroughbook.uk>` |
    | `RESEND_API_KEY` | the Resend API key |
    | `RESEND_WEBHOOK_SECRET` | the webhook's signing secret |
    | `MAIL_REPLY_TO` | optional, for example `boroughs@guzh.uk` |

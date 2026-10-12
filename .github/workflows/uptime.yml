@@ -27,14 +27,14 @@ jobs:
             if ! printf '%s' "$body" | grep -q "$want"; then echo "::error::$url is missing \"$want\""; fail=1; return; fi
             echo "ok  $url"
           }
-          check / "Borough Book"
+          check / "BoroughBook.UK"
           check /promises "manifesto pledges"
           check /promise/hf-free-home-care "Right of reply"
           check /payments "Payments over"
           check /decisions "Council decisions"
           check /wards "Your ward"
           check /feed.xml "<rss"
-          check /llms.txt "Borough Book"
+          check /llms.txt "BoroughBook.UK"
           old=$(curl -sS --max-time 30 -o /dev/null -w '%{http_code} %{redirect_url}' https://borough-ledger.vercel.app/promises || true)
           case "$old" in
             "308 https://boroughbook.uk/promises") echo "ok  old address redirects" ;;

@@ -28,6 +28,6 @@ describe("email alerts", () => {
     expect(isKnownTarget({ kind: "all", id: "*" })).toBe(true);
     expect(describeTarget({ kind: "promise", id: p.id })).toContain(p.partyShort);
     expect(targetHref({ kind: "promise", id: p.id })).toBe(`/promise/${p.id}`);
-    expect(describeTarget({ kind: "all", id: "*" })).toBe("Every pledge on Borough Book");
+    expect(describeTarget({ kind: "all", id: "*" })).toBe("Every pledge on BoroughBook.UK");
   });
 });

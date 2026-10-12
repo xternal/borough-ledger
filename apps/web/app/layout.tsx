@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: SITE.title,
   description: SITE.description,
   applicationName: SITE.name,
-  alternates: { canonical: "/", types: feedAlternate("/feed.xml", "Borough Book: everything new") },
+  alternates: { canonical: "/", types: feedAlternate("/feed.xml", "BoroughBook.UK: everything new") },
   // Full previews and snippets: a quoted pledge or figure is the point of the site, always with its source on the page.
   robots: INDEXABLE
     ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 } }

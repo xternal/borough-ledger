@@ -53,7 +53,7 @@ const GROUPS: { id: string; label: string; desc: string; test: (s: Source) => bo
     desc: "Each ward's result at the May 2026 council election, copied from the council's declarations by Democracy Club.",
     test: (s) => s.publisher === "Democracy Club",
   },
-  { id: "method", label: "Our method", desc: "How figures are combined and modelled.", test: (s) => s.publisher === "Borough Book" },
+  { id: "method", label: "Our method", desc: "How figures are combined and modelled.", test: (s) => s.publisher === "BoroughBook.UK" },
 ];
 
 /** Every source in exactly one group, in a fixed order; anything unmatched goes under "Other". */

@@ -82,7 +82,7 @@ describe("email follow: start, confirm, manage, unsubscribe", () => {
     // Following more is confirmed by email too.
     await requestEmailFollow(ctx(new Date(T0.getTime() + 7200_000)), { email: "reader@example.org", targets: [ALL] });
     const added = mail.sent[2]!;
-    expect(added.subject).toBe("Confirm what to add to your Borough Book alerts");
+    expect(added.subject).toBe("Confirm what to add to your BoroughBook.UK alerts");
     expect(tokenIn(added.text, "/follow/manage")).toBe(res.manageToken); // the same link in every email
     expect((await manageView({ db, config }, res.manageToken))!.targets).toEqual([CCTV]);
     expect(await confirmEmailFollow(ctx(new Date(T0.getTime() + 7300_000)), tokenIn(added.text, "/follow/confirm"))).toEqual({
@@ -136,7 +136,7 @@ describe("email follow: start, confirm, manage, unsubscribe", () => {
 describe("consent text", () => {
   it("names the controller and the service that delivers the email", () => {
     const points = consentPoints("Example Person");
-    expect(points[0]).toContain("Example Person runs Borough Book");
+    expect(points[0]).toContain("Example Person runs BoroughBook.UK");
     expect(points.join(" ")).toContain("Resend");
     expect(points.join(" ")).toMatch(/political opinions/);
     expect(points.join(" ")).not.toContain("\u00b7");
@@ -224,7 +224,7 @@ describe("follow requests for an address that is already confirmed", () => {
     await confirmed([CCTV, ALL]);
     await requestEmailFollow(ctx(later(1000)), { email: EMAIL, targets: [ALL] });
     const note = mail.sent.at(-1)!;
-    expect(note.subject).toBe("You already follow this on Borough Book");
+    expect(note.subject).toBe("You already follow this on BoroughBook.UK");
     expect(note.text).not.toContain("/follow/confirm");
     expect(await db.query("SELECT 1 FROM pending_target")).toHaveLength(0);
   });

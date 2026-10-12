@@ -95,7 +95,7 @@ export function AdultCare({ care, council, results }: { care: AdultCareModel; co
           </ul>
           <p className="small muted">
             A difference counts as lower or higher only where it is bigger than the survey&rsquo;s margins of error. These are people&rsquo;s own answers, not a
-            rating of the council; the care regulator&rsquo;s rating of each council is not on Borough Book yet. From the{" "}
+            rating of the council; the care regulator&rsquo;s rating of each council is not on BoroughBook.UK yet. From the{" "}
             <a href={results.source.url}>adult social care outcomes framework</a>, {results.yearLabel}.
           </p>
           <div className="qrow">

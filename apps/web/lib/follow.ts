@@ -21,7 +21,7 @@ const promises = () => new Map(buildModel().promises.map((p) => [p.id, p]));
 
 /** A target's name in emails and on the manage page: the pledge's party and words. */
 export const describeTarget: DescribeTarget = (t) => {
-  if (t.kind === "all") return "Every pledge on Borough Book";
+  if (t.kind === "all") return "Every pledge on BoroughBook.UK";
   const p = promises().get(t.id);
   return p ? `${p.partyShort} pledge: “${shorten(p.text, 90)}”` : `A pledge that has since been removed (${t.id})`;
 };

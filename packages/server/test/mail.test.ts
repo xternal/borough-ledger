@@ -14,7 +14,7 @@ const prod = {
   BB_LOOKUP_PEPPER: Buffer.alloc(32, 2).toString("base64"),
   ALTCHA_HMAC_KEY: "k",
   FOLLOW_CONTROLLER: "Example Person",
-  MAIL_FROM: "Borough Book <alerts@boroughbook.example>",
+  MAIL_FROM: "BoroughBook.UK <alerts@boroughbook.example>",
   RESEND_API_KEY: "re_test",
   CRON_SECRET: "c".repeat(32),
 };
@@ -56,7 +56,7 @@ describe("Resend mail", () => {
     expect((calls[0]!.init.headers as Record<string, string>).Authorization).toBe("Bearer re_test");
     const body = JSON.parse(String(calls[0]!.init.body));
     expect(body).toEqual({
-      from: "Borough Book <alerts@boroughbook.example>",
+      from: "BoroughBook.UK <alerts@boroughbook.example>",
       to: ["reader@example.org"],
       subject: "Pledge update",
       text: "Hello",

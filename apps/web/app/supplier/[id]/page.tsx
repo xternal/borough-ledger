@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!s) return {};
   const title = `${s.name}: payments from Hammersmith & Fulham Council | ${SITE.name}`;
   const description = `What Hammersmith & Fulham Council paid ${s.name}, by month and service, from the council's own spend files (${formatMonth(s.first)} to ${formatMonth(s.last)}).`;
-  return { title, description, alternates: { canonical: `/supplier/${id}` }, ...share(`/supplier/${id}`, title, description, { image: { url: `/supplier/${id}/og`, alt: `${s.name}: payments from Hammersmith & Fulham Council, on Borough Book` } }) };
+  return { title, description, alternates: { canonical: `/supplier/${id}` }, ...share(`/supplier/${id}`, title, description, { image: { url: `/supplier/${id}/og`, alt: `${s.name}: payments from Hammersmith & Fulham Council, on BoroughBook.UK` } }) };
 }
 
 export default async function SupplierPage({ params }: Props) {
