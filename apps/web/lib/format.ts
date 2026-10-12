@@ -7,6 +7,7 @@ export type Fmt =
   | "mAuto" // £80.7m, or £0.03m when under £0.1m
   | "pm1" // £37.7m from an amount in pounds (payments)
   | "sm1" // +£4.0m / −£3.3m
+  | "sgbp2" // +£48.00 / −£12.07
   | "pct0" // 36%   (input in percent units)
   | "pct1" // 4.7%
   | "pct2" // 4.69%
@@ -58,6 +59,10 @@ export function format(fmt: Fmt, raw: number): string {
       return format("m1", raw / 1e6);
     case "mAuto":
       return Math.abs(raw) > 0 && Math.abs(raw) < 0.1 ? `${sign(raw)}£${nf(2, 2).format(Math.abs(clean(raw, 2)))}m` : format("m1", raw);
+    case "sgbp2": {
+      const v = clean(raw, 2);
+      return `${v > 0 ? "+" : v < 0 ? MINUS : ""}£${nf(2, 2).format(Math.abs(v))}`;
+    }
     case "sm1": {
       const v = clean(raw, 1);
       return `${v > 0 ? "+" : v < 0 ? MINUS : ""}£${nf(1, 1).format(Math.abs(v))}m`;

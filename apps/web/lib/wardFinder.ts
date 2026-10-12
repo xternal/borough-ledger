@@ -1,8 +1,9 @@
-/* Postcode to ward, in the reader's browser. The postcode goes from the browser to postcodes.io (a free, open
-   service using ONS data) in the body of an encrypted request, so it is never in an address or our logs.
-   We never see it and it is never stored; only the ward found may be kept in the tab (YOUR_WARD_KEY, docs/PRIVACY.md). */
+/* Postcode to ward. The browser sends the postcode to this site's own route (app/api/postcode), in the body of a POST so
+   it is in no address or request log; the server asks postcodes.io (a free, open service using ONS data), so postcodes.io
+   never sees the reader, and hands back only the council and ward. The postcode is never kept or logged; only the ward
+   found may be kept in the tab (YOUR_WARD_KEY, docs/PRIVACY.md). */
 
-export const POSTCODES_IO = "https://api.postcodes.io/postcodes?filter=postcode,admin_district,codes";
+export const POSTCODE_LOOKUP = "/api/postcode";
 
 export type FinderWard = { id: string; name: string; ons_code: string };
 
@@ -35,7 +36,7 @@ export async function lookupWard(input: string, wards: readonly FinderWard[], co
   const postcode = normalisePostcode(input);
   if (!postcode) return { kind: "invalid" };
   try {
-    const res = await fetchImpl(POSTCODES_IO, {
+    const res = await fetchImpl(POSTCODE_LOOKUP, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ postcodes: [postcode] }),
@@ -66,7 +67,7 @@ export type FinderPlace = { short: string; ons: string; href?: string; word?: st
 export type PlaceLookup =
   | { kind: "ward"; place: string; name: string; href: string; placeHref?: string; word?: string; postcode: string }
   | { kind: "council"; place: string; href: string; postcode: string }
-  | { kind: "elsewhere"; district: string; postcode: string }
+  | { kind: "elsewhere"; district: string; postcode: string; ons?: string }
   | { kind: "not_found" }
   | { kind: "invalid" }
   | { kind: "error" };
@@ -80,14 +81,14 @@ export function placeFromResult(result: Result, places: readonly FinderPlace[]):
   if (place && ward)
     return { kind: "ward", place: place.short, name: ward.name, href: ward.href, ...(place.href ? { placeHref: place.href } : {}), ...(place.word ? { word: place.word } : {}), postcode };
   if (place?.href && !place.wards.length) return { kind: "council", place: place.short, href: place.href, postcode };
-  return { kind: "elsewhere", district: result.admin_district ?? "another area", postcode };
+  return { kind: "elsewhere", district: result.admin_district ?? "another area", postcode, ...(result.codes?.admin_district ? { ons: result.codes.admin_district } : {}) };
 }
 
 export async function lookupPlace(input: string, places: readonly FinderPlace[], fetchImpl: typeof fetch = fetch): Promise<PlaceLookup> {
   const postcode = normalisePostcode(input);
   if (!postcode) return { kind: "invalid" };
   try {
-    const res = await fetchImpl(POSTCODES_IO, {
+    const res = await fetchImpl(POSTCODE_LOOKUP, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ postcodes: [postcode] }),

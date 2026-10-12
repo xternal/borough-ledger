@@ -25,13 +25,14 @@ describe("postcode to ward", () => {
     expect(wardFromResult(null, wards, councilCode)).toEqual({ kind: "not_found" });
   });
 
-  it("sends the postcode in the body of a POST to postcodes.io, never in the address, and survives a failure", async () => {
+  it("sends the postcode in the body of a POST to the site's own lookup, never in the address, and survives a failure", async () => {
     let seen: { url: string; init?: RequestInit } | undefined;
     const ok = (async (url: string, init?: RequestInit) => {
       seen = { url, init };
       return new Response(JSON.stringify({ status: 200, result: [{ query: "W6 9JU", result: { postcode: "W6 9JU", admin_district: "Hammersmith and Fulham", codes: { admin_ward: broadway.ons_code, admin_district: councilCode } } }] }));
     }) as unknown as typeof fetch;
     expect((await lookupWard("w6 9ju", wards, councilCode, ok)).kind).toBe("ward");
+    expect(seen!.url).toBe("/api/postcode");
     expect(seen!.init?.method).toBe("POST");
     expect(seen!.url).not.toContain("9JU");
     expect(String(seen!.init?.body)).toContain("W6 9JU");
@@ -195,7 +196,12 @@ describe("postcode finder across boroughs", () => {
       kind: "elsewhere",
       district: "Barnet",
       postcode: "NW9 4EW",
+      ons: "E09000003",
     });
+    // ... and the postcode box offers Barnet's decoded bill instead (the council tax decoder covers all of England).
+    const { DecoderIndex } = await import("@borough-ledger/schema");
+    const index = DecoderIndex.parse((await import("../../../data/build/council_tax_decoder_index.json")).default);
+    expect(index.councils["E09000003"]).toEqual(["barnet", "Barnet"]);
   });
 });
 

@@ -52,18 +52,23 @@ Every borough added (docs/BOROUGHS.md) follows the same rules: councillors from 
 
 ## Finding your ward by postcode
 
-* The lookup runs in the reader's browser. The postcode goes straight to postcodes.io (a free, open service using ONS data) in the body of an encrypted POST request, with no cookies and no referrer, so it never appears in an address, in our logs or in the page's URL afterwards.
-* We never see the postcode and it is never stored. The ward page the reader lands on is the same for everyone in that ward.
+* The postcode goes from the reader's browser to the site's own route (`app/api/postcode`), in the body of an encrypted POST request with no cookies and no referrer, so it never appears in an address, a request log or the page's URL afterwards. The server asks postcodes.io (a free, open service using ONS data) and passes back only the council and ward, so postcodes.io sees our server, never the reader (the owner's decision of 12 Oct 2026: no third party sees which reader looked up which postcode).
+* The postcode is never kept: no cache, no storage, and nothing about it is logged. The ward page the reader lands on is the same for everyone in that ward.
 * The same finder is the first thing on every council's page and works for every council on the site. A postcode in the council already open opens its ward. A postcode in another covered council opens that council's page at the top, and the name of the ward it found (never the postcode) is kept in the browser tab's session storage so the page can say "Your ward is ..."; it stays in that tab only, is never sent to us, and goes when the tab is closed. A postcode elsewhere is told which council it is in. The list of wards it checks against is part of the page, so nothing about the postcode is sent to us at any step.
 * Readers who would rather not send a postcode anywhere can pick their ward on the map or the list.
 
 ## Make your case
 
 * The letter is drafted in the reader's browser from what they choose and type. Nothing they choose or write is sent to us, stored or counted: the owner decided (11 Oct 2026) that the site does not tally what people send, so there is nothing to keep and nothing to moderate.
-* Finding their councillors uses the same postcode lookup as above (browser to postcodes.io). The postcode is not put in the letter.
+* Finding their councillors uses the same postcode lookup as above (through the site's own route; nothing kept). The postcode is not put in the letter.
 * The reader sends the letter themselves: they copy it, or "Open in my email" hands it to their own email app (a `mailto:` link with no address in it; the letter never leaves their device until they send it), or they paste it into WriteToThem, mySociety's free service, which asks for their postcode and address itself under its own privacy policy. We publish no councillors' email addresses; each councillor's council page has theirs.
 * The Freedom of Information links open WhatDoTheyKnow (also mySociety) with our suggested question filled in. Nothing the reader typed goes into those links.
 * Councillors are named only as the council publishes them: each ward's councillors, and the administration's lead and each opposition party's spokesperson on the subject, side by side.
+
+## The council tax decoder
+
+* The decoder (`/council-tax`) uses the same postcode lookup: the reader's postcode goes to the site's own route, which asks postcodes.io for the council and passes back only that. Nothing is kept or logged. A reader who would rather not type a postcode can pick their council from the list.
+* Every figure comes from the government's council tax requirement tables; nothing about readers is collected.
 
 ## Council decisions
 

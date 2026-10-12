@@ -2742,3 +2742,84 @@
     }
   }
 }
+
+@layer components {
+  /* The council tax decoder: one council's Band D bill as a bar, a legend and a table; every council by region */
+  .dc-bar {
+    display: flex;
+    height: 28px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 4px 0 14px;
+  }
+  .dc-bar i {
+    display: block;
+    height: 100%;
+  }
+  .dc-council {
+    background: var(--fund);
+  }
+  .dc-county {
+    background: var(--spend);
+  }
+  .dc-police {
+    background: color-mix(in srgb, var(--fund) 45%, var(--bg));
+  }
+  .dc-fire {
+    background: var(--gap);
+  }
+  .dc-combined {
+    background: color-mix(in srgb, var(--gap) 45%, var(--bg));
+  }
+  .dc-parish {
+    background: var(--gla);
+  }
+  .dc-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: grid;
+    gap: 8px;
+  }
+  .dc-legend li {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .dc-legend .sw {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    align-self: center;
+  }
+  .dc-legend .amt {
+    font-weight: 550;
+    font-variant-numeric: tabular-nums;
+  }
+  .dc-regions {
+    display: grid;
+    gap: 8px;
+  }
+  .dc-regions details {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: var(--raised);
+  }
+  .dc-regions summary {
+    cursor: pointer;
+    font-weight: 550;
+  }
+  .dc-regions ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 2px;
+    columns: 2 220px;
+    column-gap: 24px;
+  }
+  .dc-regions li {
+    break-inside: avoid;
+    padding: 3px 0;
+  }
+}

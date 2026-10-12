@@ -6,6 +6,7 @@ import { MONTHS, suppliersById } from "@/lib/payments";
 import { dateModified } from "@/lib/promiseText";
 import { SITE_URL } from "@/lib/site";
 import { OTHER_BOROUGHS } from "@/lib/boroughList";
+import { decodedCouncils } from "@/lib/decoder";
 import { partiesOf, topicsOf } from "@/lib/topics";
 import { WARD_MAP } from "@/lib/wards";
 
@@ -27,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     ...OTHER_BOROUGHS.map((b) => ({ url: `${SITE_URL}${b.href}`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly" as const, priority: 0.8 })),
+    { url: `${SITE_URL}/council-tax`, changeFrequency: "monthly", priority: 0.9 },
+    ...decodedCouncils().map((c) => ({ url: `${SITE_URL}/council-tax/${c.slug}`, changeFrequency: "yearly" as const, priority: 0.6 })),
     { url: `${SITE_URL}/building`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/council-homes`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/promises`, lastModified: promisesChanged, changeFrequency: "weekly", priority: 0.9 },

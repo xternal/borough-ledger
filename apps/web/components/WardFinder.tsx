@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
 import { lookupPlace, type FinderPlace, type PlaceLookup } from "@/lib/wardFinder";
 
-/** Postcode to ward, in any borough on the site. The lookup runs in the browser against postcodes.io; the postcode never
- *  reaches us or the address bar. */
+/** Postcode to ward, in any borough on the site. The postcode goes to the site's own lookup (app/api/postcode), which asks
+ *  postcodes.io and keeps nothing; it never reaches the address bar. */
 export function WardFinder({ places, covered }: { places: FinderPlace[]; covered: string }) {
   const router = useRouter();
   const id = useId();
@@ -70,7 +70,7 @@ export function WardFinder({ places, covered }: { places: FinderPlace[]; covered
         {result ? message(result) : null}
       </p>
       <p id={`${id}-note`} className="small muted">
-        Your postcode goes from your browser to postcodes.io, a free public service, to find the ward. We never see it, and nothing is kept.
+        Your postcode goes to our own server, which asks postcodes.io, a free public service, for the ward. Nothing is kept or logged, and postcodes.io never sees who you are.
       </p>
     </form>
   );

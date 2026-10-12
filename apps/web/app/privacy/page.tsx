@@ -46,8 +46,8 @@ export default function PrivacyPage() {
           <li>No account, no cookies, no analytics and no advertising.</li>
           <li>The bill calculator and the balance-it tool run in your browser. Your band, discounts and choices are never sent to us.</li>
           <li>
-            The postcode finder sends your postcode from your browser straight to postcodes.io, a free service using official data. We never see it, and it is never
-            stored.
+            The postcode boxes send your postcode to our own server, which asks postcodes.io, a free service using official data, and passes back only your council and ward. Your postcode is never kept or logged, and postcodes.io never
+            sees who you are.
           </li>
           <li>
             Make your case drafts a letter in your browser from what you choose and write. We never see it and nothing is stored or counted: you copy it, or open it in
