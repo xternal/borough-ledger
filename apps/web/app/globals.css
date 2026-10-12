@@ -2684,6 +2684,9 @@
   .myc-letter .seg {
     justify-self: start;
   }
+  .myc .sec-head .seg {
+    margin-top: 10px;
+  }
   .myc-finder {
     margin: 2px 0 4px 28px;
   }

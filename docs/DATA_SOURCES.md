@@ -171,3 +171,7 @@ The county council's figures come from the same government files as every counci
 
 Budget meeting dates: the council's report to Cabinet of 12 October 2026 (Table 11) proposes Cabinet on 15 February and Full Council on 1 March 2027; its calendar of meetings, read on 11 October 2026, has Cabinet on 8 February and Full Council on 24 February, and no Full Council in March. The page shows the report's dates, marked proposed, with the calendar's beside them (`note` in `budget_timetable_2027-28.csv`).
 
+## In use: Make your case for everyday services (12 Oct 2026)
+
+Three more subjects in `data/manual/make_your_case.csv`, each citing the law on legislation.gov.uk: bins and streets (Environmental Protection Act 1990 section 45; Highways Act 1980 section 41; Road Traffic Regulation Act 1984 section 45), libraries, parks and leisure (Public Libraries and Museums Act 1964 sections 7 and 10), and housing and homelessness (Housing Act 1996 sections 166A, 188, 189 and 189B). `etl/make_your_case.py` also works out, for each, the share of the money each London borough on the site pays for itself that goes on it, from the 2026/27 budget returns already in `data/build` (Hammersmith & Fulham's statement and every London borough's): a share rather than a sum per resident, so no population figures are needed. The rows are "checked" until the owner reviews them.
+

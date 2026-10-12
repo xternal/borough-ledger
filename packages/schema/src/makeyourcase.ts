@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Quality } from "./quality";
 import { Source } from "./seed";
 
-export const CaseTopic = z.enum(["adult_care", "council_tax", "budget"]);
+export const CaseTopic = z.enum(["adult_care", "council_tax", "budget", "streets_waste", "libraries_leisure", "housing"]);
 export type CaseTopic = z.infer<typeof CaseTopic>;
 
 const WhoDecides = z.object({
@@ -19,6 +19,18 @@ export const MakeYourCaseFile = z.object({
   note: z.string(),
   sources: z.array(Source),
   topics: z.record(CaseTopic, z.array(WhoDecides).min(3)),
+  /** For each everyday service, every London borough's share of the money it pays for itself that goes on it (2026/27). */
+  compare: z.record(
+    z.string(),
+    z.object({
+      service: z.string(),
+      label: z.string(),
+      year: z.string(),
+      source_id: z.string(),
+      quality: Quality,
+      councils: z.array(z.object({ name: z.string(), council_code: z.string(), m: z.number(), share: z.number() })).min(2),
+    }),
+  ),
   take_part: z.object({
     council: z.string(),
     questions: z.array(

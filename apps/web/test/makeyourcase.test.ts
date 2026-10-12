@@ -124,3 +124,36 @@ describe("make your case: how care compares", () => {
     expect(care.facts.find((f) => f.id === "residential_65")!.text).toMatch(/^A week in a care home for someone aged 65 or over costs the council £1,124, the 13th lowest of the 28 London boroughs/);
   });
 });
+
+describe("make your case: everyday services", () => {
+  it("offers both sides' leads for bins and streets, libraries and leisure, and housing", async () => {
+    const { serviceCase } = await import("@/lib/makeYourCase");
+    const leads = (t: "streets_waste" | "libraries_leisure" | "housing") => serviceCase(m, t, HF)!.setup.responsible.map((r) => r.side);
+    for (const t of ["streets_waste", "libraries_leisure", "housing"] as const) expect(leads(t)).toEqual(["administration", "opposition"]);
+    for (const t of ["streets_waste", "libraries_leisure", "housing"] as const) {
+      const s = caseSetup(t, m);
+      expect(new Set(s.who.map((w) => w.who))).toEqual(new Set(["law", "government", "council"]));
+      expect(s.who.every((w) => w.sources.every((x) => x.url.startsWith("https://www.legislation.gov.uk/") || x.url.startsWith("https://")))).toBe(true);
+      expect(s.foi.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("compares how much of its own money each London borough puts into a service, without population figures", async () => {
+    const { serviceComparison, placeOf, pence } = await import("@/lib/makeYourCase");
+    const streets = serviceComparison("streets_waste", HF)!;
+    expect([pence(streets.f.value), streets.rank, streets.of, pence(streets.median.value)]).toEqual(["3p", 7, 28, "7p"]);
+    expect(streets.low.f.value).toBeLessThan(0); // a council that collects more than it spends on its streets
+    const housing = serviceComparison("housing", HF)!;
+    expect([pence(housing.f.value), placeOf(housing.rank, housing.of), pence(housing.median.value)]).toEqual(["17p", "the 4th largest share of 28", "10p"]);
+    expect(pence(-0.0175)).toBe("−2p");
+    expect(serviceComparison("streets_waste", "E06000030")).toBeNull(); // Swindon: London boroughs only, for now
+  });
+
+  it("offers every choice on the same terms for each service", async () => {
+    const { serviceCase } = await import("@/lib/makeYourCase");
+    const c = serviceCase(m, "libraries_leisure", HF)!;
+    expect(c.wants.map((w) => w.id)).toEqual(["more", "less", "differently", "ask"]);
+    expect(c.facts.map((f) => f.id)).toEqual(["spend", "share"]);
+    expect(c.facts.every((f) => /https:\/\//.test(f.source))).toBe(true);
+  });
+});
