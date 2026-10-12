@@ -2,7 +2,7 @@
    its address and an image here: its own where it has one, otherwise the site's (app/opengraph-image.tsx). */
 
 /** The site's own share image, for pages with none of their own. */
-export const SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Borough Book: where your council tax goes. An independent project." } as const;
+export const SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "BoroughBook.UK: where your council tax goes. An independent project." } as const;
 
 /** og:url and the image for one page; spread into its metadata. `own`: the page's segment has its own share image file
  *  (opengraph-image.tsx), which Next.js adds itself. */

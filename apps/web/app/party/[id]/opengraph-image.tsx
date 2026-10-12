@@ -4,7 +4,7 @@ import { OG_SIZE, collectionImage, statusPills } from "@/lib/ogCollection";
 import { STATUS_LABEL, STATUS_ORDER, standing } from "@/lib/promises";
 import { partiesOf } from "@/lib/topics";
 
-export const alt = "A party's 2026 manifesto pledges, tracked by Borough Book";
+export const alt = "A party's 2026 manifesto pledges, tracked by BoroughBook.UK";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

@@ -39,17 +39,17 @@ export function CareCompare({ cmp, yearLabel, results }: { cmp: CareComparison; 
       <p>
         Who long-term care is for: people aged 65 and over, <Num f={byAge.older} fmt="m1" /> (<Num f={derive(byAge.older.value / total.value, byAge.older, total)} fmt="share0" />
         ), and adults aged 18 to 64 with a disability or a mental illness, <Num f={byAge.workingAge} fmt="m1" />. In {cmp.moreForWorkingAge.count} of the{" "}
-        {cmp.moreForWorkingAge.of} English councils on Borough Book, working-age adults get more.
+        {cmp.moreForWorkingAge.of} English councils on BoroughBook.UK, working-age adults get more.
       </p>
       {results ? (
         <p>
           Does it work? In the government&rsquo;s {results.yearLabel} survey, <Num f={results.items[0]!.f} fmt="share0" /> of people who get care here{" "}
           {results.items[0]!.label}, {versusText(results.items[0]!)}. <a href="#care-results">All three answers, with their margins of error</a>. The care
-          regulator&rsquo;s rating of the council is not on Borough Book yet.
+          regulator&rsquo;s rating of the council is not on BoroughBook.UK yet.
         </p>
       ) : (
         <p className="myc-gap small">
-          Does it work? How satisfied people are with their care, and the care regulator&rsquo;s rating of the council, are not on Borough Book yet, and a low cost
+          Does it work? How satisfied people are with their care, and the care regulator&rsquo;s rating of the council, are not on BoroughBook.UK yet, and a low cost
           is not the same as good value, so this compares costs only.
         </p>
       )}

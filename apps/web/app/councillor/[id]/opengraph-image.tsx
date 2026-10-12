@@ -2,7 +2,7 @@ import { DATA } from "@borough-ledger/schema";
 import { buildModel } from "@/lib/model";
 import { OG_SIZE, collectionImage } from "@/lib/ogCollection";
 
-export const alt = "A Hammersmith & Fulham councillor: their ward, party and posts, on Borough Book";
+export const alt = "A Hammersmith & Fulham councillor: their ward, party and posts, on BoroughBook.UK";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

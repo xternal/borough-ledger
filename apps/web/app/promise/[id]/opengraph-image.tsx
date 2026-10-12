@@ -6,7 +6,7 @@ import { buildModel } from "@/lib/model";
 import { assertRenderable } from "@/lib/quality";
 import { LOGO_DATA_URI } from "@/lib/logo";
 
-export const alt = "A promise tracked by Borough Book";
+export const alt = "A promise tracked by BoroughBook.UK";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, fontWeight: 600 }}>
             <img src={LOGO_DATA_URI} width={32} height={32} alt="" />
-            Borough Book
+            BoroughBook.UK
           </div>
           <div style={{ display: "flex", color: "#61616B" }}>{`${p.actor}, ${p.made_on.slice(0, 4)}`}</div>
         </div>

@@ -14,7 +14,7 @@ export const CONSENT_VERSION = "2026-10-09";
 /** One point per line; the form shows them as a list. */
 export function consentPoints(controller: string): string[] {
   return [
-    `${controller} runs Borough Book, independently of any council or party, holds your data and is responsible for it.`,
+    `${controller} runs BoroughBook.UK, independently of any council or party, holds your data and is responsible for it.`,
     "We store your email address, encrypted, and the list of pledges you follow. Nothing else: no name, no IP address, no tracking.",
     "We use it only to email you when a pledge you follow changes. Resend delivers our emails, so it sees each alert.",
     "What you follow can reveal your political opinions, so we treat it as sensitive data. We never show who follows what, and never share or sell our list.",

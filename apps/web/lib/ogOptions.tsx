@@ -24,7 +24,7 @@ export async function optionsImage(m: PageModel, band: Band) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, fontWeight: 600 }}>
             <img src={LOGO_DATA_URI} width={32} height={32} alt="" />
-            Borough Book
+            BoroughBook.UK
           </div>
           <div style={{ display: "flex", color: "#61616B" }}>{`${m.place.short}, ${m.place.nextYearLabel}`}</div>
         </div>

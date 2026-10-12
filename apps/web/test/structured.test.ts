@@ -23,7 +23,7 @@ describe("structured data", () => {
     for (const p of m.promises) {
       const s = promiseSummary(p, m);
       expect(s).toContain(p.text);
-      expect(s).toContain("Status on Borough Book");
+      expect(s).toContain("Status on BoroughBook.UK");
       expect(s).not.toContain("\u00b7");
       expect(promiseMarkdown(p, m)).toContain(`/promise/${p.id}`);
     }

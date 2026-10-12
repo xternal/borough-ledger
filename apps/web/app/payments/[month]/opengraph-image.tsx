@@ -3,7 +3,7 @@ import { buildModel } from "@/lib/model";
 import { OG_SIZE, collectionImage } from "@/lib/ogCollection";
 import { MONTHS } from "@/lib/payments";
 
-export const alt = "A month of council payments over £500 in Hammersmith & Fulham, on Borough Book";
+export const alt = "A month of council payments over £500 in Hammersmith & Fulham, on BoroughBook.UK";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

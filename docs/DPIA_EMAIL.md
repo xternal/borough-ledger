@@ -4,9 +4,9 @@
 
 ## 1. What and why
 
-Borough Book lets readers ask for an email when a council election pledge changes. A DPIA is needed because what someone follows can reveal their political opinions, which are special category data (UK GDPR Article 9), even though the pledges themselves are public.
+BoroughBook.UK lets readers ask for an email when a council election pledge changes. A DPIA is needed because what someone follows can reveal their political opinions, which are special category data (UK GDPR Article 9), even though the pledges themselves are public.
 
-* **Controller:** Empatiq Limited, as for LedgerGov.uk (decided by the owner on 10 October 2026), named on the site through `FOLLOW_CONTROLLER`.
+* **Controller:** Empatiq Limited, as for LedgerGov.UK (decided by the owner on 10 October 2026), named on the site through `FOLLOW_CONTROLLER`.
 * **Processors:** Resend (email delivery; US company; sees each address and alert); Neon (database, London region); Vercel (hosting; request logs).
 * **People affected:** members of the public who sign up. No one else: the alerts carry only public pledge information.
 * **Lawful basis:** consent (Article 6(1)(a)), and explicit consent for the special category data (Article 9(2)(a)). PECR: the emails are only those the reader asked for, each with an unsubscribe link.

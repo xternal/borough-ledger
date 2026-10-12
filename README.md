@@ -1,14 +1,14 @@
-# Borough Book: Hammersmith & Fulham
+# BoroughBook.UK: Hammersmith & Fulham
 
 An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://boroughbook.uk**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, your ward and its councillors (find it by postcode), and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
 
-Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from Public Ledger (the national version), sharing its ideas and later its code. Called Borough Ledger until 8 Oct 2026; the code packages, repo and Vercel project keep that name.
+Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from LedgerGov.UK (the national version), sharing its ideas and later its code. Called Borough Ledger until 8 Oct 2026; the code packages, repo and Vercel project keep that name.
 
 Where things stand and what is still open: `docs/PRE_SHIP_REVIEW.md`. The reference prototype in `prototype/` still runs on test data; the site does not.
 
 ## 1. The idea
 
-Your council tax bill is the only statement most residents ever get from their council, and it says almost nothing. Borough Book turns it into a readable account:
+Your council tax bill is the only statement most residents ever get from their council, and it says almost nothing. BoroughBook.UK turns it into a readable account:
 
 1. **Your bill.** Pick your band, see what you pay, how much goes to the council and how much to the Mayor of London, and what your share pays for.
 2. **The budget.** Where the council's money comes from (council tax, business rates, government grants, reserves) and what it pays for.
@@ -26,7 +26,7 @@ Your council tax bill is the only statement most residents ever get from their c
 
 ## 3. What is different from the national version
 
-| | National (Public Ledger) | Borough (this project) |
+| | National (LedgerGov.UK) | Borough (this project) |
 |---|---|---|
 | The gap | Borrowed, adds to debt | Must be closed every year by law. Failure means a section 114 notice |
 | Visual of the gap | Hatched borrowing flow | Waterfall: pressures → gap → council tax, savings, reserves |
@@ -70,7 +70,7 @@ Estimates are low-confidence until M0 is done.
 * Local election rules. Rules on third-party spending in local elections are tight. Get advice before the run-up to May 2030.
 * Personal data in payments files. Some payments go to individuals (foster carers, direct-payment recipients, sole traders). Councils redact them; we must never re-identify them.
 * Being "the resident scoring the council". One standard for both parties, right of reply, evidence for every status.
-* Overlap with Public Ledger's political backers. Separate brand, separate entity, funding disclosed.
+* Overlap with LedgerGov.UK's political backers. Separate brand, separate entity, funding disclosed.
 
 ## 7. What is in the pack
 
@@ -87,7 +87,7 @@ Estimates are low-confidence until M0 is done.
 | `docs/PRIVACY.md` | Product, legal | Personal data, follow, contribute |
 | `docs/DESIGN_HANDOFF.md` | Designer | Screens, components, tokens |
 | `docs/BUILD_PLAN.md` | Claude Code | Milestones with prompts |
-| `docs/SHARED_CORE.md` | Engineering | What to share with Public Ledger, and when |
+| `docs/SHARED_CORE.md` | Engineering | What to share with LedgerGov.UK, and when |
 | `docs/BOROUGHS.md` | Engineering, owner | Adding boroughs: what each gets first, what adding Kensington and Chelsea found, the address decision, and a first run of the checks across all 32 |
 | `data/seed/*.json` | All | Prototype data, mostly test |
 | `prototype/` | Design, engineering | Clickable prototype; `index.html` is built by `build_prototype.py` |
@@ -135,5 +135,5 @@ Vercel: set the build command to `pnpm --filter @borough-ledger/web vercel-build
 
 ## 9. Licence
 
-Code: MIT (`LICENSE`). Our own text and data tables: CC BY 4.0, credit "Borough Book (Pavel Guzhikov)". Council, government, ONS and Democracy Club data keep their own licences, and manifesto quotes are not relicensed: see `LICENSE-CONTENT.md`.
+Code: MIT (`LICENSE`). Our own text and data tables: CC BY 4.0, credit "BoroughBook.UK (Pavel Guzhikov)". Council, government, ONS and Democracy Club data keep their own licences, and manifesto quotes are not relicensed: see `LICENSE-CONTENT.md`.
 

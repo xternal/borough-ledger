@@ -280,7 +280,7 @@ export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
 function budgetFacts(sum: ReturnType<typeof shareSummary>, url: string, changed: boolean) {
   const lower = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
   const outcome = sum.status === "Balanced" ? "balances" : `has ${lower(sum.status)}`;
-  const source = "Balance it on Borough Book, which starts from the council's own forecast";
+  const source = "Balance it on BoroughBook.UK, which starts from the council's own forecast";
   return [
     {
       id: "result",

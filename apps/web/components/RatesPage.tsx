@@ -24,7 +24,7 @@ const SECTIONS = [
 ] as const;
 
 export function ratesWords(m: RatesModel) {
-  const title = `Where your rates go in ${m.place.short} | Borough Book`;
+  const title = `Where your rates go in ${m.place.short} | BoroughBook.UK`;
   const description = `${m.place.short}: how a rates bill splits between ${m.place.council} and the Northern Ireland Executive, worked out from your home's capital value; the council's ${format("m0", m.netBudget.value)} budget by service; rates over five years; and every area's councillors. From the Department of Finance, the Department for Communities and the council's own records.`;
   return { title, description };
 }
@@ -174,7 +174,7 @@ export function RatesPage({ m, slug }: { m: RatesModel; slug: string }) {
             <h2 id="next-h">Still to come for {m.place.short}</h2>
           </div>
           <p>
-            For Hammersmith &amp; Fulham, Borough Book also tracks every party&rsquo;s manifesto pledges, every council payment over £500, council decisions, how this
+            For Hammersmith &amp; Fulham, BoroughBook.UK also tracks every party&rsquo;s manifesto pledges, every council payment over £500, council decisions, how this
             year&rsquo;s budget gap was closed and a tool to balance next year. Those need the council&rsquo;s own papers, read by hand, and come here next.{" "}
             <a href="/">See Hammersmith &amp; Fulham</a>.
           </p>

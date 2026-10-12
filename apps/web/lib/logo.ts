@@ -1,4 +1,4 @@
-/* The Borough Book mark: an open book on the site's blue, with the money rising on one page and an orange bookmark
+/* The BoroughBook.UK mark: an open book on the site's blue, with the money rising on one page and an orange bookmark
    for the promises being tracked. One drawing for the favicon (app/icon.svg), the top bar and the share images.
    No council colours, crest or typeface (CLAUDE.md invariant 5). */
 

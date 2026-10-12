@@ -1,4 +1,4 @@
-# PRD — Borough Book (Hammersmith & Fulham pilot)
+# PRD — BoroughBook.UK (Hammersmith & Fulham pilot)
 
 ## Problem
 

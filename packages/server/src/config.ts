@@ -88,7 +88,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     contact: env.FOLLOW_CONTACT?.trim() || "boroughs@guzh.uk",
     mail: {
       provider,
-      from: required("MAIL_FROM", env.MAIL_FROM, production, "Borough Book <alerts@localhost>"),
+      from: required("MAIL_FROM", env.MAIL_FROM, production, "BoroughBook.UK <alerts@localhost>"),
       replyTo: env.MAIL_REPLY_TO || undefined,
       resendApiKey: production ? required("RESEND_API_KEY", env.RESEND_API_KEY, true, "") : null,
       /** Signing secret of the Resend webhook (bounces and complaints); unset turns the endpoint off. */

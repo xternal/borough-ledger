@@ -288,7 +288,7 @@ export function councilTaxCase(m: PageModel): { setup: CaseSetup; wants: CaseWan
 /** Next year's budget, from Balance it: the reader's own choices are the figures (BalanceIt adds them). */
 export function budgetWants(m: PageModel): CaseWant[] {
   return [
-    { id: "mine", label: "Here is my budget", sentence: `Here is how I would balance the council's ${m.place.nextYearLabel} budget, using the Balance it tool on Borough Book.` },
+    { id: "mine", label: "Here is my budget", sentence: `Here is how I would balance the council's ${m.place.nextYearLabel} budget, using the Balance it tool on BoroughBook.UK.` },
     { id: "ask", label: "Ask a question", sentence: `I have a question about the council's ${m.place.nextYearLabel} budget.` },
   ];
 }

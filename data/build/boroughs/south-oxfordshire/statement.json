@@ -507,7 +507,7 @@
    "general_fund_m": 0.0,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "adult_care",
@@ -518,7 +518,7 @@
    "general_fund_m": 0.0,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "children",
@@ -529,7 +529,7 @@
    "general_fund_m": 0.0,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "housing",
@@ -540,7 +540,7 @@
    "general_fund_m": 3.425,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 409, 440, 457, 460, grouped by Borough Book (data/manual/ra_service_map.csv). Includes housing benefit net of its government subsidy, £-0.409m."
+   "method_note": "Net current expenditure, RA 2026-27 lines 409, 440, 457, 460, grouped by BoroughBook.UK (data/manual/ra_service_map.csv). Includes housing benefit net of its government subsidy, £-0.409m."
   },
   {
    "id": "public_health",
@@ -551,7 +551,7 @@
    "general_fund_m": 0.0,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines , grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "running",
@@ -562,7 +562,7 @@
    "general_fund_m": 4.252,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 610, 625, 628, 650, 675, 681, 831, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 610, 625, 628, 650, 675, 681, 831, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "safety_regulation",
@@ -573,7 +573,7 @@
    "general_fund_m": 1.974,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 510, 521, 522, 528, 529, 530, 531, 533, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 510, 521, 522, 528, 529, 530, 531, 533, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "streets",
@@ -584,7 +584,7 @@
    "general_fund_m": 8.98,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 258, 260, 543, 570, 581, 584, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 258, 260, 543, 570, 581, 584, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "planning",
@@ -595,7 +595,7 @@
    "general_fund_m": 5.247,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 591, 592, 593, 595, 596, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 591, 592, 593, 595, 596, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "debt_levies",
@@ -606,7 +606,7 @@
    "general_fund_m": 2.759,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 821, 873, 886, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 821, 873, 886, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   },
   {
    "id": "parks_culture",
@@ -617,7 +617,7 @@
    "general_fund_m": 2.241,
    "quality": "sourced",
    "source_id": "ra_2026-27",
-   "method_note": "Net current expenditure, RA 2026-27 lines 501, 506, 507, grouped by Borough Book (data/manual/ra_service_map.csv)."
+   "method_note": "Net current expenditure, RA 2026-27 lines 501, 506, 507, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
   }
  ],
  "county": {
@@ -766,7 +766,7 @@
     "general_fund_m": 79.012,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 110, 120, 130, 140, 145, 165, 897, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 110, 120, 130, 140, 145, 165, 897, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "adult_care",
@@ -777,7 +777,7 @@
     "general_fund_m": 321.718,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 332, 333, 334, 335, 336, 337, 340, 341, 344, 345, 348, 349, 350, 351, 353, 354, 355, 356, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 332, 333, 334, 335, 336, 337, 340, 341, 344, 345, 348, 349, 350, 351, 353, 354, 355, 356, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "children",
@@ -788,7 +788,7 @@
     "general_fund_m": 199.403,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 313, 315, 322, 323, 325, 326, 327, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 313, 315, 322, 323, 325, 326, 327, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "housing",
@@ -799,7 +799,7 @@
     "general_fund_m": 3.634,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 440, 460, 475, grouped by Borough Book (data/manual/ra_service_map.csv). Includes housing benefit net of its government subsidy, £-0.371m."
+    "method_note": "Net current expenditure, RA 2026-27 lines 440, 460, 475, grouped by BoroughBook.UK (data/manual/ra_service_map.csv). Includes housing benefit net of its government subsidy, £-0.371m."
    },
    {
     "id": "public_health",
@@ -810,7 +810,7 @@
     "general_fund_m": 0.45,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 361, 362, 363, 365, 366, 368, 370, 371, 372, 373, 374, 376, 378, 380, 381, 382, 383, 384, 385, 386, 387, 389, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 361, 362, 363, 365, 366, 368, 370, 371, 372, 373, 374, 376, 378, 380, 381, 382, 383, 384, 385, 386, 387, 389, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "running",
@@ -821,7 +821,7 @@
     "general_fund_m": 14.189,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 604, 610, 623, 650, 675, 681, 871, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 604, 610, 623, 650, 675, 681, 871, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "safety_regulation",
@@ -832,7 +832,7 @@
     "general_fund_m": 1.994,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 519, 532, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 519, 532, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "fire",
@@ -843,7 +843,7 @@
     "general_fund_m": 33.467,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 602, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 602, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "streets",
@@ -854,7 +854,7 @@
     "general_fund_m": 86.612,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 210, 230, 247, 248, 249, 252, 254, 258, 260, 271, 275, 276, 582, 583, 584, 585, 586, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 210, 230, 247, 248, 249, 252, 254, 258, 260, 271, 275, 276, 582, 583, 584, 585, 586, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "planning",
@@ -865,7 +865,7 @@
     "general_fund_m": 4.912,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 592, 593, 594, 595, 598, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 592, 593, 594, 595, 598, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "debt_levies",
@@ -876,7 +876,7 @@
     "general_fund_m": 24.225,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 828, 859, 865, 873, 881, 886, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 828, 859, 865, 873, 881, 886, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    },
    {
     "id": "parks_culture",
@@ -887,7 +887,7 @@
     "general_fund_m": 14.425,
     "quality": "sourced",
     "source_id": "ra_2026-27",
-    "method_note": "Net current expenditure, RA 2026-27 lines 500, 501, 505, 507, grouped by Borough Book (data/manual/ra_service_map.csv)."
+    "method_note": "Net current expenditure, RA 2026-27 lines 500, 501, 505, 507, grouped by BoroughBook.UK (data/manual/ra_service_map.csv)."
    }
   ],
   "quality": "sourced",
