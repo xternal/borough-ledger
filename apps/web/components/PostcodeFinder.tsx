@@ -2,10 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
+import { DecoderIndex } from "@borough-ledger/schema";
+import index from "../../../data/build/council_tax_decoder_index.json";
 import { YOUR_WARD_KEY, lookupPlace, type FinderPlace, type PlaceLookup, type YourWard } from "@/lib/wardFinder";
 
-/** Postcode to ward, in any borough on the site. The lookup runs in the browser against postcodes.io; the postcode
- *  never reaches us or the address bar (docs/PRIVACY.md). On a council's page (here), a postcode in another council opens
+/** Every English council's decoded bill, for a postcode in a council without a full page yet. */
+const DECODED = DecoderIndex.parse(index).councils;
+
+/** Postcode to ward, in any borough on the site. The postcode goes to the site's own lookup (app/api/postcode), which asks postcodes.io and keeps nothing; it never reaches the address bar (docs/PRIVACY.md). On a council's page (here), a postcode in another council opens
  *  that council's page at the top, and the ward it found is kept for this tab so the page can say "your ward"; a postcode
  *  in this council opens its ward. */
 export function PostcodeFinder({
@@ -93,9 +97,15 @@ export function PostcodeFinder({
       </div>
       <p id={`${id}-msg`} className={result && result.kind !== "ward" && result.kind !== "council" ? "finder-msg warn" : "finder-msg"} aria-live="polite">
         {result ? message(result) : null}
+        {result?.kind === "elsewhere" && result.ons && DECODED[result.ons] ? (
+          <>
+            {" "}
+            <a href={`/council-tax/${DECODED[result.ons]![0]}`}>See where your council tax goes in {DECODED[result.ons]![1]}</a>.
+          </>
+        ) : null}
       </p>
       <p id={`${id}-note`} className="finder-note">
-        Looked up in your browser with postcodes.io. We never see your postcode.
+        Looked up through our own server with postcodes.io. Your postcode is never kept or logged, and postcodes.io never sees who you are.
       </p>
     </form>
   );

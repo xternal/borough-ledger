@@ -18,3 +18,4 @@ export * from "./rates";
 export * from "./adultcare";
 export * from "./childrencare";
 export * from "./makeyourcase";
+export * from "./decoder";

@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { SECTIONS, isStatementPath, sectionForPath, sectionHref, type SectionId } from "@/lib/nav";
 
 /** A borough page's own sections, on that page: [id, label], each a part of the long page at `base`. */
-export type BoroughSections = { base: string; items: readonly (readonly [string, string])[] };
+/** `current` marks the item a sub-page belongs to (a council's decoder page is under "Every council"). */
+export type BoroughSections = { base: string; items: readonly (readonly [string, string])[]; current?: string };
 
 /** The top bar's menu. Highlights the page's section, or on the statement the section in view, and keeps it visible on narrow screens. */
 export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
@@ -14,7 +15,7 @@ export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
   const statement = borough ? path === borough.base : isStatementPath(path);
   const [inView, setInView] = useState<string | null>(null);
   const nav = useRef<HTMLElement>(null);
-  const current = statement ? inView : borough ? null : sectionForPath(path);
+  const current = statement ? inView : borough ? (borough.current ?? null) : sectionForPath(path);
   const href = (id: string) => (borough ? `${borough.base}#${id}` : sectionHref(id as SectionId));
 
   // On the statement, follow the section in view: the last one whose top has passed just under the bar.

@@ -17,7 +17,7 @@ const WHO_LABEL = { law: "The law", government: "The government", council: "The 
 
 /**
  * Make your case: who decides, how it compares, what a resident can do and by when, and a letter they write in their own
- * words. Everything happens in the reader's browser: the postcode goes only to postcodes.io (as on the rest of the site),
+ * words. The postcode goes only to the site's own lookup, which asks postcodes.io and keeps nothing (as on the rest of the site),
  * and the letter is copied, or handed to the reader's own email app or to WriteToThem. BoroughBook.UK never sees or sends
  * it (docs/PRIVACY.md). The same tools for every view: every choice of what to ask for, and both sides' councillors.
  */
@@ -330,7 +330,7 @@ export function MakeYourCase({
               <p className={ward ? "finder-msg" : "finder-msg warn"} aria-live="polite">
                 {found}
               </p>
-              <p className="finder-note">Looked up in your browser with postcodes.io. We never see your postcode, and it is not put in the letter.</p>
+              <p className="finder-note">Looked up through our own server with postcodes.io. Your postcode is never kept or logged, and it is not put in the letter.</p>
             </div>
           ) : null}
           {leads.length ? (

@@ -18,7 +18,7 @@ export function Footer({ council, hasTestData, full }: { council: string; hasTes
             <a href={b.href}>{b.short}</a>
           </span>
         ))}
-        .
+        . Every council in England: the <a href="/council-tax">council tax decoder</a>.
       </span>
       {hasTestData && ALLOW_TEST_DATA ? <span>Prototype for design review. Do not quote any figure marked test.</span> : null}
       <span className="credit">

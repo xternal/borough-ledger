@@ -16,6 +16,8 @@ Your council tax bill is the only statement most residents ever get from their c
 4. **Balance it.** Next year's gap, with the real levers a council has. Residents see the trade-offs councillors face, including the 4.99% referendum limit and the one-off nature of reserves.
 5. **Promises.** Every pledge from the administration and the opposition, costed per Band D home, with a timeline that ends in delivery or in silence.
 6. **Payments over £500.** The council's monthly transparency files, searchable.
+7. **Make your case.** Who decides (the law, the government or the council), how the council compares, and a letter to councillors in the reader's own words, never seen or sent by the site.
+8. **The council tax decoder** ([boroughbook.uk/council-tax](https://boroughbook.uk/council-tax)). Every one of England's 296 councils that send bills: a postcode in, the Band D bill out, split between the council, the county council or the Mayor of London, police, fire, combined authorities and parish councils, with the change on last year.
 
 ## 2. Why a borough, and why this one
 
