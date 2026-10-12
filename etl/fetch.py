@@ -28,13 +28,18 @@ def load_sources() -> list:
     return json.loads((ROOT / "etl" / "sources.json").read_text())["sources"]
 
 
-def main(check_only: bool) -> int:
+def main(check_only: bool, refresh_stale: bool = False) -> int:
     RAW.mkdir(parents=True, exist_ok=True)
     bad = 0
     for s in load_sources():
         if "file" not in s:
             continue
         path = RAW / s["file"]
+        # CI keeps the files it has checked between runs (.github/workflows/ci.yml); a kept file that no longer matches
+        # sources.json is from before a source was updated, so it is fetched again and checked like any other.
+        if refresh_stale and not s.get("manual") and path.exists() and sha256(path) != s["sha256"]:
+            print(f"stale     {s['file']}: fetching it again")
+            path.unlink()
         if s.get("manual") and not path.exists():
             print(f"manual    {s['file']} (download by hand from {s['url']}; not needed to build)")
             continue
@@ -69,4 +74,4 @@ def main(check_only: bool) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main("--check" in sys.argv))
+    sys.exit(main("--check" in sys.argv, refresh_stale="--refresh-stale" in sys.argv))
