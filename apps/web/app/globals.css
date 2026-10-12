@@ -27,60 +27,67 @@
   /* Text on tinted pills: darker than the chart colours so every pill passes WCAG AA (4.5:1). */
   --good-ink: #166534;
   --fund-ink: #1d45cf;
+  --gap-ink: #f2600c;
   --idle: #8b8b94;
   --font: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-/* Dark mode: deep navy slate (#101820), as in LedgerGov.UK, never black. Every text colour passes WCAG AA on bg and sunk. */
+/* Dark mode: dark brown (#241f1a), Pavel's dark palette from 12 October 2026, never black or navy. The background is
+   lifted off black and warm, body text is about 13:1 so it does not glare, amber marks links, focus and where you are,
+   and blue appears only where it means funding in the data. Lines are the solid equivalents of rgba(239, 231, 218, .10)
+   and .16 on the background. Every text colour passes WCAG AA on bg, sunk and raised, pills included, and chart marks
+   pass 3:1 (test/contrast.test.ts). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #101820;
-    --sunk: #1a2531;
-    --raised: #131d27;
-    --line: #26323f;
-    --line-strong: #364657;
-    --ink: #e7edf3;
-    --muted: #a3b0bd;
-    --faint: #8291a0;
-    --accent: #7b9dff;
-    --fund: #7b9dff;
-    --fund-soft: rgba(123, 157, 255, 0.22);
-    --spend: #a3b0bd;
-    --spend-soft: rgba(163, 176, 189, 0.16);
-    --gap: #ff7a2e;
-    --gap-soft: rgba(255, 122, 46, 0.2);
-    --gla: #4f5f71;
-    --good: #4ade80;
-    --warn: #fbbf24;
-    --bad: #f87171;
-    --idle: #8291a0;
-    --good-ink: #4ade80;
-    --fund-ink: #7b9dff;
+    --bg: #241f1a;
+    --sunk: #2e2822;
+    --raised: #39322b;
+    --line: #38332d;
+    --line-strong: #443f39;
+    --ink: #efe7da;
+    --muted: #c0b5a4;
+    --faint: #a59a88;
+    --accent: #e2b26f;
+    --fund: #8aa3ec;
+    --fund-soft: rgba(138, 163, 236, 0.22);
+    --spend: #c0b5a4;
+    --spend-soft: rgba(192, 181, 164, 0.16);
+    --gap: #e6844f;
+    --gap-soft: rgba(230, 132, 79, 0.2);
+    --gla: #7a7064;
+    --good: #7fc78c;
+    --warn: #e3c85b;
+    --bad: #ef9c90;
+    --idle: #a59a88;
+    --good-ink: #7fc78c;
+    --fund-ink: #9fb4f0;
+    --gap-ink: #f2a77a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #101820;
-  --sunk: #1a2531;
-  --raised: #131d27;
-  --line: #26323f;
-  --line-strong: #364657;
-  --ink: #e7edf3;
-  --muted: #a3b0bd;
-  --faint: #8291a0;
-  --accent: #7b9dff;
-  --fund: #7b9dff;
-  --fund-soft: rgba(123, 157, 255, 0.22);
-  --spend: #a3b0bd;
-  --spend-soft: rgba(163, 176, 189, 0.16);
-  --gap: #ff7a2e;
-  --gap-soft: rgba(255, 122, 46, 0.2);
-  --gla: #4f5f71;
-  --good: #4ade80;
-  --warn: #fbbf24;
-  --bad: #f87171;
-  --idle: #8291a0;
-  --good-ink: #4ade80;
-  --fund-ink: #7b9dff;
+  --bg: #241f1a;
+  --sunk: #2e2822;
+  --raised: #39322b;
+  --line: #38332d;
+  --line-strong: #443f39;
+  --ink: #efe7da;
+  --muted: #c0b5a4;
+  --faint: #a59a88;
+  --accent: #e2b26f;
+  --fund: #8aa3ec;
+  --fund-soft: rgba(138, 163, 236, 0.22);
+  --spend: #c0b5a4;
+  --spend-soft: rgba(192, 181, 164, 0.16);
+  --gap: #e6844f;
+  --gap-soft: rgba(230, 132, 79, 0.2);
+  --gla: #7a7064;
+  --good: #7fc78c;
+  --warn: #e3c85b;
+  --bad: #ef9c90;
+  --idle: #a59a88;
+  --good-ink: #7fc78c;
+  --fund-ink: #9fb4f0;
+  --gap-ink: #f2a77a;
   color-scheme: dark;
 }
 
@@ -1131,7 +1138,7 @@
     color: var(--bad);
   }
   .status.spare {
-    color: var(--accent);
+    color: var(--fund);
   }
   .result .big {
     font-size: 44px;
@@ -1245,7 +1252,7 @@
     color: var(--bad);
   }
   .strip-year .n.spare {
-    color: var(--accent);
+    color: var(--fund);
   }
   .strip-year .n.balanced {
     color: var(--good);
@@ -1270,7 +1277,7 @@
     background: var(--bad);
   }
   .strip-year .bar i.spare {
-    background: var(--accent);
+    background: var(--fund);
   }
   .strip-year .bar b {
     display: block;
@@ -2277,7 +2284,7 @@
     font-weight: 550;
     padding: 1px 7px;
     border-radius: 999px;
-    color: var(--gap);
+    color: var(--gap-ink);
     background: var(--gap-soft);
     white-space: nowrap;
   }
