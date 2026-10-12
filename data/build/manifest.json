@@ -265,6 +265,11 @@
    "id": "sodc_lgr_2026-07-16",
    "file": "sodc_lgr_2026-07-16.html",
    "sha256": "a1f3c18c61013faddd2a8952ee93165fd2e95ebee454886928afc869696233c7"
+  },
+  {
+   "id": "dhsc_ascof_2024-25",
+   "file": "ascof_2024-25_time_series.ods",
+   "sha256": "e4b06416b2b5b31ba9c4db7d64f52cce5c8cffc95e391458e2e5c626f1439226"
   }
  ],
  "manual": [
@@ -274,7 +279,7 @@
   },
   {
    "file": "data/manual/budget_timetable_2027-28.csv",
-   "sha256": "d8727ae8b3c141741603ea3d1bafb3814de725ca5c2150860b0fe6aa1410bd21"
+   "sha256": "c1b988cf8f5832e1238ee5f58c1350533c351784b38d15610db9b29f67b93058"
   },
   {
    "file": "data/manual/capital_2026-30.csv",
@@ -392,7 +397,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "0f109e2aefc09db4f12307818a423b4baeb3ecc592e82f9f7d3bb08d036c1f25"
+   "sha256": "31218b6c63a5e24fc97a680467a2386c28d5a3b3cb4887fe0e3fc1719351c543"
   }
  ],
  "quality_counts": {

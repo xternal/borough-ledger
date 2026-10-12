@@ -24,7 +24,7 @@ import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
-import { adultCare, careComparison } from "@/lib/adultCare";
+import { adultCare, careComparison, careResults } from "@/lib/adultCare";
 import { adultCareCase, budgetWants, caseSetup } from "@/lib/makeYourCase";
 import { childrenCare } from "@/lib/childrenCare";
 import { DATA as HF_DATA } from "@borough-ledger/schema";
@@ -83,7 +83,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
               </p>
             }
           />
-          {CARE ? <AdultCare care={CARE} council={m.place.council} /> : null}
+          {CARE ? <AdultCare care={CARE} council={m.place.council} results={careResults(HF_DATA.council.meta.council_code)} /> : null}
           {careCase && CARE ? (
             <MakeYourCase
               id="case-care"
@@ -91,7 +91,7 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
               wants={careCase.wants}
               facts={careCase.facts}
               page={`${SITE_URL}/#case-care`}
-              compare={<CareCompare cmp={careComparison(HF_DATA.council.meta.council_code)!} yearLabel={CARE.yearLabel} />}
+              compare={<CareCompare cmp={careComparison(HF_DATA.council.meta.council_code)!} yearLabel={CARE.yearLabel} results={careResults(HF_DATA.council.meta.council_code)} />}
             />
           ) : null}
           {KIDS ? <ChildrenCare care={KIDS} council={m.place.council} short={m.place.short} /> : null}

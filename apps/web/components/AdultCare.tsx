@@ -2,12 +2,12 @@
    home) and where the council's adult care money went, from its return to government. The same for every English
    council on the site. */
 import { derive } from "@borough-ledger/schema";
-import type { AdultCareModel } from "@/lib/adultCare";
+import { versusText, type AdultCareModel, type careResults } from "@/lib/adultCare";
 import { ChartTable, DataTable } from "./ChartTable";
 import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 
-export function AdultCare({ care, council }: { care: AdultCareModel; council: string }) {
+export function AdultCare({ care, council, results }: { care: AdultCareModel; council: string; results?: ReturnType<typeof careResults> }) {
   const max = Math.max(...care.parts.map((p) => p.f.value));
   return (
     <section id="adult-care" aria-labelledby="adult-care-h">
@@ -68,6 +68,41 @@ export function AdultCare({ care, council }: { care: AdultCareModel; council: st
       <div className="qrow">
         <QualityGroup q={care.total.quality} text={`Adult social care finance report, ${care.yearLabel}`} />
       </div>
+      {results ? (
+        <>
+          <h3 className="care-h" id="care-results">
+            What people who get care say
+          </h3>
+          <p>
+            In the government&rsquo;s survey of people who get care and support from their council, {results.yearLabel}, about{" "}
+            {results.respondents.toLocaleString("en-GB")} people answered here. Of them:
+          </p>
+          <ul className="care-results">
+            {results.items.map((r) => (
+              <li key={r.id}>
+                <b>
+                  <Num f={r.f} fmt="share0" />
+                </b>{" "}
+                {r.label} <span className="muted">(give or take {Math.round(r.moe)} points)</span>.{" "}
+                {r.london ? (
+                  <>
+                    London <Num f={r.london.f} fmt="share0" />,{" "}
+                  </>
+                ) : null}
+                England <Num f={r.england.f} fmt="share0" />: {versusText(r)}.
+              </li>
+            ))}
+          </ul>
+          <p className="small muted">
+            A difference counts as lower or higher only where it is bigger than the survey&rsquo;s margins of error. These are people&rsquo;s own answers, not a
+            rating of the council; the care regulator&rsquo;s rating of each council is not on Borough Book yet. From the{" "}
+            <a href={results.source.url}>adult social care outcomes framework</a>, {results.yearLabel}.
+          </p>
+          <div className="qrow">
+            <QualityGroup q={results.items[0]!.f.quality} text={`Adult social care survey, ${results.yearLabel}`} />
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

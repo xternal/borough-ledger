@@ -18,7 +18,7 @@ import { HeroTop } from "@/components/HeroTop";
 import { councilWithThe } from "@/lib/boroughList";
 import { BOROUGHS, boroughModel, type BoroughModel } from "@/lib/boroughs";
 import { format, formatDay } from "@/lib/format";
-import { adultCare } from "@/lib/adultCare";
+import { adultCare, careResults } from "@/lib/adultCare";
 import { childrenCare } from "@/lib/childrenCare";
 import { isRatesCouncil, ratesModel } from "@/lib/rates";
 import { RatesPage, ratesWords } from "@/components/RatesPage";
@@ -283,7 +283,7 @@ export default async function BoroughPage({ params }: Props) {
           }
         />
 
-        {care ? <AdultCare care={care} council={careBy.council} /> : null}
+        {care ? <AdultCare care={care} council={careBy.council} results={careResults(careBy.ons)} /> : null}
         {kids ? <ChildrenCare care={kids} council={careBy.council} short={careBy.short} /> : null}
 
         <section id="history" aria-labelledby="history-h">

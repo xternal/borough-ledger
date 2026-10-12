@@ -161,6 +161,20 @@ export function CouncilTaxRise({ m, band, path }: { m: PageModel; band: Band; pa
               </b>
               <span>
                 {t.label}.
+                {t.note ? (
+                  <>
+                    {" "}
+                    <span className="muted">
+                      {t.note}
+                      {t.note_url ? (
+                        <>
+                          {" "}
+                          <a href={t.note_url}>The calendar</a>.
+                        </>
+                      ) : null}
+                    </span>
+                  </>
+                ) : null}
               {t.id === "engagement" ? (
                 t.url ? (
                   <>
