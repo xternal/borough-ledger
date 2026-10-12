@@ -9,5 +9,6 @@ export default defineConfig({
       "server-only": fileURLToPath(new URL("./test/empty.ts", import.meta.url)),
     },
   },
-  test: { include: ["test/**/*.test.ts", "scripts/**/*.test.mjs"] },
+  // At most three test workers on a laptop (a 16 GB Mac hung with several sessions testing at once); CI keeps its default.
+  test: { include: ["test/**/*.test.ts", "scripts/**/*.test.mjs"], maxWorkers: process.env.CI ? undefined : 3 },
 });
