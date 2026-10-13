@@ -66,18 +66,18 @@ const IN_WORDS: Partial<Record<Status, [string, string]>> = {
 };
 
 /**
- * Where each side's pledges stand, in one sentence each: "Labour, which runs the council, made 9 headline pledges:
+ * Where each side's pledges stand, in one sentence each: "Labour, which runs the council, has 9 pledges tracked:
  * 2 are being delivered, ...". Counted from the data, the same way for every party.
  */
 export function standing(promises: readonly PromiseModel[]): string[] {
   return sides(promises).map((g) => {
     const ps = promises.filter((p) => p.side === g.id);
     const who = `${g.parties.join(" and ")}${g.id === "administration" ? ", which runs the council," : ", in opposition,"}`;
-    if (g.id === "opposition") return `${who} made ${ps.length} headline ${ps.length === 1 ? "pledge" : "pledges"}; opposition pledges are costed so voters can compare, but cannot be delivered from opposition.`;
+    if (g.id === "opposition") return `${who} has ${ps.length} ${ps.length === 1 ? "pledge" : "pledges"} tracked; opposition pledges are costed so voters can compare, but cannot be delivered from opposition.`;
     const parts = STATUS_ORDER.map((st) => [st, ps.filter((p) => p.status === st).length] as const)
       .filter(([, n]) => n > 0)
       .map(([st, n]) => `${n} ${(IN_WORDS[st] ?? [STATUS_LABEL[st], STATUS_LABEL[st]])[n === 1 ? 0 : 1]}`);
     const list = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}` : parts[0];
-    return `${who} made ${ps.length} headline ${ps.length === 1 ? "pledge" : "pledges"}: ${list}.`;
+    return `${who} has ${ps.length} ${ps.length === 1 ? "pledge" : "pledges"} tracked: ${list}.`;
   });
 }

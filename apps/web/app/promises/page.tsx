@@ -20,9 +20,9 @@ const PARTIES = DATA.content.parties
   .filter((pt) => DATA.content.promises.some((p) => p.actor.kind === "party" && p.actor.id === pt.id))
   .map((pt) => pt.short)
   .join(" and ");
-const title = `${PARTIES} 2026 manifesto pledges in Hammersmith & Fulham: where each stands | ${SITE.name}`;
+const title = `${PARTIES} pledges in Hammersmith & Fulham: where each stands | ${SITE.name}`;
 const description =
-  `Every headline pledge from the 2026 ${PARTIES} manifestos for Hammersmith & Fulham, quoted word for word with its source, its status and its cost to the council, tracked to the same rules for every party.`;
+  `${PARTIES} pledges for Hammersmith & Fulham, from the 2026 manifestos and since, each quoted word for word with its source, its status and its cost to the council, tracked to the same rules for every party.`;
 
 export const metadata: Metadata = {
   title,
@@ -35,18 +35,21 @@ export default function PromisesPage() {
   const m = buildModel();
   const groups = sides(m.promises);
   const used = STATUS_ORDER.filter((s) => m.promises.some((p) => p.status === s));
+  const fromManifestos = m.promises.filter((p) => p.venue === "manifesto").length;
   const seatsOf = (party: string) => m.people.councillors.filter((c) => c.party === party).length;
   return (
     <PageShell m={m}>
       <div className="hero">
         <h1>Promises</h1>
         <p className="lede">
-          What each party promised {m.place.short} in its 2026 manifesto, quoted word for word, and where each pledge stands now. Every party is held to the
+          What each party has promised {m.place.short}, in its 2026 manifesto and since, quoted word for word, and where each pledge stands now. Every party is held to the
           same rules.
         </p>
         <p className="lede">{standing(m.promises).join(" ")}</p>
         <p className="small">
-          <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them.
+          <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them. Every two weeks an AI
+          journalist (Claude, an AI) looks for new pledges from every party in the same places; one appears only after the editor has read its quote
+          against the source.
         </p>
         <p className="small">
           By party:{" "}
@@ -72,7 +75,10 @@ export default function PromisesPage() {
         <div className="kpi">
           <span className="l">Pledges tracked</span>
           <span className="v">{m.promises.length}</span>
-          <span className="s">headline pledges from {groups.reduce((a, g) => a + g.parties.length, 0)} manifestos, May 2026</span>
+          <span className="s">
+            {`${fromManifestos} from ${groups.reduce((a, g) => a + g.parties.length, 0)} manifestos, May 2026`}
+            {m.promises.length > fromManifestos ? `, and ${m.promises.length - fromManifestos} made since` : null}
+          </span>
         </div>
         {groups.map((g) => (
           <div className="kpi" key={g.id}>
@@ -108,8 +114,9 @@ export default function PromisesPage() {
         <div className="sec-head">
           <h2 id="how-h">How pledges are tracked</h2>
           <p>
-            Each party&rsquo;s own headline pledges get a card, quoted exactly with the manifesto page and an archived copy. The party with more than half the
-            seats runs the council; the same rules apply to every party.
+            Each party&rsquo;s own headline pledges got a card first. The rest of each manifesto follows in page order, the same number from every party at
+            a time, and so do pledges made since the election. Each is quoted exactly, with its page and an archived copy. The party with more than half
+            the seats runs the council; the same rules apply to every party.
           </p>
         </div>
         <dl className="statuses">

@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const { m, party } = partyOf(id);
   if (!party) return {};
-  const title = `${party.name}: 2026 manifesto pledges and where they stand | ${SITE.name}`;
-  const description = `${standing(party.promises).join(" ")} Every pledge quoted word for word from the ${party.short} manifesto for ${m.place.short}, with its status, cost and sources.`;
+  const title = `${party.name}: pledges and where they stand | ${SITE.name}`;
+  const description = `${standing(party.promises).join(" ")} Each pledge quoted word for word from the ${party.short} manifesto and since, for ${m.place.short}, with its status, cost and sources.`;
   return {
     title,
     description,
@@ -79,7 +79,7 @@ export default async function PartyPage({ params }: Props) {
         <p className="small">
           <a href="/promises">Promises</a>
         </p>
-        <h1>{party.name}: 2026 manifesto pledges</h1>
+        <h1>{party.name}: pledges</h1>
         <p className="lede">{standing(party.promises).join(" ")}</p>
         <p className="small">
           {party.short} holds {party.seats} of {m.people.councillors.length} seats
@@ -92,7 +92,7 @@ export default async function PartyPage({ params }: Props) {
       <section aria-labelledby="pledges-h" className="pay-section">
         <div className="sec-head">
           <h2 id="pledges-h">The pledges</h2>
-          <p>Headline pledges, as the party marked them, quoted word for word. Open one for its timeline, sources and the right of reply.</p>
+          <p>Pledges from the party&rsquo;s 2026 manifesto and since, quoted word for word. Open one for its timeline, sources and the right of reply.</p>
         </div>
         <PledgeRows promises={party.promises} show="area" />
         <p className="small muted">
@@ -161,7 +161,7 @@ export default async function PartyPage({ params }: Props) {
           {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: `${party.name}: 2026 manifesto pledges`,
+            name: `${party.name}: pledges`,
             url: `${SITE_URL}/party/${party.id}`,
             inLanguage: "en-GB",
             dateModified: party.changed,
