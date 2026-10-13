@@ -74,6 +74,7 @@ Your council tax bill, turned into a readable account of your council's money an
 | funding | `#2457F5` | `#8AA3EC` (the only blue in dark mode) |
 | services | `#52525B` | `#C0B5A4` |
 | gap, reserves | `#F2600C` | `#E6844F` |
+| gap as text ("Today" in a timeline, the "one-off" pill) | `#AD3F00` (passes AA on white, grey panels and its own pill) | `#F2A77A` |
 | GLA | `#A1A1AA` | `#7A7064` |
 | good / warn / bad | `#15803D` / `#B45309` / `#DC2626` | `#7FC78C` / `#E3C85B` / `#EF9C90` |
 
