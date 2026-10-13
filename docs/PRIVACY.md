@@ -6,6 +6,12 @@
 2. No personal names except councillors and officers named in official publications.
 3. Reading, calculating and sharing never need an account.
 
+## Page views
+
+* Since 13 Oct 2026 (once the owner connects the counter) the site counts how often each page is opened: one number per page per UTC day, counted on our server (`apps/web/proxy.ts`, rules in `apps/web/lib/views.ts`, tested in `apps/web/test/views.test.ts`). Only the page's path and the date are stored, in Upstash Redis. No IP address, cookie, device, browser, country, referrer or time of day; the user agent and fetch headers are read only to skip crawlers, link previews, AI fetchers, scripts and prefetches, and are never stored.
+* Only the site's own reading pages count, by an allow-list that matches the sitemap. What a reader types never reaches a page's path (postcodes go in a POST body, Balance it choices in the query string, which is never stored), and as a second guard no part of an address shaped like a postcode or a bare number is ever counted. The follow pages that carry an email token (`/follow/confirm`, `/follow/manage`) and the API are never counted.
+* The totals are public at `/views.json` and `/most-read`, so there is nothing hidden to ask for.
+
 ## Payments over £500
 
 Councils redact payments to individuals (foster carers, direct-payment recipients, some sole traders). Rules:

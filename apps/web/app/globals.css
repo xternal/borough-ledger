@@ -1629,6 +1629,11 @@
   .tablewrap th.n {
     text-align: right;
   }
+  /* /most-read: a pledge's name is long; let it wrap under its own column. */
+  .tablewrap td.most-read-page {
+    white-space: normal;
+    min-width: 16ch;
+  }
   .more {
     margin-top: 12px;
   }
