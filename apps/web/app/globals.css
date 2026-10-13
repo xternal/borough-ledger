@@ -1559,6 +1559,10 @@
     color: var(--gap-ink);
     font-weight: 600;
   }
+  /* The word "Today" sits in the grey date column, so it needs its own rule to turn orange. */
+  .timeline li.t-today .d {
+    color: var(--gap-ink);
+  }
   .actions {
     display: flex;
     gap: 10px;
