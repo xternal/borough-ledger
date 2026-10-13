@@ -46,7 +46,7 @@ Use council figures first (budget report, cabinet papers). Otherwise a documente
 * Rewording → new version, visible diff.
 * Council decisions (M7): each day `.github/workflows/daily-decisions.yml` fetches Cabinet and Full Council decisions and asks Claude which open pledges of the party running the council each new one moves, with the decision's exact words (code rejects any quote not found word for word). Suggestions arrive as a pull request that appends the event to each card; merging it is the editor's confirmation, closing it rejects them. A status only moves up the ladder this way, never down, except to "failed" when a decision abandons a pledge. Opposition pledges are never linked: a council decision cannot move them, the same rule for every party.
 * Right of reply for any councillor or party, published within 5 working days. Replies and corrections go to boroughs@guzh.uk, which every card and footer shows; a reply is added to the card's `replies` as sent, with the sender's public role and the date.
-* Two editors per merge. Reader submissions go to triage; volume never changes a status.
+* Two editors per merge. Until a second person joins, the two are the project owner (Pavel Guzhikov) and the AI Journalist (Claude, an AI; called The Robot in the October 2026 sign-off). The AI Journalist finds pledges, drafts cards and checks each quote word for word against its source; the owner reads every card and decides. Nothing is published on the AI Journalist's word alone, and the site says an AI takes part wherever it does. Reader submissions go to triage; volume never changes a status.
 * Editors declare party membership and residence ward. Cards about a party an editor belongs to need a second editor from outside it.
 * Quarterly audit of a 10% sample by someone outside the project.
 
@@ -60,3 +60,11 @@ The same rule for every party, so nobody chooses the easy pledges for one side a
 * **Quotes** are copied exactly as printed, typos included, with the PDF page. The manifesto is archived (Wayback Machine) and its SHA-256 recorded in `content/parties.yaml`.
 * **Order on the site:** newest first, then by id. No party is listed first by design.
 * **Editor check:** cards drafted by the build carry `editor_check_required: true` and show "Awaiting editor check" until two editors have read each quote against the page and applied the 7-day unscoreable rule (§2).
+
+## 7. Finding new pledges
+
+The same places for every party, every two weeks (docs/PLEDGE_FINDER.md):
+
+* **Where:** each party's local website, the council's news (commitments by named councillors), Cabinet and Full Council, by-election candidates, and the next two pledges from each manifesto in page order until every manifesto is covered.
+* **Who:** the AI Journalist, as a scheduled routine. It drafts cards marked "Awaiting editor check" and opens a pull request; it never merges one. A place it cannot read is listed in the pull request, never skipped silently.
+* **The guard:** `pnpm --filter @borough-ledger/schema promises:quotes` reads the source of every new version and fails unless its quote is there word for word, on the cited page, with an archived copy. CI runs it on every pull request. A photo of a leaflet cannot be read by code; the check marks it for the editor to read by eye.

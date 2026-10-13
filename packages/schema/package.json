@@ -18,16 +18,19 @@
     "decisions:suggest": "tsx src/decision-links-cli.ts suggest",
     "decisions:apply": "tsx src/decision-links-cli.ts apply",
     "decisions:probe": "tsx src/decision-links-cli.ts probe",
-    "digest": "tsx src/digest-cli.ts"
+    "digest": "tsx src/digest-cli.ts",
+    "promises:quotes": "tsx src/promise-quotes-cli.ts",
+    "promises:manifesto": "tsx src/manifesto-cli.ts"
   },
   "dependencies": {
-    "zod": "4.6.5",
-    "yaml": "2.9.1"
+    "pdfjs-dist": "6.3.289",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
   },
   "devDependencies": {
+    "@types/node": "22.20.5",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
-    "vitest": "5.0.3",
-    "@types/node": "22.20.5"
+    "vitest": "5.0.3"
   }
 }

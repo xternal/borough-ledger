@@ -35,7 +35,7 @@ function questions(t: TopicView, m: ReturnType<typeof buildModel>) {
   const qa = [
     {
       q: `What have the parties promised on ${t.area.toLowerCase()} in ${m.place.short}?`,
-      a: `${t.promises.length} headline pledge${t.promises.length === 1 ? "" : "s"} from ${parties.join(" and ")}: ${t.promises
+      a: `${t.promises.length} pledge${t.promises.length === 1 ? "" : "s"} from ${parties.join(" and ")}: ${t.promises
         .map((p) => `${p.partyShort}, “${p.text}” (${STATUS_LABEL[p.status]})`)
         .join("; ")}.`,
     },
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { m, topic } = topicOf(slug);
   if (!topic) return {};
   const title = `${topic.area} in ${m.place.short}: party pledges${topic.service ? " and council spending" : ""} | ${SITE.name}`;
-  const description = `${standing(topic.promises).join(" ")} Every pledge on ${topic.area.toLowerCase()} from the 2026 manifestos for ${m.place.short}, quoted word for word with its status and sources.`;
+  const description = `${standing(topic.promises).join(" ")} Every pledge on ${topic.area.toLowerCase()} for ${m.place.short}, from the 2026 manifestos and since, quoted word for word with its status and sources.`;
   return {
     title,
     description,
@@ -101,7 +101,7 @@ export default async function TopicPage({ params }: Props) {
       <section aria-labelledby="pledges-h" className="pay-section">
         <div className="sec-head">
           <h2 id="pledges-h">The pledges</h2>
-          <p>From every party&rsquo;s 2026 manifesto, quoted word for word. Open one for its timeline, sources and the right of reply.</p>
+          <p>From every party&rsquo;s 2026 manifesto and since, quoted word for word. Open one for its timeline, sources and the right of reply.</p>
         </div>
         <PledgeRows promises={topic.promises} show="party" />
       </section>

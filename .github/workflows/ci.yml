@@ -84,6 +84,8 @@ jobs:
         run: pnpm --filter @borough-ledger/schema content:check
       - name: Promise history only grows (CLAUDE.md invariant 8)
         run: pnpm --filter @borough-ledger/schema content:append-only origin/main
+      - name: Every new pledge quote is in its source word for word (docs/PROMISE_STANDARD.md section 7)
+        run: pnpm --filter @borough-ledger/schema promises:quotes origin/main
 
   check:
     name: Typecheck, test, preview build

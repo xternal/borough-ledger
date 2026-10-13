@@ -21,4 +21,8 @@ pnpm --filter @borough-ledger/schema content:build                  # compile af
 pnpm --filter @borough-ledger/schema content:check                  # what CI runs
 pnpm --filter @borough-ledger/schema content:append-only origin/main
 pnpm --filter @borough-ledger/schema content:deadlines              # what the nightly job runs
+pnpm --filter @borough-ledger/schema promises:quotes origin/main    # new quotes are in their sources word for word
+pnpm --filter @borough-ledger/schema promises:manifesto conservative 10 12   # a manifesto's pages, SHA-256 checked
 ```
+
+New pledges are found every two weeks by the pledge finder (`docs/PLEDGE_FINDER.md`), which opens a pull request for the editor.

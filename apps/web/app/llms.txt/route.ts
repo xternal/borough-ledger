@@ -25,7 +25,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Council tax next year (${SITE_URL}/council-tax-rise): the council's three options for 2027/28 from its report to Cabinet on 12 October 2026 (its own share of the bill up 100%, 125% or 150%), worked out for every band as the whole bill and the extra a week; why it is happening; and the timetable to the decision, with how to have your say. The percentages apply to the council's share, not the whole bill, which includes the Mayor of London's.
 - Council tax decoder (${SITE_URL}/council-tax): for every one of England's 296 councils that send council tax bills, the 2026/27 Band D bill split between the council's own share, the county council or the Mayor of London, police, fire, the combined authority and parish councils on average, with the change on 2025/26, from the government's council tax requirement tables (Table 10). One page per council at ${SITE_URL}/council-tax/<council>, found by postcode; and where across England the council's own share rose most, and where the other bodies drove the rise.
 - Balance it: next year's gap with the real choices a council has, including the referendum limit on council tax rises and the one-off nature of reserves.
-- Promises: each party's headline pledges from its 2026 manifesto, quoted word for word with the manifesto page, an archived copy, a status and a timeline. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
+- Promises: each party's pledges, from its 2026 manifesto (headline pledges first, then the rest in page order) and since, quoted word for word with the page, an archived copy, a status and a timeline. Every two weeks an AI journalist looks for new pledges from every party, and one appears only after the editor has read its quote against the source. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
 - Council decisions: every Cabinet and Full Council decision since January 2026 from the council's own records, with the pledges each one moves; a link is suggested by an AI with the decision's exact words and added only when an editor confirms it.
 - Your ward: find any of the 21 wards by postcode or on a map, with its councillors (all 50, with their posts, from the council's own records), pledges about the ward, the wards next to it and a link to report street problems on FixMyStreet.
 - What the council is building (${SITE_URL}/building): the four-year capital programme, scheme by scheme, how it is paid for and the debt it leaves.
@@ -54,7 +54,7 @@ Data vintage: ${c.vintage}.
 - [Home](${SITE_URL}/)
 - [Promises](${SITE_URL}/promises)
 - [Council decisions](${SITE_URL}/decisions)
-${partiesOf(buildModel()).map((pt) => `- [${pt.name}: 2026 manifesto pledges](${SITE_URL}/party/${pt.id})`).join("\n")}
+${partiesOf(buildModel()).map((pt) => `- [${pt.name}: pledges](${SITE_URL}/party/${pt.id})`).join("\n")}
 ${topicsOf(buildModel()).map((t) => `- [${t.area}: pledges from every party](${SITE_URL}/topic/${t.slug})`).join("\n")}
 - [Your ward: wards and councillors](${SITE_URL}/wards)
 - [Balance next year's budget](${SITE_URL}/balance)
