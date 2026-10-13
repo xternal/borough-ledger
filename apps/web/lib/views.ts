@@ -94,16 +94,22 @@ export interface ViewsFile {
   days: ViewsDay[];
 }
 
-/** Pages by views over the newest `days` days, most read first. */
+const DAY_MS = 86_400_000;
+
+/**
+ * Pages by views over the last `days` UTC days up to the file's own date (today and the days before it), most read
+ * first. By calendar date, not the newest days in the file: a day nobody read anything is not in the file at all.
+ */
 export function topPages(file: ViewsFile, days: number): { path: string; views: number }[] {
+  const from = new Date(new Date(file.generated_at).getTime() - (days - 1) * DAY_MS).toISOString().slice(0, 10);
   const totals = new Map<string, number>();
-  for (const d of [...file.days].sort((a, b) => b.date.localeCompare(a.date)).slice(0, days)) {
+  for (const d of file.days.filter((x) => x.date >= from)) {
     for (const [path, n] of Object.entries(d.pages)) totals.set(path, (totals.get(path) ?? 0) + n);
   }
   return [...totals.entries()].map(([path, views]) => ({ path, views })).sort((a, b) => b.views - a.views || a.path.localeCompare(b.path));
 }
 
-/** All views over the newest `days` days. */
+/** All views over the last `days` UTC days. */
 export const totalViews = (file: ViewsFile, days: number) => topPages(file, days).reduce((s, p) => s + p.views, 0);
 
 /** The Upstash REST address and tokens, as the Vercel integration names them; null when the counter is not connected. */
@@ -126,7 +132,8 @@ async function pipeline(counter: Counter, commands: string[][], token: string, t
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
     body: JSON.stringify(commands),
-    cache: "no-store",
+    // No `cache: "no-store"`: on /most-read it would stop Next.js refreshing the page every ten minutes (it calls that
+    // turning static to dynamic, and keeps the old page). A POST is never cached anyway.
     signal: AbortSignal.timeout(timeoutMs),
   });
   if (!r.ok) throw new Error(`counter answered ${r.status}`);
@@ -137,8 +144,6 @@ async function pipeline(counter: Counter, commands: string[][], token: string, t
 export async function countView(counter: Counter, path: string, now = new Date(), f: Fetch = fetch): Promise<void> {
   await pipeline(counter, [["HINCRBY", dayKey(now), path, "1"]], counter.writeToken, COUNT_TIMEOUT_MS, f);
 }
-
-const DAY_MS = 86_400_000;
 
 /** The last VIEWS_DAYS days' totals, newest first; days with no views are left out. */
 export async function readViews(counter: Counter, now = new Date(), f: Fetch = fetch): Promise<ViewsFile> {

@@ -191,6 +191,8 @@ describe("what is stored and read", () => {
     const sent: { url: string; body: string[][]; auth: string }[] = [];
     const f = (async (url: string, init: RequestInit) => {
       const body = JSON.parse(String(init.body)) as string[][];
+      // "no-store" would make Next.js refuse to refresh /most-read every ten minutes.
+      expect(init.cache).toBeUndefined();
       sent.push({ url, body, auth: (init.headers as Record<string, string>).Authorization! });
       return new Response(JSON.stringify(answer(body)), { status });
     }) as unknown as typeof fetch;
@@ -366,7 +368,7 @@ describe("the most read pages", () => {
     ],
   };
 
-  it("adds up the newest days, most read first, ties by address", () => {
+  it("adds up the last days by calendar date, most read first, ties by address", () => {
     expect(topPages(file, 2)).toEqual([
       { path: "/promises", views: 6 },
       { path: "/", views: 5 },
@@ -374,5 +376,17 @@ describe("the most read pages", () => {
     ]);
     expect(topPages(file, 30)[0]).toEqual({ path: "/payments", views: 100 });
     expect(totalViews(file, 2)).toBe(13);
+  });
+
+  it("leaves out a day older than the window even when the quiet days in between are missing from the file", () => {
+    // 1 October is 12 days before the 13th: among the file's newest seven days, but not in the last seven.
+    expect(topPages(file, 7).map((p) => p.path)).toEqual(["/promises", "/", "/wards"]);
+    expect(totalViews(file, 7)).toBe(13);
+    expect(totalViews(file, 12)).toBe(13);
+    expect(totalViews(file, 13)).toBe(113);
+    expect(topPages(file, 1)).toEqual([
+      { path: "/", views: 5 },
+      { path: "/promises", views: 2 },
+    ]);
   });
 });

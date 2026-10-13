@@ -83,16 +83,19 @@ export default async function MostReadPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {top.map((p, i) => (
-                        <tr key={p.path}>
-                          <td className="n muted">{i + 1}</td>
-                          <td className="most-read-page">
-                            <a href={p.path}>{pageLabel(p.path)}</a>
-                            <span className="small muted block">{p.path}</span>
-                          </td>
-                          <td className="n">{format("int", p.views)}</td>
-                        </tr>
-                      ))}
+                      {top.map((p, i) => {
+                        const label = pageLabel(p.path);
+                        return (
+                          <tr key={p.path}>
+                            <td className="n muted">{i + 1}</td>
+                            <td className="most-read-page">
+                              <a href={p.path}>{label}</a>
+                              {label !== p.path ? <span className="small muted block">{p.path}</span> : null}
+                            </td>
+                            <td className="n">{format("int", p.views)}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
