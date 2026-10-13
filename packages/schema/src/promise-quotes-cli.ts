@@ -40,6 +40,10 @@ if (!added.length) {
   process.exit(0);
 }
 
+// Several cards quote the same manifesto: read each source once.
+const sources = new Map<string, ReturnType<typeof readSource>>();
+const readOnce = (url: string) => sources.get(url) ?? sources.set(url, readSource(url)).get(url)!;
+
 const cell = (s: string) => s.replace(/\|/g, "\\|").replace(/\s+/g, " ");
 const rows: string[] = [];
 let failed = 0;
@@ -50,7 +54,7 @@ for (const v of added) {
   let verdict = archive_url ? "" : "**No**: no archived copy (archive_url)";
   if (archive_url) {
     for (const url of [waybackRaw(archive_url), source_url]) {
-      const got = await readSource(url);
+      const got = await readOnce(url);
       const used = url === source_url ? "live page" : "archived copy";
       if ("picture" in got) {
         // A photo of a leaflet cannot be read by code; the editor reads it, and the table says so.

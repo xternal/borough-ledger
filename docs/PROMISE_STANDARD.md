@@ -66,5 +66,5 @@ The same rule for every party, so nobody chooses the easy pledges for one side a
 The same places for every party, every two weeks (docs/PLEDGE_FINDER.md):
 
 * **Where:** each party's local website, the council's news (commitments by named councillors), Cabinet and Full Council, by-election candidates, and the next two pledges from each manifesto in page order until every manifesto is covered.
-* **Who:** the AI Journalist, as a scheduled routine. It drafts cards marked "Awaiting editor check" and opens a pull request; it never merges one. A place it cannot read is listed in the pull request, never skipped silently.
+* **Who:** the AI Journalist, as a scheduled task. It drafts cards marked "Awaiting editor check" and opens a pull request; it never merges one. A place it cannot read is listed in the pull request, never skipped silently.
 * **The guard:** `pnpm --filter @borough-ledger/schema promises:quotes` reads the source of every new version and fails unless its quote is there word for word, on the cited page, with an archived copy. CI runs it on every pull request. A photo of a leaflet cannot be read by code; the check marks it for the editor to read by eye.

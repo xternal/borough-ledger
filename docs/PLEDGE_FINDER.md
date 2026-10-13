@@ -1,6 +1,10 @@
 # Pledge finder
 
-Every two weeks an AI journalist (Claude, an AI, run as a scheduled cloud routine) looks for new pledges about Hammersmith & Fulham and drafts a card for each one. It opens a pull request and never merges it: a card appears on the site only after the editor has read its quote against the source (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
+Every two weeks an AI journalist (Claude, an AI, run as the scheduled task `bb-pledge-finder` on the owner's computer) looks for new pledges about Hammersmith & Fulham and drafts a card for each one. It opens a pull request and never merges it: a card appears on the site only after the editor has read its quote against the source (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
+
+## Where it runs, and why not in the cloud
+
+On the owner's Mac, in the Claude app, from `/Users/xternal/dev/borough-ledger`. It needs the open web: the party sites, the council's site (which refuses scripts, so it is read in the app's built-in browser) and the Wayback Machine. On 13 October 2026 a cloud routine on this account could reach only GitHub, npm and PyPI, and its GitHub login failed, so it could not read a single source. To move it to the cloud later, set the cloud environment's network access to "Full" and connect GitHub on claude.ai, run it once by hand, and check that `promises:quotes` reaches web.archive.org. If the Mac is off on a Monday, the task runs when the app next opens.
 
 ## 0. Is this a run week?
 
@@ -24,7 +28,7 @@ Look back to the date of the last pledge-finder pull request (titled "New pledge
 | By-elections | Candidates' published leaflets and websites, for any ward with a by-election in the window | Every candidate in that ward, not only the parties with seats. |
 | The manifesto backlog | `pnpm --filter @borough-ledger/schema promises:manifesto <party id>` | See section 3. |
 
-If a place cannot be read (an error, a block, a page that needs a browser), say so in the pull request under "Could not read". Never skip a place silently, and never read one party's places more closely than another's. Social media posts count only when the post can be archived and its words read from the archive.
+Read each place with curl or WebFetch first. A site that refuses scripts (the council's, often hflabour.com) is read in the built-in browser instead; never sign in, never get round a bot check, never download files. If a place still cannot be read, say so in the pull request under "Could not read". Never skip a place silently, and never read one party's places more closely than another's. Social media posts count only when the post can be archived and its words read from the archive.
 
 ## 2. What counts
 
@@ -69,11 +73,13 @@ pnpm --filter @borough-ledger/schema content:append-only origin/main
 pnpm --filter @borough-ledger/schema promises:quotes origin/main
 ```
 
-`promises:quotes` reads every new quote's source and fails unless the words are there word for word, on the cited page. Fix or drop any card it fails; never loosen the check. When all pass, commit on a new branch `claude/pledges-<YYYY-MM-DD>` and open a pull request against `main` titled "New pledges, <day month year>". `gh pr` does not work in the cloud; use the REST API:
+`promises:quotes` reads every new quote's source and fails unless the words are there word for word, on the cited page. Fix or drop any card it fails; never loosen the check. When all pass, commit on a new branch `pledges-<YYYY-MM-DD>` off an up-to-date `main` and open a pull request against `main` titled "New pledges, <day month year>":
 
 ```bash
-gh api repos/xternal/borough-ledger/pulls -f title="New pledges, 26 October 2026" -f head="claude/pledges-2026-10-26" -f base=main -F body=@pr-body.md
+gh pr create --base main --title "New pledges, 26 October 2026" --body-file pr-body.md
 ```
+
+Commit messages end with "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and the pull request body with "🤖 Generated with [Claude Code](https://claude.com/claude-code)".
 
 The pull request body has:
 
@@ -83,4 +89,4 @@ The pull request body has:
 4. **Considered, not added**: with one line each.
 5. **Could not read**: each place and the error.
 
-Do not merge it, approve it or turn on auto-merge. If nothing new was found and the backlog is empty, open no pull request. If no place could be read at all, open an issue titled "Pledge finder could not read its sources" with the errors (`gh api repos/xternal/borough-ledger/issues -f title=... -f body=...`), so the editor knows.
+Do not merge it, approve it or turn on auto-merge. If nothing new was found and the backlog is empty, open no pull request. If no place could be read at all, open an issue titled "Pledge finder could not read its sources" with the errors (`gh issue create`), so the editor knows.
