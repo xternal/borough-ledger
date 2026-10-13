@@ -8,7 +8,7 @@ import { CONTACT, MAKER, SITE } from "@/lib/site";
 import { share } from "@/lib/share";
 
 const title = `Privacy | ${SITE.name}`;
-const description = `What ${SITE.name} keeps about you: nothing to read the site, and for email alerts only your encrypted address and the pledges you follow.`;
+const description = `What ${SITE.name} keeps about you: nothing when you read the site (we only count how often each page is opened), and for email alerts only your encrypted address and the pledges you follow.`;
 
 export const metadata: Metadata = {
   title,
@@ -43,7 +43,12 @@ export default function PrivacyPage() {
       <section aria-labelledby="read-h" className="ward-sec">
         <h2 id="read-h">Reading the site</h2>
         <ul>
-          <li>No account, no cookies, no analytics and no advertising.</li>
+          <li>No account, no cookies, no analytics scripts and no advertising.</li>
+          <li>
+            We count how often each page is opened: one number per page per day, with nothing about who opened it (no IP address, device, browser, country or
+            time of day). Search engines, link previews and an address that could hold something you typed are never counted. The counts are kept by Upstash,
+            which sees only a page&rsquo;s address and the date, and they are public on <a href="/most-read">Most read pages</a>.
+          </li>
           <li>The bill calculator and the balance-it tool run in your browser. Your band, discounts and choices are never sent to us.</li>
           <li>
             The postcode boxes send your postcode to our own server, which asks postcodes.io, a free service using official data, and passes back only your council and ward. Your postcode is never kept or logged, and postcodes.io never

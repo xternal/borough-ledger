@@ -42,6 +42,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...DATA.content.promises.map((p) => ({ url: `${SITE_URL}/promise/${p.id}`, lastModified: changed.get(p.id), changeFrequency: "weekly" as const, priority: 0.8 })),
     ...DATA.content.councillors.map((c) => ({ url: `${SITE_URL}/councillor/${c.id}`, lastModified: m.people.retrievedOn, changeFrequency: "monthly" as const, priority: 0.4 })),
     { url: `${SITE_URL}/sources`, changeFrequency: "monthly", priority: 0.5 },
+    // Its counts change every ten minutes; the page itself changes with the site.
+    { url: `${SITE_URL}/most-read`, changeFrequency: "daily", priority: 0.2 },
     { url: `${SITE_URL}/follow`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${SITE_URL}/payments`, changeFrequency: "monthly", priority: 0.7 },
     ...MONTHS.map((mo) => ({ url: `${SITE_URL}/payments/${mo}`, changeFrequency: "yearly" as const, priority: 0.4 })),

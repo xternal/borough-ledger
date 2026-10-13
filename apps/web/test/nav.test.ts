@@ -19,6 +19,7 @@ describe("where you are", () => {
     expect(sectionForPath("/sources")).toBe("method");
     expect(sectionForPath("/follow/manage")).toBe("method");
     expect(sectionForPath("/privacy")).toBe("method");
+    expect(sectionForPath("/most-read")).toBe("method");
     expect(sectionForPath("/promisesxyz")).toBeNull();
   });
 

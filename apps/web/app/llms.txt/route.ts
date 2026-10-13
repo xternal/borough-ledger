@@ -60,6 +60,7 @@ ${topicsOf(buildModel()).map((t) => `- [${t.area}: pledges from every party](${S
 - [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)
 - [Sources](${SITE_URL}/sources)
+- [Most read pages](${SITE_URL}/most-read): which pages readers open most over the last 7 and 30 days, counted on the server as one number per page per day with nothing about the reader; the daily totals are public at ${SITE_URL}/views.json
 - [Follow changes by RSS](${SITE_URL}/follow): feeds for everything (${SITE_URL}/feed.xml), every pledge, each ward, each councillor and payments
 ${buildModel()
   .promises.map((p) => `- [${p.actor}: \u201c${p.text}\u201d (${STATUS_LABEL[p.status]})](${SITE_URL}/promise/${p.id}.md)`)

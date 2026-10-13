@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 vi.mock("node:fs", async (importOriginal) => {
   const fs = await importOriginal<typeof import("node:fs")>();
   const guard = (p: unknown) => {
-    if (String(p).includes("data/build/payments")) throw new Error(`read from disk at request time: ${String(p)}`);
+    if (/data\/(build\/payments|config)/.test(String(p))) throw new Error(`read from disk at request time: ${String(p)}`);
   };
   return {
     ...fs,
@@ -22,5 +22,22 @@ describe("pages rendered on request", () => {
     const m = buildModel();
     expect(m.payments.top.length).toBeGreaterThan(0);
     expect(m.payments.top[0]!.total.value).toBeGreaterThan(0);
+  });
+
+  it("name the pages on /most-read without reading files from disk", async () => {
+    const { pageLabel } = await import("@/lib/mostRead");
+    const { OTHER_BOROUGHS } = await import("@/lib/boroughList");
+    const { DATA } = await import("@borough-ledger/schema");
+    const ward = DATA.content.wards.wards[0]!;
+    expect(pageLabel("/")).not.toBe("/");
+    expect(pageLabel(`/ward/${ward.id}`)).toBe(`${ward.name} ward`);
+    expect(pageLabel(`/${OTHER_BOROUGHS[0]!.slug}`)).toBe(OTHER_BOROUGHS[0]!.short);
+    expect(pageLabel(`/promise/${DATA.content.promises[0]!.id}`)).toMatch(/pledge: \u201c/);
+    expect(pageLabel(`/councillor/${DATA.content.councillors[0]!.id}`)).toMatch(/ ward$/);
+    expect(pageLabel("/council-tax/camden")).toBe("Council tax in Camden");
+    expect(pageLabel("/council-tax-rise/band-d")).toBe("Council tax next year: Band D");
+    expect(pageLabel("/payments/2026-06")).toBe("Payments, June 2026");
+    expect(pageLabel("/supplier/veolia-es-uk-ltd")).toBe("/supplier/veolia-es-uk-ltd");
+    expect(pageLabel("/promise/gone")).toBe("/promise/gone");
   });
 });
