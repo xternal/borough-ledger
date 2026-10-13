@@ -27,7 +27,7 @@
   /* Text on tinted pills: darker than the chart colours so every pill passes WCAG AA (4.5:1). */
   --good-ink: #166534;
   --fund-ink: #1d45cf;
-  --gap-ink: #f2600c;
+  --gap-ink: #ad3f00;
   --idle: #8b8b94;
   --font: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -1556,8 +1556,12 @@
     border-radius: 2px !important;
   }
   .t-today {
-    color: var(--gap);
+    color: var(--gap-ink);
     font-weight: 600;
+  }
+  /* The word "Today" sits in the grey date column, so it needs its own rule to turn orange. */
+  .timeline li.t-today .d {
+    color: var(--gap-ink);
   }
   .actions {
     display: flex;
