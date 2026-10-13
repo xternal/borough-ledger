@@ -17,20 +17,20 @@
   --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#101820; --sunk:#1A2531; --line:#26323F; --line-strong:#364657;
-  --ink:#E7EDF3; --muted:#A3B0BD; --faint:#7D8B99; --accent:#7B9DFF;
-  --fund:#7B9DFF; --fund-soft:rgba(123,157,255,.22);
-  --spend:#A3B0BD; --spend-soft:rgba(163,176,189,.16);
-  --gap:#FF7A2E; --gap-soft:rgba(255,122,46,.20); --gla:#4F5F71;
-  --good:#4ADE80; --warn:#FBBF24; --bad:#F87171; --idle:#8291A0;
+  --bg:#241F1A; --sunk:#2E2822; --line:#38332D; --line-strong:#443F39;
+  --ink:#EFE7DA; --muted:#C0B5A4; --faint:#A59A88; --accent:#E2B26F;
+  --fund:#8AA3EC; --fund-soft:rgba(138,163,236,.22);
+  --spend:#C0B5A4; --spend-soft:rgba(192,181,164,.16);
+  --gap:#E6844F; --gap-soft:rgba(230,132,79,.20); --gla:#7A7064;
+  --good:#7FC78C; --warn:#E3C85B; --bad:#EF9C90; --idle:#A59A88;
   color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#101820; --sunk:#1A2531; --line:#26323F; --line-strong:#364657;
-  --ink:#E7EDF3; --muted:#A3B0BD; --faint:#7D8B99; --accent:#7B9DFF;
-  --fund:#7B9DFF; --fund-soft:rgba(123,157,255,.22);
-  --spend:#A3B0BD; --spend-soft:rgba(163,176,189,.16);
-  --gap:#FF7A2E; --gap-soft:rgba(255,122,46,.20); --gla:#4F5F71;
-  --good:#4ADE80; --warn:#FBBF24; --bad:#F87171; --idle:#8291A0;
+  --bg:#241F1A; --sunk:#2E2822; --line:#38332D; --line-strong:#443F39;
+  --ink:#EFE7DA; --muted:#C0B5A4; --faint:#A59A88; --accent:#E2B26F;
+  --fund:#8AA3EC; --fund-soft:rgba(138,163,236,.22);
+  --spend:#C0B5A4; --spend-soft:rgba(192,181,164,.16);
+  --gap:#E6844F; --gap-soft:rgba(230,132,79,.20); --gla:#7A7064;
+  --good:#7FC78C; --warn:#E3C85B; --bad:#EF9C90; --idle:#A59A88;
   color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -169,7 +169,7 @@ input[type=range]{width:100%;accent-color:var(--ink);margin:0;height:18px}
 .result{position:sticky;top:76px;background:var(--sunk);border-radius:14px;padding:24px;display:grid;gap:18px}
 @media (max-width:960px){.result{position:static}}
 .status{font-size:13px;font-weight:600}
-.status.ok{color:var(--good)} .status.short{color:var(--bad)} .status.spare{color:var(--accent)}
+.status.ok{color:var(--good)} .status.short{color:var(--bad)} .status.spare{color:var(--fund)}
 .result .big{font-size:44px}
 .stackbar{display:flex;height:12px;border-radius:4px;overflow:hidden;background:var(--bg);gap:2px}
 .stackbar i{display:block;height:100%}

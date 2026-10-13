@@ -66,15 +66,16 @@ Your council tax bill, turned into a readable account of your council's money an
 
 | Token | Light | Dark |
 |---|---|---|
-| bg | `#FFFFFF` | `#101820` (deep navy slate, never black) |
-| sunk | `#F5F5F6` | `#1A2531` |
-| line / line-strong | `#E7E7EA` / `#D4D4D8` | `#26323F` / `#364657` |
-| ink / muted / faint | `#0B0B0D` / `#61616B` / `#9A9AA3` | `#E7EDF3` / `#A3B0BD` / `#7D8B99` |
-| funding (accent) | `#2457F5` | `#7B9DFF` |
-| services | `#52525B` | `#A3B0BD` |
-| gap, reserves | `#F2600C` | `#FF7A2E` |
-| GLA | `#A1A1AA` | `#4F5F71` |
-| good / warn / bad | `#15803D` / `#B45309` / `#DC2626` | `#4ADE80` / `#FBBF24` / `#F87171` |
+| bg | `#FFFFFF` | `#241F1A` (dark brown: never black or navy, Pavel's dark palette from 12 Oct 2026) |
+| sunk / raised | `#F5F5F6` / `#FFFFFF` | `#2E2822` / `#39322B` |
+| line / line-strong | `#E7E7EA` / `#D4D4D8` | `#38332D` / `#443F39` |
+| ink / muted / faint | `#0B0B0D` / `#61616B` / `#9A9AA3` | `#EFE7DA` (13.3:1, never above 14:1) / `#C0B5A4` / `#A59A88` |
+| accent (links, focus, where you are) | `#2457F5` | `#E2B26F` (amber) |
+| funding | `#2457F5` | `#8AA3EC` (the only blue in dark mode) |
+| services | `#52525B` | `#C0B5A4` |
+| gap, reserves | `#F2600C` | `#E6844F` |
+| GLA | `#A1A1AA` | `#7A7064` |
+| good / warn / bad | `#15803D` / `#B45309` / `#DC2626` | `#7FC78C` / `#E3C85B` / `#EF9C90` |
 
 Type: Geist 400–700, self-hosted in production; tabular figures only on numbers (not body text, or hyphens widen). Scale 56 / 48 / 28 / 24 / 17 / 15 / 13 / 12. Radius 8 controls, 14 panels. Section spacing 72px.
 
