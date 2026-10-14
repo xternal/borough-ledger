@@ -22,13 +22,13 @@ jobs:
           check() {
             url="https://boroughbook.uk$1"; want="$2"
             body=$(curl -sS --max-time 30 --retry 2 --retry-delay 10 -w '\n%{http_code}' "$url") || { echo "::error::$url did not answer"; fail=1; return; }
-            code=$(printf '%s' "$body" | tail -n1)
+            code=${body##*$'\n'}
             if [ "$code" != "200" ]; then echo "::error::$url answered $code"; fail=1; return; fi
-            if ! printf '%s' "$body" | grep -q "$want"; then echo "::error::$url is missing \"$want\""; fail=1; return; fi
+            if ! grep -qF "$want" <<<"$body"; then echo "::error::$url is missing \"$want\""; fail=1; return; fi
             echo "ok  $url"
           }
           check / "BoroughBook.UK"
-          check /promises "manifesto pledges"
+          check /promises "quoted word for word"
           check /promise/hf-free-home-care "Right of reply"
           check /payments "Payments over"
           check /decisions "Council decisions"
