@@ -1334,7 +1334,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-services-taxes",
@@ -1421,7 +1421,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-tenants",
@@ -1633,7 +1633,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-green-investment",
@@ -1662,7 +1662,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-green-schemes",
