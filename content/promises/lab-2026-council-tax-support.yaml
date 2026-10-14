@@ -1,0 +1,20 @@
+id: "lab-2026-council-tax-support"
+actor:
+  kind: "party"
+  id: "labour"
+made_on: "2026-05-01"
+venue: "manifesto"
+area: "Running the council"
+versions:
+  - text: "Maintain one of the most comprehensive Council Tax Support Schemes in the country, so that who pays is as fair as how much they pay."
+    recorded_on: "2026-10-14"
+    source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+    page: 3
+status: "promised"
+deadline: null
+events:
+  - date: "2026-05-01"
+    type: "promised"
+    text: "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+replies: []
+editor_check_required: true
