@@ -24,12 +24,13 @@ Look back to the date of the last pledge-finder pull request (titled "New pledge
 | Place | What to read | Notes |
 |---|---|---|
 | Each party with seats (`content/parties.yaml`) | Its local website's news and campaign pages | Conservatives: https://www.hfconservatives.org.uk/news. Labour: https://hflabour.com/, which often does not answer scripts; read its newest Wayback Machine capture (`https://web.archive.org/web/2026/https://hflabour.com/`). hflabour.org.uk is not the party. |
+| Each party's official social media | Posts in the window | Labour: https://www.facebook.com/HFLabour/ and https://www.instagram.com/hflabour/ (given by the editor on 14 October 2026, while hflabour.com does not answer). Conservatives: https://www.facebook.com/hfconservatives and https://x.com/hfconscllrs (linked from their own site). Read in the built-in browser without signing in: decline optional cookies, close any sign-in box, never sign in. Facebook then shows the newest posts; on Instagram, open the newest posts to read each date and caption. If a login wall still hides the posts, list the page under "Could not read". |
 | The council's news | https://www.lbhf.gov.uk/news | Only commitments made by a named councillor (usually a Cabinet member). Officers' plans are not pledges. |
 | Cabinet and Full Council | `data/build/decisions.json` (fetched daily) and the agendas on https://democracy.lbhf.gov.uk | Motions passed, the Leader's statements, the budget speech in February and March. |
 | By-elections | Candidates' published leaflets and websites, for any ward with a by-election in the window | Every candidate in that ward, not only the parties with seats. |
 | The manifesto backlog | `pnpm --filter @borough-ledger/schema promises:manifesto <party id>` | See section 3. |
 
-Read each place with curl or WebFetch first. A site that refuses scripts (the council's, often hflabour.com) is read in the built-in browser instead; never sign in, never get round a bot check, never download files. If a place still cannot be read, say so in the pull request under "Could not read". Never skip a place silently, and never read one party's places more closely than another's. Social media posts count only when the post can be archived and its words read from the archive.
+Read each place with curl or WebFetch first. A site that refuses scripts (the council's, often hflabour.com) is read in the built-in browser instead; never sign in, never get round a bot check, never download files. If a place still cannot be read, say so in the pull request under "Could not read". Never skip a place silently, and never read one party's places more closely than another's. Social media posts count only when the post can be archived and its words read from the archive (`promises:quotes` checks this); a post the archive cannot read goes under "Considered, not added".
 
 ## 2. What counts
 
