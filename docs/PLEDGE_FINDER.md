@@ -6,15 +6,16 @@ Every two weeks an AI journalist (Claude, an AI, run as the scheduled task `bb-p
 
 On the owner's Mac, in the Claude app, from `/Users/xternal/dev/borough-ledger`. It needs the open web: the party sites, the council's site (which refuses scripts, so it is read in the app's built-in browser) and the Wayback Machine. On 13 October 2026 a cloud routine on this account could reach only GitHub, npm and PyPI, and its GitHub login failed, so it could not read a single source. To move it to the cloud later, set the cloud environment's network access to "Full" and connect GitHub on claude.ai, run it once by hand, and check that `promises:quotes` reaches web.archive.org. If the Mac is off on a Monday, the task runs when the app next opens.
 
-## 0. Is this a run week?
+## 0. Is a run due?
 
-The schedule fires every Monday. Run only in the weeks counted in twos from Monday 26 October 2026:
+The schedule fires every Monday. A run is due when no "New pledges, ..." pull request has been opened in the last 10 days, open, merged or closed:
 
 ```bash
-python3 -c "import datetime as d; t=d.date.today(); w=(t-d.date(2026,10,26)).days//7; print('run' if t.weekday()!=0 or (w>=0 and w%2==0) else 'skip')"
+last=$(gh pr list --repo xternal/borough-ledger --state all --search "New pledges in:title" --limit 20 --json title,createdAt -q '[.[] | select(.title | startswith("New pledges, ")) | .createdAt] | max // ""')
+python3 -c "import sys,datetime as d; s=sys.argv[1]; age=(d.datetime.now(d.timezone.utc)-d.datetime.fromisoformat(s.replace('Z','+00:00'))).days if s else 99; print(('run' if age>=10 else 'skip')+f' (last New pledges PR opened {s or \"never\"}, {age} days ago)')" "$last"
 ```
 
-On `skip`, stop at once and do nothing else. A run started by hand (anything other than Monday) always goes ahead.
+On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Monday is caught up the next Monday. With a run every other Monday it skips the Mondays in between (19 October 2026 skips, 26 October runs). A run that opens no pull request leaves the next Monday due. The only way past a `skip` is a person in a Claude session asking for the pledge finder to "run anyway"; the scheduled task never does.
 
 ## 1. Where to look: the same places for every party
 
