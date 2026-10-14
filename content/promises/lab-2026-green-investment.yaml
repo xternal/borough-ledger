@@ -1,0 +1,20 @@
+id: "lab-2026-green-investment"
+actor:
+  kind: "party"
+  id: "labour"
+made_on: "2026-05-01"
+venue: "manifesto"
+area: "Climate and environment"
+versions:
+  - text: "Double our Green Investment scheme, which has already raised nearly £5m, letting residents earn market-leading returns while funding local projects and saving the council money."
+    recorded_on: "2026-10-14"
+    source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+    page: 3
+status: "promised"
+deadline: null
+events:
+  - date: "2026-05-01"
+    type: "promised"
+    text: "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+replies: []
+editor_check_required: true

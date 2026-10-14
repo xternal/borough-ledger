@@ -1,0 +1,20 @@
+id: "con-2026-special-constables"
+actor:
+  kind: "party"
+  id: "conservative"
+made_on: "2026-03-16"
+venue: "manifesto"
+area: "Community safety"
+versions:
+  - text: "We will launch a Special Constable recruitment drive, offering incentives such as council tax reductions."
+    recorded_on: "2026-10-14"
+    source_url: "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf"
+    page: 4
+status: "not_in_power"
+deadline: null
+events:
+  - date: "2026-03-16"
+    type: "promised"
+    text: "In the 2026 Conservative manifesto, page 4; not one of its key commitments"
+replies: []
+editor_check_required: true

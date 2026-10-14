@@ -1308,6 +1308,35 @@
    "editor_note": "Cost not stated in the manifesto; cost it from Met charges for additional officers if a council source exists."
   },
   {
+   "id": "con-2026-service-standards",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Running the council",
+   "versions": [
+    {
+     "text": "we will publish clear service standards, be transparent about how we perform, and be honest about what the Council can and cannot do",
+     "recorded_on": "2026-10-14",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 3
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "In the 2026 Conservative manifesto, page 3; not one of its key commitments"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
    "id": "con-2026-services-taxes",
    "actor": {
     "kind": "party",
@@ -1364,6 +1393,35 @@
    ],
    "replies": [],
    "editor_check_required": false
+  },
+  {
+   "id": "con-2026-special-constables",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "We will launch a Special Constable recruitment drive, offering incentives such as council tax reductions.",
+     "recorded_on": "2026-10-14",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 4
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "In the 2026 Conservative manifesto, page 4; not one of its key commitments"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
   },
   {
    "id": "con-2026-tenants",
@@ -1547,6 +1605,64 @@
    "replies": [],
    "editor_check_required": false,
    "editor_note": "'Best value council in Britain' has no stated measure; free home care has its own card (hf-free-home-care)."
+  },
+  {
+   "id": "lab-2026-council-tax-support",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Running the council",
+   "versions": [
+    {
+     "text": "Maintain one of the most comprehensive Council Tax Support Schemes in the country, so that who pays is as fair as how much they pay.",
+     "recorded_on": "2026-10-14",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
+   "id": "lab-2026-green-investment",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Climate and environment",
+   "versions": [
+    {
+     "text": "Double our Green Investment scheme, which has already raised nearly £5m, letting residents earn market-leading returns while funding local projects and saving the council money.",
+     "recorded_on": "2026-10-14",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
   },
   {
    "id": "lab-2026-green-schemes",

@@ -1,5 +1,9 @@
+import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { buildModel } from "@/lib/model";
+
+/** One card per file in content/promises: the pledge finder adds cards, so the count comes from the files, not a fixed number. */
+const CARD_FILES = readdirSync(new URL("../../../content/promises/", import.meta.url)).filter((f) => f.endsWith(".yaml")).length;
 
 describe("page model", () => {
   const m = buildModel();
@@ -35,7 +39,8 @@ describe("page model", () => {
   });
 
   it("holds both parties' manifesto pledges to the same rules", () => {
-    expect(m.promises).toHaveLength(18);
+    expect(CARD_FILES).toBeGreaterThanOrEqual(18);
+    expect(m.promises).toHaveLength(CARD_FILES);
     const by = (side: string) => m.promises.filter((p) => p.side === side);
     expect(by("administration").every((p) => p.partyId === "labour")).toBe(true); // 38 of 50 seats
     expect(by("opposition").every((p) => p.partyId === "conservative" && ["not_in_power", "unscoreable"].includes(p.status))).toBe(true);
