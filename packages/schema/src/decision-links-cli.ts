@@ -10,7 +10,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { isSeq, parseDocument } from "yaml";
 import { compileContent } from "./content-compile";
-import { SYSTEM_PROMPT, eventFor, linkFor, linkTool, openPledges, statusAfter, userPrompt, validSuggestions, type Suggestion } from "./decision-links";
+import { SYSTEM_PROMPT, eventFor, linkFor, linkSchema, openPledges, statusAfter, userPrompt, validSuggestions, type Suggestion } from "./decision-links";
 import type { PromiseCard } from "./content";
 import { DecisionsFile } from "./decisions";
 
@@ -29,15 +29,36 @@ const writeAssessed = (a: Assessed) =>
   );
 const decisions = () => DecisionsFile.parse(JSON.parse(readFileSync(join(root, "data", "build", "decisions.json"), "utf8"))).decisions;
 
-async function ask(system: string, user: string, tool: ReturnType<typeof linkTool>): Promise<unknown> {
+/** Puts one decision to Claude. The answer is JSON in the schema (structured outputs; the model always thinks first, so
+    max_tokens leaves room for that). A declined request is retried server-side on the fallback Anthropic recommends, so
+    `model` is whichever model answered. Null when there is no usable answer (refused or cut off): the decision then stays
+    unassessed and is asked about again on the next run. */
+async function ask(system: string, user: string, schema: ReturnType<typeof linkSchema>): Promise<{ answer: unknown; model: string; stop: string } | null> {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
-    headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY!, "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 2000, system, tools: [tool], tool_choice: { type: "tool", name: tool.name }, messages: [{ role: "user", content: user }] }),
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": process.env.ANTHROPIC_API_KEY!,
+      "anthropic-version": "2023-06-01",
+      "anthropic-beta": "server-side-fallback-2026-07-01",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 16000,
+      system,
+      output_config: { format: { type: "json_schema", schema } },
+      fallbacks: "default",
+      messages: [{ role: "user", content: user }],
+    }),
   });
-  if (!res.ok) throw new Error(`Claude API ${res.status}: ${(await res.text()).slice(0, 300)}`);
-  const body = (await res.json()) as { content: { type: string; input?: unknown }[] };
-  return body.content.find((c) => c.type === "tool_use")?.input ?? { links: [] };
+  if (!res.ok) throw new Error(`Claude API ${res.status} for ${MODEL}: ${(await res.text()).slice(0, 300)}`);
+  const body = (await res.json()) as { model: string; stop_reason: string; content: { type: string; text?: string }[] };
+  const text = body.content.filter((c) => c.type === "text").at(-1)?.text;
+  if (body.stop_reason !== "end_turn" || !text) {
+    console.log(`no answer from ${body.model}: stop_reason ${body.stop_reason}`);
+    return null;
+  }
+  return { answer: JSON.parse(text), model: body.model, stop: body.stop_reason };
 }
 
 async function suggest(out: string) {
@@ -49,16 +70,23 @@ async function suggest(out: string) {
     return;
   }
   const pledges = openPledges(compileContent(join(root, "content")));
-  const all: Suggestion[] = [];
+  const all: (Suggestion & { suggested_by: string })[] = [];
+  let unanswered = 0;
   for (const d of todo) {
-    const { kept, dropped } = validSuggestions(d, pledges, await ask(SYSTEM_PROMPT, userPrompt(d, pledges), linkTool(pledges)));
+    const reply = await ask(SYSTEM_PROMPT, userPrompt(d, pledges), linkSchema(pledges));
+    if (!reply) {
+      console.log(`${d.id} left for the next run`);
+      unanswered++;
+      continue;
+    }
+    const { kept, dropped } = validSuggestions(d, pledges, reply.answer);
     for (const x of dropped) console.log(`dropped ${x}`);
-    all.push(...kept);
-    assessed[d.id] = { on: today, by: MODEL, links: kept.length };
+    all.push(...kept.map((k) => ({ ...k, suggested_by: reply.model })));
+    assessed[d.id] = { on: today, by: reply.model, links: kept.length };
   }
   writeAssessed(assessed);
   writeFileSync(out, `${JSON.stringify(all, null, 1)}\n`);
-  console.log(`${todo.length} decisions assessed, ${all.length} links suggested.`);
+  console.log(`${todo.length - unanswered} decisions assessed, ${all.length} links suggested${unanswered ? `, ${unanswered} left for the next run` : ""}.`);
 }
 
 function apply(input: string, summaryPath?: string) {
@@ -97,16 +125,16 @@ function apply(input: string, summaryPath?: string) {
   console.log(`${lines.length} links applied.`);
 }
 
-/** One tiny request: is the key accepted and does the model exist? Costs a fraction of a penny. */
+/** The suggester's own request for one short decision already assessed, recording nothing: is the key accepted, does the
+    model exist, and does it take the request as sent? Costs about a penny. */
 async function probe() {
   if (!process.env.ANTHROPIC_API_KEY) throw new Error("No ANTHROPIC_API_KEY.");
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 5, messages: [{ role: "user", content: "Reply with OK." }] }),
-  });
-  if (!res.ok) throw new Error(`Claude API ${res.status} for ${MODEL}: ${(await res.text()).slice(0, 300)}`);
-  console.log(`Claude API key accepted; ${MODEL} answered.`);
+  const pledges = openPledges(compileContent(join(root, "content")));
+  const d = decisions().reduce((a, b) => (b.text.length < a.text.length ? b : a));
+  const reply = await ask(SYSTEM_PROMPT, userPrompt(d, pledges), linkSchema(pledges));
+  if (!reply) throw new Error(`${MODEL} gave no usable answer for ${d.id}.`);
+  const { kept, dropped } = validSuggestions(d, pledges, reply.answer);
+  console.log(`Claude API key accepted; ${reply.model} answered for ${d.id} (stop_reason ${reply.stop}): ${kept.length} links kept, ${dropped.length} dropped.`);
 }
 
 const [cmd, a, b] = process.argv.slice(2);
