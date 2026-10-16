@@ -156,6 +156,11 @@
    "by": "Claude (backfill, read by hand in a session)",
    "links": 0
   },
+  "mg-73254": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
+   "links": 0
+  },
   "mg-73278": {
    "on": "2026-10-08",
    "by": "Claude (backfill, read by hand in a session)",
@@ -196,6 +201,11 @@
    "by": "Claude (backfill, read by hand in a session)",
    "links": 0
   },
+  "mg-73525": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
+   "links": 0
+  },
   "mg-73594": {
    "on": "2026-10-08",
    "by": "Claude (backfill, read by hand in a session)",
@@ -204,6 +214,11 @@
   "mg-73607": {
    "on": "2026-10-08",
    "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73650": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
    "links": 0
   },
   "mg-73660": {
@@ -219,6 +234,21 @@
   "mg-73668": {
    "on": "2026-10-08",
    "by": "Claude (backfill, read by hand in a session)",
+   "links": 0
+  },
+  "mg-73753": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
+   "links": 0
+  },
+  "mg-73759": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
+   "links": 0
+  },
+  "mg-73763": {
+   "on": "2026-10-16",
+   "by": "claude-opus-5-5",
    "links": 0
   },
   "mg-73806": {
