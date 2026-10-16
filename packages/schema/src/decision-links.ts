@@ -48,30 +48,30 @@ Text:
 ${d.text}`;
 }
 
-/** The tool the model must call, so its answer is structured and checkable. */
-export function linkTool(pledges: PromiseCard[]) {
+/** The JSON schema the model's answer must follow (structured outputs), so it is checkable. Current models refuse a forced
+    tool call, so the answer is the reply itself; every object needs additionalProperties: false. */
+export function linkSchema(pledges: PromiseCard[]) {
   return {
-    name: "record_links",
-    description: "Record the pledges this decision moves, with the exact words that show it. An empty list when it moves none.",
-    input_schema: {
-      type: "object",
-      properties: {
-        links: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              promise_id: { type: "string", enum: pledges.map((p) => p.id) },
-              event: { type: "string", enum: [...LINK_EVENTS] },
-              quote: { type: "string", description: "Copied exactly from the decision text, 20 to 300 characters." },
-              reason: { type: "string", description: "One sentence for the editor: why this decision shows that step." },
-            },
-            required: ["promise_id", "event", "quote", "reason"],
+    type: "object",
+    description: "The pledges this decision moves, with the exact words that show it. An empty list when it moves none.",
+    properties: {
+      links: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            promise_id: { type: "string", enum: pledges.map((p) => p.id) },
+            event: { type: "string", enum: [...LINK_EVENTS] },
+            quote: { type: "string", description: "Copied exactly from the decision text, 20 to 300 characters." },
+            reason: { type: "string", description: "One sentence for the editor: why this decision shows that step." },
           },
+          required: ["promise_id", "event", "quote", "reason"],
+          additionalProperties: false,
         },
       },
-      required: ["links"],
     },
+    required: ["links"],
+    additionalProperties: false,
   } as const;
 }
 

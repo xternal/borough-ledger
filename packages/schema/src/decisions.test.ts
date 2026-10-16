@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DATA } from "./data";
-import { eventFor, openPledges, userPrompt, validSuggestions } from "./decision-links";
+import { eventFor, linkSchema, openPledges, userPrompt, validSuggestions } from "./decision-links";
 import { checkDecisionLinks, normaliseText, quoteIn, statusAfter, type Decision } from "./decisions";
 
 const d: Decision = {
@@ -48,6 +48,18 @@ describe("council decisions and pledges", () => {
     expect(kept.map((k) => k.event)).toEqual(["in_plan"]);
     expect(dropped.length).toBe(3);
     expect(userPrompt(d, open)).toContain(green.id);
+  });
+
+  it("asks for an answer in a schema the API accepts for structured outputs", () => {
+    const open = openPledges(DATA.content);
+    const schema = linkSchema(open);
+    const item = schema.properties.links.items;
+    for (const o of [schema, item]) {
+      expect(o.additionalProperties).toBe(false);
+      expect([...o.required].sort()).toEqual(Object.keys(o.properties).sort());
+    }
+    expect(item.properties.promise_id.enum).toEqual(open.map((p) => p.id));
+    expect(JSON.stringify(schema)).not.toMatch(/minLength|maxLength|minimum|maximum/);
   });
 
   it("writes a timeline event that quotes the decision and cites the council's page", () => {

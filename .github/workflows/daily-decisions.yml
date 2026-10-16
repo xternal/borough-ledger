@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       probe:
-        description: "Only check that the Claude API key and model work"
+        description: "Only check that the Claude API key, model and request work (on the branch it is run from)"
         type: boolean
         default: false
 
@@ -27,9 +27,10 @@ jobs:
   decisions:
     runs-on: ubuntu-24.04
     steps:
+      # Real runs always work on main; a probe tries the branch it was started on, so a fix can be checked before merging.
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ inputs.probe && github.ref || 'main' }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
