@@ -46,8 +46,8 @@ Use council figures first (budget report, cabinet papers). Otherwise a documente
 * Rewording → new version, visible diff.
 * Council decisions (M7): each day `.github/workflows/daily-decisions.yml` fetches Cabinet and Full Council decisions and asks Claude which open pledges of the party running the council each new one moves, with the decision's exact words (code rejects any quote not found word for word). Suggestions arrive as a pull request that appends the event to each card; merging it is the editor's confirmation, closing it rejects them. A status only moves up the ladder this way, never down, except to "failed" when a decision abandons a pledge. Opposition pledges are never linked: a council decision cannot move them, the same rule for every party.
 * Right of reply for any councillor or party, published within 5 working days. Replies and corrections go to boroughs@guzh.uk, which every card and footer shows; a reply is added to the card's `replies` as sent, with the sender's public role and the date.
-* Two editors per merge. Until a second person joins, the two are the project owner (Pavel Guzhikov) and the AI Journalist (Claude, an AI; called The Robot in the October 2026 sign-off). The AI Journalist finds pledges, drafts cards and checks each quote word for word against its source; the owner reads every card and decides. Nothing is published on the AI Journalist's word alone, and the site says an AI takes part wherever it does. Reader submissions go to triage; volume never changes a status.
-* Editors declare party membership and residence ward. Cards about a party an editor belongs to need a second editor from outside it.
+* One editor's approval per merge: the project owner's, Pavel Guzhikov's (his decision of 17 October 2026; until then the rule said two editors, and the two were the owner and the AI Journalist). The AI Journalist (Claude, an AI; called The Robot in the October 2026 sign-off) checks first: it finds pledges, drafts cards and checks each quote word for word against its source; the editor reads every card and decides. The AI Journalist never approves, nothing is published on its word alone, and the site says an AI takes part wherever it does: an approved card reads "Checked by the AI Journalist and approved by Pavel Guzhikov" (`packages/schema/src/editorial.ts`). Sign-offs already given stay valid. Reader submissions go to triage; volume never changes a status.
+* Editors declare party membership and residence ward. A card about a party an editor belongs to is approved by an editor from outside it.
 * Quarterly audit of a 10% sample by someone outside the project.
 
 ## 6. Which pledges get a card
@@ -59,7 +59,7 @@ The same rule for every party, so nobody chooses the easy pledges for one side a
 * **Starting status:** the administration's pledges start at "promised" and move up only on evidence from council papers. Opposition pledges are "opposition pledge" (`not_in_power`).
 * **Quotes** are copied exactly as printed, typos included, with the PDF page. The manifesto is archived (Wayback Machine) and its SHA-256 recorded in `content/parties.yaml`.
 * **Order on the site:** newest first, then by id. No party is listed first by design.
-* **Editor check:** cards drafted by the build carry `editor_check_required: true` and show "Awaiting editor check" until two editors have read each quote against the page and applied the 7-day unscoreable rule (§2).
+* **Editor check:** cards drafted by the build carry `editor_check_required: true` and show "Awaiting editor check" until the editor has read each quote against the page, after the AI Journalist's check, and applied the 7-day unscoreable rule (§2). Then the flag is set to `false`, and the card reads "Checked by the AI Journalist and approved by Pavel Guzhikov".
 
 ## 7. Finding new pledges
 
