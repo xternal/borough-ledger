@@ -16,6 +16,8 @@ Residents pay £1,000–£3,000 a year in council tax and get a one-page bill. B
 
 ## Features v0
 
+Each of F1 to F4 and F8 has a page of its own (`/bill`, `/budget`, `/gap`, `/balance`, `/method`), as F5 and F6 do (`/promises`, `/payments`); the home page shows them all on one page as the overview, and the menu always links to the pages.
+
 ### F1. Your bill
 - Band picker A–H; single person discount toggle; Council Tax Support signposted.
 - Total, monthly (10 and 12 instalments), split council vs Mayor of London (GLA), with what the GLA share funds.
