@@ -5,6 +5,7 @@ import { QUALITY_TITLE } from "@/lib/quality";
 import { Num, NumT } from "./Num";
 import { QualityLegend } from "./QualityLegend";
 import { ChartTable, DataTable } from "./ChartTable";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 interface FlowNode {
   id: string;
@@ -163,6 +164,7 @@ export function BudgetFlow({
   id = "budget",
   title = "The council’s budget",
   lead,
+  view,
 }: {
   m: Pick<PageModel, "funding" | "services" | "netBudget" | "place">;
   legend: QualityItem[];
@@ -170,6 +172,8 @@ export function BudgetFlow({
   id?: string;
   title?: string;
   lead?: React.ReactNode;
+  /** Hammersmith & Fulham's budget, on the overview or on its own page (/budget); unset on other councils' pages. */
+  view?: SectionView;
 }) {
   // A service the council does not run at all (a district's schools) is left out here; `more` can say who runs it.
   const services = m.services.filter((x) => x.f.value !== 0).sort((a, z) => z.f.value - a.f.value);
@@ -178,7 +182,9 @@ export function BudgetFlow({
   return (
     <section id={id} aria-labelledby={`${id}-h`}>
       <div className="sec-head">
-        <h2 id={`${id}-h`}>{title}</h2>
+        <SecTitle id={`${id}-h`} section="budget" view={view}>
+          {title}
+        </SecTitle>
         {lead ? <p>{lead}</p> : null}
         <p>
           What the council spends on day-to-day services after fees and charges, and where the money comes from

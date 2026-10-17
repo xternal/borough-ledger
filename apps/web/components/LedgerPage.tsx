@@ -1,14 +1,4 @@
-import type { Scenario } from "@borough-ledger/engine";
-import { BalanceIt } from "@/components/BalanceIt";
-import { AdultCare } from "@/components/AdultCare";
-import { CareCompare } from "@/components/CareCompare";
-import { MakeYourCase } from "@/components/MakeYourCase";
-import { ServiceCases } from "@/components/ServiceCases";
-import { ServiceCompare } from "@/components/ServiceCompare";
-import { ChildrenCare } from "@/components/ChildrenCare";
-import { BillSection } from "@/components/BillSection";
-import { CouncilTaxOptions } from "@/components/CouncilTaxOptions";
-import { BudgetFlow } from "@/components/BudgetFlow";
+import { BalancePart, BillPart, BudgetPart } from "@/components/LedgerSections";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
@@ -16,33 +6,18 @@ import { LedgerStateProvider } from "@/components/LedgerState";
 import { Method } from "@/components/Method";
 import { Payments } from "@/components/Payments";
 import { Promises } from "@/components/Promises";
-import { ScrollTo } from "@/components/ScrollTo";
 import { TopBar } from "@/components/TopBar";
 import { WardSection } from "@/components/WardSection";
 import { Waterfall } from "@/components/Waterfall";
-import { Num } from "@/components/Num";
-import { HOMES, SPAN, capFig, homesFig, totalOf } from "@/lib/capital";
 import { faq } from "@/lib/faq";
 import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
-import { adultCare, careComparison, careResults } from "@/lib/adultCare";
-import { adultCareCase, budgetWants, caseSetup, serviceCase } from "@/lib/makeYourCase";
-import { childrenCare } from "@/lib/childrenCare";
-import { DATA as HF_DATA } from "@borough-ledger/schema";
-
-/** What care for adults costs here (the government's finance report), shown under the budget. */
-const CARE = adultCare(HF_DATA.council.meta.council_code);
-/** And for children in care (the Department for Education's statistics). */
-const KIDS = childrenCare(HF_DATA.council.meta.council_code);
-
-/** The whole statement. `/` renders it as is; `/balance` opens it on a shared scenario. */
-export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initialScenario?: Scenario; focus?: string }) {
-  const careCase = adultCareCase(m, HF_DATA.council.meta.council_code);
-  const serviceCases = (["streets_waste", "libraries_leisure", "housing"] as const).flatMap((t) => {
-    const c = serviceCase(m, t, HF_DATA.council.meta.council_code);
-    return c ? [{ setup: c.setup, wants: c.wants, facts: c.facts, compare: <ServiceCompare cmp={c.cmp} council={m.place.short} /> }] : [];
-  });
+/**
+ * The home page: the whole statement on one long page, the overview. Every section keeps its anchor, so an old /#bill
+ * link still opens here, and each section's heading links to the section's own page (/bill, /budget, ...).
+ */
+export function LedgerPage({ m }: { m: PageModel }) {
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -64,54 +39,18 @@ export function LedgerPage({ m, initialScenario, focus }: { m: PageModel; initia
       <TopBar place={m.place.short} year={m.place.yearLabel} />
       <main className="wrap" id="top">
         <Hero m={m} />
-        <LedgerStateProvider input={m.balance.input} initialScenario={initialScenario}>
-          <BillSection bill={m.bill} rules={m.rules} services={m.services} ctShareGeneral={m.ctShareGeneral} generalBudget={m.generalBudget} place={m.place} />
-          {m.ctOptions ? (
-            <section id="next-bill" aria-labelledby="next-bill-h">
-              <div className="sec-head">
-                <h2 id="next-bill-h">Your bill next year: the council&rsquo;s three options</h2>
-                <p>
-                  The council&rsquo;s report to Cabinet on 12 October 2026 sets out three options for {m.place.nextYearLabel}. Nothing is decided yet. For the band you
-                  picked above:
-                </p>
-              </div>
-              <CouncilTaxOptions bill={m.bill} rules={m.rules} place={m.place} ct={m.ctOptions} compact />
-            </section>
-          ) : null}
-          <BudgetFlow
-            m={m}
-            legend={m.qualityLegend.budget}
-            more={
-              <p className="flow-more">
-                This is day-to-day spending. The council also plans <a href="/building">building work</a> worth <Num f={capFig(totalOf("gf").total!)} fmt="m1" />{" "}
-                from {SPAN}, and <a href="/council-homes">council homes</a> have an account of their own: rents and service charges of{" "}
-                <Num f={homesFig(-HOMES.budget.filter((b) => b.kind === "income").reduce((a, b) => a + b.now, 0))} fmt="m1" /> a year.
-              </p>
-            }
-          />
-          {serviceCases.length ? <ServiceCases cases={serviceCases} page={`${SITE_URL}/#case-services`} /> : null}
-          {CARE ? <AdultCare care={CARE} council={m.place.council} results={careResults(HF_DATA.council.meta.council_code)} /> : null}
-          {careCase && CARE ? (
-            <MakeYourCase
-              id="case-care"
-              setup={careCase.setup}
-              wants={careCase.wants}
-              facts={careCase.facts}
-              page={`${SITE_URL}/#case-care`}
-              compare={<CareCompare cmp={careComparison(HF_DATA.council.meta.council_code)!} yearLabel={CARE.yearLabel} results={careResults(HF_DATA.council.meta.council_code)} />}
-            />
-          ) : null}
-          {KIDS ? <ChildrenCare care={KIDS} council={m.place.council} short={m.place.short} /> : null}
-          <Waterfall m={m} />
-          <BalanceIt balance={m.balance} bill={m.bill} rules={m.rules} place={m.place} makeCase={{ setup: caseSetup("budget", m), wants: budgetWants(m), site: SITE_URL }} />
-          <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} />
+        <LedgerStateProvider input={m.balance.input}>
+          <BillPart m={m} view="overview" />
+          <BudgetPart m={m} view="overview" />
+          <Waterfall m={m} view="overview" />
+          <BalancePart m={m} view="overview" />
+          <Promises promises={m.promises} today={m.today} generalBudget={m.generalBudget} balance={m.balance} limit={6} view="overview" />
         </LedgerStateProvider>
-        <WardSection m={m} />
-        <Payments payments={m.payments} />
-        <Method m={m} />
+        <WardSection m={m} view="overview" />
+        <Payments payments={m.payments} view="overview" />
+        <Method m={m} view="overview" />
         <Footer council={m.place.short} hasTestData={m.hasTestData} />
       </main>
-      {focus ? <ScrollTo id={focus} /> : null}
       <JsonLd data={jsonLd} />
     </>
   );

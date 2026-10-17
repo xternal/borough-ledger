@@ -2,14 +2,17 @@ import { formatMonth, formatPeriod } from "@/lib/format";
 import type { PageModel } from "@/lib/model";
 import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 /** The home page's view of the payments ledger: the latest quarter in the council's files, and a way in to every payment. */
-export function Payments({ payments: p }: Pick<PageModel, "payments">) {
+export function Payments({ payments: p, view }: Pick<PageModel, "payments"> & { view?: SectionView }) {
   const period = formatPeriod(`${p.from}-01`, `${p.to}-01`);
   return (
     <section id="payments" aria-labelledby="payments-h">
       <div className="sec-head">
-        <h2 id="payments-h">Payments over £500</h2>
+        <SecTitle id="payments-h" section="payments" view={view}>
+          Payments over £500
+        </SecTitle>
         <p>
           The council publishes every payment over £500, a quarter at a time. The latest quarter here is {period}. Search every payment since{" "}
           {formatMonth(p.firstMonth)} on the <a href="/payments">payments page</a>.

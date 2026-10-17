@@ -3,14 +3,9 @@
 import { DATA, type Decision } from "@borough-ledger/schema";
 import type { FlowLine, PageModel, PromiseModel } from "./model";
 import { dateModified } from "./promiseText";
+import { topicSlug } from "./topicSlug";
 
-/** "Parks, libraries and leisure" -> "parks-libraries-and-leisure". Client-safe: the card links to its topic. */
-export const topicSlug = (area: string) =>
-  area
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+export { topicSlug };
 
 /**
  * A topic's line in the council's budget, where one clearly matches: the same name, or one named here. Topics with

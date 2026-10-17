@@ -46,7 +46,7 @@ export default function CouncilHomesPage() {
     <PageShell m={m}>
       <div className="hero">
         <p className="small">
-          <a href="/#budget">The council&rsquo;s budget</a>
+          <a href="/budget">The council&rsquo;s budget</a>
         </p>
         <h1>Council homes</h1>
         <p className="lede">

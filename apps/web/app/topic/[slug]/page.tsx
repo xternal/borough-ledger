@@ -45,7 +45,7 @@ function questions(t: TopicView, m: ReturnType<typeof buildModel>) {
     assertRenderable(f.quality, `topic ${t.slug} spending`);
     qa.push({
       q: `How much does ${m.place.short} Council spend on ${t.service.label.toLowerCase()}?`,
-      a: `${format("m1", f.value)}${f.quality === "sourced" ? "" : " (estimate)"} in its ${m.place.yearLabel} day-to-day budget, from the council's own budget papers. See the budget on ${SITE_URL}/#budget.`,
+      a: `${format("m1", f.value)}${f.quality === "sourced" ? "" : " (estimate)"} in its ${m.place.yearLabel} day-to-day budget, from the council's own budget papers. See the budget on ${SITE_URL}/budget.`,
     });
   }
   return qa;
@@ -92,7 +92,7 @@ export default async function TopicPage({ params }: Props) {
                 , of which <Num f={topic.service.general} fmt="m1" /> is paid for from council tax, business rates and general grants
               </>
             ) : null}
-            . <a href="/#budget">The whole budget</a>.
+            . <a href="/budget">The whole budget</a>.
           </p>
         ) : null}
         <FollowLink href={`/topic/${topic.slug}/feed.xml`} label={`Follow ${topic.area.toLowerCase()} pledges by RSS`} />

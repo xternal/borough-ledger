@@ -31,7 +31,7 @@ export default function BuildingPage() {
     <PageShell m={m}>
       <div className="hero">
         <p className="small">
-          <a href="/#budget">The council&rsquo;s budget</a>
+          <a href="/budget">The council&rsquo;s budget</a>
         </p>
         <h1>What the council is building</h1>
         <p className="lede">

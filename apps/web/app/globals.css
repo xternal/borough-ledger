@@ -522,6 +522,34 @@
   .sec-head p {
     color: var(--muted);
   }
+  /* On the home page, a section's heading and the link to its own page (/bill, /budget, ...). */
+  .sec-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 16px;
+  }
+  .sec-own {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  /* On a section's own page its heading is the page's h1, straight under the independence notice. */
+  .page-kicker + section {
+    padding-top: 28px;
+  }
+  .sec-head h1 {
+    max-width: 24ch;
+  }
+  /* The way on from a section's own page: the next section, or everything on one page. */
+  .read-on {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
   /* news that changes what the section says, such as a newer forecast from the council */
   .sec-head p.callout {
     color: var(--ink);
@@ -1112,6 +1140,25 @@
     display: flex;
     gap: 10px;
     align-items: center;
+  }
+  /* The pledge Balance it was opened from (/balance?promise=<id>). */
+  .toggles .check.picked {
+    margin-inline: -8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: var(--sunk);
+    box-shadow: inset 2px 0 0 var(--accent);
+  }
+  .sec-head p.picked-note {
+    color: var(--ink);
+  }
+  /* On Balance it's own page: the band for "your council part", as the bill's band picker. */
+  .bal-band {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 24px;
   }
   .result {
     position: sticky;
