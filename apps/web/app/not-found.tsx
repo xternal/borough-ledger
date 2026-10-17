@@ -11,7 +11,7 @@ export default function NotFound() {
       <div className="hero">
         <h1>Page not found</h1>
         <p className="lede">
-          There is nothing at this address. Start from <a href="/">your council tax bill and the budget</a>, the <a href="/promises">promises</a> or the{" "}
+          There is nothing at this address. Start from <a href="/bill">your council tax bill</a>, <a href="/budget">the budget</a>, the <a href="/promises">promises</a> or the{" "}
           <a href="/payments">payments over £500</a>.
         </p>
       </div>

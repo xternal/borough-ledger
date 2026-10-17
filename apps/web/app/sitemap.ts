@@ -20,7 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const peopleChanged = latest([m.people.retrievedOn, WARD_MAP.source.retrieved_on]);
   return [
     { url: `${SITE_URL}/`, lastModified: DATA.council.meta.vintage, changeFrequency: "weekly", priority: 1 },
+    // Each section of the home page, on a page of its own.
+    { url: `${SITE_URL}/bill`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/budget`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/gap`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/balance`, lastModified: DATA.council.meta.vintage, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/method`, changeFrequency: "monthly", priority: 0.5 },
     ...(DATA.council.next_year.ct_options
       ? [
           { url: `${SITE_URL}/council-tax-rise`, lastModified: DATA.council.meta.vintage, changeFrequency: "weekly" as const, priority: 0.9 },

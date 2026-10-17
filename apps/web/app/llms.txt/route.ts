@@ -19,19 +19,19 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 
 ## What is on the site
 
-- Your bill: pick a council tax band and see what you pay, how it splits between the council and the Mayor of London, and what your share pays for.
-- The budget: where the council's day-to-day money comes from and what it pays for. By law it must balance every year.
-- The gap: how this year's gap between costs and funding opened, and how it was closed with council tax, savings and reserves.
+- Your bill (${SITE_URL}/bill): pick a council tax band and see what you pay, how it splits between the council and the Mayor of London, and what your share pays for.
+- The budget (${SITE_URL}/budget): where the council's day-to-day money comes from and what it pays for. By law it must balance every year.
+- The gap (${SITE_URL}/gap): how this year's gap between costs and funding opened, and how it was closed with council tax, savings and reserves.
 - Council tax next year (${SITE_URL}/council-tax-rise): the council's three options for 2027/28 from its report to Cabinet on 12 October 2026 (its own share of the bill up 100%, 125% or 150%), worked out for every band as the whole bill and the extra a week; why it is happening; and the timetable to the decision, with how to have your say. The percentages apply to the council's share, not the whole bill, which includes the Mayor of London's.
 - Council tax decoder (${SITE_URL}/council-tax): for every one of England's 296 councils that send council tax bills, the 2026/27 Band D bill split between the council's own share, the county council or the Mayor of London, police, fire, the combined authority and parish councils on average, with the change on 2025/26, from the government's council tax requirement tables (Table 10). One page per council at ${SITE_URL}/council-tax/<council>, found by postcode; and where across England the council's own share rose most, and where the other bodies drove the rise.
-- Balance it: next year's gap with the real choices a council has, including the referendum limit on council tax rises and the one-off nature of reserves.
-- Promises: each party's pledges, from its 2026 manifesto (headline pledges first, then the rest in page order) and since, quoted word for word with the page, an archived copy, a status and a timeline. Every two weeks an AI journalist looks for new pledges from every party, and one appears only after the editor has read its quote against the source. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
-- Council decisions: every Cabinet and Full Council decision since January 2026 from the council's own records, with the pledges each one moves; a link is suggested by an AI with the decision's exact words and added only when an editor confirms it.
-- Your ward: find any of the 21 wards by postcode or on a map, with its councillors (all 50, with their posts, from the council's own records), pledges about the ward, the wards next to it and a link to report street problems on FixMyStreet.
+- Balance it (${SITE_URL}/balance): next year's gap with the real choices a council has, including the referendum limit on council tax rises and the one-off nature of reserves.
+- Promises (${SITE_URL}/promises, each pledge at ${SITE_URL}/promise/<id>): each party's pledges, from its 2026 manifesto (headline pledges first, then the rest in page order) and since, quoted word for word with the page, an archived copy, a status and a timeline. Every two weeks an AI journalist looks for new pledges from every party, and one appears only after the editor has read its quote against the source. Pledges are costed per Band D home where a cost can be sourced. The party with more than half the seats is the administration; every party is held to the same rules.
+- Council decisions (${SITE_URL}/decisions): every Cabinet and Full Council decision since January 2026 from the council's own records, with the pledges each one moves; a link is suggested by an AI with the decision's exact words and added only when an editor confirms it.
+- Your ward (${SITE_URL}/wards): find any of the 21 wards by postcode or on a map, with its councillors (all 50, with their posts, from the council's own records), pledges about the ward, the wards next to it and a link to report street problems on FixMyStreet.
 - What the council is building (${SITE_URL}/building): the four-year capital programme, scheme by scheme, how it is paid for and the debt it leaves.
 - Council homes (${SITE_URL}/council-homes): the ring-fenced account council rents pay into, where the money goes, council rents against private rents, and the building work on council homes.
 - Other councils: ${OTHER_BOROUGHS.map((b) => `${b.short} (${SITE_URL}${b.href})`).join(", ")}: the bill by band, the budget by service, council tax over five years, and every ward's councillors and election result, from government returns and the council's own records, with the same checks. In Belfast, homes pay rates rather than council tax: the bill is worked out from a home's capital value, split between the council's district rate and the Northern Ireland Executive's regional rate, and councillors are shown by district electoral area.
-- Payments over £500: every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
+- Payments over £500 (${SITE_URL}/payments): every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
 This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
 
@@ -51,13 +51,17 @@ Every figure is labelled sourced, approx or test, with a link to its source on t
 
 Data vintage: ${c.vintage}.
 
-- [Home](${SITE_URL}/)
+- [Home: everything on one page](${SITE_URL}/)
+- [Your council tax bill](${SITE_URL}/bill)
+- [The council's budget](${SITE_URL}/budget)
+- [How this year's gap opened and closed](${SITE_URL}/gap)
+- [Balance next year's budget](${SITE_URL}/balance)
+- [How this works](${SITE_URL}/method): the rules a council lives by, the quality labels and the questions people ask
 - [Promises](${SITE_URL}/promises)
 - [Council decisions](${SITE_URL}/decisions)
 ${partiesOf(buildModel()).map((pt) => `- [${pt.name}: pledges](${SITE_URL}/party/${pt.id})`).join("\n")}
 ${topicsOf(buildModel()).map((t) => `- [${t.area}: pledges from every party](${SITE_URL}/topic/${t.slug})`).join("\n")}
 - [Your ward: wards and councillors](${SITE_URL}/wards)
-- [Balance next year's budget](${SITE_URL}/balance)
 - [Payments over £500](${SITE_URL}/payments)
 - [Sources](${SITE_URL}/sources)
 - [Most read pages](${SITE_URL}/most-read): which pages readers open most over the last 7 and 30 days, counted on the server as one number per page per day with nothing about the reader; the daily totals are public at ${SITE_URL}/views.json
