@@ -6,6 +6,7 @@ import { Num } from "@/components/Num";
 import { PageShell } from "@/components/PageShell";
 import { PromisesIndex } from "@/components/PromisesIndex";
 import { buildModel } from "@/lib/model";
+import { filtersFromQuery } from "@/lib/promiseFilters";
 import { feedAlternate } from "@/lib/rss";
 import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL, STATUS_MEANS, STATUS_ORDER, sides, standing } from "@/lib/promises";
@@ -13,7 +14,11 @@ import { SITE } from "@/lib/site";
 import { promisesJsonLd } from "@/lib/structured";
 import { share } from "@/lib/share";
 
-export const revalidate = 86400;
+/**
+ * Made on request: the filters in the address (?side=, ?status=, ?topic=) are applied on the server, so a shared
+ * filtered link opens filtered, before any script runs. The canonical address stays /promises.
+ */
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 /** The parties with pledges on the site, from the data, so the title never favours or forgets one. */
 const PARTIES = DATA.content.parties
@@ -31,8 +36,9 @@ export const metadata: Metadata = {
   ...share("/promises", title, description),
 };
 
-export default function PromisesPage() {
+export default async function PromisesPage({ searchParams }: Props) {
   const m = buildModel();
+  const initial = filtersFromQuery(m.promises, await searchParams);
   const groups = sides(m.promises);
   const used = STATUS_ORDER.filter((s) => m.promises.some((p) => p.status === s));
   const fromManifestos = m.promises.filter((p) => p.venue === "manifesto").length;
@@ -107,7 +113,7 @@ export default function PromisesPage() {
         <h2 id="list-h" className="sr-only">
           All pledges
         </h2>
-        <PromisesIndex promises={m.promises} />
+        <PromisesIndex promises={m.promises} today={m.today} initial={initial} />
       </section>
 
       <section aria-labelledby="how-h" className="pay-section">
