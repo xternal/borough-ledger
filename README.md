@@ -10,12 +10,12 @@ Where things stand and what is still open: `docs/PRE_SHIP_REVIEW.md`. The refere
 
 Your council tax bill is the only statement most residents ever get from their council, and it says almost nothing. BoroughBook.UK turns it into a readable account:
 
-1. **Your bill.** Pick your band, see what you pay, how much goes to the council and how much to the Mayor of London, and what your share pays for.
-2. **The budget.** Where the council's money comes from (council tax, business rates, government grants, reserves) and what it pays for.
-3. **The gap.** Each year costs rise faster than funding. One chart shows what opened the gap and how it was closed: council tax, savings, reserves.
-4. **Balance it.** Next year's gap, with the real levers a council has. Residents see the trade-offs councillors face, including the 4.99% referendum limit and the one-off nature of reserves.
-5. **Promises.** Every pledge from the administration and the opposition, costed per Band D home, with a timeline that ends in delivery or in silence.
-6. **Payments over £500.** The council's monthly transparency files, searchable.
+1. **Your bill** (`/bill`). Pick your band, see what you pay, how much goes to the council and how much to the Mayor of London, and what your share pays for.
+2. **The budget** (`/budget`). Where the council's money comes from (council tax, business rates, government grants, reserves) and what it pays for.
+3. **The gap** (`/gap`). Each year costs rise faster than funding. One chart shows what opened the gap and how it was closed: council tax, savings, reserves.
+4. **Balance it** (`/balance`). Next year's gap, with the real levers a council has. Residents see the trade-offs councillors face, including the 4.99% referendum limit and the one-off nature of reserves.
+5. **Promises** (`/promises`, each card at `/promise/<id>`). Every pledge from the administration and the opposition, costed per Band D home, with a timeline that ends in delivery or in silence.
+6. **Payments over £500** (`/payments`). The council's monthly transparency files, searchable.
 7. **Make your case.** Who decides (the law, the government or the council), how the council compares, and a letter to councillors in the reader's own words, never seen or sent by the site.
 8. **The council tax decoder** ([boroughbook.uk/council-tax](https://boroughbook.uk/council-tax)). Every one of England's 296 councils that send bills: a postcode in, the Band D bill out, split between the council, the county council or the Mayor of London, police, fire, combined authorities and parish councils, with the change on last year.
 

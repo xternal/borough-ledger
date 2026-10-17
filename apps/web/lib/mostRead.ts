@@ -32,7 +32,11 @@ export const MOST_READ_TITLE = "Most read pages";
 
 const FIXED: Record<string, string> = {
   "/": `${DATA.council.meta.council_short}: your bill, the budget and the gap`,
+  "/bill": "Your council tax bill",
+  "/budget": "The council's budget",
+  "/gap": "How this year's gap opened and closed",
   "/balance": "Balance next year's budget",
+  "/method": "How this works",
   "/council-tax-rise": "Council tax next year",
   "/council-tax": "Council tax decoder: every council in England",
   "/building": "What the council is building",

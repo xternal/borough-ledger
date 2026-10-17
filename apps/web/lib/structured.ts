@@ -218,7 +218,25 @@ export function capitalJsonLd(path: string, title: string, description: string, 
       about: { "@type": "GovernmentOrganization", name: DATA.council.meta.council },
       ...(source?.url ? { isBasedOn: { "@type": "Report", name: source.title, url: source.url, ...(source.published_on ? { datePublished: source.published_on } : {}) } } : {}),
     },
-    breadcrumbs([["Home", "/"], ["Budget", "/#budget"], [name, `/${path}`]]),
+    breadcrumbs([["Home", "/"], ["Budget", "/budget"], [name, `/${path}`]]),
+  ] as const;
+}
+
+/** A section's own page (/bill, /budget, /gap, /balance, /method): part of the site, about the council's money. */
+export function sectionJsonLd(path: string, name: string, description: string) {
+  return [
+    {
+      "@context": CONTEXT,
+      "@type": "WebPage",
+      name,
+      description,
+      url: `${SITE_URL}${path}`,
+      inLanguage: "en-GB",
+      isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE_URL },
+      publisher: PUBLISHER,
+      about: { "@type": "GovernmentOrganization", name: DATA.council.meta.council },
+    },
+    breadcrumbs([["Home", "/"], [name, path]]),
   ] as const;
 }
 

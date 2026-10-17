@@ -35,7 +35,11 @@ const READ_TIMEOUT_MS = 5_000;
 const PAGES = new RegExp(
   "^/(?:" +
     [
+      "bill",
+      "budget",
+      "gap",
       "balance",
+      "method",
       "building",
       "council-homes",
       "promises",

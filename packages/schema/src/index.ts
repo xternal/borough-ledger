@@ -3,6 +3,7 @@ export * from "./seed";
 export * from "./data";
 export * from "./testValues";
 export * from "./content";
+export * from "./editorial";
 export * from "./payments";
 export * from "./append-only";
 export * from "./deadlines";

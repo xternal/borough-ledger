@@ -47,7 +47,7 @@ ${m.bill.glaSplit.length ? `- The Mayor of London's share at Band D, by body: ${
 - Spending by service:
 ${m.services.map((s) => `  - ${s.label}: ${fig(s.f, "m1")}`).join("\n")}
 
-More: ${SITE_URL}/ (your bill, the budget, the gap), ${SITE_URL}/balance (balance next year yourself), ${SITE_URL}/sources.
+More: ${SITE_URL}/ (everything on one page), ${SITE_URL}/bill (your bill by band), ${SITE_URL}/budget (the budget by service), ${SITE_URL}/gap (how this year's gap was closed), ${SITE_URL}/balance (balance next year yourself), ${SITE_URL}/method (how the site works), ${SITE_URL}/sources.
 
 ## Pledges
 

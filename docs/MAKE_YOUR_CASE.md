@@ -1,6 +1,6 @@
 # Make your case
 
-A panel that turns a figure into something a resident can act on, live for Hammersmith & Fulham on six subjects: care for adults (under "What care for adults costs" on `/`), council tax next year (`/council-tax-rise`, "Have your say"), next year's budget (under Balance it, on `/` and `/balance`), and three everyday services the reader picks from under the budget on `/` (`#case-services`): bins and streets, libraries, parks and leisure, and housing and homelessness. Decided by the owner on 11 Oct 2026; the services followed on 12 Oct.
+A panel that turns a figure into something a resident can act on, live for Hammersmith & Fulham on six subjects: care for adults (under "What care for adults costs" on `/` and `/budget`, `#case-care`), council tax next year (`/council-tax-rise`, "Have your say"), next year's budget (under Balance it, on `/` and `/balance`), and three everyday services the reader picks from under the budget on `/` and `/budget` (`#case-services`): bins and streets, libraries, parks and leisure, and housing and homelessness. Decided by the owner on 11 Oct 2026; the services followed on 12 Oct.
 
 ## What it shows
 

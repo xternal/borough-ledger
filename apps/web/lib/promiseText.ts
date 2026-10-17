@@ -129,7 +129,7 @@ ${promiseSummary(p, m)}
 - Cost: ${costText(p)}
 - Deadline: ${p.deadline ?? "none stated"}
 - Last changed: ${dateModified(p)}
-- Page: ${url}
+${p.approvedMark ? `- Checks: ${p.approvedMark}\n` : p.editorCheck ? "- Checks: awaiting the editor's check\n" : ""}- Page: ${url}
 
 ## Timeline
 

@@ -7,6 +7,7 @@ import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 import { useLedger } from "./LedgerState";
 import { ChartTable, DataTable } from "./ChartTable";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 /** "two", "six": small counts in words, as the page says them; larger ones in figures. */
 const numberWord = (n: number) => ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"][n] ?? String(n);
@@ -14,9 +15,11 @@ const numberWord = (n: number) => ["", "one", "two", "three", "four", "five", "s
 type Props = Pick<PageModel, "bill" | "rules" | "services" | "ctShareGeneral" | "generalBudget" | "place"> & {
   /** What pays for the rest besides council tax, where it is not grants and business rates (South Oxfordshire keeps none). */
   rest?: string;
+  /** On the overview (with a link to its own page) or on its own page (/bill). */
+  view?: SectionView;
 };
 
-export function BillSection({ bill, rules, services, ctShareGeneral, generalBudget, place, rest = "government grants and business rates" }: Props) {
+export function BillSection({ bill, rules, services, ctShareGeneral, generalBudget, place, rest = "government grants and business rates", view }: Props) {
   const { band, singlePerson, setBand, setSinglePerson } = useLedger();
   const b = billFor(rules, { council: bill.council.value, gla: bill.gla.value }, band, singlePerson);
   const inputs: Figure[] = [bill.ratios, ...(singlePerson ? [bill.spd] : [])];
@@ -48,7 +51,9 @@ export function BillSection({ bill, rules, services, ctShareGeneral, generalBudg
   return (
     <section id="bill" aria-labelledby="bill-h">
       <div className="sec-head">
-        <h2 id="bill-h">Your bill</h2>
+        <SecTitle id="bill-h" section="bill" view={view}>
+          Your bill
+        </SecTitle>
         <p>
           Pick your band. The council keeps <Num f={bill.councilShare} fmt="share0" /> of it; the rest goes to {bill.others.to}.
         </p>

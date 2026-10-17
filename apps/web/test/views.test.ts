@@ -17,7 +17,11 @@ describe("which pages count", () => {
   it("counts the site's reading pages", () => {
     for (const path of [
       "/",
+      "/bill",
+      "/budget",
+      "/gap",
       "/balance",
+      "/method",
       "/camden",
       "/south-oxfordshire",
       "/council-tax",

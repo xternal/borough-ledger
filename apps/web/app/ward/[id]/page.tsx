@@ -111,7 +111,7 @@ export default async function WardPage({ params }: Props) {
           <section aria-labelledby="tax-h" className="ward-sec">
             <h2 id="tax-h">Council tax</h2>
             <p>
-              Council tax is the same in every ward of {m.place.short}: only your home&rsquo;s band changes it. <a href="/#bill">See your bill by band</a>.
+              Council tax is the same in every ward of {m.place.short}: only your home&rsquo;s band changes it. <a href="/bill">See your bill by band</a>.
             </p>
           </section>
         </div>

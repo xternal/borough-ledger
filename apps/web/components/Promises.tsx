@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { encodeScenario, defaultScenario } from "@borough-ledger/engine";
 import type { Status } from "@borough-ledger/schema";
 import { formatDay, formatMonthYear } from "@/lib/format";
 import type { PageModel, PromiseModel } from "@/lib/model";
@@ -9,7 +8,9 @@ import { Num, TestMark } from "./Num";
 import { isOverdue, sides } from "@/lib/promises";
 import { useLedger } from "./LedgerState";
 import { CONTACT } from "@/lib/site";
-import { topicSlug } from "@/lib/topics";
+import { topicSlug } from "@/lib/topicSlug";
+import { balancePath, withPledge } from "@/lib/balanceLink";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
 
@@ -57,10 +58,17 @@ export function Promises({
   balance,
   heading = true,
   limit,
-}: Props & { heading?: boolean; /** Show only this many cards, with a link to all of them. */ limit?: number }) {
+  view,
+}: Props & {
+  heading?: boolean;
+  /** Show only this many cards, with a link to all of them. */
+  limit?: number;
+  /** On the overview, the heading links to /promises. */
+  view?: SectionView;
+}) {
   const [filter, setFilter] = useState<Filter>("all");
   const [sel, setSel] = useState(promises[0]?.id);
-  const { scenario, setToggle } = useLedger();
+  const { scenario } = useLedger();
 
   // One rule for every side: the filter reads `side` from data, never a party name; labels name the parties from the data.
   const overdueCount = promises.filter((p) => overdue(p, today)).length;
@@ -72,15 +80,22 @@ export function Promises({
   const all = promises.filter((p) => filter === "all" || (filter === "overdue" ? overdue(p, today) : p.side === filter));
   const list = limit ? all.slice(0, limit) : all;
   const current = list.find((p) => p.id === sel) ?? list[0];
+  // The same filter on /promises, in its address, with the count it will show.
+  const side = sides(promises).find((g) => g.id === filter);
+  const allHref = filter === "overdue" ? "/promises?status=overdue" : side ? `/promises?side=${side.id}` : "/promises";
+  const allLabel = `See all ${all.length} ${filter === "overdue" ? "overdue " : side ? `${side.parties.join(" and ")} ` : ""}${all.length === 1 ? "promise" : "promises"}`;
+  const toggle = current ? balance.toggles.find((t) => t.id === current.lever_or_toggle_id) : undefined;
 
   return (
     <section id="promises" aria-labelledby="promises-h">
       {heading ? (
         <div className="sec-head">
-          <h2 id="promises-h">Promises</h2>
+          <SecTitle id="promises-h" section="promises" view={view}>
+            Promises
+          </SecTitle>
           <p>
             Each party&rsquo;s pledges, from its 2026 manifesto and since, quoted word for word, with the cost to the council and a timeline that ends in
-            delivery or in silence. <a href="/promises">All promises</a>, and <a href="/wards">your ward&rsquo;s councillors</a>.
+            delivery or in silence. <a href="/promises">All {promises.length} promises</a>, and <a href="/wards">your ward&rsquo;s councillors</a>.
           </p>
         </div>
       ) : (
@@ -134,9 +149,9 @@ export function Promises({
                 No promises match this filter.
               </p>
             )}
-            {limit && all.length > list.length ? (
-              <a className="linkbtn more" href={filter === "administration" || filter === "opposition" ? `/promises?side=${filter}` : "/promises"}>
-                See all {all.length} promises
+            {limit && all.length ? (
+              <a className="linkbtn more" href={allHref}>
+                {allLabel}
               </a>
             ) : null}
           </div>
@@ -146,20 +161,10 @@ export function Promises({
             p={current}
             today={today}
             generalBudget={generalBudget}
-            toggle={balance.toggles.find((t) => t.id === current.lever_or_toggle_id)}
-            toggleOn={current.lever_or_toggle_id ? scenario.toggles[current.lever_or_toggle_id] : undefined}
-            onTry={(id, on) => {
-              // On the full statement, change the tool in place; elsewhere, open a balance-it link with this choice.
-              if (document.getElementById("balance")) {
-                setToggle(id, on);
-                location.hash = "#balance";
-              } else {
-                const s = defaultScenario(balance.input);
-                s.toggles[id] = on;
-                const code = encodeScenario(balance.input, s);
-                location.href = `/balance${code ? `?s=${code}` : ""}`;
-              }
-            }}
+            toggle={toggle}
+            toggleOn={toggle ? (scenario.toggles[toggle.id] ?? toggle.on) : undefined}
+            // Balance it on its own page, with this pledge picked in the address and the reader's other choices kept.
+            tryHref={toggle ? balancePath(balance.input, withPledge(balance.input, toggle.id, scenario), { id: current.id, toggleId: toggle.id }) : undefined}
           />
         ) : (
           <div className="detail" />
@@ -175,7 +180,7 @@ export function Detail({
   generalBudget,
   toggle,
   toggleOn,
-  onTry,
+  tryHref,
   heading = "h3",
 }: {
   /** The pledge is the page's main heading on its own card page, a sub-heading elsewhere. */
@@ -185,7 +190,8 @@ export function Detail({
   generalBudget: PageModel["generalBudget"];
   toggle: PageModel["balance"]["toggles"][number] | undefined;
   toggleOn: boolean | undefined;
-  onTry: (id: string, on: boolean) => void;
+  /** Balance it with this pledge picked: /balance?promise=<id>. */
+  tryHref: string | undefined;
 }) {
   const single = SINGLE[p.status];
   const idx = LADDER.indexOf(p.status as (typeof LADDER)[number]);
@@ -207,6 +213,7 @@ export function Detail({
           {p.page ? `, page ${p.page}` : ""}
           {p.editorCheck ? <span className="checkmark"> Awaiting editor check</span> : null}
         </span>
+        {p.approvedMark && !p.test ? <span className="muted small">{p.approvedMark}</span> : null}
         {p.test ? <TestMark what={`promise card ${p.id}`}>Test card with an invented actor</TestMark> : null}
       </div>
       {single ? (
@@ -298,10 +305,10 @@ export function Detail({
         <a className="linkbtn" href={`/promise/${p.id}`}>
           Open the full card
         </a>
-        {toggle && toggleOn !== undefined ? (
-          <button type="button" className="btn" onClick={() => onTry(toggle.id, !toggleOn)}>
+        {toggle && toggleOn !== undefined && tryHref ? (
+          <a className="btn" href={tryHref}>
             {toggleOn ? "See next year without it" : "See next year with it"}
-          </button>
+          </a>
         ) : null}
         <a className="btn secondary" href={`/promise/${p.id}/feed.xml`} type="application/rss+xml">
           Follow by RSS
@@ -324,7 +331,7 @@ export function Detail({
   );
 }
 
-/** One card on its own page: the panel from the list, opening balance-it links instead of changing the tool in place. */
+/** One card on its own page: the panel from the list, its "see next year" action opening Balance it with this pledge picked. */
 export function PromiseCardView({ p, today, generalBudget, balance }: { p: PromiseModel } & Pick<PageModel, "today" | "generalBudget" | "balance">) {
   const toggle = balance.toggles.find((t) => t.id === p.lever_or_toggle_id);
   return (
@@ -335,12 +342,7 @@ export function PromiseCardView({ p, today, generalBudget, balance }: { p: Promi
       generalBudget={generalBudget}
       toggle={toggle}
       toggleOn={toggle?.on}
-      onTry={(id, on) => {
-        const s = defaultScenario(balance.input);
-        s.toggles[id] = on;
-        const code = encodeScenario(balance.input, s);
-        location.href = `/balance${code ? `?s=${code}` : ""}`;
-      }}
+      tryHref={toggle ? balancePath(balance.input, withPledge(balance.input, toggle.id), { id: p.id, toggleId: toggle.id }) : undefined}
     />
   );
 }

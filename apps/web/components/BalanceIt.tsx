@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { derive, fig, worst, type Figure, type Lever, type LeverId } from "@borough-ledger/schema";
+import { bandsOf, derive, fig, worst, type Figure, type Lever, type LeverId } from "@borough-ledger/schema";
 import { billFor, computeBalance, encodeScenario, leverValue, mediumTerm, nextYearCouncil, type MediumTermYear, type PartId } from "@borough-ledger/engine";
+import { balancePath, type PledgeTry } from "@/lib/balanceLink";
 import { formatLever } from "@/lib/format";
 import type { CaseSetup } from "@/lib/makeYourCase";
 import type { PageModel } from "@/lib/model";
@@ -11,10 +12,15 @@ import { MakeYourCase, type CaseWant } from "./MakeYourCase";
 import { Num } from "./Num";
 import { QualityGroup } from "./QualityLegend";
 import { useLedger } from "./LedgerState";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 type Props = Pick<PageModel, "balance" | "bill" | "rules" | "place"> & {
   /** Make your case under the tool, with the reader's choices as the letter's figures. */
   makeCase?: { setup: CaseSetup; wants: CaseWant[]; site: string };
+  /** On the overview (with a link to its own page) or on its own page (/balance). */
+  view?: SectionView;
+  /** The pledge the page was opened from (/balance?promise=<id>): its choice is marked and the address keeps it. */
+  pledge?: PledgeTry & { text: string; partyShort: string };
 };
 
 const PART: Record<PartId, { label: string; colour: string }> = {
@@ -26,8 +32,8 @@ const PART: Record<PartId, { label: string; colour: string }> = {
   reserves: { label: "Reserves, one-off", colour: "hatch" },
 };
 
-export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
-  const { band, singlePerson, scenario, setLever, setToggle } = useLedger();
+export function BalanceIt({ balance, bill, rules, place, makeCase, view, pledge }: Props) {
+  const { band, singlePerson, scenario, setBand, setLever, setToggle } = useLedger();
   const r = computeBalance(balance.input, scenario);
   // Outcomes depend on the gap and every choice; each lever's own effect carries only that lever's provenance.
   const q = balance.computed;
@@ -58,7 +64,7 @@ export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
 
   // Keep a shared /balance link in step with the choices, so reloading or copying the address keeps them.
   const code = encodeScenario(balance.input, scenario);
-  const path = `/balance${code ? `?s=${code}` : ""}`;
+  const path = balancePath(balance.input, scenario, pledge);
   useEffect(() => {
     if (window.location.pathname === "/balance") window.history.replaceState(null, "", path);
   }, [path]);
@@ -111,7 +117,9 @@ export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
   return (
     <section id="balance" aria-labelledby="balance-h">
       <div className="sec-head">
-        <h2 id="balance-h">Balance next year&rsquo;s budget</h2>
+        <SecTitle id="balance-h" section="balance" view={view}>
+          Balance next year&rsquo;s budget
+        </SecTitle>
         <p>
           {balance.ctAssumed ? (
             <>
@@ -133,7 +141,27 @@ export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
             already assumes a council tax rise.
           </p>
         ) : null}
+        {pledge ? (
+          <p className="picked-note">
+            Opened from the {pledge.partyShort} pledge <a href={`/promise/${pledge.id}`}>&ldquo;{pledge.text}&rdquo;</a>. Its cost is marked under Services and pledges.
+          </p>
+        ) : null}
       </div>
+      {view === "own" ? (
+        // On its own page there is no bill above to pick a band in, so the band that "your council part" uses is picked here.
+        <div className="bal-band">
+          <span className="muted small" id="bal-band-l">
+            Your band
+          </span>
+          <div className="seg" role="group" aria-labelledby="bal-band-l">
+            {bandsOf(rules).map((x) => (
+              <button key={x} type="button" aria-pressed={x === band} onClick={() => setBand(x)}>
+                {x}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
       <div className="balance">
         <div className="levers">
           {balance.levers.map((l) => {
@@ -172,7 +200,7 @@ export function BalanceIt({ balance, bill, rules, place, makeCase }: Props) {
           <div className="toggles">
             <h3 style={{ marginBottom: 2 }}>Services and pledges</h3>
             {balance.toggles.map((t) => (
-              <div className="check" key={t.id}>
+              <div className={t.id === pledge?.toggleId ? "check picked" : "check"} key={t.id}>
                 <label>
                   <input type="checkbox" id={`tg-${t.id}`} checked={scenario.toggles[t.id] ?? t.on} onChange={(e) => setToggle(t.id, e.target.checked)} />
                   {t.label}

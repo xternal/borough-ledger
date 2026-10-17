@@ -29,6 +29,9 @@ function partyAndTopic(file) {
   return [...(party ? [`/party/${party}`] : []), ...(slug ? [`/topic/${slug}`] : [])];
 }
 
+/** The home page's sections that have a page of their own (apps/web/lib/nav.ts). */
+const SECTION_PAGES = ["/bill", "/budget", "/gap", "/balance", "/method"];
+
 /** The public pages a changed file feeds. */
 export function pagesFor(file) {
   let m;
@@ -37,9 +40,9 @@ export function pagesFor(file) {
   if (file === "content/decision_links.yaml" || file === "data/build/decisions.json") return ["/decisions", "/promises"];
   if (file === "content/wards.yaml" || file.startsWith("data/build/ward_")) return ["/wards", ...wardIds().map((w) => `/ward/${w}`)];
   if (file.startsWith("data/build/payments/")) return ["/payments"];
-  if (file.startsWith("data/build/hf_") || file.startsWith("data/config/")) return ["/", "/balance"];
+  if (file.startsWith("data/build/hf_") || file.startsWith("data/config/")) return ["/", ...SECTION_PAGES];
   if (file.startsWith("apps/web/"))
-    return ["/", "/promises", "/decisions", "/wards", "/payments", "/sources", ...promiseIds().flatMap((id) => [`/promise/${id}`, ...partyAndTopic(`content/promises/${id}.yaml`)])];
+    return ["/", ...SECTION_PAGES, "/promises", "/decisions", "/wards", "/payments", "/sources", ...promiseIds().flatMap((id) => [`/promise/${id}`, ...partyAndTopic(`content/promises/${id}.yaml`)])];
   return [];
 }
 

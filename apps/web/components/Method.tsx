@@ -2,12 +2,15 @@ import type { PageModel } from "@/lib/model";
 import { faq } from "@/lib/faq";
 import { groupSources } from "@/lib/sources";
 import { Num } from "./Num";
+import { SecTitle, type SectionView } from "./SecTitle";
 
-export function Method({ m }: { m: PageModel }) {
+export function Method({ m, view }: { m: PageModel; view?: SectionView }) {
   return (
     <section id="method" aria-labelledby="method-h">
       <div className="sec-head">
-        <h2 id="method-h">How this works</h2>
+        <SecTitle id="method-h" section="method" view={view}>
+          How this works
+        </SecTitle>
       </div>
       <div className="method">
         <div>

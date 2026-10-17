@@ -27,7 +27,7 @@ describe("make your case: the letter", () => {
         { text: "Fact two.", source: "the report, https://example.gov.uk/a" },
       ],
       closing: closingLine(dates, "2026-10-11"),
-      page: "https://boroughbook.uk/#case-care",
+      page: "https://boroughbook.uk/budget#case-care",
     });
     expect(subject).toBe("Care for adults: a resident's view");
     expect(body.startsWith("Dear Councillor Molly Mantle and Councillor Callum Nimmo,\n\nI live in Hammersmith Broadway ward. I would like")).toBe(true);

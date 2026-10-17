@@ -60,7 +60,7 @@ reserves_left = general_reserves − reserves used        (spent once, stays spe
 
 This is the same as the formula above: the year-2 gap rises by the year-1 reserves. Simplifications: a higher council tax rise is carried forward as the same £ amount each year (no compounding), fee changes are static (no behavioural response, PRE_SHIP H5), and 2029/30 is shown as not forecast because the council does not publish it.
 
-Scenario links: `/balance?s=ct:5.5,sv:3,rs:2,fe:2,st:-1,off:weekly_bins,on:extra_officers`. Only choices that differ from the start are written; unknown keys are ignored and values are clamped to each lever's range and snapped to its step.
+Scenario links: `/balance?s=ct:5.5,sv:3,rs:2,fe:2,st:-1,off:weekly_bins,on:extra_officers`. Only choices that differ from the start are written; unknown keys are ignored and values are clamped to each lever's range and snapped to its step. A pledge's "see next year with it" opens `/balance?promise=<id>`: without `s`, that is the forecast with the pledge's switch flipped; with `s` (even empty), `s` is exact and the pledge is only marked (`apps/web/lib/balanceLink.ts`).
 
 ## 6. Promise costing
 

@@ -16,22 +16,24 @@ Your council tax bill, turned into a readable account of your council's money an
 5. **Neutral.** No party colours anywhere. Red and green only for deltas and statuses.
 6. **Provenance one glance away.** A coloured dot and a word: sourced (green), approx (amber), test (red).
 7. **No middle-dot (·) separators.** Use layout, alignment, line breaks or commas.
-8. **People always know where they are.** The top bar highlights the current section (`aria-current`): the page's section on its own pages and sub-pages (a promise card lights up Promises, a supplier lights up Payments), and on the long statement the section in view as you scroll. On a phone the highlighted item stays visible in the scrolling menu.
+8. **People always know where they are.** Every menu item is a page of its own (`/bill`, `/budget`, `/gap`, `/balance`, `/promises`, `/wards`, `/payments`, `/method`). The top bar highlights an item when you are where it leads (`aria-current`): on its page and the pages under it (a promise card lights up Promises, a supplier lights up Payments), nothing on the home page, which is every section at once, and on another council's long page, whose items are anchors, the section in view as you scroll. On a phone the highlighted item stays visible in the scrolling menu.
 
 ## Information architecture
 
 ```
-/                     Your bill, budget, the gap, balance it, promises, payments (one page, sticky section nav)
-/bill?band=D          Bill on its own (shareable)
+/                     The overview: every section on one page (old /#bill-style links still land here); each heading links to its own page
+/bill                 Your bill, and next year's options for the band picked (?band=D to share a band: not built yet)
+/budget               The budget, with everyday services and care for adults and children (/budget#case-care)
 /budget/[service]     Service drill-down: sub-lines, trend, gross vs net, savings, related pledges
-/balance?s=…          Balance-it scenario (shareable, share image)
-/promises             Ledger with filters
+/gap                  How this year's gap opened and closed
+/balance?s=…          Balance it on its own page (shareable, share image); ?promise=<id> opens it with that pledge picked
+/promises             Ledger with filters, kept in the address (?side=, ?status=, ?topic=) and applied on the server
 /promise/[id]         Card page (share image)
 /councillor/[id]      Councillor: ward, roles, pledges
 /ward/[id]            v1: councillors, ward pledges, local issues
 /payments             Payments explorer
 /supplier/[id]        Supplier history
-/method               How council finance works, sources
+/method               How it works: the council's rules, quality labels, sources, questions
 ```
 
 ## Screens in priority order

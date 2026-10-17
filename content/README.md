@@ -14,6 +14,7 @@ Rules (docs/PROMISE_STANDARD.md, docs/DATA_MODEL.md):
 * **Every version and event needs a source** with a URL and, for PDFs, a page.
 * **Status follows seats.** The party with more than half the seats is the administration. An opposition card must be `not_in_power` or `unscoreable`; an administration card cannot be `not_in_power`.
 * **Deadlines.** A nightly job (`.github/workflows/nightly-deadlines.yml`) adds a `deadline_missed` event to any open administration pledge whose deadline has passed. An editor confirms "quietly dropped" after 30 days.
+* **One editor approves.** The AI Journalist (Claude, an AI) checks each quote word for word against its source; then the editor, Pavel Guzhikov, reads the card and approves it, and only then is `editor_check_required` set to `false`. One editor's approval is enough since 17 October 2026 (it was two editors, the owner and the AI Journalist, before; sign-offs already given stay valid). An approved card reads "Checked by the AI Journalist and approved by Pavel Guzhikov" (`packages/schema/src/editorial.ts`).
 * **No personal data.** Councillors appear only in their public role: name, party, ward, posts and the link to their council profile. No photos, addresses, phone numbers or emails.
 
 ```bash

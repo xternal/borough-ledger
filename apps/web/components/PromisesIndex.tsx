@@ -1,51 +1,38 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { Status } from "@borough-ledger/schema";
 import { formatMonthYear } from "@/lib/format";
 import type { PromiseModel } from "@/lib/model";
-import { STATUS_LABEL, STATUS_ORDER, sides } from "@/lib/promises";
+import { applyFilters, filtersQuery, type PromiseFilters, type SideFilter, type StatusFilter } from "@/lib/promiseFilters";
+import { STATUS_LABEL, STATUS_ORDER, isOverdue, sides } from "@/lib/promises";
 import { Num } from "./Num";
 
-type Side = PromiseModel["side"] | "all";
-
 /**
- * /promises: every pledge in one clean, scannable list. Filters by party (from seats in the data), status and topic,
- * kept in the address so a filtered view can be shared. Each row opens the card page.
+ * /promises: every pledge in one clean, scannable list. Filters by party (from seats in the data), status (or overdue)
+ * and topic. The page reads them from the address, so the first view is already filtered; changes keep the address in
+ * step without adding history entries, so a filtered view can be shared. Each row opens the card page.
  */
-export function PromisesIndex({ promises }: { promises: PromiseModel[] }) {
-  const [side, setSide] = useState<Side>("all");
-  const [status, setStatus] = useState<Status | "all">("all");
-  const [topic, setTopic] = useState("all");
+export function PromisesIndex({ promises, today, initial }: { promises: PromiseModel[]; today: string; initial: PromiseFilters }) {
+  const [side, setSide] = useState<SideFilter>(initial.side);
+  const [status, setStatus] = useState<StatusFilter>(initial.status);
+  const [topic, setTopic] = useState(initial.topic);
 
-  // Read the filters from the address once, then keep it in step without adding history entries.
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
-    const s = q.get("side");
-    if (s === "administration" || s === "opposition") setSide(s);
-    const st = q.get("status");
-    if (st && (STATUS_ORDER as string[]).includes(st)) setStatus(st as Status);
-    const t = q.get("topic");
-    if (t) setTopic(t);
-  }, []);
-  useEffect(() => {
-    const q = new URLSearchParams();
-    if (side !== "all") q.set("side", side);
-    if (status !== "all") q.set("status", status);
-    if (topic !== "all") q.set("topic", topic);
-    const next = `${window.location.pathname}${q.size ? `?${q}` : ""}`;
+    const next = `${window.location.pathname}${filtersQuery({ side, status, topic })}`;
     if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(null, "", next);
   }, [side, status, topic]);
 
   const groups = sides(promises);
   const bySide = side === "all" ? promises : promises.filter((p) => p.side === side);
-  const statuses = STATUS_ORDER.map((s) => ({ s, n: bySide.filter((p) => p.status === s).length })).filter((x) => x.n > 0);
+  // Statuses that side has, and the one picked even when it has none, so a shared link always shows what it filters by.
+  const statuses = STATUS_ORDER.map((s) => ({ s, n: bySide.filter((p) => p.status === s).length })).filter((x) => x.n > 0 || x.s === status);
+  const overdue = bySide.filter((p) => isOverdue(p, today)).length;
   const topics = useMemo(() => {
     const c = new Map<string, number>();
     for (const p of promises) c.set(p.area, (c.get(p.area) ?? 0) + 1);
     return [...c].sort((a, z) => a[0].localeCompare(z[0]));
   }, [promises]);
-  const list = bySide.filter((p) => (status === "all" || p.status === status) && (topic === "all" || p.area === topic));
+  const list = applyFilters(promises, { side, status, topic }, today);
   const allAwaitCheck = promises.every((p) => p.editorCheck);
 
   return (
@@ -84,6 +71,11 @@ export function PromisesIndex({ promises }: { promises: PromiseModel[] }) {
                 {STATUS_LABEL[s]} <span className="count">{n}</span>
               </button>
             ))}
+            {overdue || status === "overdue" ? (
+              <button type="button" className="chip" aria-pressed={status === "overdue"} onClick={() => setStatus("overdue")}>
+                Overdue <span className="count">{overdue}</span>
+              </button>
+            ) : null}
           </div>
         </div>
         <div className="ptool">

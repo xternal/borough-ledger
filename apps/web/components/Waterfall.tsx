@@ -5,6 +5,7 @@ import { Num } from "./Num";
 import { SavingsList } from "./SavingsList";
 import { QualityLegend } from "./QualityLegend";
 import { ChartTable, DataTable, type TableLine } from "./ChartTable";
+import { SecTitle, type SectionView } from "./SecTitle";
 
 const CLOSING = new Set<WaterfallRowModel["kind"]>(["close", "close_saving", "close_oneoff"]);
 
@@ -53,7 +54,7 @@ function stepTable(rows: WaterfallRowModel[]): TableLine[] {
   return out;
 }
 
-export function Waterfall({ m }: { m: PageModel }) {
+export function Waterfall({ m, view }: { m: PageModel; view?: SectionView }) {
   const { rows, maxM } = m.waterfall;
   const pct = (x: number) => `${((x / maxM) * 100).toFixed(2)}%`;
   const shown = new Set<string>();
@@ -64,7 +65,9 @@ export function Waterfall({ m }: { m: PageModel }) {
   return (
     <section id="gap" aria-labelledby="gap-h">
       <div className="sec-head">
-        <h2 id="gap-h">How this year&rsquo;s gap opened and closed</h2>
+        <SecTitle id="gap-h" section="gap" view={view}>
+          How this year&rsquo;s gap opened and closed
+        </SecTitle>
         <p>
           {costs ? (
             <>
