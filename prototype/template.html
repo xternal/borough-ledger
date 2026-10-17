@@ -7,13 +7,14 @@
    a balance-it tool for next year, promises, and the payments ledger. White, hairlines, numbers first. */
 :root{
   --bg:#FFFFFF; --sunk:#F5F5F6; --line:#E7E7EA; --line-strong:#D4D4D8;
-  --ink:#0B0B0D; --muted:#61616B; --faint:#9A9AA3;
+  --ink:#0B0B0D; --muted:#61616B; --faint:#6B6B74;
   --accent:#2457F5;
   --fund:#2457F5; --fund-soft:rgba(36,87,245,.16);
   --spend:#52525B; --spend-soft:rgba(82,82,91,.13);
   --gap:#F2600C; --gap-soft:rgba(242,96,12,.16);
   --gla:#A1A1AA;
-  --good:#15803D; --warn:#B45309; --bad:#DC2626; --idle:#8B8B94;
+  --good:#15803D; --warn:#92400E; --bad:#B91C1C; --idle:#8B8B94;
+  --good-ink:#166534; --fund-ink:#1D45CF; --gap-ink:#AD3F00;
   --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -23,6 +24,7 @@
   --spend:#C0B5A4; --spend-soft:rgba(192,181,164,.16);
   --gap:#E6844F; --gap-soft:rgba(230,132,79,.20); --gla:#7A7064;
   --good:#7FC78C; --warn:#E3C85B; --bad:#EF9C90; --idle:#A59A88;
+  --good-ink:#7FC78C; --fund-ink:#9FB4F0; --gap-ink:#F2A77A;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#241F1A; --sunk:#2E2822; --line:#38332D; --line-strong:#443F39;
@@ -31,6 +33,7 @@
   --spend:#C0B5A4; --spend-soft:rgba(192,181,164,.16);
   --gap:#E6844F; --gap-soft:rgba(230,132,79,.20); --gla:#7A7064;
   --good:#7FC78C; --warn:#E3C85B; --bad:#EF9C90; --idle:#A59A88;
+  --good-ink:#7FC78C; --fund-ink:#9FB4F0; --gap-ink:#F2A77A;
   color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -199,8 +202,8 @@ input[type=range]{width:100%;accent-color:var(--ink);margin:0;height:18px}
 .pcard .meta{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--muted)}
 .pill{font-size:12px;font-weight:550;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .st-delivering,.st-funded{background:color-mix(in srgb,var(--warn) 13%,transparent);color:var(--warn)}
-.st-in_plan,.st-budgeted{background:color-mix(in srgb,var(--fund) 12%,transparent);color:var(--fund)}
-.st-delivered{background:color-mix(in srgb,var(--good) 13%,transparent);color:var(--good)}
+.st-in_plan,.st-budgeted{background:color-mix(in srgb,var(--fund) 12%,transparent);color:var(--fund-ink)}
+.st-delivered{background:color-mix(in srgb,var(--good) 13%,transparent);color:var(--good-ink)}
 .st-failed,.st-quietly_dropped{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
 .st-promised,.st-unscoreable,.st-not_in_power{background:var(--sunk);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
 .testmark{font-size:12px;color:var(--bad)}
@@ -231,7 +234,8 @@ input[type=range]{width:100%;accent-color:var(--ink);margin:0;height:18px}
 .t-deadline .dot{background:var(--bg)!important;box-shadow:inset 0 0 0 2px var(--ink)}
 .t-deadline_missed .dot{background:var(--bad)!important}
 .t-today .dot{background:var(--gap)!important;border-radius:2px!important}
-.t-today{color:var(--gap);font-weight:600}
+.t-today{color:var(--gap-ink);font-weight:600}
+.timeline li.t-today .d{color:var(--gap-ink)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
 /* payments */

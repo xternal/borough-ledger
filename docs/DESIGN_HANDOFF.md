@@ -69,14 +69,15 @@ Your council tax bill, turned into a readable account of your council's money an
 | bg | `#FFFFFF` | `#241F1A` (dark brown: never black or navy, Pavel's dark palette from 12 Oct 2026) |
 | sunk / raised | `#F5F5F6` / `#FFFFFF` | `#2E2822` / `#39322B` |
 | line / line-strong | `#E7E7EA` / `#D4D4D8` | `#38332D` / `#443F39` |
-| ink / muted / faint | `#0B0B0D` / `#61616B` / `#9A9AA3` | `#EFE7DA` (13.3:1, never above 14:1) / `#C0B5A4` / `#A59A88` |
+| ink / muted / faint | `#0B0B0D` / `#61616B` / `#6B6B74` | `#EFE7DA` (13.3:1, never above 14:1) / `#C0B5A4` / `#A59A88` |
 | accent (links, focus, where you are) | `#2457F5` | `#E2B26F` (amber) |
 | funding | `#2457F5` | `#8AA3EC` (the only blue in dark mode) |
 | services | `#52525B` | `#C0B5A4` |
 | gap, reserves | `#F2600C` | `#E6844F` |
 | gap as text ("Today" in a timeline, the "one-off" pill) | `#AD3F00` (passes AA on white, grey panels and its own pill) | `#F2A77A` |
 | GLA | `#A1A1AA` | `#7A7064` |
-| good / warn / bad | `#15803D` / `#B45309` / `#DC2626` | `#7FC78C` / `#E3C85B` / `#EF9C90` |
+| good / warn / bad | `#15803D` / `#92400E` / `#B91C1C` | `#7FC78C` / `#E3C85B` / `#EF9C90` |
+| text on green and blue pills | `#166534` / `#1D45CF` | `#7FC78C` / `#9FB4F0` |
 
 Type: Geist 400–700, self-hosted in production; tabular figures only on numbers (not body text, or hyphens widen). Scale 56 / 48 / 28 / 24 / 17 / 15 / 13 / 12. Radius 8 controls, 14 panels. Section spacing 72px.
 
