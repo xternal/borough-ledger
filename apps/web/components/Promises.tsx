@@ -213,6 +213,7 @@ export function Detail({
           {p.page ? `, page ${p.page}` : ""}
           {p.editorCheck ? <span className="checkmark"> Awaiting editor check</span> : null}
         </span>
+        {p.approvedMark && !p.test ? <span className="muted small">{p.approvedMark}</span> : null}
         {p.test ? <TestMark what={`promise card ${p.id}`}>Test card with an invented actor</TestMark> : null}
       </div>
       {single ? (

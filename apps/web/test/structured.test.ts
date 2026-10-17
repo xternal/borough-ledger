@@ -29,6 +29,17 @@ describe("structured data", () => {
     }
   });
 
+  it("says who checked and who approved each signed-off card: the AI Journalist, then the editor (17 October 2026)", () => {
+    const approved = m.promises.filter((p) => p.approvedMark);
+    expect(approved.length).toBeGreaterThan(0);
+    for (const p of approved) {
+      expect(p.editorCheck).toBe(false);
+      expect(p.approvedMark).toBe("Checked by the AI Journalist and approved by Pavel Guzhikov");
+      expect(promiseMarkdown(p, m)).toContain(`- Checks: ${p.approvedMark}`);
+    }
+    for (const p of m.promises.filter((x) => x.editorCheck)) expect(p.approvedMark).toBeNull();
+  });
+
   it("lists every card on the promises page", () => {
     const [page] = promisesJsonLd(m.promises);
     expect(page.mainEntity.numberOfItems).toBe(m.promises.length);

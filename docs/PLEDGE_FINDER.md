@@ -1,6 +1,6 @@
 # Pledge finder
 
-Every two weeks an AI journalist (Claude, an AI, run as the scheduled task `bb-pledge-finder` on the owner's computer) looks for new pledges about Hammersmith & Fulham and drafts a card for each one. It opens a pull request and never merges it: a card appears on the site only after the editor has read its quote against the source (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
+Every two weeks the AI Journalist (Claude, an AI, run as the scheduled task `bb-pledge-finder` on the owner's computer) looks for new pledges about Hammersmith & Fulham, drafts a card for each one and checks each quote word for word against its source. It opens a pull request and never merges or approves it: a card appears on the site only after the editor, Pavel Guzhikov, has read its quote against the source and approved it. One editor's approval is enough since 17 October 2026 (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
 
 ## Where it runs, and why not in the cloud
 

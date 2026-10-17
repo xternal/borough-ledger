@@ -2,6 +2,7 @@ import "server-only";
 import {
   DATA,
   derive,
+  editorialMark,
   fig,
   isGapValueLine,
   listTestValues,
@@ -103,6 +104,8 @@ export interface PromiseModel {
   replies: PromiseCard["replies"];
   lever_or_toggle_id?: string;
   editorCheck: boolean;
+  /** Once the editor approved it: "Checked by the AI Journalist and approved by Pavel Guzhikov" (editorialMark); else null. */
+  approvedMark: string | null;
   test?: boolean;
 }
 
@@ -234,6 +237,7 @@ function promiseModel(K: typeof DATA.content, p: PromiseCard, costOf: (x: Promis
     sources.set(v.archive_url ?? (m && v.source_url === m.url && m.archive_url ? m.archive_url : v.source_url), title);
   }
   for (const e of p.events) if (e.evidence_url && !sources.has(e.evidence_url)) sources.set(e.evidence_url, e.text.split(":")[0] ?? e.evidence_url);
+  const mark = editorialMark(p);
   return {
     id: p.id,
     actor: councillor?.name ?? party?.name ?? p.actor.id,
@@ -258,6 +262,7 @@ function promiseModel(K: typeof DATA.content, p: PromiseCard, costOf: (x: Promis
     replies: p.replies,
     ...(p.lever_or_toggle_id ? { lever_or_toggle_id: p.lever_or_toggle_id } : {}),
     editorCheck: !!p.editor_check_required,
+    approvedMark: mark && !mark.awaiting ? mark.text : null,
   };
 }
 

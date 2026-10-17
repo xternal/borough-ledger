@@ -53,9 +53,9 @@ export default async function PromisesPage({ searchParams }: Props) {
         </p>
         <p className="lede">{standing(m.promises).join(" ")}</p>
         <p className="small">
-          <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them. Every two weeks an AI
-          journalist (Claude, an AI) looks for new pledges from every party in the same places; one appears only after the editor has read its quote
-          against the source.
+          <a href="/decisions">Council decisions</a> that move a pledge are added to its timeline once an editor confirms them. Every two weeks the AI
+          Journalist (Claude, an AI) looks for new pledges from every party in the same places and checks each quote word for word against its
+          source; a pledge appears only after the editor, Pavel Guzhikov, has read its quote against the source and approved it.
         </p>
         <p className="small">
           By party:{" "}
