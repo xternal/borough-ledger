@@ -1162,6 +1162,35 @@
    "editor_note": "'dvelopments' is the manifesto's own spelling, quoted as printed."
   },
   {
+   "id": "con-2026-gangs-vawg-units",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "We will maintain the Gangs Unit and Violence Against Women and Girls Unit.",
+     "recorded_on": "2026-10-18",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 4
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "In the 2026 Conservative manifesto, page 4; not one of its key commitments"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
    "id": "con-2026-green-spaces",
    "actor": {
     "kind": "party",
@@ -1218,6 +1247,35 @@
    ],
    "replies": [],
    "editor_check_required": false
+  },
+  {
+   "id": "con-2026-law-enforcement-remit",
+   "actor": {
+    "kind": "party",
+    "id": "conservative"
+   },
+   "made_on": "2026-03-16",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "We will change the remit of the Law Enforcement Team to ensure they are fully focused on high streets, parks and antisocial behaviour – not whether people are putting their bins out on time.",
+     "recorded_on": "2026-10-18",
+     "source_url": "https://www.hfconservatives.org.uk/sites/www.hfconservatives.org.uk/files/2026-03/Conservative%20Manifesto%20-%20LBHF%202026.pdf",
+     "page": 4
+    }
+   ],
+   "status": "not_in_power",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-03-16",
+     "type": "promised",
+     "text": "In the 2026 Conservative manifesto, page 4; not one of its key commitments"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
   },
   {
    "id": "con-2026-next-generation",
@@ -1607,6 +1665,35 @@
    "editor_note": "'Best value council in Britain' has no stated measure; free home care has its own card (hf-free-home-care)."
   },
   {
+   "id": "lab-2026-cost-of-living",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Running the council",
+   "versions": [
+    {
+     "text": "Tackle the cost of living through our 60+ partner Cost-of-Living Alliance, expanding debt advice, fuel poverty support and community-based financial help for residents who need it most.",
+     "recorded_on": "2026-10-18",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 3
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
    "id": "lab-2026-council-tax-support",
    "actor": {
     "kind": "party",
@@ -1681,7 +1768,7 @@
      "page": 4
     }
    ],
-   "status": "in_plan",
+   "status": "delivering",
    "deadline": null,
    "events": [
     {
@@ -1694,6 +1781,12 @@
      "type": "in_plan",
      "text": "Cabinet decision, 19 Jan 2026 (in a council plan): “To approve a new H&F service, as part of the H&F ‘Healthy Homes’ programme, to help residents design and install measures including insulation, solar PV, heat pumps and energy storage to their homes.”",
      "evidence_url": "https://democracy.lbhf.gov.uk/ieDecisionDetails.aspx?AIId=72574"
+    },
+    {
+     "date": "2026-07-15",
+     "type": "delivering",
+     "text": "Council news, 15 July 2026 (being delivered): Tenant Power, a new energy tariff for council tenants: “A new, unique tariff from Octopus Energy is set to slash energy bills by more than £200 a year – and H&F Council tenants are first in line to benefit from it”; the council's “programme to improve energy efficiency across its housing stock is currently underway in Wormholt and Old Oak in Shepherds Bush, Brackenbury in Hammersmith and Sands End in Fulham”",
+     "evidence_url": "https://www.lbhf.gov.uk/news/2026/07/hf-gives-tenants-power-save-ps200-year-energy-bills"
     }
    ],
    "replies": [],
@@ -1759,6 +1852,35 @@
    "editor_note": "How much and from where are not stated; decide within 7 days whether council documents supply them or the card is unscoreable."
   },
   {
+   "id": "lab-2026-law-enforcement-team",
+   "actor": {
+    "kind": "party",
+    "id": "labour"
+   },
+   "made_on": "2026-05-01",
+   "venue": "manifesto",
+   "area": "Community safety",
+   "versions": [
+    {
+     "text": "Continue to invest in our Law Enforcement Team, tackling anti-social behaviour, fly-tipping and street crime day and night, and opposing any efforts to scrap it.",
+     "recorded_on": "2026-10-18",
+     "source_url": "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf",
+     "page": 4
+    }
+   ],
+   "status": "promised",
+   "deadline": null,
+   "events": [
+    {
+     "date": "2026-05-01",
+     "type": "promised",
+     "text": "In the 2026 Labour manifesto, page 4; not one of its headline pledges"
+    }
+   ],
+   "replies": [],
+   "editor_check_required": true
+  },
+  {
    "id": "lab-2026-parks",
    "actor": {
     "kind": "party",
@@ -1784,13 +1906,19 @@
     "quality": "sourced",
     "note": "The manifesto says 'over £8m' of new investment: £8m is a lower bound, and it is capital spending over the term."
    },
-   "status": "promised",
+   "status": "delivering",
    "deadline": null,
    "events": [
     {
      "date": "2026-05-01",
      "type": "promised",
      "text": "Headline pledge in the 2026 Labour manifesto"
+    },
+    {
+     "date": "2026-09-10",
+     "type": "delivering",
+     "text": "Council news, 10 September 2026 (being delivered): “The Shepherds Bush playground is the first to be improved through our £8.3million transformation programme”; the Cabinet Member for the Environment, Arts and Culture said “our first playground transformation is complete”",
+     "evidence_url": "https://www.lbhf.gov.uk/news/2026/09/godolphin-road-open-space-playground-has-been-transformed"
     }
    ],
    "replies": [],
