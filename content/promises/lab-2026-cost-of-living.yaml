@@ -1,0 +1,20 @@
+id: "lab-2026-cost-of-living"
+actor:
+  kind: "party"
+  id: "labour"
+made_on: "2026-05-01"
+venue: "manifesto"
+area: "Running the council"
+versions:
+  - text: "Tackle the cost of living through our 60+ partner Cost-of-Living Alliance, expanding debt advice, fuel poverty support and community-based financial help for residents who need it most."
+    recorded_on: "2026-10-18"
+    source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
+    page: 3
+status: "promised"
+deadline: null
+events:
+  - date: "2026-05-01"
+    type: "promised"
+    text: "In the 2026 Labour manifesto, page 3; not one of its headline pledges"
+replies: []
+editor_check_required: true
