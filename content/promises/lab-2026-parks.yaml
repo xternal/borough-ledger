@@ -14,11 +14,15 @@ capital_cost_m:
   range: [8, 8, 8]
   quality: "sourced"
   note: "The manifesto says 'over £8m' of new investment: £8m is a lower bound, and it is capital spending over the term."
-status: "promised"
+status: "delivering"
 deadline: null
 events:
   - date: "2026-05-01"
     type: "promised"
     text: "Headline pledge in the 2026 Labour manifesto"
+  - date: "2026-09-10"
+    type: "delivering"
+    text: "Council news, 10 September 2026 (being delivered): “The Shepherds Bush playground is the first to be improved through our £8.3million transformation programme”; the Cabinet Member for the Environment, Arts and Culture said “our first playground transformation is complete”"
+    evidence_url: "https://www.lbhf.gov.uk/news/2026/09/godolphin-road-open-space-playground-has-been-transformed"
 replies: []
 editor_check_required: false

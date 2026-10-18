@@ -10,7 +10,7 @@ versions:
     recorded_on: "2026-10-07"
     source_url: "https://hflabour.com/wp-content/uploads/2026/05/HF-manifesto-EXEC.pdf"
     page: 4
-status: "in_plan"
+status: "delivering"
 deadline: null
 events:
   - date: "2026-05-01"
@@ -23,5 +23,9 @@ events:
       design and install measures including insulation, solar PV, heat pumps and
       energy storage to their homes.”"
     evidence_url: https://democracy.lbhf.gov.uk/ieDecisionDetails.aspx?AIId=72574
+  - date: "2026-07-15"
+    type: "delivering"
+    text: "Council news, 15 July 2026 (being delivered): Tenant Power, a new energy tariff for council tenants: “A new, unique tariff from Octopus Energy is set to slash energy bills by more than £200 a year – and H&F Council tenants are first in line to benefit from it”; the council's “programme to improve energy efficiency across its housing stock is currently underway in Wormholt and Old Oak in Shepherds Bush, Brackenbury in Hammersmith and Sands End in Fulham”"
+    evidence_url: "https://www.lbhf.gov.uk/news/2026/07/hf-gives-tenants-power-save-ps200-year-energy-bills"
 replies: []
 editor_check_required: false
