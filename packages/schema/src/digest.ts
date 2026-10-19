@@ -139,6 +139,22 @@ export function draftNumbersOk(draft: string, facts: Fact[], extra: string[] = [
   return { ok: stray.length === 0, stray };
 }
 
+/** A Messages API answer, as much of it as the digest reads. */
+export interface ClaudeAnswer {
+  stop_reason?: string | null;
+  content?: { type: string; text?: string }[];
+}
+
+/** The draft in Claude's answer, or why there is none. Only an answer that ended by itself is a draft: the model thinks
+    before it writes, so a low max_tokens cuts the post off mid-sentence. The drafts of 9 and 12 October 2026 (issues
+    #41 and #76) stopped mid-word and still went out as "every number checked"; the one of 19 October was cut inside a
+    link, and only its stray number sent it to the plain version. */
+export function claudeDraft(answer: ClaudeAnswer): { draft: string } | { problem: string } {
+  if (answer.stop_reason !== "end_turn") return { problem: `Claude's draft did not finish (stop reason: ${answer.stop_reason ?? "none"})` };
+  const draft = (answer.content ?? []).filter((c) => c.type === "text").map((c) => c.text ?? "").join("").trim();
+  return draft ? { draft } : { problem: "Claude's answer held no text" };
+}
+
 /** The plain version, used when no writer is available or a draft fails the check. */
 export function templateDraft(facts: Fact[], weekOf: string, site: string): string {
   const part = (section: Fact["section"], heading: string) => {

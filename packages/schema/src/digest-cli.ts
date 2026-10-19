@@ -4,14 +4,15 @@
 
    Gathers the week's facts (digest.ts), fetches the council's meetings in the next fortnight from its ModernGov web
    service, and asks Claude for a short Substack draft in the owner's voice using only those facts. If any number in
-   the draft is not one of the facts' numbers, or there is no API key, the plain template is used instead. The output
-   ends with the facts themselves, so the owner can check the draft in a minute before posting. */
+   the draft is not one of the facts' numbers, the draft did not finish, or there is no API key, the plain template is
+   used instead. The output ends with the facts themselves, so the owner can check the draft in a minute before
+   posting. */
 import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { compileContent } from "./content-compile";
 import { DecisionsFile } from "./decisions";
-import { addDays, digestFacts, draftNumbersOk, templateDraft, type Fact, type UpcomingMeeting } from "./digest";
+import { addDays, claudeDraft, digestFacts, draftNumbersOk, templateDraft, type ClaudeAnswer, type Fact, type UpcomingMeeting } from "./digest";
 import { PaymentsIndex } from "./payments";
 import { WardSpend } from "./wardspend";
 
@@ -74,14 +75,15 @@ async function write(facts: Fact[], today: string): Promise<{ draft: string; not
     headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 1500,
+      max_tokens: 16000, // the model thinks first; 1500 cut every draft off (claudeDraft in digest.ts)
       system: VOICE,
       messages: [{ role: "user", content: `The week ending ${today}; the post goes out on ${publishDay(today)}, so "coming up" starts that day. The facts:\n${JSON.stringify(facts, null, 1)}` }],
     }),
   });
   if (!res.ok) return { draft: plain, note: `Claude API ${res.status}: the plain version.` };
-  const body = (await res.json()) as { content: { type: string; text?: string }[] };
-  const draft = body.content.map((c) => c.text ?? "").join("").trim();
+  const answer = claudeDraft((await res.json()) as ClaudeAnswer);
+  if ("problem" in answer) return { draft: plain, note: `${answer.problem}, so here is the plain version.` };
+  const { draft } = answer;
   const check = draftNumbersOk(draft, facts, ["500", "boroughs", today, publishDay(today), SITE]);
   if (!check.ok) return { draft: plain, note: `Claude's draft used numbers not in the facts (${check.stray.join(", ")}), so here is the plain version.` };
   if (draft.includes("\u00b7")) return { draft: draft.replace(/\u00b7/g, ","), note: "Middle dots replaced with commas." };
