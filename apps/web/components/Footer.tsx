@@ -1,5 +1,5 @@
 import { ALLOW_TEST_DATA } from "@/lib/quality";
-import { CONTACT, MAKER, REPO } from "@/lib/site";
+import { ALSO_BY, CONTACT, MAKER, REPO } from "@/lib/site";
 import { HOME_BOROUGH, OTHER_BOROUGHS } from "@/lib/boroughList";
 
 /** `full` is the council's own name where "<place> Council" would be wrong, such as a royal borough. */
@@ -24,6 +24,12 @@ export function Footer({ council, hasTestData, full }: { council: string; hasTes
       <span className="credit">
         <a href={MAKER.url}>Made by {MAKER.name}</a>
         <a href={MAKER.coffee}>Buy me a coffee</a>
+        <span>
+          Also by the author:{" "}
+          <a href={ALSO_BY.url} rel="noopener noreferrer">
+            {ALSO_BY.name}
+          </a>
+        </span>
       </span>
     </footer>
   );
