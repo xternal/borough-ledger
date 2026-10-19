@@ -20,6 +20,12 @@ export const STAGE = "Alpha";
 /** Who made the site, credited in every footer. */
 export const MAKER = { name: "Pavel Guzhikov", url: "https://guzh.uk", coffee: "https://ko-fi.com/pavelg" };
 
+/**
+ * The owner's other project: one plain link in every footer, the same on every page (Pavel, 19 Oct 2026; docs/PRE_SHIP_REVIEW.md,
+ * "Also by the author"). No card, no line above the header, no query string, nothing counted.
+ */
+export const ALSO_BY = { name: "Ruminator.xyz", url: "https://ruminator.xyz/" } as const;
+
 /** Where replies from councillors and parties, and corrections, are sent. Shown in every footer and on every promise card. */
 export const CONTACT = "boroughs@guzh.uk";
 
