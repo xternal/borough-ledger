@@ -1188,7 +1188,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-green-spaces",
@@ -1275,7 +1275,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "con-2026-next-generation",
@@ -1691,7 +1691,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-council-tax-support",
@@ -1878,7 +1878,7 @@
     }
    ],
    "replies": [],
-   "editor_check_required": true
+   "editor_check_required": false
   },
   {
    "id": "lab-2026-parks",
