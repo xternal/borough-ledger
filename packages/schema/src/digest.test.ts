@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DATA } from "./data";
-import { digestFacts, draftNumbersOk, money, templateDraft, type DigestInput } from "./digest";
+import { claudeDraft, digestFacts, draftNumbersOk, money, templateDraft, type DigestInput } from "./digest";
 
 const base: DigestInput = {
   today: "2026-10-09",
@@ -46,6 +46,16 @@ describe("weekly digest", () => {
     expect(draftNumbersOk(ok, facts, ["500", base.today, base.site]).ok).toBe(true);
     const bad = `${ok}\nThe council will save £12.5m next year.`;
     expect(draftNumbersOk(bad, facts, ["500", base.today, base.site])).toEqual({ ok: false, stray: ["12.5"] });
+  });
+
+  it("takes only a draft that finished, without the model's thinking", () => {
+    const thinking = { type: "thinking", thinking: "Plan the post." };
+    expect(claudeDraft({ stop_reason: "end_turn", content: [thinking, { type: "text", text: "# Title\n\nAll of it. " }] })).toEqual({ draft: "# Title\n\nAll of it." });
+    // Issue #76, 12 October 2026: cut off inside a link at max_tokens 1500.
+    const cut = claudeDraft({ stop_reason: "max_tokens", content: [thinking, { type: "text", text: "**[Cabinet meets on Monday 12 October at 6.30 pm](https://democ" }] });
+    expect(cut).toEqual({ problem: "Claude's draft did not finish (stop reason: max_tokens)" });
+    expect(claudeDraft({ stop_reason: "refusal", content: [] })).toHaveProperty("problem");
+    expect(claudeDraft({ stop_reason: "end_turn", content: [thinking] })).toEqual({ problem: "Claude's answer held no text" });
   });
 
   it("writes money the way the site does", () => {
