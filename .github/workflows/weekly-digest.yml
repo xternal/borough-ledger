@@ -51,3 +51,25 @@ jobs:
           else
             gh issue create --repo "$REPO" --title "$title" --label digest --body-file "$RUNNER_TEMP/digest.md"
           fi
+
+  # A failed run opens an issue labelled job-failed, or comments on the open one, with the run link and the error from the
+  # log (scripts/job_failed.py). Otherwise a failed scheduled run shows only in the Actions tab: the decisions job failed
+  # every morning from 14 to 16 October 2026 and nobody knew (docs/PRE_SHIP_REVIEW.md, AI Journalist backtest fixes).
+  report-failure:
+    needs: [digest]
+    if: ${{ failure() }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Open or update the job-failed issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: python3 scripts/job_failed.py

@@ -10,7 +10,8 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { isSeq, parseDocument } from "yaml";
 import { compileContent } from "./content-compile";
-import { SYSTEM_PROMPT, eventFor, linkFor, linkSchema, openPledges, statusAfter, userPrompt, validSuggestions, type Suggestion } from "./decision-links";
+import { requestProblems } from "./claude-request";
+import { SYSTEM_PROMPT, eventFor, linkFor, linkSchema, openPledges, statusAfter, suggestRequest, userPrompt, validSuggestions, type Suggestion } from "./decision-links";
 import type { PromiseCard } from "./content";
 import { DecisionsFile } from "./decisions";
 
@@ -29,27 +30,19 @@ const writeAssessed = (a: Assessed) =>
   );
 const decisions = () => DecisionsFile.parse(JSON.parse(readFileSync(join(root, "data", "build", "decisions.json"), "utf8"))).decisions;
 
-/** Puts one decision to Claude. The answer is JSON in the schema (structured outputs; the model always thinks first, so
-    max_tokens leaves room for that). A declined request is retried server-side on the fallback Anthropic recommends, so
-    `model` is whichever model answered. Null when there is no usable answer (refused or cut off): the decision then stays
-    unassessed and is asked about again on the next run. */
+/** Puts one decision to Claude, with the request suggestRequest builds (structured outputs, never a forced tool call). A
+    declined request is retried server-side on the fallback Anthropic recommends, so `model` is whichever model answered.
+    Null when there is no usable answer (refused or cut off): the decision then stays unassessed and is asked about again
+    on the next run. A request the API would refuse is not sent: the run fails with the reason, and the workflow opens a
+    job-failed issue. */
 async function ask(system: string, user: string, schema: ReturnType<typeof linkSchema>): Promise<{ answer: unknown; model: string; stop: string } | null> {
+  const req = suggestRequest(MODEL, system, user, schema);
+  const problems = requestProblems(req);
+  if (problems.length) throw new Error(`Not sent: the Claude API would refuse this request for ${MODEL}: ${problems.join("; ")}`);
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "x-api-key": process.env.ANTHROPIC_API_KEY!,
-      "anthropic-version": "2023-06-01",
-      "anthropic-beta": "server-side-fallback-2026-07-01",
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 16000,
-      system,
-      output_config: { format: { type: "json_schema", schema } },
-      fallbacks: "default",
-      messages: [{ role: "user", content: user }],
-    }),
+    headers: { ...req.headers, "x-api-key": process.env.ANTHROPIC_API_KEY! },
+    body: JSON.stringify(req.body),
   });
   if (!res.ok) throw new Error(`Claude API ${res.status} for ${MODEL}: ${(await res.text()).slice(0, 300)}`);
   const body = (await res.json()) as { model: string; stop_reason: string; content: { type: string; text?: string }[] };
