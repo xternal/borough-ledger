@@ -29,6 +29,12 @@ const HREF: Record<SectionId, string> = {
 
 export const sectionHref = (id: SectionId): string => HREF[id];
 
+/**
+ * Promises are in every menu (decision 30). On another council's page, or the council tax decoder, the item leads to
+ * the promises this site tracks, which are Hammersmith & Fulham's, so a screen reader hears whose they are.
+ */
+export const PROMISES_ITEM = { id: "promises", label: "Promises", href: HREF.promises, whose: "in Hammersmith & Fulham" } as const;
+
 export const sectionLabel = (id: SectionId): string => SECTIONS.find(([s]) => s === id)![1];
 
 /** The section after this one, in the order of the overview; null after the last. */

@@ -2,6 +2,7 @@ import type { PageModel } from "@/lib/model";
 import { ALLOW_TEST_DATA } from "@/lib/quality";
 import { Num } from "./Num";
 import { HeroTop } from "./HeroTop";
+import { PromisesTrackedLine } from "./HomePromises";
 
 export function Hero({ m }: { m: PageModel }) {
   const { bill, place, balance } = m;
@@ -26,6 +27,7 @@ export function Hero({ m }: { m: PageModel }) {
           <Num f={m.grantsShare} fmt="share0" />, including the money passed straight to schools, and business rates for{" "}
           <Num f={m.ratesShare} fmt="share0" />.
         </p>
+        <PromisesTrackedLine promises={m.promises} />
       </div>
       <div className="kpis">
         {kpis.map((k) => (

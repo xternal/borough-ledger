@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { SECTIONS, sectionForPath, sectionHref, type SectionId } from "@/lib/nav";
+import { PROMISES_ITEM, SECTIONS, sectionForPath, sectionHref, type SectionId } from "@/lib/nav";
 
 /** A borough page's own sections, on that page: [id, label], each a part of the long page at `base`. */
 /** `current` marks the item a sub-page belongs to (a council's decoder page is under "Every council"). */
@@ -12,10 +12,12 @@ export type BoroughSections = { base: string; items: readonly (readonly [string,
  * The top bar's menu. One rule: an item is highlighted when you are where it leads. Hammersmith & Fulham's items are
  * pages, so the page's section is highlighted on that page and the pages under it, and nothing on the home page, which
  * is every section at once. Another council's items are parts of its one long page, so there the section in view is.
+ * Every menu has Promises: another council's ends with it, leading to Hammersmith & Fulham's (decision 30).
  * On narrow screens the highlighted item is kept in view.
  */
 export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
   const path = usePathname() ?? "/";
+  // Hammersmith & Fulham's sections, or another council's parts of its page (followed as you scroll; Promises comes after them).
   const items = borough ? borough.items : SECTIONS;
   const statement = !!borough && path === borough.base;
   const [inView, setInView] = useState<string | null>(null);
@@ -85,6 +87,12 @@ export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
           {label}
         </a>
       ))}
+      {borough ? (
+        <a href={PROMISES_ITEM.href} data-section={PROMISES_ITEM.id}>
+          {PROMISES_ITEM.label}
+          <span className="sr-only"> {PROMISES_ITEM.whose}</span>
+        </a>
+      ) : null}
     </nav>
   );
 }

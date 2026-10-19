@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatMonthYear } from "@/lib/format";
 import type { PromiseModel } from "@/lib/model";
 import { applyFilters, filtersQuery, type PromiseFilters, type SideFilter, type StatusFilter } from "@/lib/promiseFilters";
 import { STATUS_LABEL, STATUS_ORDER, isOverdue, sides } from "@/lib/promises";
-import { Num } from "./Num";
+import { PromiseRow } from "./PledgeRows";
 
 /**
  * /promises: every pledge in one clean, scannable list. Filters by party (from seats in the data), status (or overdue)
  * and topic. The page reads them from the address, so the first view is already filtered; changes keep the address in
- * step without adding history entries, so a filtered view can be shared. Each row opens the card page.
+ * step without adding history entries, so a filtered view can be shared. Each row is one link to its card page.
  */
 export function PromisesIndex({ promises, today, initial }: { promises: PromiseModel[]; today: string; initial: PromiseFilters }) {
   const [side, setSide] = useState<SideFilter>(initial.side);
@@ -102,34 +101,7 @@ export function PromisesIndex({ promises, today, initial }: { promises: PromiseM
         <ol className="prows">
           {list.map((p) => (
             <li key={p.id}>
-              <a className="prow" href={`/promise/${p.id}`}>
-                <span className="prow-who">
-                  <b>{p.partyShort}</b>
-                  <span className="muted">{p.side === "administration" ? "runs the council" : "opposition"}</span>
-                </span>
-                <span className="prow-quote">&ldquo;{p.text}&rdquo;</span>
-                <span className="prow-meta">
-                  <span className={`pill st-${p.status}`}>{STATUS_LABEL[p.status]}</span>
-                  <span>{p.area}</span>
-                  <span>
-                    {p.cost ? (
-                      <>
-                        <Num f={p.cost.low} fmt="m1" />
-                        {" to "}
-                        <Num f={p.cost.high} fmt="m1" /> a year
-                      </>
-                    ) : p.capital ? (
-                      <>
-                        <Num f={p.capital.central} fmt="m1" /> to build, once
-                      </>
-                    ) : (
-                      "No cost stated"
-                    )}
-                  </span>
-                  {p.deadline ? <span>Due {formatMonthYear(p.deadline)}</span> : null}
-                  {!allAwaitCheck && p.editorCheck ? <span className="checkmark">Awaiting editor check</span> : null}
-                </span>
-              </a>
+              <PromiseRow p={p} area check={!allAwaitCheck} />
             </li>
           ))}
         </ol>

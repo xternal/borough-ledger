@@ -6,13 +6,11 @@ import { formatDay, formatMonthYear } from "@/lib/format";
 import type { PageModel, PromiseModel } from "@/lib/model";
 import { Num, TestMark } from "./Num";
 import { isOverdue, sides } from "@/lib/promises";
-import { useLedger } from "./LedgerState";
 import { CONTACT } from "@/lib/site";
 import { topicSlug } from "@/lib/topicSlug";
 import { balancePath, withPledge } from "@/lib/balanceLink";
+import { PromiseRow } from "./PledgeRows";
 import { SecTitle, type SectionView } from "./SecTitle";
-
-type Props = Pick<PageModel, "promises" | "today" | "generalBudget" | "balance">;
 
 const LADDER = ["promised", "in_plan", "budgeted", "delivering", "delivered"] as const;
 const LABEL: Record<Status, string> = {
@@ -51,15 +49,17 @@ function who(p: PromiseModel): string {
   return p.party ? `${p.actor}, ${p.party}` : p.actor;
 }
 
+/**
+ * The promises on the home page: a few pledges with filters, each row one link straight to its card page (decision 30).
+ * There is no side pane to select first: the card page shows everything the pane did.
+ */
 export function Promises({
   promises,
   today,
-  generalBudget,
-  balance,
   heading = true,
   limit,
   view,
-}: Props & {
+}: Pick<PageModel, "promises" | "today"> & {
   heading?: boolean;
   /** Show only this many cards, with a link to all of them. */
   limit?: number;
@@ -67,8 +67,6 @@ export function Promises({
   view?: SectionView;
 }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const [sel, setSel] = useState(promises[0]?.id);
-  const { scenario } = useLedger();
 
   // One rule for every side: the filter reads `side` from data, never a party name; labels name the parties from the data.
   const overdueCount = promises.filter((p) => overdue(p, today)).length;
@@ -79,12 +77,10 @@ export function Promises({
   ];
   const all = promises.filter((p) => filter === "all" || (filter === "overdue" ? overdue(p, today) : p.side === filter));
   const list = limit ? all.slice(0, limit) : all;
-  const current = list.find((p) => p.id === sel) ?? list[0];
   // The same filter on /promises, in its address, with the count it will show.
   const side = sides(promises).find((g) => g.id === filter);
   const allHref = filter === "overdue" ? "/promises?status=overdue" : side ? `/promises?side=${side.id}` : "/promises";
   const allLabel = `See all ${all.length} ${filter === "overdue" ? "overdue " : side ? `${side.parties.join(" and ")} ` : ""}${all.length === 1 ? "promise" : "promises"}`;
-  const toggle = current ? balance.toggles.find((t) => t.id === current.lever_or_toggle_id) : undefined;
 
   return (
     <section id="promises" aria-labelledby="promises-h">
@@ -103,73 +99,33 @@ export function Promises({
           Promises
         </h2>
       )}
-      <div className="promises">
-        <div>
-          <div className="filters" role="group" aria-label="Filter promises">
-            {filters.map((f) => (
-              <button key={f.id} type="button" className="chip" aria-pressed={f.id === filter} onClick={() => setFilter(f.id)}>
-                {f.label} <span className="count">{f.count}</span>
-              </button>
-            ))}
-          </div>
-          <div className="plist">
-            {list.length ? (
-              list.map((p) => (
-                <button key={p.id} type="button" className="pcard" aria-pressed={p.id === current?.id} onClick={() => setSel(p.id)}>
-                  <div className="who">
-                    <span>{who(p)}</span>
-                    <span>{formatDay(p.made_on)}</span>
-                  </div>
-                  <div className="txt">&ldquo;{p.text}&rdquo;</div>
-                  <div className="meta">
-                    <span className={`pill st-${p.status}`}>{LABEL[p.status]}</span>
-                    <span>
-                      {p.cost ? (
-                        <>
-                          <Num f={p.cost.low} fmt="m1" />
-                          {" to "}
-                          <Num f={p.cost.high} fmt="m1" /> a year
-                        </>
-                      ) : p.capital ? (
-                        <>
-                          <Num f={p.capital.central} fmt="m1" /> capital
-                        </>
-                      ) : (
-                        "Cost not stated"
-                      )}
-                    </span>
-                    {p.deadline ? <span>Due {formatMonthYear(p.deadline)}</span> : null}
-                    {p.editorCheck ? <span className="checkmark">Awaiting editor check</span> : null}
-                    {p.test ? <TestMark what={`promise card ${p.id}`}>Test card</TestMark> : null}
-                  </div>
-                </button>
-              ))
-            ) : (
-              <p className="muted" style={{ padding: "16px 0" }}>
-                No promises match this filter.
-              </p>
-            )}
-            {limit && all.length ? (
-              <a className="linkbtn more" href={allHref}>
-                {allLabel}
-              </a>
-            ) : null}
-          </div>
-        </div>
-        {current ? (
-          <Detail
-            p={current}
-            today={today}
-            generalBudget={generalBudget}
-            toggle={toggle}
-            toggleOn={toggle ? (scenario.toggles[toggle.id] ?? toggle.on) : undefined}
-            // Balance it on its own page, with this pledge picked in the address and the reader's other choices kept.
-            tryHref={toggle ? balancePath(balance.input, withPledge(balance.input, toggle.id, scenario), { id: current.id, toggleId: toggle.id }) : undefined}
-          />
-        ) : (
-          <div className="detail" />
-        )}
+      <div className="filters" role="group" aria-label="Filter promises">
+        {filters.map((f) => (
+          <button key={f.id} type="button" className="chip" aria-pressed={f.id === filter} onClick={() => setFilter(f.id)}>
+            {f.label} <span className="count">{f.count}</span>
+          </button>
+        ))}
       </div>
+      {list.length ? (
+        <ol className="prows">
+          {list.map((p) => (
+            <li key={p.id}>
+              <PromiseRow p={p} area check />
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="muted" style={{ padding: "16px 0" }}>
+          No promises match this filter.
+        </p>
+      )}
+      {limit && all.length ? (
+        <p className="more">
+          <a className="linkbtn" href={allHref}>
+            {allLabel}
+          </a>
+        </p>
+      ) : null}
     </section>
   );
 }
@@ -302,9 +258,6 @@ export function Detail({
         ))}
       </ol>
       <div className="actions">
-        <a className="linkbtn" href={`/promise/${p.id}`}>
-          Open the full card
-        </a>
         {toggle && toggleOn !== undefined && tryHref ? (
           <a className="btn" href={tryHref}>
             {toggleOn ? "See next year without it" : "See next year with it"}
