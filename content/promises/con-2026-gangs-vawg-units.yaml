@@ -17,4 +17,4 @@ events:
     type: "promised"
     text: "In the 2026 Conservative manifesto, page 4; not one of its key commitments"
 replies: []
-editor_check_required: true
+editor_check_required: false
