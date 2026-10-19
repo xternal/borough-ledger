@@ -279,7 +279,7 @@
   },
   {
    "file": "data/manual/budget_timetable_2027-28.csv",
-   "sha256": "c1b988cf8f5832e1238ee5f58c1350533c351784b38d15610db9b29f67b93058"
+   "sha256": "a66334623a0e3cfb4b35d9767ba53cb9fba3e6ba8eff20e88c5803a8382b8668"
   },
   {
    "file": "data/manual/capital_2026-30.csv",
@@ -397,7 +397,7 @@
  "outputs": [
   {
    "file": "data/build/hf_2026-27.json",
-   "sha256": "a0d361ca4a94e95554711231e9d27dfc6bf13738b06dfc8d8e4c03b666b05e72"
+   "sha256": "9bca088c8a3d258f95c15a52fb5c21099ec3fb945e9164dffd847a3f8fccd4f9"
   }
  ],
  "quality_counts": {
