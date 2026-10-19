@@ -37,7 +37,8 @@ describe("a pledge's way into Balance it", () => {
       }),
     );
     expect(html).toContain(`href="/balance?promise=${p.id}"`);
-    expect(html).toContain(`href="/promise/${p.id}"`);
+    // The card is shown on its own page only (decision 30 dropped the home page's side pane), so it does not link to itself.
+    expect(html).not.toContain(`href="/promise/${p.id}"`);
   });
 
   it("opens Balance it with the pledge's choice switched, marked, and linked back to its card", () => {

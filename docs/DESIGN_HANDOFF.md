@@ -16,12 +16,12 @@ Your council tax bill, turned into a readable account of your council's money an
 5. **Neutral.** No party colours anywhere. Red and green only for deltas and statuses.
 6. **Provenance one glance away.** A coloured dot and a word: sourced (green), approx (amber), test (red).
 7. **No middle-dot (·) separators.** Use layout, alignment, line breaks or commas.
-8. **People always know where they are.** Every menu item is a page of its own (`/bill`, `/budget`, `/gap`, `/balance`, `/promises`, `/wards`, `/payments`, `/method`). The top bar highlights an item when you are where it leads (`aria-current`): on its page and the pages under it (a promise card lights up Promises, a supplier lights up Payments), nothing on the home page, which is every section at once, and on another council's long page, whose items are anchors, the section in view as you scroll. On a phone the highlighted item stays visible in the scrolling menu.
+8. **People always know where they are.** Every menu item is a page of its own (`/bill`, `/budget`, `/gap`, `/balance`, `/promises`, `/wards`, `/payments`, `/method`). The top bar highlights an item when you are where it leads (`aria-current`): on its page and the pages under it (a promise card lights up Promises, a supplier lights up Payments), nothing on the home page, which is every section at once, and on another council's long page, whose items are anchors, the section in view as you scroll. Every menu has Promises: on another council's page it comes last and leads to Hammersmith & Fulham's promises (decision 30, 19 Oct 2026). On a phone the highlighted item stays visible in the scrolling menu.
 
 ## Information architecture
 
 ```
-/                     The overview: every section on one page (old /#bill-style links still land here); each heading links to its own page
+/                     The overview: the opening, then the promises (how many, the latest changes, what is due next; decision 30), then every section on one page (old /#bill-style links still land here); each heading links to its own page
 /bill                 Your bill, and next year's options for the band picked (?band=D to share a band: not built yet)
 /budget               The budget, with everyday services and care for adults and children (/budget#case-care)
 /budget/[service]     Service drill-down: sub-lines, trend, gross vs net, savings, related pledges
@@ -59,7 +59,7 @@ Your council tax bill, turned into a readable account of your council's money an
 | Lever | at base, changed, over limit (red value), government-controlled label |
 | Toggle | on/off with cost |
 | Result panel | still to find (red), balanced (green), spare (blue); flags: referendum, one-off, below safe minimum, section 114 |
-| Promise row | each status; test card mark; overdue |
+| Promise row | each status; test card mark; overdue; the whole row is one link to its card, ending "Open the promise →" |
 | Ladder | 5 steps; single-message variant for opposition, unscoreable, failed, quietly dropped |
 | Timeline | promised, in plan, budgeted, delivering, delivered, deadline, deadline missed, today |
 | Payments table | loading, empty, filtered, redacted aggregate row |
