@@ -6,20 +6,30 @@ Every two weeks the AI Journalist (Claude, an AI, run as the scheduled task `bb-
 
 On the owner's Mac, in the Claude app, from `/Users/xternal/dev/borough-ledger`. It needs the open web: the party sites, the council's site (which refuses scripts, so it is read in the app's built-in browser) and the Wayback Machine. On 13 October 2026 a cloud routine on this account could reach only GitHub, npm and PyPI, and its GitHub login failed, so it could not read a single source. To move it to the cloud later, set the cloud environment's network access to "Full" and connect GitHub on claude.ai, run it once by hand, and check that `promises:quotes` reaches web.archive.org. If the Mac is off on a Monday, the task runs when the app next opens.
 
-## 0. Is a run due?
+## 0. Is a run due? Then start the branch
 
-The schedule fires every Monday. A run is due when no "New pledges, ..." pull request has been opened in the last 10 days, open, merged or closed:
+The schedule fires every Monday. A run is due when no **scheduled** run has opened a "New pledges, ..." pull request in the last 10 days, open, merged or closed:
 
 ```bash
-last=$(gh pr list --repo xternal/borough-ledger --state all --search "New pledges in:title" --limit 20 --json title,createdAt -q '[.[] | select(.title | startswith("New pledges, ")) | .createdAt] | max // ""')
-python3 -c "import sys,datetime as d; s=sys.argv[1]; age=(d.datetime.now(d.timezone.utc)-d.datetime.fromisoformat(s.replace('Z','+00:00'))).days if s else 99; print(('run' if age>=10 else 'skip')+f' (last New pledges PR opened {s or \"never\"}, {age} days ago)')" "$last"
+python3 scripts/pledge_finder.py due
 ```
 
-On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Monday is caught up the next Monday. With a run every other Monday it skips the Mondays in between (19 October 2026 skips, 26 October runs). A run that opens no pull request leaves the next Monday due. The only way past a `skip` is a person in a Claude session asking for the pledge finder to "run anyway"; the scheduled task never does.
+It prints `run` or `skip` with the reason, then how far back to look (section 1). On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Monday is caught up the next Monday. With a run every other Monday it skips the Mondays in between (19 October 2026 skips, 26 October runs, 2 November skips). A scheduled run that opens no pull request leaves the next Monday due.
+
+Only scheduled runs set the schedule. The only way past a `skip` is a person in a Claude session asking for the pledge finder to "run anyway"; the scheduled task never does. A run by hand skips the check, and its pull request counts only for where the next run looks back to: it never moves the next scheduled run. (Until 19 October 2026 any "New pledges" pull request counted, so the run by hand of 18 October, #95, would have pushed the run due on 26 October out to 2 November.) Each pull request says in its first line which kind of run opened it; the check reads that line, and a pull request without it counts as by hand. The schedule started with the first run, on 14 October 2026 (#89), recorded in the script as `SCHEDULE_STARTED`.
+
+On `run`, or for a run by hand, start the branch before anything else:
+
+```bash
+python3 scripts/pledge_finder.py start --scheduled   # the scheduled task
+python3 scripts/pledge_finder.py start --by-hand     # a person's "run anyway"
+```
+
+It fetches `main`, switches to a new branch `pledges-<YYYY-MM-DD>` off `origin/main` (`pledges-<YYYY-MM-DD>-2` if a run that day already has the name), and prints the pull request's title and the first line of its body. Every run works and commits on that branch, a run by hand too: never on a Claude session's own branch (such as `claude/...`) or on `main`.
 
 ## 1. Where to look: the same places for every party
 
-Look back to the date of the last pledge-finder pull request (titled "New pledges, ..."), or 21 days if there is none.
+Look back to the date of the last pledge-finder pull request (titled "New pledges, ..."), scheduled or by hand, or 21 days if there is none. `due` prints it ("look back to ...").
 
 | Place | What to read | Notes |
 |---|---|---|
@@ -75,15 +85,15 @@ pnpm --filter @borough-ledger/schema content:append-only origin/main
 pnpm --filter @borough-ledger/schema promises:quotes origin/main
 ```
 
-`promises:quotes` reads every new quote's source and fails unless the words are there word for word, on the cited page. Fix or drop any card it fails; never loosen the check. When all pass, commit on a new branch `pledges-<YYYY-MM-DD>` off an up-to-date `main` and open a pull request against `main` titled "New pledges, <day month year>":
+`promises:quotes` reads every new quote's source and fails unless the words are there word for word, on the cited page. Fix or drop any card it fails; never loosen the check. When all pass, commit on the `pledges-<YYYY-MM-DD>` branch that `start` made (section 0), push it and open a pull request against `main` with the title `start` printed ("New pledges, <day month year>"):
 
 ```bash
-gh pr create --base main --title "New pledges, 26 October 2026" --body-file pr-body.md
+gh pr create --base main --head pledges-2026-10-26 --title "New pledges, 26 October 2026" --body-file pr-body.md
 ```
 
-Commit messages end with "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and the pull request body with "🤖 Generated with [Claude Code](https://claude.com/claude-code)".
+Commit messages end with "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and the pull request body with "🤖 Generated with [Claude Code](https://claude.com/claude-code)". Write `pr-body.md` outside the repository (or delete it before committing), so it is never committed.
 
-The pull request body has:
+The pull request body starts with the line `start` printed, exactly as printed (it ends with a hidden marker that `due` reads): "Run: scheduled ..." for the scheduled task, "Run: by hand ..." for a run by hand. Then:
 
 1. **Places checked**: each place in section 1, with what was found or "nothing new".
 2. **New cards**: for each, one line on why it counts and who made it.

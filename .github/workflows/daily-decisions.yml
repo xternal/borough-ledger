@@ -86,3 +86,26 @@ jobs:
           gh pr create --title "Council decisions to pledges: $n suggested" --body-file "$RUNNER_TEMP/body.md" --base main --head "$branch"
           # A pull request opened with the workflow's token does not start CI by itself.
           gh workflow run ci.yml --ref "$branch"
+
+  # A failed run opens an issue labelled job-failed, or comments on the open one, with the run link and the error from the
+  # log (scripts/job_failed.py). Otherwise a failed scheduled run shows only in the Actions tab: the decisions job failed
+  # every morning from 14 to 16 October 2026 and nobody knew (docs/PRE_SHIP_REVIEW.md, AI Journalist backtest fixes).
+  report-failure:
+    needs: [decisions]
+    # A probe is watched by the person who started it, so only real runs report.
+    if: ${{ failure() && !inputs.probe }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Open or update the job-failed issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: python3 scripts/job_failed.py

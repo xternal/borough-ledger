@@ -1,4 +1,5 @@
 /* Suggesting links from council decisions to pledges, and applying confirmed ones. Pure: no files, no network. */
+import { API_VERSION, FALLBACK_DEFAULT_BETA, type ClaudeRequest } from "./claude-request";
 import { partyOf, sideOf, type Content, type PromiseCard } from "./content";
 import { LINK_EVENTS, linkable, quoteIn, statusAfter, type Decision, type DecisionLink, type LinkEvent } from "./decisions";
 
@@ -73,6 +74,25 @@ export function linkSchema(pledges: PromiseCard[]) {
     required: ["links"],
     additionalProperties: false,
   } as const;
+}
+
+/** The request that puts one decision to Claude, without the API key. The answer comes back as JSON in the schema
+    (structured outputs), never through a forced tool call, which claude-opus-5-5 refuses with a 400 (the job failed on it
+    from 14 to 16 October 2026). The model always thinks first, so max_tokens leaves room for that. A declined request is
+    retried server-side on the fallback Anthropic recommends ("default", with its own beta header). requestProblems in
+    claude-request.ts checks it before it is sent. */
+export function suggestRequest(model: string, system: string, user: string, schema: ReturnType<typeof linkSchema>): ClaudeRequest {
+  return {
+    headers: { "content-type": "application/json", "anthropic-version": API_VERSION, "anthropic-beta": FALLBACK_DEFAULT_BETA },
+    body: {
+      model,
+      max_tokens: 16000,
+      system,
+      output_config: { format: { type: "json_schema", schema } },
+      fallbacks: "default",
+      messages: [{ role: "user", content: user }],
+    },
+  };
 }
 
 /** Keeps only suggestions that are checkable: a known open pledge, a known step, and a quote that is really in the text. */
