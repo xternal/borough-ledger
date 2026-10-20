@@ -30,7 +30,7 @@ export const ALSO_BY = { name: "Ruminator.xyz", url: "https://ruminator.xyz/" } 
 export const CONTACT = "boroughs@guzh.uk";
 
 /** The open repository: code, data tables and every promise card. */
-export const REPO = "https://github.com/xternal/borough-ledger";
+export const REPO = "https://github.com/xternal/boroughbook.uk";
 
 export const SITE = {
   name: "BoroughBook.UK",

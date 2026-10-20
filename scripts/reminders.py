@@ -257,7 +257,7 @@ def main(argv: List[str]) -> int:
         issues = [r.render(r.falls_due(args.today) or args.today)]
     else:
         issues = due_today(args.today)
-    repo = os.environ.get("REPO", "xternal/borough-ledger")
+    repo = os.environ.get("REPO", "xternal/boroughbook.uk")
     for title, body in issues:
         if args.dry_run:
             print(f"Would open: {title}")

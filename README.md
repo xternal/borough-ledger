@@ -2,7 +2,7 @@
 
 An independent, open view of a London borough's money and promises, built for residents. Live as a public alpha at **https://boroughbook.uk**: your council tax bill by band, the council's budget, how this year's gap was closed, a tool to balance next year, 18 manifesto pledges from both parties with their status, your ward and its councillors (find it by postcode), and every payment over £500 the council publishes. Every figure links to its source. Not run by or affiliated with the council.
 
-Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from LedgerGov.UK (the national version), sharing its ideas and later its code. Called Borough Ledger until 8 Oct 2026; the code packages, repo and Vercel project keep that name.
+Corrections, and replies from anyone named on a promise card: boroughs@guzh.uk. Made by [Pavel Guzhikov](https://guzh.uk). Separate project from LedgerGov.UK (the national version), sharing its ideas and later its code. Called Borough Ledger until 8 Oct 2026; the code packages and Vercel project keep that name. The repo is [xternal/boroughbook.uk](https://github.com/xternal/boroughbook.uk) since 20 Oct 2026 (xternal/boroughbook.uk before; the old address redirects).
 
 Where things stand and what is still open: `docs/PRE_SHIP_REVIEW.md`. The reference prototype in `prototype/` still runs on test data; the site does not.
 

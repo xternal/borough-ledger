@@ -27,7 +27,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from typing import Dict, Iterable, List, Optional, Set
 
-REPO = "xternal/borough-ledger"
+REPO = "xternal/boroughbook.uk"
 TITLE_PREFIX = "New pledges, "
 DUE_AFTER_DAYS = 10  # every other Monday: a scheduled run 7 days ago means skip, 14 days ago means run
 LOOK_BACK_DAYS = 21  # how far the first run ever looked back

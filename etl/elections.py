@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "elections"
 OUT = ROOT / "data" / "build" / "elections.json"
 CONTENT = ROOT / "data" / "build" / "content.json"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 
 API = "https://candidates.democracyclub.org.uk/api/next/ballots/"
 # TODO(config): the council's election moves to its config with M8 (second borough).
