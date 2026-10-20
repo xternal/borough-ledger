@@ -143,7 +143,8 @@ class WorkflowsTest(unittest.TestCase):
         workflows = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
         ai = [w for w in workflows if "schedule:" in w.read_text() and "ANTHROPIC_API_KEY" in w.read_text()]
         self.assertEqual([w.name for w in ai], ["daily-decisions.yml", "weekly-digest.yml"])
-        for w in ai:
+        # The pledge finder runs on the owner's computer; its watch reports a due run that opened no pull request.
+        for w in ai + [ROOT / ".github" / "workflows" / "pledge-finder-watch.yml"]:
             text = w.read_text()
             jobs = re.findall(r"^  ([\w-]+):\n", text.split("\njobs:\n", 1)[1], flags=re.M)
             self.assertIn("report-failure", jobs, w.name)

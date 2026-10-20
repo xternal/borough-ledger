@@ -1,0 +1,55 @@
+name: Pledge finder watch
+
+# The pledge finder runs as a scheduled task on the owner's computer (docs/PLEDGE_FINDER.md), so a run that never fires,
+# stops at a permission prompt or crashes leaves nothing on GitHub: the scheduled attempt of 14 October 2026 stopped at
+# its first permission prompt and nobody was told (AI Journalist backtest of 20 October 2026). The day after each Monday
+# this asks the same question the task asks (`pledge_finder.py due`). "run" on a Tuesday means Monday's run was due and
+# opened no pull request, so this job fails and report-failure opens or updates the job-failed issue. A run that found
+# nothing new with the backlog empty also opens no pull request (section 5); the issue then says so and needs no fix.
+on:
+  schedule:
+    - cron: "0 9 * * 2" # 09:00 UTC on Tuesdays: 10:00 BST in summer, 09:00 GMT in winter
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Check that Monday's due run opened its pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # bash with pipefail, so a failed `due` (GitHub's API down) fails the job instead of reading as "skip".
+        shell: bash
+        run: |
+          python3 scripts/pledge_finder.py due | tee "$RUNNER_TEMP/due.txt"
+          if head -1 "$RUNNER_TEMP/due.txt" | grep -q '^run'; then
+            echo "Error: the pledge finder was due and has opened no pull request since: $(head -1 "$RUNNER_TEMP/due.txt"). Check the bb-pledge-finder task on the owner's computer, or, if it found nothing new with the backlog empty, close this issue."
+            exit 1
+          fi
+
+  # The same report as the scheduled AI workflows (scripts/job_failed.py, daily-decisions.yml).
+  report-failure:
+    needs: [check]
+    if: ${{ failure() }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Open or update the job-failed issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: python3 scripts/job_failed.py
