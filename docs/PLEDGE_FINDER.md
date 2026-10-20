@@ -16,6 +16,8 @@ python3 scripts/pledge_finder.py due
 
 It prints `run` or `skip` with the reason, then how far back to look (section 1). On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Monday is caught up the next Monday. With a run every other Monday it skips the Mondays in between (19 October 2026 skips, 26 October runs, 2 November skips). A scheduled run that opens no pull request leaves the next Monday due.
 
+Because the task runs on the owner's computer, GitHub checks it from outside: every Tuesday the workflow `pledge-finder-watch.yml` runs `due` too, and if it still says `run`, Monday's run did not open its pull request (it never fired, stopped at a permission prompt or failed), so the workflow opens or updates the `job-failed` issue. If the run found nothing new with the backlog empty (section 5), close the issue.
+
 Only scheduled runs set the schedule. The only way past a `skip` is a person in a Claude session asking for the pledge finder to "run anyway"; the scheduled task never does. A run by hand skips the check, and its pull request counts only for where the next run looks back to: it never moves the next scheduled run. (Until 19 October 2026 any "New pledges" pull request counted, so the run by hand of 18 October, #95, would have pushed the run due on 26 October out to 2 November.) Each pull request says in its first line which kind of run opened it; the check reads that line, and a pull request without it counts as by hand. The schedule started with the first run, on 14 October 2026 (#89), recorded in the script as `SCHEDULE_STARTED`.
 
 On `run`, or for a run by hand, start the branch before anything else:
