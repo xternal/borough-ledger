@@ -105,7 +105,7 @@ class StartTest(unittest.TestCase):
     def test_title_and_marker(self) -> None:
         self.assertEqual(P.title_for(date(2026, 11, 2)), "New pledges, 2 November 2026")
         line = P.marker(P.SCHEDULED, date(2026, 10, 26))
-        self.assertEqual(line, "Run: scheduled (the bb-pledge-finder task, Monday 26 October 2026). <!-- pledge-finder-run: scheduled -->")
+        self.assertEqual(line, "Run: scheduled (the weekly ledger desk, Monday 26 October 2026). <!-- pledge-finder-run: scheduled -->")
         for kind in (P.SCHEDULED, P.BY_HAND):
             text = P.marker(kind, date(2026, 10, 26))
             self.assertNotIn("\u00b7", text)  # CLAUDE.md: no middle dots

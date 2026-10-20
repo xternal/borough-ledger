@@ -1,29 +1,29 @@
 # Pledge finder
 
-Every two weeks the AI Journalist (Claude, an AI, run as the scheduled task `bb-pledge-finder` on the owner's computer) looks for new pledges about Hammersmith & Fulham, drafts a card for each one and checks each quote word for word against its source. It opens a pull request and never merges or approves it: a card appears on the site only after the editor, Pavel Guzhikov, has read its quote against the source and approved it. One editor's approval is enough since 17 October 2026 (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
+Every two weeks the AI Journalist (Claude, an AI, run by the weekly ledger desk, a scheduled task on the owner's computer every Sunday evening; `docs/desk/WEEKLY.md`) looks for new pledges about Hammersmith & Fulham, drafts a card for each one and checks each quote word for word against its source. It opens a pull request and never merges or approves it: a card appears on the site only after the editor, Pavel Guzhikov, has read its quote against the source and approved it. One editor's approval is enough since 17 October 2026 (docs/PROMISE_STANDARD.md, sections 5 and 7). These are its instructions. Change them by pull request, like any other rule.
 
 ## Where it runs, and why not in the cloud
 
-On the owner's Mac, in the Claude app, from `/Users/xternal/dev/borough-ledger`. It needs the open web: the party sites, the council's site (which refuses scripts, so it is read in the app's built-in browser) and the Wayback Machine. On 13 October 2026 a cloud routine on this account could reach only GitHub, npm and PyPI, and its GitHub login failed, so it could not read a single source. To move it to the cloud later, set the cloud environment's network access to "Full" and connect GitHub on claude.ai, run it once by hand, and check that `promises:quotes` reaches web.archive.org. If the Mac is off on a Monday, the task runs when the app next opens.
+On the owner's Mac, in the Claude app, as part of the weekly ledger desk (`docs/desk/WEEKLY.md`), in a worktree of its own beside `/Users/xternal/dev/borough-ledger`. Until 20 October 2026 it was its own task, `bb-pledge-finder`, on Monday mornings. It needs the open web: the party sites, the council's site (which refuses scripts, so it is read in the app's built-in browser) and the Wayback Machine. On 13 October 2026 a cloud routine on this account could reach only GitHub, npm and PyPI, and its GitHub login failed, so it could not read a single source. To move it to the cloud later, set the cloud environment's network access to "Full" and connect GitHub on claude.ai, run it once by hand, and check that `promises:quotes` reaches web.archive.org. If the Mac is off on a Sunday evening, the task runs when the app next opens.
 
 ## 0. Is a run due? Then start the branch
 
-The schedule fires every Monday. A run is due when no **scheduled** run has opened a "New pledges, ..." pull request in the last 10 days, open, merged or closed:
+The weekly desk reaches this site every Sunday. A run is due when no **scheduled** run has opened a "New pledges, ..." pull request in the last 10 days, open, merged or closed:
 
 ```bash
 python3 scripts/pledge_finder.py due
 ```
 
-It prints `run` or `skip` with the reason, then how far back to look (section 1). On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Monday is caught up the next Monday. With a run every other Monday it skips the Mondays in between (19 October 2026 skips, 26 October runs, 2 November skips). A scheduled run that opens no pull request leaves the next Monday due.
+It prints `run` or `skip` with the reason, then how far back to look (section 1). On `skip`, stop at once and do nothing else. This checks what actually happened rather than the weekday, so a late or repeated run cannot draft a fortnight's work twice, and a missed Sunday is caught up the next Sunday. With a run every other Sunday it skips the Sundays in between (25 October 2026 runs, 1 November skips, 8 November runs). A scheduled run that opens no pull request leaves the next Sunday due.
 
-Because the task runs on the owner's computer, GitHub checks it from outside: every Tuesday the workflow `pledge-finder-watch.yml` runs `due` too, and if it still says `run`, Monday's run did not open its pull request (it never fired, stopped at a permission prompt or failed), so the workflow opens or updates the `job-failed` issue. If the run found nothing new with the backlog empty (section 5), close the issue.
+Because the task runs on the owner's computer, GitHub checks it from outside: every Tuesday the workflow `pledge-finder-watch.yml` runs `due` too, and if it still says `run`, Sunday's run did not open its pull request (it never fired, stopped at a permission prompt or failed), so the workflow opens or updates the `job-failed` issue. If the run found nothing new with the backlog empty (section 5), close the issue.
 
 Only scheduled runs set the schedule. The only way past a `skip` is a person in a Claude session asking for the pledge finder to "run anyway"; the scheduled task never does. A run by hand skips the check, and its pull request counts only for where the next run looks back to: it never moves the next scheduled run. (Until 19 October 2026 any "New pledges" pull request counted, so the run by hand of 18 October, #95, would have pushed the run due on 26 October out to 2 November.) Each pull request says in its first line which kind of run opened it; the check reads that line, and a pull request without it counts as by hand. The schedule started with the first run, on 14 October 2026 (#89), recorded in the script as `SCHEDULE_STARTED`.
 
 On `run`, or for a run by hand, start the branch before anything else:
 
 ```bash
-python3 scripts/pledge_finder.py start --scheduled   # the scheduled task
+python3 scripts/pledge_finder.py start --scheduled   # the weekly desk's scheduled run
 python3 scripts/pledge_finder.py start --by-hand     # a person's "run anyway"
 ```
 
