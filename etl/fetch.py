@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 
 
 def sha256(path: Path) -> str:

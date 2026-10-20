@@ -24,7 +24,7 @@ from typing import Any, Dict, List
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 CONTENT = ROOT / "content"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 
 MODERNGOV = "https://democracy.lbhf.gov.uk/mgWebService.asmx/GetCouncillorsByWard"
 PROFILE = "https://democracy.lbhf.gov.uk/mgUserInfo.aspx?UID={id}"

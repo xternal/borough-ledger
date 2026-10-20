@@ -39,7 +39,7 @@ LOG_14_OCTOBER = """\
 
 RUN = {
     "name": "Daily council decisions",
-    "html_url": "https://github.com/xternal/borough-ledger/actions/runs/38549740899",
+    "html_url": "https://github.com/xternal/boroughbook.uk/actions/runs/38549740899",
     "event": "schedule",
     "run_started_at": "2026-10-14T10:27:51Z",
 }
@@ -49,7 +49,7 @@ def failed_job() -> Dict:
     return {
         "id": 115804505143,
         "name": "decisions",
-        "url": "https://github.com/xternal/borough-ledger/actions/runs/38549740899/job/115804505143",
+        "url": "https://github.com/xternal/boroughbook.uk/actions/runs/38549740899/job/115804505143",
         "steps": ["Ask Claude which pledges new decisions move"],
         "error": J.error_excerpt(LOG_14_OCTOBER),
     }

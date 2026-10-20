@@ -30,7 +30,7 @@ from typing import Dict, List, Optional
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "decisions"
 OUT = ROOT / "data" / "build" / "decisions.json"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 
 SITE = "https://democracy.lbhf.gov.uk"
 SERVICE = f"{SITE}/mgWebService.asmx"

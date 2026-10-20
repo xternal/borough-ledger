@@ -23,7 +23,7 @@ from typing import Dict, List, Sequence, Tuple
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "data" / "build" / "ward_map.json"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 
 COUNCIL_CODE = "E09000013"
 SERVICE = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/ArcGIS/rest/services/Wards_December_2024_Boundaries_UK_BGC/FeatureServer/0/query"

@@ -48,7 +48,7 @@ POSTCODES = RAW / "postcode_areas.json"
 SUPPLIERS = ROOT / "data" / "build" / "payments" / "suppliers.json"
 OUT = ROOT / "data" / "build" / "companies.json"
 TABLE = ROOT / "data" / "manual" / "companies_house_matches.csv"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 PAGE = "https://find-and-update.company-information.service.gov.uk/company/"
 
 SUFFIX = r"(?:ltd|plc|llp|cic|lp|llc|cio)"

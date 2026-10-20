@@ -41,7 +41,7 @@ def boroughs() -> List[Dict[str, Any]]:
     return json.loads(CONFIG.read_text())["boroughs"]
 
 OUT = ROOT / "data" / "build" / "boroughs"
-UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)"
+UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)"
 DC = "https://candidates.democracyclub.org.uk/api/next/ballots/"
 EE = "https://elections.democracyclub.org.uk/api/elections/"
 PARTY = {

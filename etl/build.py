@@ -41,7 +41,7 @@ METHOD = {
     "id": "borough_ledger_method",
     "title": "BoroughBook.UK method notes (docs/MODEL.md)",
     "publisher": "BoroughBook.UK",
-    "url": "https://github.com/xternal/borough-ledger/blob/main/docs/MODEL.md",
+    "url": "https://github.com/xternal/boroughbook.uk/blob/main/docs/MODEL.md",
     "note": "TODO(decide): the repository is private; publish the method page before launch.",
 }
 # Seed sources are kept only while a carried-over value still cites them.

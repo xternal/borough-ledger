@@ -19,7 +19,7 @@ import { WardSpend } from "./wardspend";
 const root = join(import.meta.dirname, "..", "..", "..");
 const SITE = process.env.SITE_URL ?? "https://boroughbook.uk";
 const MODEL = process.env.CLAUDE_MODEL ?? "claude-opus-5-5";
-const UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/borough-ledger)";
+const UA = "BoroughLedger-ETL/0.1 (independent research; https://github.com/xternal/boroughbook.uk)";
 const MG = "https://democracy.lbhf.gov.uk";
 // TODO(config): the council's committees move to its config with M8 (second borough). Same as etl/decisions.py.
 const COMMITTEES: Record<number, string> = { 116: "Cabinet", 114: "Full Council" };
