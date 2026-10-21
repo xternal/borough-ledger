@@ -29,7 +29,7 @@ from typing import Dict, Iterable, List, Optional, Set
 
 REPO = "xternal/boroughbook.uk"
 TITLE_PREFIX = "New pledges, "
-DUE_AFTER_DAYS = 10  # every other Monday: a scheduled run 7 days ago means skip, 14 days ago means run
+DUE_AFTER_DAYS = 10  # every other Sunday (Mondays until 19 October 2026): a scheduled run 7 days ago means skip, 14 days ago means run
 LOOK_BACK_DAYS = 21  # how far the first run ever looked back
 # The first run (#89, by hand, 14 October 2026) started the fortnightly schedule, so 26 October 2026 was the first
 # scheduled run. It stands in for the last scheduled run until a scheduled run's pull request is newer.
@@ -114,7 +114,7 @@ def branch_for(day: date, taken: Set[str]) -> str:
 def marker(kind: str, day: date) -> str:
     """The first line of the pull request body: says which kind of run opened it, for people and for `due`."""
     if kind == SCHEDULED:
-        text = f"Run: scheduled (the bb-pledge-finder task, {day:%A} {day.day} {day:%B %Y})."
+        text = f"Run: scheduled (the weekly ledger desk, {day:%A} {day.day} {day:%B %Y})."
     else:
         text = 'Run: by hand ("run anyway"), outside the schedule, so the next scheduled run stays where it was.'
     return f"{text} <!-- pledge-finder-run: {kind} -->"
