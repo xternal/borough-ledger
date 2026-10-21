@@ -23,7 +23,7 @@ export function Footer({ council, hasTestData, full }: { council: string; hasTes
       {hasTestData && ALLOW_TEST_DATA ? <span>Prototype for design review. Do not quote any figure marked test.</span> : null}
       <span className="credit">
         <a href={MAKER.url}>Made by {MAKER.name}</a>
-        <a href={MAKER.coffee}>Buy me a coffee</a>
+        <a href={MAKER.coffee}>Buy me a matcha</a>
         <span>
           Also by the author:{" "}
           <a href={ALSO_BY.url} rel="noopener noreferrer">
