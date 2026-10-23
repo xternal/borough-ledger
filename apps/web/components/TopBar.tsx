@@ -1,4 +1,4 @@
-import { SITE, STAGE } from "@/lib/site";
+import { SITE } from "@/lib/site";
 import { FamilySwitcher } from "./FamilySwitcher";
 import { Logo } from "./Logo";
 import { SectionNav, type BoroughSections } from "./SectionNav";
@@ -15,9 +15,6 @@ export function TopBar({ place, year, borough }: { place: string; year: string; 
           <a className="mark" href="/">
             <Logo />
             {SITE.name}
-            <span className="stage" title="Early version: every figure is sourced and checked by hand, and more is being added">
-              {STAGE}
-            </span>
           </a>
           <FamilySwitcher />
         </div>
