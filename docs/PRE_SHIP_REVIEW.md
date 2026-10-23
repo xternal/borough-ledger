@@ -85,7 +85,7 @@ B7 closed: the redaction rules ran on two full years. Reviewing the names they l
 
 ## Public alpha (7 Oct 2026)
 
-The project owner decided to publish the site as a public alpha at https://borough-ledger.vercel.app, open to search engines and AI crawlers, **before** the legal advice in B6 (third-party campaigning rules and naming councillors) and before the editor checks of the promise cards and the payments mapping. The site says "Alpha" next to its name, every promise card still says "Awaiting editor check", and payments mark service groups as approx.
+The project owner decided to publish the site as a public alpha at https://borough-ledger.vercel.app, open to search engines and AI crawlers, **before** the legal advice in B6 (third-party campaigning rules and naming councillors) and before the editor checks of the promise cards and the payments mapping. The site said "Alpha" next to its name until 23 October 2026, when Pavel asked to take it off the header and out of llms.txt; every promise card still says "Awaiting editor check", and payments mark service groups as approx.
 
 To publish with no test values, the three "Balance it" switches without a sourced cost (free home care, weekly bins, library hours) are held back and named on the page as coming later. The two free home care cards no longer link to a switch until it returns. Production builds now pass the gate, which still blocks any test value from reaching them.
 

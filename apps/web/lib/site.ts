@@ -14,9 +14,6 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? VERCEL_URL ?? "http
 /** Google Search Console's verification code (public by design: it sits in the page head). Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION on Vercel. */
 export const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
 
-/** The site is in alpha: shown next to the name and said in llms.txt. Remove when the pre-ship review is closed. */
-export const STAGE = "Alpha";
-
 /** Who made the site, credited in every footer. */
 export const MAKER = { name: "Pavel Guzhikov", url: "https://guzh.uk", coffee: "https://ko-fi.com/pavelg" };
 
