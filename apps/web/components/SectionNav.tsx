@@ -2,7 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { PROMISES_ITEM, SECTIONS, sectionForPath, sectionHref, type SectionId } from "@/lib/nav";
+import { MENU, PROMISES_ITEM, menuItemFor, sectionForPath, sectionHref, sectionLabel, type SectionId } from "@/lib/nav";
+
+/** Hammersmith & Fulham's menu: five pages, as [id, label]. */
+const ITEMS = MENU.map((id) => [id, sectionLabel(id)] as const);
 
 /** A borough page's own sections, on that page: [id, label], each a part of the long page at `base`. */
 /** `current` marks the item a sub-page belongs to (a council's decoder page is under "Every council"). */
@@ -10,19 +13,19 @@ export type BoroughSections = { base: string; items: readonly (readonly [string,
 
 /**
  * The top bar's menu. One rule: an item is highlighted when you are where it leads. Hammersmith & Fulham's items are
- * pages, so the page's section is highlighted on that page and the pages under it, and nothing on the home page, which
- * is every section at once. Another council's items are parts of its one long page, so there the section in view is.
+ * pages, so the page's section is highlighted on that page and the pages under it (the gap, Balance it and Payments are
+ * under Budget), and nothing on the home page, which is every section at once. Another council's items are parts of its one long page, so there the section in view is.
  * Every menu has Promises: another council's ends with it, leading to Hammersmith & Fulham's (decision 30).
  * On narrow screens the highlighted item is kept in view.
  */
 export function SectionNav({ borough }: { borough?: BoroughSections } = {}) {
   const path = usePathname() ?? "/";
   // Hammersmith & Fulham's sections, or another council's parts of its page (followed as you scroll; Promises comes after them).
-  const items = borough ? borough.items : SECTIONS;
+  const items = borough ? borough.items : ITEMS;
   const statement = !!borough && path === borough.base;
   const [inView, setInView] = useState<string | null>(null);
   const nav = useRef<HTMLElement>(null);
-  const current = statement ? inView : borough ? (borough.current ?? null) : sectionForPath(path);
+  const current = statement ? inView : borough ? (borough.current ?? null) : menuItemFor(sectionForPath(path));
   const href = (id: string) => (borough ? `${borough.base}#${id}` : sectionHref(id as SectionId));
 
   // On a council's long page, follow the section in view: the last one whose top has passed just under the bar.

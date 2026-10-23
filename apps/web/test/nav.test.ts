@@ -112,3 +112,16 @@ describe("promise filters", () => {
     expect(sides(hung).map((x) => x.label)).toEqual(["Labour, Conservative, opposition"]);
   });
 });
+
+describe("the short menu (23 Oct 2026)", () => {
+  it("has five pages, Method last, with the gap, Balance it and Payments under Budget", async () => {
+    const { BUDGET_PARTS, MENU, menuItemFor } = await import("@/lib/nav");
+    expect(MENU).toEqual(["bill", "budget", "promises", "ward", "method"]);
+    expect(BUDGET_PARTS).toEqual(["budget", "gap", "balance", "payments"]);
+    for (const path of ["/budget", "/gap", "/balance", "/payments", "/payments/2026-06", "/supplier/veolia-es-uk-ltd", "/building", "/council-homes"])
+      expect(menuItemFor(sectionForPath(path)), path).toBe("budget");
+    for (const [path, item] of [["/bill", "bill"], ["/promise/lab-2026-parks", "promises"], ["/ward/addison", "ward"], ["/sources", "method"]] as const)
+      expect(menuItemFor(sectionForPath(path)), path).toBe(item);
+    expect(menuItemFor(sectionForPath("/"))).toBeNull();
+  });
+});

@@ -304,3 +304,28 @@ Pavel asked whether one routine every Sunday should do the background work for a
 **What changed.** One scheduled task on Pavel's Mac, the weekly ledger desk, works through LedgerGov.UK, RussiaLedger.com, BoroughBook.UK, UkraineLedger.com and USLedger.org every Sunday at 20:00 UK time, one at a time, each by its own `docs/desk/WEEKLY.md`, and sends one report, or nothing when there is nothing new. Here it runs the pledge finder (still every other week, by `pledge_finder.py due`: 25 October 2026 runs, 1 November skips) in place of the Monday task `bb-pledge-finder`, now paused, and adds three checks: the cards whose deadline was missed a month ago, for the editor to confirm (PROMISE_STANDARD §3), broken links, and the health of the site's jobs and pull requests. A scheduled pull request's first line now names the weekly ledger desk. `pledge-finder-watch.yml` still runs `due` every Tuesday, so a Sunday run that opened nothing is caught as before.
 
 **Why the Mac.** The pledge finder needs the app's built-in browser for the council's site and the parties' pages, and RussiaLedger.com needs archive copies the cloud cannot reach, so one task for every ledger runs where every source can be read. The FOI check (`bb-foi-answers`, Mondays until the three answers are handled) stays a task of its own.
+
+## A short menu and a first screen of cards (23 Oct 2026)
+
+Pavel, on LedgerGov.UK's menu on 23 October 2026: "it is soooo big.. too big?", then "maybe we should rethink first screen? have a glance of Main Thing we have here: key number(s), promises block, play sandbox ledger with gov money. i want a person to understand both The Scale of our Data and the Easiness he now has", "and a logbook of last changes/additions/check down is a good idea", and "we can have a switcher somewhere to easy-go on sister sites and guzh.uk and ruminator.xyz". He chose option A of the sketches (https://claude.ai/artifact/CoD6wVe8TE26xAqCF4HPpW), "but i'd some more widget cards there and give Header less vertical pixels". Once it was live on LedgerGov.UK (ledgergov.uk #167 and #168) he asked for "the same great job for boroughbook and russialedger".
+
+**Done:**
+
+- **The menu** has five pages: Your bill, Budget, Promises, Your ward, Method (`MENU` in `apps/web/lib/nav.ts`). The gap, Balance it and Payments are parts of Budget: on their pages, and on building work, council homes and supplier pages, Budget is highlighted, and tabs under the top bar (`BudgetTabs`) say which part you are on. Follow is a button beside the menu. The top bar is one row, 48px (it was 56px). Other councils' pages keep their own menus, which are parts of their one long page, ending with Promises.
+- **The family switcher** beside the logo (`components/FamilySwitcher.tsx`, a `<details>` that opens without JavaScript): LedgerGov.UK, BoroughBook.UK (marked "you are here"), USLedger.org, RussiaLedger.com, UkraineLedger.com and Ruminator.xyz, each with one line, and "Made by Pavel Guzhikov, guzh.uk" (a comma, not a middle dot: invariant 10). This is a second place that names Ruminator.xyz, besides the footer's "Also by the author"; Pavel asked for it.
+- **The first screen** (`components/HomeFirstScreen.tsx`), in place of the opening:
+  - a one-line headline from the budget and the cards ("Where £398m of council money goes in Hammersmith & Fulham, and 26 promises to watch");
+  - the year's six figures (the figures row the opening had);
+  - the promises at a glance: the count, a bar by status and the counts;
+  - Balance it: next year's council tax rise at the two settings the tool itself marks (a freeze and the rise the forecast assumes), with what is still to find. It shares the reader's choices with the full tool further down, and "Open Balance it" carries them to `/balance`;
+  - the postcode finder and borough picker, with the independence note, in a card;
+  - four promises to watch: the latest delivered, the latest not met, the open one due next and the latest step forward. A rule that finds nothing says so ("No pledge has been delivered yet");
+  - the logbook: what was added, moved, reworded or checked, newest first, six lines.
+- **The rules** (`apps/web/lib/home.ts`), never chosen by hand, published cards only, reading nothing about who made a pledge (tested by swapping every card's party):
+  - a card counts as added on the day its first wording was recorded, and one party's cards added on one day are one line ("Labour: 2 new pledges");
+  - each status step, rewording and reply is a line;
+  - the council decisions put to the pledge check on one day are one line ("6 council decisions checked against every pledge: none moves one", from `data/build/decision_assessments.json`).
+- **Nothing left the home page**: every section is still on it, after the first screen, so old `/#bill` links still work. The promises block (decision 30) comes straight after the first screen.
+- **Two tests encoded the old layout**, and both now follow the new one: "N promises tracked →" in the opening is now the heading of the first screen's promise card, after the figures; and the promises block comes after the first screen rather than after the opening.
+
+**Deliberately not done:** the editor's approvals are not in the logbook yet. They are recorded only in docs/editor-checks/, not in the data, so the logbook cannot date them by a rule. The payments months are not in it either, because the data does not say when each month was added.

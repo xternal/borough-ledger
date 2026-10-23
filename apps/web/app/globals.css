@@ -217,10 +217,10 @@
     max-width: 1120px;
     margin: 0 auto;
     padding-inline: 24px;
-    height: 56px;
+    height: 48px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
   }
   @media (max-width: 520px) {
     .bar-in {
@@ -242,6 +242,139 @@
     width: 20px;
     height: 20px;
     flex: none;
+  }
+  .mark-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+  /* The family of sites: a small button beside the logo, opening a panel of the sister sites. */
+  /* The panel hangs from the logo's left edge (.mark-wrap), so it stays on screen on a phone. */
+  .family summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .family summary::-webkit-details-marker {
+    display: none;
+  }
+  .family summary:hover,
+  .family[open] summary {
+    color: var(--ink);
+    background: var(--sunk);
+  }
+  .family summary svg {
+    transition: transform 0.15s;
+  }
+  .family[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .family-panel {
+    position: absolute;
+    z-index: 30;
+    top: 40px;
+    left: 0;
+    width: min(320px, calc(100vw - 32px));
+    padding: 8px;
+    display: grid;
+    gap: 4px;
+    background: var(--raised);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  }
+  .family-panel p {
+    margin: 0;
+    padding: 6px 10px 4px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .family-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2px;
+  }
+  .family-panel li a,
+  .family-maker {
+    display: grid;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .family-panel li a:hover,
+  .family-panel li a[aria-current="page"],
+  .family-maker:hover {
+    background: var(--sunk);
+  }
+  .family-panel li b {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .family-panel li span,
+  .family-maker {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .family-panel li .family-here {
+    margin-left: 8px;
+    font-weight: 400;
+  }
+  /* Follow: a button beside the menu, not one of its pages. */
+  .bar-follow {
+    flex: none;
+    padding: 4px 12px;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px var(--ink);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .bar-follow:hover {
+    background: var(--sunk);
+  }
+  @media (max-width: 640px) {
+    .bar-follow {
+      display: none;
+    }
+  }
+  /* Budget's parts (the budget, the gap, Balance it, Payments), as tabs on their pages. */
+  nav.tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-top: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  nav.tabs::-webkit-scrollbar {
+    display: none;
+  }
+  nav.tabs a {
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: inset 0 -2px 0 transparent;
+  }
+  nav.tabs a:hover {
+    color: var(--ink);
+  }
+  nav.tabs a[aria-current] {
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--accent);
   }
   nav.sections {
     display: flex;
@@ -2935,5 +3068,326 @@
   .dc-regions li {
     break-inside: avoid;
     padding: 3px 0;
+  }
+}
+
+/* The home page's first screen (Pavel, 23 Oct 2026): a one-line headline, the figures, then cards that each lead on. */
+@layer components {
+  .fs {
+    display: grid;
+    gap: 12px;
+    padding-block: 20px 8px;
+  }
+  .fs section {
+    padding-top: 0;
+    scroll-margin-top: 56px;
+  }
+  .fs-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+  .fs-title h1 {
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    max-width: none;
+  }
+  .fs-title p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .fs .kpis {
+    padding-block: 16px;
+  }
+  .fs-row3 {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .fs-tiles {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  @media (max-width: 980px) {
+    .fs-row3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .fs-tiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .fs-row3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    /* A rule that found nothing takes half a row; a promise it found takes the whole row. */
+    .fs-tiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .fs-tile:not(.fs-tile-none) {
+      grid-column: span 2;
+    }
+  }
+  .fs-card {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+    min-width: 0;
+    padding: 16px;
+    border-radius: 14px;
+    background: var(--sunk);
+    box-shadow: inset 0 0 0 1px var(--line);
+    color: var(--ink);
+  }
+  a.fs-card {
+    text-decoration: none;
+  }
+  a.fs-card:hover {
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+  }
+  .fs-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2px 12px;
+  }
+  .fs-head h2 {
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .fs-head h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .fs-head h2 a:hover {
+    text-decoration: underline;
+  }
+  .fs-head > span,
+  .fs-head h2 span {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .fs-head > a,
+  .fs-more {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .fs-more {
+    justify-self: start;
+  }
+  .fs-line {
+    margin: 0;
+    font-size: 14px;
+  }
+  .fs-quiet {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  /* The promises at a glance: one bar, one colour per status, then the counts. */
+  .fs-bar {
+    display: flex;
+    gap: 2px;
+    height: 14px;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .fs-bar span,
+  .fs-counts i {
+    flex-basis: 0;
+    background: var(--idle);
+  }
+  .fs-bar .st-in_plan,
+  .fs-bar .st-budgeted,
+  .fs-counts i.st-in_plan,
+  .fs-counts i.st-budgeted {
+    background: var(--fund);
+  }
+  .fs-bar .st-delivering,
+  .fs-counts i.st-delivering {
+    background: var(--warn);
+  }
+  .fs-bar .st-delivered,
+  .fs-counts i.st-delivered {
+    background: var(--good);
+  }
+  .fs-bar .st-failed,
+  .fs-bar .st-quietly_dropped,
+  .fs-counts i.st-failed,
+  .fs-counts i.st-quietly_dropped {
+    background: var(--bad);
+  }
+  .fs-bar .st-not_in_power,
+  .fs-counts i.st-not_in_power {
+    background: var(--line-strong);
+  }
+  .fs-counts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .fs-counts li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .fs-counts i {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex: none;
+  }
+  .fs-counts b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  /* Balance it: the one dark card, so the thing to try stands out. */
+  .fs-dark {
+    background: var(--ink);
+    color: var(--bg);
+    box-shadow: none;
+  }
+  .fs-dark .fs-head > span,
+  .fs-dark .fs-quiet {
+    color: color-mix(in srgb, var(--bg) 72%, transparent);
+  }
+  .fs-dark a {
+    color: var(--bg);
+  }
+  .fs-lever {
+    display: grid;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .fs-lever > div {
+    display: flex;
+    gap: 6px;
+  }
+  .fs-lever button {
+    flex: 1;
+    min-height: 44px;
+    display: grid;
+    place-content: center;
+    gap: 0;
+    padding: 4px 8px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--bg);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bg) 35%, transparent);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .fs-lever button small {
+    font-size: 11.5px;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  .fs-lever button[aria-pressed="true"] {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .fs-dark :focus-visible {
+    outline-color: var(--bg);
+  }
+  /* Your postcode, in a card. */
+  .fs-ward .hero-top {
+    margin: 0;
+  }
+  .fs-ward .hero-switch .finder {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .fs-ward .hero-or {
+    padding-top: 0;
+  }
+  /* Promises to watch. */
+  .fs-tile-q {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .fs-tile-none {
+    background: transparent;
+  }
+  .fs-tag {
+    justify-self: start;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .t-new {
+    background: color-mix(in srgb, var(--fund) 12%, transparent);
+    color: var(--fund-ink);
+  }
+  .t-good {
+    background: color-mix(in srgb, var(--good) 13%, transparent);
+    color: var(--good-ink);
+  }
+  .t-bad {
+    background: color-mix(in srgb, var(--bad) 12%, transparent);
+    color: var(--bad);
+  }
+  .t-moved {
+    background: color-mix(in srgb, var(--warn) 13%, transparent);
+    color: var(--warn);
+  }
+  .t-neutral {
+    background: var(--bg);
+    color: var(--muted);
+  }
+  /* The logbook: date, what happened, and the line, which links to it. */
+  .fs-log ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fs-log li {
+    display: grid;
+    grid-template-columns: 96px 128px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 4px 12px;
+    padding-block: 8px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .fs-log-date {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .fs-log li a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .fs-log li a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 640px) {
+    .fs-log li {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+    .fs-log li a {
+      grid-column: 1 / -1;
+    }
+  }
+  /* The promises block after the first screen needs less air than the gaps between sections. */
+  .fs + section {
+    padding-top: 48px;
   }
 }

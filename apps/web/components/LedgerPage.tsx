@@ -1,6 +1,6 @@
 import { BalancePart, BillPart, BudgetPart } from "@/components/LedgerSections";
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
+import { HomeFirstScreen } from "@/components/HomeFirstScreen";
 import { HomePromises } from "@/components/HomePromises";
 import { JsonLd } from "@/components/JsonLd";
 import { LedgerStateProvider } from "@/components/LedgerState";
@@ -15,10 +15,11 @@ import type { PageModel } from "@/lib/model";
 import { MAKER, SITE, SITE_URL } from "@/lib/site";
 
 /**
- * The home page: the whole statement on one long page, the overview. Every section keeps its anchor, so an old /#bill
- * link still opens here, and each section's heading links to the section's own page (/bill, /budget, ...). The
- * promises come second, straight after the opening (decision 30): how many are tracked, the latest changes and what
- * is due next, each a link to its card.
+ * The home page. First a screen of cards (HomeFirstScreen: the year's figures, the promises at a glance, Balance it,
+ * your postcode, four promises to watch and the logbook; Pavel, 23 Oct 2026); then the whole statement on one long
+ * page, the overview. Every section keeps its anchor, so an old /#bill link still opens here, and each section's
+ * heading links to the section's own page (/bill, /budget, ...). The promises block comes straight after the first
+ * screen (decision 30): the latest changes and what is due next, each a link to its card.
  */
 export function LedgerPage({ m }: { m: PageModel }) {
   const jsonLd = [
@@ -41,9 +42,9 @@ export function LedgerPage({ m }: { m: PageModel }) {
     <>
       <TopBar place={m.place.short} year={m.place.yearLabel} />
       <main className="wrap" id="top">
-        <Hero m={m} />
-        <HomePromises promises={m.promises} today={m.today} />
         <LedgerStateProvider input={m.balance.input}>
+          <HomeFirstScreen m={m} />
+          <HomePromises promises={m.promises} today={m.today} />
           <BillPart m={m} view="overview" />
           <BudgetPart m={m} view="overview" />
           <Waterfall m={m} view="overview" />

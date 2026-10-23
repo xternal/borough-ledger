@@ -19,6 +19,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 
 ## What is on the site
 
+- Home (${SITE_URL}/): a first screen of cards (the year's figures, the promises at a glance, next year's council tax rise to try in Balance it, a postcode finder, four promises to watch picked by fixed rules, and a logbook of what was added, moved, reworded or checked), then every section on one page.
 - Your bill (${SITE_URL}/bill): pick a council tax band and see what you pay, how it splits between the council and the Mayor of London, and what your share pays for.
 - The budget (${SITE_URL}/budget): where the council's day-to-day money comes from and what it pays for. By law it must balance every year.
 - The gap (${SITE_URL}/gap): how this year's gap between costs and funding opened, and how it was closed with council tax, savings and reserves.
@@ -51,7 +52,7 @@ Every figure is labelled sourced, approx or test, with a link to its source on t
 
 Data vintage: ${c.vintage}.
 
-- [Home: everything on one page](${SITE_URL}/)
+- [Home: the first screen, then everything on one page](${SITE_URL}/)
 - [Your council tax bill](${SITE_URL}/bill)
 - [The council's budget](${SITE_URL}/budget)
 - [How this year's gap opened and closed](${SITE_URL}/gap)
