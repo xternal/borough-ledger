@@ -3,7 +3,7 @@ import { OTHER_BOROUGHS } from "@/lib/boroughList";
 import { buildModel } from "@/lib/model";
 import { partiesOf, topicsOf } from "@/lib/topics";
 import { STATUS_LABEL } from "@/lib/promises";
-import { CONTACT, MAKER, REPO, SITE, SITE_URL, STAGE } from "@/lib/site";
+import { CONTACT, MAKER, REPO, SITE, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -34,7 +34,7 @@ ${SITE.name} is an independent project. It is not run by, endorsed by or affilia
 - Other councils: ${OTHER_BOROUGHS.map((b) => `${b.short} (${SITE_URL}${b.href})`).join(", ")}: the bill by band, the budget by service, council tax over five years, and every ward's councillors and election result, from government returns and the council's own records, with the same checks. In Belfast, homes pay rates rather than council tax: the bill is worked out from a home's capital value, split between the council's district rate and the Northern Ireland Executive's regional rate, and councillors are shown by district electoral area.
 - Payments over £500 (${SITE_URL}/payments): every payment in the council's quarterly spend files (excluding VAT), by month, organisation and service, reconciled to each file. Payments to people, such as direct payments for care, appear only as totals and nobody is named. Companies, charities and public bodies have their own pages.
 
-This is the ${STAGE.toLowerCase()} version. Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
+Every figure comes from the council's own documents or government returns, and the promise cards and the way payments are grouped into services have been checked by hand. More is being added.
 
 Corrections, and replies from anyone named on a card: ${CONTACT}. The code, data tables and promise cards are open at ${REPO}. Our own text and data are CC BY 4.0 (credit "${SITE.name} (${MAKER.name})"), the code is MIT, and council, government and ONS data keep their own licences.
 
