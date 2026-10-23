@@ -7,8 +7,8 @@ import { OPEN_THE_PROMISE } from "./PledgeRows";
 
 /**
  * Promises close to the way in (docs/PRE_SHIP_REVIEW.md, "Promises close to the way in (19 Oct 2026)"; OpenPromises
- * decision 30): the second block on the home page, after its opening and before the bill. How many promises the site
- * tracks and how many sit at each status, the latest changes and the nearest deadlines, each a direct link to its card.
+ * decision 30): on the home page straight after the first screen and before the bill. How many promises the site tracks
+ * and how many sit at each status, the latest changes and the nearest deadlines, each a direct link to its card.
  * The cards are chosen by a rule (lib/spotlight.ts), never by hand, from the cards the editor has approved; with none
  * approved the block is not drawn. Plain links: it works without JavaScript.
  */
@@ -20,18 +20,6 @@ const PROMISES = sectionHref("promises");
 
 /** "26 promises tracked": every card on the promises page, which is where the count leads. */
 export const promisesTracked = (n: number) => `${n} ${n === 1 ? "promise" : "promises"} tracked`;
-
-/** The opening's line: "26 promises tracked →", to the promises page. Nothing when no card is published. */
-export function PromisesTrackedLine({ promises }: { promises: readonly PromiseModel[] }) {
-  if (!promises.some(isPublished)) return null;
-  return (
-    <p className="hero-promises">
-      <a href={PROMISES}>
-        {promisesTracked(promises.length)} <span aria-hidden="true">&rarr;</span>
-      </a>
-    </p>
-  );
-}
 
 export function HomePromises({ promises, today }: { promises: readonly PromiseModel[]; today: string }) {
   if (!promises.some(isPublished)) return null;

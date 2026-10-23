@@ -5,7 +5,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { describe, expect, it, vi } from "vitest";
 import type { Status } from "@borough-ledger/schema";
-import { HOME_PROMISES_ID, HomePromises, PromisesTrackedLine, promisesTracked } from "@/components/HomePromises";
+import { HOME_PROMISES_ID, HomePromises, promisesTracked } from "@/components/HomePromises";
+import { FIRST_SCREEN_ID } from "@/components/HomeFirstScreen";
 import { LedgerPage } from "@/components/LedgerPage";
 import { Promises } from "@/components/Promises";
 import { PromisesIndex } from "@/components/PromisesIndex";
@@ -228,11 +229,13 @@ describe("the promises block on the home page", () => {
     expect(html).toContain('<p class="spot-all"><a href="/promises">All promises <span aria-hidden="true">→</span></a></p>');
   });
 
-  it("draws nothing, and no line in the opening, when no card is published", () => {
+  it("draws nothing, and no promise card on the first screen, when no card is published", () => {
     const none = m.promises.map((p) => ({ ...p, editorCheck: true }));
     expect(renderToStaticMarkup(createElement(HomePromises, { promises: none, today: TODAY }))).toBe("");
     expect(renderToStaticMarkup(createElement(HomePromises, { promises: [], today: TODAY }))).toBe("");
-    expect(renderToStaticMarkup(createElement(PromisesTrackedLine, { promises: none }))).toBe("");
+    const page = renderToStaticMarkup(createElement(LedgerPage, { m: { ...m, promises: none } }));
+    expect(page).not.toContain('id="fs-promises-h"');
+    expect(page).not.toContain('aria-label="Promises to watch"');
   });
 });
 
@@ -240,17 +243,19 @@ describe("the home page", () => {
   const page = renderToStaticMarkup(createElement(LedgerPage, { m }));
   const main = page.slice(page.indexOf("<main"));
 
-  it("has \"N promises tracked →\" in its opening, linking to the promises page", () => {
-    const line = `<p class="hero-promises"><a href="/promises">${promisesTracked(m.promises.length)} <span aria-hidden="true">→</span></a></p>`;
-    expect(main.indexOf(line)).toBeGreaterThan(main.indexOf("<h1"));
-    expect(main.indexOf(line)).toBeLessThan(main.indexOf('<div class="kpis">'));
+  // The first screen (docs/PRE_SHIP_REVIEW.md, "A short menu and a first screen of cards", 23 Oct 2026) replaced the
+  // opening: the count now heads its promises card, beside the year's figures, and the promises block follows it.
+  it("has \"N promises tracked\" on its first screen, linking to the promises page, after the year's figures", () => {
+    const heading = `<h2 id="fs-promises-h"><a href="/promises">${promisesTracked(m.promises.length)}</a></h2>`;
+    expect(main.indexOf(heading)).toBeGreaterThan(main.indexOf('<div class="kpis">'));
+    expect(main.indexOf('<div class="kpis">')).toBeGreaterThan(main.indexOf("<h1"));
   });
 
-  it("puts the promises block second: straight after the opening, before the bill and every other section", () => {
+  it("puts the promises block straight after the first screen, before the bill and every other section", () => {
     const sections = [...main.matchAll(/<section id="([^"]+)"/g)].map((x) => x[1]);
     expect(sections[0]).toBe(HOME_PROMISES_ID);
     expect(sections[1]).toBe("bill");
-    expect(main.indexOf(`id="${HOME_PROMISES_ID}"`)).toBeGreaterThan(main.indexOf('<div class="kpis">'));
+    expect(main.indexOf(`id="${FIRST_SCREEN_ID}"`)).toBeLessThan(main.indexOf(`id="${HOME_PROMISES_ID}"`));
   });
 
   it("opens each promise in one click: every row in its Promises section is a link to its card", () => {

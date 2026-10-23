@@ -1,4 +1,5 @@
 import type { PageModel } from "@/lib/model";
+import { BudgetTabs } from "./BudgetTabs";
 import { Footer } from "./Footer";
 import { TopBar } from "./TopBar";
 
@@ -8,6 +9,7 @@ export function PageShell({ m, children }: { m: PageModel; children: React.React
     <>
       <TopBar place={m.place.short} year={m.place.yearLabel} />
       <main className="wrap" id="top">
+        <BudgetTabs />
         <div className="kicker page-kicker">
           <span>Independent project, not run by or affiliated with {m.place.short} Council</span>
         </div>

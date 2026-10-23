@@ -1,4 +1,8 @@
-/** The top bar's sections, and which one a page belongs to, so people always see where they are. */
+/**
+ * The site's sections, in the order of the overview (the home page after its first screen): each has a page of its own,
+ * and a page belongs to one of them, so people always see where they are. The menu (MENU) shows five of them; the
+ * rest are parts of Budget (BUDGET_PARTS).
+ */
 export const SECTIONS = [
   ["bill", "Your bill"],
   ["budget", "Budget"],
@@ -28,6 +32,19 @@ const HREF: Record<SectionId, string> = {
 };
 
 export const sectionHref = (id: SectionId): string => HREF[id];
+
+/**
+ * The menu: five pages, Method last (Pavel, 23 Oct 2026, as on LedgerGov.UK; docs/PRE_SHIP_REVIEW.md, "A short menu
+ * and a first screen of cards"). The gap, Balance it and Payments are parts of Budget: on their pages Budget is
+ * highlighted, and the Budget tabs (BudgetTabs) say which part you are on.
+ */
+export const MENU: readonly SectionId[] = ["bill", "budget", "promises", "ward", "method"];
+
+/** Budget's parts, in the order of its tabs: the budget itself, how this year's gap was closed, next year, every payment. */
+export const BUDGET_PARTS: readonly SectionId[] = ["budget", "gap", "balance", "payments"];
+
+/** The menu item a section is under: the section itself, or Budget for its parts. */
+export const menuItemFor = (id: SectionId | null): SectionId | null => (id && BUDGET_PARTS.includes(id) ? "budget" : id);
 
 /**
  * Promises are in every menu (decision 30). On another council's page, or the council tax decoder, the item leads to
