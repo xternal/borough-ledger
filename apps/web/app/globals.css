@@ -367,6 +367,9 @@
     box-shadow: inset 0 -2px 0 var(--accent);
   }
   nav.sections {
+    /* Positioned, so the absolute sr-only text inside its links is clipped by
+       its scroll box; otherwise it widens every page on a phone. */
+    position: relative;
     display: flex;
     gap: 2px;
     overflow-x: auto;
